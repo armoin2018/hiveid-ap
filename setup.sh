@@ -13,5 +13,5 @@ wget https://github.com/esp8266/Arduino/raw/master/tools/espota.py
 sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 git clone https://github.com/mitchellurgero/openrsd
 ln -s /opt/hiveid-ap/openrsd /var/www/html/openrsd
-chown -R pi:pi /var/www/html
+chown -R pi:pi /opt/hiveid-ap
 echo "192.168.2.1	local.hive-id.com" >>/etc/hosts
