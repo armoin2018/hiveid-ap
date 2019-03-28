@@ -2,8 +2,9 @@
 cd /opt/hiveid-ap
 mkdir backup log nodered nodered/backups ota
 ./update_system.sh
-apt-get install --yes git curl nodered npm firefox-esr iwlist
+apt-get install --yes git curl npm firefox-esr iwlist
 apt-get install --yes lsof git apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
+apt-get install --yes nodered
 systemctl enable nodered.service
 pip install esptool
 npm install -g node-red-admin
