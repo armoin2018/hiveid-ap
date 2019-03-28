@@ -32,9 +32,9 @@ If you want to use JMRI
 ```
 
 Node-Red 
-Will be available on http://<IP>:1880 and the dashbaord is on http://<IP>:1880/ui
+Will be available on http://[IP]:1880 and the dashbaord is on http://[IP]:1880/ui
   
 OpenRSD
-Will be available on http://<IP>/openrsd
+Will be available on http://[IP]/openrsd
   
   
