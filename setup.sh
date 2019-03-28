@@ -10,7 +10,7 @@ systemctl enable nodered.service
 pip install esptool
 npm install -g node-red-admin
 ./apache_set_user.sh pi
-./nodered_set_nodes.php
+php ./nodered_set_nodes.php
 wget https://github.com/esp8266/Arduino/raw/master/tools/espota.py
 sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 git clone https://github.com/mitchellurgero/openrsd
