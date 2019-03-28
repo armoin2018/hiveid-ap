@@ -6,6 +6,10 @@ apt-get install --yes git curl npm firefox-esr iwlist
 apt-get install --yes lsof git apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
 apt-get install --yes nodered
 apt-get install --yes arduino aduino-mk
+apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
+
+setcap cap_net_raw+eip $(eval readlink -f `which node`)
+npm install -g noble
 systemctl enable nodered.service
 pip install esptool
 npm install -g node-red-admin
