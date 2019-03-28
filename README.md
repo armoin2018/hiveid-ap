@@ -14,7 +14,9 @@ apt-get install git
 git clone https://github.com/armoin2018/hiveid-ap
 chown -R pi:pi hiveid-ap
 cd hiveid-ap
+chmod +x *.sh
 ./setup.sh
+
 ```
 If you want a WiFi to  WiFi Access Point (Still being Tested)
 ```
