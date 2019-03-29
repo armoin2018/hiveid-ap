@@ -1,6 +1,6 @@
 <?php
 
-$installedNodes = preg_split('/\s*\n\s*/',`/opt/hiveid-ap/installed_nodes.sh`);
+$installedNodes = preg_split('/\s*\n\s*/',`/opt/hiveid-ap/nodered_get_nodes.sh`);
 
 $neededNodes = preg_split("/\s*\n\s*/",file_get_contents('/opt/hiveid-ap/node.list'));
 foreach ($neededNodes as $id=>$val) {
