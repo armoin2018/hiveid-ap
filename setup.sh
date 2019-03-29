@@ -4,6 +4,7 @@ cd /opt/hiveid-ap
 apt-get install --yes git curl npm firefox-esr iwlist
 apt-get install --yes lsof git apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
 apt-get install --yes nodered
+apt-get install --yes jython
 apt-get install --yes arduino arduino-mk
 apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
 
