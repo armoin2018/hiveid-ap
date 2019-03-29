@@ -17,11 +17,15 @@ pip install esptool
 npm install -g node-red-admin
 ./apache_set_user.sh pi
 php ./nodered_set_nodes.php
-wget https://github.com/esp8266/Arduino/raw/master/tools/espota.py
+
 sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 cd /opt
 git clone https://github.com/mitchellurgero/openrsd
 ln -s /opt/openrsd /var/www/html/openrsd
+
+cd /usr/local/hiveid-ap
+wget https://github.com/esp8266/Arduino/raw/master/tools/espota.py
+
 
 chown -R pi:pi /opt/hiveid-ap /opt/openrsd
 echo "192.168.2.1	local.hive-id.com" >>/etc/hosts
