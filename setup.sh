@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /opt/hiveid-ap
 ./update_system.sh
-apt-get install --yes git curl npm firefox-esr iwlist
+apt-get install --yes git curl npm firefox-esr iw
 apt-get install --yes lsof git apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
 apt-get install --yes nodered
 apt-get install --yes jython
