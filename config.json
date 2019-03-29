@@ -1,5 +1,11 @@
 {
     "HiveID_API": "https://apps.hive-id.com/wp-json/hiveid/v2/custom/",
     "HiveID_Web": "https://apps.hive-id.com",
-    "HiveID_Key": ""
+    "HiveID_Key": "",
+    "TrainTraxx_API": "http://www.traintraxx.com/wp-json/traintraxx/v2/custom/",
+    "TrainTraxx_Web": "http://www.traintraxx.com",
+    "TrainTraxx_Key": "",
+    "JMRI_API": "http://local.hive-id.com:12080/json/",
+    "JMRI_Web": "http://local.hive-id.com:12080/",
+    "JMRI_ENABLED": false
 }

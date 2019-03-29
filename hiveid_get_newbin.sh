@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /opt/hiveid-ap/ota
+cd /usr/local/hiveid-ap/ota
 ls -1rt Auto*.bin | head -1
