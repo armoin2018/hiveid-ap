@@ -1,11 +1,9 @@
 #!/bin/bash
 cd /opt/hiveid-ap
-./update_system.sh
+./system_update.sh
 apt-get install --yes git curl npm firefox-esr iw
 apt-get install --yes lsof git apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
-apt-get install --yes nodered
-apt-get install --yes jython
-apt-get install --yes arduino arduino-mk
+apt-get install --yes nodered jython arduino arduino-mk
 apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
 
 mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup /usr/local/hiveid-ap/ota /var/log/hiveid-ap /etc/hiveid-ap
@@ -21,7 +19,13 @@ php ./nodered_set_nodes.php
 
 sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 cd /opt
-git clone https://github.com/mitchellurgero/openrsd
+OPENRSD_BASE=/opt/openrsd
+if [ -f $OPENRSD_BASE ]; then
+    echo "OpenRSD is already installed"
+else 
+    git clone https://github.com/mitchellurgero/openrsd
+fi
+
 OPENRSD=/var/www/html/openrsd
 if [ -f $OPENRSD ]; then 
     rm -rdf /var/www/html/openrsd
