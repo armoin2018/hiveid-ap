@@ -48,4 +48,6 @@ else
     cp /opt/hiveid-ap/config.json /etc/hiveid-ap/.
 fi
 
-chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap
+cp /opt/hiveid-ap/index.php /var/www/html/.
+rm /var/www/html/index.html
+chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap /var/www/html
