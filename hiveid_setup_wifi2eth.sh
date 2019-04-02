@@ -2,8 +2,9 @@
 # Usage: hiveid_setup_wifi2eth.sh PASSWORD
 PWD = $1
 
+
 apt-get update && apt-get upgrade --yes && apt-get autoremove --yes
-apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw iwlist openssh-server
+apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw openssh-server
 
 systemctl enable multi-user.target --force
 systemctl set-default multi-user.target
