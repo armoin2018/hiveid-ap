@@ -41,11 +41,25 @@ else
     echo "192.168.2.1	local.hive-id.com" >>/etc/hosts
 fi
 
-CONF=/etc/hiveid-ap/config.json
+CONF=/etc/hiveid-ap/conf.hiveid.json
 if [ -f $CONF ]; then 
-    echo "Existing host file found, skipping"
+    echo "Existing hiveid configuration file found, skipping"
 else 
-    cp /opt/hiveid-ap/config.json /etc/hiveid-ap/.
+    cp /opt/hiveid-ap/conf.hiveid.json /etc/hiveid-ap/.
+fi
+
+CONF=/etc/hiveid-ap/conf.traintraxx.json
+if [ -f $CONF ]; then 
+    echo "Existing TrainTraxx configuration file found, skipping"
+else 
+    cp /opt/hiveid-ap/conf.traintraxx.json /etc/hiveid-ap/.
+fi
+
+CONF=/etc/hiveid-ap/conf.jmri.json
+if [ -f $CONF ]; then 
+    echo "Existing JMRI configuration file found, skipping"
+else 
+    cp /opt/hiveid-ap/conf.jmri.json /etc/hiveid-ap/.
 fi
 
 cp /opt/hiveid-ap/index.php /var/www/html/.

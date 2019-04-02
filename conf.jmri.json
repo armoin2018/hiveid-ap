@@ -1,0 +1,5 @@
+{
+    "JMRI_API": "http://local.hive-id.com:12080/json/",
+    "JMRI_Web": "http://local.hive-id.com:12080/",
+    "JMRI_ENABLED": false
+}
