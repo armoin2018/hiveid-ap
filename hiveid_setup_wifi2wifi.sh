@@ -1,21 +1,35 @@
 #!/bin/bash
-# Usage: hiveid_setup_wifi2wifi.sh SSID PASSWORD
+# Usage: hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD
 
-SSID=$1
-PWD=$2
+PWD1=$1
+SSID=$2
+PWD2=$3
 apt-get update && apt-get upgrade --yes && apt-get autoremove --yes
-apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw iwlist openssh-server
+apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw openssh-server
 
 systemctl enable multi-user.target --force
 systemctl set-default multi-user.target
 sed -i "s/^hostname.*$/hostname $HOSTNAME/g" /etc/dhcpcd.conf
+
+
+if [ -f /etc/dhcpcd.conf.orig ]; then 
+    mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
+else 
+    cp /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
+fi
+
 echo "interface wlan0
     static ip_address=192.168.2.1/24" >> /etc/dhcpcd.conf
 
 service dhcpcd restart
-mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+if [ -f /etc/dnsmasq.conf.orig ]; then 
+    mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
+else 
+    cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+fi
 echo "interface=wlan0
-dhcp-range=192.168.2.2,192.168.2.254,255.255.255.0,24h" > /etc/dnsmasq.conf
+dhcp-range=192.168.2.2,192.168.2.254,255.255.255.0,24h" >> /etc/dnsmasq.conf
+
 echo "interface=wlan0
 driver=nl80211
 ssid=$HOSTNAME
@@ -26,7 +40,7 @@ macaddr_acl=0
 auth_algs=1
 ignore_broadcast_ssid=0
 wpa=2
-wpa_passphrase=$PWD
+wpa_passphrase=$PWD1
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP" > /etc/hostapd/hostapd.conf
@@ -38,18 +52,34 @@ country=US
 
 network={
 	ssid=\"$SSID\"
-	psk=\"$PWD\"
+	psk=\"$PWD2\"
 	key_mgmt=WPA-PSK
 }" >/etc/wpa_supplicant/wpa_supplicant.conf
-
+systemctl enable hostapd
 systemctl start hostapd
 systemctl start dnsmasq
+
+if [ -f /etc/sysctl.conf.orig ]; then 
+    mv /etc/sysctl.conf.orig /etc/sysctl.conf
+else 
+    cp /etc/sysctl.conf /etc/sysctl.conf.orig
+fi
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+
+iptables -t nat -F
 iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
-sed -i "s/^exit 0$//g" /etc/rc.local
-echo "iptables-restore < /etc/iptables.ipv4.nat
+
+
+if grep -Fxq "iptables\.ipv4\.nat" /etc/rc.local
+then
+    echo "rc.local is already configured for iptables"
+else
+    sed -i "s/^exit 0$//g" /etc/rc.local
+    echo "iptables-restore < /etc/iptables.ipv4.nat
 exit 0" >> /etc/rc.local
+fi
+
 
 echo "#!/bin/sh
 service dhcpcd stop

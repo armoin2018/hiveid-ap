@@ -16,12 +16,27 @@ iface wlan0 inet static
     network 192.168.2.0
 broadcast 192.168.2.255" > /etc/network/interfaces.d/wlan0
 sed -i "s/^hostname.*$/hostname $HOSTNAME/g" /etc/dhcpcd.conf
+
+
+if [ -f /etc/dhcpcd.conf.orig ]; then 
+    mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
+else 
+    cp /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
+fi
+
 echo "interface wlan0
     static ip_address=192.168.2.1/24" >> /etc/dhcpcd.conf
+
 service dhcpcd restart
-mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+if [ -f /etc/dnsmasq.conf.orig ]; then 
+    mv /etc/dnsmasq.conf.orig /etc/dnsmasq.conf
+else 
+    cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+fi
 echo "interface=wlan0
-dhcp-range=192.168.2.2,192.168.2.254,255.255.255.0,24h" > /etc/dnsmasq.conf
+dhcp-range=192.168.2.2,192.168.2.254,255.255.255.0,24h" >> /etc/dnsmasq.conf
+
+
 echo "interface=wlan0
 driver=nl80211
 ssid=$HOSTNAME
@@ -37,11 +52,41 @@ wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP" > /etc/hostapd/hostapd.conf
 echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" >> /etc/default/hostapd
+systemctl enable hostapd
 systemctl start hostapd
 systemctl start dnsmasq
+
+if [ -f /etc/sysctl.conf.orig ]; then 
+    mv /etc/sysctl.conf.orig /etc/sysctl.conf
+else 
+    cp /etc/sysctl.conf /etc/sysctl.conf.orig
+fi
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+
+iptables -t nat -F
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
-sed -i "s/^exit 0$//g" /etc/rc.local
-echo "iptables-restore < /etc/iptables.ipv4.nat
+
+
+if grep -Fxq "iptables\.ipv4\.nat" /etc/rc.local
+then
+    echo "rc.local is already configured for iptables"
+else
+    sed -i "s/^exit 0$//g" /etc/rc.local
+    echo "iptables-restore < /etc/iptables.ipv4.nat
 exit 0" >> /etc/rc.local
+fi
+
+
+echo "#!/bin/sh
+service dhcpcd stop
+service dnsmasq stop
+service hostapd stop
+Sleep 5
+service dhcpcd start
+service dnsmasq start
+service hostapd start
+exit 1" > /etc/network/if-post-up.d/zzz_hostapd
+chmod +x /etc/network/if-post-up.d/zzz_hostapd
+
+echo "Reboot Now"
