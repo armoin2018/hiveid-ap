@@ -20,7 +20,7 @@ chmod +x *.sh
 ```
 If you want a WiFi to  WiFi Access Point (Still being Tested)
 ```
-./hiveid_set_wifi2wifi.sh <SSID> <PASSWORD>
+./hiveid_setup_wifi2wifi.sh <NEW_GATEWAY_PWD> <REMOTE_SSID> <REMOTE_SSID_PWD>
 ```
 
 If you want to use WiFi to Ethernet Access Point
