@@ -23,7 +23,7 @@ If you want a WiFi to  WiFi Access Point (Still being Tested)
 
 If you want to use WiFi to Ethernet Access Point
 ```
-./hiveid_set_wifi2eth.sh <PASSWORD>
+./hiveid_setup_wifi2eth.sh <PASSWORD>
 ```
 
 If you want to use JMRI
