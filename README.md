@@ -12,9 +12,7 @@ cd /opt
 apt-get update && apt-get upgrade --yes && apt-get autoremove --yes 
 apt-get install git
 git clone https://github.com/armoin2018/hiveid-ap
-chown -R pi:pi hiveid-ap
-cd hiveid-ap
-chmod +x *.sh
+chown -R pi:pi /opt/hiveid-ap;chmod +x /opt/hiveid-ap/*.sh;cd /opt/hiveid-ap
 ./setup.sh
 
 ```
