@@ -1,0 +1,6 @@
+{
+    "git.enableCommitSigning": true,
+    "git.enableSmartCommit": true,
+    "git.postCommitCommand": "push",
+    "git.rebaseWhenSync": true
+}
