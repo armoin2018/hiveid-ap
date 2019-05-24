@@ -2,6 +2,7 @@
 cp PanelPro.desktop /home/pi/.config/autostart/.
 #mkdir /home/pi/.config/lxsession /home/pi/.config/lxsession/LXDE-pi
 #cp autostart /home/pi/.config/lxsession/LXDE-pi/.
+
 cd /opt/
 mkdir jmri
 cd /opt/jmri
