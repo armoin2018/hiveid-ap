@@ -6,13 +6,11 @@ This is the setup and dependencies for the hive-id.com access point for the Rasp
 1. Setup Raspberry Pi Raspbian NOOBS (Based on v3.0 - https://www.raspberrypi.org/downloads/noobs/)
 2. Launch Terminal Window
 ```
-sudo bash 
-mkdir /opt 
+sudo mkdir /opt 
 cd /opt
-apt-get update && apt-get upgrade --yes && apt-get autoremove --yes 
-apt-get install git
-git clone https://github.com/armoin2018/hiveid-ap
-chown -R pi:pi /opt/hiveid-ap;chmod +x /opt/hiveid-ap/*.sh;cd /opt/hiveid-ap
+
+sudo git clone https://github.com/armoin2018/hiveid-ap
+sudo chown -R pi:pi /opt/hiveid-ap;chmod +x /opt/hiveid-ap/*.sh;cd /opt/hiveid-ap
 ./setup.sh
 
 ```
