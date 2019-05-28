@@ -10,8 +10,8 @@ sudo npm install usb  --unsafe-perm -g
 sudo npm install bluetooth-hci-socket --unsafe-perm -g
 sudo npm install bcrypt --unsafe-perm -g
 sudo npm install node-red-admin --unsafe-perm -g
-sudo npm install noble -g
-sudo npm install lodash -g
+sudo npm install noble --unsafe-perm -g
+sudo npm install lodash --unsafe-perm -g
 sudo npm update -g
 
 sudo systemctl enable nodered.service
