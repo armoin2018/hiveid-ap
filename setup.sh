@@ -1,21 +1,20 @@
 #!/bin/bash
 cd /opt/hiveid-ap
 ./system_update.sh
-apt-get install --yes git curl npm firefox-esr iw
+apt-get install --yes git curl firefox-esr iw
 apt-get install --yes lsof git apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
-apt-get install --yes nodered jython arduino arduino-mk
+apt-get install --yes jython arduino arduino-mk
 apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
 
 mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup /usr/local/hiveid-ap/ota /var/log/hiveid-ap /etc/hiveid-ap
 chown -R pi:pi /usr/local/hiveid-ap /var/log/hiveid-ap 
 
 setcap cap_net_raw+eip $(eval readlink -f `which node`)
-npm install -g noble
-systemctl enable nodered.service
+
 pip install esptool
-npm install -g node-red-admin
 ./apache_set_user.sh pi
-php ./nodered_set_nodes.php
+
+./setup_node.sh
 
 sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 cd /opt
