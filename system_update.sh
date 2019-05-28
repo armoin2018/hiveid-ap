@@ -1,3 +1,3 @@
 #!/bin/bash
-rpi-update
-apt-get update && apt-get upgrade --yes && apt-get autoremove --yes
+sudo rpi-update
+sudo apt-get update && sudo apt-get upgrade --yes && sudo apt-get autoremove --yes

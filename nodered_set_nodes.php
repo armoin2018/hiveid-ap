@@ -9,5 +9,5 @@ foreach ($neededNodes as $id=>$val) {
 		system('cd /home/pi/.node-red;npm install ' . $val . ' >> /var/log/hiveid-ap/node.install.log');
 	}
 }
-system('service nodered restart');
+system('sudo service nodered restart');
 ?>
