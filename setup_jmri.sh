@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir /home/pi/.config/autostart
 cp PanelPro.desktop /home/pi/.config/autostart/.
 #mkdir /home/pi/.config/lxsession /home/pi/.config/lxsession/LXDE-pi
 #cp autostart /home/pi/.config/lxsession/LXDE-pi/.
