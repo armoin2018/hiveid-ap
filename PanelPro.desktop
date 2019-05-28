@@ -9,3 +9,4 @@ OnlyShowIn=
 StartupNotify=false
 Terminal=false
 Hidden=false
+X-XFCE-Autostart-Override=true
