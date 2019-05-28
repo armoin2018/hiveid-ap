@@ -9,7 +9,7 @@ cd /opt
 now=$(date +"%Y%m%d")
 sudo rm /opt/jmri_backups/jmri_$now.tar.gz 2>/dev/null
 sudo tar -zcvf jmri_$now.tar.gz jmri
-mv jmri_$now.tar.gz /opt/jmri_backups/.
+sudo mv jmri_$now.tar.gz /opt/jmri_backups/.
 cd /opt/jmri
 sudo rm -rdf *
 sudo wget https://github.com/JMRI/JMRI/releases/download/v4.14/JMRI.4.14+Rd060e0b.tgz
