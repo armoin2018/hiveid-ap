@@ -3,6 +3,7 @@ sudo apt-get update && sudo apt-get upgrade --yes && sudo apt-get autoremove --y
 sudo apt-get install npm nodejs nodered --yes
 
 sudo npm cache clean -f
+sudo chown -R root:root /root/.* /root /usr/lib/node_modules
 sudo npm install npm -g  
 sudo npm install bcrypt -g
 sudo npm install node-red-admin -g
