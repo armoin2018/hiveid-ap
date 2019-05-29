@@ -24,7 +24,6 @@ CONF=/home/pi/.node-red/settings.js
 if [ -f $CONF ]; then 
     sudo cp $CONF /usr/local/hiveid-ap/backup/settings.$now.js
 fi
-
 cp /opt/hiveid-ap/node.settings.js $CONF
 
 CONF=/home/pi/.node-red/user-authentication.js
@@ -38,7 +37,8 @@ sudo chown -R pi:pi /home/pi/.node-red
 sudo systemctl enable nodered.service
 sudo service nodered start
 
-if [ `curl http://localhost:1880/flows` == "[]" ]; then
+existing_flows=`curl http://localhost:1880/flows`
+if [ "$existing_flows" == "[]" ]; then
 	echo "Settings default flows."
     cp /opt/hiveid-ap/node.flows.js /home/pi/.node-red/flows.json
     sudo chown -R pi:pi /home/pi/.node-red
