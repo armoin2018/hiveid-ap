@@ -14,13 +14,13 @@ module.exports = {
         type: "credentials",
         users: [{
             username: "admin",
-            password: "$2b$08$C9tz3cK5KCUtXX13SxJyB.9ml92sg2wZr9Zy.yehD9IhfPHyWyYjm",
+            password: "$2b$08$yxqQOhVlL5QwK.jvIBFhCeRASHDFVIMDVa67/PStDagPYBbuOb/GK",
             permissions: "*"
         }]
     },
     /*httpNodeAuth: {
         user: "admin"
-        , pass: "$2b$08$C9tz3cK5KCUtXX13SxJyB.9ml92sg2wZr9Zy.yehD9IhfPHyWyYjm"
+        , pass: "$2b$08$yxqQOhVlL5QwK.jvIBFhCeRASHDFVIMDVa67/PStDagPYBbuOb/GK"
     },*/
     functionGlobalContext: {
     },
