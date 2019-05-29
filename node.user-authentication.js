@@ -1,50 +1,61 @@
+const { userExists, checkPassword } = require('passwd');
+
 module.exports = {
     type: "credentials",
-    users: function(username) {
-        return new Promise(function (resolve) {
-            const { userExists } = require('passwd');
-            userExists(username, function (err, response) {
-                if (err) {
-                    console.log('Error: Credential Check User', err);
-                    resolve(null);
-                } else {
-                    if (response) {
-                        resolve({
-                            username: username,
-                            permissions: "*"
-                        });
+    users: function (username) {
+        return new Promise((resolve, reject) => {
+            try {
+                userExists(username, function (err, response) {
+                    if (err) {
+                        throw new Error(err);
                     } else {
-                        resolve(null);
+                        if (response) {
+                            resolve({
+                                username: username,
+                                permissions: "*"
+                            });
+                        } else {
+                            resolve(null);
+                        }
                     }
-                }
-            });
-            resolve(null);
+                });
+            } catch (e) {
+                console.log('Error: Credential Check User', e);
+                reject(e);
+            }
         });
     },
-    authenticate: function(username,password) {
-        return new Promise(function (resolve) {
-            const { checkPassword } = require('passwd');
-            checkPassword(username, password, function (err, response) {
-                if (err) {
-                    console.log('Error: Credential Authenticate User', err);
-                    resolve(null);
-                } else {
-                    if (response) {
-                        resolve({
-                            username: username,
-                            permissions: "*"
-                        });
+    authenticate: function (username, password) {
+        return new Promise((resolve, reject) => {
+            try {
+                checkPassword(username, password, function (err, response) {
+                    if (err) {
+                        throw new Error(err);
                     } else {
-                        resolve(null);
+                        if (response) {
+                            resolve({
+                                username: username,
+                                permissions: "*"
+                            });
+                        } else {
+                            resolve(null);
+                        }
                     }
-                }
-            });
+                });
+            } catch (e) {
+                console.log('Error: Credential Authenticate User', e);
+                reject(e);
+            }
         });
     },
-    default: function() {
-        return new Promise(function(resolve) {
-            resolve({anonymous: true, permissions:"read"});
+    default: function () {
+        return new Promise((resolve, reject) => {
+            try {
+                resolve({ anonymous: true, permissions: "read" });
+            } catch (e) {
+                console.log('Error: Default User', e);
+                reject(e);
+            }
         });
     }
-
  }
