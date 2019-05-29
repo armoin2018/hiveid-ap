@@ -26,11 +26,12 @@ if [ -f $CONF ]; then
 fi
 cp /opt/hiveid-ap/node.settings.js $CONF
 
-CONF=/home/pi/.node-red/user-authentication.js
-if [ -f $CONF ]; then 
-    sudo cp $CONF /usr/local/hiveid-ap/backup/user-authentication.$now.js
-fi
-cp /opt/hiveid-ap/node.user-authentication.js $CONF
+# TODO: Create User Authentication
+#CONF=/home/pi/.node-red/user-authentication.js
+#if [ -f $CONF ]; then 
+#    sudo cp $CONF /usr/local/hiveid-ap/backup/user-authentication.$now.js
+#fi
+#cp /opt/hiveid-ap/node.user-authentication.js $CONF
 
 sudo chown -R pi:pi /home/pi/.node-red
 

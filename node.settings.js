@@ -7,9 +7,21 @@ module.exports = {
     flowFilePretty: true,    
     userDir: '/home/pi/.node-red/',
     nodesDir: '/home/pi/.node-red/nodes',
-    httpAdminRoot: '/admin',
+    httpAdminRoot: '/',
 
-    adminAuth: require("./user-authentication"),
+//    adminAuth: require("./user-authentication"),
+    adminAuth: {
+        type: "credentials",
+        users: [{
+            username: "admin",
+            password: "$2b$08$C9tz3cK5KCUtXX13SxJyB.9ml92sg2wZr9Zy.yehD9IhfPHyWyYjm",
+            permissions: "*"
+        }]
+    },
+    /*httpNodeAuth: {
+        user: "admin"
+        , pass: "$2b$08$C9tz3cK5KCUtXX13SxJyB.9ml92sg2wZr9Zy.yehD9IhfPHyWyYjm"
+    },*/
     functionGlobalContext: {
     },
     exportGlobalContextKeys: false,
