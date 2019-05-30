@@ -1,6 +1,12 @@
 #!/bin/bash
 # Usage: hiveid_setup_wifi2eth.sh PASSWORD
-PWD = $1
+if [ -z "$1" ]; then 
+    echo "No argument supplied"
+    echo "Usage: hiveid_setup_wifi2eth.sh PASSWORD"
+    exit;
+else 
+    PWD=$1
+fi
 
 
 apt-get update && apt-get upgrade --yes && apt-get autoremove --yes

@@ -15,9 +15,9 @@ sudo npm install bluetooth-hci-socket --unsafe-perm -g
 sudo npm install bcrypt --unsafe-perm -g
 sudo chown -R root:root /root/.npm /root/.node-gyp /root /usr/lib/node_modules
 sudo npm install node-red-admin --unsafe-perm -g
-sudo npm install noble -g
-sudo npm install lodash -g
-sudo npm install passwd-linux -g
+sudo npm install noble --unsafe-perm -g
+sudo npm install lodash --unsafe-perm -g
+sudo npm install passwd-linux --unsafe-perm -g
 sudo npm update -g
 
 CONF=/home/pi/.node-red/settings.js

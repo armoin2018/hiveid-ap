@@ -1,9 +1,16 @@
 #!/bin/bash
 # Usage: hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD
 
-PWD1=$1
-SSID=$2
-PWD2=$3
+if [ -z "$3" ]; then 
+    echo "Insufficient argument list"
+    echo "Usage: hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD"
+    exit;
+else 
+    PWD1=$1
+    SSID=$2
+    PWD2=$3
+fi
+
 apt-get update && apt-get upgrade --yes && apt-get autoremove --yes
 apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw openssh-server
 
