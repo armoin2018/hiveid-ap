@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo service nodered stop
 sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup
 CONF=/home/pi/.node-red/settings.js
 if [ -f $CONF ]; then 
@@ -14,3 +15,4 @@ cp /opt/hiveid-ap/node.settings.js $CONF
 #cp /opt/hiveid-ap/node.user-authentication.js $CONF
 
 sudo chown -R pi:pi /home/pi/.node-red
+sudo service nodered start
