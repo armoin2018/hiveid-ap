@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup
 CONF=/home/pi/.node-red/settings.js
 if [ -f $CONF ]; then 
     sudo cp $CONF /usr/local/hiveid-ap/backup/settings.$now.js
