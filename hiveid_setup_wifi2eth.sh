@@ -58,6 +58,7 @@ wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP" > /etc/hostapd/hostapd.conf
 echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" >> /etc/default/hostapd
+systemctl unmask hostapd
 systemctl enable hostapd
 systemctl start hostapd
 systemctl start dnsmasq

@@ -62,6 +62,7 @@ network={
 	psk=\"$PWD2\"
 	key_mgmt=WPA-PSK
 }" >/etc/wpa_supplicant/wpa_supplicant.conf
+systemctl unmask hostapd
 systemctl enable hostapd
 systemctl start hostapd
 systemctl start dnsmasq
