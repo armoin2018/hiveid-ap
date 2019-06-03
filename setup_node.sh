@@ -1,6 +1,6 @@
 #!/bin/bash
 now=$(date +"%Y%m%d")
-sudo ./setup.sh
+sudo ./system_update.sh
 sudo apt-get install npm nodejs nodered --yes
 
 sudo service nodered stop
