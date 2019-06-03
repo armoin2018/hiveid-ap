@@ -92,7 +92,7 @@ echo "#!/bin/sh
 service dhcpcd stop
 service dnsmasq stop
 service hostapd stop
-Sleep 5
+sleep 5
 service dhcpcd start
 service dnsmasq start
 service hostapd start
