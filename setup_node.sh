@@ -1,6 +1,6 @@
 #!/bin/bash
 now=$(date +"%Y%m%d")
-sudo apt-get update && sudo apt-get upgrade --yes && sudo apt-get autoremove --yes
+sudo ./setup.sh
 sudo apt-get install npm nodejs nodered --yes
 
 sudo service nodered stop
@@ -19,19 +19,6 @@ sudo npm install noble --unsafe-perm -g
 sudo npm install lodash --unsafe-perm -g
 sudo npm install passwd-linux --unsafe-perm -g
 sudo npm update -g
-
-CONF=/home/pi/.node-red/settings.js
-if [ -f $CONF ]; then 
-    sudo cp $CONF /usr/local/hiveid-ap/backup/settings.$now.js
-fi
-cp /opt/hiveid-ap/node.settings.js $CONF
-
-# TODO: Create User Authentication
-#CONF=/home/pi/.node-red/user-authentication.js
-#if [ -f $CONF ]; then 
-#    sudo cp $CONF /usr/local/hiveid-ap/backup/user-authentication.$now.js
-#fi
-#cp /opt/hiveid-ap/node.user-authentication.js $CONF
 
 sudo chown -R pi:pi /home/pi/.node-red
 
