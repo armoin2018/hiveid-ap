@@ -39,3 +39,6 @@ node-red-contrib-ignoble
 node-red-contrib-generic-ble
 node-red-contrib-function-npm
 node-red-contrib-npm
+node-red-contrib-ip
+node-red-contrib-cpu
+node-red-contrib-fs-ops

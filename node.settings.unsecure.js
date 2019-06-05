@@ -8,19 +8,6 @@ module.exports = {
     userDir: '/home/pi/.node-red/',
     nodesDir: '/home/pi/.node-red/nodes',
     httpAdminRoot: '/',
-    //    adminAuth: require("./user-authentication"),
-    adminAuth: {
-        type: "credentials",
-        users: [{
-            username: "admin",
-            password: "$2b$08$yxqQOhVlL5QwK.jvIBFhCeRASHDFVIMDVa67/PStDagPYBbuOb/GK",
-            permissions: "*"
-        }]
-    },
-    /*httpNodeAuth: {
-        user: "admin"
-        , pass: "$2b$08$yxqQOhVlL5QwK.jvIBFhCeRASHDFVIMDVa67/PStDagPYBbuOb/GK"
-    },*/
     functionGlobalContext: {
     },
     exportGlobalContextKeys: false,

@@ -18,7 +18,6 @@ systemctl enable multi-user.target --force
 systemctl set-default multi-user.target
 sed -i "s/^hostname.*$/hostname $HOSTNAME/g" /etc/dhcpcd.conf
 
-
 if [ -f /etc/dhcpcd.conf.orig ]; then 
     mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
 else 
@@ -78,7 +77,6 @@ iptables -t nat -F
 iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-
 if grep -Fxq "iptables\.ipv4\.nat" /etc/rc.local
 then
     echo "rc.local is already configured for iptables"
@@ -87,7 +85,6 @@ else
     echo "iptables-restore < /etc/iptables.ipv4.nat
 exit 0" >> /etc/rc.local
 fi
-
 
 echo "#!/bin/sh
 service dhcpcd stop

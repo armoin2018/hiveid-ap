@@ -20,7 +20,7 @@ iface wlan0 inet static
     address 192.168.2.1
     netmask 255.255.255.0
     network 192.168.2.0
-broadcast 192.168.2.255" > /etc/network/interfaces.d/wlan0
+    broadcast 192.168.2.255" > /etc/network/interfaces.d/wlan0
 sed -i "s/^hostname.*$/hostname $HOSTNAME/g" /etc/dhcpcd.conf
 
 
@@ -41,7 +41,6 @@ else
 fi
 echo "interface=wlan0
 dhcp-range=192.168.2.2,192.168.2.254,255.255.255.0,24h" >> /etc/dnsmasq.conf
-
 
 echo "interface=wlan0
 driver=nl80211
@@ -73,7 +72,6 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 iptables -t nat -F
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
 
 if grep -Fxq "iptables\.ipv4\.nat" /etc/rc.local
 then
