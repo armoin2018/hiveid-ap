@@ -2,6 +2,8 @@
 
 This is the setup and dependencies for the hive-id.com access point for the Raspberry Pi. 
 
+Scripts being actively changed!!!
+
 ## How To:
 1. Setup Raspberry Pi Raspbian NOOBS (Based on v3.0 - https://www.raspberrypi.org/downloads/noobs/)
 2. Launch Terminal Window
