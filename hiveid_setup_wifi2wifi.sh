@@ -86,6 +86,7 @@ else
 exit 0" >> /etc/rc.local
 fi
 
+mkdir /etc/network/if-post-up.d
 echo "#!/bin/sh
 service dhcpcd stop
 service dnsmasq stop
