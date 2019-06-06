@@ -42,3 +42,7 @@ node-red-contrib-npm
 node-red-contrib-ip
 node-red-contrib-cpu
 node-red-contrib-fs-ops
+node-red-contrib-device-stats
+node-red-contrib-linux-memory 
+node-red-contrib-os
+node-red-contrib-wifiscan

@@ -18,6 +18,8 @@ sudo npm install node-red-admin --unsafe-perm -g
 sudo npm install noble --unsafe-perm -g
 sudo npm install lodash --unsafe-perm -g
 sudo npm install passwd-linux --unsafe-perm -g
+sudo npm install ini --unsafe-perm -g
+sudo npm install fs --unsafe-perm -g
 sudo npm update -g
 
 sudo chown -R pi:pi /home/pi/.node-red
