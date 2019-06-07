@@ -27,13 +27,13 @@ sudo chown -R pi:pi /home/pi/.node-red
 sudo systemctl enable nodered.service
 sudo service nodered start
 
-# Need to move the file in place instead of using the service
-CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 DATE=`date '+%Y%m%d%H%M%S'`
-sudo mkdir /usr/local/hiveid-ap/backups/$DATE
+sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
+sudo chown -R pi:pi /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
+CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 if [ -f $CONF ]; then 
     sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
-else 
+fi 
 cp /opt/hiveid-ap/node.flows.js $CONF
 sudo chown -R pi:pi /home/pi/.node-red
 sudo chmod -R 666 /var/log/hiveid-ap
