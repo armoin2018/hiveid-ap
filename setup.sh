@@ -10,7 +10,7 @@ sudo apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
 
 sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup /usr/local/hiveid-ap/ota /var/log/hiveid-ap /etc/hiveid-ap
 sudo chown -R pi:pi /usr/local/hiveid-ap /var/log/hiveid-ap 
-
+sudo chmod -R 666 /var/log/hiveid-ap
 sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
 
 pip install esptool
