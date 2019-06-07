@@ -40,5 +40,5 @@ if [ "$existing_flows" == "[]" ]; then
 else
 	echo "Default flows exist. Not Updating."
 fi
-
+sudo chmod -R 666 /var/log/hiveid-ap
 php ./nodered_set_nodes.php
