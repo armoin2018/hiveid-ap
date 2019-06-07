@@ -11,6 +11,15 @@ module.exports = {
     nodesDir: '/home/pi/.node-red/nodes',
     httpStatic: '/opt/hiveid-ap/nodered',
     httpAdminRoot: '/',
+    //    adminAuth: require("./user-authentication"),
+    adminAuth: {
+        type: "credentials",
+        users: [{
+            username: "admin",
+            password: "[PASSWORD]",
+            permissions: "*"
+        }]
+    },
     functionGlobalContext: {
         os: require("os")
     },

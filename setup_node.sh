@@ -1,4 +1,11 @@
 #!/bin/bash
+##########################################################
+#### Author: Blaine McDonnell (blaine@armoin.com)     ####
+#### Usage: ./setup_node.sh                           ####
+#### Description: Sets up node-red                    ####
+#### Version: 0.20190607                              ####
+##########################################################
+
 now=$(date +"%Y%m%d")
 sudo ./system_update.sh
 sudo apt-get install npm nodejs nodered --yes
@@ -35,6 +42,15 @@ if [ -f $CONF ]; then
     sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
 fi 
 cp /opt/hiveid-ap/node.flows.js $CONF
+
+CONF=/home/pi/.node-red/settings.js
+if [ -f $CONF ]; then 
+    sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
+fi 
+cp /opt/hiveid-ap/node.settings.unsecure.js ~/.node-red/settings.js 
+
 sudo chown -R pi:pi /home/pi/.node-red
 sudo chmod -R 666 /var/log/hiveid-ap
 php ./nodered_set_nodes.php
+
+sudo service nodered restart

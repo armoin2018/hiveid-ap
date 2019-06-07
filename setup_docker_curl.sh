@@ -2,7 +2,7 @@
 ##########################################################
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: sudo ./setup_docker_curl.sh               ####
-#### Description: Sets up Docker                      ####
+#### Description: Sets up Docker using curl           ####
 #### Version: 0.1                                     ####
 ##########################################################
 

@@ -1,6 +1,13 @@
 #!/bin/bash
+##########################################################
+#### Author: Blaine McDonnell (blaine@armoin.com)     ####
+#### Usage: ./hiveid_update.sh                        ####
+#### Description: Updates HiveID's scripts            ####
+#### Version: 0.2                                     ####
+##########################################################
+
 cd /opt/hiveid-ap/
 git reset --hard
 git pull --rebase
-chown -R pi:pi /opt/hiveid-ap
-chmod +x /opt/hiveid-ap/*.sh
+sudo chown -R pi:pi /opt/hiveid-ap
+sudo chmod +x /opt/hiveid-ap/*.sh

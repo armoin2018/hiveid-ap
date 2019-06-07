@@ -1,6 +1,10 @@
 #!/bin/bash
-# Usage: hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD
-
+##############################################################################################
+#### Author: Blaine McDonnell (blaine@armoin.com)                                         ####
+#### Usage: sudo ./hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD  ####
+#### Description: Sets up Raspberry Pi as a WiFi to WiFi Gateway                          ####
+#### Version: 0.2                                                                         ####
+##############################################################################################
 if [ -z "$3" ]; then 
     echo "Insufficient argument list"
     echo "Usage: hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD"

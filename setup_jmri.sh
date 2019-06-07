@@ -1,9 +1,14 @@
 #!/bin/bash
+##########################################################
+#### Author: Blaine McDonnell (blaine@armoin.com)     ####
+#### Usage: ./setup_jmri.sh                           ####
+#### Description: Sets up basic JRMI                  ####
+#### Version: 0.20190607                              ####
+##########################################################
 killall PanelPro
 mkdir /home/pi/.config/autostart
 cp PanelPro.desktop /home/pi/.config/autostart/.
-#mkdir /home/pi/.config/lxsession /home/pi/.config/lxsession/LXDE-pi
-#cp autostart /home/pi/.config/lxsession/LXDE-pi/.
+
 sudo mkdir /opt/jmri /opt/jmri_backups 2>/dev/null
 cd /opt
 now=$(date +"%Y%m%d")

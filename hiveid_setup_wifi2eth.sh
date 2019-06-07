@@ -1,5 +1,11 @@
 #!/bin/bash
-# Usage: hiveid_setup_wifi2eth.sh PASSWORD
+############################################################################
+#### Author: Blaine McDonnell (blaine@armoin.com)                       ####
+#### Usage: sudo ./hiveid_setup_wifi2eth.sh PASSWORD                    ####
+#### Description: Sets up Raspberry Pi as a WiFi to Ethernet Gateway    ####
+#### Version: 0.2                                                       ####
+############################################################################
+
 if [ -z "$1" ]; then 
     echo "No argument supplied"
     echo "Usage: hiveid_setup_wifi2eth.sh PASSWORD"

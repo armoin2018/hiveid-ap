@@ -1,1 +1,7234 @@
-[{"id":"adc8251.587bb58","type":"tab","label":"RFID Flow","disabled":false,"info":""},{"id":"d333a985.4c5e8","type":"tab","label":"TrainTraxx Activity Screen","disabled":false,"info":""},{"id":"30eec23d.fd286e","type":"tab","label":"TrainTraxx Data Cache","disabled":false,"info":""},{"id":"bb1f7096.73abc8","type":"tab","label":"JMRI Data Cache","disabled":false,"info":""},{"id":"e423bbbc.8e44","type":"tab","label":"HiveID Configuration","disabled":false,"info":""},{"id":"92b7c3ae.62f42","type":"tab","label":"TrainTraxx Configuration","disabled":false,"info":""},{"id":"b2a790cb.412978","type":"tab","label":"JMRI Configuration","disabled":false,"info":""},{"id":"2703c1bf.cdcd0e","type":"tab","label":"Summary Section","disabled":false,"info":""},{"id":"30784332.7a39cc","type":"tab","label":"Admin Console - System","disabled":false,"info":""},{"id":"d09cb82e.8ccc38","type":"tab","label":"Admin Cosole - WiFi 2 WiFi Gateway","disabled":false,"info":""},{"id":"ad297f2f.ea702","type":"tab","label":"Admin Console - WiFi to Ethernet Gateway","disabled":false,"info":""},{"id":"aa8a2211.777d5","type":"tab","label":"JMRI GET Endpoint","disabled":false,"info":""},{"id":"cd7101b0.54e6d","type":"tab","label":"TrainTraxx Firmware Updater","disabled":false,"info":""},{"id":"6e904939.8c5468","type":"tab","label":"HiveID Flow Updater","disabled":false,"info":""},{"id":"f64af0d3.410aa8","type":"tab","label":"Node Link Redirector","disabled":false,"info":""},{"id":"e780311.6ef4bd","type":"tab","label":"TrainTraxx to JMRI","disabled":false,"info":""},{"id":"a74d9fb8.b81e8","type":"subflow","name":"Reporters to JRMI","info":"","category":"JMRI","in":[{"x":114.75,"y":162,"wires":[{"id":"1ff8ed0e.e0f883"}]}],"out":[{"x":1272,"y":240,"wires":[{"id":"3cdbab87.3d2ac4","port":0},{"id":"3ed6374a.2ea74","port":0}]},{"x":1272,"y":400,"wires":[{"id":"a8a6ba87.48c718","port":0},{"id":"f2007e4b.2ec1d","port":0}]}],"icon":"node-red/inject.png"},{"id":"df010d82.ab2078","type":"subflow","name":"Tracker Proxy","info":"","category":"TrainTraxx","in":[],"out":[{"x":560,"y":142.5,"wires":[{"id":"2225515f.ea473e","port":0}]},{"x":1000,"y":122.5,"wires":[{"id":"634fcef8.43a0e","port":0}]}],"outputLabels":["","msg"],"icon":"node-red/white-globe.png"},{"id":"85ae3462.0c5d6","type":"subflow","name":"Get JMRI Info","info":"","category":"JMRI","in":[{"x":85,"y":72.5,"wires":[{"id":"ab5fb551.f8f3"}]}],"out":[{"x":745,"y":72.5,"wires":[{"id":"25a5724d.6196de","port":0}]}],"inputLabels":["msg.payload"],"outputLabels":["msg.payload"],"icon":"node-red/leveldb.png"},{"id":"5a683f5f.0a3de8","type":"subflow","name":"Get TrainTraxx Data","info":"","category":"TrainTraxx","in":[{"x":80,"y":140,"wires":[{"id":"f6775b38.e976c8"}]}],"out":[{"x":1040,"y":140,"wires":[{"id":"cd3e4f6.a3e97b","port":0}]}],"inputLabels":["msg"],"outputLabels":["msg"],"icon":"node-red/leveldb.png"},{"id":"177e2d55.7524b3","type":"ui_base","theme":{"name":"theme-light","lightTheme":{"default":"#0094CE","baseColor":"#ff9900","baseFont":"Lucida Sans Unicode,Lucida Grande,sans-serif","edited":true,"reset":false},"darkTheme":{"default":"#097479","baseColor":"#097479","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":false},"customTheme":{"name":"Untitled Theme 1","default":"#4B7930","baseColor":"#4B7930","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"},"themeState":{"base-color":{"default":"#0094CE","value":"#ff9900","edited":true},"page-titlebar-backgroundColor":{"value":"#ff9900","edited":false},"page-backgroundColor":{"value":"#fafafa","edited":false},"page-sidebar-backgroundColor":{"value":"#ffffff","edited":false},"group-textColor":{"value":"#ffb84d","edited":false},"group-borderColor":{"value":"#ffffff","edited":false},"group-backgroundColor":{"value":"#ffffff","edited":false},"widget-textColor":{"value":"#111111","edited":false},"widget-backgroundColor":{"value":"#ff9900","edited":false},"widget-borderColor":{"value":"#ffffff","edited":false},"base-font":{"value":"Lucida Sans Unicode,Lucida Grande,sans-serif"}},"angularTheme":{"primary":"indigo","accents":"blue","warn":"red","background":"grey"}},"site":{"name":"TrainTraxx","hideToolbar":"false","allowSwipe":"false","lockMenu":"false","allowTempTheme":"true","dateFormat":"DD/MM/YYYY","sizes":{"sx":48,"sy":48,"gx":6,"gy":6,"cx":6,"cy":6,"px":0,"py":0}}},{"id":"f3b1c0b5.a0749","type":"ui_tab","z":"","name":"Application Settings","icon":"apps","order":2,"disabled":false,"hidden":false},{"id":"eac11a26.5dfd","type":"ui_group","z":"","name":"TrainTraxx","tab":"f3b1c0b5.a0749","order":2,"disp":true,"width":"6","collapse":true},{"id":"55f37166.7d3bb","type":"ui_group","z":"","name":"JMRI","tab":"f3b1c0b5.a0749","order":3,"disp":true,"width":"6","collapse":true},{"id":"7f2576d0.5d638","type":"ui_group","z":"","name":"Software Updates","tab":"df175916.2bc718","order":2,"disp":true,"width":"6","collapse":false},{"id":"df175916.2bc718","type":"ui_tab","z":"","name":"Manage","icon":"fa-cogs","order":8,"disabled":false,"hidden":false},{"id":"8a4e9c12.83472","type":"ui_group","z":"","name":"TrainTraxx RFID Module","tab":"df175916.2bc718","order":3,"disp":true,"width":"6","collapse":false},{"id":"b07bd3c9.b57a38","type":"ui_link","z":"","name":"Node-Red Editor","link":"/","icon":"all_inclusive","target":"iframe","order":6},{"id":"e04ff4b8.d6243","type":"ui_link","z":"","name":"OpenRSD","link":"/redir?app=openrsd","icon":"fa-cogs","target":"iframe","order":5},{"id":"df994164.4e16b8","type":"ui_link","z":"","name":"phpMyAdmin","link":"/redir?app=phpmyadmin","icon":"fa-database","target":"newtab","order":7},{"id":"13fbce81.ce5239","type":"ui_link","z":"","name":"TrainTraxx Application","link":"https://www.traintraxx.com/traintraxx-application","icon":"fa-train","target":"iframe","order":3},{"id":"2bc7494.89a5236","type":"ui_group","name":"Group 1","tab":"","order":1,"disp":true,"width":6},{"id":"5fe0e722.49dfe8","type":"ui_link","z":"","name":"JMRI","link":"/redir?app=jmri","icon":"train","target":"iframe","order":4},{"id":"ee03b9f1.190e18","type":"ui_link","z":"","name":"TrainTraxx Store","link":"http://www.traintraxx.com","icon":"shopping_cart","target":"newtab","order":9},{"id":"1f4cf29f.76a78d","type":"ui_tab","z":"","name":"Local TrainTraxx","icon":"dashboard","order":1,"disabled":false,"hidden":false},{"id":"ed28cca7.ef01c","type":"ui_group","z":"","name":"Activity","tab":"1f4cf29f.76a78d","order":1,"disp":true,"width":"12","collapse":false},{"id":"2f5542b8.31351e","type":"ui_group","z":"","name":"Manage Information","tab":"1f4cf29f.76a78d","order":3,"disp":true,"width":"6","collapse":true},{"id":"cd816e8a.0326f8","type":"ui_group","z":"","name":"System Controls","tab":"df175916.2bc718","order":1,"disp":true,"width":"6","collapse":false},{"id":"144723c0.3de35c","type":"ui_group","z":"","name":"Summary","tab":"1f4cf29f.76a78d","order":2,"disp":true,"width":"6","collapse":false},{"id":"a17185aa.d387a","type":"ui_group","z":"","name":"HiveID","tab":"f3b1c0b5.a0749","order":1,"disp":true,"width":"6","collapse":false},{"id":"bf62db03.b149a8","type":"ui_group","z":"","name":"WiFi to Ethernet Gateway","tab":"df175916.2bc718","order":4,"disp":true,"width":"6","collapse":false},{"id":"dcf278c0.990a78","type":"ui_group","z":"","name":"WiFi to WiFi Gateway","tab":"df175916.2bc718","order":5,"disp":true,"width":"6","collapse":false},{"id":"2225515f.ea473e","type":"http in","z":"df010d82.ab2078","name":"Tracker","url":"/tracker","method":"post","upload":false,"swaggerDoc":"","x":450,"y":82.5,"wires":[["d1057f10.b40b8"]],"outputLabels":["req"]},{"id":"d1057f10.b40b8","type":"function","z":"df010d82.ab2078","name":"Tracker Process","func":"var config = global.get('TrainTraxx_Config');\nmsg.payload = { \n     DATA: msg.payload.DATA, \n     apikey : config.TrainTraxx_Key \n};\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n","outputs":1,"noerr":0,"x":640,"y":82.5,"wires":[["634fcef8.43a0e"]]},{"id":"634fcef8.43a0e","type":"http request","z":"df010d82.ab2078","name":"","method":"POST","ret":"txt","url":"","tls":"","x":851,"y":81.5,"wires":[[]],"inputLabels":["msg.payload"]},{"id":"3cdbab87.3d2ac4","type":"http request","z":"a74d9fb8.b81e8","name":"","method":"POST","ret":"obj","url":"","tls":"","x":1102,"y":200,"wires":[[]],"inputLabels":["msg"],"outputLabels":["msg.payload"]},{"id":"55065766.04bb38","type":"function","z":"a74d9fb8.b81e8","name":"JRMI Reporters Process","func":"var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nmsg.verb = 'PUT';\nvar reporterName = 'FR' + String(curReporters.nextID);\nif (curReporters.map[RFIDRequest.MAC] !== undefined) {\n    var reporterId = curReporters.map[RFIDRequest.MAC];\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n} else if (curReporters.available.length > 0) {\n    var reporterId = curReporters.available.pop();\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": {\n      \"name\": reporterName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  String(Date.now()),\n      \"report\": RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'reporter';\n\nreturn msg;","outputs":1,"noerr":0,"x":682,"y":240,"wires":[["4ba3883f.777b48"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"58782921.160d38","type":"json","z":"a74d9fb8.b81e8","name":"","property":"payload","action":"obj","pretty":false,"x":462,"y":320,"wires":[["55065766.04bb38","d693cfbb.f675c8"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"4ba3883f.777b48","type":"switch","z":"a74d9fb8.b81e8","name":"","property":"verb","propertyType":"msg","rules":[{"t":"eq","v":"POST","vt":"str"},{"t":"eq","v":"PUT","vt":"str"}],"checkall":"true","repair":false,"outputs":2,"x":882,"y":240,"wires":[["3cdbab87.3d2ac4"],["3ed6374a.2ea74"]],"inputLabels":["msg"],"outputLabels":["msg","msg"]},{"id":"3ed6374a.2ea74","type":"http request","z":"a74d9fb8.b81e8","name":"","method":"PUT","ret":"obj","url":"","tls":"","x":1102,"y":280,"wires":[[]],"inputLabels":["msg"],"outputLabels":["msg.payload"]},{"id":"b9522c57.34d448","type":"subflow:df010d82.ab2078","z":"adc8251.587bb58","name":"","x":368.4762725830078,"y":421.7618713378906,"wires":[["c8e7c693.6d383","f24be54f.915c98"],["19f9009f.71d24f","6f48bdba.57714c"]]},{"id":"19f9009f.71d24f","type":"http response","z":"adc8251.587bb58","name":"","statusCode":"","headers":{},"x":647.0317840576172,"y":384.3174133300781,"wires":[]},{"id":"6f48bdba.57714c","type":"debug","z":"adc8251.587bb58","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":666.0318145751953,"y":428.09521484375,"wires":[]},{"id":"25a5724d.6196de","type":"function","z":"85ae3462.0c5d6","name":"Set Map","func":"var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nfor (var i = 0; i < currentRecords.length; i++) {\n    console.log(i,currentRecords[i]);\n    if (currentRecords[i].data !== undefined) {\n        if (currentRecords[i].data.userName === null) {\n            msg.payload.available.push(i); \n        } else {\n            msg.payload.map[currentRecords[i].data.userName] = i;\n        }\n        msg.payload.data[i] = currentRecords[i].data;\n        if (currentRecords[i].data.name !== undefined) {\n            msg.payload.nextID =Number(currentRecords[i].data.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n}  \n\nvar curTable = flow.get('curTable');\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+curTable,msg.payload);\nreturn msg;","outputs":1,"noerr":0,"x":605,"y":72.5,"wires":[[]],"inputLabels":["msg"],"outputLabels":["msg.payload"]},{"id":"8fb4bf6c.0a0dd","type":"subflow:85ae3462.0c5d6","z":"aa8a2211.777d5","name":"","x":497,"y":107,"wires":[["5baadfdb.71e3a","733321f9.b901e8"]],"inputLabels":["msg"],"outputLabels":["msg.payload"]},{"id":"21a41d7a.1bd302","type":"http in","z":"aa8a2211.777d5","name":"JMRI Endpoint","url":"/jmri/v2/:table","method":"get","upload":false,"swaggerDoc":"","x":137,"y":107,"wires":[["c8fffb80.155f1"]],"outputLabels":["msg"]},{"id":"5baadfdb.71e3a","type":"http response","z":"aa8a2211.777d5","name":"","statusCode":"","headers":{},"x":687,"y":147,"wires":[]},{"id":"733321f9.b901e8","type":"debug","z":"aa8a2211.777d5","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":687,"y":67,"wires":[]},{"id":"135d5929.49d217","type":"http request","z":"85ae3462.0c5d6","name":"","method":"GET","ret":"obj","url":"","tls":"","x":435,"y":72.5,"wires":[["25a5724d.6196de"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"ab5fb551.f8f3","type":"function","z":"85ae3462.0c5d6","name":"Set the URL","func":"var table = msg.payload;\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + table;\nflow.set('curTable',table)\nreturn msg;","outputs":1,"noerr":0,"x":235,"y":72.5,"wires":[["135d5929.49d217"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"c8fffb80.155f1","type":"change","z":"aa8a2211.777d5","name":"Set Table","rules":[{"t":"set","p":"payload","pt":"msg","to":"req.params.table","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":317,"y":107,"wires":[["8fb4bf6c.0a0dd"]]},{"id":"a8a6ba87.48c718","type":"http request","z":"a74d9fb8.b81e8","name":"","method":"POST","ret":"obj","url":"","tls":"","x":1102,"y":360,"wires":[[]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"d693cfbb.f675c8","type":"function","z":"a74d9fb8.b81e8","name":"JRMI Sensors Process","func":"var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nmsg.verb = 'PUT';\nvar sensorName = 'FS' + String(curSensors.nextID);\nif (curSensors.map[RFIDRequest.MAC] !== undefined) {\n    var sensorId = curSensors.map[RFIDRequest.MAC];\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n} else if (curSensors.available.length > 0) {\n    var sensorId = curSensors.available.pop();\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": {\n      \"name\": sensorName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'sensor';\nreturn msg;","outputs":1,"noerr":0,"x":680.75,"y":400,"wires":[["61928148.ce687"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"61928148.ce687","type":"switch","z":"a74d9fb8.b81e8","name":"","property":"verb","propertyType":"msg","rules":[{"t":"eq","v":"POST","vt":"str"},{"t":"eq","v":"PUT","vt":"str"}],"checkall":"true","repair":false,"outputs":2,"x":882,"y":400,"wires":[["a8a6ba87.48c718"],["f2007e4b.2ec1d"]],"inputLabels":["msg"],"outputLabels":["msg","msg"]},{"id":"f2007e4b.2ec1d","type":"http request","z":"a74d9fb8.b81e8","name":"","method":"PUT","ret":"obj","url":"","tls":"","x":1102,"y":440,"wires":[[]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"cd3e4f6.a3e97b","type":"function","z":"5a683f5f.0a3de8","name":"Set Data","func":"var curTable = flow.get('curTable');\nmsg.payload.lastLoad = Date.now();\nvar tempMap = {};\nfor (var i in msg.payload.columns) {\n    tempMap[msg.payload.columns[i]] = i;\n}\nmsg.payload['columnLookup'] = tempMap;\nvar tempMap = {};\nif (msg.payload.meta !== undefined) {\n    for (var i in msg.payload.meta.columns) {\n        tempMap[msg.payload.meta.columns[i]] = i;\n    }\n    msg.payload.meta['columnLookup'] = tempMap;\n}\nvar tempMap = {};\nif (msg.payload.keys !== undefined) {\n    for (var i in msg.payload.keys.columns) {\n        tempMap[msg.payload.keys.columns[i]] = i;\n    }\n    msg.payload.keys['columnLookup'] = tempMap;\n}\n\nglobal.set('TrainTraxx.' + curTable,msg.payload);\nreturn msg;","outputs":1,"noerr":0,"x":860,"y":140,"wires":[[]],"inputLabels":["msg"],"outputLabels":["msg.payload"]},{"id":"e36d8493.f5ffc8","type":"http request","z":"5a683f5f.0a3de8","name":"","method":"GET","ret":"obj","url":"","tls":"","x":670,"y":140,"wires":[["cd3e4f6.a3e97b"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"6440ae37.e6eab","type":"change","z":"5a683f5f.0a3de8","name":"","rules":[{"t":"set","p":"url","pt":"msg","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":470,"y":140,"wires":[["e36d8493.f5ffc8"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"f6775b38.e976c8","type":"function","z":"5a683f5f.0a3de8","name":"Set the URL","func":"var table = msg.payload;\nvar config = global.get('TrainTraxx_Config');\nmsg.payload = config.TrainTraxx_API + table + '?apikey=' + config.TrainTraxx_Key;\nflow.set('curTable',table)\nreturn msg;","outputs":1,"noerr":0,"x":290,"y":140,"wires":[["6440ae37.e6eab"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"9f0d5ae5.c02a","type":"ui_button","z":"adc8251.587bb58","name":"Refresh All","group":"2f5542b8.31351e","order":4,"width":0,"height":0,"passthru":false,"label":"Refresh All","tooltip":"","color":"#fff","bgcolor":"#f90","icon":"refresh","payload":"true","payloadType":"bool","topic":"","x":408.25408935546875,"y":185.87289428710938,"wires":[["166d2a6e.69cd46","32ae5a36.729726","637ae14b.5fd44"]]},{"id":"6983b25c.cb3834","type":"mosca in","z":"adc8251.587bb58","mqtt_port":1883,"mqtt_ws_port":8080,"name":"","username":"","password":"","dburl":"","x":330.00408935546875,"y":315.3728942871094,"wires":[["19f9009f.71d24f","c8e7c693.6d383","f24be54f.915c98"]]},{"id":"1ff8ed0e.e0f883","type":"switch","z":"a74d9fb8.b81e8","name":"Is Enabled","property":"JMRI_Config.JMRI_ENABLED","propertyType":"global","rules":[{"t":"true"},{"t":"false"}],"checkall":"true","repair":false,"outputs":2,"x":151,"y":294,"wires":[["1b8cdcab.fb562b"],[]],"outputLabels":["msg.payload.DATA",""]},{"id":"1b8cdcab.fb562b","type":"change","z":"a74d9fb8.b81e8","name":"Move Data to Payload","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload.DATA","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":237,"y":367,"wires":[["58782921.160d38"]]},{"id":"e921d422.c80448","type":"http request","z":"6e904939.8c5468","name":"","method":"GET","ret":"obj","url":"","tls":"","x":659,"y":151,"wires":[["79f28d6d.69da84","4a60e573.6b9eac"]]},{"id":"67aaff6e.6e2528","type":"function","z":"6e904939.8c5468","name":"Set Keyed URL","func":"var config = global.get('HIVEID_Config');\n\nmsg.url = config.HiveID_API + 'nodered?apikey=' + config.HiveID_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n","outputs":1,"noerr":0,"x":462,"y":151,"wires":[["e921d422.c80448"]]},{"id":"9657470c.203448","type":"ui_button","z":"6e904939.8c5468","name":"","group":"7f2576d0.5d638","order":2,"width":0,"height":0,"passthru":false,"label":"Update Node-Red Flows","tooltip":"","color":"","bgcolor":"","icon":"cloud_download","payload":"","payloadType":"str","topic":"","x":169,"y":151,"wires":[["67aaff6e.6e2528"]]},{"id":"79f28d6d.69da84","type":"debug","z":"6e904939.8c5468","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1397,"y":145,"wires":[]},{"id":"4a60e573.6b9eac","type":"function","z":"6e904939.8c5468","name":"Link new Nodes","func":"delete msg.url;\nmsg.new_nodes = msg.payload;\nmsg.headers = {'content-type':'application/json'};\nreturn msg;","outputs":1,"noerr":0,"x":397,"y":230,"wires":[["10f64002.f7f638","79f28d6d.69da84"]]},{"id":"108a4a39.a625d6","type":"function","z":"6e904939.8c5468","name":"Merge Flows ","func":"var tempObj = {};\nvar foundObj = {};\nfor (var i=0; i<msg.new_nodes.length;i++) {\n    tempObj[msg.new_nodes[i]['id']] = msg.new_nodes[i];\n    foundObj[msg.new_nodes[i]['id']] = 0;\n    \n}\n\nfor (var i=0;i<msg.payload.length;i++) {\n    if (tempObj[msg.payload[i]['id']] !== undefined) {\n        msg.payload[i] = tempObj[msg.payload[i]['id']];\n        foundObj[msg.payload[i]['id']] =1;\n    }\n}\n\nfor (var i in foundObj) {\n    if (foundObj[i] === 0) {\n        msg.payload.push(tempObj[i]);\n    }\n}\nreturn msg;","outputs":1,"noerr":0,"x":945,"y":232,"wires":[["5ae586e6.df34d","79f28d6d.69da84"]]},{"id":"10f64002.f7f638","type":"http request","z":"6e904939.8c5468","name":"","method":"GET","ret":"obj","url":"http://127.0.0.1:1880/flows","tls":"","x":721,"y":232,"wires":[["108a4a39.a625d6","f66e8142.ccfd88"]]},{"id":"5ae586e6.df34d","type":"http request","z":"6e904939.8c5468","name":"","method":"POST","ret":"txt","url":"http://127.0.0.1:1880/flows","tls":"","x":1200,"y":232,"wires":[["79f28d6d.69da84"]]},{"id":"71d1ec9f.a7296c","type":"file","z":"6e904939.8c5468","name":"","filename":"","appendNewline":true,"createDir":false,"overwriteFile":"false","x":1270,"y":317,"wires":[[]]},{"id":"96bb01e5.ced25","type":"function","z":"6e904939.8c5468","name":"Setup Backup File Name","func":"msg.filename = '/usr/local/hiveid-ap/backups/nodered.' + msg.timestamp + '.json';\nreturn msg;","outputs":1,"noerr":0,"x":1025,"y":317,"wires":[["71d1ec9f.a7296c"]]},{"id":"f66e8142.ccfd88","type":"moment","z":"6e904939.8c5468","name":"","topic":"","input":"","inputType":"date","inTz":"America/Chicago","adjAmount":0,"adjType":"days","adjDir":"add","format":"YYYYMMDDHHMMSS","locale":"en_US","output":"timestamp","outputType":"msg","outTz":"America/Chicago","x":749,"y":317,"wires":[["96bb01e5.ced25"]]},{"id":"99f87d84.115fd8","type":"ui_button","z":"cd7101b0.54e6d","name":"","group":"8a4e9c12.83472","order":3,"width":0,"height":0,"passthru":false,"label":"Update Readers Wirelessly","tooltip":"","color":"","bgcolor":"","icon":"fa-wifi","payload":"","payloadType":"str","topic":"","x":174.75,"y":374.00006103515625,"wires":[["3eb2f86c.e6b488","b5436025.2a6358"]]},{"id":"27b54bb4.4f148c","type":"exec","z":"cd7101b0.54e6d","command":"sudo /opt/hiveid-ap/dhcpcd_get_leases.sh","addpay":false,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":253.24996948242188,"y":453,"wires":[["30c4df2a.64ba28","7a574409.d63e0c"],[],[]]},{"id":"30c4df2a.64ba28","type":"csv","z":"cd7101b0.54e6d","name":"","sep":",","hdrin":"","hdrout":"","multi":"one","ret":"\\n","temp":"","skip":"0","x":525.5,"y":454,"wires":[["b583167c.306e98"]]},{"id":"b583167c.306e98","type":"function","z":"cd7101b0.54e6d","name":"Create OTA Commands","func":"msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        // -P is the host port\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n","outputs":1,"noerr":0,"x":748.5,"y":453,"wires":[["93355963.9671d8","a10afe99.b10a4"]]},{"id":"7ae373a8.bc3814","type":"http request","z":"cd7101b0.54e6d","name":"","method":"GET","ret":"bin","url":"","tls":"","x":879.75,"y":223.25,"wires":[["16751949.b9a377"]]},{"id":"940eedd5.8caca","type":"function","z":"cd7101b0.54e6d","name":"Set Firmware URL","func":"var config = global.get('TrainTraxx_Config');\n\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n","outputs":1,"noerr":0,"x":669.25,"y":222.5,"wires":[["7ae373a8.bc3814"]]},{"id":"3aeb424.6e0853e","type":"exec","z":"cd7101b0.54e6d","command":"sudo /opt/hiveid-ap/hiveid_get_binlist.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":385.25,"y":222.00001525878906,"wires":[["940eedd5.8caca"],[],[]]},{"id":"cbfced83.b11438","type":"file","z":"cd7101b0.54e6d","name":"","filename":"","appendNewline":false,"createDir":false,"overwriteFile":"true","x":1203.75,"y":289.25001525878906,"wires":[[]]},{"id":"f5a97612.9bd81","type":"debug","z":"cd7101b0.54e6d","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1211.75,"y":222.25,"wires":[]},{"id":"16751949.b9a377","type":"function","z":"cd7101b0.54e6d","name":"","func":"var tempFile = msg.headers['content-disposition'];\ntempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\nmsg.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\nreturn msg;","outputs":1,"noerr":0,"x":1044.75,"y":222.25001525878906,"wires":[["cbfced83.b11438","f5a97612.9bd81"]]},{"id":"e8fd1f7a.46b958","type":"exec","z":"cd7101b0.54e6d","command":"sudo python /usr/local/hiveid-ap/espota.py ","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":866.5,"y":531.5000305175781,"wires":[["814fb784.1a0b5","ac4dedd1.f8fcd"],[],[]]},{"id":"93355963.9671d8","type":"switch","z":"cd7101b0.54e6d","name":"NodeExists","property":"flag","propertyType":"msg","rules":[{"t":"true"},{"t":"else"}],"checkall":"true","repair":true,"outputs":2,"x":1023.5,"y":453,"wires":[["e8fd1f7a.46b958"],["650300c5.0b2da"]]},{"id":"ab5cad6e.a569e","type":"debug","z":"cd7101b0.54e6d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1398.5,"y":574,"wires":[]},{"id":"9a38f7ba.242fa","type":"ui_text","z":"cd7101b0.54e6d","group":"8a4e9c12.83472","order":4,"width":0,"height":0,"name":"","label":"Update Status Messages","format":"{{msg.payload}}","layout":"col-center","x":1456.5,"y":167.99998474121094,"wires":[]},{"id":"814fb784.1a0b5","type":"function","z":"cd7101b0.54e6d","name":"Handle Results","func":"if (!msg.payload.match(/ERROR/)) {\n    msg.payload =  msg.IP + \" Updated Successfully\\n\";\n} else {\n    msg.payload =  msg.IP + \" Update Failed\\n\";\n}\nreturn msg;","outputs":1,"noerr":0,"x":1195.5,"y":574.0000610351562,"wires":[["ab5cad6e.a569e","9a38f7ba.242fa"]]},{"id":"b5436025.2a6358","type":"function","z":"cd7101b0.54e6d","name":"Clear Box","func":"msg.payload = '';\nreturn msg;","outputs":1,"noerr":0,"x":1222.2498779296875,"y":167.00001525878906,"wires":[["9a38f7ba.242fa"]]},{"id":"71290a91.04287c","type":"inject","z":"cd7101b0.54e6d","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":1099.25,"y":80.5,"wires":[["b5436025.2a6358"]]},{"id":"638075fb.dc923c","type":"http in","z":"f64af0d3.410aa8","name":"Redirector","url":"/redir","method":"get","upload":false,"swaggerDoc":"","x":318,"y":49,"wires":[["740fbf62.d49728","16e52c68.d4c64c"]]},{"id":"740fbf62.d49728","type":"switch","z":"f64af0d3.410aa8","name":"checkRedirect","property":"payload.app","propertyType":"msg","rules":[{"t":"eq","v":"openrsd","vt":"str"},{"t":"eq","v":"phpmyadmin","vt":"str"},{"t":"eq","v":"jmri","vt":"str"},{"t":"else"}],"checkall":"true","repair":false,"outputs":4,"x":318,"y":151,"wires":[["93c8c917.be2f4"],["bc974e50.2523e8"],["f766568c.ef2e4"],[]]},{"id":"bd4a17a0.8b5ef8","type":"http response","z":"f64af0d3.410aa8","name":"","statusCode":"","headers":{},"x":839,"y":128,"wires":[]},{"id":"16e52c68.d4c64c","type":"debug","z":"f64af0d3.410aa8","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":840,"y":85,"wires":[]},{"id":"93c8c917.be2f4","type":"function","z":"f64af0d3.410aa8","name":"Set OpenRSD","func":"delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.trim() + '/openrsd'\n};\nreturn msg;","outputs":1,"noerr":0,"x":554,"y":97,"wires":[["bd4a17a0.8b5ef8","16e52c68.d4c64c"]]},{"id":"bc974e50.2523e8","type":"function","z":"f64af0d3.410aa8","name":"Set phpMyAdmin","func":"delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.trim() + '/phpmyadmin'\n};\nreturn msg;","outputs":1,"noerr":0,"x":564,"y":144,"wires":[["bd4a17a0.8b5ef8","16e52c68.d4c64c"]]},{"id":"f766568c.ef2e4","type":"function","z":"f64af0d3.410aa8","name":"Set JRMI","func":"delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.trim() + ':12080'\n};\nreturn msg;","outputs":1,"noerr":0,"x":535,"y":192,"wires":[["bd4a17a0.8b5ef8","16e52c68.d4c64c"]]},{"id":"aaac1389.cd51e","type":"ui_text_input","z":"e423bbbc.8e44","name":"HiveID API Endpoint","label":"HiveID API Endpoint","tooltip":"","group":"a17185aa.d387a","order":2,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":728.0000610351562,"y":241.88888549804688,"wires":[["a843ea3c.eeb098"]],"outputLabels":["msg.payload"]},{"id":"a843ea3c.eeb098","type":"change","z":"e423bbbc.8e44","name":"Set HIVEID_Config.HiveID_API","rules":[{"t":"set","p":"HIVEID_Config.HiveID_API","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":997,"y":241.88888549804688,"wires":[["c364fb1d.1d16f"]]},{"id":"71856077.43be68","type":"change","z":"e423bbbc.8e44","name":"HIVEID_Config.HiveID_API","rules":[{"t":"set","p":"payload","pt":"msg","to":"HIVEID_Config.HiveID_API","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":447.00006103515625,"y":242.88888549804688,"wires":[["aaac1389.cd51e"]]},{"id":"7aa8b837.b7d518","type":"link in","z":"adc8251.587bb58","name":"Configuration Change oLink","links":["c2ffecf.a2abf1","4982abb5.313f84"],"x":249.36517333984375,"y":186.98397827148438,"wires":[["9f0d5ae5.c02a"]]},{"id":"df2c88b8.e77d98","type":"subflow:5a683f5f.0a3de8","z":"30eec23d.fd286e","name":"","x":723.3333740234375,"y":344.4444580078125,"wires":[["595647cf.626548"]]},{"id":"4ed0e1c1.129608","type":"function","z":"30eec23d.fd286e","name":"Set Inventory","func":"msg.payload = 'inventory';\nreturn msg;","outputs":1,"noerr":0,"x":493.3333740234375,"y":344.4444580078125,"wires":[["df2c88b8.e77d98"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"cfaffa02.2d4dd8","type":"function","z":"30eec23d.fd286e","name":"Set Locations","func":"msg.payload = 'locations';\nreturn msg;","outputs":1,"noerr":0,"x":503.3333740234375,"y":384.4444580078125,"wires":[["8e01db0f.5be6b"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"608b8fe9.ee3138","type":"function","z":"30eec23d.fd286e","name":"Set Tags","func":"msg.payload = 'tags';\nreturn msg;","outputs":1,"noerr":0,"x":483.3333740234375,"y":424.4444580078125,"wires":[["194c0f60.7998d9"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"8e01db0f.5be6b","type":"subflow:5a683f5f.0a3de8","z":"30eec23d.fd286e","name":"","x":723.3333740234375,"y":384.4444580078125,"wires":[["595647cf.626548"]]},{"id":"194c0f60.7998d9","type":"subflow:5a683f5f.0a3de8","z":"30eec23d.fd286e","name":"","x":723.3333740234375,"y":424.4444580078125,"wires":[["595647cf.626548"]]},{"id":"d24f6e2.706d59","type":"subflow:5a683f5f.0a3de8","z":"30eec23d.fd286e","name":"","x":723.3333740234375,"y":304.4444580078125,"wires":[["595647cf.626548"]]},{"id":"a666266b.4c3b7","type":"function","z":"30eec23d.fd286e","name":"Set Hivegateway","func":"msg.payload = 'hivegateway';\nreturn msg;","outputs":1,"noerr":0,"x":513.3333740234375,"y":304.4444580078125,"wires":[["d24f6e2.706d59"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"69015953.5de388","type":"subflow:5a683f5f.0a3de8","z":"30eec23d.fd286e","name":"","x":723.3333740234375,"y":264.4444580078125,"wires":[["595647cf.626548"]]},{"id":"d7b4394a.b2ab3","type":"function","z":"30eec23d.fd286e","name":"Set Hivenode","func":"msg.payload = 'hivenode';\nreturn msg;","outputs":1,"noerr":0,"x":503.3333740234375,"y":264.4444580078125,"wires":[["69015953.5de388"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"22eada37.d615e6","type":"subflow:5a683f5f.0a3de8","z":"30eec23d.fd286e","name":"","x":723.3333740234375,"y":224.4444580078125,"wires":[["595647cf.626548"]]},{"id":"e4d8bc5e.77fa3","type":"function","z":"30eec23d.fd286e","name":"Set Images","func":"msg.payload = 'images';\nreturn msg;","outputs":1,"noerr":0,"x":493.3333740234375,"y":224.4444580078125,"wires":[["22eada37.d615e6"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"ee0ac828.a2d8f","type":"ui_button","z":"30eec23d.fd286e","name":"Refresh TrainTraxx","group":"2f5542b8.31351e","order":3,"width":0,"height":0,"passthru":false,"label":"Refresh TrainTraxx","tooltip":"","color":"#fff","bgcolor":"#f90","icon":"refresh","payload":"true","payloadType":"bool","topic":"","x":217.77783203125,"y":318.8889465332031,"wires":[["e4d8bc5e.77fa3","d7b4394a.b2ab3","a666266b.4c3b7","4ed0e1c1.129608","cfaffa02.2d4dd8","608b8fe9.ee3138"]]},{"id":"595647cf.626548","type":"debug","z":"30eec23d.fd286e","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1044.000244140625,"y":319.5555725097656,"wires":[]},{"id":"ea65d9c8.fdb53","type":"link in","z":"30eec23d.fd286e","name":"TrainTraxx Data iLink","links":["166d2a6e.69cd46"],"x":66.66668701171875,"y":317.7778015136719,"wires":[["ee0ac828.a2d8f"]]},{"id":"166d2a6e.69cd46","type":"link out","z":"adc8251.587bb58","name":"TrainTraxx Data oLink","links":["ea65d9c8.fdb53"],"x":608.4762573242188,"y":183.98406982421875,"wires":[]},{"id":"4ff9ea6f.6d7774","type":"function","z":"bb1f7096.73abc8","name":"Set Reporters","func":"msg.payload = 'reporters';\nreturn msg;","outputs":1,"noerr":0,"x":608.888916015625,"y":370,"wires":[["f331c6e6.9fb31"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"76d3def2.57441","type":"subflow:85ae3462.0c5d6","z":"bb1f7096.73abc8","name":"","x":848.888916015625,"y":410,"wires":[["8a8f03d3.704bf"]]},{"id":"e2d9e5ef.3f2038","type":"function","z":"bb1f7096.73abc8","name":"Set Sensors","func":"msg.payload = 'sensors';\nreturn msg;","outputs":1,"noerr":0,"x":598.888916015625,"y":410,"wires":[["76d3def2.57441"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"f331c6e6.9fb31","type":"subflow:85ae3462.0c5d6","z":"bb1f7096.73abc8","name":"","x":848.888916015625,"y":370,"wires":[["8a8f03d3.704bf"]]},{"id":"166b57a0.7d50a","type":"function","z":"bb1f7096.73abc8","name":"Set Engine","func":"msg.payload = 'engines';\nreturn msg;","outputs":1,"noerr":0,"x":598.888916015625,"y":250,"wires":[["9f1b0c43.f038e"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"9f1b0c43.f038e","type":"subflow:85ae3462.0c5d6","z":"bb1f7096.73abc8","name":"","x":853.888916015625,"y":250,"wires":[["8a8f03d3.704bf"]]},{"id":"76298924.f421b8","type":"function","z":"bb1f7096.73abc8","name":"Set Cars","func":"msg.payload = 'cars';\nreturn msg;","outputs":1,"noerr":0,"x":588.888916015625,"y":210,"wires":[["b7a2df0f.604e18"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"b7a2df0f.604e18","type":"subflow:85ae3462.0c5d6","z":"bb1f7096.73abc8","name":"","x":848.888916015625,"y":210,"wires":[["8a8f03d3.704bf"]]},{"id":"b24baeaf.2bc088","type":"function","z":"bb1f7096.73abc8","name":"Set Trains","func":"msg.payload = 'trains';\nreturn msg;","outputs":1,"noerr":0,"x":588.888916015625,"y":329,"wires":[["70b94f55.7d3f"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"70b94f55.7d3f","type":"subflow:85ae3462.0c5d6","z":"bb1f7096.73abc8","name":"","x":848.888916015625,"y":330,"wires":[["8a8f03d3.704bf"]]},{"id":"4707cf5d.24b168","type":"function","z":"bb1f7096.73abc8","name":"Set Locations","func":"msg.payload = 'locations';\nreturn msg;","outputs":1,"noerr":0,"x":608.888916015625,"y":290,"wires":[["7f691da6.36c01c"]],"inputLabels":["msg"],"outputLabels":["msg"]},{"id":"7f691da6.36c01c","type":"subflow:85ae3462.0c5d6","z":"bb1f7096.73abc8","name":"","x":848.888916015625,"y":290,"wires":[["8a8f03d3.704bf"]]},{"id":"8a8f03d3.704bf","type":"debug","z":"bb1f7096.73abc8","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1131.5556640625,"y":312.22222900390625,"wires":[]},{"id":"1da958d0.6cbd1f","type":"switch","z":"bb1f7096.73abc8","name":"","property":"JMRI_Config.JMRI_ENABLED","propertyType":"global","rules":[{"t":"true"}],"checkall":"true","repair":false,"outputs":1,"x":347.77789306640625,"y":310.9999694824219,"wires":[["76298924.f421b8","166b57a0.7d50a","4707cf5d.24b168","b24baeaf.2bc088","4ff9ea6f.6d7774","e2d9e5ef.3f2038"]]},{"id":"a515faf9.10d11","type":"ui_button","z":"bb1f7096.73abc8","name":"Refresh JMRI","group":"2f5542b8.31351e","order":2,"width":0,"height":0,"passthru":true,"label":"Refresh JMRI","tooltip":"","color":"#fff","bgcolor":"#f90","icon":"refresh","payload":"true","payloadType":"bool","topic":"","x":176.66668701171875,"y":312.2221374511719,"wires":[["1da958d0.6cbd1f"]]},{"id":"6ef619ea.bd1238","type":"link in","z":"bb1f7096.73abc8","name":"JMRI Data iLink","links":["32ae5a36.729726"],"x":41.111114501953125,"y":312.22222900390625,"wires":[["a515faf9.10d11"]]},{"id":"fd9b3092.9f5bf","type":"link in","z":"bb1f7096.73abc8","name":"JMRI Data iLink Activity Only","links":[],"x":38.88893127441406,"y":402.22222900390625,"wires":[["b2a4276c.65f0b8"]]},{"id":"b2a4276c.65f0b8","type":"switch","z":"bb1f7096.73abc8","name":"","property":"JMRI_Config.JMRI_ENABLED","propertyType":"global","rules":[{"t":"true"}],"checkall":"true","repair":false,"outputs":1,"x":156.66672261555988,"y":402.2222730848524,"wires":[["2af83847.128bb"]]},{"id":"2af83847.128bb","type":"subflow:a74d9fb8.b81e8","z":"bb1f7096.73abc8","name":"","x":352.2222646077474,"y":401.22233412000867,"wires":[["4ff9ea6f.6d7774"],["e2d9e5ef.3f2038"]]},{"id":"32ae5a36.729726","type":"link out","z":"adc8251.587bb58","name":"JMRI Data oLink","links":["6ef619ea.bd1238"],"x":608.3651733398438,"y":230.09521484375,"wires":[]},{"id":"c8e7c693.6d383","type":"link out","z":"adc8251.587bb58","name":"JMRI Data oLink Activity Only","links":[],"x":616.0316772460938,"y":318.09521484375,"wires":[]},{"id":"b402ee7d.7cd76","type":"function","z":"d333a985.4c5e8","name":"setLocalActivityData","func":"var curActivity = global.get('Activity');\nif (curActivity === undefined) {\n    curActivity = [];\n}\ncurActivity.unshift(msg.payload.DATA);\n\nwhile (curActivity.length > 10) {\n    curActivity.pop();\n}\n\nglobal.set('Activity',curActivity);\nreturn msg;","outputs":1,"noerr":0,"x":670.1111755371094,"y":264.44439697265625,"wires":[["4693ed6c.56dcc4","14bec57f.e9e8f3"]]},{"id":"14bec57f.e9e8f3","type":"debug","z":"d333a985.4c5e8","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":869.1111755371094,"y":214.44439697265625,"wires":[]},{"id":"9c6e2787.cb657","type":"json","z":"d333a985.4c5e8","name":"","property":"payload.DATA","action":"","pretty":false,"x":185.00006103515625,"y":263.7777404785156,"wires":[["676a3cc7.9000c4"]]},{"id":"4693ed6c.56dcc4","type":"function","z":"d333a985.4c5e8","name":"Format Activity Data","func":"var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']];\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        }\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      border: 1px solid #ccc; ' +\n                '      text-align:center;  ' +\n                '      border-spacing: 0px; ' +\n                '   }' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC']);\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;","outputs":1,"noerr":0,"x":922.1111755371094,"y":261.44439697265625,"wires":[["ae38162f.250c88","df00e0b4.59bff"]]},{"id":"676a3cc7.9000c4","type":"moment","z":"d333a985.4c5e8","name":"","topic":"","input":"","inputType":"date","inTz":"America/Chicago","adjAmount":0,"adjType":"days","adjDir":"add","format":"YYYY-MM-DD hh:mm:ss","locale":"en_US","output":"payload.DATA.TIME","outputType":"msg","outTz":"America/Chicago","x":408.1111755371094,"y":264.44439697265625,"wires":[["b402ee7d.7cd76"]]},{"id":"ae38162f.250c88","type":"debug","z":"d333a985.4c5e8","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1107.1111755371094,"y":219.44439697265625,"wires":[]},{"id":"ea99f44a.cba1e","type":"inject","z":"d333a985.4c5e8","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":"5","x":719.3389587402344,"y":314.4166259765625,"wires":[["4693ed6c.56dcc4"]]},{"id":"c0efc162.3a9ee8","type":"link in","z":"d333a985.4c5e8","name":"TrainTraxx Activity iLink","links":["f24be54f.915c98"],"x":78.88888888888889,"y":264.44444444444446,"wires":[["9c6e2787.cb657"]]},{"id":"f24be54f.915c98","type":"link out","z":"adc8251.587bb58","name":"TrainTraxx Activity oLink","links":["c0efc162.3a9ee8"],"x":616.5079345703125,"y":478.8888854980469,"wires":[]},{"id":"f00842d0.3c7268","type":"inject","z":"2703c1bf.cdcd0e","name":"","topic":"","payload":"","payloadType":"date","repeat":"5","crontab":"","once":true,"onceDelay":"5","x":131.11114501953125,"y":65.55554962158203,"wires":[["7dfff34f.41c3bc"]]},{"id":"7dfff34f.41c3bc","type":"function","z":"2703c1bf.cdcd0e","name":"Make Summary","func":"var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar config = global.get('JMRI_Config');\n\nvar temp = [];\n\ntemp.push('<td colspan=\"2\"><h3>TrainTaxx</h3></td>');\nif (TT !== undefined) {\n    if (TT['hivenode'] !== undefined) {\n        temp.push('<td style=\"font-weight:bold\">Readers</td><td>'+ Object.keys(TT['hivenode'].data).length + '</td>');\n    }\n    if (TT['tags'] !== undefined) {\n        temp.push('<td style=\"font-weight:bold\">Tags</td><td>' +  Object.keys(TT['tags'].data).length + '</td>');\n    }\n    if (TT['inventory'] !== undefined) {\n        temp.push('<td style=\"font-weight:bold\">Inventory</td><td>' + Object.keys(TT['inventory'].data).length + '</td>');\n    }\n    if (TT['locations'] !== undefined) {\n        temp.push('<td style=\"font-weight:bold\">Locations</td><td>' + Object.keys(TT['locations'].data).length + '</td>');\n    }\n}\n\nif (config.JMRI_ENABLED === true && JMRI !== undefined) {\n    temp.push('<td colspan=\"2\"><h3>JMRI</h3></td>');\n    if (JMRI['sensors'] !== undefined){\n        temp.push('<td style=\"font-weight:bold\">Sensors</td><td>' + JMRI['sensors'].data.length + '</td>');\n    }\n    if (JMRI['reporters'] !== undefined){\n        temp.push('<td style=\"font-weight:bold\">Reporters</td><td>' + JMRI['reporters'].data.length + '</td>');\n    }\n    if (JMRI['cars'] !== undefined){\n        temp.push('<td style=\"font-weight:bold\">Cars</td><td>' + JMRI['cars'].data.length + '</td>');\n    }\n    if (JMRI['engines'] !== undefined){\n        temp.push('<td style=\"font-weight:bold\">Engines</td><td>' + JMRI['engines'].data.length + '</td>');\n    }\n    if (JMRI['locations'] !== undefined){\n        temp.push('<td style=\"font-weight:bold\">Locations</td><td>' + JMRI['locations'].data.length + '</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;","outputs":1,"noerr":0,"x":355.4443359375,"y":110.61112213134766,"wires":[["277d4314.b7ea44","f0da5b3b.1e1078"]]},{"id":"277d4314.b7ea44","type":"debug","z":"2703c1bf.cdcd0e","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":553.4443969726562,"y":56.027748107910156,"wires":[]},{"id":"f0da5b3b.1e1078","type":"ui_template","z":"2703c1bf.cdcd0e","group":"144723c0.3de35c","name":"Summary","order":2,"width":"6","height":"8","format":"","storeOutMessages":false,"fwdInMessages":true,"templateScope":"local","x":558.4444580078125,"y":110.27774810791016,"wires":[[]]},{"id":"5d5155d8.0b8844","type":"ui_button","z":"2703c1bf.cdcd0e","name":"","group":"144723c0.3de35c","order":1,"width":0,"height":0,"passthru":false,"label":"Refresh Summary","tooltip":"","color":"","bgcolor":"","icon":"","payload":"","payloadType":"str","topic":"","x":115.99447631835938,"y":110.55554962158203,"wires":[["7dfff34f.41c3bc"]]},{"id":"f2a4e451.66cce8","type":"function","z":"e780311.6ef4bd","name":"parseInventory","func":"var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;i++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n\nvar arrayFlip = function(inObject) {\n    node.log('arrayFlip');\n    var myResults = {};\n    for (var ai in inObject) {\n        myResults[inObject[ai]] = parseInt(ai);\n    }\n    return myResults;\n};\n\nvar TT_InvDataColumns = TT.inventory.columns;\nvar invIDs = Object.keys(TT.inventory.data);\nvar TT_InvMetaKeyColumns = TT.inventory.keys.columns;\nvar iLookup = TT.inventory.columnLookup;\nvar mLookup = TT.inventory.meta.columnLookup;\nvar mkLookup = TT.inventory.keys.columnLookup;\nvar i = 0;\nmsg.payload.DATA = [];\nfor (var curID in TT.inventory.data) { \n    var temp = {};\n    temp=keyArray(TT_InvDataColumns,TT.inventory.data[curID]);        \n    temp['ID'] = curID;\n    temp['NAME'] = TT.inventory.data[curID][iLookup['NAME']];\n    var keysWVals = Object.keys(TT.inventory.meta.data[curID]);\n    for (var j=0; j< keysWVals.length;j++) {\n        var curKeyID=keysWVals[j];\n        var keyName = TT.inventory.keys.data[curKeyID][mkLookup['meta_key']];\n        temp[keyName] = TT.inventory.meta.data[curID][curKeyID][mLookup['meta_value']];\n    }\n    node.send({\"payload\": { \"activeInv\" : temp}});\n    i++;\n}\n\nreturn msg;","outputs":1,"noerr":0,"x":395.71435546875,"y":112.85711669921875,"wires":[["7c99848c.1acf2c"]]},{"id":"7ea6d989.20d6f","type":"function","z":"e780311.6ef4bd","name":"Format Engine","func":"var temp =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": msg.payload.activeInv['Road Mark'] + msg.payload.activeInv['Road Number'],\n      \"number\": msg.payload.activeInv['Road Number'],\n      \"road\": msg.payload.activeInv['Road Mark'],\n      \"type\": msg.payload.activeInv['Car Type'],\n      \"length\": msg.payload.activeInv['Length'],\n      \"color\": msg.payload.activeInv['Color'],\n      \"model\": ((msg.payload.activeInv['Model'] !== undefined) ? msg.payload.activeInv['Model'] : null)\n    }\n  };\nmsg.payload = temp;\nreturn msg;","outputs":1,"noerr":0,"x":860.71435546875,"y":87.85711669921875,"wires":[["a4c66617.0d863"]]},{"id":"34136b3a.bdde84","type":"function","z":"e780311.6ef4bd","name":"Format Car","func":"var temp =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": msg.payload.activeInv['Road Mark'] + msg.payload.activeInv['Road Number'],\n      \"number\": msg.payload.activeInv['Road Number'],\n      \"road\": msg.payload.activeInv['Road Mark'],\n      \"type\": msg.payload.activeInv['Car Type'],\n      \"length\": msg.payload.activeInv['Length'],\n      \"color\": msg.payload.activeInv['Color'],\n      \"load\": ((msg.payload.activeInv['Initial Load State'] !== undefined) ? msg.payload.activeInv['Initial Load State'] : \"E\"),\n      \"hazardous\": ((msg.payload.activeInv['Hazardous'] !== undefined) ? msg.payload.activeInv['Hazardous'] : false),\n      \"utility\": ((msg.payload.activeInv['Utility'] !== undefined)? msg.payload.activeInv['Utility'] : false),\n      \"returnWhenEmpty\": ((msg.payload.activeInv['Return When Empty'] !== undefined) ?  msg.payload.activeInv['Return When Empty'] : null),\n      \"status\": ((msg.payload.activeInv['Initial Status'] !== undefined) ? msg.payload.activeInv['Initial Status'] : \"\")\n    }\n  };\nmsg.payload = temp;\nreturn msg;","outputs":1,"noerr":0,"x":849.71435546875,"y":127.85711669921875,"wires":[["a4c66617.0d863"]]},{"id":"7c99848c.1acf2c","type":"switch","z":"e780311.6ef4bd","name":"Split Inv Type","property":"payload.activeInv.Type","propertyType":"msg","rules":[{"t":"eq","v":"Engine","vt":"str"},{"t":"else"}],"checkall":"true","repair":false,"outputs":2,"x":629.71435546875,"y":112.85711669921875,"wires":[["7ea6d989.20d6f"],["34136b3a.bdde84"]]},{"id":"8dca73ff.c16558","type":"function","z":"e780311.6ef4bd","name":"Format Locations","func":"var JMRI = global.get('JMRI'); \nvar addFlag = true;\nvar changeFlag = false;\nfor (var i in JMRI.locations.data) {\n    var tempData = JMRI.locations.data[i];\n    if (msg.payload.activeLoc['NAME'] === tempData['name']) {\n        addFlag = false;\n        if ((msg.payload.activeLoc['Length'] !== undefined && tempData['length'] != msg.payload.activeLoc['Length']) || (msg.payload.activeLoc['Comment'] !== undefined && tempData['comment'] != msg.payload.activeLoc['Comment'])) {\n            changeFlag = true;\n        }\n    }\n}\nif (addFlag === true) {\n    msg.verb = 'POST'; // 'PUT';\n} \nif (changeFlag === true) {\n    msg.verb = 'POST'; \n}\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'locations';\n\nvar temp =  {\n    \"type\": \"location\",\n    \"data\": {\n        \"id\": msg.payload.activeLoc['ID'],\n        \"name\": msg.payload.activeLoc['NAME'],\n        \"length\": ((msg.payload.activeLoc['Length'] !== undefined) ? msg.payload.activeLoc['Length'] : 0 ),\n        \"comment\":  ((msg.payload.activeLoc['Comment'] !== undefined) ? msg.payload.activeLoc['Comment'] : 0 )\n    }\n};\nmsg.payload = temp;\nreturn msg;\n","outputs":1,"noerr":0,"x":860.71435546875,"y":175.85711669921875,"wires":[["a4c66617.0d863","211e7109.e0e7d6"]]},{"id":"99ddbf64.69ba78","type":"comment","z":"e780311.6ef4bd","name":"Sample Car Object","info":"msg.payload =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": \"AA123\",\n      \"number\": \"123\",\n      \"road\": \"AA\",\n      \"type\": \"Baggage\",\n      \"length\": \"32\",\n      \"color\": \"Black\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"destination\": null,\n      \"load\": \"E\",\n      \"hazardous\": false,\n      \"removeComment\": \"\",\n      \"addComment\": \"\",\n      \"kernel\": \"\",\n      \"utility\": false,\n      \"finalDestination\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"returnWhenEmpty\": null,\n      \"status\": \"\"\n    }\n  };\nreturn msg;","x":124.57144165039062,"y":224.85714721679688,"wires":[]},{"id":"b10fe55.2ae4718","type":"comment","z":"e780311.6ef4bd","name":"Sample Engine Object","info":"msg.payload =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": \"ACL1234\",\n      \"number\": \"1234\",\n      \"road\": \"ACL\",\n      \"type\": \"Diesel\",\n      \"length\": \"54\",\n      \"color\": \"\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": null,\n      \"destination\": null,\n      \"model\": \"E8\",\n      \"consist\": \"\"\n    }\n  };\n  \n \nreturn msg;","x":133.57144165039062,"y":341.8571472167969,"wires":[]},{"id":"a6305f0f.9e45d8","type":"comment","z":"e780311.6ef4bd","name":"Sample Locations Object","info":"msg.payload =    {\n    \"type\": \"location\",\n    \"data\": {\n      \"name\": \"Test Location\",\n      \"id\": \"1\",\n      \"length\": 40,\n      \"comment\": \"\"\n    }\n  };\nreturn msg;","x":143.57144165039062,"y":302.8571472167969,"wires":[]},{"id":"916618.830a29e8","type":"comment","z":"e780311.6ef4bd","name":"Sample Train Object","info":"msg.payload =  {\n    \"type\": \"train\",\n    \"data\": {\n      \"name\": \"Test Train 1\",\n      \"iconName\": \"Test Train 1\",\n      \"id\": \"1\",\n      \"departureTime\": \"03:00\",\n      \"description\": \"Test Train \",\n      \"comment\": \"\",\n      \"route\": \"Test Route\",\n      \"routeId\": \"1\",\n      \"locations\": [\n        {\n          \"id\": \"1r2\",\n          \"name\": \"Test Location\",\n          \"trainDirection\": \"East\",\n          \"comment\": \"\",\n          \"sequenceId\": 2,\n          \"expectedArrivalTime\": \"03:00\",\n          \"expectedDepartureTime\": \"03:00\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"length\": 40,\n            \"comment\": \"\"\n          }\n        }\n      ],\n      \"engines\": [],\n      \"cars\": [\n        {\n          \"id\": \"AA123\",\n          \"number\": \"123\",\n          \"road\": \"AA\",\n          \"type\": \"Baggage\",\n          \"length\": \"32\",\n          \"color\": \"Black\",\n          \"owner\": \"\",\n          \"comment\": \"\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"destination\": null,\n          \"load\": \"E\",\n          \"hazardous\": false,\n          \"removeComment\": \"\",\n          \"addComment\": \"\",\n          \"kernel\": \"\",\n          \"utility\": false,\n          \"finalDestination\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"returnWhenEmpty\": null,\n          \"status\": \"\"\n        }\n      ],\n      \"trainDepartsName\": \"Test Location\",\n      \"trainTerminatesName\": \"Test Location\",\n      \"location\": \"\",\n      \"status\": \"\",\n      \"statusCode\": 65535,\n      \"length\": 0,\n      \"weight\": 0,\n      \"caboose\": \"\"\n    }\n  };\nreturn msg;","x":124.57144165039062,"y":263.8571472167969,"wires":[]},{"id":"d131b303.7ce22","type":"http request","z":"e780311.6ef4bd","name":"","method":"POST","ret":"txt","url":"","tls":"","x":1338.71435546875,"y":100.85711669921875,"wires":[["8c7ba7.9a8b2458"]]},{"id":"a4c66617.0d863","type":"switch","z":"e780311.6ef4bd","name":"Route Verb","property":"verb","propertyType":"msg","rules":[{"t":"eq","v":"POST","vt":"str"},{"t":"eq","v":"PUT","vt":"str"}],"checkall":"true","repair":false,"outputs":2,"x":1151.71435546875,"y":128.85711669921875,"wires":[["d131b303.7ce22"],["88922762.63a8d8"]]},{"id":"88922762.63a8d8","type":"http request","z":"e780311.6ef4bd","name":"","method":"PUT","ret":"txt","url":"","tls":"","x":1334.71435546875,"y":159.85711669921875,"wires":[["8c7ba7.9a8b2458"]]},{"id":"8c7ba7.9a8b2458","type":"debug","z":"e780311.6ef4bd","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":1501.4286804199219,"y":128.5714111328125,"wires":[]},{"id":"a3d74c82.836718","type":"ui_button","z":"e780311.6ef4bd","name":"","group":"2f5542b8.31351e","order":5,"width":0,"height":0,"passthru":false,"label":"TrainTraxx to JMRI","tooltip":"","color":"","bgcolor":"","icon":"cloud_download","payload":"","payloadType":"str","topic":"","x":122.85714721679688,"y":175.71429443359375,"wires":[["2885283.8bc91d8"]]},{"id":"211e7109.e0e7d6","type":"debug","z":"e780311.6ef4bd","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":816.857177734375,"y":232.42852783203125,"wires":[]},{"id":"df00e0b4.59bff","type":"ui_template","z":"d333a985.4c5e8","group":"ed28cca7.ef01c","name":"TrainTraxx Activity","order":0,"width":"0","height":"0","format":"","storeOutMessages":false,"fwdInMessages":true,"templateScope":"local","x":1137.5,"y":317.5,"wires":[[]]},{"id":"2885283.8bc91d8","type":"function","z":"e780311.6ef4bd","name":"parseLocations","func":"var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n/*\nvar TT_LocDataColumns = TT.locations.columns;\nvar locIDs = Object.keys(TT.locations.data);\nvar TT_LocMetaKeyColumns = TT.locations.keys.columns;\nvar iLookup = TT.locations.columnLookup;\nvar mLookup = TT.locations.meta.columnLookup;\nvar mkLookup = TT.locations.keys.columnLookup;\n*/\nfor (var curID in TT.locations.data) { \n    var temp = keyArray(TT.locations.columns,TT.locations.data[curID]);        \n    temp['ID'] = curID;\n    for (var j in TT.locations.meta.data[curID]) {\n        var tempMeta = keyArray(TT.locations.meta.columns,TT.locations.meta.data[curID][j]);        \n        var tempMetaKey = keyArray(TT.locations.keys.columns,TT.locations.keys.data[tempMeta['wp_tt_locationmetakeys_ID']]);        \n        temp[tempMetaKey['meta_key']] = tempMeta['meta_value'];\n    }\n    node.send({\"payload\": { \"activeLoc\" : temp}});\n}\n\nreturn msg;","outputs":1,"noerr":0,"x":397.7833251953125,"y":175.33331298828125,"wires":[["211e7109.e0e7d6","8dca73ff.c16558"]]},{"id":"e294b4f5.02e59","type":"ui_button","z":"cd7101b0.54e6d","name":"","group":"8a4e9c12.83472","order":2,"width":0,"height":0,"passthru":false,"label":"Update Readers Using USB","tooltip":"","color":"","bgcolor":"","icon":"usb","payload":"","payloadType":"str","topic":"","x":172.5,"y":618.8543090820312,"wires":[["6a84360e.030928","b5436025.2a6358"]]},{"id":"245627ce.75a778","type":"exec","z":"cd7101b0.54e6d","command":"sudo /opt/hiveid-ap/hiveid_set_binByUSB.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":865.7499389648438,"y":616.3543090820312,"wires":[["814fb784.1a0b5"],[],[]]},{"id":"d1bfd08c.24657","type":"inject","z":"cd7101b0.54e6d","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"00 01 * * *","once":false,"onceDelay":0.1,"x":154.72915649414062,"y":287.5000457763672,"wires":[["3aeb424.6e0853e"]]},{"id":"f641ea00.5156e","type":"ui_toast","z":"cd7101b0.54e6d","position":"dialog","displayTime":"10","highlight":"","outputs":1,"ok":"OK","cancel":"","topic":"","name":"","x":640.7290649414062,"y":723.9584350585938,"wires":[[]]},{"id":"139d22f2.61af3d","type":"watch","z":"cd7101b0.54e6d","name":"","files":"/usr/local/hiveid-ap/ota/","recursive":"","x":158.47915649414062,"y":723.2291870117188,"wires":[["2874df1.95d1b2"]]},{"id":"2874df1.95d1b2","type":"function","z":"cd7101b0.54e6d","name":"New Version Notice","func":"msg.topic = 'TrainTraxx';\nmsg.payload = 'A new firmware version is available';\nreturn msg;","outputs":1,"noerr":0,"x":405.2291564941406,"y":723.9583740234375,"wires":[["f641ea00.5156e"]]},{"id":"d53768f0.bca9a","type":"ui_button","z":"cd7101b0.54e6d","name":"","group":"8a4e9c12.83472","order":1,"width":0,"height":0,"passthru":false,"label":"Check for Updated Reader Firmware","tooltip":"","color":"","bgcolor":"","icon":"","payload":"","payloadType":"str","topic":"","x":188.47915649414062,"y":124.52081298828125,"wires":[["3aeb424.6e0853e"]]},{"id":"6a84360e.030928","type":"exec","z":"cd7101b0.54e6d","command":"/opt/hiveid-ap/hiveid_get_newbin.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":492.2291564941406,"y":617.2918090820312,"wires":[["245627ce.75a778"],[],[]]},{"id":"3eb2f86c.e6b488","type":"exec","z":"cd7101b0.54e6d","command":"/opt/hiveid-ap/hiveid_get_newbin.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":538.3332824707031,"y":374.6459655761719,"wires":[["268c7388.e0810c","173d3c62.187864"],[],[]]},{"id":"268c7388.e0810c","type":"change","z":"cd7101b0.54e6d","name":"Set Filename","rules":[{"t":"set","p":"filename","pt":"msg","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":799.5833129882812,"y":375.8958740234375,"wires":[["27b54bb4.4f148c"]]},{"id":"637ae14b.5fd44","type":"link out","z":"adc8251.587bb58","name":"Default Configs Change oLink","links":["2b9d79c4.945546"],"x":607,"y":137,"wires":[]},{"id":"99df6183.095d4","type":"file in","z":"e423bbbc.8e44","name":"","filename":"/etc/hiveid-ap/conf.hiveid.json","format":"utf8","chunk":false,"sendError":false,"x":294,"y":165,"wires":[["849640a.288acc"]]},{"id":"849640a.288acc","type":"json","z":"e423bbbc.8e44","name":"","property":"payload","action":"","pretty":false,"x":514,"y":165,"wires":[["2cf11be2.065594"]]},{"id":"2cf11be2.065594","type":"change","z":"e423bbbc.8e44","name":"Set HIVEID_Config","rules":[{"t":"set","p":"HIVEID_Config","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":704,"y":165,"wires":[["71856077.43be68","d1f428bf.382ee","f25f5970.4df8c8"]]},{"id":"c364fb1d.1d16f","type":"change","z":"e423bbbc.8e44","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"HIVEID_Config","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":1274,"y":293,"wires":[["eb8affd0.982408"]]},{"id":"eb8affd0.982408","type":"json","z":"e423bbbc.8e44","name":"","property":"payload","action":"","pretty":true,"x":1437,"y":293,"wires":[["b46e625b.1d755"]]},{"id":"b46e625b.1d755","type":"file","z":"e423bbbc.8e44","name":"","filename":"/etc/hiveid-ap/conf.hiveid.json","appendNewline":true,"createDir":true,"overwriteFile":"true","x":1690,"y":292,"wires":[[]]},{"id":"e0313725.d0ad08","type":"inject","z":"e423bbbc.8e44","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":114,"y":97,"wires":[["99df6183.095d4"]]},{"id":"49901a9c.8828d4","type":"watch","z":"e423bbbc.8e44","name":"","files":"/etc/hiveid-ap/conf.hiveid.json","recursive":"","x":141.5,"y":222,"wires":[["99df6183.095d4"]]},{"id":"bab9f121.c05e","type":"ui_text_input","z":"e423bbbc.8e44","name":"HiveID Web Address","label":"HiveID Web Address","tooltip":"","group":"a17185aa.d387a","order":1,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":725,"y":292,"wires":[["df60c552.4fa61"]],"outputLabels":["msg.payload"]},{"id":"df60c552.4fa61","type":"change","z":"e423bbbc.8e44","name":"Set HIVEID_Config.HiveID_Web","rules":[{"t":"set","p":"HIVEID_Config.HiveID_Web","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":993.9999389648438,"y":292,"wires":[["c364fb1d.1d16f"]]},{"id":"d1f428bf.382ee","type":"change","z":"e423bbbc.8e44","name":"HIVEID_Config.HiveID_Web","rules":[{"t":"set","p":"payload","pt":"msg","to":"HIVEID_Config.HiveID_Web","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":444,"y":293,"wires":[["bab9f121.c05e"]]},{"id":"a44b272d.c61a4","type":"ui_text_input","z":"e423bbbc.8e44","name":"HiveID API Key","label":"HiveID API Key","tooltip":"","group":"a17185aa.d387a","order":3,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":703,"y":341,"wires":[["2871a282.17ee4e"]],"outputLabels":["msg.payload"]},{"id":"2871a282.17ee4e","type":"change","z":"e423bbbc.8e44","name":"Set HIVEID_Config.HiveID_Key","rules":[{"t":"set","p":"HIVEID_Config.HiveID_Key","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":991.9999389648438,"y":341,"wires":[["c364fb1d.1d16f"]]},{"id":"f25f5970.4df8c8","type":"change","z":"e423bbbc.8e44","name":"HIVEID_Config.HiveID_Key","rules":[{"t":"set","p":"payload","pt":"msg","to":"HIVEID_Config.HiveID_Key","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":442,"y":342,"wires":[["a44b272d.c61a4"]]},{"id":"a2814f3f.465468","type":"ui_text_input","z":"92b7c3ae.62f42","name":"TrainTraxx API Endpoint","label":"TrainTraxx API Endpoint","tooltip":"","group":"eac11a26.5dfd","order":2,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":763,"y":241,"wires":[["fde83937.032db8"]],"outputLabels":["msg.payload"]},{"id":"fde83937.032db8","type":"change","z":"92b7c3ae.62f42","name":"Set TrainTraxx_Config.TrainTraxx_API","rules":[{"t":"set","p":"TrainTraxx_Config.TrainTraxx_API","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1041.9999389648438,"y":241,"wires":[["92fcbe86.ed12e8"]]},{"id":"c6b28dd2.2181b8","type":"change","z":"92b7c3ae.62f42","name":"TrainTraxx_Config.TrainTraxx_API","rules":[{"t":"set","p":"payload","pt":"msg","to":"TrainTraxx_Config.TrainTraxx_API","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":492,"y":242,"wires":[["a2814f3f.465468"]]},{"id":"231a83a5.fc7ad4","type":"file in","z":"92b7c3ae.62f42","name":"","filename":"/etc/hiveid-ap/conf.traintraxx.json","format":"utf8","chunk":false,"sendError":false,"x":328.99993896484375,"y":164.11111450195312,"wires":[["353e59c4.0e51ae"]]},{"id":"353e59c4.0e51ae","type":"json","z":"92b7c3ae.62f42","name":"","property":"payload","action":"","pretty":false,"x":549.9999389648438,"y":164.11111450195312,"wires":[["e40c6730.f787e8"]]},{"id":"e40c6730.f787e8","type":"change","z":"92b7c3ae.62f42","name":"Set TrainTraxx_Config","rules":[{"t":"set","p":"TrainTraxx_Config","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":738.9999389648438,"y":164.11111450195312,"wires":[["c6b28dd2.2181b8","90654dbd.0dc23","a46d36b5.2a282"]]},{"id":"92fcbe86.ed12e8","type":"change","z":"92b7c3ae.62f42","name":"Set TrainTraxx_Config","rules":[{"t":"set","p":"payload","pt":"msg","to":"TrainTraxx_Config","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":1318.9999389648438,"y":292.1111145019531,"wires":[["f72f604c.994b88"]]},{"id":"f72f604c.994b88","type":"json","z":"92b7c3ae.62f42","name":"","property":"payload","action":"","pretty":true,"x":1505,"y":292.1111145019531,"wires":[["2525d4f7.14b7bc"]]},{"id":"2525d4f7.14b7bc","type":"file","z":"92b7c3ae.62f42","name":"","filename":"/etc/hiveid-ap/conf.traintraxx.json","appendNewline":true,"createDir":true,"overwriteFile":"true","x":1724.9999389648438,"y":291.1111145019531,"wires":[["4982abb5.313f84"]]},{"id":"10d53bd7.6c40bc","type":"inject","z":"92b7c3ae.62f42","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":136.99993896484375,"y":96.11111450195312,"wires":[["231a83a5.fc7ad4"]]},{"id":"505b2c6f.c0936c","type":"watch","z":"92b7c3ae.62f42","name":"","files":"/etc/hiveid-ap/conf.traintraxx.json","recursive":"","x":148.49993896484375,"y":224.11111450195312,"wires":[["231a83a5.fc7ad4"]]},{"id":"14b285eb.b25012","type":"ui_text_input","z":"92b7c3ae.62f42","name":"TrainTraxx Web Address","label":"TrainTraxx Web Address","tooltip":"","group":"eac11a26.5dfd","order":1,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":759.9999389648438,"y":291.1111145019531,"wires":[["dadce0ba.c1a4"]],"outputLabels":["msg.payload"]},{"id":"dadce0ba.c1a4","type":"change","z":"92b7c3ae.62f42","name":"Set TrainTraxx_Config.TrainTraxx_Web","rules":[{"t":"set","p":"TrainTraxx_Config.TrainTraxx_Web","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1038.9998779296875,"y":291.1111145019531,"wires":[["92fcbe86.ed12e8"]]},{"id":"90654dbd.0dc23","type":"change","z":"92b7c3ae.62f42","name":"TrainTraxx_Config.TrainTraxx_Web","rules":[{"t":"set","p":"payload","pt":"msg","to":"TrainTraxx_Config.TrainTraxx_Web","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":488.99993896484375,"y":292.1111145019531,"wires":[["14b285eb.b25012"]]},{"id":"136514e6.c63a9b","type":"ui_text_input","z":"92b7c3ae.62f42","name":"TrainTraxx API Key","label":"TrainTraxx API Key","tooltip":"","group":"eac11a26.5dfd","order":3,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":737.9999389648438,"y":340.1111145019531,"wires":[["63aa61af.2d9238"]],"outputLabels":["msg.payload"]},{"id":"63aa61af.2d9238","type":"change","z":"92b7c3ae.62f42","name":"Set TrainTraxx_Config.TrainTraxx_Key","rules":[{"t":"set","p":"TrainTraxx_Config.TrainTraxx_Key","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1036.9998779296875,"y":340.1111145019531,"wires":[["92fcbe86.ed12e8"]]},{"id":"a46d36b5.2a282","type":"change","z":"92b7c3ae.62f42","name":"TrainTraxx_Config.TrainTraxx_Key","rules":[{"t":"set","p":"payload","pt":"msg","to":"TrainTraxx_Config.TrainTraxx_Key","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":486.99993896484375,"y":341.1111145019531,"wires":[["136514e6.c63a9b"]]},{"id":"ce767182.9e697","type":"ui_text_input","z":"b2a790cb.412978","name":"JMRI API Endpoint","label":"JMRI API Endpoint","tooltip":"","group":"55f37166.7d3bb","order":2,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":789,"y":218.88888549804688,"wires":[["86b2cd1c.c24a98"]],"outputLabels":["msg.payload"]},{"id":"86b2cd1c.c24a98","type":"change","z":"b2a790cb.412978","name":"Set JMRI_Config.JMRI_API","rules":[{"t":"set","p":"JMRI_Config.JMRI_API","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1057.9999389648438,"y":218.88888549804688,"wires":[["eb3491ea.528378"]]},{"id":"fcca72d8.68cd78","type":"change","z":"b2a790cb.412978","name":"JMRI_Config.JMRI_API","rules":[{"t":"set","p":"payload","pt":"msg","to":"JMRI_Config.JMRI_API","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":508,"y":219.88888549804688,"wires":[["ce767182.9e697"]]},{"id":"71c0dcb.6662fa4","type":"file in","z":"b2a790cb.412978","name":"","filename":"/etc/hiveid-ap/conf.jmri.json","format":"utf8","chunk":false,"sendError":false,"x":354.99993896484375,"y":142,"wires":[["9fc95a95.f8998"]]},{"id":"9fc95a95.f8998","type":"json","z":"b2a790cb.412978","name":"","property":"payload","action":"","pretty":false,"x":595.9999389648438,"y":142,"wires":[["b1a4183d.1de3d8"]]},{"id":"b1a4183d.1de3d8","type":"change","z":"b2a790cb.412978","name":"Set JMRI_Config","rules":[{"t":"set","p":"JMRI_Config","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":774.9999389648438,"y":142,"wires":[["fcca72d8.68cd78","3318afc3.f815a8","ca89a9bd.f639e8"]]},{"id":"eb3491ea.528378","type":"change","z":"b2a790cb.412978","name":"Set JMRI_Config","rules":[{"t":"set","p":"payload","pt":"msg","to":"JMRI_Config","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":1354.9999389648438,"y":270,"wires":[["548e8acf.14a2cc"]]},{"id":"548e8acf.14a2cc","type":"json","z":"b2a790cb.412978","name":"","property":"payload","action":"","pretty":true,"x":1551,"y":270,"wires":[["5b18f2be.4c9bec"]]},{"id":"5b18f2be.4c9bec","type":"file","z":"b2a790cb.412978","name":"","filename":"/etc/hiveid-ap/conf.jmri.json","appendNewline":true,"createDir":true,"overwriteFile":"true","x":1750.9999389648438,"y":269,"wires":[[]]},{"id":"714dd7ed.8c3638","type":"inject","z":"b2a790cb.412978","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":182.99993896484375,"y":74,"wires":[["71c0dcb.6662fa4"]]},{"id":"775a52a2.5dd054","type":"watch","z":"b2a790cb.412978","name":"","files":"/etc/hiveid-ap/conf.jmri.json","recursive":"","x":174.49993896484375,"y":202,"wires":[["71c0dcb.6662fa4"]]},{"id":"fc0ecbe4.d9426","type":"ui_text_input","z":"b2a790cb.412978","name":"JMRI Web Address","label":"TrainTraxx Web Address","tooltip":"","group":"55f37166.7d3bb","order":1,"width":0,"height":0,"passthru":false,"mode":"text","delay":"0","topic":"","x":785.9999389648438,"y":269,"wires":[["2a007e2e.74a2ba"]],"outputLabels":["msg.payload"]},{"id":"2a007e2e.74a2ba","type":"change","z":"b2a790cb.412978","name":"Set JMRI_Config.JMRI_Web","rules":[{"t":"set","p":"JMRI_Config.JMRI_Web","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1054.9998779296875,"y":269,"wires":[["eb3491ea.528378"]]},{"id":"3318afc3.f815a8","type":"change","z":"b2a790cb.412978","name":"JMRI_Config.JMRI_Web","rules":[{"t":"set","p":"payload","pt":"msg","to":"JMRI_Config.JMRI_Web","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":504.99993896484375,"y":270,"wires":[["fc0ecbe4.d9426"]]},{"id":"64c66de.ba21494","type":"change","z":"b2a790cb.412978","name":"Set JMRI_Config.JMRI_ENABLED","rules":[{"t":"set","p":"JMRI_Config.JMRI_ENABLED","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":1072.9998779296875,"y":318,"wires":[["eb3491ea.528378"]]},{"id":"ca89a9bd.f639e8","type":"change","z":"b2a790cb.412978","name":"JMRI_Config.JMRI_ENABLED","rules":[{"t":"set","p":"payload","pt":"msg","to":"JMRI_Config.JMRI_ENABLED","tot":"global"}],"action":"","property":"","from":"","to":"","reg":false,"x":522.9999389648438,"y":319,"wires":[["579069c8.d69548"]]},{"id":"579069c8.d69548","type":"ui_switch","z":"b2a790cb.412978","name":"","label":"Enable JMRI","tooltip":"","group":"55f37166.7d3bb","order":3,"width":0,"height":0,"passthru":false,"decouple":"false","topic":"jmri_switch","style":"","onvalue":"true","onvalueType":"bool","onicon":"","oncolor":"","offvalue":"false","offvalueType":"bool","officon":"","offcolor":"","x":768,"y":318,"wires":[["64c66de.ba21494"]],"outputLabels":["flow.payload"]},{"id":"4982abb5.313f84","type":"link out","z":"92b7c3ae.62f42","name":"Configuration Change iLink","links":["7aa8b837.b7d518"],"x":1682,"y":364,"wires":[]},{"id":"bea16477.85aa78","type":"ui_text_input","z":"30784332.7a39cc","name":"","label":"Host Name","tooltip":"","group":"cd816e8a.0326f8","order":1,"width":0,"height":0,"passthru":false,"mode":"text","delay":300,"topic":"","x":857.2221946716309,"y":97.77777099609375,"wires":[["2cca02ab.fe159e"]]},{"id":"eba77e43.a7eab","type":"watch","z":"30784332.7a39cc","name":"","files":"/etc/hostname","recursive":"","x":129.7778091430664,"y":65.22221994400024,"wires":[["5d30c126.93601"]]},{"id":"246f90e3.aed14","type":"change","z":"30784332.7a39cc","name":"","rules":[{"t":"set","p":"hostname","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":633.5554962158203,"y":98.3333888053894,"wires":[["bea16477.85aa78"]]},{"id":"5d30c126.93601","type":"file in","z":"30784332.7a39cc","name":"","filename":"/etc/hostname","format":"utf8","chunk":false,"sendError":false,"x":406.8888931274414,"y":99.33340883255005,"wires":[["246f90e3.aed14"]]},{"id":"2cca02ab.fe159e","type":"exec","z":"30784332.7a39cc","command":"sudo /opt/hiveid-ap/system_set_hostname.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":1188.1111297607422,"y":97.88889932632446,"wires":[[],[],["fdea73bc.75f4a"]]},{"id":"2b22c2b6.8550ce","type":"ui_button","z":"30784332.7a39cc","name":"","group":"cd816e8a.0326f8","order":3,"width":0,"height":0,"passthru":false,"label":"Reboot","tooltip":"","color":"","bgcolor":"","icon":"autorenew","payload":"","payloadType":"str","topic":"","x":750.6666641235352,"y":241.33321714401245,"wires":[["a0da69fb.6eef88"]]},{"id":"d63cf5a3.d22f88","type":"exec","z":"30784332.7a39cc","command":"sudo reboot","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":1131.4443359375,"y":288.4999260902405,"wires":[[],[],[]]},{"id":"205cf3bb.65172c","type":"ui_button","z":"30784332.7a39cc","name":"","group":"cd816e8a.0326f8","order":4,"width":0,"height":0,"passthru":false,"label":"Shutdown","tooltip":"","color":"","bgcolor":"","icon":"fa-power-off","payload":"","payloadType":"str","topic":"","x":115,"y":408.22228479385376,"wires":[["59d256b4.260c78"]]},{"id":"570a6743.7d2a58","type":"exec","z":"30784332.7a39cc","command":"sudo shutdown now","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":726.6665878295898,"y":409.94453859329224,"wires":[[],[],[]]},{"id":"4265926b.2414bc","type":"exec","z":"30784332.7a39cc","command":"sudo /opt/hiveid-ap/system_get_ip.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":476.8888931274414,"y":163.38893747329712,"wires":[["a9070979.28e6d8"],[],[]]},{"id":"a9070979.28e6d8","type":"change","z":"30784332.7a39cc","name":"Set IP","rules":[{"t":"set","p":"IP","pt":"global","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":756.6666793823242,"y":167.4444718360901,"wires":[["3978003c.3928d"]]},{"id":"e5dee61d.923238","type":"ui_button","z":"30784332.7a39cc","name":"","group":"cd816e8a.0326f8","order":5,"width":0,"height":0,"passthru":false,"label":"OS Upgrades","tooltip":"","color":"","bgcolor":"","icon":"fa-redo","payload":"","payloadType":"str","topic":"","x":144.65467834472656,"y":294.06746912002563,"wires":[["83b6a79f.5b26a8"]]},{"id":"83b6a79f.5b26a8","type":"exec","z":"30784332.7a39cc","command":"sudo /opt/hiveid-ap/system_update.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":479.6546630859375,"y":293.5674080848694,"wires":[["fdea73bc.75f4a"],[],["a777e582.97b638"]]},{"id":"a777e582.97b638","type":"switch","z":"30784332.7a39cc","name":"","property":"payload.code","propertyType":"msg","rules":[{"t":"eq","v":"0","vt":"str"}],"checkall":"true","repair":false,"outputs":1,"x":758.6546630859375,"y":290.90084314346313,"wires":[["a0da69fb.6eef88"]]},{"id":"3978003c.3928d","type":"ui_text","z":"30784332.7a39cc","group":"cd816e8a.0326f8","order":2,"width":0,"height":0,"name":"","label":"IP Address","format":"{{msg.payload}}","layout":"row-spread","x":948.126895904541,"y":167.12304735183716,"wires":[]},{"id":"60d4c1fe.5601d","type":"ui_button","z":"30784332.7a39cc","name":"","group":"7f2576d0.5d638","order":1,"width":0,"height":0,"passthru":false,"label":"Update HiveID Code","tooltip":"","color":"","bgcolor":"","icon":"","payload":"","payloadType":"str","topic":"","x":155.07135009765625,"y":352.65084314346313,"wires":[["43074c36.143b24"]]},{"id":"43074c36.143b24","type":"exec","z":"30784332.7a39cc","command":"sudo /opt/hiveid-ap/hiveid_update.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":480.07135009765625,"y":352.15084314346313,"wires":[["fdea73bc.75f4a"],[],[]]},{"id":"fdea73bc.75f4a","type":"ui_text","z":"30784332.7a39cc","group":"cd816e8a.0326f8","order":6,"width":0,"height":0,"name":"","label":"System Results","format":"{{msg.payload}}","layout":"col-center","x":1412.3491516113281,"y":355.5396981239319,"wires":[]},{"id":"a0b7d03d.14aa2","type":"inject","z":"30784332.7a39cc","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":122.34912109375,"y":164.42853784561157,"wires":[["4265926b.2414bc","5d30c126.93601"]]},{"id":"a0da69fb.6eef88","type":"ui_toast","z":"30784332.7a39cc","position":"dialog","displayTime":"3","highlight":"","outputs":1,"ok":"OK","cancel":"Cancel","topic":"","name":"Reboot","x":935.6825542449951,"y":289.9841523170471,"wires":[["d63cf5a3.d22f88"]]},{"id":"59d256b4.260c78","type":"ui_toast","z":"30784332.7a39cc","position":"dialog","displayTime":"3","highlight":"","outputs":1,"ok":"OK","cancel":"Cancel","topic":"","name":"Shutdown","x":391.79358673095703,"y":408.87307691574097,"wires":[["570a6743.7d2a58"]]},{"id":"f226176f.b2e128","type":"debug","z":"d09cb82e.8ccc38","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":1216.111083984375,"y":68.88888549804688,"wires":[]},{"id":"7b03d0e3.9a4cf","type":"ui_button","z":"d09cb82e.8ccc38","name":"","group":"dcf278c0.990a78","order":1,"width":0,"height":0,"passthru":false,"label":"Configure WiFi to WiFi Gateway ","tooltip":"","color":"","bgcolor":"","icon":"fa-wifi","payload":"","payloadType":"str","topic":"","x":433.111083984375,"y":67.88888549804688,"wires":[["f33cd2f4.3f671"]]},{"id":"f33cd2f4.3f671","type":"exec","z":"d09cb82e.8ccc38","command":"sudo /opt/hiveid-ap/hiveid_setup_wifi2wifi.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":843.111083984375,"y":67.38888549804688,"wires":[["f226176f.b2e128"],["f226176f.b2e128"],["f226176f.b2e128","ff60012e.3d2ae"]]},{"id":"fe94e8ed.58c8c8","type":"exec","z":"d09cb82e.8ccc38","command":"sudo /opt/hiveid-ap/wpaclient_set_ssid.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":845.3332977294922,"y":246.88886070251465,"wires":[[],[],["ff60012e.3d2ae"]]},{"id":"370a2276.0d32de","type":"ui_dropdown","z":"d09cb82e.8ccc38","name":"","label":"WiFi SSID","tooltip":"","place":"Select option","group":"dcf278c0.990a78","order":2,"width":0,"height":0,"passthru":false,"options":[],"payload":"","topic":"","x":517.2222518920898,"y":240.22219276428223,"wires":[["fe94e8ed.58c8c8"]]},{"id":"bc120ceb.5d335","type":"exec","z":"d09cb82e.8ccc38","command":"sudo /opt/hiveid-ap/system_get_ssidList.sh","addpay":false,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":249.44447326660156,"y":304.1666259765625,"wires":[["5efa9a9.d238f64"],[],[]]},{"id":"6d91d9cd.a5d408","type":"ui_button","z":"d09cb82e.8ccc38","name":"","group":"dcf278c0.990a78","order":3,"width":0,"height":0,"passthru":false,"label":"Scan","tooltip":"","color":"","bgcolor":"","icon":"wifi_tethering","payload":"","payloadType":"str","topic":"","x":72.77777099609375,"y":232.55548095703125,"wires":[["bc120ceb.5d335"]]},{"id":"5efa9a9.d238f64","type":"function","z":"d09cb82e.8ccc38","name":"","func":"msg.options = msg.payload.split('\\n');\nreturn msg;","outputs":1,"noerr":0,"x":334.5555877685547,"y":240.1110897064209,"wires":[["370a2276.0d32de"]]},{"id":"ff60012e.3d2ae","type":"ui_text","z":"d09cb82e.8ccc38","group":"dcf278c0.990a78","order":4,"width":0,"height":0,"name":"","label":"WiFi to WiFi Gateway Status","format":"{{msg.payload}}","layout":"col-center","x":1309.9046020507812,"y":262.09523582458496,"wires":[]},{"id":"e6e9e21.a53da2","type":"comment","z":"d09cb82e.8ccc38","name":"Notes","info":"Need to add in setup of SSID, Passphrase and security Mode and a commit button\n\nNeed to undo any WiFi to Ethernet Settings ","x":177.22222222222223,"y":426.66666666666663,"wires":[]},{"id":"9c01932.b531f7","type":"ui_button","z":"ad297f2f.ea702","name":"","group":"bf62db03.b149a8","order":2,"width":0,"height":0,"passthru":false,"label":"Restart Wireless Gateway Service","tooltip":"","color":"","bgcolor":"","icon":"autorenew","payload":"","payloadType":"str","topic":"","x":471.111083984375,"y":188.88890886306763,"wires":[["d096e5cc.8258b8"]]},{"id":"d096e5cc.8258b8","type":"exec","z":"ad297f2f.ea702","command":"sudo service hostapd restart","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":787.3333015441895,"y":187.27779626846313,"wires":[["bf650bc7.4c6288"],["f39ce7a9.a181d8"],["ecd8885.59b7e78"]]},{"id":"882a5aa3.716b28","type":"ui_text","z":"ad297f2f.ea702","group":"bf62db03.b149a8","order":3,"width":0,"height":0,"name":"","label":"WiFi to Ethernet Gateway Status","format":"{{msg.payload}}","layout":"col-center","x":1548.1111145019531,"y":306.9999752044678,"wires":[]},{"id":"af7c21ef.d1e9d","type":"change","z":"ad297f2f.ea702","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"Successfully Restarted","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":1281.111083984375,"y":201.88889360427856,"wires":[["882a5aa3.716b28"]]},{"id":"f39ce7a9.a181d8","type":"change","z":"ad297f2f.ea702","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"Error Occurred","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":1281.111083984375,"y":156.88889360427856,"wires":[["882a5aa3.716b28"]]},{"id":"bf650bc7.4c6288","type":"change","z":"ad297f2f.ea702","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"Error 2 Occurred","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":1279.7777786254883,"y":107.77777099609375,"wires":[["882a5aa3.716b28"]]},{"id":"ecd8885.59b7e78","type":"switch","z":"ad297f2f.ea702","name":"","property":"payload.code","propertyType":"msg","rules":[{"t":"eq","v":"0","vt":"str"}],"checkall":"true","repair":false,"outputs":1,"x":1069.111083984375,"y":201.88889360427856,"wires":[["af7c21ef.d1e9d"]]},{"id":"de2eaedf.2ebbe","type":"ui_button","z":"ad297f2f.ea702","name":"","group":"bf62db03.b149a8","order":1,"width":0,"height":0,"passthru":false,"label":"Configure WiFi to Ethernet Bridge ","tooltip":"","color":"","bgcolor":"","icon":"settings_ethernet","payload":"","payloadType":"str","topic":"","x":467.1111145019531,"y":307.88893961906433,"wires":[["63932b67.7d37c4"]]},{"id":"63932b67.7d37c4","type":"exec","z":"ad297f2f.ea702","command":"sudo /opt/hiveid-ap/hiveid_setup_wifi2eth.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":849.6667327880859,"y":307.9999976158142,"wires":[[],[],["882a5aa3.716b28"]]},{"id":"508771db.24cdd","type":"inject","z":"ad297f2f.ea702","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":208.38097381591797,"y":482.82542085647583,"wires":[["97175299.0b01c"]]},{"id":"25faa63.9572d5a","type":"ui_text_input","z":"ad297f2f.ea702","name":"","label":"WiFi Passphrase","tooltip":"","group":"bf62db03.b149a8","order":4,"width":0,"height":0,"passthru":false,"mode":"password","delay":300,"topic":"","x":813.1111297607422,"y":426.77776765823364,"wires":[["edbe717e.df48e"]]},{"id":"edbe717e.df48e","type":"exec","z":"ad297f2f.ea702","command":"sudo /opt/hiveid-ap/hostapd_set_psk.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":1140.7777824401855,"y":424.7142987251282,"wires":[[],[],["882a5aa3.716b28"]]},{"id":"1af93deb.162932","type":"exec","z":"ad297f2f.ea702","command":"sudo /opt/hiveid-ap/hostapd_set_cnl.sh","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":1141.7777824401855,"y":483.0000042915344,"wires":[[],[],["882a5aa3.716b28"]]},{"id":"c1bf0e6e.2eb3a","type":"ui_dropdown","z":"ad297f2f.ea702","name":"","label":"WiFi Channel","tooltip":"","place":"Select option","group":"bf62db03.b149a8","order":5,"width":0,"height":0,"passthru":false,"options":[{"label":"1*","value":1,"type":"num"},{"label":"2","value":2,"type":"num"},{"label":"3","value":3,"type":"num"},{"label":"4","value":4,"type":"num"},{"label":"5","value":5,"type":"num"},{"label":"6*","value":6,"type":"num"},{"label":"7","value":7,"type":"num"},{"label":"8","value":8,"type":"num"},{"label":"9","value":9,"type":"num"},{"label":"10","value":10,"type":"num"},{"label":"11*","value":11,"type":"num"},{"label":"12","value":12,"type":"num"},{"label":"13","value":13,"type":"num"},{"label":"Auto Channel","value":"acs_survey","type":"str"}],"payload":"","topic":"","x":836.7777824401855,"y":484.0000042915344,"wires":[["1af93deb.162932"]]},{"id":"97175299.0b01c","type":"exec","z":"ad297f2f.ea702","command":"sudo /opt/hiveid-ap/hostapd_get_cnl.sh","addpay":false,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":557.9206962585449,"y":483.7142376899719,"wires":[["c1bf0e6e.2eb3a"],[],[]]},{"id":"c0fec92c.ec7e88","type":"comment","z":"ad297f2f.ea702","name":"Get Passphrase from file ","info":"","x":616.3490905761719,"y":388.4286389350891,"wires":[]},{"id":"173d3c62.187864","type":"debug","z":"cd7101b0.54e6d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":851.5,"y":314,"wires":[]},{"id":"7a574409.d63e0c","type":"debug","z":"cd7101b0.54e6d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":1003.5,"y":386,"wires":[]},{"id":"ac4dedd1.f8fcd","type":"debug","z":"cd7101b0.54e6d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":1413.5,"y":502,"wires":[]},{"id":"a10afe99.b10a4","type":"debug","z":"cd7101b0.54e6d","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":1200.5,"y":394,"wires":[]},{"id":"650300c5.0b2da","type":"function","z":"cd7101b0.54e6d","name":"Node Not Registered","func":"msg.payload = msg.IP + ' is not a valid hive node';\nreturn msg;","outputs":1,"noerr":0,"x":1435.5,"y":438,"wires":[["9a38f7ba.242fa"]]}]
+[
+    {
+        "id": "f1ec9b2a.1f7298",
+        "type": "tab",
+        "label": "Node Link Redirector",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a06855ce.9f5488",
+        "type": "tab",
+        "label": "Admin Console - System",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "727c7bb6.e94204",
+        "type": "tab",
+        "label": "Admin Console - WiFi to Ethernet Gateway",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a8734d01.d65fe",
+        "type": "tab",
+        "label": "Admin Cosole - WiFi 2 WiFi Gateway",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9745920.d8a397",
+        "type": "tab",
+        "label": "Set Mode",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5e61e22e.7a581c",
+        "type": "tab",
+        "label": "RFID Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d65a42c6.df12f",
+        "type": "tab",
+        "label": "HiveID Configuration",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "11b2f565.0266ab",
+        "type": "tab",
+        "label": "HiveID Flow Updater",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "16d0b1f7.5422be",
+        "type": "tab",
+        "label": "Firmware Updater",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fd2ebb8a.240a38",
+        "type": "tab",
+        "label": "TrainTraxx Configuration",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1a726252.d178be",
+        "type": "tab",
+        "label": "TrainTraxx Data Cache",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7bef0b7b.d5a104",
+        "type": "tab",
+        "label": "TrainTraxx Activity Screen",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3d602d50.39dab2",
+        "type": "tab",
+        "label": "TrainTraxx to JMRI",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ed0209cc.523aa8",
+        "type": "tab",
+        "label": "JMRI Configuration",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "41757e63.7ce36",
+        "type": "tab",
+        "label": "JMRI GET Endpoint",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "164213bd.e3dd4c",
+        "type": "tab",
+        "label": "JMRI Data Cache",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c3e3e66a.322358",
+        "type": "tab",
+        "label": "Summary Section",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "49e2d5c0.49790c",
+        "type": "subflow",
+        "name": "Reporters to JRMI",
+        "info": "",
+        "category": "JMRI",
+        "in": [
+            {
+                "x": 114.75,
+                "y": 162,
+                "wires": [
+                    {
+                        "id": "4369543.5731eac"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1272,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "82f1526e.9323b",
+                        "port": 0
+                    },
+                    {
+                        "id": "b6bbb1e6.4ca5f",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1272,
+                "y": 400,
+                "wires": [
+                    {
+                        "id": "5b9a0.b59166604",
+                        "port": 0
+                    },
+                    {
+                        "id": "dd61c8d5.569b88",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "icon": "node-red/inject.png"
+    },
+    {
+        "id": "8b10dcf.dc4c82",
+        "type": "subflow",
+        "name": "Get JMRI Info",
+        "info": "",
+        "category": "JMRI",
+        "in": [
+            {
+                "x": 85,
+                "y": 72.5,
+                "wires": [
+                    {
+                        "id": "96e18991.b2fa88"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 745,
+                "y": 72.5,
+                "wires": [
+                    {
+                        "id": "b50ad81b.505278",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "inputLabels": [
+            "msg.payload"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ],
+        "icon": "node-red/leveldb.png"
+    },
+    {
+        "id": "a493d433.024998",
+        "type": "subflow",
+        "name": "Tracker Proxy",
+        "info": "",
+        "category": "TrainTraxx",
+        "in": [],
+        "out": [
+            {
+                "x": 560,
+                "y": 142.5,
+                "wires": [
+                    {
+                        "id": "4dfa5b69.319274",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1000,
+                "y": 122.5,
+                "wires": [
+                    {
+                        "id": "3d89b1af.dec3ae",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "outputLabels": [
+            "",
+            "msg"
+        ],
+        "icon": "node-red/white-globe.png"
+    },
+    {
+        "id": "a40e76b8.4d8a48",
+        "type": "subflow",
+        "name": "Get TrainTraxx Data",
+        "info": "",
+        "category": "TrainTraxx",
+        "in": [
+            {
+                "x": 80,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "91353714.a754e8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1040,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "958d130f.9dbf1",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ],
+        "icon": "node-red/leveldb.png"
+    },
+    {
+        "id": "4de8836.ac0667c",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "hiveid-manager",
+                "default": "#4B7930",
+                "baseColor": "#ff9300",
+                "baseFont": "Trebuchet MS,Helvetica,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#ff9300",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#ff9300",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#ffb34d",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#ff9300",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "Trebuchet MS,Helvetica,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "HiveID Manager",
+            "hideToolbar": "false",
+            "allowSwipe": "true",
+            "lockMenu": "false",
+            "allowTempTheme": "false",
+            "dateFormat": "YYYY-MM-DD",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "98512fe8.4ad4",
+        "type": "ui_group",
+        "z": "",
+        "name": "System Controls",
+        "tab": "82d159ac.42e4b8",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "df05b319.59cad",
+        "type": "ui_group",
+        "z": "",
+        "name": "Software Updates",
+        "tab": "b654d5df.424178",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "2d93584c.72e648",
+        "type": "ui_group",
+        "z": "",
+        "name": "HiveID",
+        "tab": "5168ef46.74702",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5168ef46.74702",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Application Settings",
+        "icon": "apps",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5ffcbee0.a5304",
+        "type": "ui_group",
+        "z": "",
+        "name": "HiveID RFID Module",
+        "tab": "b654d5df.424178",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "652de07e.0d453",
+        "type": "ui_group",
+        "z": "",
+        "name": "WiFi to Ethernet Gateway",
+        "tab": "95d2bc1b.6b456",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "8b01491a.1965e8",
+        "type": "ui_group",
+        "z": "",
+        "name": "WiFi to WiFi Gateway",
+        "tab": "95d2bc1b.6b456",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "3b710094.8878f",
+        "type": "ui_link",
+        "z": "",
+        "name": "HiveID Editor",
+        "link": "/",
+        "icon": "all_inclusive",
+        "target": "iframe",
+        "order": 9
+    },
+    {
+        "id": "8e968283.a2d29",
+        "type": "ui_link",
+        "z": "",
+        "name": "JMRI",
+        "link": "/redir?app=jmri",
+        "icon": "train",
+        "target": "iframe",
+        "order": 8
+    },
+    {
+        "id": "6efda0bd.72343",
+        "type": "ui_link",
+        "z": "",
+        "name": "OpenRSD",
+        "link": "/redir?app=openrsd",
+        "icon": "fa-cogs",
+        "target": "iframe",
+        "order": 10
+    },
+    {
+        "id": "38e63d7a.b846e2",
+        "type": "ui_link",
+        "z": "",
+        "name": "phpMyAdmin",
+        "link": "/redir?app=phpmyadmin",
+        "icon": "fa-database",
+        "target": "newtab",
+        "order": 11
+    },
+    {
+        "id": "3808a9b7.8005b6",
+        "type": "ui_link",
+        "z": "",
+        "name": "TrainTraxx Application",
+        "link": "https://www.traintraxx.com/traintraxx-application",
+        "icon": "fa-train",
+        "target": "iframe",
+        "order": 7
+    },
+    {
+        "id": "12a9f286.0bbd9d",
+        "type": "ui_link",
+        "z": "",
+        "name": "TrainTraxx Store",
+        "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
+        "icon": "shopping_cart",
+        "target": "newtab",
+        "order": 12
+    },
+    {
+        "id": "82d159ac.42e4b8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "System Summary",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "95d2bc1b.6b456",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Network Mode",
+        "icon": "settings_ethernet",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "bdaf72c3.2be81",
+        "type": "ui_group",
+        "z": "",
+        "name": "Performance",
+        "tab": "82d159ac.42e4b8",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "17f52c5b.cfb014",
+        "type": "ui_group",
+        "z": "",
+        "name": "Host Information",
+        "tab": "82d159ac.42e4b8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1aab9ee9.8893d1",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Local Train Activity",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b654d5df.424178",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Updates",
+        "icon": "update",
+        "order": 13,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a9319cec.7d9c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Manage Information",
+        "tab": "cc77e7c8.3db938",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "cc77e7c8.3db938",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Local TrainTraxx",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3220fafa.330906",
+        "type": "ui_group",
+        "z": "",
+        "name": "Activity",
+        "tab": "1aab9ee9.8893d1",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "52268d3e.c2cde4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Manage Information",
+        "tab": "",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "e74abd5.60ebe4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Manage Information",
+        "tab": "",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "c39736a3.dcaf08",
+        "type": "ui_group",
+        "z": "",
+        "name": "TrainTraxx",
+        "tab": "5168ef46.74702",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "f907e9dd.26a218",
+        "type": "ui_group",
+        "z": "",
+        "name": "JMRI",
+        "tab": "5168ef46.74702",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "198bfc48.894d14",
+        "type": "ui_group",
+        "z": "",
+        "name": "TrainTraxx",
+        "tab": "",
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "4411c851.baef98",
+        "type": "ui_group",
+        "z": "",
+        "name": "Summary",
+        "tab": "1aab9ee9.8893d1",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "e2f29212.fa7b8",
+        "type": "ui_group",
+        "z": "",
+        "name": "TrainTraxx",
+        "tab": "",
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "bfa7bfc3.31cd7",
+        "type": "ui_group",
+        "z": "",
+        "name": "Manage Information",
+        "tab": "",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "7491149.92351ec",
+        "type": "ui_group",
+        "z": "",
+        "name": "Operating Mode",
+        "tab": "95d2bc1b.6b456",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "92534c08.7fb13",
+        "type": "ui_group",
+        "z": "",
+        "name": "Gateway Settings",
+        "tab": "95d2bc1b.6b456",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5a317a8b.60a8b4",
+        "type": "ui_text_input",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "label": "Host Name",
+        "tooltip": "",
+        "group": "17f52c5b.cfb014",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "x": 830,
+        "y": 100,
+        "wires": [
+            [
+                "5e56d465.6b35ac"
+            ]
+        ]
+    },
+    {
+        "id": "16c7651a.292bdb",
+        "type": "watch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "files": "/etc/hostname",
+        "recursive": "",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "e8ed6bdd.7a0138"
+            ]
+        ]
+    },
+    {
+        "id": "109b7ab9.c9eb25",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "hostname",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 100,
+        "wires": [
+            [
+                "5a317a8b.60a8b4"
+            ]
+        ]
+    },
+    {
+        "id": "e8ed6bdd.7a0138",
+        "type": "file in",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "filename": "/etc/hostname",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "109b7ab9.c9eb25"
+            ]
+        ]
+    },
+    {
+        "id": "60e46d31.c31c34",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo /opt/hiveid-ap/system_set_hostname.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1540,
+        "y": 100,
+        "wires": [
+            [
+                "9811ce1d.294a8"
+            ],
+            [],
+            [
+                "3c095ad9.f39cc6"
+            ]
+        ]
+    },
+    {
+        "id": "b93a8462.ae5298",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "98512fe8.4ad4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reboot",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "autorenew",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "9811ce1d.294a8"
+            ]
+        ]
+    },
+    {
+        "id": "7cb7f74b.562db8",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo reboot",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1490,
+        "y": 320,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4eb7a717.26b618",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "98512fe8.4ad4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Shutdown",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "fa-power-off",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "b5df9eca.cde6b"
+            ]
+        ]
+    },
+    {
+        "id": "1ed4aa5a.8af176",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo shutdown now",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1100,
+        "y": 500,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a8e24a71.9f44d8",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set Internal IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "IP",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "77d1ec0d.c31724",
+                "de82a97a.34a1f8"
+            ]
+        ]
+    },
+    {
+        "id": "9a80917a.4666b",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "df05b319.59cad",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "OS Upgrades",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "fa-redo",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "de3137d8.c9ba48"
+            ]
+        ]
+    },
+    {
+        "id": "de3137d8.c9ba48",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo /opt/hiveid-ap/system_update.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "3c095ad9.f39cc6"
+            ],
+            [],
+            [
+                "af7d97d7.e8a898"
+            ]
+        ]
+    },
+    {
+        "id": "af7d97d7.e8a898",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "9811ce1d.294a8"
+            ]
+        ]
+    },
+    {
+        "id": "77d1ec0d.c31724",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Internal IP",
+        "format": "{{msg.payload.internalIPv4}}",
+        "layout": "row-spread",
+        "x": 820,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "307d29d2.71ff56",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "df05b319.59cad",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Update HiveID Code",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 160,
+        "y": 440,
+        "wires": [
+            [
+                "60e3884f.3df908"
+            ]
+        ]
+    },
+    {
+        "id": "60e3884f.3df908",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo /opt/hiveid-ap/hiveid_update.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "3c095ad9.f39cc6"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3c095ad9.f39cc6",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "df05b319.59cad",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "System Results",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 1640,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "92b7519d.28a39",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "e8ed6bdd.7a0138",
+                "b7ecf609.ef19a8",
+                "aac85b05.c667a8",
+                "d618702e.2c062"
+            ]
+        ]
+    },
+    {
+        "id": "5a9407e8.fa2398",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "Reboot",
+        "x": 1180,
+        "y": 320,
+        "wires": [
+            [
+                "d5da6758.1961a8"
+            ]
+        ]
+    },
+    {
+        "id": "a6afd8dd.732578",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "Shutdown",
+        "x": 690,
+        "y": 500,
+        "wires": [
+            [
+                "c3ea8792.391e88"
+            ]
+        ]
+    },
+    {
+        "id": "e9af9d2a.be78f",
+        "type": "ui_text_input",
+        "z": "d65a42c6.df12f",
+        "name": "HiveID API Endpoint",
+        "label": "HiveID API Endpoint",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 700,
+        "y": 140,
+        "wires": [
+            [
+                "c20928f5.da0458"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "c20928f5.da0458",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.HiveID_API",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.HiveID_API",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "616d5896.3683f8",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.HiveID_API",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.HiveID_API",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "e9af9d2a.be78f"
+            ]
+        ]
+    },
+    {
+        "id": "b22ac622.eba508",
+        "type": "file in",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "filename": "/etc/hiveid-ap/conf.hiveid.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "82e7fea3.bd2b3"
+            ]
+        ]
+    },
+    {
+        "id": "82e7fea3.bd2b3",
+        "type": "json",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "7e78409d.ec487"
+            ]
+        ]
+    },
+    {
+        "id": "7e78409d.ec487",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "616d5896.3683f8",
+                "62d04a23.b80bd4",
+                "2250c2df.a8728e"
+            ]
+        ]
+    },
+    {
+        "id": "e82f7a29.794508",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 300,
+        "wires": [
+            [
+                "5fdfad93.b1d8b4"
+            ]
+        ]
+    },
+    {
+        "id": "5fdfad93.b1d8b4",
+        "type": "json",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 1090,
+        "y": 340,
+        "wires": [
+            [
+                "c4cecae6.b7be98"
+            ]
+        ]
+    },
+    {
+        "id": "c4cecae6.b7be98",
+        "type": "file",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "filename": "/etc/hiveid-ap/conf.hiveid.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 1190,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88e55a28.5ffc78",
+        "type": "inject",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "b22ac622.eba508"
+            ]
+        ]
+    },
+    {
+        "id": "77e95678.0dd7a8",
+        "type": "watch",
+        "z": "d65a42c6.df12f",
+        "name": "",
+        "files": "/etc/hiveid-ap/conf.hiveid.json",
+        "recursive": "",
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "b22ac622.eba508"
+            ]
+        ]
+    },
+    {
+        "id": "3d193b84.ed7754",
+        "type": "ui_text_input",
+        "z": "d65a42c6.df12f",
+        "name": "HiveID Web Address",
+        "label": "HiveID Web Address",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 700,
+        "y": 260,
+        "wires": [
+            [
+                "4e44260a.1a98e8"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "4e44260a.1a98e8",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.HiveID_Web",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.HiveID_Web",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "62d04a23.b80bd4",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.HiveID_Web",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.HiveID_Web",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "3d193b84.ed7754"
+            ]
+        ]
+    },
+    {
+        "id": "e2c2ad9c.caed1",
+        "type": "ui_text_input",
+        "z": "d65a42c6.df12f",
+        "name": "HiveID API Key",
+        "label": "HiveID API Key",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 680,
+        "y": 380,
+        "wires": [
+            [
+                "aff72860.1b2878"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "aff72860.1b2878",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.HiveID_Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.HiveID_Key",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 420,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "2250c2df.a8728e",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.HiveID_Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.HiveID_Key",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 340,
+        "wires": [
+            [
+                "e2c2ad9c.caed1"
+            ]
+        ]
+    },
+    {
+        "id": "c8cd0273.9f1f4",
+        "type": "http in",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Redirector",
+        "url": "/redir",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 40,
+        "wires": [
+            [
+                "fed0826d.2117",
+                "372dacb9.a08e74"
+            ]
+        ]
+    },
+    {
+        "id": "fed0826d.2117",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "checkRedirect",
+        "property": "payload.app",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "openrsd",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "phpmyadmin",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "jmri",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 240,
+        "y": 200,
+        "wires": [
+            [
+                "e5b4b384.ffba8"
+            ],
+            [
+                "86aa8688.67b188"
+            ],
+            [
+                "7f66e017.f90e1"
+            ],
+            [
+                "f8e90910.c1fb88"
+            ]
+        ]
+    },
+    {
+        "id": "9596c547.812608",
+        "type": "http response",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "372dacb9.a08e74",
+        "type": "debug",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 990,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f27066a1.a44ba8",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set OpenRSD",
+        "func": "delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.internalIPv4 + '/openrsd'\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "9596c547.812608",
+                "372dacb9.a08e74"
+            ]
+        ]
+    },
+    {
+        "id": "86aa8688.67b188",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set phpMyAdmin",
+        "func": "delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.internalIPv4  + '/phpmyadmin'\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 140,
+        "wires": [
+            [
+                "9596c547.812608",
+                "372dacb9.a08e74"
+            ]
+        ]
+    },
+    {
+        "id": "7f66e017.f90e1",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set JRMI",
+        "func": "delete msg.payload;\n\nvar IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JRMI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    msg.headers = {\n        \"Location\" : \"http://\" + JMRI_Config.JMRI_Web \n    };\n} else {\n    msg.statusCode = 404;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "9596c547.812608",
+                "372dacb9.a08e74"
+            ]
+        ]
+    },
+    {
+        "id": "90a5c2c3.31751",
+        "type": "http request",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "208ccfbb.60cfd",
+                "fe524ffe.6821f"
+            ]
+        ]
+    },
+    {
+        "id": "dc21a5dc.d18fb8",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Set Keyed URL",
+        "func": "var config = global.get('HIVEID_Config');\n\nmsg.url = config.HiveID_API + 'nodered?apikey=' + config.HiveID_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "90a5c2c3.31751"
+            ]
+        ]
+    },
+    {
+        "id": "21edbadb.b209a6",
+        "type": "ui_button",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "group": "df05b319.59cad",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Update Node-Red Flows",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "cloud_download",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "dc21a5dc.d18fb8"
+            ]
+        ]
+    },
+    {
+        "id": "208ccfbb.60cfd",
+        "type": "debug",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 750,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "fe524ffe.6821f",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Link new Nodes",
+        "func": "delete msg.url;\nmsg.new_nodes = msg.payload;\nmsg.headers = {'content-type':'application/json'};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "b4df86b6.c6b2b8",
+                "208ccfbb.60cfd"
+            ]
+        ]
+    },
+    {
+        "id": "11b0779f.cb8098",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Merge Flows ",
+        "func": "var tempObj = {};\nvar foundObj = {};\nfor (var i=0; i<msg.new_nodes.length;i++) {\n    tempObj[msg.new_nodes[i]['id']] = msg.new_nodes[i];\n    foundObj[msg.new_nodes[i]['id']] = 0;\n    \n}\n\nfor (var i=0;i<msg.payload.length;i++) {\n    if (tempObj[msg.payload[i]['id']] !== undefined) {\n        msg.payload[i] = tempObj[msg.payload[i]['id']];\n        foundObj[msg.payload[i]['id']] =1;\n    }\n}\n\nfor (var i in foundObj) {\n    if (foundObj[i] === 0) {\n        msg.payload.push(tempObj[i]);\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "8b922e5e.6f89a",
+                "208ccfbb.60cfd"
+            ]
+        ]
+    },
+    {
+        "id": "b4df86b6.c6b2b8",
+        "type": "http request",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "url": "http://127.0.0.1:1880/flows",
+        "tls": "",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "11b0779f.cb8098",
+                "422f15af.c3cc6c"
+            ]
+        ]
+    },
+    {
+        "id": "8b922e5e.6f89a",
+        "type": "http request",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://127.0.0.1:1880/flows",
+        "tls": "",
+        "x": 550,
+        "y": 260,
+        "wires": [
+            [
+                "208ccfbb.60cfd"
+            ]
+        ]
+    },
+    {
+        "id": "fca32d87.e092a",
+        "type": "file",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 570,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a03255ae.66a948",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Setup Backup File Name",
+        "func": "msg.filename = '/usr/local/hiveid-ap/backups/nodered.' + msg.timestamp + '.json';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 360,
+        "wires": [
+            [
+                "fca32d87.e092a"
+            ]
+        ]
+    },
+    {
+        "id": "422f15af.c3cc6c",
+        "type": "moment",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "America/Chicago",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "YYYYMMDDHHMMSS",
+        "locale": "en_US",
+        "output": "timestamp",
+        "outputType": "msg",
+        "outTz": "America/Chicago",
+        "x": 540,
+        "y": 320,
+        "wires": [
+            [
+                "a03255ae.66a948"
+            ]
+        ]
+    },
+    {
+        "id": "33658631.e608aa",
+        "type": "ui_button",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "group": "5ffcbee0.a5304",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Update Readers Wirelessly",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "fa-wifi",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "e47e8d5c.512fd",
+                "695a152e.efd0ec"
+            ]
+        ]
+    },
+    {
+        "id": "9c8a89b8.58e198",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "sudo /opt/hiveid-ap/dhcpcd_get_leases.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 210,
+        "y": 460,
+        "wires": [
+            [
+                "56a59df3.3ee5a4",
+                "d395d1f0.e27c2"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "56a59df3.3ee5a4",
+        "type": "csv",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "8133a096.b87"
+            ]
+        ]
+    },
+    {
+        "id": "8133a096.b87",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Create OTA Commands",
+        "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        // -P is the host port\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 480,
+        "wires": [
+            [
+                "6964cb7.b194a34",
+                "a72ea356.dfc17"
+            ]
+        ]
+    },
+    {
+        "id": "5abf151a.f7c80c",
+        "type": "http request",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "url": "",
+        "tls": "",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "16181bb6.fb2234"
+            ]
+        ]
+    },
+    {
+        "id": "130cbf91.edc2d",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Set Firmware URL",
+        "func": "var config = global.get('TrainTraxx_Config');\n\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "5abf151a.f7c80c"
+            ]
+        ]
+    },
+    {
+        "id": "7d59a86a.56f2c8",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "sudo /opt/hiveid-ap/hiveid_get_binlist.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 540,
+        "y": 80,
+        "wires": [
+            [
+                "130cbf91.edc2d"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d505e776.cc8988",
+        "type": "file",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 550,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18150761.7a23b9",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "16181bb6.fb2234",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "func": "var tempFile = msg.headers['content-disposition'];\ntempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\nmsg.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "d505e776.cc8988",
+                "18150761.7a23b9"
+            ]
+        ]
+    },
+    {
+        "id": "4bd26c8c.731c44",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "sudo python /usr/local/hiveid-ap/espota.py ",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 870,
+        "y": 560,
+        "wires": [
+            [
+                "d480b3e5.18cbf",
+                "dff80caf.85559"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6964cb7.b194a34",
+        "type": "switch",
+        "z": "16d0b1f7.5422be",
+        "name": "NodeExists",
+        "property": "flag",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 950,
+        "y": 480,
+        "wires": [
+            [
+                "4bd26c8c.731c44"
+            ],
+            [
+                "9095b7d0.f5b318"
+            ]
+        ]
+    },
+    {
+        "id": "c004a83.7c97e58",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1350,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "2af64c41.95a824",
+        "type": "ui_text",
+        "z": "16d0b1f7.5422be",
+        "group": "5ffcbee0.a5304",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Update Status Messages",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 1190,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d480b3e5.18cbf",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Handle Results",
+        "func": "if (!msg.payload.match(/ERROR/)) {\n    msg.payload =  msg.IP + \" Updated Successfully\\n\";\n} else {\n    msg.payload =  msg.IP + \" Update Failed\\n\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1180,
+        "y": 600,
+        "wires": [
+            [
+                "c004a83.7c97e58",
+                "2af64c41.95a824"
+            ]
+        ]
+    },
+    {
+        "id": "695a152e.efd0ec",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Clear Box",
+        "func": "msg.payload = '';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 900,
+        "y": 320,
+        "wires": [
+            [
+                "2af64c41.95a824"
+            ]
+        ]
+    },
+    {
+        "id": "abacc62d.40cf58",
+        "type": "inject",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 790,
+        "y": 260,
+        "wires": [
+            [
+                "695a152e.efd0ec"
+            ]
+        ]
+    },
+    {
+        "id": "23e115c3.0b6e0a",
+        "type": "ui_button",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "group": "5ffcbee0.a5304",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Update Readers Using USB",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "usb",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 172.5,
+        "y": 618.8543090820312,
+        "wires": [
+            [
+                "25037935.913206",
+                "695a152e.efd0ec"
+            ]
+        ]
+    },
+    {
+        "id": "ea289cc4.dfed6",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "sudo /opt/hiveid-ap/hiveid_set_binByUSB.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 865.7499389648438,
+        "y": 616.3543090820312,
+        "wires": [
+            [
+                "d480b3e5.18cbf"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b072a4f3.c61fa8",
+        "type": "inject",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 01 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "7d59a86a.56f2c8"
+            ]
+        ]
+    },
+    {
+        "id": "4c840e2e.6fb22",
+        "type": "ui_toast",
+        "z": "16d0b1f7.5422be",
+        "position": "dialog",
+        "displayTime": "10",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 640.7290649414062,
+        "y": 723.9584350585938,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d2eaae4.23cdf8",
+        "type": "watch",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "files": "/usr/local/hiveid-ap/ota/",
+        "recursive": "",
+        "x": 158.47915649414062,
+        "y": 723.2291870117188,
+        "wires": [
+            [
+                "d03f3a23.5bbcf8"
+            ]
+        ]
+    },
+    {
+        "id": "d03f3a23.5bbcf8",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "New Version Notice",
+        "func": "msg.topic = 'TrainTraxx';\nmsg.payload = 'A new firmware version is available';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 405.2291564941406,
+        "y": 723.9583740234375,
+        "wires": [
+            [
+                "4c840e2e.6fb22"
+            ]
+        ]
+    },
+    {
+        "id": "6f670665.7e0928",
+        "type": "ui_button",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "group": "5ffcbee0.a5304",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Check for Updated Reader Firmware",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 190,
+        "y": 40,
+        "wires": [
+            [
+                "7d59a86a.56f2c8"
+            ]
+        ]
+    },
+    {
+        "id": "25037935.913206",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "/opt/hiveid-ap/hiveid_get_newbin.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 492.2291564941406,
+        "y": 617.2918090820312,
+        "wires": [
+            [
+                "ea289cc4.dfed6"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e47e8d5c.512fd",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "/opt/hiveid-ap/hiveid_get_newbin.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "7011f363.68bd1c",
+                "5bdf3fa0.0437d"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7011f363.68bd1c",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "Set Filename",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "9c8a89b8.58e198"
+            ]
+        ]
+    },
+    {
+        "id": "5bdf3fa0.0437d",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 470,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d395d1f0.e27c2",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 490,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "dff80caf.85559",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1170,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a72ea356.dfc17",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9095b7d0.f5b318",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Node Not Registered",
+        "func": "msg.payload = msg.IP + ' is not a valid hive node';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1435.5,
+        "y": 438,
+        "wires": [
+            [
+                "2af64c41.95a824"
+            ]
+        ]
+    },
+    {
+        "id": "7ded79ad.bc2b78",
+        "type": "ui_text",
+        "z": "727c7bb6.e94204",
+        "group": "652de07e.0d453",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "WiFi to Ethernet Gateway Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 1548.1111145019531,
+        "y": 306.9999752044678,
+        "wires": []
+    },
+    {
+        "id": "ab23a5cf.ad9588",
+        "type": "exec",
+        "z": "727c7bb6.e94204",
+        "command": "sudo /opt/hiveid-ap/hiveid_setup_wifi2eth.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 849.6667327880859,
+        "y": 307.9999976158142,
+        "wires": [
+            [],
+            [],
+            [
+                "7ded79ad.bc2b78"
+            ]
+        ]
+    },
+    {
+        "id": "213f3d14.4789c2",
+        "type": "inject",
+        "z": "727c7bb6.e94204",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 310,
+        "y": 420,
+        "wires": [
+            [
+                "bc89ef70.46dcc"
+            ]
+        ]
+    },
+    {
+        "id": "473f953e.2720cc",
+        "type": "exec",
+        "z": "727c7bb6.e94204",
+        "command": "sudo /opt/hiveid-ap/hostapd_set_psk.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1140.7777824401855,
+        "y": 424.7142987251282,
+        "wires": [
+            [],
+            [],
+            [
+                "7ded79ad.bc2b78"
+            ]
+        ]
+    },
+    {
+        "id": "d084d6de.494cc8",
+        "type": "exec",
+        "z": "727c7bb6.e94204",
+        "command": "sudo /opt/hiveid-ap/hostapd_set_cnl.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1141.7777824401855,
+        "y": 483.0000042915344,
+        "wires": [
+            [],
+            [],
+            [
+                "7ded79ad.bc2b78"
+            ]
+        ]
+    },
+    {
+        "id": "bc89ef70.46dcc",
+        "type": "exec",
+        "z": "727c7bb6.e94204",
+        "command": "sudo /opt/hiveid-ap/hostapd_get_cnl.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 557.9206962585449,
+        "y": 483.7142376899719,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e4fe3b19.11d2c8",
+        "type": "comment",
+        "z": "727c7bb6.e94204",
+        "name": "Get Passphrase from file ",
+        "info": "",
+        "x": 570,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e3b3bbb8.4a2938",
+        "type": "debug",
+        "z": "a8734d01.d65fe",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 750,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d39b1a23.f43d68",
+        "type": "exec",
+        "z": "a8734d01.d65fe",
+        "command": "sudo /opt/hiveid-ap/hiveid_setup_wifi2wifi.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "e3b3bbb8.4a2938"
+            ],
+            [
+                "e3b3bbb8.4a2938"
+            ],
+            [
+                "e3b3bbb8.4a2938"
+            ]
+        ]
+    },
+    {
+        "id": "2cb20bbe.97d6c4",
+        "type": "exec",
+        "z": "a8734d01.d65fe",
+        "command": "sudo /opt/hiveid-ap/wpaclient_set_ssid.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b7ecf609.ef19a8",
+        "type": "ip",
+        "z": "a06855ce.9f5488",
+        "name": "ip",
+        "https": false,
+        "timeout": "5000",
+        "internalIPv4": true,
+        "internalIPv6": true,
+        "publicIPv4": true,
+        "publicIPv6": true,
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "a8e24a71.9f44d8"
+            ]
+        ]
+    },
+    {
+        "id": "de82a97a.34a1f8",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "External IP",
+        "format": "{{msg.payload.publicIPv4}}",
+        "layout": "row-spread",
+        "x": 830,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "aac85b05.c667a8",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Get Network Interfaces",
+        "func": "var os = global.get('os');\nmsg.payload = os.networkInterfaces();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "ecbf8a82.e0ce58"
+            ]
+        ]
+    },
+    {
+        "id": "ecbf8a82.e0ce58",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "networkInterfaces",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5e56d465.6b35ac",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "Change Name",
+        "x": 1020,
+        "y": 100,
+        "wires": [
+            [
+                "e3822aa5.ea2aa8",
+                "fb5e4e59.7f52b"
+            ]
+        ]
+    },
+    {
+        "id": "e3822aa5.ea2aa8",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Cancel",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1230,
+        "y": 40,
+        "wires": [
+            [
+                "60e46d31.c31c34"
+            ],
+            [
+                "e8ed6bdd.7a0138"
+            ]
+        ]
+    },
+    {
+        "id": "fb5e4e59.7f52b",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1250,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "c3ea8792.391e88",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Cancel",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 500,
+        "wires": [
+            [
+                "1ed4aa5a.8af176"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d5da6758.1961a8",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Cancel",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1330,
+        "y": 320,
+        "wires": [
+            [
+                "7cb7f74b.562db8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9811ce1d.294a8",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Ready to Reboot?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 320,
+        "wires": [
+            [
+                "5a9407e8.fa2398",
+                "b8b57b0b.455b28"
+            ]
+        ]
+    },
+    {
+        "id": "b5df9eca.cde6b",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Ready to Shutdown?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 500,
+        "wires": [
+            [
+                "a6afd8dd.732578",
+                "b8b57b0b.455b28"
+            ]
+        ]
+    },
+    {
+        "id": "d618702e.2c062",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 280,
+        "wires": [
+            [
+                "3c095ad9.f39cc6"
+            ]
+        ]
+    },
+    {
+        "id": "f8e90910.c1fb88",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set 404",
+        "func": "delete msg.payload;\nmsg.statusCode = 404;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "9596c547.812608",
+                "372dacb9.a08e74"
+            ]
+        ]
+    },
+    {
+        "id": "e5b4b384.ffba8",
+        "type": "fs-ops-access",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Check Directory",
+        "path": "/opt/openrsd",
+        "pathType": "str",
+        "filename": "index.php",
+        "filenameType": "str",
+        "read": true,
+        "write": false,
+        "throwerror": false,
+        "x": 400,
+        "y": 100,
+        "wires": [
+            [
+                "f27066a1.a44ba8"
+            ],
+            [
+                "f8e90910.c1fb88"
+            ]
+        ]
+    },
+    {
+        "id": "b8b57b0b.455b28",
+        "type": "play audio",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "voice": "21",
+        "x": 870,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c9aa36d9.5823f8",
+        "type": "cpu",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "msgCore": true,
+        "msgOverall": false,
+        "msgArray": false,
+        "msgTemp": false,
+        "x": 330,
+        "y": 640,
+        "wires": [
+            [
+                "fed4cd3c.abeae"
+            ]
+        ]
+    },
+    {
+        "id": "fed4cd3c.abeae",
+        "type": "ui_chart",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "bdaf72c3.2be81",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Processor Performance",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 550,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "42e26548.651efc",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "c9aa36d9.5823f8",
+                "e4003998.bf2188",
+                "a9fea8f7.6b8d68"
+            ]
+        ]
+    },
+    {
+        "id": "82f1526e.9323b",
+        "type": "http request",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 1102,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "511bdb33.ee5724",
+        "type": "function",
+        "z": "49e2d5c0.49790c",
+        "name": "JRMI Reporters Process",
+        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nmsg.verb = 'PUT';\nvar reporterName = 'FR' + String(curReporters.nextID);\nif (curReporters.map[RFIDRequest.MAC] !== undefined) {\n    var reporterId = curReporters.map[RFIDRequest.MAC];\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n} else if (curReporters.available.length > 0) {\n    var reporterId = curReporters.available.pop();\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": {\n      \"name\": reporterName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  String(Date.now()),\n      \"report\": RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'reporter';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 682,
+        "y": 240,
+        "wires": [
+            [
+                "7964a429.ca37ac"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "3cde87df.2bf038",
+        "type": "json",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 462,
+        "y": 320,
+        "wires": [
+            [
+                "511bdb33.ee5724",
+                "cf82d6f2.a988c8"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "7964a429.ca37ac",
+        "type": "switch",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 882,
+        "y": 240,
+        "wires": [
+            [
+                "82f1526e.9323b"
+            ],
+            [
+                "b6bbb1e6.4ca5f"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg",
+            "msg"
+        ]
+    },
+    {
+        "id": "b6bbb1e6.4ca5f",
+        "type": "http request",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "method": "PUT",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 1102,
+        "y": 280,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "5b9a0.b59166604",
+        "type": "http request",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 1102,
+        "y": 360,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "cf82d6f2.a988c8",
+        "type": "function",
+        "z": "49e2d5c0.49790c",
+        "name": "JRMI Sensors Process",
+        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nmsg.verb = 'PUT';\nvar sensorName = 'FS' + String(curSensors.nextID);\nif (curSensors.map[RFIDRequest.MAC] !== undefined) {\n    var sensorId = curSensors.map[RFIDRequest.MAC];\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n} else if (curSensors.available.length > 0) {\n    var sensorId = curSensors.available.pop();\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": {\n      \"name\": sensorName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'sensor';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 680.75,
+        "y": 400,
+        "wires": [
+            [
+                "787abb70.82ed24"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "787abb70.82ed24",
+        "type": "switch",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 882,
+        "y": 400,
+        "wires": [
+            [
+                "5b9a0.b59166604"
+            ],
+            [
+                "dd61c8d5.569b88"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg",
+            "msg"
+        ]
+    },
+    {
+        "id": "dd61c8d5.569b88",
+        "type": "http request",
+        "z": "49e2d5c0.49790c",
+        "name": "",
+        "method": "PUT",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 1102,
+        "y": 440,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "4369543.5731eac",
+        "type": "switch",
+        "z": "49e2d5c0.49790c",
+        "name": "Is Enabled",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 151,
+        "y": 294,
+        "wires": [
+            [
+                "d84e2602.59e048"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "msg.payload.DATA",
+            ""
+        ]
+    },
+    {
+        "id": "d84e2602.59e048",
+        "type": "change",
+        "z": "49e2d5c0.49790c",
+        "name": "Move Data to Payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DATA",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 237,
+        "y": 367,
+        "wires": [
+            [
+                "3cde87df.2bf038"
+            ]
+        ]
+    },
+    {
+        "id": "b50ad81b.505278",
+        "type": "function",
+        "z": "8b10dcf.dc4c82",
+        "name": "Set Map",
+        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nfor (var i = 0; i < currentRecords.length; i++) {\n    console.log(i,currentRecords[i]);\n    if (currentRecords[i].data !== undefined) {\n        if (currentRecords[i].data.userName === null) {\n            msg.payload.available.push(i); \n        } else {\n            msg.payload.map[currentRecords[i].data.userName] = i;\n        }\n        msg.payload.data[i] = currentRecords[i].data;\n        if (currentRecords[i].data.name !== undefined) {\n            msg.payload.nextID =Number(currentRecords[i].data.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n}  \n\nvar curTable = flow.get('curTable');\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+curTable,msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 605,
+        "y": 72.5,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "eb4f909e.cddbf",
+        "type": "http request",
+        "z": "8b10dcf.dc4c82",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 435,
+        "y": 72.5,
+        "wires": [
+            [
+                "b50ad81b.505278"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "96e18991.b2fa88",
+        "type": "function",
+        "z": "8b10dcf.dc4c82",
+        "name": "Set the URL",
+        "func": "var table = msg.payload;\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + table;\nflow.set('curTable',table)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 235,
+        "y": 72.5,
+        "wires": [
+            [
+                "eb4f909e.cddbf"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "28a1a49b.fbc2ac",
+        "type": "ui_chart",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "bdaf72c3.2be81",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Memory",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 700,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "302dd467.6f1a0c",
+        "type": "OS",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "x": 310,
+        "y": 780,
+        "wires": [
+            [
+                "9ba3f6e7.d8b438"
+            ]
+        ]
+    },
+    {
+        "id": "e259d39a.d7e68",
+        "type": "Drives",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "x": 310,
+        "y": 820,
+        "wires": [
+            [
+                "bdc61a3b.3e7758"
+            ]
+        ]
+    },
+    {
+        "id": "a9fea8f7.6b8d68",
+        "type": "Uptime",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "x": 320,
+        "y": 720,
+        "wires": [
+            [
+                "8a7998a8.747678"
+            ]
+        ]
+    },
+    {
+        "id": "e4003998.bf2188",
+        "type": "Memory",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "x": 320,
+        "y": 680,
+        "wires": [
+            [
+                "2e18a81a.662928"
+            ]
+        ]
+    },
+    {
+        "id": "2a113082.e508b",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "OS Version",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 710,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "e23efcbd.33283",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 780,
+        "wires": [
+            [
+                "302dd467.6f1a0c",
+                "e259d39a.d7e68"
+            ]
+        ]
+    },
+    {
+        "id": "80f9695e.4555f8",
+        "type": "ui_gauge",
+        "z": "a06855ce.9f5488",
+        "name": "Memory Guage",
+        "group": "bdaf72c3.2be81",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "Available Memory",
+        "format": "{{value}}%",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff2600",
+            "#e6e600",
+            "#008f00"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 720,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "8a7998a8.747678",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Uptime",
+        "format": "{{msg.payload.uptime}} seconds",
+        "layout": "row-spread",
+        "x": 500,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "bdc61a3b.3e7758",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 490,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "9ba3f6e7.d8b438",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set OS Version",
+        "func": "msg.payload = msg.payload.type + '-' + msg.payload.arch + '-' + msg.payload.release;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 780,
+        "wires": [
+            [
+                "2a113082.e508b"
+            ]
+        ]
+    },
+    {
+        "id": "2e18a81a.662928",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set Memory",
+        "func": "msg1={};\nmsg2={};\n\nmsg1.payload ={   \n    totalmem: parseFloat(Number(msg.payload.totalmem)/1024).toFixed(2),\n    freemem: parseFloat(Number(msg.payload.freemem)/1024).toFixed(2)\n};\n\nmsg2.payload = parseFloat(100-Number(msg.payload.memusage)).toFixed(2);\n\nreturn [msg1,msg2];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 510,
+        "y": 680,
+        "wires": [
+            [
+                "28a1a49b.fbc2ac"
+            ],
+            [
+                "80f9695e.4555f8"
+            ]
+        ]
+    },
+    {
+        "id": "4dfa5b69.319274",
+        "type": "http in",
+        "z": "a493d433.024998",
+        "name": "Tracker",
+        "url": "/tracker",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 450,
+        "y": 82.5,
+        "wires": [
+            [
+                "a7fdb95b.17a5d8"
+            ]
+        ],
+        "outputLabels": [
+            "req"
+        ]
+    },
+    {
+        "id": "a7fdb95b.17a5d8",
+        "type": "function",
+        "z": "a493d433.024998",
+        "name": "Tracker Process",
+        "func": "var config = global.get('TrainTraxx_Config');\nmsg.payload = { \n     DATA: msg.payload.DATA, \n     apikey : config.TrainTraxx_Key \n};\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 82.5,
+        "wires": [
+            [
+                "3d89b1af.dec3ae"
+            ]
+        ]
+    },
+    {
+        "id": "3d89b1af.dec3ae",
+        "type": "http request",
+        "z": "a493d433.024998",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 851,
+        "y": 81.5,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "958d130f.9dbf1",
+        "type": "function",
+        "z": "a40e76b8.4d8a48",
+        "name": "Set Data",
+        "func": "var curTable = flow.get('curTable');\nmsg.payload.lastLoad = Date.now();\nvar tempMap = {};\nfor (var i in msg.payload.columns) {\n    tempMap[msg.payload.columns[i]] = i;\n}\nmsg.payload['columnLookup'] = tempMap;\nvar tempMap = {};\nif (msg.payload.meta !== undefined) {\n    for (var i in msg.payload.meta.columns) {\n        tempMap[msg.payload.meta.columns[i]] = i;\n    }\n    msg.payload.meta['columnLookup'] = tempMap;\n}\nvar tempMap = {};\nif (msg.payload.keys !== undefined) {\n    for (var i in msg.payload.keys.columns) {\n        tempMap[msg.payload.keys.columns[i]] = i;\n    }\n    msg.payload.keys['columnLookup'] = tempMap;\n}\n\nglobal.set('TrainTraxx.' + curTable,msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "2eadc8b.6e43638",
+        "type": "http request",
+        "z": "a40e76b8.4d8a48",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "url": "",
+        "tls": "",
+        "x": 670,
+        "y": 140,
+        "wires": [
+            [
+                "958d130f.9dbf1"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "19c3a31e.2e8aad",
+        "type": "change",
+        "z": "a40e76b8.4d8a48",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "2eadc8b.6e43638"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "91353714.a754e8",
+        "type": "function",
+        "z": "a40e76b8.4d8a48",
+        "name": "Set the URL",
+        "func": "var table = msg.payload;\nvar config = global.get('TrainTraxx_Config');\nmsg.payload = config.TrainTraxx_API + table + '?apikey=' + config.TrainTraxx_Key;\nflow.set('curTable',table)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "19c3a31e.2e8aad"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "ec4da317.03502",
+        "type": "ui_ui_control",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "x": 320,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e80fb98c.dccd08",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "17f52c5b.cfb014",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Go to Updates",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Updates\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 120,
+        "y": 860,
+        "wires": [
+            [
+                "ec4da317.03502"
+            ]
+        ]
+    },
+    {
+        "id": "6291a610.4d4dc8",
+        "type": "subflow:a493d433.024998",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "x": 368.4762725830078,
+        "y": 421.7618713378906,
+        "wires": [
+            [
+                "e7682bc7.41dee8",
+                "9860fd21.83ed9"
+            ],
+            [
+                "8dc0fe46.c010d",
+                "27387db.42dca82"
+            ]
+        ]
+    },
+    {
+        "id": "8dc0fe46.c010d",
+        "type": "http response",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 647.0317840576172,
+        "y": 384.3174133300781,
+        "wires": []
+    },
+    {
+        "id": "27387db.42dca82",
+        "type": "debug",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 666.0318145751953,
+        "y": 428.09521484375,
+        "wires": []
+    },
+    {
+        "id": "8f95f0f.8bc931",
+        "type": "ui_button",
+        "z": "5e61e22e.7a581c",
+        "name": "Refresh All",
+        "group": "a9319cec.7d9c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh All",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#f90",
+        "icon": "refresh",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "x": 408.25408935546875,
+        "y": 185.87289428710938,
+        "wires": [
+            [
+                "eb7a7fef.95ee4",
+                "ef86f5e4.672e98",
+                "e6c0a333.a9d44"
+            ]
+        ]
+    },
+    {
+        "id": "ea6d1bc1.e51f88",
+        "type": "mosca in",
+        "z": "5e61e22e.7a581c",
+        "mqtt_port": 1883,
+        "mqtt_ws_port": 8080,
+        "name": "",
+        "username": "",
+        "password": "",
+        "dburl": "",
+        "x": 330.00408935546875,
+        "y": 315.3728942871094,
+        "wires": [
+            [
+                "8dc0fe46.c010d",
+                "e7682bc7.41dee8",
+                "9860fd21.83ed9"
+            ]
+        ]
+    },
+    {
+        "id": "f6d7de28.90ff4",
+        "type": "link in",
+        "z": "5e61e22e.7a581c",
+        "name": "Configuration Change oLink",
+        "links": [
+            "c2ffecf.a2abf1",
+            "e18f1415.38d7c8"
+        ],
+        "x": 249.36517333984375,
+        "y": 186.98397827148438,
+        "wires": [
+            [
+                "8f95f0f.8bc931"
+            ]
+        ]
+    },
+    {
+        "id": "eb7a7fef.95ee4",
+        "type": "link out",
+        "z": "5e61e22e.7a581c",
+        "name": "TrainTraxx Data oLink",
+        "links": [
+            "2a8eb535.ecc04a"
+        ],
+        "x": 608.4762573242188,
+        "y": 183.98406982421875,
+        "wires": []
+    },
+    {
+        "id": "ef86f5e4.672e98",
+        "type": "link out",
+        "z": "5e61e22e.7a581c",
+        "name": "JMRI Data oLink",
+        "links": [
+            "bd2c2948.9f6ba8"
+        ],
+        "x": 608.3651733398438,
+        "y": 230.09521484375,
+        "wires": []
+    },
+    {
+        "id": "e7682bc7.41dee8",
+        "type": "link out",
+        "z": "5e61e22e.7a581c",
+        "name": "JMRI Data oLink Activity Only",
+        "links": [],
+        "x": 616.0316772460938,
+        "y": 318.09521484375,
+        "wires": []
+    },
+    {
+        "id": "9860fd21.83ed9",
+        "type": "link out",
+        "z": "5e61e22e.7a581c",
+        "name": "TrainTraxx Activity oLink",
+        "links": [
+            "9e632d9b.8b03b"
+        ],
+        "x": 616.5079345703125,
+        "y": 478.8888854980469,
+        "wires": []
+    },
+    {
+        "id": "e6c0a333.a9d44",
+        "type": "link out",
+        "z": "5e61e22e.7a581c",
+        "name": "Default Configs Change oLink",
+        "links": [
+            "2b9d79c4.945546"
+        ],
+        "x": 607,
+        "y": 137,
+        "wires": []
+    },
+    {
+        "id": "ef8fd901.8301a8",
+        "type": "function",
+        "z": "7bef0b7b.d5a104",
+        "name": "setLocalActivityData",
+        "func": "var curActivity = global.get('Activity');\nif (curActivity === undefined) {\n    curActivity = [];\n}\ncurActivity.unshift(msg.payload.DATA);\n\nwhile (curActivity.length > 10) {\n    curActivity.pop();\n}\n\nglobal.set('Activity',curActivity);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "d4deb1b2.f1eb5",
+                "6902f9b7.cd47e8"
+            ]
+        ]
+    },
+    {
+        "id": "6902f9b7.cd47e8",
+        "type": "debug",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 510,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "64bf2bc4.ffd124",
+        "type": "json",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "property": "payload.DATA",
+        "action": "",
+        "pretty": false,
+        "x": 210,
+        "y": 40,
+        "wires": [
+            [
+                "682e65b1.37211c"
+            ]
+        ]
+    },
+    {
+        "id": "d4deb1b2.f1eb5",
+        "type": "function",
+        "z": "7bef0b7b.d5a104",
+        "name": "Format Activity Data",
+        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']];\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        }\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      border: 1px solid #ccc; ' +\n                '      text-align:center;  ' +\n                '      border-spacing: 0px; ' +\n                '   }' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC']);\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "b7ca5c16.bde28",
+                "fc758d5.841bd7"
+            ]
+        ]
+    },
+    {
+        "id": "682e65b1.37211c",
+        "type": "moment",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "America/Chicago",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "YYYY-MM-DD hh:mm:ss",
+        "locale": "en_US",
+        "output": "payload.DATA.TIME",
+        "outputType": "msg",
+        "outTz": "America/Chicago",
+        "x": 240,
+        "y": 80,
+        "wires": [
+            [
+                "ef8fd901.8301a8"
+            ]
+        ]
+    },
+    {
+        "id": "b7ca5c16.bde28",
+        "type": "debug",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 550,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "deb73202.c811c",
+        "type": "inject",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "d4deb1b2.f1eb5"
+            ]
+        ]
+    },
+    {
+        "id": "bb39a9a4.ceacc8",
+        "type": "link in",
+        "z": "7bef0b7b.d5a104",
+        "name": "TrainTraxx Activity iLink",
+        "links": [
+            "95a6c50d.2493b8"
+        ],
+        "x": 95,
+        "y": 40,
+        "wires": [
+            [
+                "64bf2bc4.ffd124"
+            ]
+        ]
+    },
+    {
+        "id": "fc758d5.841bd7",
+        "type": "ui_template",
+        "z": "7bef0b7b.d5a104",
+        "group": "3220fafa.330906",
+        "name": "TrainTraxx Activity",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "format": "",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cde5452b.0a9148",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "x": 723.3333740234375,
+        "y": 344.4444580078125,
+        "wires": [
+            [
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "3269a1eb.1446ee",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Set Inventory",
+        "func": "msg.payload = 'inventory';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 493.3333740234375,
+        "y": 344.4444580078125,
+        "wires": [
+            [
+                "cde5452b.0a9148"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "af088ea1.5922c",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Set Locations",
+        "func": "msg.payload = 'locations';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 503.3333740234375,
+        "y": 384.4444580078125,
+        "wires": [
+            [
+                "b39cf6ea.e288a8"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "69df09ea.12f168",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Set Tags",
+        "func": "msg.payload = 'tags';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 483.3333740234375,
+        "y": 424.4444580078125,
+        "wires": [
+            [
+                "1e02b589.644c4a"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "b39cf6ea.e288a8",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "x": 723.3333740234375,
+        "y": 384.4444580078125,
+        "wires": [
+            [
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "1e02b589.644c4a",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "x": 723.3333740234375,
+        "y": 424.4444580078125,
+        "wires": [
+            [
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "d90b9ce9.5206e",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "x": 723.3333740234375,
+        "y": 304.4444580078125,
+        "wires": [
+            [
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "6b1f2358.c1b3ec",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Set Hivegateway",
+        "func": "msg.payload = 'hivegateway';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 513.3333740234375,
+        "y": 304.4444580078125,
+        "wires": [
+            [
+                "d90b9ce9.5206e"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "854f0a6f.328a88",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "x": 723.3333740234375,
+        "y": 264.4444580078125,
+        "wires": [
+            [
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "98175d0.98d66a",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Set Hivenode",
+        "func": "msg.payload = 'hivenode';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 503.3333740234375,
+        "y": 264.4444580078125,
+        "wires": [
+            [
+                "854f0a6f.328a88"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "20862159.6fab0e",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "x": 723.3333740234375,
+        "y": 224.4444580078125,
+        "wires": [
+            [
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "12f5f078.d26ae",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Set Images",
+        "func": "msg.payload = 'images';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 493.3333740234375,
+        "y": 224.4444580078125,
+        "wires": [
+            [
+                "20862159.6fab0e"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "248da61.73dc05a",
+        "type": "ui_button",
+        "z": "1a726252.d178be",
+        "name": "Refresh TrainTraxx",
+        "group": "a9319cec.7d9c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh TrainTraxx",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#f90",
+        "icon": "refresh",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "x": 217.77783203125,
+        "y": 318.8889465332031,
+        "wires": [
+            [
+                "12f5f078.d26ae",
+                "98175d0.98d66a",
+                "6b1f2358.c1b3ec",
+                "3269a1eb.1446ee",
+                "af088ea1.5922c",
+                "69df09ea.12f168"
+            ]
+        ]
+    },
+    {
+        "id": "acfec978.dad798",
+        "type": "debug",
+        "z": "1a726252.d178be",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1044.000244140625,
+        "y": 319.5555725097656,
+        "wires": []
+    },
+    {
+        "id": "b1607e3f.fb142",
+        "type": "link in",
+        "z": "1a726252.d178be",
+        "name": "TrainTraxx Data iLink",
+        "links": [
+            "b4d88e2d.12773"
+        ],
+        "x": 66.66668701171875,
+        "y": 317.7778015136719,
+        "wires": [
+            [
+                "248da61.73dc05a"
+            ]
+        ]
+    },
+    {
+        "id": "1d5514d.8e83eeb",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Reporters",
+        "func": "msg.payload = 'reporters';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 608.888916015625,
+        "y": 370,
+        "wires": [
+            [
+                "629617.5b00f9e8"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "7e5966b.6a5d998",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 848.888916015625,
+        "y": 410,
+        "wires": [
+            [
+                "304356e3.df8eba"
+            ]
+        ]
+    },
+    {
+        "id": "caab416.28359c",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Sensors",
+        "func": "msg.payload = 'sensors';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 598.888916015625,
+        "y": 410,
+        "wires": [
+            [
+                "7e5966b.6a5d998"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "629617.5b00f9e8",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 848.888916015625,
+        "y": 370,
+        "wires": [
+            [
+                "304356e3.df8eba"
+            ]
+        ]
+    },
+    {
+        "id": "41492e9b.c0ccc",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Engine",
+        "func": "msg.payload = 'engines';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 598.888916015625,
+        "y": 250,
+        "wires": [
+            [
+                "2cfec4dc.7dbadc"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "2cfec4dc.7dbadc",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 853.888916015625,
+        "y": 250,
+        "wires": [
+            [
+                "304356e3.df8eba"
+            ]
+        ]
+    },
+    {
+        "id": "709e363a.e33718",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Cars",
+        "func": "msg.payload = 'cars';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 588.888916015625,
+        "y": 210,
+        "wires": [
+            [
+                "d3aedf1f.c858c"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "d3aedf1f.c858c",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 848.888916015625,
+        "y": 210,
+        "wires": [
+            [
+                "304356e3.df8eba"
+            ]
+        ]
+    },
+    {
+        "id": "8572684d.002f18",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Trains",
+        "func": "msg.payload = 'trains';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 588.888916015625,
+        "y": 329,
+        "wires": [
+            [
+                "d69f8500.af92a8"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "d69f8500.af92a8",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 848.888916015625,
+        "y": 330,
+        "wires": [
+            [
+                "304356e3.df8eba"
+            ]
+        ]
+    },
+    {
+        "id": "40385e28.6afcf",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Locations",
+        "func": "msg.payload = 'locations';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 608.888916015625,
+        "y": 290,
+        "wires": [
+            [
+                "1fcc12f.b4a5ced"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "1fcc12f.b4a5ced",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 848.888916015625,
+        "y": 290,
+        "wires": [
+            [
+                "304356e3.df8eba"
+            ]
+        ]
+    },
+    {
+        "id": "304356e3.df8eba",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1131.5556640625,
+        "y": 312.22222900390625,
+        "wires": []
+    },
+    {
+        "id": "3c4a9a1c.addf66",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 347.77789306640625,
+        "y": 310.9999694824219,
+        "wires": [
+            [
+                "709e363a.e33718",
+                "41492e9b.c0ccc",
+                "40385e28.6afcf",
+                "8572684d.002f18",
+                "1d5514d.8e83eeb",
+                "caab416.28359c"
+            ]
+        ]
+    },
+    {
+        "id": "b0a1d979.9f8538",
+        "type": "ui_button",
+        "z": "164213bd.e3dd4c",
+        "name": "Refresh JMRI",
+        "group": "a9319cec.7d9c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Refresh JMRI",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#f90",
+        "icon": "refresh",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "x": 176.66668701171875,
+        "y": 312.2221374511719,
+        "wires": [
+            [
+                "3c4a9a1c.addf66"
+            ]
+        ]
+    },
+    {
+        "id": "a309b660.225d08",
+        "type": "link in",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI Data iLink",
+        "links": [
+            "2c90c75c.da3878"
+        ],
+        "x": 41.111114501953125,
+        "y": 312.22222900390625,
+        "wires": [
+            [
+                "b0a1d979.9f8538"
+            ]
+        ]
+    },
+    {
+        "id": "20a5c666.fa9baa",
+        "type": "link in",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI Data iLink Activity Only",
+        "links": [],
+        "x": 38.88893127441406,
+        "y": 402.22222900390625,
+        "wires": [
+            [
+                "79ba309.678a2d"
+            ]
+        ]
+    },
+    {
+        "id": "79ba309.678a2d",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 156.66672261555988,
+        "y": 402.2222730848524,
+        "wires": [
+            [
+                "2e9b3ddd.033352"
+            ]
+        ]
+    },
+    {
+        "id": "2e9b3ddd.033352",
+        "type": "subflow:49e2d5c0.49790c",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "1d5514d.8e83eeb"
+            ],
+            [
+                "caab416.28359c"
+            ]
+        ]
+    },
+    {
+        "id": "c1968950.ab2378",
+        "type": "ui_text_input",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx API Endpoint",
+        "label": "TrainTraxx API Endpoint",
+        "tooltip": "",
+        "group": "c39736a3.dcaf08",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 763,
+        "y": 241,
+        "wires": [
+            [
+                "6c7bd810.48e988"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "6c7bd810.48e988",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config.TrainTraxx_API",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.TrainTraxx_API",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1041.9999389648438,
+        "y": 241,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "67bb3f95.44b5",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Config.TrainTraxx_API",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.TrainTraxx_API",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 492,
+        "y": 242,
+        "wires": [
+            [
+                "c1968950.ab2378"
+            ]
+        ]
+    },
+    {
+        "id": "d92d97a6.01bde8",
+        "type": "file in",
+        "z": "fd2ebb8a.240a38",
+        "name": "",
+        "filename": "/etc/hiveid-ap/conf.traintraxx.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 328.99993896484375,
+        "y": 164.11111450195312,
+        "wires": [
+            [
+                "1af91b49.c4dee5"
+            ]
+        ]
+    },
+    {
+        "id": "1af91b49.c4dee5",
+        "type": "json",
+        "z": "fd2ebb8a.240a38",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 549.9999389648438,
+        "y": 164.11111450195312,
+        "wires": [
+            [
+                "2fe397d9.3f1218"
+            ]
+        ]
+    },
+    {
+        "id": "2fe397d9.3f1218",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 738.9999389648438,
+        "y": 164.11111450195312,
+        "wires": [
+            [
+                "67bb3f95.44b5",
+                "29b4d282.40a57e",
+                "639c3c57.932cb4"
+            ]
+        ]
+    },
+    {
+        "id": "ed5837b0.97eb08",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1318.9999389648438,
+        "y": 292.1111145019531,
+        "wires": [
+            [
+                "4aa8df10.db935"
+            ]
+        ]
+    },
+    {
+        "id": "4aa8df10.db935",
+        "type": "json",
+        "z": "fd2ebb8a.240a38",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 1505,
+        "y": 292.1111145019531,
+        "wires": [
+            [
+                "bce53b01.90a798"
+            ]
+        ]
+    },
+    {
+        "id": "bce53b01.90a798",
+        "type": "file",
+        "z": "fd2ebb8a.240a38",
+        "name": "",
+        "filename": "/etc/hiveid-ap/conf.traintraxx.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 1724.9999389648438,
+        "y": 291.1111145019531,
+        "wires": [
+            [
+                "b6ed7646.ea36a8"
+            ]
+        ]
+    },
+    {
+        "id": "483610b8.d67bf",
+        "type": "inject",
+        "z": "fd2ebb8a.240a38",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 136.99993896484375,
+        "y": 96.11111450195312,
+        "wires": [
+            [
+                "d92d97a6.01bde8"
+            ]
+        ]
+    },
+    {
+        "id": "f7f13c06.4cea4",
+        "type": "watch",
+        "z": "fd2ebb8a.240a38",
+        "name": "",
+        "files": "/etc/hiveid-ap/conf.traintraxx.json",
+        "recursive": "",
+        "x": 148.49993896484375,
+        "y": 224.11111450195312,
+        "wires": [
+            [
+                "d92d97a6.01bde8"
+            ]
+        ]
+    },
+    {
+        "id": "af7f7821.c09708",
+        "type": "ui_text_input",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx Web Address",
+        "label": "TrainTraxx Web Address",
+        "tooltip": "",
+        "group": "c39736a3.dcaf08",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 759.9999389648438,
+        "y": 291.1111145019531,
+        "wires": [
+            [
+                "c67eb33e.1b383"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "c67eb33e.1b383",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config.TrainTraxx_Web",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.TrainTraxx_Web",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1038.9998779296875,
+        "y": 291.1111145019531,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "29b4d282.40a57e",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Config.TrainTraxx_Web",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.TrainTraxx_Web",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 488.99993896484375,
+        "y": 292.1111145019531,
+        "wires": [
+            [
+                "af7f7821.c09708"
+            ]
+        ]
+    },
+    {
+        "id": "bec6eea2.5b2af",
+        "type": "ui_text_input",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx API Key",
+        "label": "TrainTraxx API Key",
+        "tooltip": "",
+        "group": "c39736a3.dcaf08",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 737.9999389648438,
+        "y": 340.1111145019531,
+        "wires": [
+            [
+                "f62192c2.b1a95"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "f62192c2.b1a95",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config.TrainTraxx_Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.TrainTraxx_Key",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1036.9998779296875,
+        "y": 340.1111145019531,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "639c3c57.932cb4",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Config.TrainTraxx_Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.TrainTraxx_Key",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 486.99993896484375,
+        "y": 341.1111145019531,
+        "wires": [
+            [
+                "bec6eea2.5b2af"
+            ]
+        ]
+    },
+    {
+        "id": "b6ed7646.ea36a8",
+        "type": "link out",
+        "z": "fd2ebb8a.240a38",
+        "name": "Configuration Change iLink",
+        "links": [
+            "2ed78054.4bed2"
+        ],
+        "x": 1682,
+        "y": 364,
+        "wires": []
+    },
+    {
+        "id": "16b16365.cdab7d",
+        "type": "ui_text_input",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI API Endpoint",
+        "label": "JMRI API Endpoint",
+        "tooltip": "",
+        "group": "f907e9dd.26a218",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 789,
+        "y": 218.88888549804688,
+        "wires": [
+            [
+                "ad528bcc.a124c8"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "ad528bcc.a124c8",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "Set JMRI_Config.JMRI_API",
+        "rules": [
+            {
+                "t": "set",
+                "p": "JMRI_Config.JMRI_API",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1057.9999389648438,
+        "y": 218.88888549804688,
+        "wires": [
+            [
+                "a4af5b1c.7c9078"
+            ]
+        ]
+    },
+    {
+        "id": "16ca6d5b.3ce5e3",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI_Config.JMRI_API",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI_Config.JMRI_API",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 508,
+        "y": 219.88888549804688,
+        "wires": [
+            [
+                "16b16365.cdab7d"
+            ]
+        ]
+    },
+    {
+        "id": "fe07428b.41ec6",
+        "type": "file in",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "filename": "/etc/hiveid-ap/conf.jmri.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 354.99993896484375,
+        "y": 142,
+        "wires": [
+            [
+                "f2093035.96ce4"
+            ]
+        ]
+    },
+    {
+        "id": "f2093035.96ce4",
+        "type": "json",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 595.9999389648438,
+        "y": 142,
+        "wires": [
+            [
+                "d8b6e1a9.98737"
+            ]
+        ]
+    },
+    {
+        "id": "d8b6e1a9.98737",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "Set JMRI_Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "JMRI_Config",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 774.9999389648438,
+        "y": 142,
+        "wires": [
+            [
+                "16ca6d5b.3ce5e3",
+                "463da7b7.9c90a8",
+                "f2f09380.a63d5"
+            ]
+        ]
+    },
+    {
+        "id": "a4af5b1c.7c9078",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "Set JMRI_Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI_Config",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1354.9999389648438,
+        "y": 270,
+        "wires": [
+            [
+                "f0028118.46089"
+            ]
+        ]
+    },
+    {
+        "id": "f0028118.46089",
+        "type": "json",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 1551,
+        "y": 270,
+        "wires": [
+            [
+                "9f616197.f9c29"
+            ]
+        ]
+    },
+    {
+        "id": "9f616197.f9c29",
+        "type": "file",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "filename": "/etc/hiveid-ap/conf.jmri.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 1750.9999389648438,
+        "y": 269,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1b7293d.b84518",
+        "type": "inject",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 182.99993896484375,
+        "y": 74,
+        "wires": [
+            [
+                "fe07428b.41ec6"
+            ]
+        ]
+    },
+    {
+        "id": "41410a5f.edaa34",
+        "type": "watch",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "files": "/etc/hiveid-ap/conf.jmri.json",
+        "recursive": "",
+        "x": 174.49993896484375,
+        "y": 202,
+        "wires": [
+            [
+                "fe07428b.41ec6"
+            ]
+        ]
+    },
+    {
+        "id": "6f9753bf.52ba0c",
+        "type": "ui_text_input",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI Web Address",
+        "label": "TrainTraxx Web Address",
+        "tooltip": "",
+        "group": "f907e9dd.26a218",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 785.9999389648438,
+        "y": 269,
+        "wires": [
+            [
+                "f2dbddb8.284a7"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "f2dbddb8.284a7",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "Set JMRI_Config.JMRI_Web",
+        "rules": [
+            {
+                "t": "set",
+                "p": "JMRI_Config.JMRI_Web",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1054.9998779296875,
+        "y": 269,
+        "wires": [
+            [
+                "a4af5b1c.7c9078"
+            ]
+        ]
+    },
+    {
+        "id": "463da7b7.9c90a8",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI_Config.JMRI_Web",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI_Config.JMRI_Web",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 504.99993896484375,
+        "y": 270,
+        "wires": [
+            [
+                "6f9753bf.52ba0c"
+            ]
+        ]
+    },
+    {
+        "id": "7481bb81.5ab614",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "Set JMRI_Config.JMRI_ENABLED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "JMRI_Config.JMRI_ENABLED",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1072.9998779296875,
+        "y": 318,
+        "wires": [
+            [
+                "a4af5b1c.7c9078"
+            ]
+        ]
+    },
+    {
+        "id": "f2f09380.a63d5",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI_Config.JMRI_ENABLED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI_Config.JMRI_ENABLED",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 522.9999389648438,
+        "y": 319,
+        "wires": [
+            [
+                "3b3f757b.60fd7a"
+            ]
+        ]
+    },
+    {
+        "id": "3b3f757b.60fd7a",
+        "type": "ui_switch",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "label": "Enable JMRI",
+        "tooltip": "",
+        "group": "f907e9dd.26a218",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "jmri_switch",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 768,
+        "y": 318,
+        "wires": [
+            [
+                "7481bb81.5ab614"
+            ]
+        ],
+        "outputLabels": [
+            "flow.payload"
+        ]
+    },
+    {
+        "id": "49a65c2c.fd7964",
+        "type": "inject",
+        "z": "c3e3e66a.322358",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "d8e243ba.8292b"
+            ]
+        ]
+    },
+    {
+        "id": "5e90f355.24e56c",
+        "type": "function",
+        "z": "c3e3e66a.322358",
+        "name": "Make Summary",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Object.keys(Stores)) {\n    console.log(store);\n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Object.keys(Stores[store].elements)) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 220,
+        "wires": [
+            [
+                "b6b1b343.577db",
+                "df26e46e.307998"
+            ]
+        ]
+    },
+    {
+        "id": "b6b1b343.577db",
+        "type": "debug",
+        "z": "c3e3e66a.322358",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 778.0000610351562,
+        "y": 165.4166259765625,
+        "wires": []
+    },
+    {
+        "id": "df26e46e.307998",
+        "type": "ui_template",
+        "z": "c3e3e66a.322358",
+        "group": "4411c851.baef98",
+        "name": "Summary",
+        "order": 1,
+        "width": "6",
+        "height": "8",
+        "format": "",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 783.0001220703125,
+        "y": 219.6666259765625,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1134ccf2.362973",
+        "type": "ui_button",
+        "z": "c3e3e66a.322358",
+        "name": "",
+        "group": "4411c851.baef98",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh Summary",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 290,
+        "y": 300,
+        "wires": [
+            [
+                "5e90f355.24e56c"
+            ]
+        ]
+    },
+    {
+        "id": "6c40f02a.6f059",
+        "type": "change",
+        "z": "c3e3e66a.322358",
+        "name": "Set config.RefreshSummaryEnabled",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config.RefreshSummaryEnabled",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "698f0b12.de04a4",
+        "type": "ui_switch",
+        "z": "c3e3e66a.322358",
+        "name": "",
+        "label": "Refresh Summary",
+        "tooltip": "",
+        "group": "4411c851.baef98",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "6c40f02a.6f059"
+            ]
+        ]
+    },
+    {
+        "id": "d8e243ba.8292b",
+        "type": "switch",
+        "z": "c3e3e66a.322358",
+        "name": "",
+        "property": "config.RefreshSummaryEnabled",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "5e90f355.24e56c"
+            ]
+        ]
+    },
+    {
+        "id": "aa7fab4d.d03c88",
+        "type": "subflow:8b10dcf.dc4c82",
+        "z": "41757e63.7ce36",
+        "name": "",
+        "x": 497,
+        "y": 107,
+        "wires": [
+            [
+                "e50da4ff.21a8f8",
+                "7dd91a5.3aaece4"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "30f119af.41a7b6",
+        "type": "http in",
+        "z": "41757e63.7ce36",
+        "name": "JMRI Endpoint",
+        "url": "/jmri/v2/:table",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 137,
+        "y": 107,
+        "wires": [
+            [
+                "15da7c8.1a6a384"
+            ]
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "e50da4ff.21a8f8",
+        "type": "http response",
+        "z": "41757e63.7ce36",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 687,
+        "y": 147,
+        "wires": []
+    },
+    {
+        "id": "7dd91a5.3aaece4",
+        "type": "debug",
+        "z": "41757e63.7ce36",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 687,
+        "y": 67,
+        "wires": []
+    },
+    {
+        "id": "15da7c8.1a6a384",
+        "type": "change",
+        "z": "41757e63.7ce36",
+        "name": "Set Table",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "req.params.table",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 317,
+        "y": 107,
+        "wires": [
+            [
+                "aa7fab4d.d03c88"
+            ]
+        ]
+    },
+    {
+        "id": "cccdade7.ec80b",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "parseInventory",
+        "func": "var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;i++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n\nvar arrayFlip = function(inObject) {\n    node.log('arrayFlip');\n    var myResults = {};\n    for (var ai in inObject) {\n        myResults[inObject[ai]] = parseInt(ai);\n    }\n    return myResults;\n};\n\nvar TT_InvDataColumns = TT.inventory.columns;\nvar invIDs = Object.keys(TT.inventory.data);\nvar TT_InvMetaKeyColumns = TT.inventory.keys.columns;\nvar iLookup = TT.inventory.columnLookup;\nvar mLookup = TT.inventory.meta.columnLookup;\nvar mkLookup = TT.inventory.keys.columnLookup;\nvar i = 0;\nmsg.payload.DATA = [];\nfor (var curID in TT.inventory.data) { \n    var temp = {};\n    temp=keyArray(TT_InvDataColumns,TT.inventory.data[curID]);        \n    temp['ID'] = curID;\n    temp['NAME'] = TT.inventory.data[curID][iLookup['NAME']];\n    var keysWVals = Object.keys(TT.inventory.meta.data[curID]);\n    for (var j=0; j< keysWVals.length;j++) {\n        var curKeyID=keysWVals[j];\n        var keyName = TT.inventory.keys.data[curKeyID][mkLookup['meta_key']];\n        temp[keyName] = TT.inventory.meta.data[curID][curKeyID][mLookup['meta_value']];\n    }\n    node.send({\"payload\": { \"activeInv\" : temp}});\n    i++;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 395.71435546875,
+        "y": 112.85711669921875,
+        "wires": [
+            [
+                "87df2a6f.156728"
+            ]
+        ]
+    },
+    {
+        "id": "b5cb9bf3.aba9a8",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Format Engine",
+        "func": "var temp =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": msg.payload.activeInv['Road Mark'] + msg.payload.activeInv['Road Number'],\n      \"number\": msg.payload.activeInv['Road Number'],\n      \"road\": msg.payload.activeInv['Road Mark'],\n      \"type\": msg.payload.activeInv['Car Type'],\n      \"length\": msg.payload.activeInv['Length'],\n      \"color\": msg.payload.activeInv['Color'],\n      \"model\": ((msg.payload.activeInv['Model'] !== undefined) ? msg.payload.activeInv['Model'] : null)\n    }\n  };\nmsg.payload = temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860.71435546875,
+        "y": 87.85711669921875,
+        "wires": [
+            [
+                "783ce65.3454618"
+            ]
+        ]
+    },
+    {
+        "id": "55a4af9.b32635",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Format Car",
+        "func": "var temp =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": msg.payload.activeInv['Road Mark'] + msg.payload.activeInv['Road Number'],\n      \"number\": msg.payload.activeInv['Road Number'],\n      \"road\": msg.payload.activeInv['Road Mark'],\n      \"type\": msg.payload.activeInv['Car Type'],\n      \"length\": msg.payload.activeInv['Length'],\n      \"color\": msg.payload.activeInv['Color'],\n      \"load\": ((msg.payload.activeInv['Initial Load State'] !== undefined) ? msg.payload.activeInv['Initial Load State'] : \"E\"),\n      \"hazardous\": ((msg.payload.activeInv['Hazardous'] !== undefined) ? msg.payload.activeInv['Hazardous'] : false),\n      \"utility\": ((msg.payload.activeInv['Utility'] !== undefined)? msg.payload.activeInv['Utility'] : false),\n      \"returnWhenEmpty\": ((msg.payload.activeInv['Return When Empty'] !== undefined) ?  msg.payload.activeInv['Return When Empty'] : null),\n      \"status\": ((msg.payload.activeInv['Initial Status'] !== undefined) ? msg.payload.activeInv['Initial Status'] : \"\")\n    }\n  };\nmsg.payload = temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 849.71435546875,
+        "y": 127.85711669921875,
+        "wires": [
+            [
+                "783ce65.3454618"
+            ]
+        ]
+    },
+    {
+        "id": "87df2a6f.156728",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "Split Inv Type",
+        "property": "payload.activeInv.Type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Engine",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 629.71435546875,
+        "y": 112.85711669921875,
+        "wires": [
+            [
+                "b5cb9bf3.aba9a8"
+            ],
+            [
+                "55a4af9.b32635"
+            ]
+        ]
+    },
+    {
+        "id": "c1f39a87.2b8348",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Format Locations",
+        "func": "var JMRI = global.get('JMRI'); \nvar addFlag = true;\nvar changeFlag = false;\nfor (var i in JMRI.locations.data) {\n    var tempData = JMRI.locations.data[i];\n    if (msg.payload.activeLoc['NAME'] === tempData['name']) {\n        addFlag = false;\n        if ((msg.payload.activeLoc['Length'] !== undefined && tempData['length'] != msg.payload.activeLoc['Length']) || (msg.payload.activeLoc['Comment'] !== undefined && tempData['comment'] != msg.payload.activeLoc['Comment'])) {\n            changeFlag = true;\n        }\n    }\n}\nif (addFlag === true) {\n    msg.verb = 'POST'; // 'PUT';\n} \nif (changeFlag === true) {\n    msg.verb = 'POST'; \n}\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'locations';\n\nvar temp =  {\n    \"type\": \"location\",\n    \"data\": {\n        \"id\": msg.payload.activeLoc['ID'],\n        \"name\": msg.payload.activeLoc['NAME'],\n        \"length\": ((msg.payload.activeLoc['Length'] !== undefined) ? msg.payload.activeLoc['Length'] : 0 ),\n        \"comment\":  ((msg.payload.activeLoc['Comment'] !== undefined) ? msg.payload.activeLoc['Comment'] : 0 )\n    }\n};\nmsg.payload = temp;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860.71435546875,
+        "y": 175.85711669921875,
+        "wires": [
+            [
+                "783ce65.3454618",
+                "adddbe9.5de4a4"
+            ]
+        ]
+    },
+    {
+        "id": "ee7a4b50.bf36e8",
+        "type": "comment",
+        "z": "3d602d50.39dab2",
+        "name": "Sample Car Object",
+        "info": "msg.payload =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": \"AA123\",\n      \"number\": \"123\",\n      \"road\": \"AA\",\n      \"type\": \"Baggage\",\n      \"length\": \"32\",\n      \"color\": \"Black\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"destination\": null,\n      \"load\": \"E\",\n      \"hazardous\": false,\n      \"removeComment\": \"\",\n      \"addComment\": \"\",\n      \"kernel\": \"\",\n      \"utility\": false,\n      \"finalDestination\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"returnWhenEmpty\": null,\n      \"status\": \"\"\n    }\n  };\nreturn msg;",
+        "x": 124.57144165039062,
+        "y": 224.85714721679688,
+        "wires": []
+    },
+    {
+        "id": "5f1626e1.e0ab68",
+        "type": "comment",
+        "z": "3d602d50.39dab2",
+        "name": "Sample Engine Object",
+        "info": "msg.payload =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": \"ACL1234\",\n      \"number\": \"1234\",\n      \"road\": \"ACL\",\n      \"type\": \"Diesel\",\n      \"length\": \"54\",\n      \"color\": \"\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": null,\n      \"destination\": null,\n      \"model\": \"E8\",\n      \"consist\": \"\"\n    }\n  };\n  \n \nreturn msg;",
+        "x": 133.57144165039062,
+        "y": 341.8571472167969,
+        "wires": []
+    },
+    {
+        "id": "75824d8a.676ee4",
+        "type": "comment",
+        "z": "3d602d50.39dab2",
+        "name": "Sample Locations Object",
+        "info": "msg.payload =    {\n    \"type\": \"location\",\n    \"data\": {\n      \"name\": \"Test Location\",\n      \"id\": \"1\",\n      \"length\": 40,\n      \"comment\": \"\"\n    }\n  };\nreturn msg;",
+        "x": 143.57144165039062,
+        "y": 302.8571472167969,
+        "wires": []
+    },
+    {
+        "id": "3289e031.08b23",
+        "type": "comment",
+        "z": "3d602d50.39dab2",
+        "name": "Sample Train Object",
+        "info": "msg.payload =  {\n    \"type\": \"train\",\n    \"data\": {\n      \"name\": \"Test Train 1\",\n      \"iconName\": \"Test Train 1\",\n      \"id\": \"1\",\n      \"departureTime\": \"03:00\",\n      \"description\": \"Test Train \",\n      \"comment\": \"\",\n      \"route\": \"Test Route\",\n      \"routeId\": \"1\",\n      \"locations\": [\n        {\n          \"id\": \"1r2\",\n          \"name\": \"Test Location\",\n          \"trainDirection\": \"East\",\n          \"comment\": \"\",\n          \"sequenceId\": 2,\n          \"expectedArrivalTime\": \"03:00\",\n          \"expectedDepartureTime\": \"03:00\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"length\": 40,\n            \"comment\": \"\"\n          }\n        }\n      ],\n      \"engines\": [],\n      \"cars\": [\n        {\n          \"id\": \"AA123\",\n          \"number\": \"123\",\n          \"road\": \"AA\",\n          \"type\": \"Baggage\",\n          \"length\": \"32\",\n          \"color\": \"Black\",\n          \"owner\": \"\",\n          \"comment\": \"\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"destination\": null,\n          \"load\": \"E\",\n          \"hazardous\": false,\n          \"removeComment\": \"\",\n          \"addComment\": \"\",\n          \"kernel\": \"\",\n          \"utility\": false,\n          \"finalDestination\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"returnWhenEmpty\": null,\n          \"status\": \"\"\n        }\n      ],\n      \"trainDepartsName\": \"Test Location\",\n      \"trainTerminatesName\": \"Test Location\",\n      \"location\": \"\",\n      \"status\": \"\",\n      \"statusCode\": 65535,\n      \"length\": 0,\n      \"weight\": 0,\n      \"caboose\": \"\"\n    }\n  };\nreturn msg;",
+        "x": 124.57144165039062,
+        "y": 263.8571472167969,
+        "wires": []
+    },
+    {
+        "id": "717d881.3195878",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 1338.71435546875,
+        "y": 100.85711669921875,
+        "wires": [
+            [
+                "bf6aa2b.c3b3b6"
+            ]
+        ]
+    },
+    {
+        "id": "783ce65.3454618",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "Route Verb",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1151.71435546875,
+        "y": 128.85711669921875,
+        "wires": [
+            [
+                "717d881.3195878"
+            ],
+            [
+                "1912be33.f43e72"
+            ]
+        ]
+    },
+    {
+        "id": "1912be33.f43e72",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "method": "PUT",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 1334.71435546875,
+        "y": 159.85711669921875,
+        "wires": [
+            [
+                "bf6aa2b.c3b3b6"
+            ]
+        ]
+    },
+    {
+        "id": "bf6aa2b.c3b3b6",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1501.4286804199219,
+        "y": 128.5714111328125,
+        "wires": []
+    },
+    {
+        "id": "f51f6fd0.01c5d",
+        "type": "ui_button",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "group": "a9319cec.7d9c",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "TrainTraxx to JMRI",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "cloud_download",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 122.85714721679688,
+        "y": 175.71429443359375,
+        "wires": [
+            [
+                "dbf25248.8540c"
+            ]
+        ]
+    },
+    {
+        "id": "adddbe9.5de4a4",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 816.857177734375,
+        "y": 232.42852783203125,
+        "wires": []
+    },
+    {
+        "id": "dbf25248.8540c",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "parseLocations",
+        "func": "var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n/*\nvar TT_LocDataColumns = TT.locations.columns;\nvar locIDs = Object.keys(TT.locations.data);\nvar TT_LocMetaKeyColumns = TT.locations.keys.columns;\nvar iLookup = TT.locations.columnLookup;\nvar mLookup = TT.locations.meta.columnLookup;\nvar mkLookup = TT.locations.keys.columnLookup;\n*/\nfor (var curID in TT.locations.data) { \n    var temp = keyArray(TT.locations.columns,TT.locations.data[curID]);        \n    temp['ID'] = curID;\n    for (var j in TT.locations.meta.data[curID]) {\n        var tempMeta = keyArray(TT.locations.meta.columns,TT.locations.meta.data[curID][j]);        \n        var tempMetaKey = keyArray(TT.locations.keys.columns,TT.locations.keys.data[tempMeta['wp_tt_locationmetakeys_ID']]);        \n        temp[tempMetaKey['meta_key']] = tempMeta['meta_value'];\n    }\n    node.send({\"payload\": { \"activeLoc\" : temp}});\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 397.7833251953125,
+        "y": 175.33331298828125,
+        "wires": [
+            [
+                "adddbe9.5de4a4",
+                "c1f39a87.2b8348"
+            ]
+        ]
+    },
+    {
+        "id": "49f70c72.4b3914",
+        "type": "ui_dropdown",
+        "z": "9745920.d8a397",
+        "name": "Operating Mode",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "7491149.92351ec",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "options": [
+            {
+                "label": "WiFi to Ethernet Gateway",
+                "value": "wifi2eth",
+                "type": "str"
+            },
+            {
+                "label": "WiFi to WiFi Gateway",
+                "value": "wifi2wifi",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "f4e268bc.464438",
+                "53212cd0.a7eb04"
+            ]
+        ]
+    },
+    {
+        "id": "18316d6a.0b7ff3",
+        "type": "wifiscan",
+        "z": "9745920.d8a397",
+        "name": "",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "334b87f0.5ca348",
+                "6ace129c.3ff03c"
+            ]
+        ]
+    },
+    {
+        "id": "57136e46.8c841",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "Passphrase",
+        "tooltip": "",
+        "group": "8b01491a.1965e8",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "password",
+        "delay": "0",
+        "topic": "",
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "1f28ded0.9135c1"
+            ]
+        ]
+    },
+    {
+        "id": "334b87f0.5ca348",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 630,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "dcb6ca7.bb4b738",
+        "type": "ui_button",
+        "z": "9745920.d8a397",
+        "name": "",
+        "group": "92534c08.7fb13",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Submit",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Would you like to change modes?",
+        "payloadType": "str",
+        "topic": "",
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "11542bbf.5c74c4"
+            ]
+        ]
+    },
+    {
+        "id": "11542bbf.5c74c4",
+        "type": "ui_toast",
+        "z": "9745920.d8a397",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "",
+        "x": 190,
+        "y": 440,
+        "wires": [
+            [
+                "f31c81bb.20231"
+            ]
+        ]
+    },
+    {
+        "id": "6ace129c.3ff03c",
+        "type": "function-npm",
+        "z": "9745920.d8a397",
+        "name": "Structure Wifi List",
+        "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar activeSSID = flow.get('SSID');\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : (activeSSID.title === inPayload[id].ssid)\n    }); \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "334b87f0.5ca348",
+                "d7851c8c.0a68a"
+            ]
+        ]
+    },
+    {
+        "id": "d7851c8c.0a68a",
+        "type": "ui_list",
+        "z": "9745920.d8a397",
+        "group": "8b01491a.1965e8",
+        "name": "Available Networks",
+        "order": 5,
+        "width": "12",
+        "height": "4",
+        "lineType": "one",
+        "actionType": "check",
+        "allowHTML": false,
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "3fabea93.85d8b6"
+            ]
+        ]
+    },
+    {
+        "id": "6ea9c20a.3165fc",
+        "type": "ui_ui_control",
+        "z": "9745920.d8a397",
+        "name": "",
+        "x": 440,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4e268bc.464438",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Show/Hide Elements",
+        "func": "switch (msg.payload) {\n    case 'wifi2wifi':\n        msg.payload = {\n            \"group\" : {\n                \"hide\": [\n                    \"Network_Mode_WiFi_to_Ethernet_Gateway\"\n                ], \n                \"show\": [\n                    \"Network_Mode_WiFi_to_WiFi_Gateway\"\n                ], \n                \"focus\": true\n            }\n        };\n        break;\n    case 'wifi2eth':\n        msg.payload = {\n            \"group\" : {\n                \"hide\": [\n                    \"Network_Mode_WiFi_to_WiFi_Gateway\"\n                ], \n                \"show\": [\n                    \"Network_Mode_WiFi_to_Ethernet_Gateway\"\n                ], \n                \"focus\": true\n            }\n        };\n        break;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "6ea9c20a.3165fc"
+            ]
+        ]
+    },
+    {
+        "id": "46154f4.93c9eb",
+        "type": "inject",
+        "z": "9745920.d8a397",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 240,
+        "wires": [
+            [
+                "18316d6a.0b7ff3"
+            ]
+        ]
+    },
+    {
+        "id": "3fabea93.85d8b6",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set WiFi SSID to Connect To",
+        "func": "flow.set('SSID',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 780,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f28ded0.9135c1",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set WiFi Passphrase to Connect To",
+        "func": "flow.set('passphrase',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 800,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f31c81bb.20231",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Cancel",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 480,
+        "wires": [
+            [
+                "5c2a8500.41db6c",
+                "a74e6db4.a0c8d"
+            ],
+            [
+                "1f13c357.2674dd"
+            ]
+        ]
+    },
+    {
+        "id": "9360a00d.3a1cf",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set Information",
+        "func": "msg.payload  ={\n    'SSID' :flow.get(\"SSID\"),\n    'passphrase' : flow.get('passphrase')\n};\n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53212cd0.a7eb04",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Set Operating Mode",
+        "rules": [
+            {
+                "t": "set",
+                "p": "OperatingMode",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23b61d89.9da062",
+        "type": "inject",
+        "z": "9745920.d8a397",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "x": 710,
+        "y": 60,
+        "wires": [
+            [
+                "acafe7f9.82cb98",
+                "83a7951c.8f1198"
+            ]
+        ]
+    },
+    {
+        "id": "7d87a0e7.9f49d",
+        "type": "ui_ui_control",
+        "z": "9745920.d8a397",
+        "name": "",
+        "x": 780,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "acafe7f9.82cb98",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Hide Elements",
+        "func": "msg.payload = {\n    \"group\" : {\n        \"hide\": [\n            \"Network_Mode_Gateway_Settings\",\n            \"Network_Mode_WiFi_to_Ethernet_Gateway\",\n            \"Network_Mode_WiFi_to_WiFi_Gateway\"\n        ],\n        \"focus\": false\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 740,
+        "y": 100,
+        "wires": [
+            [
+                "7d87a0e7.9f49d"
+            ]
+        ]
+    },
+    {
+        "id": "1db28431.6f27ec",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "98512fe8.4ad4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Restart Wireless Gateway Service",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "autorenew",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 180,
+        "y": 960,
+        "wires": [
+            [
+                "a5662777.20df48"
+            ]
+        ]
+    },
+    {
+        "id": "a5662777.20df48",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo service hostapd restart",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 496.22221755981445,
+        "y": 958.3888874053955,
+        "wires": [
+            [
+                "29e236ab.83528a"
+            ],
+            [
+                "5f86a7b4.4666f8"
+            ],
+            [
+                "7168080e.a7dc48"
+            ]
+        ]
+    },
+    {
+        "id": "23323538.aa622a",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Successfully Restarted",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 1020,
+        "wires": [
+            [
+                "3c095ad9.f39cc6"
+            ]
+        ]
+    },
+    {
+        "id": "5f86a7b4.4666f8",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Error Occurred",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 960,
+        "wires": [
+            [
+                "3c095ad9.f39cc6"
+            ]
+        ]
+    },
+    {
+        "id": "29e236ab.83528a",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Error 2 Occurred",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 900,
+        "wires": [
+            [
+                "3c095ad9.f39cc6"
+            ]
+        ]
+    },
+    {
+        "id": "7168080e.a7dc48",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 1020,
+        "wires": [
+            [
+                "23323538.aa622a"
+            ]
+        ]
+    },
+    {
+        "id": "f310e9f5.ec92e8",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "sudo /opt/hiveid-ap/hiveid_setup_wifi2eth.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 830,
+        "y": 640,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "622978c3.ef9878",
+        "type": "ui_dropdown",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "Channel",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "92534c08.7fb13",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "1*",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "2",
+                "value": 2,
+                "type": "num"
+            },
+            {
+                "label": "3",
+                "value": 3,
+                "type": "num"
+            },
+            {
+                "label": "4",
+                "value": 4,
+                "type": "num"
+            },
+            {
+                "label": "5",
+                "value": 5,
+                "type": "num"
+            },
+            {
+                "label": "6*",
+                "value": 6,
+                "type": "num"
+            },
+            {
+                "label": "7",
+                "value": 7,
+                "type": "num"
+            },
+            {
+                "label": "8",
+                "value": 8,
+                "type": "num"
+            },
+            {
+                "label": "9",
+                "value": 9,
+                "type": "num"
+            },
+            {
+                "label": "10",
+                "value": 10,
+                "type": "num"
+            },
+            {
+                "label": "11*",
+                "value": 11,
+                "type": "num"
+            },
+            {
+                "label": "12",
+                "value": 12,
+                "type": "num"
+            },
+            {
+                "label": "13",
+                "value": 13,
+                "type": "num"
+            },
+            {
+                "label": "Auto Channel",
+                "value": "acs_survey",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 1440,
+        "y": 80,
+        "wires": [
+            [
+                "a98e6a09.ccb3c8"
+            ]
+        ]
+    },
+    {
+        "id": "5c2a8500.41db6c",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "Switch Operating Mode",
+        "property": "OperatingMode",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "wifi2eth",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "wifi2wifi",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [],
+            [
+                "9360a00d.3a1cf"
+            ]
+        ]
+    },
+    {
+        "id": "1f13c357.2674dd",
+        "type": "function-npm",
+        "z": "9745920.d8a397",
+        "name": "Extract Hostapd Config",
+        "func": "var fs = require('fs');\nvar ini = require('ini');\n\nvar config = ini.parse(fs.readFileSync('/etc/hostpad/hostapd.conf', 'utf-8'))\n\nflow.set('AP',config);\n//fs.writeFileSync('./config_modified.ini', ini.stringify(config, { section: 'section' }))",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1090,
+        "y": 100,
+        "wires": [
+            [
+                "fe9e4655.a725e8",
+                "8912a30e.fa783",
+                "378892a2.c7b34e",
+                "6de2917a.45472"
+            ]
+        ]
+    },
+    {
+        "id": "83a7951c.8f1198",
+        "type": "fs-ops-access",
+        "z": "9745920.d8a397",
+        "name": "Check Read on Hostapd",
+        "path": "/etc/hostapd",
+        "pathType": "str",
+        "filename": "hostapd.conf",
+        "filenameType": "str",
+        "read": true,
+        "write": false,
+        "throwerror": false,
+        "x": 1050,
+        "y": 60,
+        "wires": [
+            [
+                "1f13c357.2674dd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fe9e4655.a725e8",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Show Gateway Settings",
+        "func": "msg.payload = {\n    \"group\" : {\n        \"show\": [\n            \"Network_Mode_Gateway_Settings\"\n        ], \n        \"focus\": true\n    }\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1110,
+        "y": 140,
+        "wires": [
+            [
+                "db021a9c.e18778"
+            ]
+        ]
+    },
+    {
+        "id": "db021a9c.e18778",
+        "type": "ui_ui_control",
+        "z": "9745920.d8a397",
+        "name": "",
+        "x": 1080,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8912a30e.fa783",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Get Channel",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AP.channel",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1430,
+        "y": 40,
+        "wires": [
+            [
+                "622978c3.ef9878"
+            ]
+        ]
+    },
+    {
+        "id": "378892a2.c7b34e",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Get SSID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AP.ssid",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 160,
+        "wires": [
+            [
+                "696d72e4.693a7c"
+            ]
+        ]
+    },
+    {
+        "id": "6de2917a.45472",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Get Passphrase",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AP.wpa_passphrase",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1440,
+        "y": 280,
+        "wires": [
+            [
+                "aa288074.16ba6"
+            ]
+        ]
+    },
+    {
+        "id": "696d72e4.693a7c",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "SSID",
+        "tooltip": "",
+        "group": "92534c08.7fb13",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "x": 1430,
+        "y": 200,
+        "wires": [
+            [
+                "4e77f5a5.79a54c"
+            ]
+        ]
+    },
+    {
+        "id": "aa288074.16ba6",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "Passphrase",
+        "tooltip": "",
+        "group": "92534c08.7fb13",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "password",
+        "delay": 300,
+        "topic": "",
+        "x": 1450,
+        "y": 320,
+        "wires": [
+            [
+                "18cdedff.4f3582"
+            ]
+        ]
+    },
+    {
+        "id": "a74e6db4.a0c8d",
+        "type": "fs-ops-access",
+        "z": "9745920.d8a397",
+        "name": "Check RW on Hostapd",
+        "path": "/etc/hostapd",
+        "pathType": "str",
+        "filename": "hostapd.conf",
+        "filenameType": "str",
+        "read": true,
+        "write": true,
+        "throwerror": true,
+        "x": 570,
+        "y": 420,
+        "wires": [
+            [
+                "c7eeb9b5.728988"
+            ],
+            [
+                "82e35654.d406b8"
+            ]
+        ]
+    },
+    {
+        "id": "c7eeb9b5.728988",
+        "type": "function-npm",
+        "z": "9745920.d8a397",
+        "name": "Update Hostapd Config",
+        "func": "var fs = require('fs');\nvar ini = require('ini');\nvar AP = flow.get('AP');\n\nfs.writeFileSync('/etc/hostpad/hostapd.conf', ini.stringify(AP))",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 460,
+        "wires": [
+            [
+                "acd4a1d3.1b2d1"
+            ]
+        ]
+    },
+    {
+        "id": "fbe25c85.8ae56",
+        "type": "ui_toast",
+        "z": "9745920.d8a397",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "Unable to Update",
+        "x": 870,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "82e35654.d406b8",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Error Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Unable to update configuration",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Error",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 420,
+        "wires": [
+            [
+                "fbe25c85.8ae56"
+            ]
+        ]
+    },
+    {
+        "id": "49f928a1.ffb798",
+        "type": "link in",
+        "z": "a06855ce.9f5488",
+        "name": "Restart Gateway iLink",
+        "links": [
+            "acd4a1d3.1b2d1"
+        ],
+        "x": 260,
+        "y": 1040,
+        "wires": [
+            [
+                "a5662777.20df48"
+            ]
+        ]
+    },
+    {
+        "id": "acd4a1d3.1b2d1",
+        "type": "link out",
+        "z": "9745920.d8a397",
+        "name": "Restart Gateway oLink",
+        "links": [
+            "49f928a1.ffb798"
+        ],
+        "x": 795,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a98e6a09.ccb3c8",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Update Channel",
+        "rules": [
+            {
+                "t": "set",
+                "p": "AP.channel",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1480,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e77f5a5.79a54c",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Update SSID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "AP.ssid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18cdedff.4f3582",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Update Passphrase",
+        "rules": [
+            {
+                "t": "set",
+                "p": "AP.wpa_passphrase",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3818ea0.1ba0216",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "sudo /opt/hiveid-ap/hiveid_setup_wifi2wifi.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 830,
+        "y": 560,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    }
+]

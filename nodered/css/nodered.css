@@ -1,0 +1,68 @@
+#header {
+    background-color: #f90;
+    color: #fff;
+    height:50px;
+}
+#header .button {
+    border-left: 2px solid #f90;
+    border-right: 2px solid #f90;
+    color: #fff;
+}
+
+#header-toolbar {
+    background-color: #ffcb6b;
+    color: #000;
+}
+
+#header ul.dropdown-menu {
+    background-color: #ffcb6b;
+}
+
+#header ul.dropdown-menu li a {
+    color: #000;
+}
+
+#header ul#btn-deploy-options-submenu li a {
+    color: #000;
+}
+#header ul.dropdown-menu li a span.menu-sublabel {
+    color: #333;
+}
+#btn-deploy-options {
+    color: #000;
+}
+
+span.logo img {
+    height : 32px;
+}
+.palette-header {
+    background-color: #ffcb6b;
+    color: #7f7f7f;
+}
+
+.palette-header :active {
+    background-color: #f90;
+    color: #000;
+}
+
+.red-ui-tab-label {
+    background-color: #ffcb6b;
+}
+
+.red-ui-tab-label :active {
+    background-color: #f90;
+    color: #000;
+}
+
+#main-container {
+    top :50px;
+}
+
+.red-ui-tab-link-buttons { 
+    background-color: #ffcb6b;
+}
+
+.red-ui-tab-link-buttons :active { 
+    background-color: #f90;
+    color: #000;
+}

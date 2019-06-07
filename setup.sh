@@ -1,4 +1,10 @@
 #!/bin/bash
+##########################################################
+#### Author: Blaine McDonnell (blaine@armoin.com)     ####
+#### Usage: ./setup.sh                                ####
+#### Description: Installs all packages               ####
+#### Version: 0.1                                     ####
+##########################################################
 cd /opt/hiveid-ap
 
 ./system_update.sh
