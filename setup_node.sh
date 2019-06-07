@@ -27,18 +27,14 @@ sudo chown -R pi:pi /home/pi/.node-red
 sudo systemctl enable nodered.service
 sudo service nodered start
 
-existing_flows=`curl http://localhost:1880/flows`
-if [ "$existing_flows" == "[]" ]; then
-	echo "Settings default flows."
-    cp /opt/hiveid-ap/node.flows.js /home/pi/.node-red/flows.json
-    sudo chown -R pi:pi /home/pi/.node-red
-    # Disabling this section because adding authentication blocks the use of flows
-    #curl -i -H "Accept: application/json" \
-	#	-H "X-HTTP-Method-Override: PUT" \
-	#	-X POST -d @/opt/hiveid-ap/node.flows.js \
-    #	http://localhost:1880/flows
-else
-	echo "Default flows exist. Not Updating."
-fi
+# Need to move the file in place instead of using the service
+CONF=/home/pi/.node-red/flows_$HOSTNAME.json
+DATE=`date '+%Y%m%d%H%M%S'`
+sudo mkdir /usr/local/hiveid-ap/backups/$DATE
+if [ -f $CONF ]; then 
+    sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
+else 
+cp /opt/hiveid-ap/node.flows.js $CONF
+sudo chown -R pi:pi /home/pi/.node-red
 sudo chmod -R 666 /var/log/hiveid-ap
 php ./nodered_set_nodes.php
