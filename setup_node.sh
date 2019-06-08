@@ -8,7 +8,7 @@
 
 now=$(date +"%Y%m%d")
 sudo ./system_update.sh
-sudo apt-get install npm nodejs nodered --yes
+sudo apt-get install npm nodejs nodered libzmq5 --yes
 
 sudo service nodered stop
 
@@ -36,7 +36,7 @@ sudo systemctl enable nodered.service
 sudo service nodered start
 
 DATE=`date '+%Y%m%d%H%M%S'`
-sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
+sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE 2>/dev/null
 sudo chown -R pi:pi /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
 CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 if [ -f $CONF ]; then 
