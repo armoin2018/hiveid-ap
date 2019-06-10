@@ -908,34 +908,6 @@
         ]
     },
     {
-        "id": "a8e24a71.9f44d8",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "Set Internal IP",
-        "rules": [
-            {
-                "t": "set",
-                "p": "IP",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 600,
-        "y": 160,
-        "wires": [
-            [
-                "77d1ec0d.c31724",
-                "de82a97a.34a1f8"
-            ]
-        ]
-    },
-    {
         "id": "9a80917a.4666b",
         "type": "ui_button",
         "z": "a06855ce.9f5488",
@@ -1019,10 +991,10 @@
         "height": 0,
         "name": "",
         "label": "Internal IP",
-        "format": "{{msg.payload.internalIPv4}}",
+        "format": "{{msg.payload.wlan0[0].address}}",
         "layout": "row-spread",
-        "x": 820,
-        "y": 140,
+        "x": 1020,
+        "y": 160,
         "wires": []
     },
     {
@@ -1105,7 +1077,6 @@
         "wires": [
             [
                 "e8ed6bdd.7a0138",
-                "b7ecf609.ef19a8",
                 "aac85b05.c667a8",
                 "d618702e.2c062"
             ]
@@ -2678,25 +2649,6 @@
         ]
     },
     {
-        "id": "b7ecf609.ef19a8",
-        "type": "ip",
-        "z": "a06855ce.9f5488",
-        "name": "ip",
-        "https": false,
-        "timeout": "5000",
-        "internalIPv4": true,
-        "internalIPv6": true,
-        "publicIPv4": true,
-        "publicIPv6": true,
-        "x": 350,
-        "y": 160,
-        "wires": [
-            [
-                "a8e24a71.9f44d8"
-            ]
-        ]
-    },
-    {
         "id": "de82a97a.34a1f8",
         "type": "ui_text",
         "z": "a06855ce.9f5488",
@@ -2706,10 +2658,10 @@
         "height": 0,
         "name": "",
         "label": "External IP",
-        "format": "{{msg.payload.publicIPv4}}",
+        "format": "{{msg.payload.eth0[0].address}}",
         "layout": "row-spread",
-        "x": 830,
-        "y": 180,
+        "x": 1030,
+        "y": 220,
         "wires": []
     },
     {
@@ -2750,7 +2702,10 @@
         "x": 760,
         "y": 220,
         "wires": [
-            []
+            [
+                "de82a97a.34a1f8",
+                "77d1ec0d.c31724"
+            ]
         ]
     },
     {
