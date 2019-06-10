@@ -17,7 +17,7 @@ for i in $(sudo find /var/log -type f); do sudo cat /dev/null > $i; done
 for i in $(sudo find /var/log -type d); do sudo rm $i/*.1 $i/*.gz 2>/dev/null; done
 
 echo "Clearing up other history files"
-sudo rm /root/.bash_history 2>/dev/null
+sudo rm -rf /root/.bash_history 2>/dev/null
 rm -rdf /home/pi/Downloads/* /root/Downloads/* 2>/dev/null
 rm -rdf /home/pi/.local/share/Trash/info/* 2>/dev/null
 
