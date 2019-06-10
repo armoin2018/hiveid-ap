@@ -26,7 +26,7 @@ rm -rf  /home/pi/JMRI_UserFiles/roster/consist \
         /home/pi/.bash_history
 
 find /home/pi/.jmri -name "*.bak" -type f -delete
-find /home/pi/.jmri -name "jmri-*" -type d -print0|xargs -o rm -r --
+find /home/pi/.jmri -name "jmri-*" -type d -print0|xargs -0 rm -r --
 
 #echo "Setting Empty space to zeros"
 #cat /dev/zero >> zero.file;sync;rm zero.file;
