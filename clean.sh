@@ -12,8 +12,9 @@ sudo apt-get autoremove --purge
 sudo apt-get clean
 
 echo "Clearing log files"
-sudo rm -R /var/log/*.1 /var/log/*.gz 2>/dev/null
+sudo rm /var/log/*.1 /var/log/*.gz /var/ 2>/dev/null
 for i in $(find /var/log -type f); do sudo cat /dev/null > $i; done
+for i in $(sudo find /var/log -type d); do sudo rm $i/*.1 $i/*.gz 2>/dev/null; done
 
 echo "Clearing up other history files"
 sudo rm /root/.bash_history 2>/dev/null
