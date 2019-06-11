@@ -725,13 +725,14 @@
         "height": 0,
         "passthru": false,
         "mode": "text",
-        "delay": 300,
+        "delay": "0",
         "topic": "",
         "x": 830,
         "y": 100,
         "wires": [
             [
-                "5e56d465.6b35ac"
+                "5e56d465.6b35ac",
+                "9561984e.66c808"
             ]
         ]
     },
@@ -742,8 +743,8 @@
         "name": "",
         "files": "/etc/hostname",
         "recursive": "",
-        "x": 120,
-        "y": 100,
+        "x": 100,
+        "y": 60,
         "wires": [
             [
                 "e8ed6bdd.7a0138"
@@ -805,7 +806,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1540,
+        "x": 1560,
         "y": 100,
         "wires": [
             [
@@ -1056,8 +1057,8 @@
         "label": "System Results",
         "format": "{{msg.payload}}",
         "layout": "col-center",
-        "x": 1640,
-        "y": 440,
+        "x": 1660,
+        "y": 420,
         "wires": []
     },
     {
@@ -2720,7 +2721,7 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "Change Name",
-        "x": 1020,
+        "x": 1080,
         "y": 100,
         "wires": [
             [
@@ -2751,14 +2752,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1230,
+        "x": 1250,
         "y": 40,
         "wires": [
             [
-                "60e46d31.c31c34"
+                "5dec6d17.a36824"
             ],
             [
-                "e8ed6bdd.7a0138"
+                "109b7ab9.c9eb25"
             ]
         ]
     },
@@ -2967,7 +2968,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "voice": "21",
-        "x": 870,
+        "x": 810,
         "y": 460,
         "wires": []
     },
@@ -7072,8 +7073,8 @@
         "links": [
             "acd4a1d3.1b2d1"
         ],
-        "x": 260,
-        "y": 1040,
+        "x": 255,
+        "y": 1020,
         "wires": [
             [
                 "a5662777.20df48"
@@ -7184,6 +7185,58 @@
             [],
             [],
             []
+        ]
+    },
+    {
+        "id": "9561984e.66c808",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set Hostname to Flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "hostname",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5dec6d17.a36824",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Move the Flow.hostname to payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "hostname",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1530,
+        "y": 40,
+        "wires": [
+            [
+                "60e46d31.c31c34"
+            ]
         ]
     }
 ]
