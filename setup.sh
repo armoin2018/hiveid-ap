@@ -8,6 +8,8 @@
 cd /opt/hiveid-ap
 
 ./system_update.sh
+sudo apt-get remove --purge raspberrypi-net-mods
+sudo apt-get install --yes  raspberrypi-net-mods
 
 sudo apt-get install --yes git curl firefox-esr iw
 sudo apt-get install --yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
