@@ -10,6 +10,8 @@ now=$(date +"%Y%m%d")
 sudo ./system_update.sh
 sudo apt-get install npm nodejs nodered libzmq5 --yes
 
+mkdir /home/pi/.nodered 2>/dev/null
+
 sudo service nodered stop
 
 sudo npm cache clean -f

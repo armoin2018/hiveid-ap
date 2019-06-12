@@ -69,6 +69,7 @@ else
     sudo cp /opt/hiveid-ap/conf.jmri.json /etc/hiveid-ap/.
 fi
 
+sudo mkir /var/ww/html 2>/dev/null
 sudo cp /opt/hiveid-ap/index.php /var/www/html/.
 sudo rm /var/www/html/index.html
 sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap /var/www/html
