@@ -23,7 +23,7 @@ sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
 pip install esptool
 ./apache_set_user.sh pi
 
-./setup_node.sh
+
 
 sudo sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 cd /opt
@@ -83,5 +83,8 @@ sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid
 
 pcmanfm --set-wallpaper /opt/hiveid-ap/nodered/images/hiveid.png
 sudo cp /opt/hiveid-ap/nodered/images/hiveid.png /usr/share/plymouth/themes/pix/splash.png
+
+cd /opt/hiveid-ap
+./setup_node.sh
 
 echo "Please Reboot"

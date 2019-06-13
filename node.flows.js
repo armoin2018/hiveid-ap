@@ -2677,7 +2677,8 @@
         "y": 220,
         "wires": [
             [
-                "ecbf8a82.e0ce58"
+                "ecbf8a82.e0ce58",
+                "88136dde.78741"
             ]
         ]
     },
@@ -7237,6 +7238,65 @@
             [
                 "60e46d31.c31c34"
             ]
+        ]
+    },
+    {
+        "id": "88136dde.78741",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6a08424c.7b4b1c",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "bdaf72c3.2be81",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Clean Memory",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 580,
+        "wires": [
+            [
+                "e1986986.8508b8"
+            ]
+        ]
+    },
+    {
+        "id": "e1986986.8508b8",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo /opt/hiveid-ap/free_memory.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 490,
+        "y": 580,
+        "wires": [
+            [],
+            [],
+            []
         ]
     }
 ]
