@@ -6,4 +6,5 @@
 ####              This is to support Legacy flows     ####
 #### Version: 1.0                                     ####
 ##########################################################
-./opt/hiveid-ap/dnsmasq_get_leases.sh
+cd /opt/hiveid-ap
+./dnsmasq_get_leases.sh
