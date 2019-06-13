@@ -79,13 +79,13 @@ iptables -t nat -F
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-if grep -Fxq "iptables\.ipv4\.nat" /etc/rc.local
-then
-    echo "rc.local is already configured for iptables"
-else
+CNT=`grep "iptables.ipv4.nat" /etc/rc.local`
+if [[ "$CNT" -eq "0" ]]; then
     sed -i "s/^exit 0$//g" /etc/rc.local
     echo "iptables-restore < /etc/iptables.ipv4.nat
 exit 0" >> /etc/rc.local
+else
+    echo "rc.local is already configured for iptables"
 fi
 
 mkdir /etc/network/if-post-up.d

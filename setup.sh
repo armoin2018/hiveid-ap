@@ -45,10 +45,11 @@ sudo ln -s /opt/openrsd /var/www/html/openrsd
 cd /usr/local/hiveid-ap
 wget https://github.com/esp8266/Arduino/raw/master/tools/espota.py
 
-if grep -Fxq "local.hive-id.com" /etc/hosts; then
-    echo "Local host reference found in hosts file"
-else
+CNT=`grep "local.hive-id.com" /etc/hosts`
+if [[ "$CNT" -eq "0" ]]; then
     sudo echo "192.168.2.1	local.hive-id.com" >>/etc/hosts
+else 
+    echo "Local host reference found in hosts file"
 fi
 
 CONF=/etc/hiveid-ap/conf.hiveid.json
@@ -72,7 +73,14 @@ else
     sudo cp /opt/hiveid-ap/conf.jmri.json /etc/hiveid-ap/.
 fi
 
+CNT=`grep "net.ifnames" /boot/cmdline.txt`
+if [[ "$CNT" -eq "0" ]]; then
+    sudo sed -i -e "s/$/ net.ifnames=0/" /boot/cmdline.txt
+fi
+
 sudo mkir /var/ww/html 2>/dev/null
 sudo cp /opt/hiveid-ap/index.php /var/www/html/.
 sudo rm /var/www/html/index.html
 sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap /var/www/html
+
+echo "Please Reboot"
