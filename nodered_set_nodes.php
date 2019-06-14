@@ -24,5 +24,4 @@ foreach ($neededNodes as $id=>$val) {
                 system('sudo node-red-admin install ' . $val);
         }
 }
-system('sudo service nodered restart');
 ?>
