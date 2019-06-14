@@ -3862,8 +3862,7 @@
         "wires": [
             [
                 "eb7a7fef.95ee4",
-                "ef86f5e4.672e98",
-                "e6c0a333.a9d44"
+                "ef86f5e4.672e98"
             ]
         ]
     },
@@ -3893,8 +3892,7 @@
         "z": "5e61e22e.7a581c",
         "name": "Configuration Change oLink",
         "links": [
-            "c2ffecf.a2abf1",
-            "e18f1415.38d7c8"
+            "b6ed7646.ea36a8"
         ],
         "x": 249.36517333984375,
         "y": 186.98397827148438,
@@ -3910,10 +3908,10 @@
         "z": "5e61e22e.7a581c",
         "name": "TrainTraxx Data oLink",
         "links": [
-            "2a8eb535.ecc04a"
+            "b1607e3f.fb142"
         ],
-        "x": 608.4762573242188,
-        "y": 183.98406982421875,
+        "x": 595,
+        "y": 160,
         "wires": []
     },
     {
@@ -3922,10 +3920,10 @@
         "z": "5e61e22e.7a581c",
         "name": "JMRI Data oLink",
         "links": [
-            "bd2c2948.9f6ba8"
+            "a309b660.225d08"
         ],
-        "x": 608.3651733398438,
-        "y": 230.09521484375,
+        "x": 595,
+        "y": 220,
         "wires": []
     },
     {
@@ -3933,7 +3931,9 @@
         "type": "link out",
         "z": "5e61e22e.7a581c",
         "name": "JMRI Data oLink Activity Only",
-        "links": [],
+        "links": [
+            "20a5c666.fa9baa"
+        ],
         "x": 616.0316772460938,
         "y": 318.09521484375,
         "wires": []
@@ -3944,22 +3944,10 @@
         "z": "5e61e22e.7a581c",
         "name": "TrainTraxx Activity oLink",
         "links": [
-            "9e632d9b.8b03b"
+            "bb39a9a4.ceacc8"
         ],
         "x": 616.5079345703125,
         "y": 478.8888854980469,
-        "wires": []
-    },
-    {
-        "id": "e6c0a333.a9d44",
-        "type": "link out",
-        "z": "5e61e22e.7a581c",
-        "name": "Default Configs Change oLink",
-        "links": [
-            "2b9d79c4.945546"
-        ],
-        "x": 607,
-        "y": 137,
         "wires": []
     },
     {
@@ -3970,8 +3958,8 @@
         "func": "var curActivity = global.get('Activity');\nif (curActivity === undefined) {\n    curActivity = [];\n}\ncurActivity.unshift(msg.payload.DATA);\n\nwhile (curActivity.length > 10) {\n    curActivity.pop();\n}\n\nglobal.set('Activity',curActivity);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 280,
-        "y": 120,
+        "x": 440,
+        "y": 240,
         "wires": [
             [
                 "d4deb1b2.f1eb5",
@@ -3989,8 +3977,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 510,
-        "y": 40,
+        "x": 670,
+        "y": 160,
         "wires": []
     },
     {
@@ -4001,8 +3989,8 @@
         "property": "payload.DATA",
         "action": "",
         "pretty": false,
-        "x": 210,
-        "y": 40,
+        "x": 370,
+        "y": 160,
         "wires": [
             [
                 "682e65b1.37211c"
@@ -4017,8 +4005,8 @@
         "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']];\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        }\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      border: 1px solid #ccc; ' +\n                '      text-align:center;  ' +\n                '      border-spacing: 0px; ' +\n                '   }' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC']);\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 320,
-        "y": 160,
+        "x": 480,
+        "y": 280,
         "wires": [
             [
                 "b7ca5c16.bde28",
@@ -4043,8 +4031,8 @@
         "output": "payload.DATA.TIME",
         "outputType": "msg",
         "outTz": "America/Chicago",
-        "x": 240,
-        "y": 80,
+        "x": 400,
+        "y": 200,
         "wires": [
             [
                 "ef8fd901.8301a8"
@@ -4061,8 +4049,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 550,
-        "y": 80,
+        "x": 710,
+        "y": 200,
         "wires": []
     },
     {
@@ -4077,8 +4065,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "5",
-        "x": 150,
-        "y": 200,
+        "x": 310,
+        "y": 320,
         "wires": [
             [
                 "d4deb1b2.f1eb5"
@@ -4091,10 +4079,10 @@
         "z": "7bef0b7b.d5a104",
         "name": "TrainTraxx Activity iLink",
         "links": [
-            "95a6c50d.2493b8"
+            "9860fd21.83ed9"
         ],
-        "x": 95,
-        "y": 40,
+        "x": 255,
+        "y": 160,
         "wires": [
             [
                 "64bf2bc4.ffd124"
@@ -4114,8 +4102,8 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 370,
-        "y": 200,
+        "x": 530,
+        "y": 320,
         "wires": [
             []
         ]
@@ -4381,10 +4369,10 @@
         "z": "1a726252.d178be",
         "name": "TrainTraxx Data iLink",
         "links": [
-            "b4d88e2d.12773"
+            "eb7a7fef.95ee4"
         ],
-        "x": 66.66668701171875,
-        "y": 317.7778015136719,
+        "x": 195,
+        "y": 260,
         "wires": [
             [
                 "248da61.73dc05a"
@@ -4675,7 +4663,7 @@
         "z": "164213bd.e3dd4c",
         "name": "JMRI Data iLink",
         "links": [
-            "2c90c75c.da3878"
+            "ef86f5e4.672e98"
         ],
         "x": 41.111114501953125,
         "y": 312.22222900390625,
@@ -4690,7 +4678,9 @@
         "type": "link in",
         "z": "164213bd.e3dd4c",
         "name": "JMRI Data iLink Activity Only",
-        "links": [],
+        "links": [
+            "e7682bc7.41dee8"
+        ],
         "x": 38.88893127441406,
         "y": 402.22222900390625,
         "wires": [
@@ -5141,7 +5131,7 @@
         "z": "fd2ebb8a.240a38",
         "name": "Configuration Change iLink",
         "links": [
-            "2ed78054.4bed2"
+            "f6d7de28.90ff4"
         ],
         "x": 1682,
         "y": 364,
@@ -7438,15 +7428,15 @@
         "id": "bec6e433.866148",
         "type": "exec",
         "z": "7b5cf843.8f8fc8",
-        "command": "sudo /opt/hiveid-ap/dhcpcd_get_leases.sh",
-        "addpay": false,
+        "command": "sudo /opt/hiveid-ap/dnsmasq_get_leases.sh",
+        "addpay": true,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 210,
-        "y": 100,
+        "x": 570,
+        "y": 220,
         "wires": [
             [
                 "b1933c19.2d82f",
@@ -7466,8 +7456,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 530,
-        "y": 140,
+        "x": 910,
+        "y": 280,
         "wires": []
     },
     {
@@ -7478,12 +7468,12 @@
         "sep": ",",
         "hdrin": "",
         "hdrout": "",
-        "multi": "one",
+        "multi": "mult",
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 130,
-        "y": 160,
+        "x": 490,
+        "y": 280,
         "wires": [
             [
                 "4ccff1fd.8062b",
@@ -7496,11 +7486,11 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Create Node View",
-        "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n\n/*\nvar JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Object.keys(Stores)) {\n    console.log(store);\n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Object.keys(Stores[store].elements)) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;\n*/\n",
+        "func": "/*msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n\n\nvar JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Object.keys(Stores)) {\n    console.log(store);\n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Object.keys(Stores[store].elements)) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;\n*/\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 210,
-        "y": 200,
+        "x": 570,
+        "y": 320,
         "wires": [
             [
                 "c19e7c4.9016c8"
@@ -7513,14 +7503,14 @@
         "z": "7b5cf843.8f8fc8",
         "name": "",
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
+        "payload": "LEASE_FILE",
+        "payloadType": "global",
+        "repeat": "60",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 40,
+        "x": 220,
+        "y": 220,
         "wires": [
             [
                 "bec6e433.866148"
@@ -7539,8 +7529,74 @@
         "lineType": "three",
         "actionType": "none",
         "allowHTML": true,
+        "x": 890,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ea49fdb.c5819",
+        "type": "inject",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "3d7fd194.53872e"
+            ]
+        ]
+    },
+    {
+        "id": "3d7fd194.53872e",
+        "type": "exec",
+        "z": "7b5cf843.8f8fc8",
+        "command": "sudo /opt/hiveid-ap/dnsmasq_find_leases.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
         "x": 510,
-        "y": 200,
+        "y": 140,
+        "wires": [
+            [
+                "5f1132a3.8da3ec"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "5f1132a3.8da3ec",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Assign Lease File",
+        "rules": [
+            {
+                "t": "set",
+                "p": "LEASE_FILE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 120,
         "wires": [
             []
         ]
