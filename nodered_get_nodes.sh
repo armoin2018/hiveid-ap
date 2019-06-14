@@ -16,9 +16,10 @@ cp /opt/hiveid-ap/node.settings.unsecure.js ~/.node-red/settings.js
 sudo service nodered start
 
 echo "Extracting Node List"
-node-red-admin list > ~/.node-red/nodes.list
+sudo node-red-admin list > ~/.node-red/installed.node.list
 
 echo "Restoring configuration and restarting Node Red"
 sudo service nodered stop
 cp ~/.node-red/settings.js.temp ~/.node-red/settings.js
+sudo chown -R pi:pi ~/.node-red
 sudo service nodered start

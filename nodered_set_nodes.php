@@ -1,6 +1,5 @@
 <?php
-
-$nodeFile = '/home/pi/.node-red/nodes.list';
+$nodeFile = '/home/pi/.node-red/installed.node.list';
 if (file_exists($nodeFile)) {
         $nodeList = file_get_contents($nodeFile);
 } else {
@@ -21,7 +20,8 @@ $neededNodes = preg_split("/\s*\n\s*/",file_get_contents('/opt/hiveid-ap/node.li
 foreach ($neededNodes as $id=>$val) {
         if (!in_array(trim($val),$installedNodes)) {
                 echo 'Installing Node-Red Module ' . $val . "\n";
-                system('cd ~/.node-red;npm install ' . $val . '  --unsafe-perm --no-audit');
+                #system('cd ~/.node-red;npm install ' . $val . '  --unsafe-perm --no-audit');
+                system('sudo node-red-admin install ' . $val);
         }
 }
 system('sudo service nodered restart');
