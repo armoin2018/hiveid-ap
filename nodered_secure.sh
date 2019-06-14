@@ -26,6 +26,6 @@ cp /opt/hiveid-ap/node.settings.secure.js $CONF
 
 sudo chown -R pi:pi /home/pi/.node-red
 
-PWD_HASH=`echo -e "$IN_PWD\n" | node-red-admin hash-pw | sed -e "s/.*\s//" | sed -e "s/^/\\/"` 
+PWD_HASH=`echo -e "$IN_PWD\n" | node-red-admin hash-pw | sed -e "s/.*\s//g"`
 sed -i -e "s/\[PASSWORD\]/$PWD_HASH/" /home/pi/.node-red/settings.js
 sudo service nodered start
