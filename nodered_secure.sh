@@ -14,10 +14,10 @@ fi
 sudo service nodered stop
 
 DATE=`date '+%Y%m%d%H%M%S'`
-sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
+sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE  2>/dev/null
 sudo chown -R pi:pi /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
 
-sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup
+sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup  2>/dev/null
 CONF=/home/pi/.node-red/settings.js
 if [ -f $CONF ]; then 
     sudo cp $CONF /usr/local/hiveid-ap/backup/settings.$now.js
