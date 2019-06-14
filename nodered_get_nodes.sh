@@ -12,10 +12,10 @@ echo "Unsecuring Node Red Temporarily"
 
 sudo service nodered stop
 cp ~/.node-red/settings.js ~/.node-red/settings.js.temp
-cp /opt/hiveid-ap/node.settings.upgrade.js ~/.node-red/settings.js
+cp /opt/hiveid-ap/node.settings.unsecure.js ~/.node-red/settings.js
 sudo service nodered start
 echo "Node-Red is starting up "
-sleep 180
+sleep 120
 
 echo "Extracting Node List"
 sudo node-red-admin list > ~/.node-red/installed.node.list
