@@ -12,7 +12,7 @@ foreach ($nodeArray as $row=>$data) {
         $data = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '',$data);
         $lineArray = preg_split('/[\s\t\/]+/',$data);
         if (!empty($lineArray[0]) && !preg_match('/(^\d|^node-red$|^Nodes)/',$lineArray[0])) {
-                $installedNodes[$lineArray[0]]++;
+                $installedNodes[$lineArray[0]]=1;
         }
 }
 $installedNodes=array_keys($installedNodes);
