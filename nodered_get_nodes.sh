@@ -14,6 +14,8 @@ sudo service nodered stop
 cp ~/.node-red/settings.js ~/.node-red/settings.js.temp
 cp /opt/hiveid-ap/node.settings.upgrade.js ~/.node-red/settings.js
 sudo service nodered start
+echo "Node-Red is starting up "
+sleep 180
 
 echo "Extracting Node List"
 sudo node-red-admin list > ~/.node-red/installed.node.list
