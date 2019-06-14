@@ -55,6 +55,5 @@ cp /opt/hiveid-ap/node.settings.unsecure.js ~/.node-red/settings.js
 
 sudo chown -R pi:pi /home/pi/.node-red
 sudo chmod -R 666 /var/log/hiveid-ap
-php ./nodered_set_nodes.php
 
-sudo service nodered restart
+./nodered_udpate.sh

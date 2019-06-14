@@ -1,5 +1,11 @@
 <?php
-$nodeList = `node-red-admin list`;
+
+$nodeFile = '/home/pi/.node-red/nodes.list';
+if (file_exists($nodeFile)) {
+        $nodeList = file_get_contents($nodeFile);
+} else {
+        exit('Node file not found');
+}
 
 $nodeArray = preg_split("/\n/",$nodeList);
 $installedNodes = array();

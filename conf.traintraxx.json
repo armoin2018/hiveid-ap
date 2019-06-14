@@ -1,5 +1,5 @@
 {
-    "TrainTraxx_API": "http://www.traintraxx.com/wp-json/traintraxx/v2/custom/",
-    "TrainTraxx_Web": "http://www.traintraxx.com",
+    "TrainTraxx_API": "https://www.traintraxx.com/wp-json/traintraxx/v2/custom/",
+    "TrainTraxx_Web": "https://www.traintraxx.com",
     "TrainTraxx_Key": ""
 }

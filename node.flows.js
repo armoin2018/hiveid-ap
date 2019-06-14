@@ -119,6 +119,13 @@
         "info": ""
     },
     {
+        "id": "7b5cf843.8f8fc8",
+        "type": "tab",
+        "label": "Hive Node Manager",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "49e2d5c0.49790c",
         "type": "subflow",
         "name": "Reporters to JRMI",
@@ -458,7 +465,7 @@
         "link": "/",
         "icon": "all_inclusive",
         "target": "iframe",
-        "order": 9
+        "order": 8
     },
     {
         "id": "8e968283.a2d29",
@@ -468,7 +475,7 @@
         "link": "/redir?app=jmri",
         "icon": "train",
         "target": "iframe",
-        "order": 8
+        "order": 7
     },
     {
         "id": "6efda0bd.72343",
@@ -478,7 +485,7 @@
         "link": "/redir?app=openrsd",
         "icon": "fa-cogs",
         "target": "iframe",
-        "order": 10
+        "order": 9
     },
     {
         "id": "38e63d7a.b846e2",
@@ -488,7 +495,7 @@
         "link": "/redir?app=phpmyadmin",
         "icon": "fa-database",
         "target": "newtab",
-        "order": 11
+        "order": 10
     },
     {
         "id": "3808a9b7.8005b6",
@@ -498,7 +505,7 @@
         "link": "https://www.traintraxx.com/traintraxx-application",
         "icon": "fa-train",
         "target": "iframe",
-        "order": 7
+        "order": 6
     },
     {
         "id": "12a9f286.0bbd9d",
@@ -508,7 +515,7 @@
         "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
         "icon": "shopping_cart",
         "target": "newtab",
-        "order": 12
+        "order": 11
     },
     {
         "id": "82d159ac.42e4b8",
@@ -558,7 +565,7 @@
         "z": "",
         "name": "Local Train Activity",
         "icon": "dashboard",
-        "order": 3,
+        "order": 4,
         "disabled": false,
         "hidden": false
     },
@@ -568,7 +575,7 @@
         "z": "",
         "name": "Updates",
         "icon": "update",
-        "order": 13,
+        "order": 12,
         "disabled": false,
         "hidden": false
     },
@@ -577,21 +584,11 @@
         "type": "ui_group",
         "z": "",
         "name": "Manage Information",
-        "tab": "cc77e7c8.3db938",
+        "tab": "1aab9ee9.8893d1",
         "order": 3,
         "disp": true,
         "width": "6",
         "collapse": true
-    },
-    {
-        "id": "cc77e7c8.3db938",
-        "type": "ui_tab",
-        "z": "",
-        "name": "Local TrainTraxx",
-        "icon": "dashboard",
-        "order": 4,
-        "disabled": false,
-        "hidden": false
     },
     {
         "id": "3220fafa.330906",
@@ -664,7 +661,7 @@
         "z": "",
         "name": "Summary",
         "tab": "1aab9ee9.8893d1",
-        "order": 3,
+        "order": 2,
         "disp": true,
         "width": "6",
         "collapse": false
@@ -710,6 +707,27 @@
         "order": 2,
         "disp": false,
         "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "e96b9c3.af2826",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Node Manger",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "873f13f8.22f2b",
+        "type": "ui_group",
+        "z": "",
+        "name": "Nodes",
+        "tab": "e96b9c3.af2826",
+        "order": 1,
+        "disp": true,
+        "width": "12",
         "collapse": false
     },
     {
@@ -2032,8 +2050,8 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var tempFile = msg.headers['content-disposition'];\ntempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\nmsg.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\nreturn msg;",
-        "outputs": 1,
+        "func": "msg1 = {};\nmsg2 = {};\nif (msg.headers !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n} else {\n    msg2.payload = \"No files returned\";\n}\nreturn [msg1,msg2];",
+        "outputs": 2,
         "noerr": 0,
         "x": 530,
         "y": 220,
@@ -2041,6 +2059,9 @@
             [
                 "d505e776.cc8988",
                 "18150761.7a23b9"
+            ],
+            [
+                "2af64c41.95a824"
             ]
         ]
     },
@@ -2105,8 +2126,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1350,
-        "y": 620,
+        "x": 1370,
+        "y": 600,
         "wires": []
     },
     {
@@ -2170,8 +2191,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 790,
-        "y": 260,
+        "x": 710,
+        "y": 280,
         "wires": [
             [
                 "695a152e.efd0ec"
@@ -3409,48 +3430,6 @@
         ]
     },
     {
-        "id": "28a1a49b.fbc2ac",
-        "type": "ui_chart",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "group": "bdaf72c3.2be81",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "Memory",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "useOldStyle": false,
-        "outputs": 1,
-        "x": 700,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "302dd467.6f1a0c",
         "type": "OS",
         "z": "a06855ce.9f5488",
@@ -3562,7 +3541,7 @@
         "seg1": "",
         "seg2": "",
         "x": 720,
-        "y": 720,
+        "y": 680,
         "wires": []
     },
     {
@@ -3622,9 +3601,7 @@
         "x": 510,
         "y": 680,
         "wires": [
-            [
-                "28a1a49b.fbc2ac"
-            ],
+            [],
             [
                 "80f9695e.4555f8"
             ]
@@ -7296,6 +7273,275 @@
         "wires": [
             [],
             [],
+            []
+        ]
+    },
+    {
+        "id": "22ec837b.f2089c",
+        "type": "ui_form",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "label": "Change Password",
+        "group": "17f52c5b.cfb014",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Password",
+                "value": "PASS1",
+                "type": "password",
+                "required": true
+            },
+            {
+                "label": "Confirm",
+                "value": "PASS2",
+                "type": "password",
+                "required": true
+            }
+        ],
+        "formValue": {
+            "PASS1": "",
+            "PASS2": ""
+        },
+        "payload": "",
+        "submit": "Change",
+        "cancel": "Cancel",
+        "topic": "",
+        "x": 160,
+        "y": 1140,
+        "wires": [
+            [
+                "b6649e5f.4d6f1",
+                "ff08124.c1692f"
+            ]
+        ]
+    },
+    {
+        "id": "b6649e5f.4d6f1",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 390,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "ff08124.c1692f",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Check Passwords",
+        "func": "msg1.payload={};\nmsg2.payload= {};\nif (msg.payload.PASS1 == msg.payload.PASS2) {\n    msg1.payload.PASSWORD=msg.payload.PASS1;\n} else {\n    msg2.payload = \"Passwords do not match\";\n}\nreturn [msg1,msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 410,
+        "y": 1140,
+        "wires": [
+            [
+                "367077e4.def7a8"
+            ],
+            [
+                "bf399be2.c9b918"
+            ]
+        ]
+    },
+    {
+        "id": "bf399be2.c9b918",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 810,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "367077e4.def7a8",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "echo ",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 640,
+        "y": 1100,
+        "wires": [
+            [
+                "bf399be2.c9b918"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "9d5d2cb.7ed4fd",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 420,
+        "y": 1200,
+        "wires": [
+            [
+                "419fb0d9.21572"
+            ]
+        ]
+    },
+    {
+        "id": "419fb0d9.21572",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 1220,
+        "wires": [
+            [
+                "bf399be2.c9b918"
+            ]
+        ]
+    },
+    {
+        "id": "bec6e433.866148",
+        "type": "exec",
+        "z": "7b5cf843.8f8fc8",
+        "command": "sudo /opt/hiveid-ap/dhcpcd_get_leases.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "b1933c19.2d82f",
+                "33a0dcf.5102a24"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "33a0dcf.5102a24",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 530,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b1933c19.2d82f",
+        "type": "csv",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "4ccff1fd.8062b",
+                "33a0dcf.5102a24"
+            ]
+        ]
+    },
+    {
+        "id": "4ccff1fd.8062b",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Create Node View",
+        "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n\n/*\nvar JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Object.keys(Stores)) {\n    console.log(store);\n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Object.keys(Stores[store].elements)) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;\n*/\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "c19e7c4.9016c8"
+            ]
+        ]
+    },
+    {
+        "id": "89ae3cce.0e8ef",
+        "type": "inject",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "bec6e433.866148"
+            ]
+        ]
+    },
+    {
+        "id": "c19e7c4.9016c8",
+        "type": "ui_list",
+        "z": "7b5cf843.8f8fc8",
+        "group": "873f13f8.22f2b",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "lineType": "three",
+        "actionType": "none",
+        "allowHTML": true,
+        "x": 510,
+        "y": 200,
+        "wires": [
             []
         ]
     }

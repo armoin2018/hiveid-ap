@@ -81,10 +81,11 @@ sudo cp /opt/hiveid-ap/index.php /var/www/html/.
 sudo rm /var/www/html/index.html
 sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap /var/www/html
 
-pcmanfm --set-wallpaper /opt/hiveid-ap/nodered/images/hiveid.png
+pcmanfm --set-wallpaper=/opt/hiveid-ap/nodered/images/hiveid.png --wallpaper-mode=screen
 sudo cp /opt/hiveid-ap/nodered/images/hiveid.png /usr/share/plymouth/themes/pix/splash.png
 
 cd /opt/hiveid-ap
 ./setup_node.sh
+./hiveid_set_wifi2eth.sh
 
 echo "Please Reboot"
