@@ -6,6 +6,7 @@
 #### Version: 0.1                                     ####
 ##########################################################
 
+cd /opt/hiveid-ap
 ./nodered_get_nodes.sh
 php ./nodered_set_nodes.php
 ./nodred_set_flows.sh
