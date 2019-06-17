@@ -387,7 +387,7 @@
         "z": "",
         "name": "System Controls",
         "tab": "82d159ac.42e4b8",
-        "order": 3,
+        "order": 4,
         "disp": true,
         "width": "6",
         "collapse": false
@@ -543,7 +543,7 @@
         "z": "",
         "name": "Performance",
         "tab": "82d159ac.42e4b8",
-        "order": 2,
+        "order": 3,
         "disp": true,
         "width": "6",
         "collapse": false
@@ -731,6 +731,17 @@
         "collapse": false
     },
     {
+        "id": "73493f86.f11df",
+        "type": "ui_group",
+        "z": "",
+        "name": "Network Interfaces",
+        "tab": "82d159ac.42e4b8",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -739,8 +750,8 @@
         "tooltip": "",
         "group": "17f52c5b.cfb014",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "2",
         "passthru": false,
         "mode": "text",
         "delay": "0",
@@ -854,7 +865,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 120,
+        "x": 100,
         "y": 320,
         "wires": [
             [
@@ -899,8 +910,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 120,
-        "y": 540,
+        "x": 110,
+        "y": 520,
         "wires": [
             [
                 "b5df9eca.cde6b"
@@ -918,7 +929,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1100,
+        "x": 1020,
         "y": 500,
         "wires": [
             [],
@@ -944,7 +955,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 140,
+        "x": 120,
         "y": 380,
         "wires": [
             [
@@ -967,9 +978,7 @@
         "x": 490,
         "y": 380,
         "wires": [
-            [
-                "3c095ad9.f39cc6"
-            ],
+            [],
             [],
             [
                 "af7d97d7.e8a898"
@@ -988,34 +997,24 @@
                 "t": "eq",
                 "v": "0",
                 "vt": "str"
+            },
+            {
+                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
-        "x": 730,
-        "y": 400,
+        "outputs": 2,
+        "x": 750,
+        "y": 380,
         "wires": [
             [
                 "9811ce1d.294a8"
+            ],
+            [
+                "6ee73805.11a858"
             ]
         ]
-    },
-    {
-        "id": "77d1ec0d.c31724",
-        "type": "ui_text",
-        "z": "a06855ce.9f5488",
-        "group": "17f52c5b.cfb014",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Internal IP",
-        "format": "{{msg.payload.wlan0[0].address}}",
-        "layout": "row-spread",
-        "x": 1020,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "307d29d2.71ff56",
@@ -1035,7 +1034,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 160,
+        "x": 140,
         "y": 440,
         "wires": [
             [
@@ -1048,21 +1047,21 @@
         "id": "60e3884f.3df908",
         "type": "exec",
         "z": "a06855ce.9f5488",
-        "command": "sudo /opt/hiveid-ap/hiveid_update.sh",
-        "addpay": true,
+        "command": "echo \"/opt/hiveid-ap/hiveid_update.sh\" | at -M now",
+        "addpay": false,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 490,
+        "x": 530,
         "y": 440,
         "wires": [
-            [
-                "3c095ad9.f39cc6"
-            ],
             [],
-            []
+            [],
+            [
+                "6263486e.492748"
+            ]
         ]
     },
     {
@@ -1135,8 +1134,8 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "Shutdown",
-        "x": 640,
-        "y": 540,
+        "x": 630,
+        "y": 520,
         "wires": [
             [
                 "c3ea8792.391e88"
@@ -2673,63 +2672,19 @@
         ]
     },
     {
-        "id": "de82a97a.34a1f8",
-        "type": "ui_text",
-        "z": "a06855ce.9f5488",
-        "group": "17f52c5b.cfb014",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "External IP",
-        "format": "{{msg.payload.eth0[0].address}}",
-        "layout": "row-spread",
-        "x": 1030,
-        "y": 220,
-        "wires": []
-    },
-    {
         "id": "aac85b05.c667a8",
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Get Network Interfaces",
-        "func": "var os = global.get('os');\nmsg.payload = os.networkInterfaces();\nreturn msg;",
+        "func": "var nics = global.get('networkInterfaces');\nmsg.payload =[];\nconsole.log(nics);\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    console.log(ni);\n    if (nics[ni][0].address !== undefined) {\n        tempIP[ni]=nics[ni][0].address;\n        if (ni !== 'lo') {\n            msg.payload.push({\n                title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][0].address \n            });\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = tempIP['lo'];\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 220,
+        "y": 160,
         "wires": [
             [
-                "ecbf8a82.e0ce58",
-                "88136dde.78741"
-            ]
-        ]
-    },
-    {
-        "id": "ecbf8a82.e0ce58",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "networkInterfaces",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 760,
-        "y": 220,
-        "wires": [
-            [
-                "de82a97a.34a1f8",
-                "77d1ec0d.c31724"
+                "21cd203b.6f37c",
+                "f564ab88.947548"
             ]
         ]
     },
@@ -2823,8 +2778,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 870,
-        "y": 500,
+        "x": 810,
+        "y": 520,
         "wires": [
             [
                 "1ed4aa5a.8af176"
@@ -2882,12 +2837,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 980,
+        "x": 960,
         "y": 320,
         "wires": [
             [
-                "5a9407e8.fa2398",
-                "b8b57b0b.455b28"
+                "5a9407e8.fa2398"
             ]
         ]
     },
@@ -2910,12 +2864,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 430,
-        "y": 540,
+        "x": 420,
+        "y": 520,
         "wires": [
             [
-                "a6afd8dd.732578",
-                "b8b57b0b.455b28"
+                "a6afd8dd.732578"
             ]
         ]
     },
@@ -2938,8 +2891,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 380,
-        "y": 280,
+        "x": 390,
+        "y": 220,
         "wires": [
             [
                 "3c095ad9.f39cc6"
@@ -2985,16 +2938,6 @@
                 "f8e90910.c1fb88"
             ]
         ]
-    },
-    {
-        "id": "b8b57b0b.455b28",
-        "type": "play audio",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "voice": "21",
-        "x": 810,
-        "y": 460,
-        "wires": []
     },
     {
         "id": "c9aa36d9.5823f8",
@@ -3067,7 +3010,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 130,
+        "x": 110,
         "y": 640,
         "wires": [
             [
@@ -3488,9 +3431,9 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 4,
-        "width": 0,
-        "height": 0,
+        "order": 2,
+        "width": "6",
+        "height": "2",
         "name": "",
         "label": "OS Version",
         "format": "{{msg.payload}}",
@@ -3511,7 +3454,7 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 130,
+        "x": 110,
         "y": 780,
         "wires": [
             [
@@ -3551,9 +3494,9 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 6,
-        "width": 0,
-        "height": 0,
+        "order": 4,
+        "width": "6",
+        "height": "1",
         "name": "",
         "label": "Uptime",
         "format": "{{msg.payload.uptime}} seconds",
@@ -3778,9 +3721,9 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 5,
-        "width": 0,
-        "height": 0,
+        "order": 3,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "label": "Go to Updates",
         "tooltip": "",
@@ -5550,11 +5493,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "5",
+        "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": "5",
-        "x": 190,
+        "x": 180,
         "y": 160,
         "wires": [
             [
@@ -6161,7 +6104,7 @@
         "type": "debug",
         "z": "9745920.d8a397",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6487,8 +6430,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 496.22221755981445,
-        "y": 958.3888874053955,
+        "x": 500,
+        "y": 960,
         "wires": [
             [
                 "29e236ab.83528a"
@@ -7210,20 +7153,6 @@
         ]
     },
     {
-        "id": "88136dde.78741",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 710,
-        "y": 180,
-        "wires": []
-    },
-    {
         "id": "6a08424c.7b4b1c",
         "type": "ui_button",
         "z": "a06855ce.9f5488",
@@ -7241,7 +7170,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 140,
+        "x": 120,
         "y": 580,
         "wires": [
             [
@@ -7263,14 +7192,9 @@
         "x": 490,
         "y": 580,
         "wires": [
+            [],
+            [],
             [
-                "1cbfece6.c8ee93"
-            ],
-            [
-                "1a67d67a.5a598a"
-            ],
-            [
-                "6a00eb59.015484",
                 "6528c9e.07b4038"
             ]
         ]
@@ -7282,9 +7206,9 @@
         "name": "",
         "label": "Change Password",
         "group": "17f52c5b.cfb014",
-        "order": 6,
-        "width": 0,
-        "height": 0,
+        "order": 5,
+        "width": "6",
+        "height": "3",
         "options": [
             {
                 "label": "Password",
@@ -7350,22 +7274,6 @@
         ]
     },
     {
-        "id": "bf399be2.c9b918",
-        "type": "ui_text",
-        "z": "a06855ce.9f5488",
-        "group": "17f52c5b.cfb014",
-        "order": 7,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "col-center",
-        "x": 850,
-        "y": 1160,
-        "wires": []
-    },
-    {
         "id": "367077e4.def7a8",
         "type": "exec",
         "z": "a06855ce.9f5488",
@@ -7379,9 +7287,7 @@
         "x": 670,
         "y": 1100,
         "wires": [
-            [
-                "bf399be2.c9b918"
-            ],
+            [],
             [],
             []
         ]
@@ -7428,9 +7334,7 @@
         "x": 430,
         "y": 1220,
         "wires": [
-            [
-                "bf399be2.c9b918"
-            ]
+            []
         ]
     },
     {
@@ -7633,69 +7537,6 @@
         ]
     },
     {
-        "id": "6a00eb59.015484",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 910,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "1a67d67a.5a598a",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 910,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "1cbfece6.c8ee93",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 910,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "a05cf2e5.2e263",
-        "type": "delay",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 920,
-        "y": 720,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "6528c9e.07b4038",
         "type": "switch",
         "z": "a06855ce.9f5488",
@@ -7715,8 +7556,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 920,
-        "y": 660,
+        "x": 780,
+        "y": 580,
         "wires": [
             [
                 "b7ef9aeb.b31358"
@@ -7738,8 +7579,8 @@
         "cancel": "",
         "topic": "Success",
         "name": "Success Notification",
-        "x": 1140,
-        "y": 640,
+        "x": 1020,
+        "y": 560,
         "wires": []
     },
     {
@@ -7754,8 +7595,8 @@
         "cancel": "",
         "topic": "Failed",
         "name": "Failed Notification",
-        "x": 1130,
-        "y": 680,
+        "x": 1010,
+        "y": 600,
         "wires": []
     },
     {
@@ -7805,5 +7646,136 @@
         "x": 810,
         "y": 1220,
         "wires": []
+    },
+    {
+        "id": "21cd203b.6f37c",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 610,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7a6bde0d.90a08",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "73493f86.f11df",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "label": "Update Interfaces",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "aac85b05.c667a8"
+            ]
+        ]
+    },
+    {
+        "id": "f564ab88.947548",
+        "type": "ui_list",
+        "z": "a06855ce.9f5488",
+        "group": "73493f86.f11df",
+        "name": "Network Interfaces",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "lineType": "one",
+        "actionType": "none",
+        "allowHTML": true,
+        "x": 650,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "127b37d8.6c9228",
+        "type": "http response",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1290,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c4eefb13.3f05d8",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Setup Redirect to PHP Processing",
+        "func": "delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.internalIPv4 + '/processing.php'\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1060,
+        "y": 440,
+        "wires": [
+            [
+                "127b37d8.6c9228"
+            ]
+        ]
+    },
+    {
+        "id": "6ee73805.11a858",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Updates Failed",
+        "name": "Show Update Failure",
+        "x": 980,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "6263486e.492748",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 440,
+        "wires": [
+            [
+                "c4eefb13.3f05d8"
+            ],
+            []
+        ]
     }
 ]
