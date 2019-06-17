@@ -3,7 +3,7 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./nodered_update.sh                       ####
 #### Description: Updates Node Red                    ####
-#### Version: 0.2                                     ####
+#### Version: 0.20190614                              ####
 ##########################################################
 
 echo "Unsecuring Node Red Temporarily"
@@ -29,13 +29,13 @@ LINE_DIFF=`diff /opt/hiveid-ap/node.flows.js $CONF | wc -l`
 
 if [ "$LINE_DIFF" -eq "0" ]; then 
     echo "Skipping flow updates"
-    exit 0
+else
+    if [ -f $CONF ]; then 
+        sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
+    fi
+    
+    cp /opt/hiveid-ap/node.flows.js $CONF
 fi
-
-if [ -f $CONF ]; then 
-    sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
-fi 
-cp /opt/hiveid-ap/node.flows.js $CONF
 
 echo "Restoring configuration and restarting Node Red"
 sudo service nodered stop
