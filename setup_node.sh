@@ -20,21 +20,21 @@ sudo service nodered stop
 
 sudo npm cache clean -f
 sudo chown -R root:root /root/.npm /root/.node-gyp /root /usr/lib/node_modules
-sudo npm install npm -g  
-sudo npm install node-gyp --unsafe-perm --no-audit -g
-sudo npm install zmq --unsafe-perm --no-audit -g
+sudo npm install npm -g --loglevel=error 
+sudo npm install node-gyp --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install zmq --unsafe-perm --no-audit -g --loglevel=error
 sudo chown -R root:root /root/.npm /root/.node-gyp /root /usr/lib/node_modules
-sudo npm install usb  --unsafe-perm --no-audit -g
-sudo npm install bluetooth-hci-socket --unsafe-perm --no-audit  -g
-sudo npm install bcrypt --unsafe-perm --no-audit -g
+sudo npm install usb  --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install bluetooth-hci-socket --unsafe-perm --no-audit  -g --loglevel=error
+sudo npm install bcrypt --unsafe-perm --no-audit -g --loglevel=error
 sudo chown -R root:root /root/.npm /root/.node-gyp /root /usr/lib/node_modules
-sudo npm install node-red-admin --unsafe-perm --no-audit -g
-sudo npm install noble --unsafe-perm --no-audit -g
-sudo npm install lodash --unsafe-perm --no-audit -g
-sudo npm install passwd-linux --unsafe-perm --no-audit -g
-sudo npm install ini --unsafe-perm --no-audit -g
-sudo npm install fs --unsafe-perm --no-audit -g
-sudo npm update -g
+sudo npm install node-red-admin --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install noble --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install lodash --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install passwd-linux --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install ini --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install fs --unsafe-perm --no-audit -g --loglevel=error
+sudo npm update -g --loglevel=error
 
 sudo chown -R pi:pi /home/pi/.node-red
 
