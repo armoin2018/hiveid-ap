@@ -3,7 +3,7 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./change_pwd.sh <password>                ####
 #### Description: Clean up file system                ####
-#### Version: 0.1                                     ####
+#### Version: 0.20190614                              ####
 ##########################################################
 
 if [ -z "$1" ]; then 
@@ -17,4 +17,4 @@ fi
 echo -e "$PWD\n$PWD\n" | passwd pi
 echo -e "$PWD\n$PWD\n" | vncpasswd -service 
 
-sudo ./nodered_secure.sh $PWD
+/opt/hiveid-ap/nodered_secure.sh $PWD

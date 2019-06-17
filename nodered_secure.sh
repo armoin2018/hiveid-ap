@@ -1,9 +1,9 @@
 #!/bin/bash
 ##########################################################
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
-#### Usage: sudo ./nodered_secure.sh password         ####
+#### Usage: ./nodered_secure.sh password              ####
 #### Description: Sets up security for node-red       ####
-#### Version: 0.1                                     ####
+#### Version: 0.20190614                              ####
 ##########################################################
 
 IN_PWD=$1
