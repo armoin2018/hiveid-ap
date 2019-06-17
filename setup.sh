@@ -3,17 +3,20 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup.sh                                ####
 #### Description: Installs all packages               ####
-#### Version: 0.1                                     ####
+#### Version: 0.20190614                              ####
 ##########################################################
 cd /opt/hiveid-ap
 
-./system_update.sh
+/opt/hiveid-ap/system_update.sh
 
-sudo apt-get install --yes git curl firefox-esr iw at
-sudo apt-get install --yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
-sudo apt-get install --yes jython arduino arduino-mk
-sudo apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
-suod apt-get install --yes bleachbit
+export DEBIAN_FRONTEND=noninteractive
+sudo apt-get install --qq --force-yes git curl firefox-esr iw at
+sudo apt-get install --qq --force-yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
+sudo apt-get install --qq --force-yes jython arduino arduino-mk
+sudo apt-get install --qq --force-yes libbluetooth-dev libudev-dev pi-bluetooth
+suod apt-get install --qq --force-yes bleachbit
+export DEBIAN_FRONTEND=dialog
+
 
 sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup /usr/local/hiveid-ap/ota /var/log/hiveid-ap /etc/hiveid-ap
 sudo chown -R pi:pi /usr/local/hiveid-ap /var/log/hiveid-ap 

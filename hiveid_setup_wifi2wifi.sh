@@ -3,7 +3,7 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)                                         ####
 #### Usage: sudo ./hiveid_setup_wifi2wifi.sh NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD  ####
 #### Description: Sets up Raspberry Pi as a WiFi to WiFi Gateway                          ####
-#### Version: 0.2                                                                         ####
+#### Version: 0.20190614                                                                  ####
 ##############################################################################################
 if [ -z "$3" ]; then 
     echo "Insufficient argument list"
@@ -15,8 +15,11 @@ else
     PWD2=$3
 fi
 
-apt-get update && apt-get upgrade --yes && apt-get autoremove --yes
+
+/opt/hiveid-ap/system_update.sh
+export DEBIAN_FRONTEND=noninteractive
 apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw openssh-server
+export DEBIAN_FRONTEND=dialog
 
 systemctl enable multi-user.target --force
 systemctl set-default multi-user.target

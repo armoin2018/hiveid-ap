@@ -3,10 +3,10 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup_shell_default.sh                  ####
 #### Description: Sets up lxde                        ####
-#### Version: 0.1                                     ####
+#### Version: 0.20190614                              ####
 ##########################################################
 
-sudo ./system_update.sh
+/opt/hiveid-ap/system_update.sh
 sudo update-alternatives --set x-session-manager /usr/bin/startlxde-pi
 
 echo "If you would like to see a list and change to another shell use the following command:"

@@ -3,7 +3,7 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)                       ####
 #### Usage: sudo ./hiveid_setup_wifi2eth.sh PASSWORD                    ####
 #### Description: Sets up Raspberry Pi as a WiFi to Ethernet Gateway    ####
-#### Version: 0.2                                                       ####
+#### Version: 0.20190614                                                ####
 ############################################################################
 
 if [ -z "$1" ]; then 
@@ -14,9 +14,10 @@ else
     PWD=$1
 fi
 
-
-apt-get update && apt-get upgrade --yes && apt-get autoremove --yes
+/opt/hiveid-ap/system_update.sh
+export DEBIAN_FRONTEND=noninteractive
 apt-get install --yes curl git hostapd dnsmasq iptables bridge-utils iw nmon ethtool lshw openssh-server
+export DEBIAN_FRONTEND=dialog
 
 systemctl enable multi-user.target --force
 systemctl set-default multi-user.target
