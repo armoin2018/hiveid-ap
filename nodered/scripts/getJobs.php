@@ -1,7 +1,7 @@
 <?php
     $jobs = `atq`;
     $jobList= preg_split('/\n/',$jobs);
-    $myResults = {};
+    $myResults = array();
     if (count($jobList) > 0 ) { 
         for ($i=0;$i < count($jobList);$i++) {
             $jobLine = preg_split('/\s+/',$jobList[$i]);
