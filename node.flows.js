@@ -899,8 +899,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 130,
-        "y": 500,
+        "x": 120,
+        "y": 540,
         "wires": [
             [
                 "b5df9eca.cde6b"
@@ -948,7 +948,8 @@
         "y": 380,
         "wires": [
             [
-                "de3137d8.c9ba48"
+                "de3137d8.c9ba48",
+                "de578607.2bd608"
             ]
         ]
     },
@@ -1038,7 +1039,8 @@
         "y": 440,
         "wires": [
             [
-                "60e3884f.3df908"
+                "60e3884f.3df908",
+                "62a9a8a6.197848"
             ]
         ]
     },
@@ -1133,8 +1135,8 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "Shutdown",
-        "x": 690,
-        "y": 500,
+        "x": 640,
+        "y": 540,
         "wires": [
             [
                 "c3ea8792.391e88"
@@ -2908,8 +2910,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 420,
-        "y": 500,
+        "x": 430,
+        "y": 540,
         "wires": [
             [
                 "a6afd8dd.732578",
@@ -3027,8 +3029,8 @@
         "interpolate": "linear",
         "nodata": "",
         "dot": false,
-        "ymin": "",
-        "ymax": "",
+        "ymin": "0",
+        "ymax": "100",
         "removeOlder": "5",
         "removeOlderPoints": "",
         "removeOlderUnit": "60",
@@ -7261,9 +7263,16 @@
         "x": 490,
         "y": 580,
         "wires": [
-            [],
-            [],
-            []
+            [
+                "1cbfece6.c8ee93"
+            ],
+            [
+                "1a67d67a.5a598a"
+            ],
+            [
+                "6a00eb59.015484",
+                "6528c9e.07b4038"
+            ]
         ]
     },
     {
@@ -7326,7 +7335,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Check Passwords",
-        "func": "msg1.payload={};\nmsg2.payload= {};\nif (msg.payload.PASS1 == msg.payload.PASS2) {\n    msg1.payload.PASSWORD=msg.payload.PASS1;\n} else {\n    msg2.payload = \"Passwords do not match\";\n}\nreturn [msg1,msg2];",
+        "func": "msg1.payload={};\nmsg2.payload= {};\nif (msg.payload.PASS1 == msg.payload.PASS2) {\n    msg1.payload.PASSWORD=msg.payload.PASS1;\n    msg2.payload = \"Changing Passwords\";\n} else {\n    msg2.payload = \"Passwords do not match\";\n}\nreturn [msg1,msg2];",
         "outputs": 2,
         "noerr": 0,
         "x": 410,
@@ -7336,7 +7345,7 @@
                 "367077e4.def7a8"
             ],
             [
-                "bf399be2.c9b918"
+                "7a652293.01ccbc"
             ]
         ]
     },
@@ -7352,7 +7361,7 @@
         "label": "",
         "format": "{{msg.payload}}",
         "layout": "col-center",
-        "x": 810,
+        "x": 850,
         "y": 1160,
         "wires": []
     },
@@ -7367,7 +7376,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 640,
+        "x": 670,
         "y": 1100,
         "wires": [
             [
@@ -7389,8 +7398,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 420,
-        "y": 1200,
+        "x": 240,
+        "y": 1220,
         "wires": [
             [
                 "419fb0d9.21572"
@@ -7416,7 +7425,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 650,
+        "x": 430,
         "y": 1220,
         "wires": [
             [
@@ -7439,8 +7448,7 @@
         "y": 220,
         "wires": [
             [
-                "b1933c19.2d82f",
-                "33a0dcf.5102a24"
+                "b1933c19.2d82f"
             ],
             [],
             []
@@ -7455,8 +7463,9 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 910,
+        "complete": "true",
+        "targetType": "full",
+        "x": 810,
         "y": 280,
         "wires": []
     },
@@ -7468,7 +7477,7 @@
         "sep": ",",
         "hdrin": "",
         "hdrout": "",
-        "multi": "mult",
+        "multi": "one",
         "ret": "\\n",
         "temp": "",
         "skip": "0",
@@ -7476,24 +7485,8 @@
         "y": 280,
         "wires": [
             [
-                "4ccff1fd.8062b",
-                "33a0dcf.5102a24"
-            ]
-        ]
-    },
-    {
-        "id": "4ccff1fd.8062b",
-        "type": "function",
-        "z": "7b5cf843.8f8fc8",
-        "name": "Create Node View",
-        "func": "/*msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n\n\nvar JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Object.keys(Stores)) {\n    console.log(store);\n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Object.keys(Stores[store].elements)) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;\n*/\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 570,
-        "y": 320,
-        "wires": [
-            [
-                "c19e7c4.9016c8"
+                "33a0dcf.5102a24",
+                "5d886417.9ca5ec"
             ]
         ]
     },
@@ -7507,7 +7500,7 @@
         "payloadType": "global",
         "repeat": "60",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
         "x": 220,
         "y": 220,
@@ -7515,24 +7508,6 @@
             [
                 "bec6e433.866148"
             ]
-        ]
-    },
-    {
-        "id": "c19e7c4.9016c8",
-        "type": "ui_list",
-        "z": "7b5cf843.8f8fc8",
-        "group": "873f13f8.22f2b",
-        "name": "",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "lineType": "three",
-        "actionType": "none",
-        "allowHTML": true,
-        "x": 890,
-        "y": 320,
-        "wires": [
-            []
         ]
     },
     {
@@ -7600,5 +7575,235 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "4b1c0f98.05edc",
+        "type": "ui_template",
+        "z": "7b5cf843.8f8fc8",
+        "group": "873f13f8.22f2b",
+        "name": "",
+        "order": 0,
+        "width": "12",
+        "height": "6",
+        "format": "<div layout=\"row\" layout-align=\"space-between\">\n  <strong>{{msg.payload.IP_ADDRESS}}</strong>&nbsp;\n  {{msg.payload.MAC_ADDRESS}}\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 880,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3176c5dc.e897ba",
+        "type": "http request",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "4b1c0f98.05edc",
+                "33a0dcf.5102a24"
+            ]
+        ]
+    },
+    {
+        "id": "5d886417.9ca5ec",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set URL",
+        "func": "msg.url = 'http://' + msg.payload.col3 + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 340,
+        "wires": [
+            [
+                "3176c5dc.e897ba"
+            ]
+        ]
+    },
+    {
+        "id": "6a00eb59.015484",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 910,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "1a67d67a.5a598a",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 910,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "1cbfece6.c8ee93",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 910,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "a05cf2e5.2e263",
+        "type": "delay",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 920,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6528c9e.07b4038",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "Check Results",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 920,
+        "y": 660,
+        "wires": [
+            [
+                "b7ef9aeb.b31358"
+            ],
+            [
+                "e992e762.65fa68"
+            ]
+        ]
+    },
+    {
+        "id": "b7ef9aeb.b31358",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "Green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Success",
+        "name": "Success Notification",
+        "x": 1140,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e992e762.65fa68",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "Red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Failed",
+        "name": "Failed Notification",
+        "x": 1130,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "62a9a8a6.197848",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "0",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Upgrades Running. This will take a few minutes and interface will relaunch.",
+        "name": "HiveID Upgrade Notification",
+        "x": 460,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "de578607.2bd608",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Raspberry Pi is upgrading, once completed it will request a reboot.",
+        "name": "OS Upgrade Notification",
+        "x": 450,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7a652293.01ccbc",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 810,
+        "y": 1220,
+        "wires": []
     }
 ]
