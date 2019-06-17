@@ -3,7 +3,7 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup.sh                                ####
 #### Description: Installs all packages               ####
-#### Version: 0.20190614                              ####
+#### Version: 0.20190617                              ####
 ##########################################################
 cd /opt/hiveid-ap
 
@@ -79,15 +79,10 @@ if [[ "$CNT" -eq "0" ]]; then
     sudo sed -i -e "s/$/ net.ifnames=0/" /boot/cmdline.txt
 fi
 
-sudo mkir /var/ww/html 2>/dev/null
-sudo cp /opt/hiveid-ap/index.php /var/www/html/.
-sudo rm /var/www/html/index.html
-sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap /var/www/html
-
 pcmanfm --set-wallpaper=/opt/hiveid-ap/nodered/images/hiveid.png --wallpaper-mode=screen
-sudo cp /opt/hiveid-ap/nodered/images/hiveid.png /usr/share/plymouth/themes/pix/splash.png
 
 cd /opt/hiveid-ap
+./setup_links.sh
 ./setup_node.sh
 ./hiveid_set_wifi2eth.sh
 

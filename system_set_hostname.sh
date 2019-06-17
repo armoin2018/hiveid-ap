@@ -7,6 +7,7 @@
 ##########################################################
 
 DATE=`date '+%Y%m%d%H%M%S'`
+OLD_HOST=$HOSTNAME
 NEW_HOST=$1
 if [ "$NEW_HOST" == "" ]; then
     echo "A hostname is required to complete this action"
@@ -23,5 +24,6 @@ sudo echo $NEW_HOST > /etc/hostname
 sudo sed -i "s/^hostname.*$/hostname $NEW_HOST/g" /etc/dhcpcd.conf
 sudo sed -i "s/^ssid=.*$/ssid=$NEW_HOST/g" /etc/hostapd/hostapd.conf
 sudo sed -i "s/^127\.0\.1\.1.*$/127.0.1.1\t$NEW_HOST/g" /etc/hosts
+cp /home/pi/.node-red/flows_$OLD_HOST.json /home/pi/.node-red/flows_$NEW_HOST.json
 
 echo "Reboot for changes to take effect"
