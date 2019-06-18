@@ -772,8 +772,8 @@
         "name": "",
         "files": "/etc/hostname",
         "recursive": "",
-        "x": 100,
-        "y": 60,
+        "x": 120,
+        "y": 100,
         "wires": [
             [
                 "e8ed6bdd.7a0138"
@@ -838,12 +838,10 @@
         "x": 1560,
         "y": 100,
         "wires": [
-            [
-                "9811ce1d.294a8"
-            ],
+            [],
             [],
             [
-                "3c095ad9.f39cc6"
+                "38766841.5fbec8"
             ]
         ]
     },
@@ -866,10 +864,10 @@
         "payloadType": "str",
         "topic": "",
         "x": 100,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
-                "9811ce1d.294a8"
+                "5a9407e8.fa2398"
             ]
         ]
     },
@@ -884,8 +882,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1490,
-        "y": 320,
+        "x": 1370,
+        "y": 280,
         "wires": [
             [],
             [],
@@ -911,10 +909,10 @@
         "payloadType": "str",
         "topic": "",
         "x": 110,
-        "y": 520,
+        "y": 580,
         "wires": [
             [
-                "b5df9eca.cde6b"
+                "a6afd8dd.732578"
             ]
         ]
     },
@@ -930,11 +928,13 @@
         "oldrc": false,
         "name": "",
         "x": 1020,
-        "y": 500,
+        "y": 580,
         "wires": [
             [],
             [],
-            []
+            [
+                "63871334.57f6ec"
+            ]
         ]
     },
     {
@@ -1005,11 +1005,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 750,
+        "x": 730,
         "y": 380,
         "wires": [
             [
-                "9811ce1d.294a8"
+                "5a9407e8.fa2398"
             ],
             [
                 "6ee73805.11a858"
@@ -1035,10 +1035,9 @@
         "payloadType": "str",
         "topic": "",
         "x": 140,
-        "y": 440,
+        "y": 460,
         "wires": [
             [
-                "60e3884f.3df908",
                 "62a9a8a6.197848"
             ]
         ]
@@ -1054,8 +1053,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 530,
-        "y": 440,
+        "x": 1110,
+        "y": 460,
         "wires": [
             [],
             [],
@@ -1063,22 +1062,6 @@
                 "6263486e.492748"
             ]
         ]
-    },
-    {
-        "id": "3c095ad9.f39cc6",
-        "type": "ui_text",
-        "z": "a06855ce.9f5488",
-        "group": "df05b319.59cad",
-        "order": 6,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "System Results",
-        "format": "{{msg.payload}}",
-        "layout": "col-center",
-        "x": 1660,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "92b7519d.28a39",
@@ -1097,8 +1080,7 @@
         "wires": [
             [
                 "e8ed6bdd.7a0138",
-                "aac85b05.c667a8",
-                "d618702e.2c062"
+                "aac85b05.c667a8"
             ]
         ]
     },
@@ -1112,10 +1094,10 @@
         "outputs": 1,
         "ok": "OK",
         "cancel": "Cancel",
-        "topic": "",
+        "topic": "Ready to Reboot?",
         "name": "Reboot",
-        "x": 1180,
-        "y": 320,
+        "x": 980,
+        "y": 280,
         "wires": [
             [
                 "d5da6758.1961a8"
@@ -1132,10 +1114,10 @@
         "outputs": 1,
         "ok": "OK",
         "cancel": "Cancel",
-        "topic": "",
+        "topic": "Ready to Shutdown?",
         "name": "Shutdown",
-        "x": 630,
-        "y": 520,
+        "x": 410,
+        "y": 580,
         "wires": [
             [
                 "c3ea8792.391e88"
@@ -2700,12 +2682,11 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "Change Name",
-        "x": 1080,
+        "x": 1040,
         "y": 100,
         "wires": [
             [
-                "e3822aa5.ea2aa8",
-                "fb5e4e59.7f52b"
+                "e3822aa5.ea2aa8"
             ]
         ]
     },
@@ -2731,30 +2712,16 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1250,
+        "x": 1230,
         "y": 40,
         "wires": [
             [
                 "5dec6d17.a36824"
             ],
             [
-                "109b7ab9.c9eb25"
+                "e8ed6bdd.7a0138"
             ]
         ]
-    },
-    {
-        "id": "fb5e4e59.7f52b",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 1250,
-        "y": 140,
-        "wires": []
     },
     {
         "id": "c3ea8792.391e88",
@@ -2778,13 +2745,16 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 810,
-        "y": 520,
+        "x": 730,
+        "y": 580,
         "wires": [
             [
-                "1ed4aa5a.8af176"
+                "1ed4aa5a.8af176",
+                "807662dd.7d8ab"
             ],
-            []
+            [
+                "f0e52c51.44523"
+            ]
         ]
     },
     {
@@ -2809,94 +2779,13 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1330,
-        "y": 320,
+        "x": 1150,
+        "y": 280,
         "wires": [
             [
                 "7cb7f74b.562db8"
             ],
             []
-        ]
-    },
-    {
-        "id": "9811ce1d.294a8",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Ready to Reboot?",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 960,
-        "y": 320,
-        "wires": [
-            [
-                "5a9407e8.fa2398"
-            ]
-        ]
-    },
-    {
-        "id": "b5df9eca.cde6b",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Ready to Shutdown?",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 520,
-        "wires": [
-            [
-                "a6afd8dd.732578"
-            ]
-        ]
-    },
-    {
-        "id": "d618702e.2c062",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 390,
-        "y": 220,
-        "wires": [
-            [
-                "3c095ad9.f39cc6"
-            ]
         ]
     },
     {
@@ -2949,7 +2838,7 @@
         "msgArray": false,
         "msgTemp": false,
         "x": 330,
-        "y": 640,
+        "y": 740,
         "wires": [
             [
                 "fed4cd3c.abeae"
@@ -2993,7 +2882,7 @@
         "useOldStyle": false,
         "outputs": 1,
         "x": 550,
-        "y": 640,
+        "y": 740,
         "wires": [
             []
         ]
@@ -3011,7 +2900,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 640,
+        "y": 780,
         "wires": [
             [
                 "c9aa36d9.5823f8",
@@ -3380,7 +3269,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 780,
+        "y": 880,
         "wires": [
             [
                 "9ba3f6e7.d8b438"
@@ -3393,7 +3282,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 820,
+        "y": 920,
         "wires": [
             [
                 "bdc61a3b.3e7758"
@@ -3406,7 +3295,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 720,
+        "y": 820,
         "wires": [
             [
                 "8a7998a8.747678"
@@ -3419,7 +3308,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 680,
+        "y": 780,
         "wires": [
             [
                 "2e18a81a.662928"
@@ -3439,7 +3328,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 710,
-        "y": 780,
+        "y": 880,
         "wires": []
     },
     {
@@ -3455,7 +3344,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 780,
+        "y": 880,
         "wires": [
             [
                 "302dd467.6f1a0c",
@@ -3486,7 +3375,7 @@
         "seg1": "",
         "seg2": "",
         "x": 720,
-        "y": 680,
+        "y": 780,
         "wires": []
     },
     {
@@ -3502,7 +3391,7 @@
         "format": "{{msg.payload.uptime}} seconds",
         "layout": "row-spread",
         "x": 500,
-        "y": 720,
+        "y": 820,
         "wires": []
     },
     {
@@ -3510,13 +3399,13 @@
         "type": "debug",
         "z": "a06855ce.9f5488",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 490,
-        "y": 820,
+        "x": 510,
+        "y": 920,
         "wires": []
     },
     {
@@ -3527,8 +3416,8 @@
         "func": "msg.payload = msg.payload.type + '-' + msg.payload.arch + '-' + msg.payload.release;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 500,
-        "y": 780,
+        "x": 520,
+        "y": 880,
         "wires": [
             [
                 "2a113082.e508b"
@@ -3544,7 +3433,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 510,
-        "y": 680,
+        "y": 780,
         "wires": [
             [],
             [
@@ -3710,7 +3599,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 860,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -3734,7 +3623,7 @@
         "payloadType": "json",
         "topic": "",
         "x": 120,
-        "y": 860,
+        "y": 1000,
         "wires": [
             [
                 "ec4da317.03502"
@@ -6132,8 +6021,8 @@
         "payload": "Would you like to change modes?",
         "payloadType": "str",
         "topic": "",
-        "x": 160,
-        "y": 400,
+        "x": 900,
+        "y": 440,
         "wires": [
             [
                 "11542bbf.5c74c4"
@@ -6152,8 +6041,8 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "",
-        "x": 190,
-        "y": 440,
+        "x": 930,
+        "y": 480,
         "wires": [
             [
                 "f31c81bb.20231"
@@ -6294,8 +6183,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 210,
-        "y": 480,
+        "x": 950,
+        "y": 520,
         "wires": [
             [
                 "5c2a8500.41db6c",
@@ -6314,8 +6203,8 @@
         "func": "msg.payload  ={\n    'SSID' :flow.get(\"SSID\"),\n    'passphrase' : flow.get('passphrase')\n};\n    \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 520,
-        "y": 580,
+        "x": 1260,
+        "y": 620,
         "wires": [
             []
         ]
@@ -6412,10 +6301,11 @@
         "payloadType": "str",
         "topic": "",
         "x": 180,
-        "y": 960,
+        "y": 1080,
         "wires": [
             [
-                "a5662777.20df48"
+                "a5662777.20df48",
+                "abba8031.890a8"
             ]
         ]
     },
@@ -6431,97 +6321,12 @@
         "oldrc": false,
         "name": "",
         "x": 500,
-        "y": 960,
+        "y": 1080,
         "wires": [
-            [
-                "29e236ab.83528a"
-            ],
-            [
-                "5f86a7b4.4666f8"
-            ],
+            [],
+            [],
             [
                 "7168080e.a7dc48"
-            ]
-        ]
-    },
-    {
-        "id": "23323538.aa622a",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Successfully Restarted",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 760,
-        "y": 1020,
-        "wires": [
-            [
-                "3c095ad9.f39cc6"
-            ]
-        ]
-    },
-    {
-        "id": "5f86a7b4.4666f8",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Error Occurred",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 760,
-        "y": 960,
-        "wires": [
-            [
-                "3c095ad9.f39cc6"
-            ]
-        ]
-    },
-    {
-        "id": "29e236ab.83528a",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Error 2 Occurred",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 760,
-        "y": 900,
-        "wires": [
-            [
-                "3c095ad9.f39cc6"
             ]
         ]
     },
@@ -6537,16 +6342,22 @@
                 "t": "eq",
                 "v": "0",
                 "vt": "str"
+            },
+            {
+                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
-        "x": 470,
-        "y": 1020,
+        "outputs": 2,
+        "x": 730,
+        "y": 1080,
         "wires": [
             [
-                "23323538.aa622a"
+                "b644d7aa.00e728"
+            ],
+            [
+                "97476705.d5f628"
             ]
         ]
     },
@@ -6561,8 +6372,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 830,
-        "y": 640,
+        "x": 1570,
+        "y": 680,
         "wires": [
             [],
             [],
@@ -6656,7 +6467,7 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 1440,
+        "x": 1820,
         "y": 80,
         "wires": [
             [
@@ -6686,8 +6497,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 310,
-        "y": 520,
+        "x": 1050,
+        "y": 560,
         "wires": [
             [],
             [
@@ -6703,7 +6514,7 @@
         "func": "var fs = require('fs');\nvar ini = require('ini');\n\nvar config = ini.parse(fs.readFileSync('/etc/hostpad/hostapd.conf', 'utf-8'))\n\nflow.set('AP',config);\n//fs.writeFileSync('./config_modified.ini', ini.stringify(config, { section: 'section' }))",
         "outputs": 1,
         "noerr": 0,
-        "x": 1090,
+        "x": 1470,
         "y": 100,
         "wires": [
             [
@@ -6726,7 +6537,7 @@
         "read": true,
         "write": false,
         "throwerror": false,
-        "x": 1050,
+        "x": 1430,
         "y": 60,
         "wires": [
             [
@@ -6743,7 +6554,7 @@
         "func": "msg.payload = {\n    \"group\" : {\n        \"show\": [\n            \"Network_Mode_Gateway_Settings\"\n        ], \n        \"focus\": true\n    }\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1110,
+        "x": 1490,
         "y": 140,
         "wires": [
             [
@@ -6756,7 +6567,7 @@
         "type": "ui_ui_control",
         "z": "9745920.d8a397",
         "name": "",
-        "x": 1080,
+        "x": 1460,
         "y": 180,
         "wires": [
             []
@@ -6781,7 +6592,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1430,
+        "x": 1810,
         "y": 40,
         "wires": [
             [
@@ -6808,7 +6619,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1420,
+        "x": 1800,
         "y": 160,
         "wires": [
             [
@@ -6835,7 +6646,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1440,
+        "x": 1820,
         "y": 280,
         "wires": [
             [
@@ -6858,7 +6669,7 @@
         "mode": "text",
         "delay": 300,
         "topic": "",
-        "x": 1430,
+        "x": 1810,
         "y": 200,
         "wires": [
             [
@@ -6881,7 +6692,7 @@
         "mode": "password",
         "delay": 300,
         "topic": "",
-        "x": 1450,
+        "x": 1830,
         "y": 320,
         "wires": [
             [
@@ -6901,8 +6712,8 @@
         "read": true,
         "write": true,
         "throwerror": true,
-        "x": 570,
-        "y": 420,
+        "x": 1310,
+        "y": 460,
         "wires": [
             [
                 "c7eeb9b5.728988"
@@ -6920,8 +6731,8 @@
         "func": "var fs = require('fs');\nvar ini = require('ini');\nvar AP = flow.get('AP');\n\nfs.writeFileSync('/etc/hostpad/hostapd.conf', ini.stringify(AP))",
         "outputs": 1,
         "noerr": 0,
-        "x": 610,
-        "y": 460,
+        "x": 1350,
+        "y": 500,
         "wires": [
             [
                 "acd4a1d3.1b2d1"
@@ -6940,8 +6751,8 @@
         "cancel": "",
         "topic": "",
         "name": "Unable to Update",
-        "x": 870,
-        "y": 460,
+        "x": 1610,
+        "y": 500,
         "wires": []
     },
     {
@@ -6970,8 +6781,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 820,
-        "y": 420,
+        "x": 1560,
+        "y": 460,
         "wires": [
             [
                 "fbe25c85.8ae56"
@@ -6986,8 +6797,8 @@
         "links": [
             "acd4a1d3.1b2d1"
         ],
-        "x": 255,
-        "y": 1020,
+        "x": 295,
+        "y": 1120,
         "wires": [
             [
                 "a5662777.20df48"
@@ -7002,8 +6813,8 @@
         "links": [
             "49f928a1.ffb798"
         ],
-        "x": 795,
-        "y": 500,
+        "x": 1535,
+        "y": 540,
         "wires": []
     },
     {
@@ -7025,7 +6836,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1480,
+        "x": 1860,
         "y": 120,
         "wires": [
             []
@@ -7050,7 +6861,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1470,
+        "x": 1850,
         "y": 240,
         "wires": [
             []
@@ -7075,7 +6886,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1490,
+        "x": 1870,
         "y": 360,
         "wires": [
             []
@@ -7092,8 +6903,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 830,
-        "y": 560,
+        "x": 1570,
+        "y": 600,
         "wires": [
             [],
             [],
@@ -7171,7 +6982,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 120,
-        "y": 580,
+        "y": 680,
         "wires": [
             [
                 "e1986986.8508b8"
@@ -7190,7 +7001,7 @@
         "oldrc": false,
         "name": "",
         "x": 490,
-        "y": 580,
+        "y": 680,
         "wires": [
             [],
             [],
@@ -7231,42 +7042,28 @@
         "submit": "Change",
         "cancel": "Cancel",
         "topic": "",
-        "x": 160,
-        "y": 1140,
+        "x": 130,
+        "y": 1240,
         "wires": [
             [
-                "b6649e5f.4d6f1",
                 "ff08124.c1692f"
             ]
         ]
-    },
-    {
-        "id": "b6649e5f.4d6f1",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 390,
-        "y": 1080,
-        "wires": []
     },
     {
         "id": "ff08124.c1692f",
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Check Passwords",
-        "func": "msg1.payload={};\nmsg2.payload= {};\nif (msg.payload.PASS1 == msg.payload.PASS2) {\n    msg1.payload.PASSWORD=msg.payload.PASS1;\n    msg2.payload = \"Changing Passwords\";\n} else {\n    msg2.payload = \"Passwords do not match\";\n}\nreturn [msg1,msg2];",
+        "func": "msg1.payload={};\nmsg2.payload={};\nif (msg.payload.PASS1 == msg.payload.PASS2) {\n    msg1.payload.PASSWORD=msg.payload.PASS1;\n    msg2.payload = \"Changing Passwords\";\n} else {\n    msg2.payload = \"Passwords do not match\";\n}\nreturn [msg1,msg2];",
         "outputs": 2,
         "noerr": 0,
-        "x": 410,
-        "y": 1140,
+        "x": 350,
+        "y": 1240,
         "wires": [
             [
-                "367077e4.def7a8"
+                "6a34c3ad.5b1e0c",
+                "4a4d9e53.4b233"
             ],
             [
                 "7a652293.01ccbc"
@@ -7277,64 +7074,21 @@
         "id": "367077e4.def7a8",
         "type": "exec",
         "z": "a06855ce.9f5488",
-        "command": "echo ",
+        "command": "/opt/hiveid-ap/change_pwd.sh",
         "addpay": true,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 670,
-        "y": 1100,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "9d5d2cb.7ed4fd",
-        "type": "inject",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 240,
+        "x": 970,
         "y": 1220,
         "wires": [
+            [],
+            [],
             [
-                "419fb0d9.21572"
+                "b207f0f9.a759a"
             ]
-        ]
-    },
-    {
-        "id": "419fb0d9.21572",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 430,
-        "y": 1220,
-        "wires": [
-            []
         ]
     },
     {
@@ -7556,8 +7310,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 780,
-        "y": 580,
+        "x": 760,
+        "y": 680,
         "wires": [
             [
                 "b7ef9aeb.b31358"
@@ -7580,7 +7334,7 @@
         "topic": "Success",
         "name": "Success Notification",
         "x": 1020,
-        "y": 560,
+        "y": 660,
         "wires": []
     },
     {
@@ -7596,24 +7350,28 @@
         "topic": "Failed",
         "name": "Failed Notification",
         "x": 1010,
-        "y": 600,
+        "y": 700,
         "wires": []
     },
     {
         "id": "62a9a8a6.197848",
         "type": "ui_toast",
         "z": "a06855ce.9f5488",
-        "position": "top right",
+        "position": "dialog",
         "displayTime": "0",
         "highlight": "",
-        "outputs": 0,
+        "outputs": 1,
         "ok": "OK",
         "cancel": "",
-        "topic": "Upgrades Running. This will take a few minutes and interface will relaunch.",
+        "topic": "These upgrades will take time to load and the application will be unavailable during hte upgrades.  Do you want continue?",
         "name": "HiveID Upgrade Notification",
         "x": 460,
-        "y": 480,
-        "wires": []
+        "y": 460,
+        "wires": [
+            [
+                "550e8e3f.404b2"
+            ]
+        ]
     },
     {
         "id": "de578607.2bd608",
@@ -7637,14 +7395,14 @@
         "z": "a06855ce.9f5488",
         "position": "top right",
         "displayTime": "3",
-        "highlight": "",
+        "highlight": "red",
         "outputs": 0,
         "ok": "OK",
         "cancel": "",
-        "topic": "",
-        "name": "",
-        "x": 810,
-        "y": 1220,
+        "topic": "Passwords Mismatch",
+        "name": "Mismatch Notice",
+        "x": 630,
+        "y": 1260,
         "wires": []
     },
     {
@@ -7652,7 +7410,7 @@
         "type": "debug",
         "z": "a06855ce.9f5488",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -7681,7 +7439,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 130,
-        "y": 200,
+        "y": 220,
         "wires": [
             [
                 "aac85b05.c667a8"
@@ -7713,7 +7471,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1290,
+        "x": 1870,
         "y": 440,
         "wires": []
     },
@@ -7725,7 +7483,7 @@
         "func": "delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.internalIPv4 + '/processing.php'\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1060,
+        "x": 1640,
         "y": 440,
         "wires": [
             [
@@ -7745,7 +7503,7 @@
         "cancel": "",
         "topic": "Updates Failed",
         "name": "Show Update Failure",
-        "x": 980,
+        "x": 1020,
         "y": 380,
         "wires": []
     },
@@ -7769,13 +7527,508 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 830,
-        "y": 440,
+        "x": 1410,
+        "y": 460,
         "wires": [
             [
                 "c4eefb13.3f05d8"
             ],
+            [
+                "2223aa48.2be086"
+            ]
+        ]
+    },
+    {
+        "id": "550e8e3f.404b2",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Cancel",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 460,
+        "wires": [
+            [
+                "60e3884f.3df908",
+                "e60f8bcd.255b68"
+            ],
+            [
+                "57136f85.b74d3"
+            ]
+        ]
+    },
+    {
+        "id": "38766841.5fbec8",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "5a9407e8.fa2398"
+            ],
+            [
+                "bd2d57f0.2622f8"
+            ]
+        ]
+    },
+    {
+        "id": "abba8031.890a8",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Restarting Gateway Services",
+        "name": "Restarting Gateway Services",
+        "x": 500,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "6a34c3ad.5b1e0c",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set Password",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.PASSWORD",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 1220,
+        "wires": [
+            [
+                "367077e4.def7a8"
+            ]
+        ]
+    },
+    {
+        "id": "4a4d9e53.4b233",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Passwords Resetting. Services will restart.",
+        "name": "Restart Notice",
+        "x": 620,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "bd2d57f0.2622f8",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "An issue occurred, Not Rebooting",
+        "name": "Not rebooting message",
+        "x": 1030,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d44072e9.fc142",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "group": "98512fe8.4ad4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Restart Editor and Interface",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "autorenew",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 160,
+        "y": 1380,
+        "wires": [
+            [
+                "74ca8036.a5bdb"
+            ]
+        ]
+    },
+    {
+        "id": "74ca8036.a5bdb",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "Ready to Restart Editor and Interface?",
+        "name": "Restart Node-Red",
+        "x": 630,
+        "y": 1380,
+        "wires": [
+            [
+                "1ecb5d68.ee8303"
+            ]
+        ]
+    },
+    {
+        "id": "1ecb5d68.ee8303",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Cancel",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 1380,
+        "wires": [
+            [
+                "260fc6de.f3479a",
+                "a03e3ca8.3c9c3"
+            ],
+            [
+                "fe750cdf.f1c19"
+            ]
+        ]
+    },
+    {
+        "id": "260fc6de.f3479a",
+        "type": "exec",
+        "z": "a06855ce.9f5488",
+        "command": "sudo service nodered restart",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1160,
+        "y": 1380,
+        "wires": [
+            [],
+            [],
             []
         ]
+    },
+    {
+        "id": "b207f0f9.a759a",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 1300,
+        "wires": [
+            [
+                "74ca8036.a5bdb"
+            ],
+            [
+                "1d72c2d2.dd9c8d"
+            ]
+        ]
+    },
+    {
+        "id": "1d72c2d2.dd9c8d",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Unable to reset all the passwords",
+        "name": "Password Change Failure",
+        "x": 1150,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "fe750cdf.f1c19",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Not restarting Editor and Interface",
+        "name": "Not Restarting Node-Red",
+        "x": 1150,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "b644d7aa.00e728",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Gateway Restarted",
+        "name": "Gateway Restarted",
+        "x": 930,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "97476705.d5f628",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Gateway was unable to restart",
+        "name": "Gateway was unable to restart",
+        "x": 970,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "a03e3ca8.3c9c3",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Restarting Editor and Interface",
+        "name": "Restarting Node-Red",
+        "x": 1140,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "807662dd.7d8ab",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "Green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Shutting Down",
+        "name": "Shutting Down",
+        "x": 1000,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f0e52c51.44523",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Not shutting down",
+        "name": "Not shutting down",
+        "x": 1010,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c393816f.5e065",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "Green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Shutdown Requested",
+        "name": "Shutdown Requested",
+        "x": 1460,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "63871334.57f6ec",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1230,
+        "y": 580,
+        "wires": [
+            [
+                "c393816f.5e065"
+            ],
+            [
+                "c3826261.4667"
+            ]
+        ]
+    },
+    {
+        "id": "c3826261.4667",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "Red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Shutdown Request Failed",
+        "name": "Shutdown Request Failed",
+        "x": 1470,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e60f8bcd.255b68",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "green",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Upgrade Started",
+        "name": "Upgrade Started",
+        "x": 1010,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "57136f85.b74d3",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Not Upgrading",
+        "name": "Not Upgrading",
+        "x": 1000,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "2223aa48.2be086",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "Failed to schedule upgrade",
+        "name": "Failed to schedule upgrade",
+        "x": 1620,
+        "y": 480,
+        "wires": []
     }
 ]

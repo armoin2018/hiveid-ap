@@ -4,7 +4,7 @@
 #### Usage: ./nodered_unsecure.sh                     ####
 #### Description: Sets Node-Red to a default unsecure ####
 ####              Configuration during upgrade script ####
-#### Version: 1.0                                     ####
+#### Version: 0.20190618                              ####
 ##########################################################
 
 CONF=/home/pi/.node-red/settings.js
@@ -36,6 +36,5 @@ else
     cp $UNSECURE_SOURCE $CONF
 
     sudo chown -R pi:pi /home/pi/.node-red
-    echo "Starting Node-Red Service"
-    sudo service nodered start
+    echo "Restart Node-Red"
 fi
