@@ -56,7 +56,7 @@ function parseFile($inFile) {
         $file = file_get_contents($inFile);
         $a_file = preg_split('/\n/',$file);
         foreach ($a_file as $line) {
-            if (!preg_match('/(^\#|^$)/')) {
+            if (!preg_match('/(^\#|^$)/',$line)) {
                 if (preg_match('/([^\=]*)\=(.+)$/',$line,$matches)) {
                     $myResults[$matches[1]] = $matches[2];
                 }
