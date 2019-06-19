@@ -72,7 +72,6 @@ if (!empty($myResults['gateway'])) {
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($myResults, JSON_PRETTY_PRINT);
 
-
 function parseFile($inFile) {
     $myResults = array();
     if (file_exists($inFile)) {
