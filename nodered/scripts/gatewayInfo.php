@@ -53,6 +53,7 @@ foreach ($myResults['iptables'] as $line) {
     }
 }
 
+
 $myResults['routes'] = preg_split('/\n/',trim(`route -v`));
 
 if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches)) {
