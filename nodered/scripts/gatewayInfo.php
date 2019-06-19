@@ -15,7 +15,7 @@ $netinfoList = preg_split('/\n/', $netinfo);
 if (!empty($netinfoList)) {
     foreach ($netinfoList as $line) {
         if (preg_match_all('/^\d+\:\s(\w+).+inet\s([\d\.]+)\//',$line,$matches)) {
-            $myResults['interfaces'][] = array($matches[1],$matches[2]); 
+            $myResults['interfaces'][$matches[1]] = $matches[2]; 
         }
     }
 }
@@ -48,7 +48,7 @@ $myResults['routes'] = preg_split('/\n/',trim(`route -v`));
 
 if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches)) {
     $myResults['gateway']['lan']['iface'] = $matches[1] . $matches[2];
-    $myResults['gateway']['lan']['type'] = ($matches[1] == 'wan') 
+    $myResults['gateway']['lan']['type'] = ($matches[1] == 'wlan') 
         ? 'wireless'
         : 'ethernet';
 }
