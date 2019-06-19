@@ -69,10 +69,10 @@ if (!empty($myResults['gateway'])) {
     }
 }
 
-$services = `systemctl -l --no-pager --no-legend | sort`;
+$services = `systemctl -l --no-pager --no-legend | grep -v "^-" |sort`;
 $serviceList = preg_split('/\n/',$services);
 foreach ($serviceList as $line) {
-    if (preg_match('/^(\w+)[\s\t]+(\w+)\s(\w+)\s(\w+)[\s\t]+(.+)$/',$line,$matches)) {
+    if (preg_match('/^(.+)[\s\t]+(\w+)\s(\w+)\s(\w+)[\s\t]+(.+)$/',$line,$matches)) {
         $myResults['services'][$matches[1]] = array(
             'description' => $matches[5],
             'LOAD' => $matches[2],
