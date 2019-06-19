@@ -11,10 +11,11 @@ if (file_exists($hostapd_file)) {
 }
 
 $netinfo = `ip -o address`;
-if (!empty($netinfo)) {
-    foreach (preg_split('/\n/', $netinfo) as $line) {
-        if (preg_match_all('/\d+\:\s(\w+)\sinet\s([\d\.]+)\//',$line,$matches)) {
-            $myResults['interfaces'][] = array($matches[1],$matches[2]);
+$netinfoList = preg_split('/\n/', $netinfo);
+if (!empty($netinfoList)) {
+    foreach ($netinfoList as $line) {
+        if (preg_match_all('/^\d+\:\s(\w+).+inet\s([\d\.]+)\//',$line,$matches)) {
+            $myResults['interfaces'][] = array($matches[1],$matches[2]); 
         }
     }
 }
@@ -45,6 +46,12 @@ if (file_exists($dhcpcd_file)) {
 $myResults['iptables'] = preg_split('/\n/',trim(`cat /etc/iptables.ipv4.nat`));
 $myResults['routes'] = preg_split('/\n/',trim(`route -v`));
 
+if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches)) {
+    $myResults['gateway']['lan']['iface'] = $matches[1] . $matches[2];
+    $myResults['gateway']['lan']['type'] = ($matches[1] == 'wan') 
+        ? 'wireless'
+        : 'ethernet';
+}
 
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($myResults, JSON_PRETTY_PRINT);
