@@ -65,7 +65,7 @@ if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches))
 $myResults['gateway']['mode'] = 'none';
 if (!empty($myResults['gateway'])) {
     if (!empty($myResults['gateway']['lan']) && !empty($myResults['gateway']['wan'])) {
-        $myResults['gateway']['mode'] = $myResults['gateway']['lan'] . ' to ' . $myResults['gateway']['wan'];
+        $myResults['gateway']['mode'] = $myResults['gateway']['lan']['type'] . ' to ' . $myResults['gateway']['wan']['type'];
     }
 }
 
