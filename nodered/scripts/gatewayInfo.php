@@ -20,10 +20,7 @@ if (!empty($netinfo)) {
 }
 
 $dnsmasq_file = '/etc/dnsmasq.conf';
-if (file_exists($dnsmasq_file)) {
-    $dnsmasq = parse_ini_file($dnsmasq_file);
-    $myResults['dnsmasq'] = $dnsmasq;
-}
+$myResults['dnsmasq'] = parseFile($dnsmasq_file);
 
 $dhcpcd_file = '/etc/dhcpcd.conf';
 if (file_exists($dhcpcd_file)) {
@@ -51,4 +48,21 @@ $myResults['routes'] = preg_split('/\n/',trim(`route -v`));
 
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($myResults, JSON_PRETTY_PRINT);
+
+
+function parseFile($inFile) {
+    $myResults = array();
+    if (file_exists($inFile)) {
+        $file = file_get_contents($inFile);
+        $a_file = preg_split('/\n/',$file);
+        foreach ($a_file as $line) {
+            if (!preg_match('/(^\#|^$)/')) {
+                if (preg_match('/([^\=]*)\=(.+)$/',$line,$matches)) {
+                    $myResults[$matches[1]] = $matches[2];
+                }
+            }
+        }
+    }
+    return $myResults;
+}
 ?>
