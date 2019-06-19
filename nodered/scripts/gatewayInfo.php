@@ -74,7 +74,7 @@ $serviceList = preg_split('/\n/',$services);
 foreach ($serviceList as $line) {
     if (preg_match('/^([^\s\t]+)[\s\t]+(\w+)\s(\w+)\s(\w+)[\s\t]+(.+)$/',$line,$matches)) {
         $myResults['services'][$matches[1]] = array(
-            'description' => $matches[5],
+            'description' => trim($matches[5]),
             'LOAD' => $matches[2],
             'ACTIVE' => $matches[3],
             'SUB'=> $matches[4]
