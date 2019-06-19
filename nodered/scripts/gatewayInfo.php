@@ -1,7 +1,7 @@
 <?php
 $myResults = array();
 
-$myResults['hostname'] = `cat /etc/hostname`;
+$myResults['hostname'] = trim(`cat /etc/hostname`);
 
 $hostapd_file = '/etc/hostapd/hostapd.conf';
 if (file_exists($hostapd_file)) {
@@ -45,8 +45,8 @@ if (file_exists($dhcpcd_file)) {
     }
 }
 
-$myResults['iptables'] = `cat /etc/iptables.ipv4.nat`;
-$myResults['routes'] = `route -v`;
+$myResults['iptables'] = preg_split('/\n/',trim(`cat /etc/iptables.ipv4.nat`));
+$myResults['routes'] = preg_split('/\n/',trim(`route -v`));
 
 
 header("Content-type: application/json; charset=utf-8");
