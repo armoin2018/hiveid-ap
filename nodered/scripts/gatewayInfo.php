@@ -44,7 +44,7 @@ if (file_exists($dhcpcd_file)) {
 }
 
 $myResults['iptables'] = preg_split('/\n/',trim(`cat /etc/iptables.ipv4.nat`));
-foreach ($iptables as $line) {
+foreach ($myResults['iptables'] as $line) {
     if (preg_match('/POSTROUTING\s\-o\s(\w+)\s/', $line,$matches)) {
         $myResults['gateway']['wan']['iface'] = $matches[1];
         $myResults['gateway']['wan']['type'] = ($matches[1] == 'wlan') 
