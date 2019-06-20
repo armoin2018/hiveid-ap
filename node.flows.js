@@ -8705,7 +8705,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 910,
+        "x": 1090,
         "y": 960,
         "wires": [
             [
@@ -8787,7 +8787,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 900,
+        "x": 1080,
         "y": 1000,
         "wires": [
             [
@@ -8913,7 +8913,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 880,
+        "x": 1060,
         "y": 920,
         "wires": [
             [
@@ -8925,14 +8925,14 @@
         "id": "d5c9c93d.040dc8",
         "type": "exec",
         "z": "11b2f565.0266ab",
-        "command": "/opt/hiveid-ap/nodered_set_flows.sh",
+        "command": "echo \"/opt/hiveid-ap/nodered_set_flows.sh\" | at -M now",
         "addpay": false,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 470,
+        "x": 530,
         "y": 980,
         "wires": [
             [],
@@ -8963,7 +8963,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 710,
+        "x": 890,
         "y": 980,
         "wires": [
             [
