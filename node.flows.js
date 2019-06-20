@@ -1952,13 +1952,16 @@
         "name": "",
         "method": "GET",
         "ret": "bin",
+        "paytoqs": false,
         "url": "",
         "tls": "",
+        "proxy": "",
         "x": 510,
         "y": 180,
         "wires": [
             [
-                "16181bb6.fb2234"
+                "16181bb6.fb2234",
+                "18150761.7a23b9"
             ]
         ]
     },
@@ -2008,10 +2011,12 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 550,
+        "x": 570,
         "y": 260,
         "wires": [
-            []
+            [
+                "18150761.7a23b9"
+            ]
         ]
     },
     {
@@ -2019,13 +2024,14 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 710,
-        "y": 180,
+        "targetType": "full",
+        "x": 750,
+        "y": 200,
         "wires": []
     },
     {
@@ -2033,8 +2039,8 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "msg1 = {};\nmsg2 = {};\nif (msg.headers !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n} else {\n    msg2.payload = \"No files returned\";\n}\nreturn [msg1,msg2];",
-        "outputs": 2,
+        "func": "if (msg.headers !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n} \nreturn msg;",
+        "outputs": 1,
         "noerr": 0,
         "x": 530,
         "y": 220,
@@ -2042,9 +2048,6 @@
             [
                 "d505e776.cc8988",
                 "18150761.7a23b9"
-            ],
-            [
-                "2af64c41.95a824"
             ]
         ]
     },
@@ -2174,8 +2177,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 710,
-        "y": 280,
+        "x": 970,
+        "y": 260,
         "wires": [
             [
                 "695a152e.efd0ec"
