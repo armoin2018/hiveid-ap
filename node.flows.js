@@ -1960,8 +1960,7 @@
         "y": 180,
         "wires": [
             [
-                "16181bb6.fb2234",
-                "18150761.7a23b9"
+                "16181bb6.fb2234"
             ]
         ]
     },
@@ -1970,7 +1969,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Set Firmware URL",
-        "func": "var config = global.get('TrainTraxx_Config');\n\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "func": "var config = global.get('TrainTraxx_Config');\nflow.set('currentFirmware', msg.payload);\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 490,
@@ -2015,7 +2014,8 @@
         "y": 260,
         "wires": [
             [
-                "18150761.7a23b9"
+                "18150761.7a23b9",
+                "9bb3e409.b2b988"
             ]
         ]
     },
@@ -2030,8 +2030,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 750,
-        "y": 200,
+        "x": 710,
+        "y": 180,
         "wires": []
     },
     {
@@ -2046,8 +2046,7 @@
         "y": 220,
         "wires": [
             [
-                "d505e776.cc8988",
-                "18150761.7a23b9"
+                "d505e776.cc8988"
             ]
         ]
     },
@@ -8562,5 +8561,37 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "9bb3e409.b2b988",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "func": "if (msg.statusCode === 200 && msg.payload.length > 0) {\n    msg.topic=\"Success\";\n    msg.payload = \"New firmware downloaded to \" + msg.filename;\n    msg.highlight =\"green\";\n} else if (msg.statusCode === 500) {\n        msg.topic=\"Error\";\n        msg.payload = \"An error occurred and we are unable to retrieve new firmware.  Please contact support.\";\n        msg.highlight=\"red\";        \n} else {\n    msg.topic=\"No Updates\";\n    var currentFirmware = flow.get('currentFirmware');\n    msg.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n    msg.highlight=\"orange\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 220,
+        "wires": [
+            [
+                "bf5fd2d3.ecad8"
+            ]
+        ]
+    },
+    {
+        "id": "bf5fd2d3.ecad8",
+        "type": "ui_toast",
+        "z": "16d0b1f7.5422be",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "Firmware Update Notification",
+        "x": 970,
+        "y": 200,
+        "wires": []
     }
 ]
