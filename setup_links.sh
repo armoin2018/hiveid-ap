@@ -7,7 +7,7 @@
 ##########################################################
 
 sudo mkir /var/ww/html 2>/dev/null
-sudo rm /var/www/html/index.html 2>/dev/null
+sudo rm /var/www/html/index.html /var/www/html/index.php 2>/dev/null
 sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid-ap /var/www/html
 
 ln -s /opt/hiveid-ap/nodered/index.php /var/www/html/index.php 2>/dev/null
