@@ -1,0 +1,15 @@
+node-gyp
+zmq
+usb
+bluetooth-hci-socket
+bcrypt
+node-red-admin
+noble
+lodash
+passwd-linux
+ini
+fs
+aws-sign2
+aws4
+assert-plus
+caseless
