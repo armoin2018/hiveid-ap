@@ -2014,8 +2014,7 @@
         "y": 260,
         "wires": [
             [
-                "18150761.7a23b9",
-                "9bb3e409.b2b988"
+                "18150761.7a23b9"
             ]
         ]
     },
@@ -2030,8 +2029,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 710,
-        "y": 180,
+        "x": 730,
+        "y": 140,
         "wires": []
     },
     {
@@ -2039,14 +2038,15 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "if (msg.headers !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n} \nreturn msg;",
+        "func": "var msg1 = msg;\nvar msg2 = {};\nif (msg.headers !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n} else {\n    if (msg.statusCode >= 500) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"An error occurred\";\n    } else if (msg.statusCode >= 400) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"Not Found\";\n    } else if (msg.statusCode >= 300) {\n        msg2.topic=\"Notice\";\n        msg2.highlight = \"yellow\";\n        msg2.payload = \"Resource moved\";\n    } else if (msg.statusCode >= 200) {\n        msg2.topic=\"No Updates\";\n        var currentFirmware = flow.get('currentFirmware');\n        msg2.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n        msg2.highlight=\"orange\";\n    }\n} \n\nreturn [msg1,msg2];",
         "outputs": 1,
         "noerr": 0,
         "x": 530,
         "y": 220,
         "wires": [
             [
-                "d505e776.cc8988"
+                "d505e776.cc8988",
+                "bf5fd2d3.ecad8"
             ]
         ]
     },
@@ -8563,22 +8563,6 @@
         ]
     },
     {
-        "id": "9bb3e409.b2b988",
-        "type": "function",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "func": "if (msg.statusCode === 200 && msg.payload.length > 0) {\n    msg.topic=\"Success\";\n    msg.payload = \"New firmware downloaded to \" + msg.filename;\n    msg.highlight =\"green\";\n} else if (msg.statusCode === 500) {\n        msg.topic=\"Error\";\n        msg.payload = \"An error occurred and we are unable to retrieve new firmware.  Please contact support.\";\n        msg.highlight=\"red\";        \n} else {\n    msg.topic=\"No Updates\";\n    var currentFirmware = flow.get('currentFirmware');\n    msg.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n    msg.highlight=\"orange\";\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 730,
-        "y": 220,
-        "wires": [
-            [
-                "bf5fd2d3.ecad8"
-            ]
-        ]
-    },
-    {
         "id": "bf5fd2d3.ecad8",
         "type": "ui_toast",
         "z": "16d0b1f7.5422be",
@@ -8590,8 +8574,8 @@
         "cancel": "",
         "topic": "",
         "name": "Firmware Update Notification",
-        "x": 970,
-        "y": 200,
+        "x": 860,
+        "y": 220,
         "wires": []
     }
 ]
