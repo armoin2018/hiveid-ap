@@ -2850,7 +2850,7 @@
         "id": "42e26548.651efc",
         "type": "inject",
         "z": "a06855ce.9f5488",
-        "name": "",
+        "name": "Timer 1 Second",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -2858,7 +2858,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
+        "x": 130,
         "y": 780,
         "wires": [
             [
@@ -8002,6 +8002,13 @@
                 "pt": "msg",
                 "to": "Ready to Restart Editor and Interface?",
                 "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Restart Editor?",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -9193,6 +9200,71 @@
             [
                 "4c840e2e.6fb22"
             ]
+        ]
+    },
+    {
+        "id": "bf3bd799.4cf2a8",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "Status Timer 1 Min",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 1520,
+        "wires": [
+            [
+                "d80dbb05.2032d8"
+            ]
+        ]
+    },
+    {
+        "id": "d80dbb05.2032d8",
+        "type": "http request",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "http://localhost/scripts/gatewayInfo.php",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 350,
+        "y": 1520,
+        "wires": [
+            [
+                "b1b40989.5d3408"
+            ]
+        ]
+    },
+    {
+        "id": "b1b40989.5d3408",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "gatewayInfo",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 1520,
+        "wires": [
+            []
         ]
     }
 ]
