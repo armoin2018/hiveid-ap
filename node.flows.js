@@ -2065,11 +2065,12 @@
         "y": 560,
         "wires": [
             [
-                "d480b3e5.18cbf",
-                "dff80caf.85559"
+                "c004a83.7c97e58"
             ],
             [],
-            []
+            [
+                "1f6a8f56.0f3ca1"
+            ]
         ]
     },
     {
@@ -2106,13 +2107,13 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1370,
-        "y": 600,
+        "x": 1150,
+        "y": 560,
         "wires": []
     },
     {
@@ -2130,23 +2131,6 @@
         "x": 1190,
         "y": 320,
         "wires": []
-    },
-    {
-        "id": "d480b3e5.18cbf",
-        "type": "function",
-        "z": "16d0b1f7.5422be",
-        "name": "Handle Results",
-        "func": "if (!msg.payload.match(/ERROR/)) {\n    msg.payload =  msg.IP + \" Updated Successfully\\n\";\n} else {\n    msg.payload =  msg.IP + \" Update Failed\\n\";\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1180,
-        "y": 600,
-        "wires": [
-            [
-                "c004a83.7c97e58",
-                "2af64c41.95a824"
-            ]
-        ]
     },
     {
         "id": "695a152e.efd0ec",
@@ -2226,10 +2210,12 @@
         "y": 616.3543090820312,
         "wires": [
             [
-                "d480b3e5.18cbf"
+                "c004a83.7c97e58"
             ],
             [],
-            []
+            [
+                "1f6a8f56.0f3ca1"
+            ]
         ]
     },
     {
@@ -2264,8 +2250,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 640.7290649414062,
-        "y": 723.9584350585938,
+        "x": 210,
+        "y": 800,
         "wires": [
             []
         ]
@@ -2281,23 +2267,7 @@
         "y": 723.2291870117188,
         "wires": [
             [
-                "d03f3a23.5bbcf8"
-            ]
-        ]
-    },
-    {
-        "id": "d03f3a23.5bbcf8",
-        "type": "function",
-        "z": "16d0b1f7.5422be",
-        "name": "New Version Notice",
-        "func": "msg.topic = 'TrainTraxx';\nmsg.payload = 'A new firmware version is available';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 405.2291564941406,
-        "y": 723.9583740234375,
-        "wires": [
-            [
-                "4c840e2e.6fb22"
+                "73f0e379.d7a36c"
             ]
         ]
     },
@@ -2342,7 +2312,8 @@
         "y": 617.2918090820312,
         "wires": [
             [
-                "ea289cc4.dfed6"
+                "ea289cc4.dfed6",
+                "41f21ebb.07fbd"
             ],
             [],
             []
@@ -2423,20 +2394,6 @@
         "complete": "false",
         "x": 490,
         "y": 440,
-        "wires": []
-    },
-    {
-        "id": "dff80caf.85559",
-        "type": "debug",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 1170,
-        "y": 560,
         "wires": []
     },
     {
@@ -8631,7 +8588,7 @@
         "type": "switch",
         "z": "11b2f565.0266ab",
         "name": "",
-        "property": "payload",
+        "property": "payload.code",
         "propertyType": "msg",
         "rules": [
             {
@@ -8991,7 +8948,7 @@
         "type": "switch",
         "z": "11b2f565.0266ab",
         "name": "",
-        "property": "payload",
+        "property": "payload.code",
         "propertyType": "msg",
         "rules": [
             {
@@ -9031,5 +8988,211 @@
         "x": 700,
         "y": 700,
         "wires": []
+    },
+    {
+        "id": "1f6a8f56.0f3ca1",
+        "type": "switch",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 600,
+        "wires": [
+            [
+                "12146367.ef1a5d"
+            ],
+            [
+                "9708a2a3.9c5fe"
+            ]
+        ]
+    },
+    {
+        "id": "9708a2a3.9c5fe",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "Failure Notice",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Failed to Update Modules",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Failure",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1340,
+        "y": 620,
+        "wires": [
+            [
+                "4ad60835.72eb38"
+            ]
+        ]
+    },
+    {
+        "id": "12146367.ef1a5d",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "Success Notice",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Update Modules",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Success",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1340,
+        "y": 580,
+        "wires": [
+            [
+                "4ad60835.72eb38"
+            ]
+        ]
+    },
+    {
+        "id": "4ad60835.72eb38",
+        "type": "ui_toast",
+        "z": "16d0b1f7.5422be",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1550,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "86eb29ca.12d938",
+        "type": "ui_toast",
+        "z": "16d0b1f7.5422be",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1010,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "41f21ebb.07fbd",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Updating with Target File",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 680,
+        "wires": [
+            [
+                "86eb29ca.12d938"
+            ]
+        ]
+    },
+    {
+        "id": "73f0e379.d7a36c",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "A new firmware version is available",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TrainTraxx",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 760,
+        "wires": [
+            [
+                "4c840e2e.6fb22"
+            ]
+        ]
     }
 ]
