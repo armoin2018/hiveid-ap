@@ -26,8 +26,6 @@ sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
 pip install esptool
 ./apache_set_user.sh pi
 
-
-
 sudo sed -i -e "s/SHELLINABOX_ARGS=.*/SHELLINABOX_ARGS=\"--no-beep -t\"/g" /etc/default/shellinabox
 cd /opt
 OPENRSD_BASE=/opt/openrsd

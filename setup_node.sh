@@ -16,7 +16,6 @@ export DEBIAN_FRONTEND=dialog
 
 mkdir /home/pi/.nodered 2>/dev/null
 sudo service nodered stop
-php /opt/hiveid-ap/npm_install_globals.php 
 sudo chown -R pi:pi /home/pi/.node-red
 sudo systemctl enable nodered.service
 sudo service nodered start

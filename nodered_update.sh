@@ -6,8 +6,11 @@
 #### Version: 0.20190614                              ####
 ##########################################################
 
-echo "Unsecuring Node Red Temporarily"
+echo "Installing Global NPM Modules"
+php /opt/hiveid-ap/npm_install_globals.php 
 
+
+echo "Unsecuring Node Red Temporarily"
 sudo service nodered stop
 cp ~/.node-red/settings.js ~/.node-red/settings.js.temp
 cp /opt/hiveid-ap/node.settings.upgrade.js ~/.node-red/settings.js

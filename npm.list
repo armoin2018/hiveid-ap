@@ -13,3 +13,4 @@ aws-sign2
 aws4
 assert-plus
 caseless
+asynckit
