@@ -9,7 +9,7 @@
 /opt/hiveid-ap/system_update.sh
 
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install --qq --force-yes xfce4 xfce4-goodies
+sudo apt-get install --force-yes xfce4 xfce4-goodies
 export DEBIAN_FRONTEND=dialog
 
 sudo update-alternatives --set x-session-manager /usr/bin/startxfce4
