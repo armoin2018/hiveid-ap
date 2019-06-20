@@ -34,6 +34,9 @@ sudo npm install lodash --unsafe-perm --no-audit -g --loglevel=error
 sudo npm install passwd-linux --unsafe-perm --no-audit -g --loglevel=error
 sudo npm install ini --unsafe-perm --no-audit -g --loglevel=error
 sudo npm install fs --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install aws-sign2 --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install aws4 --unsafe-perm --no-audit -g --loglevel=error
+sudo npm install assert-plus --unsafe-perm --no-audit -g --loglevel=error
 sudo npm update -g --loglevel=error
 
 sudo chown -R pi:pi /home/pi/.node-red

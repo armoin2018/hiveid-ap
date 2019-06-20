@@ -11,5 +11,5 @@ git reset --hard
 git pull --rebase
 sudo chown -R pi:pi /opt/hiveid-ap
 sudo chmod +x /opt/hiveid-ap/*.sh
-
+./setup_links.sh
 ./nodered_update.sh
