@@ -943,7 +943,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "df05b319.59cad",
-        "order": 5,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1022,7 +1022,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "df05b319.59cad",
-        "order": 1,
+        "order": 2,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1700,11 +1700,11 @@
         "z": "11b2f565.0266ab",
         "name": "",
         "group": "df05b319.59cad",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "Update Node-Red Flows",
+        "label": "Update Node-Red Flows from Store",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -1712,7 +1712,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 190,
+        "x": 230,
         "y": 60,
         "wires": [
             [
@@ -8577,5 +8577,442 @@
         "x": 860,
         "y": 220,
         "wires": []
+    },
+    {
+        "id": "2f029628.f1b68a",
+        "type": "ui_button",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "group": "df05b319.59cad",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "HiveID Lite Update with Standard Flows",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "cloud_download",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 260,
+        "y": 660,
+        "wires": [
+            [
+                "cb5b3377.6d8cd"
+            ]
+        ]
+    },
+    {
+        "id": "cb5b3377.6d8cd",
+        "type": "exec",
+        "z": "11b2f565.0266ab",
+        "command": "/opt/hiveid-ap/hiveid_update_lite.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 310,
+        "y": 720,
+        "wires": [
+            [],
+            [],
+            [
+                "28e09cbc.cb9ca4"
+            ]
+        ]
+    },
+    {
+        "id": "28e09cbc.cb9ca4",
+        "type": "switch",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 780,
+        "wires": [
+            [
+                "b71926b7.4d6c68",
+                "39759a06.5d9436"
+            ],
+            [
+                "6372dd42.8b5614"
+            ]
+        ]
+    },
+    {
+        "id": "93535d75.79ef",
+        "type": "ui_toast",
+        "z": "11b2f565.0266ab",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1230,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "b71926b7.4d6c68",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "HiveID Successful Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HiveID Software Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 760,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "38fc9479.9fd71c",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Flows Successful Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HiveID Software Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 960,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "6372dd42.8b5614",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "HiveID Failed Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HiveID Failed Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Not Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 800,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "522e776c.656068",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Flows Failed Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Flows Failed Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Not Updated",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 1000,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "39759a06.5d9436",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Editor and UI Reset",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Do you want to replace the existing flows?  HiveID Editor and Interface will be restarted.",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Install Flows",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 840,
+        "wires": [
+            [
+                "fafc95d8.818068"
+            ]
+        ]
+    },
+    {
+        "id": "fafc95d8.818068",
+        "type": "ui_toast",
+        "z": "11b2f565.0266ab",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "topic": "",
+        "name": "Install Flows",
+        "x": 370,
+        "y": 880,
+        "wires": [
+            [
+                "19f7d2e8.e7113d"
+            ]
+        ]
+    },
+    {
+        "id": "19f7d2e8.e7113d",
+        "type": "switch",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 920,
+        "wires": [
+            [
+                "d5c9c93d.040dc8"
+            ],
+            [
+                "bf3e9a41.53c138"
+            ]
+        ]
+    },
+    {
+        "id": "bf3e9a41.53c138",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Flows Skipped",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Skipping Flow Update",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Flows Skipped",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 920,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "d5c9c93d.040dc8",
+        "type": "exec",
+        "z": "11b2f565.0266ab",
+        "command": "/opt/hiveid-ap/nodered_set_flows.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 470,
+        "y": 980,
+        "wires": [
+            [],
+            [],
+            [
+                "904041c1.3e299"
+            ]
+        ]
+    },
+    {
+        "id": "904041c1.3e299",
+        "type": "switch",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 710,
+        "y": 980,
+        "wires": [
+            [
+                "38fc9479.9fd71c"
+            ],
+            [
+                "522e776c.656068"
+            ]
+        ]
     }
 ]
