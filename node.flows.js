@@ -8621,7 +8621,8 @@
             [],
             [],
             [
-                "28e09cbc.cb9ca4"
+                "28e09cbc.cb9ca4",
+                "d95a424c.eb91b"
             ]
         ]
     },
@@ -8980,7 +8981,8 @@
             [],
             [],
             [
-                "904041c1.3e299"
+                "904041c1.3e299",
+                "d95a424c.eb91b"
             ]
         ]
     },
@@ -9014,5 +9016,20 @@
                 "522e776c.656068"
             ]
         ]
+    },
+    {
+        "id": "d95a424c.eb91b",
+        "type": "debug",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 700,
+        "y": 700,
+        "wires": []
     }
 ]
