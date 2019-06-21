@@ -62,6 +62,7 @@ if (!empty($nmcli)) {
             $header = $nmcliLine;
         } elseif (!empty($nmcliLine)) {
             $myResults['nmcli'][]= array_combine($header,$nmcliLine);
+            print_r($header);print_r($nmcliLine);
         }
     }
 }
