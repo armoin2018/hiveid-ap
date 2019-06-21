@@ -20,7 +20,6 @@ $netinfoList = preg_split('/\n/', $netinfo);
 if (!empty($netinfoList)) {
     foreach ($netinfoList as $line) {
         if (preg_match('/^\d+\:\s(\w+).+inet\s([\d\.]+)\//',$line,$matches)) {
-            print_r($matches);
             $myResults['interfaces'][$matches[1]] = $matches[2]; 
         }
     }
