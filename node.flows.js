@@ -5911,7 +5911,7 @@
         "options": [
             {
                 "label": "Client Only",
-                "value": "null",
+                "value": "client",
                 "type": "str"
             },
             {
