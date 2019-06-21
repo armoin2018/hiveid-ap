@@ -14,13 +14,6 @@
         "info": ""
     },
     {
-        "id": "727c7bb6.e94204",
-        "type": "tab",
-        "label": "Admin Console - WiFi to Ethernet Gateway",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "9745920.d8a397",
         "type": "tab",
         "label": "Set Mode",
@@ -2428,134 +2421,6 @@
                 "2af64c41.95a824"
             ]
         ]
-    },
-    {
-        "id": "7ded79ad.bc2b78",
-        "type": "ui_text",
-        "z": "727c7bb6.e94204",
-        "group": "",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "WiFi to Ethernet Gateway Status",
-        "format": "{{msg.payload}}",
-        "layout": "col-center",
-        "x": 1548.1111145019531,
-        "y": 306.9999752044678,
-        "wires": []
-    },
-    {
-        "id": "ab23a5cf.ad9588",
-        "type": "exec",
-        "z": "727c7bb6.e94204",
-        "command": "sudo /opt/hiveid-ap/hiveid_setup_wifi2eth.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 849.6667327880859,
-        "y": 307.9999976158142,
-        "wires": [
-            [],
-            [],
-            [
-                "7ded79ad.bc2b78"
-            ]
-        ]
-    },
-    {
-        "id": "213f3d14.4789c2",
-        "type": "inject",
-        "z": "727c7bb6.e94204",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "x": 310,
-        "y": 420,
-        "wires": [
-            [
-                "bc89ef70.46dcc"
-            ]
-        ]
-    },
-    {
-        "id": "473f953e.2720cc",
-        "type": "exec",
-        "z": "727c7bb6.e94204",
-        "command": "sudo /opt/hiveid-ap/hostapd_set_psk.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 1140.7777824401855,
-        "y": 424.7142987251282,
-        "wires": [
-            [],
-            [],
-            [
-                "7ded79ad.bc2b78"
-            ]
-        ]
-    },
-    {
-        "id": "d084d6de.494cc8",
-        "type": "exec",
-        "z": "727c7bb6.e94204",
-        "command": "sudo /opt/hiveid-ap/hostapd_set_cnl.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 1141.7777824401855,
-        "y": 483.0000042915344,
-        "wires": [
-            [],
-            [],
-            [
-                "7ded79ad.bc2b78"
-            ]
-        ]
-    },
-    {
-        "id": "bc89ef70.46dcc",
-        "type": "exec",
-        "z": "727c7bb6.e94204",
-        "command": "sudo /opt/hiveid-ap/hostapd_get_cnl.sh",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 557.9206962585449,
-        "y": 483.7142376899719,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "e4fe3b19.11d2c8",
-        "type": "comment",
-        "z": "727c7bb6.e94204",
-        "name": "Get Passphrase from file ",
-        "info": "",
-        "x": 570,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "aac85b05.c667a8",
@@ -9070,7 +8935,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{    \"group\": {        \"hide\": [            \"Network_Mode_WiFi_to_Ethernet_Gateway\",            \"Network_Mode_Gateway_Settings\"        ],        \"show\" : [            \"Network_Mode_WiFi_Client_Setup\"        ]        \"focus\": true    }}",
+                "to": "{\"group\":{\"hide\":[\"Network_Mode_Gateway_Settings\"],\"show\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -9097,7 +8962,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"hide\":[\"Network_Mode_WiFi_Client_Setup\"],\"show\":[\"Network_Mode_WiFi_to_Ethernet_Gateway\",\"Network_Mode_Gateway_Settings\"],\"focus\":true}}",
+                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\"],\"hide\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -9125,7 +8990,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"hide\":[\"Network_Mode_WiFi_to_Ethernet_Gateway\"],\"show\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\",\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
