@@ -45,7 +45,7 @@ if (!empty($nmcli_wifi)) {
         if (empty($header)) {
             $header = $nmcliLine;
         } else {
-            $myResults['nmcli_wifi'][]= array_merge($header,$nmcliLine);
+            $myResults['nmcli_wifi'][]= array_combine($header,$nmcliLine);
         }
     }
 }
@@ -59,7 +59,7 @@ if (!empty($nmcli)) {
         if (empty($header)) {
             $header = $nmcliLine;
         } else {
-            $myResults['nmcli'][]= array_merge($header,$nmcliLine);
+            $myResults['nmcli'][]= array_combine($header,$nmcliLine);
         }
     }
 }
