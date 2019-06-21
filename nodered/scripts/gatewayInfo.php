@@ -39,11 +39,12 @@ if ($server == 'localhost') {
                 if (preg_match('/\{[^\}]+\}/m',$items,$group)) {
                     $ifaceID++;
                     print_r($group);
-                    $wpaNetLines = preg_split('/\n/',$group[1]);
+                    $wpaNetLines = preg_split('/\n/',$group[0]);
                     foreach ($wpaNetLines as $id=>$netLine) {
-                        $net_vals=  preg_split('/\=/',$netLine);
-                        $net_vals[1] = strtr($net_vals[1],"\"","");
-                        $myResults['wpa_net']['network'][$ifaceID][trim($net_vals[0])] = trim($net_vals[1]);
+                        if ($net_vals=  preg_split('/\=/',$netLine)) {
+                            $net_vals[1] = strtr($net_vals[1],"\"","");
+                            $myResults['wpa_net']['network'][$ifaceID][trim($net_vals[0])] = trim($net_vals[1]);
+                        }
                     }
                 }
             } elseif (!empty($temp[1])) {
