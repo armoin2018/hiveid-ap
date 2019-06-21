@@ -47,6 +47,7 @@ if (!empty($nmcli_wifi)) {
         } else {
             $myResults['nmcli_wifi'][]= array_combine($header,$nmcliLine);
         }
+        print_r($header);print_r($nmcliLine);
     }
 }
 
