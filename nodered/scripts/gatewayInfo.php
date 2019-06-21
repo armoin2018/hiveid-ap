@@ -21,7 +21,7 @@ $netinfoList = preg_split('/\n/', $netinfo);
 if (!empty($netinfoList)) {
     foreach ($netinfoList as $line) {
         if (preg_match_all('/^\d+\:\s(\w+).+inet\s([\d\.]+)\//',$line,$matches)) {
-            $myResults['interfaces'][$matches[1]] = $matches[2]; 
+            @$myResults['interfaces'][$matches[1]] = $matches[2]; 
         }
     }
 }
@@ -38,7 +38,7 @@ if ($server == 'localhost') {
 
 $nmcli_wifi = `sudo nmcli -c no dev wifi`;
 if (!empty($nmcli_wifi)) {
-    $nmcliLines = preg_split('/\n',$nmcli_wifi);
+    $nmcliLines = preg_split('/\n/',$nmcli_wifi);
     $header = [];
     foreach($nmcliLines as $line) {
         $nmcliLine = preg_split('/[\t\s]+/',$line);
@@ -109,7 +109,7 @@ if (!empty($myResults['gateway'])) {
         $myResults['gateway']['mode'] = $myResults['gateway']['lan']['type'] . ' to ' . $myResults['gateway']['wan']['type'];
     }
 }
-
+/*
 $services = `systemctl -l --no-pager --no-legend | grep -v "^-" |sort`;
 $serviceList = preg_split('/\n/',$services);
 foreach ($serviceList as $line) {
@@ -122,7 +122,7 @@ foreach ($serviceList as $line) {
         );
     }
 }
-
+*/
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($myResults, JSON_PRETTY_PRINT);
 
