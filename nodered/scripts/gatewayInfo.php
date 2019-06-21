@@ -15,7 +15,7 @@ if (file_exists($hostapd_file)) {
     }
     $myResults['hostapd'] = $hostapd;
 }
-
+print __LINE__ ."\n";
 $netinfo = `ip -o address`;
 $netinfoList = preg_split('/\n/', $netinfo);
 if (!empty($netinfoList)) {
@@ -25,7 +25,7 @@ if (!empty($netinfoList)) {
         }
     }
 }
-
+print __LINE__ ."\n";
 $dnsmasq_file = '/etc/dnsmasq.conf';
 $myResults['dnsmasq'] = parseFile($dnsmasq_file);
 
@@ -35,7 +35,7 @@ if ($server == 'localhost') {
     preg_match_all('/(^(\w+)\s*\=\s*(\w+)$|^(network)\s*\=\s*\{([^\}]+)\})$/',$wpa_supplicant,$matches);
     print_r($matches);    
 }
-
+print __LINE__ ."\n";
 $nmcli_wifi = `sudo nmcli -c no dev wifi`;
 if (!empty($nmcli_wifi)) {
     $nmcliLines = preg_split('/\n/',$nmcli_wifi);
@@ -50,7 +50,7 @@ if (!empty($nmcli_wifi)) {
         print_r($header);print_r($nmcliLine);
     }
 }
-
+print __LINE__ ."\n";
 $nmcli = `sudo nmcli -c no dev`;
 if (!empty($nmcli)) {
     $nmcliLines = preg_split('/\n/',$nmcli);
@@ -64,7 +64,7 @@ if (!empty($nmcli)) {
         }
     }
 }
-
+print __LINE__ ."\n";
 $dhcpcd_file = '/etc/dhcpcd.conf';
 if (file_exists($dhcpcd_file)) {
     $dhcpcd = file_get_contents($dhcpcd_file);
