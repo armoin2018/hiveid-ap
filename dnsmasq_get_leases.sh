@@ -8,7 +8,7 @@
 ##########################################################
 
 if [ -z "$1" ]; then 
-    LEASE_FILE=`/opt/hiveid-ap/dnsmsq_find_leases.sh`
+    LEASE_FILE=`/opt/hiveid-ap/dnsmasq_find_leases.sh`
 else 
     LEASE_FILE=$1
 fi
