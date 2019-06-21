@@ -35,7 +35,7 @@ if ($server == 'localhost') {
     if (!empty($matches[1])) {
         foreach ($matches[1] as $items) {
             $temp = preg_split('/\=/',$items);
-            if ($temp[0] == 'network') {
+            if (!strcmp(trim($temp[0]),'network')) {
                 $ifaceID++;
                 preg_match('/\{[^\}]+\}/m',$items,$group);
                 $wpaNetLines = preg_split('/\n/',$group);
