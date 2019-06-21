@@ -41,7 +41,7 @@ if (!empty($nmcli_wifi)) {
     $nmcliLines = preg_split('/\n/',$nmcli_wifi);
     $header = [];
     foreach($nmcliLines as $line) {
-        $nmcliLine = preg_split('/[\t\s]+/',$line);
+        $nmcliLine = preg_split('/[\t\s]+/',trim($line));
         if (empty($header)) {
             $header = $nmcliLine;
         } else {
@@ -52,7 +52,7 @@ if (!empty($nmcli_wifi)) {
 
 $nmcli = `sudo nmcli -c no dev`;
 if (!empty($nmcli)) {
-    $nmcliLines = preg_split('/\n',$nmcli);
+    $nmcliLines = preg_split('/\n/',$nmcli);
     $header = [];
     foreach($nmcliLines as $line) {
         $nmcliLine = preg_split('/[\t\s]+/',$line);
@@ -67,7 +67,7 @@ if (!empty($nmcli)) {
 $dhcpcd_file = '/etc/dhcpcd.conf';
 if (file_exists($dhcpcd_file)) {
     $dhcpcd = file_get_contents($dhcpcd_file);
-    $dhcpcdLines = preg_split('/\n',$dhcpcd);
+    $dhcpcdLines = preg_split('/\n/',$dhcpcd);
     $flag = 0;
     $activeInterface = '';
     foreach ($dhcpcdLines as $line) {
