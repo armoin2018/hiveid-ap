@@ -5910,12 +5910,12 @@
         "passthru": false,
         "options": [
             {
-                "label": "WiFi to Ethernet Gateway",
+                "label": "WiFi to Ethernet",
                 "value": "wifi2eth",
                 "type": "str"
             },
             {
-                "label": "WiFi to WiFi Gateway",
+                "label": "WiFi to WiFi",
                 "value": "wifi2wifi",
                 "type": "str"
             }
@@ -9286,6 +9286,26 @@
         "y": 1520,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "68cb15ae.41839c",
+        "type": "inject",
+        "z": "9745920.d8a397",
+        "name": "",
+        "topic": "",
+        "payload": "gatewayInfo.gateway.mode",
+        "payloadType": "global",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "49f70c72.4b3914"
+            ]
         ]
     }
 ]
