@@ -109,8 +109,8 @@ foreach ($myResults['iptables'] as $line) {
     if (preg_match('/POSTROUTING\s\-o\s(\w+)\s/', $line,$matches)) {
         $myResults['gateway']['wan']['iface'] = $matches[1];
         $myResults['gateway']['wan']['type'] = ($matches[1] == 'wlan') 
-            ? 'WiFi'
-            : 'Ethernet';
+            ? 'wifi'
+            : 'eth';
     }
 }
 
@@ -119,17 +119,17 @@ $myResults['routes'] = preg_split('/\n/',trim(`route -v`));
 if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches)) {
     $myResults['gateway']['lan']['iface'] = $matches[1] . $matches[2];
     $myResults['gateway']['lan']['type'] = ($matches[1] == 'wlan') 
-        ? 'WiFi'
-        : 'Ethernet';
+        ? 'wifi'
+        : 'eth';
 }
 
-$myResults['gateway']['mode'] = 'none';
+$myResults['gateway']['mode'] = 'client';
 if (!empty($myResults['gateway'])) {
     if (!empty($myResults['gateway']['lan']) && !empty($myResults['gateway']['wan'])) {
-        $myResults['gateway']['mode'] = $myResults['gateway']['lan']['type'] . ' to ' . $myResults['gateway']['wan']['type'];
+        $myResults['gateway']['mode'] = $myResults['gateway']['lan']['type'] . '2' . $myResults['gateway']['wan']['type'];
     }
 }
-/*
+
 $services = `systemctl -l --no-pager --no-legend | grep -v "^-" |sort`;
 $serviceList = preg_split('/\n/',$services);
 foreach ($serviceList as $line) {
@@ -142,7 +142,6 @@ foreach ($serviceList as $line) {
         );
     }
 }
-*/
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($myResults, JSON_PRETTY_PRINT);
 
