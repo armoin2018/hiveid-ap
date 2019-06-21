@@ -3,8 +3,7 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./nodered_set_flows.sh                    ####
 #### Description: Updates flows                       ####
-#### Version: 0.2                                     ####
-####    20190614 Checked Updates                      ####
+#### Version: 0.20190621                              ####
 ##########################################################
 
 sudo service nodered stop
@@ -26,3 +25,4 @@ cp /opt/hiveid-ap/node.flows.js $CONF
 sudo chown -R pi:pi /home/pi/.node-red
 
 sudo service nodered start
+exit 0
