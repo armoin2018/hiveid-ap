@@ -6039,7 +6039,7 @@
         "type": "function-npm",
         "z": "9745920.d8a397",
         "name": "Structure Wifi List",
-        "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar activeSSID = flow.get('SSID');\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : (activeSSID.title === inPayload[id].ssid)\n    }); \n}\nreturn msg;",
+        "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar gatewayInfo = flow.get('gatewayInfo');\n\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : (gatewayInfo.activeSSID !== undefined && gatewayInfo.activeSSID === inPayload[id].ssid)\n    }); \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 510,
@@ -6362,7 +6362,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "gateway.hostapd.channel",
+                "to": "gatewayInfo.hostapd.channel",
                 "tot": "global"
             }
         ],
@@ -6389,7 +6389,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "gateway.hostapd.ssid",
+                "to": "gatewayInfo.hostapd.ssid",
                 "tot": "global"
             }
         ],
@@ -6416,7 +6416,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "gateway.hostapd.wpa_passphrase",
+                "to": "gatewayInfo.hostapd.wpa_passphrase",
                 "tot": "global"
             }
         ],
@@ -9248,12 +9248,12 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "WiFi to Ethernet",
+                "v": "wifi2eth",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "WiFi to WiFi",
+                "v": "wifi2wifi",
                 "vt": "str"
             }
         ],
@@ -9457,7 +9457,8 @@
         "y": 520,
         "wires": [
             [
-                "c258cdac.c9d2"
+                "c258cdac.c9d2",
+                "40edab27.f29304"
             ]
         ]
     },
@@ -9534,5 +9535,19 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "40edab27.f29304",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 460,
+        "y": 580,
+        "wires": []
     }
 ]
