@@ -32,7 +32,7 @@ $myResults['dnsmasq'] = parseFile($dnsmasq_file);
 if ($server == 'localhost') {
     $myResults['iwgetid'] = `sudo iwgetid`;
     $wpa_supplicant = `sudo cat /etc/wpa_supplicant/wpa_supplicant.conf`;
-    preg_match_all('/(^(\w+)\s*\=\s*(\w+)$|^(network)\s*\=\s*\{([^\}]+)\})$/',$wpa_supplicant,$matches);
+    preg_match_all('/(^(\w+)\s*\=\s*(\w+)$|^(network)\s*\=\s*\{([^\}]+)\})$/m',$wpa_supplicant,$matches);
     print_r($matches);    
 }
 print __LINE__ ."\n";
@@ -46,8 +46,9 @@ if (!empty($nmcli_wifi)) {
             $header = $nmcliLine;
         } elseif (!empty($nmcliLine)) {
             $myResults['nmcli_wifi'][]= array_combine($header,$nmcliLine);
+            print_r($header);print_r($nmcliLine);
         }
-        print_r($header);print_r($nmcliLine);
+        
     }
 }
 print __LINE__ ."\n";
@@ -56,7 +57,7 @@ if (!empty($nmcli)) {
     $nmcliLines = preg_split('/\n/',$nmcli);
     $header = [];
     foreach($nmcliLines as $line) {
-        $nmcliLine = preg_split('/[\t\s]+/',$line);
+        $nmcliLine = preg_split('/[\t\s]+/',trim($line));
         if (empty($header)) {
             $header = $nmcliLine;
         } elseif (!empty($nmcliLine)) {
