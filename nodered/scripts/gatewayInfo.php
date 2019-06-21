@@ -44,7 +44,7 @@ if (!empty($nmcli_wifi)) {
         $nmcliLine = preg_split('/[\t\s]+/',trim($line));
         if (empty($header)) {
             $header = $nmcliLine;
-        } else {
+        } elseif (!empty($nmciLine)) {
             $myResults['nmcli_wifi'][]= array_combine($header,$nmcliLine);
         }
         print_r($header);print_r($nmcliLine);
@@ -59,7 +59,7 @@ if (!empty($nmcli)) {
         $nmcliLine = preg_split('/[\t\s]+/',$line);
         if (empty($header)) {
             $header = $nmcliLine;
-        } else {
+        } elseif (!empty($nmciLine)) {
             $myResults['nmcli'][]= array_combine($header,$nmcliLine);
         }
     }
