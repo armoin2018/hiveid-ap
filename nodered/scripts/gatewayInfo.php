@@ -39,6 +39,7 @@ if ($server == 'localhost') {
                 if (preg_match('/\{[^\}]+\}/m',$items,$group)) {
                     $wpaNetLines = preg_split('/\n/',$group[0]);
                     foreach ($wpaNetLines as $id=>$netLine) {
+                        $netLine = strtr($netLine,array('{'=>'',"\t"=>'','}'=>''));
                         $net_vals=  preg_split('/\=/',$netLine);
                         if (!empty($net_vals[1])) {
                             $net_vals[1] = strtr($net_vals[1],"\"","");
