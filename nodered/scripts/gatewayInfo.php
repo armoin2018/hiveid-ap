@@ -3,10 +3,16 @@ $myResults = array();
 
 $myResults['hostname'] = trim(`cat /etc/hostname`);
 
+$server = ($_SERVER['SERVER_ADDR'] == '::1')
+    ? 'localhost'
+    : $_SERVER['SERVER_ADDR'];
+
 $hostapd_file = '/etc/hostapd/hostapd.conf';
 if (file_exists($hostapd_file)) {
     $hostapd = parse_ini_file($hostapd_file);
-    $hostapd['wpa_passphrase'] = '*******';
+    if ($server == 'localhost' ) {
+        $hostapd['wpa_passphrase'] = '*******';
+    }
     $myResults['hostapd'] = $hostapd;
 }
 
@@ -22,6 +28,41 @@ if (!empty($netinfoList)) {
 
 $dnsmasq_file = '/etc/dnsmasq.conf';
 $myResults['dnsmasq'] = parseFile($dnsmasq_file);
+
+if ($server == 'localhost') {
+    $myResults['iwgetid'] = `sudo iwgetid`;
+    $wpa_supplicant = `sudo cat /etc/wpa_supplicant/wpa_supplicant.conf`;
+    preg_match_all('/(^(\w+)\s*\=\s*(\w+)$)|^(network)\s*\=\s*\{([^\}]+)\}$)/',$wpa_supplicant,$matches);
+    print_r($matches);    
+}
+
+$nmcli_wifi = `sudo nmcli -c no dev wifi`;
+if (!empty($nmcli_wifi)) {
+    $nmcliLines = preg_split('/\n',$nmcli_wifi);
+    $header = [];
+    foreach($nmcliLines as $line) {
+        $nmcliLine = preg_split('/[\t\s]+/',$line);
+        if (empty($header)) {
+            $header = $nmcliLine;
+        } else {
+            $myResults['nmcli_wifi'][]= array_merge($header,$nmcliLine);
+        }
+    }
+}
+
+$nmcli = `sudo nmcli -c no dev`;
+if (!empty($nmcli)) {
+    $nmcliLines = preg_split('/\n',$nmcli);
+    $header = [];
+    foreach($nmcliLines as $line) {
+        $nmcliLine = preg_split('/[\t\s]+/',$line);
+        if (empty($header)) {
+            $header = $nmcliLine;
+        } else {
+            $myResults['nmcli'][]= array_merge($header,$nmcliLine);
+        }
+    }
+}
 
 $dhcpcd_file = '/etc/dhcpcd.conf';
 if (file_exists($dhcpcd_file)) {

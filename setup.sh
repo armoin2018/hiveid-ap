@@ -10,7 +10,7 @@ cd /opt/hiveid-ap
 /opt/hiveid-ap/system_update.sh
 
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install -y --force-yes git curl firefox-esr iw at
+sudo apt-get install -y --force-yes git curl firefox-esr iw at network-manager
 sudo apt-get install -y --force-yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
 sudo apt-get install -y --force-yes jython arduino arduino-mk
 sudo apt-get install -y --force-yes libbluetooth-dev libudev-dev pi-bluetooth
