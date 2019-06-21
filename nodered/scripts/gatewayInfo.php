@@ -45,7 +45,7 @@ if ($server == 'localhost') {
                             $myResults['wpa_net']['network'][$ifaceID][trim($net_vals[0])] = trim($net_vals[1]);
                         }
                     }
-                    $ifaceID++
+                    $ifaceID++;
                 }
             } elseif (!empty($temp[1])) {
                 $myResults['wpa_net'][trim($temp[0])] = trim($temp[1]);
