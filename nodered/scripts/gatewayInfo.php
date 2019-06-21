@@ -3,7 +3,7 @@ $myResults = array();
 
 $myResults['hostname'] = trim(`cat /etc/hostname`);
 
-$server = ($_SERVER['SERVER_ADDR'] == '::1')
+$server = ($_SERVER['SERVER_ADDR'] == '::1' || empty($_SERVER['SERVER_ADDR']))
     ? 'localhost'
     : $_SERVER['SERVER_ADDR'];
 
