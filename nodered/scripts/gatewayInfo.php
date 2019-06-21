@@ -32,7 +32,7 @@ $myResults['dnsmasq'] = parseFile($dnsmasq_file);
 if ($server == 'localhost') {
     $myResults['iwgetid'] = `sudo iwgetid`;
     $wpa_supplicant = `sudo cat /etc/wpa_supplicant/wpa_supplicant.conf`;
-    preg_match_all('/(^(\w+)\s*\=\s*(\w+)$)|^(network)\s*\=\s*\{([^\}]+)\}$)/',$wpa_supplicant,$matches);
+    preg_match_all('/(^(\w+)\s*\=\s*(\w+)$|^(network)\s*\=\s*\{([^\}]+)\})$/',$wpa_supplicant,$matches);
     print_r($matches);    
 }
 
