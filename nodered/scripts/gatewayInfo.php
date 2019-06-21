@@ -27,14 +27,28 @@ if (!empty($netinfoList)) {
 
 $dnsmasq_file = '/etc/dnsmasq.conf';
 $myResults['dnsmasq'] = parseFile($dnsmasq_file);
-
+$ifaceID=0;
 if ($server == 'localhost') {
     $myResults['iwgetid'] = `sudo iwgetid`;
     $wpa_supplicant = `sudo cat /etc/wpa_supplicant/wpa_supplicant.conf`;
     preg_match_all('/(^(\w+)\s*\=\s*(\w+)$|^(network)\s*\=\s*\{([^\}]+)\})$/m',$wpa_supplicant,$matches);
-    print_r($matches);    
     if (!empty($matches[1])) {
-
+        foreach ($matches[1] as $items) {
+            $temp = preg_split('/\=/',$items);
+            if ($temp[0] == 'network') {
+                $ifaceID++;
+                preg_match('/\{[^\}]+\}/',$items,$group);
+                $wpaNetLines = preg_split('/\n/',$group);
+                foreach ($wpaNetLines as $id=>$netLine) {
+                    $net_vals=  preg_split('/\=/',$netLine);
+                    $net_vals[1] = strtr($net_vals[1],"\"","");
+                    $myResults['network'][$ifaceID][trim($net_vals[0])] = trim($net_vals[1]);
+                }
+                
+            } elseif (!empty($temp[1])) {
+                $myResults[$temp[0]] = $temp[1];
+            }
+        }
     }
 }
 
