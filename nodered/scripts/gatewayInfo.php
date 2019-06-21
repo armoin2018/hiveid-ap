@@ -10,7 +10,7 @@ $server = (empty($_SERVER['SERVER_ADDR']) || $_SERVER['SERVER_ADDR'] == '::1')
 $hostapd_file = '/etc/hostapd/hostapd.conf';
 if (file_exists($hostapd_file)) {
     $hostapd = parse_ini_file($hostapd_file);
-    if ($server == 'localhost' ) {
+    if (strcmp($server,'localhost') ) {
         $hostapd['wpa_passphrase'] = '*******';
     }
     $myResults['hostapd'] = $hostapd;
