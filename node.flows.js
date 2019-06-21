@@ -21,13 +21,6 @@
         "info": ""
     },
     {
-        "id": "a8734d01.d65fe",
-        "type": "tab",
-        "label": "Admin Cosole - WiFi 2 WiFi Gateway",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "9745920.d8a397",
         "type": "tab",
         "label": "Set Mode",
@@ -436,17 +429,6 @@
         "collapse": false
     },
     {
-        "id": "652de07e.0d453",
-        "type": "ui_group",
-        "z": "",
-        "name": "WiFi to Ethernet Gateway",
-        "tab": "95d2bc1b.6b456",
-        "order": 4,
-        "disp": true,
-        "width": "12",
-        "collapse": false
-    },
-    {
         "id": "8b01491a.1965e8",
         "type": "ui_group",
         "z": "",
@@ -705,9 +687,9 @@
         "name": "Gateway Settings",
         "tab": "95d2bc1b.6b456",
         "order": 2,
-        "disp": false,
+        "disp": true,
         "width": "6",
-        "collapse": false
+        "collapse": true
     },
     {
         "id": "e96b9c3.af2826",
@@ -2451,7 +2433,7 @@
         "id": "7ded79ad.bc2b78",
         "type": "ui_text",
         "z": "727c7bb6.e94204",
-        "group": "652de07e.0d453",
+        "group": "",
         "order": 1,
         "width": 0,
         "height": 0,
@@ -2574,64 +2556,6 @@
         "x": 570,
         "y": 160,
         "wires": []
-    },
-    {
-        "id": "e3b3bbb8.4a2938",
-        "type": "debug",
-        "z": "a8734d01.d65fe",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 750,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "d39b1a23.f43d68",
-        "type": "exec",
-        "z": "a8734d01.d65fe",
-        "command": "sudo /opt/hiveid-ap/hiveid_setup_wifi2wifi.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 430,
-        "y": 140,
-        "wires": [
-            [
-                "e3b3bbb8.4a2938"
-            ],
-            [
-                "e3b3bbb8.4a2938"
-            ],
-            [
-                "e3b3bbb8.4a2938"
-            ]
-        ]
-    },
-    {
-        "id": "2cb20bbe.97d6c4",
-        "type": "exec",
-        "z": "a8734d01.d65fe",
-        "command": "sudo /opt/hiveid-ap/wpaclient_set_ssid.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 430,
-        "y": 220,
-        "wires": [
-            [],
-            [],
-            []
-        ]
     },
     {
         "id": "aac85b05.c667a8",
@@ -5978,7 +5902,7 @@
         "type": "debug",
         "z": "9745920.d8a397",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6057,7 +5981,7 @@
         "z": "9745920.d8a397",
         "group": "8b01491a.1965e8",
         "name": "Available Networks",
-        "order": 2,
+        "order": 3,
         "width": "12",
         "height": "4",
         "lineType": "one",
@@ -6122,8 +6046,8 @@
         "func": "msg.payload  ={\n    'SSID' :flow.get(\"SSID\"),\n    'passphrase' : flow.get('passphrase')\n};\n    \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 560,
-        "y": 820,
+        "x": 580,
+        "y": 760,
         "wires": [
             []
         ]
@@ -6218,8 +6142,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 870,
-        "y": 880,
+        "x": 1290,
+        "y": 600,
         "wires": [
             [],
             [],
@@ -6688,8 +6612,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 870,
-        "y": 800,
+        "x": 1290,
+        "y": 660,
         "wires": [
             [],
             [],
@@ -9273,7 +9197,7 @@
         "z": "9745920.d8a397",
         "name": "",
         "group": "8b01491a.1965e8",
-        "order": 4,
+        "order": 2,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -9299,7 +9223,7 @@
         "z": "9745920.d8a397",
         "name": "",
         "group": "8b01491a.1965e8",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -9493,7 +9417,7 @@
         "z": "9745920.d8a397",
         "name": "",
         "group": "8b01491a.1965e8",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -9546,8 +9470,46 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 460,
-        "y": 580,
+        "x": 470,
+        "y": 560,
         "wires": []
+    },
+    {
+        "id": "78afed89.434f04",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "sudo /opt/hiveid-ap/hostapd_set_psk.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1280,
+        "y": 720,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cd4842a5.be2cc",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "sudo /opt/hiveid-ap/hostapd_set_cnl.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1280,
+        "y": 780,
+        "wires": [
+            [],
+            [],
+            []
+        ]
     }
 ]
