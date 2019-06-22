@@ -1965,7 +1965,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Set Firmware URL",
-        "func": "var config = global.get('TrainTraxx_Config');\nflow.set('currentFirmware', msg.payload);\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "func": "var config = global.get('TrainTraxx_Config');\nflow.set('currentFirmware', '/usr/local/hiveid-ap/ota/' + msg.payload);\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 490,
@@ -2006,8 +2006,8 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 570,
-        "y": 260,
+        "x": 870,
+        "y": 180,
         "wires": [
             [
                 "18150761.7a23b9"
@@ -2025,8 +2025,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 730,
-        "y": 140,
+        "x": 1010,
+        "y": 180,
         "wires": []
     },
     {
@@ -2034,14 +2034,16 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var msg1 = msg;\nvar msg2 = {};\nif (msg.headers !== undefined && msg.headers['content-disposition'] !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n} else {\n    if (msg.statusCode >= 500) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"An error occurred\";\n    } else if (msg.statusCode >= 400) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"Not Found\";\n    } else if (msg.statusCode >= 300) {\n        msg2.topic=\"Notice\";\n        msg2.highlight = \"yellow\";\n        msg2.payload = \"Resource moved\";\n    } else if (msg.statusCode >= 200) {\n        msg2.topic=\"No Updates\";\n        var currentFirmware = flow.get('currentFirmware');\n        msg2.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n        msg2.highlight=\"orange\";\n    }\n} \n\nreturn [msg1,msg2];",
-        "outputs": 1,
+        "func": "var msg1 = msg;\nvar msg2 = {};\nif (msg.headers !== undefined && msg.headers['content-disposition'] !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n    msg2.topic = \"Updating\";\n    msg2.highlight = \"orange\";\n    msg2.payload = 'Updating with File ' + tempFile;\n    \n} else {\n    if (msg.statusCode >= 500) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"An error occurred\";\n    } else if (msg.statusCode >= 400) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"Not Found\";\n    } else if (msg.statusCode >= 300) {\n        msg2.topic=\"Notice\";\n        msg2.highlight = \"yellow\";\n        msg2.payload = \"Resource moved\";\n    } else if (msg.statusCode >= 200) {\n        msg2.topic=\"No Updates\";\n        var currentFirmware = flow.get('currentFirmware');\n        msg2.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n        msg2.highlight=\"orange\";\n    }\n} \n\nreturn [msg1,msg2];",
+        "outputs": 2,
         "noerr": 0,
         "x": 530,
         "y": 220,
         "wires": [
             [
-                "d505e776.cc8988",
+                "dae90564.436648"
+            ],
+            [
                 "bf5fd2d3.ecad8"
             ]
         ]
@@ -2263,7 +2265,8 @@
         "y": 723.2291870117188,
         "wires": [
             [
-                "73f0e379.d7a36c"
+                "73f0e379.d7a36c",
+                "8450b883.b9f298"
             ]
         ]
     },
@@ -8137,8 +8140,8 @@
         "cancel": "",
         "topic": "",
         "name": "Firmware Update Notification",
-        "x": 860,
-        "y": 220,
+        "x": 940,
+        "y": 120,
         "wires": []
     },
     {
@@ -8784,7 +8787,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "TrainTraxx",
+                "to": "Updated Firmware",
                 "tot": "str"
             }
         ],
@@ -9394,5 +9397,57 @@
         "x": 940,
         "y": 220,
         "wires": []
+    },
+    {
+        "id": "dae90564.436648",
+        "type": "switch",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "property": "payload.filename",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "d505e776.cc8988"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8450b883.b9f298",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "Set CurrentFirmware",
+        "rules": [
+            {
+                "t": "set",
+                "p": "currentFirmware",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 720,
+        "wires": [
+            []
+        ]
     }
 ]
