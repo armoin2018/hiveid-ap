@@ -1870,15 +1870,15 @@
         "color": "",
         "bgcolor": "",
         "icon": "fa-wifi",
-        "payload": "",
-        "payloadType": "str",
+        "payload": "currentFirmware",
+        "payloadType": "flow",
         "topic": "",
-        "x": 340,
-        "y": 320,
+        "x": 200,
+        "y": 440,
         "wires": [
             [
-                "e47e8d5c.512fd",
-                "695a152e.efd0ec"
+                "9c8a89b8.58e198",
+                "d395d1f0.e27c2"
             ]
         ]
     },
@@ -1894,7 +1894,7 @@
         "oldrc": false,
         "name": "",
         "x": 390,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "56a59df3.3ee5a4",
@@ -1929,7 +1929,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Create OTA Commands",
-        "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        // -P is the host port\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n",
+        "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        // -P is the host port\n        var currentFirmware = flow.get('currentFirmware');\n        var gatewayInfo = flow.get('gatewayInfo');\n        var gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\n        msg.payload = ' -i ' + msg.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -s -f ' + currentFirmware + ' -d -r';\n    }\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 890,
@@ -2115,58 +2115,6 @@
         "wires": []
     },
     {
-        "id": "2af64c41.95a824",
-        "type": "ui_text",
-        "z": "16d0b1f7.5422be",
-        "group": "5ffcbee0.a5304",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Update Status Messages",
-        "format": "{{msg.payload}}",
-        "layout": "col-center",
-        "x": 1190,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "695a152e.efd0ec",
-        "type": "function",
-        "z": "16d0b1f7.5422be",
-        "name": "Clear Box",
-        "func": "msg.payload = '';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 900,
-        "y": 320,
-        "wires": [
-            [
-                "2af64c41.95a824"
-            ]
-        ]
-    },
-    {
-        "id": "abacc62d.40cf58",
-        "type": "inject",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "x": 950,
-        "y": 280,
-        "wires": [
-            [
-                "695a152e.efd0ec"
-            ]
-        ]
-    },
-    {
         "id": "23e115c3.0b6e0a",
         "type": "ui_button",
         "z": "16d0b1f7.5422be",
@@ -2181,15 +2129,14 @@
         "color": "",
         "bgcolor": "",
         "icon": "usb",
-        "payload": "",
-        "payloadType": "str",
+        "payload": "currentFirmware",
+        "payloadType": "flow",
         "topic": "",
-        "x": 172.5,
-        "y": 618.8543090820312,
+        "x": 180,
+        "y": 620,
         "wires": [
             [
-                "25037935.913206",
-                "695a152e.efd0ec"
+                "ea289cc4.dfed6"
             ]
         ]
     },
@@ -2261,12 +2208,13 @@
         "name": "",
         "files": "/usr/local/hiveid-ap/ota/",
         "recursive": "",
-        "x": 158.47915649414062,
-        "y": 723.2291870117188,
+        "x": 160,
+        "y": 720,
         "wires": [
             [
                 "73f0e379.d7a36c",
-                "8450b883.b9f298"
+                "8450b883.b9f298",
+                "ce501478.c28c58"
             ]
         ]
     },
@@ -2297,91 +2245,6 @@
         ]
     },
     {
-        "id": "25037935.913206",
-        "type": "exec",
-        "z": "16d0b1f7.5422be",
-        "command": "/opt/hiveid-ap/hiveid_get_newbin.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 492.2291564941406,
-        "y": 617.2918090820312,
-        "wires": [
-            [
-                "ea289cc4.dfed6",
-                "41f21ebb.07fbd"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "e47e8d5c.512fd",
-        "type": "exec",
-        "z": "16d0b1f7.5422be",
-        "command": "/opt/hiveid-ap/hiveid_get_newbin.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 370,
-        "y": 400,
-        "wires": [
-            [
-                "7011f363.68bd1c",
-                "5bdf3fa0.0437d"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "7011f363.68bd1c",
-        "type": "change",
-        "z": "16d0b1f7.5422be",
-        "name": "Set Filename",
-        "rules": [
-            {
-                "t": "set",
-                "p": "filename",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 670,
-        "y": 400,
-        "wires": [
-            [
-                "9c8a89b8.58e198"
-            ]
-        ]
-    },
-    {
-        "id": "5bdf3fa0.0437d",
-        "type": "debug",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 670,
-        "y": 360,
-        "wires": []
-    },
-    {
         "id": "d395d1f0.e27c2",
         "type": "debug",
         "z": "16d0b1f7.5422be",
@@ -2390,9 +2253,10 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 670,
-        "y": 460,
+        "complete": "true",
+        "targetType": "full",
+        "x": 510,
+        "y": 440,
         "wires": []
     },
     {
@@ -2414,14 +2278,14 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Node Not Registered",
-        "func": "msg.payload = msg.IP + ' is not a valid hive node';\nreturn msg;",
+        "func": "msg.payload = msg.IP + ' is not a valid hive node';\nmsg.topic = \"Invalid Node\";\nmsg.highlight = \"red\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1435.5,
-        "y": 438,
+        "x": 1360,
+        "y": 500,
         "wires": [
             [
-                "2af64c41.95a824"
+                "4ad60835.72eb38"
             ]
         ]
     },
@@ -8723,8 +8587,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1550,
-        "y": 600,
+        "x": 1670,
+        "y": 540,
         "wires": []
     },
     {
@@ -9444,14 +9308,28 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 440,
-        "y": 740,
+        "x": 420,
+        "y": 720,
         "wires": [
             []
         ]
     },
     {
-        "id": "41381e80.4a46f",
+        "id": "cac1c25.866e24",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/AutoConnect.'+ msg.payload + '.bin');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1050,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a29a5b71.a68218",
         "type": "inject",
         "z": "16d0b1f7.5422be",
         "name": "",
@@ -9462,24 +9340,145 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 400,
+        "x": 690,
+        "y": 720,
         "wires": [
             [
-                "e47e8d5c.512fd"
+                "6fc345c3.70b4dc"
             ]
         ]
     },
     {
-        "id": "cac1c25.866e24",
+        "id": "6fc345c3.70b4dc",
+        "type": "exec",
+        "z": "16d0b1f7.5422be",
+        "command": "/opt/hiveid-ap/hiveid_get_newbin.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 790,
+        "y": 780,
+        "wires": [
+            [
+                "cac1c25.866e24"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "784f20e3.ac9e6",
+        "type": "ui_list",
+        "z": "16d0b1f7.5422be",
+        "group": "5ffcbee0.a5304",
+        "name": "Firmware Versions",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "lineType": "two",
+        "actionType": "click",
+        "allowHTML": true,
+        "x": 830,
+        "y": 940,
+        "wires": [
+            [
+                "ae37e931.d929a8"
+            ]
+        ]
+    },
+    {
+        "id": "ce501478.c28c58",
+        "type": "fs-ops-dir",
+        "z": "16d0b1f7.5422be",
+        "name": "OTA Files",
+        "path": "/usr/local/hiveid-ap/ota",
+        "pathType": "str",
+        "filter": "*.bin",
+        "filterType": "str",
+        "dir": "files",
+        "dirType": "msg",
+        "x": 420,
+        "y": 940,
+        "wires": [
+            [
+                "28f781ed.6efbee",
+                "20f138b7.69d9c8"
+            ]
+        ]
+    },
+    {
+        "id": "b8f3b643.66ddd8",
+        "type": "inject",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 940,
+        "wires": [
+            [
+                "ce501478.c28c58"
+            ]
+        ]
+    },
+    {
+        "id": "28f781ed.6efbee",
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "msg.filename = '/usr/local/hiveid-ap/ota/AutoConnect.'+ msg.payload + '.bin';\nreturn msg;",
+        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    results.push({ \n        title: msg.files[i],\n        icon_name : ((msg.files[i] === currentFirmware) ? 'check_circle_outline' : '')\n    });\n}\nmsg.payload = results;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 240,
-        "y": 560,
+        "x": 610,
+        "y": 940,
+        "wires": [
+            [
+                "784f20e3.ac9e6"
+            ]
+        ]
+    },
+    {
+        "id": "20f138b7.69d9c8",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 610,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "ae37e931.d929a8",
+        "type": "switch",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1060,
+        "y": 940,
         "wires": [
             []
         ]
