@@ -9568,7 +9568,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Put into Global.Probes",
-        "func": "var probes = global.get('Probes');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.payload.MAC] = msg.payload;\nglobal.set('Probes',probes);\nmsg.payload = probes;",
+        "func": "var probes = global.get('Probes');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.payload.MAC] = msg.payload;\nglobal.set('Probes',probes);\nmsg.payload = probes;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 860,
@@ -9589,7 +9589,7 @@
         "width": "12",
         "height": "6",
         "lineType": "one",
-        "actionType": "none",
+        "actionType": "click",
         "allowHTML": true,
         "x": 1130,
         "y": 440,
@@ -9609,7 +9609,8 @@
         "y": 440,
         "wires": [
             [
-                "273afee4.dd92c2"
+                "273afee4.dd92c2",
+                "25a99b27.5ec354"
             ]
         ]
     },
@@ -9626,5 +9627,20 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "25a99b27.5ec354",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1130,
+        "y": 400,
+        "wires": []
     }
 ]
