@@ -3,10 +3,12 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./nodered_set_flows.sh                    ####
 #### Description: Updates flows                       ####
-#### Version: 0.20190621                              ####
+#### Version: 0.20190624                              ####
+####   0.20190624  Added free_memory.sh               ####
 ##########################################################
 
 sudo service nodered stop
+sudo /opt/hiveid-ap/free_memory.sh
 
 CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 
