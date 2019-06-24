@@ -9376,8 +9376,8 @@
         "group": "5ffcbee0.a5304",
         "name": "Firmware Versions",
         "order": 3,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "3",
         "lineType": "two",
         "actionType": "click",
         "allowHTML": true,
@@ -9385,7 +9385,7 @@
         "y": 940,
         "wires": [
             [
-                "ae37e931.d929a8"
+                "b2b04a87.6e3da8"
             ]
         ]
     },
@@ -9461,23 +9461,14 @@
         "wires": []
     },
     {
-        "id": "ae37e931.d929a8",
-        "type": "switch",
+        "id": "b2b04a87.6e3da8",
+        "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
+        "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/' + msg.payload);\nreturn msg;",
         "outputs": 1,
-        "x": 1060,
+        "noerr": 0,
+        "x": 1050,
         "y": 940,
         "wires": [
             []
