@@ -9616,7 +9616,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = msg.payload;\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] > 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] > 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Clear Configuration\",\"Show History\",\"Get Info\",\"Change Service URL\"],\n       icon_name : icon\n    });\n}\nreturn msg;",
+        "func": "var inProbes = msg.payload;\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] > 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] > 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Clear Configuration\",\"Show History\",\"Get Info\",\"Change Service URL\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 890,
@@ -9670,8 +9670,8 @@
         "storeOutMessages": true,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 1530,
-        "y": 560,
+        "x": 2010,
+        "y": 480,
         "wires": [
             []
         ]
@@ -9687,8 +9687,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1480,
-        "y": 380,
+        "x": 1350,
+        "y": 400,
         "wires": []
     },
     {
@@ -9696,7 +9696,7 @@
         "type": "switch",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "property": "menu",
+        "property": "payload.selected",
         "propertyType": "msg",
         "rules": [
             {
@@ -9731,11 +9731,346 @@
         "x": 1350,
         "y": 480,
         "wires": [
-            [],
-            [],
-            [],
+            [
+                "6f1bb70b.a402e8"
+            ],
+            [
+                "7824df0.64d322"
+            ],
+            [
+                "eb7e7bb7.63de38"
+            ],
             [],
             []
+        ]
+    },
+    {
+        "id": "bf09d96.c8e2328",
+        "type": "http request",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 1770,
+        "y": 400,
+        "wires": [
+            [
+                "712ae40d.6a76ec"
+            ]
+        ]
+    },
+    {
+        "id": "7824df0.64d322",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set clear URL",
+        "func": "msg.url = msg.payload.url + 'clear';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1580,
+        "y": 400,
+        "wires": [
+            [
+                "bf09d96.c8e2328"
+            ]
+        ]
+    },
+    {
+        "id": "712ae40d.6a76ec",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "400",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "200",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 1970,
+        "y": 400,
+        "wires": [
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "5d8ec427.76e15c"
+            ]
+        ]
+    },
+    {
+        "id": "14527172.13ccbf",
+        "type": "ui_toast",
+        "z": "7b5cf843.8f8fc8",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 2430,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5d8ec427.76e15c",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Cleared Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Successfully Cleared",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Success",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2170,
+        "y": 420,
+        "wires": [
+            [
+                "14527172.13ccbf"
+            ]
+        ]
+    },
+    {
+        "id": "eb7e7bb7.63de38",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set History URL",
+        "func": "msg.url = msg.payload.url + 'history';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1560,
+        "y": 480,
+        "wires": [
+            [
+                "d36c35a9.0f0798"
+            ]
+        ]
+    },
+    {
+        "id": "d36c35a9.0f0798",
+        "type": "http request",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 1770,
+        "y": 480,
+        "wires": [
+            [
+                "333a0e0a.1873b2"
+            ]
+        ]
+    },
+    {
+        "id": "63502c95.5de9e4",
+        "type": "http request",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 1770,
+        "y": 320,
+        "wires": [
+            [
+                "b98ad16b.c90ec"
+            ]
+        ]
+    },
+    {
+        "id": "6f1bb70b.a402e8",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set Reset URL",
+        "func": "msg.url = msg.payload.url + 'reset';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1580,
+        "y": 320,
+        "wires": [
+            [
+                "63502c95.5de9e4"
+            ]
+        ]
+    },
+    {
+        "id": "b98ad16b.c90ec",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "400",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "200",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 1970,
+        "y": 320,
+        "wires": [
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "9ab886c2.8e45f8"
+            ]
+        ]
+    },
+    {
+        "id": "4226552a.2c89fc",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Error Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HTTP Error",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Error",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2160,
+        "y": 360,
+        "wires": [
+            [
+                "14527172.13ccbf"
+            ]
+        ]
+    },
+    {
+        "id": "9ab886c2.8e45f8",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Reset Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Successfully Reset",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Success",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2160,
+        "y": 320,
+        "wires": [
+            [
+                "14527172.13ccbf"
+            ]
         ]
     }
 ]
