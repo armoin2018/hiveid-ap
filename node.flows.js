@@ -6620,8 +6620,7 @@
         "y": 220,
         "wires": [
             [
-                "bec6e433.866148",
-                "8dce9db3.8a0f"
+                "bec6e433.866148"
             ]
         ]
     },
@@ -6692,25 +6691,6 @@
         ]
     },
     {
-        "id": "4b1c0f98.05edc",
-        "type": "ui_template",
-        "z": "7b5cf843.8f8fc8",
-        "group": "873f13f8.22f2b",
-        "name": "",
-        "order": 0,
-        "width": "12",
-        "height": "6",
-        "format": "<div layout=\"row\" layout-align=\"space-between\">\n  <strong>{{msg.payload.IP}}</strong>&nbsp;\n  {{msg.payload.MAC}}<br>\n  {{msg.payload.VERSION}}\n</div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "templateScope": "local",
-        "x": 880,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "3176c5dc.e897ba",
         "type": "http request",
         "z": "7b5cf843.8f8fc8",
@@ -6726,8 +6706,9 @@
         "y": 400,
         "wires": [
             [
-                "4b1c0f98.05edc",
-                "33a0dcf.5102a24"
+                "33a0dcf.5102a24",
+                "533870c4.2662",
+                "dd94a3fd.ae674"
             ]
         ]
     },
@@ -6736,7 +6717,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Set URL",
-        "func": "msg.url = 'http://' + msg.payload.col3 + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
+        "func": "msg.url = 'http://' + msg.payload.col3 + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nmsg.topic = msg.payload.col2;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 570,
@@ -9542,33 +9523,6 @@
         "wires": []
     },
     {
-        "id": "8dce9db3.8a0f",
-        "type": "change",
-        "z": "7b5cf843.8f8fc8",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "template",
-                "pt": "msg",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 630,
-        "y": 480,
-        "wires": [
-            [
-                "4b1c0f98.05edc"
-            ]
-        ]
-    },
-    {
         "id": "b6adf091.54a19",
         "type": "change",
         "z": "11b2f565.0266ab",
@@ -9607,6 +9561,70 @@
             [
                 "93535d75.79ef"
             ]
+        ]
+    },
+    {
+        "id": "533870c4.2662",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Put into Global.Probes",
+        "func": "var probes = global.get('Probes');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.payload.MAC] = msg.payload;\nglobal.set('Probes',probes);\nmsg.payload = probes;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 400,
+        "wires": [
+            [
+                "9fed95c1.655638"
+            ]
+        ]
+    },
+    {
+        "id": "273afee4.dd92c2",
+        "type": "ui_list",
+        "z": "7b5cf843.8f8fc8",
+        "group": "873f13f8.22f2b",
+        "name": "",
+        "order": 1,
+        "width": "12",
+        "height": "6",
+        "lineType": "one",
+        "actionType": "none",
+        "allowHTML": true,
+        "x": 1130,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9fed95c1.655638",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Setup Rendering",
+        "func": "var inProbes = msg.payload;\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    var color = 'green';\n    switch (inHealth[inProbes[i].MAC]) {\n        case 404:\n        case 500:\n        case 501:\n            color = \"red\";\n            break;\n    }\n    msg.payload.push({\n       title : inProbes[i].IP,\n       description: \"<i class=\\\"fas fa-circle\\\" style=\\\"color:\" + color + \";\\\" /\" + iProbes[i].MAC + \"<br />\" + iProbes[i].VERSION,\n       menu : [\"Restart\"],\n       icon_name : 'wifi'\n    });\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 890,
+        "y": 440,
+        "wires": [
+            [
+                "273afee4.dd92c2"
+            ]
+        ]
+    },
+    {
+        "id": "dd94a3fd.ae674",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set Health Messges for Probes",
+        "func": "var probes = global.get('Probe_Health');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.topic] = msg.statusCode;\nglobal.set('Probe_Health',probes);\nmsg.payload = probes;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 890,
+        "y": 360,
+        "wires": [
+            []
         ]
     }
 ]
