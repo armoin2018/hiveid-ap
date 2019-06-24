@@ -2006,8 +2006,8 @@
         "appendNewline": false,
         "createDir": false,
         "overwriteFile": "true",
-        "x": 870,
-        "y": 180,
+        "x": 830,
+        "y": 200,
         "wires": [
             [
                 "18150761.7a23b9"
@@ -2025,8 +2025,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1010,
-        "y": 180,
+        "x": 970,
+        "y": 200,
         "wires": []
     },
     {
@@ -2034,7 +2034,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var msg1 = msg;\nvar msg2 = {};\nif (msg.headers !== undefined && msg.headers['content-disposition'] !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n    msg2.topic = \"Updating\";\n    msg2.highlight = \"orange\";\n    msg2.payload = 'Updating with File ' + tempFile;\n    \n} else {\n    if (msg.statusCode >= 500) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"An error occurred\";\n    } else if (msg.statusCode >= 400) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"Not Found\";\n    } else if (msg.statusCode >= 300) {\n        msg2.topic=\"Notice\";\n        msg2.highlight = \"yellow\";\n        msg2.payload = \"Resource moved\";\n    } else if (msg.statusCode >= 200) {\n        msg2.topic=\"No Updates\";\n        var currentFirmware = flow.get('currentFirmware');\n        msg2.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n        msg2.highlight=\"orange\";\n    }\n} \n\nreturn [msg1,msg2];",
+        "func": "var msg1 = msg;\nvar msg2 = {};\nif (msg.headers !== undefined && msg.headers['content-disposition'] !== undefined) {\n    var tempFile = msg.headers['content-disposition'];\n    tempFile = tempFile.replace(/attachment\\;\\s*filename=/,'').replace(/\\\"/g,'');\n    msg1.filename = '/usr/local/hiveid-ap/ota/' + tempFile;\n    flow.set('currentFirmware', '/usr/local/hiveid-ap/ota/' + msg1.filename);\n\n    msg2.topic = \"Update Found\";\n    msg2.highlight = \"orange\";\n    msg2.payload = 'Update Downloaded: ' + tempFile;\n    \n} else {\n    if (msg.statusCode >= 500) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"An error occurred\";\n    } else if (msg.statusCode >= 400) {\n        msg2.topic=\"Error\";\n        msg2.highlight = \"red\";\n        msg2.payload = \"Not Found\";\n    } else if (msg.statusCode >= 300) {\n        msg2.topic=\"Notice\";\n        msg2.highlight = \"yellow\";\n        msg2.payload = \"Resource moved\";\n    } else if (msg.statusCode >= 200) {\n        msg2.topic=\"No Updates\";\n        var currentFirmware = flow.get('currentFirmware');\n        msg2.payload = \"No new firmware received.  Latest firmware is \" + currentFirmware;\n        msg2.highlight=\"orange\";\n    }\n} \n\nreturn [msg1,msg2];",
         "outputs": 2,
         "noerr": 0,
         "x": 530,
@@ -2158,8 +2158,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 970,
-        "y": 260,
+        "x": 950,
+        "y": 280,
         "wires": [
             [
                 "695a152e.efd0ec"
@@ -8140,8 +8140,8 @@
         "cancel": "",
         "topic": "",
         "name": "Firmware Update Notification",
-        "x": 940,
-        "y": 120,
+        "x": 760,
+        "y": 240,
         "wires": []
     },
     {
@@ -9416,8 +9416,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 710,
-        "y": 220,
+        "x": 690,
+        "y": 200,
         "wires": [
             [
                 "d505e776.cc8988"
