@@ -741,7 +741,7 @@
         "id": "fbf0d797.e67a78",
         "type": "ui_group",
         "z": "",
-        "name": "Firware Versions",
+        "name": "Available Firware Versions",
         "tab": "b654d5df.424178",
         "order": 3,
         "disp": true,
@@ -2144,7 +2144,7 @@
         "payload": "currentFirmware",
         "payloadType": "flow",
         "topic": "",
-        "x": 180,
+        "x": 200,
         "y": 620,
         "wires": [
             [
@@ -9349,8 +9349,8 @@
         "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/AutoConnect.'+ msg.payload + '.bin');\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1050,
-        "y": 780,
+        "x": 470,
+        "y": 340,
         "wires": [
             []
         ]
@@ -9367,8 +9367,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 690,
-        "y": 720,
+        "x": 110,
+        "y": 280,
         "wires": [
             [
                 "6fc345c3.70b4dc"
@@ -9386,8 +9386,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 790,
-        "y": 780,
+        "x": 210,
+        "y": 340,
         "wires": [
             [
                 "cac1c25.866e24"
@@ -9405,14 +9405,15 @@
         "order": 1,
         "width": "6",
         "height": "3",
-        "lineType": "two",
+        "lineType": "one",
         "actionType": "click",
         "allowHTML": true,
-        "x": 830,
-        "y": 940,
+        "x": 890,
+        "y": 840,
         "wires": [
             [
-                "b2b04a87.6e3da8"
+                "b2b04a87.6e3da8",
+                "c5e2ba47.510018"
             ]
         ]
     },
@@ -9427,8 +9428,8 @@
         "filterType": "str",
         "dir": "files",
         "dirType": "msg",
-        "x": 420,
-        "y": 940,
+        "x": 480,
+        "y": 840,
         "wires": [
             [
                 "28f781ed.6efbee",
@@ -9448,8 +9449,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 230,
-        "y": 940,
+        "x": 290,
+        "y": 840,
         "wires": [
             [
                 "ce501478.c28c58"
@@ -9461,11 +9462,11 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    results.push({ \n        title: msg.files[i],\n        icon_name : ((msg.files[i] === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
+        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    results.push({ \n        title: msg.files[i],\n        icon_name : (('/usr/local/hiveid-ap/ota/' + msg.files[i] === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 610,
-        "y": 940,
+        "x": 670,
+        "y": 840,
         "wires": [
             [
                 "784f20e3.ac9e6"
@@ -9483,8 +9484,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 610,
-        "y": 900,
+        "x": 670,
+        "y": 800,
         "wires": []
     },
     {
@@ -9492,13 +9493,28 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/' + msg.payload);\nreturn msg;",
+        "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/' + msg.payload.title);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1050,
-        "y": 940,
+        "x": 1110,
+        "y": 840,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "c5e2ba47.510018",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1130,
+        "y": 800,
+        "wires": []
     }
 ]
