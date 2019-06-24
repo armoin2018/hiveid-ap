@@ -1873,7 +1873,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 160,
+        "x": 320,
         "y": 320,
         "wires": [
             [
@@ -1893,8 +1893,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 210,
-        "y": 460,
+        "x": 390,
+        "y": 480,
         "wires": [
             [
                 "56a59df3.3ee5a4",
@@ -1916,8 +1916,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 470,
-        "y": 480,
+        "x": 650,
+        "y": 500,
         "wires": [
             [
                 "8133a096.b87"
@@ -1932,8 +1932,8 @@
         "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        // -P is the host port\n        msg.payload = ' -i ' + msg.IP + ' -I 192.168.2.1 -p 8266 -a h1v3C0nn3ct -s -f ' + msg.filename + ' -d -r';\n    }\n}\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 710,
-        "y": 480,
+        "x": 890,
+        "y": 500,
         "wires": [
             [
                 "6964cb7.b194a34",
@@ -1965,7 +1965,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Set Firmware URL",
-        "func": "var config = global.get('TrainTraxx_Config');\nflow.set('currentFirmware', '/usr/local/hiveid-ap/ota/' + msg.payload);\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "func": "var config = global.get('TrainTraxx_Config');\nmsg.url = config.TrainTraxx_API + 'autoconnect?current=' + msg.payload + '&apikey=' + config.TrainTraxx_Key ;\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 490,
@@ -2089,8 +2089,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 950,
-        "y": 480,
+        "x": 1130,
+        "y": 500,
         "wires": [
             [
                 "4bd26c8c.731c44"
@@ -2329,8 +2329,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 210,
-        "y": 380,
+        "x": 370,
+        "y": 400,
         "wires": [
             [
                 "7011f363.68bd1c",
@@ -2359,8 +2359,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 470,
-        "y": 380,
+        "x": 630,
+        "y": 400,
         "wires": [
             [
                 "9c8a89b8.58e198"
@@ -2377,8 +2377,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 470,
-        "y": 340,
+        "x": 630,
+        "y": 360,
         "wires": []
     },
     {
@@ -2391,8 +2391,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 490,
-        "y": 440,
+        "x": 670,
+        "y": 460,
         "wires": []
     },
     {
@@ -2405,8 +2405,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 950,
-        "y": 440,
+        "x": 1130,
+        "y": 460,
         "wires": []
     },
     {
@@ -9448,6 +9448,26 @@
         "y": 720,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "41381e80.4a46f",
+        "type": "inject",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "e47e8d5c.512fd"
+            ]
         ]
     }
 ]
