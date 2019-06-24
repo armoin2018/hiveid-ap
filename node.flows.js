@@ -749,6 +749,17 @@
         "collapse": false
     },
     {
+        "id": "77ad2920.7bf5c8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Node Information",
+        "tab": "e96b9c3.af2826",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -6573,7 +6584,7 @@
         "type": "debug",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9584,17 +9595,20 @@
         "type": "ui_list",
         "z": "7b5cf843.8f8fc8",
         "group": "873f13f8.22f2b",
-        "name": "",
+        "name": "Node List",
         "order": 1,
         "width": "12",
         "height": "6",
         "lineType": "three",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 1130,
+        "x": 1140,
         "y": 440,
         "wires": [
-            []
+            [
+                "c076d62d.45aac8",
+                "7fe7a3b.bd6b85c"
+            ]
         ]
     },
     {
@@ -9633,7 +9647,7 @@
         "type": "debug",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9642,5 +9656,86 @@
         "x": 1130,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "333a0e0a.1873b2",
+        "type": "ui_template",
+        "z": "7b5cf843.8f8fc8",
+        "group": "77ad2920.7bf5c8",
+        "name": "Node Information",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 1530,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c076d62d.45aac8",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1480,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7fe7a3b.bd6b85c",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "property": "menu",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Restart",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Clear Configuration",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Show History",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Get Info",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Change Service URL",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 1350,
+        "y": 480,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
     }
 ]
