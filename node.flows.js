@@ -2117,7 +2117,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2144,12 +2144,13 @@
         "payload": "currentFirmware",
         "payloadType": "flow",
         "topic": "",
-        "x": 200,
+        "x": 180,
         "y": 620,
         "wires": [
             [
                 "ea289cc4.dfed6",
-                "41f21ebb.07fbd"
+                "41f21ebb.07fbd",
+                "4e95a163.b00df"
             ]
         ]
     },
@@ -2280,8 +2281,9 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 1130,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1110,
         "y": 460,
         "wires": []
     },
@@ -6892,7 +6894,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 130,
-        "y": 220,
+        "y": 200,
         "wires": [
             [
                 "aac85b05.c667a8"
@@ -8039,7 +8041,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 260,
-        "y": 660,
+        "y": 440,
         "wires": [
             [
                 "cb5b3377.6d8cd"
@@ -8058,7 +8060,7 @@
         "oldrc": false,
         "name": "",
         "x": 310,
-        "y": 720,
+        "y": 500,
         "wires": [
             [],
             [],
@@ -8089,7 +8091,7 @@
         "repair": false,
         "outputs": 2,
         "x": 270,
-        "y": 780,
+        "y": 560,
         "wires": [
             [
                 "b71926b7.4d6c68",
@@ -8113,7 +8115,7 @@
         "topic": "",
         "name": "",
         "x": 1230,
-        "y": 820,
+        "y": 600,
         "wires": []
     },
     {
@@ -8150,7 +8152,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 760,
+        "y": 540,
         "wires": [
             [
                 "93535d75.79ef"
@@ -8191,7 +8193,7 @@
         "to": "",
         "reg": false,
         "x": 1090,
-        "y": 960,
+        "y": 740,
         "wires": [
             [
                 "93535d75.79ef"
@@ -8232,7 +8234,7 @@
         "to": "",
         "reg": false,
         "x": 900,
-        "y": 800,
+        "y": 580,
         "wires": [
             [
                 "93535d75.79ef"
@@ -8273,7 +8275,7 @@
         "to": "",
         "reg": false,
         "x": 1080,
-        "y": 1000,
+        "y": 780,
         "wires": [
             [
                 "93535d75.79ef"
@@ -8307,7 +8309,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 840,
+        "y": 620,
         "wires": [
             [
                 "fafc95d8.818068"
@@ -8327,7 +8329,7 @@
         "topic": "",
         "name": "Install Flows",
         "x": 370,
-        "y": 880,
+        "y": 660,
         "wires": [
             [
                 "19f7d2e8.e7113d"
@@ -8355,7 +8357,7 @@
         "repair": false,
         "outputs": 2,
         "x": 390,
-        "y": 920,
+        "y": 700,
         "wires": [
             [
                 "d5c9c93d.040dc8"
@@ -8399,7 +8401,7 @@
         "to": "",
         "reg": false,
         "x": 1060,
-        "y": 920,
+        "y": 700,
         "wires": [
             [
                 "93535d75.79ef"
@@ -8418,7 +8420,7 @@
         "oldrc": false,
         "name": "",
         "x": 530,
-        "y": 980,
+        "y": 760,
         "wires": [
             [],
             [],
@@ -8449,7 +8451,7 @@
         "repair": false,
         "outputs": 2,
         "x": 890,
-        "y": 980,
+        "y": 760,
         "wires": [
             [
                 "38fc9479.9fd71c"
@@ -8471,7 +8473,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 700,
-        "y": 700,
+        "y": 480,
         "wires": []
     },
     {
@@ -8616,7 +8618,7 @@
         "topic": "",
         "name": "",
         "x": 990,
-        "y": 660,
+        "y": 680,
         "wires": []
     },
     {
@@ -8653,7 +8655,7 @@
         "to": "",
         "reg": false,
         "x": 780,
-        "y": 660,
+        "y": 680,
         "wires": [
             [
                 "86eb29ca.12d938"
@@ -9449,8 +9451,8 @@
         "repeat": "60",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
-        "x": 290,
+        "onceDelay": "1",
+        "x": 130,
         "y": 840,
         "wires": [
             [
@@ -9518,6 +9520,20 @@
         "targetType": "msg",
         "x": 1130,
         "y": 800,
+        "wires": []
+    },
+    {
+        "id": "4e95a163.b00df",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 410,
+        "y": 580,
         "wires": []
     }
 ]
