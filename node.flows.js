@@ -2226,8 +2226,7 @@
         "wires": [
             [
                 "73f0e379.d7a36c",
-                "8450b883.b9f298",
-                "ce501478.c28c58"
+                "8450b883.b9f298"
             ]
         ]
     },
@@ -9338,7 +9337,9 @@
         "x": 420,
         "y": 720,
         "wires": [
-            []
+            [
+                "ce501478.c28c58"
+            ]
         ]
     },
     {
@@ -9462,7 +9463,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    results.push({ \n        title: msg.files[i],\n        icon_name : (('/usr/local/hiveid-ap/ota/' + msg.files[i] === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
+        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    var outFile = '/usr/local/hiveid-ap/ota/' + msg.files[i];\n    results.push({ \n        title: msg.files[i],\n        icon_name : ((outFile === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 670,
@@ -9499,7 +9500,9 @@
         "x": 1110,
         "y": 840,
         "wires": [
-            []
+            [
+                "ce501478.c28c58"
+            ]
         ]
     },
     {
