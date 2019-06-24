@@ -9470,7 +9470,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware').trim();\nfor (var i in msg.files) {\n    var curFile = msg.files[i].trim();\n    var outFile = '/usr/local/hiveid-ap/ota/' + curFile;\n    results.push({ \n        title: msg.files[i],\n        icon_name : ((outFile === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
+        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware').trim();\nvar tFiles = msg.files.sort().reverse();\nfor (var i in tFiles) {\n    var curFile = tFiles[i].trim();\n    var outFile = '/usr/local/hiveid-ap/ota/' + curFile;\n    results.push({ \n        title: tFiles[i],\n        icon_name : ((outFile === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 670,
