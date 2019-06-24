@@ -1873,7 +1873,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 320,
+        "x": 340,
         "y": 320,
         "wires": [
             [
@@ -1987,7 +1987,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 80,
         "wires": [
             [
@@ -2359,7 +2359,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 630,
+        "x": 670,
         "y": 400,
         "wires": [
             [
@@ -2377,7 +2377,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 630,
+        "x": 670,
         "y": 360,
         "wires": []
     },
@@ -9445,7 +9445,7 @@
         "to": "",
         "reg": false,
         "x": 440,
-        "y": 720,
+        "y": 740,
         "wires": [
             []
         ]
@@ -9468,6 +9468,20 @@
             [
                 "e47e8d5c.512fd"
             ]
+        ]
+    },
+    {
+        "id": "cac1c25.866e24",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "func": "msg.filename = '/usr/local/hiveid-ap/ota/AutoConnect.'+ msg.payload + '.bin';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 560,
+        "wires": [
+            []
         ]
     }
 ]
