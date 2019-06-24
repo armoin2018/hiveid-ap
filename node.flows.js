@@ -9347,7 +9347,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/AutoConnect.'+ msg.payload + '.bin');\nreturn msg;",
+        "func": "flow.set('currentFirmware',msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 470,
