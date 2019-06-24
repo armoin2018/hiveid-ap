@@ -738,6 +738,17 @@
         "collapse": false
     },
     {
+        "id": "fbf0d797.e67a78",
+        "type": "ui_group",
+        "z": "",
+        "name": "Firware Versions",
+        "tab": "b654d5df.424178",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -1878,7 +1889,8 @@
         "wires": [
             [
                 "9c8a89b8.58e198",
-                "d395d1f0.e27c2"
+                "d395d1f0.e27c2",
+                "41f21ebb.07fbd"
             ]
         ]
     },
@@ -2136,7 +2148,8 @@
         "y": 620,
         "wires": [
             [
-                "ea289cc4.dfed6"
+                "ea289cc4.dfed6",
+                "41f21ebb.07fbd"
             ]
         ]
     },
@@ -8603,8 +8616,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1010,
-        "y": 680,
+        "x": 990,
+        "y": 660,
         "wires": []
     },
     {
@@ -8619,6 +8632,20 @@
                 "pt": "msg",
                 "to": "Updating with Target File",
                 "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "currentFirmware",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -8627,7 +8654,7 @@
         "to": "",
         "reg": false,
         "x": 780,
-        "y": 680,
+        "y": 660,
         "wires": [
             [
                 "86eb29ca.12d938"
@@ -9373,9 +9400,9 @@
         "id": "784f20e3.ac9e6",
         "type": "ui_list",
         "z": "16d0b1f7.5422be",
-        "group": "5ffcbee0.a5304",
+        "group": "fbf0d797.e67a78",
         "name": "Firmware Versions",
-        "order": 3,
+        "order": 1,
         "width": "6",
         "height": "3",
         "lineType": "two",
@@ -9434,7 +9461,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    results.push({ \n        title: msg.files[i],\n        icon_name : ((msg.files[i] === currentFirmware) ? 'check_circle_outline' : '')\n    });\n}\nmsg.payload = results;\nreturn msg;",
+        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware');\nfor (var i in msg.files) {\n    results.push({ \n        title: msg.files[i],\n        icon_name : ((msg.files[i] === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 610,
