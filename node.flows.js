@@ -9589,7 +9589,7 @@
         "width": "12",
         "height": "6",
         "lineType": "three",
-        "actionType": "click",
+        "actionType": "menu",
         "allowHTML": true,
         "x": 1130,
         "y": 440,
