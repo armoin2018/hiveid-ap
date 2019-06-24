@@ -9355,7 +9355,9 @@
         "x": 470,
         "y": 340,
         "wires": [
-            []
+            [
+                "ce501478.c28c58"
+            ]
         ]
     },
     {
@@ -9450,8 +9452,8 @@
         "payloadType": "date",
         "repeat": "60",
         "crontab": "",
-        "once": true,
-        "onceDelay": "1",
+        "once": false,
+        "onceDelay": "3",
         "x": 130,
         "y": 840,
         "wires": [
