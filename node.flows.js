@@ -6611,7 +6611,7 @@
         "topic": "",
         "payload": "LEASE_FILE",
         "payloadType": "global",
-        "repeat": "60",
+        "repeat": "10",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
@@ -6619,7 +6619,8 @@
         "y": 220,
         "wires": [
             [
-                "bec6e433.866148"
+                "bec6e433.866148",
+                "8dce9db3.8a0f"
             ]
         ]
     },
@@ -6698,7 +6699,7 @@
         "order": 0,
         "width": "12",
         "height": "6",
-        "format": "<div layout=\"row\" layout-align=\"space-between\">\n  <strong>{{msg.payload.IP_ADDRESS}}</strong>&nbsp;\n  {{msg.payload.MAC_ADDRESS}}\n</div>",
+        "format": "<div layout=\"row\" layout-align=\"space-between\">\n  <strong>{{msg.payload.IP}}</strong>&nbsp;\n  {{msg.payload.MAC}}<br>\n  {{msg.payload.VERSION}}\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "templateScope": "local",
@@ -9537,5 +9538,32 @@
         "x": 410,
         "y": 580,
         "wires": []
+    },
+    {
+        "id": "8dce9db3.8a0f",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 480,
+        "wires": [
+            [
+                "4b1c0f98.05edc"
+            ]
+        ]
     }
 ]
