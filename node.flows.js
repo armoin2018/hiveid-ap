@@ -9588,7 +9588,7 @@
         "order": 1,
         "width": "12",
         "height": "6",
-        "lineType": "one",
+        "lineType": "three",
         "actionType": "click",
         "allowHTML": true,
         "x": 1130,
