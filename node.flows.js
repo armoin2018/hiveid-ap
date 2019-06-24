@@ -1723,7 +1723,8 @@
         "y": 60,
         "wires": [
             [
-                "dc21a5dc.d18fb8"
+                "dc21a5dc.d18fb8",
+                "b6adf091.54a19"
             ]
         ]
     },
@@ -8045,7 +8046,8 @@
         "y": 440,
         "wires": [
             [
-                "cb5b3377.6d8cd"
+                "cb5b3377.6d8cd",
+                "b6adf091.54a19"
             ]
         ]
     },
@@ -8115,8 +8117,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1230,
-        "y": 600,
+        "x": 1370,
+        "y": 540,
         "wires": []
     },
     {
@@ -9563,6 +9565,47 @@
         "wires": [
             [
                 "4b1c0f98.05edc"
+            ]
+        ]
+    },
+    {
+        "id": "b6adf091.54a19",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Update Requested",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Starting the Update Process",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "HiveID Update",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 400,
+        "wires": [
+            [
+                "93535d75.79ef"
             ]
         ]
     }
