@@ -1972,7 +1972,8 @@
         "y": 500,
         "wires": [
             [
-                "8133a096.b87"
+                "9a8042ce.11b9c",
+                "ce7a44f3.fdb208"
             ]
         ]
     },
@@ -1981,10 +1982,10 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Create OTA Commands",
-        "func": "msg.MAC = msg.payload.col2;\nmsg.IP = msg.payload.col3;\n\nvar TT = global.get('TrainTraxx');\n\nvar targetKey = null;\nmsg.flag = false;\n\nfor (var i in TT.hivenode.columns) {\n    if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n        targetKey = i;\n    }\n}\nmsg.curMacA= [];\nfor (var t in TT.hivenode.data) {\n    var curMac = TT.hivenode.data[t][targetKey];\n    msg.curMacA.push(curMac);\n    if (curMac.toLowerCase().trim() == msg.MAC.toLowerCase().trim()) {\n        msg.flag = true;\n        // -P is the host port\n        var currentFirmware = flow.get('currentFirmware');\n        var gatewayInfo = flow.get('gatewayInfo');\n        var gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\n        msg.payload = ' -i ' + msg.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -s -f ' + currentFirmware + ' -d -r';\n    }\n}\nreturn msg;\n",
+        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = flow.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nmsg.payload = ' -i ' + msg.payload.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -s -f ' + currentFirmware + ' -d -r';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 890,
+        "x": 910,
         "y": 500,
         "wires": [
             [
@@ -2126,7 +2127,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1130,
+        "x": 1150,
         "y": 500,
         "wires": [
             [
@@ -2308,7 +2309,7 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1110,
+        "x": 1130,
         "y": 460,
         "wires": []
     },
@@ -8609,8 +8610,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1670,
-        "y": 540,
+        "x": 1610,
+        "y": 420,
         "wires": []
     },
     {
@@ -8626,7 +8627,7 @@
         "topic": "",
         "name": "",
         "x": 990,
-        "y": 680,
+        "y": 660,
         "wires": []
     },
     {
@@ -8663,7 +8664,7 @@
         "to": "",
         "reg": false,
         "x": 780,
-        "y": 680,
+        "y": 660,
         "wires": [
             [
                 "86eb29ca.12d938"
@@ -10257,8 +10258,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 630,
-        "y": 100,
+        "x": 720,
+        "y": 80,
         "wires": []
     },
     {
@@ -10266,7 +10267,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes'); \nvar out = [];\nif (probes !== undefined) {\n    for (var i in probes) {\n        var tempOut = {};\n        tempOut[i] = probes[i].IP;\n        out.push(tempOut);\n    }\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -10304,8 +10305,65 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 470,
-        "y": 100,
+        "x": 460,
+        "y": 80,
         "wires": []
+    },
+    {
+        "id": "ce7a44f3.fdb208",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Validate MAC",
+        "func": "var inMac = msg.payload.col2.trim();\nvar inIP = msg.payload.col3.trim();\n\n\nvar TT = global.get('TrainTraxx');\nvar targetKey = null;\n\nvar msg1 = {};\nvar msg2 = {};\n\n\nif (TT !== undefined && TT.hivenode !== undefined) {\n    if (TT.hivenode.columns !== undefined) {\n        for (var i in TT.hivenode.columns) {\n            if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n                targetKey = i;\n            } \n        }\n    } else { \n        msg2 = {\n            payload : \"Missing Hivenode Columns\",\n            title : \"Error\",\n            highlight : \"red\"\n        };\n    }\n    if (TT.hivenode.data !== undefined && targetKey !== null) {\n        for (var t in TT.hivenode.data) {         \n            if (inMac === TT.hivenode.data[t][targetKey]) {\n                msg1 = {\n                    payload : {\n                        MAC : inMac,\n                        IP  : inIP\n                    }\n                };\n                msg2 = {\n                    payload : \"MAC Validated\",\n                    title : \"Update\",\n                    highlight : \"green\"\n                };\n            }\n        }\n    } else {\n        msg2 = {\n            payload : \"Missing Hivenode Data or Unable to find MAC Column\",\n            title : \"Error\",\n            highlight : \"red\"\n        };\n    }   \n}\nreturn [msg1,msg2];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 880,
+        "y": 420,
+        "wires": [
+            [
+                "c268dc3f.a1393"
+            ],
+            [
+                "4ad60835.72eb38"
+            ]
+        ]
+    },
+    {
+        "id": "9a8042ce.11b9c",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 690,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c268dc3f.a1393",
+        "type": "switch",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 890,
+        "y": 460,
+        "wires": [
+            [
+                "8133a096.b87"
+            ]
+        ]
     }
 ]
