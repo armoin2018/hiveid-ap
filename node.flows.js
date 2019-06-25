@@ -2062,8 +2062,8 @@
         "y": 200,
         "wires": [
             [
-                "18150761.7a23b9",
-                "ce501478.c28c58"
+                "ce501478.c28c58",
+                "243c3d12.726522"
             ]
         ]
     },
@@ -2078,8 +2078,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 970,
-        "y": 200,
+        "x": 990,
+        "y": 60,
         "wires": []
     },
     {
@@ -2094,7 +2094,8 @@
         "y": 220,
         "wires": [
             [
-                "dae90564.436648"
+                "dae90564.436648",
+                "aad654c7.b3ae58"
             ],
             [
                 "bf5fd2d3.ecad8"
@@ -9336,9 +9337,12 @@
         "y": 200,
         "wires": [
             [
-                "d505e776.cc8988"
+                "d505e776.cc8988",
+                "18150761.7a23b9"
             ],
-            []
+            [
+                "1a5f397b.63b137"
+            ]
         ]
     },
     {
@@ -10258,23 +10262,7 @@
         "y": 140,
         "wires": [
             [
-                "78ddab29.a80634"
-            ]
-        ]
-    },
-    {
-        "id": "78ddab29.a80634",
-        "type": "function",
-        "z": "de72cd33.d0bc",
-        "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 290,
-        "y": 140,
-        "wires": [
-            [
-                "5681ef8f.18bc2"
+                "78c095e6.19640c"
             ]
         ]
     },
@@ -10291,6 +10279,67 @@
         "targetType": "full",
         "x": 720,
         "y": 80,
+        "wires": []
+    },
+    {
+        "id": "78c095e6.19640c",
+        "type": "function-npm",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "5681ef8f.18bc2"
+            ]
+        ]
+    },
+    {
+        "id": "1a5f397b.63b137",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 990,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "aad654c7.b3ae58",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 710,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "243c3d12.726522",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 990,
+        "y": 140,
         "wires": []
     }
 ]
