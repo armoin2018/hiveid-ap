@@ -10257,8 +10257,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 720,
-        "y": 80,
+        "x": 630,
+        "y": 100,
         "wires": []
     },
     {
@@ -10266,7 +10266,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes'); \nvar out = [];\nif (probes !== undefined) {\n    for (var i in probes) {\n        var tempOut = {};\n        tempOut[i] = probes[i].IP;\n        out.push(tempOut);\n    }\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -10304,8 +10304,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 460,
-        "y": 80,
+        "x": 470,
+        "y": 100,
         "wires": []
     }
 ]
