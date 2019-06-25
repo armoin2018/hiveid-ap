@@ -38,4 +38,4 @@ cp /opt/hiveid-ap/node.settings.unsecure.js ~/.node-red/settings.js
 sudo chown -R pi:pi /home/pi/.node-red
 sudo chmod -R 666 /var/log/hiveid-ap
 
-./nodered_udpate.sh
+/opt/hiveid-ap/nodered_udpate.sh

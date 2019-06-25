@@ -11,7 +11,7 @@ sudo apt-get clean
 sudo rpi-update
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update 
-sudo apt-get upgrade -qq --force-yes 
+sudo apt-get upgrade --yes --force-yes 
 sudo apt-get autoremove --yes
 export DEBIAN_FRONTEND=dialog
 echo "Please Reboot"

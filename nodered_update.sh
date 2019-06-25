@@ -24,7 +24,7 @@ sudo node-red-admin list > ~/.node-red/installed.node.list
 cd /opt/hiveid-ap
 
 echo "Installing Missing Nodes"
-php ./nodered_set_nodes.php
+php /opt/hiveid-ap/nodered_set_nodes.php
 
 echo "Setting the flows"
 CONF=/home/pi/.node-red/flows_$HOSTNAME.json

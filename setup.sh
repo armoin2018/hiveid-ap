@@ -79,9 +79,8 @@ fi
 
 pcmanfm --set-wallpaper=/opt/hiveid-ap/nodered/images/hiveid.png --wallpaper-mode=screen
 
-cd /opt/hiveid-ap
-./setup_links.sh
-./setup_node.sh
-./hiveid_set_wifi2eth.sh
+/opt/hiveid-ap/setup_links.sh
+/opt/hiveid-ap/setup_node.sh
+/opt/hiveid-ap/hiveid_set_wifi2eth.sh
 
 echo "Please Reboot"
