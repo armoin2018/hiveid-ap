@@ -2321,8 +2321,8 @@
         "func": "msg.payload = msg.IP + ' is not a valid hive node';\nmsg.topic = \"Invalid Node\";\nmsg.highlight = \"red\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1360,
-        "y": 500,
+        "x": 1340,
+        "y": 460,
         "wires": [
             [
                 "4ad60835.72eb38"
@@ -10321,7 +10321,8 @@
         "y": 420,
         "wires": [
             [
-                "c268dc3f.a1393"
+                "c268dc3f.a1393",
+                "ce3e93ca.3579d"
             ],
             [
                 "4ad60835.72eb38"
@@ -10362,8 +10363,39 @@
         "y": 460,
         "wires": [
             [
-                "8133a096.b87"
+                "8133a096.b87",
+                "bf2a9b37.851f28"
             ]
         ]
+    },
+    {
+        "id": "ce3e93ca.3579d",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1130,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "bf2a9b37.851f28",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1130,
+        "y": 400,
+        "wires": []
     }
 ]
