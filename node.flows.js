@@ -112,6 +112,13 @@
         "info": ""
     },
     {
+        "id": "de72cd33.d0bc",
+        "type": "tab",
+        "label": "Node History",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "49e2d5c0.49790c",
         "type": "subflow",
         "name": "Reporters to JRMI",
@@ -406,7 +413,7 @@
         "z": "",
         "name": "Application Settings",
         "icon": "apps",
-        "order": 5,
+        "order": 6,
         "disabled": false,
         "hidden": false
     },
@@ -440,7 +447,7 @@
         "link": "/",
         "icon": "all_inclusive",
         "target": "iframe",
-        "order": 8
+        "order": 9
     },
     {
         "id": "8e968283.a2d29",
@@ -450,7 +457,7 @@
         "link": "/redir?app=jmri",
         "icon": "train",
         "target": "iframe",
-        "order": 7
+        "order": 8
     },
     {
         "id": "6efda0bd.72343",
@@ -460,7 +467,7 @@
         "link": "/redir?app=openrsd",
         "icon": "fa-cogs",
         "target": "iframe",
-        "order": 9
+        "order": 10
     },
     {
         "id": "38e63d7a.b846e2",
@@ -470,7 +477,7 @@
         "link": "/redir?app=phpmyadmin",
         "icon": "fa-database",
         "target": "newtab",
-        "order": 10
+        "order": 11
     },
     {
         "id": "3808a9b7.8005b6",
@@ -480,7 +487,7 @@
         "link": "https://www.traintraxx.com/traintraxx-application",
         "icon": "fa-train",
         "target": "iframe",
-        "order": 6
+        "order": 7
     },
     {
         "id": "12a9f286.0bbd9d",
@@ -490,7 +497,7 @@
         "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
         "icon": "shopping_cart",
         "target": "newtab",
-        "order": 11
+        "order": 12
     },
     {
         "id": "82d159ac.42e4b8",
@@ -540,7 +547,7 @@
         "z": "",
         "name": "Local Train Activity",
         "icon": "dashboard",
-        "order": 4,
+        "order": 5,
         "disabled": false,
         "hidden": false
     },
@@ -550,7 +557,7 @@
         "z": "",
         "name": "Updates",
         "icon": "update",
-        "order": 12,
+        "order": 13,
         "disabled": false,
         "hidden": false
     },
@@ -690,7 +697,7 @@
         "z": "",
         "name": "Node Manger",
         "icon": "dashboard",
-        "order": 3,
+        "order": 4,
         "disabled": false,
         "hidden": false
     },
@@ -722,7 +729,7 @@
         "z": "",
         "name": "Under Development",
         "icon": "dashboard",
-        "order": 13,
+        "order": 14,
         "disabled": false,
         "hidden": false
     },
@@ -757,6 +764,27 @@
         "order": 2,
         "disp": false,
         "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "26cecbbc.95c444",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Node History",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d93a6b1c.d9e2e8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Node History",
+        "tab": "26cecbbc.95c444",
+        "order": 1,
+        "disp": true,
+        "width": "12",
         "collapse": false
     },
     {
@@ -10183,5 +10211,86 @@
                 "14527172.13ccbf"
             ]
         ]
+    },
+    {
+        "id": "5681ef8f.18bc2",
+        "type": "ui_dropdown",
+        "z": "de72cd33.d0bc",
+        "name": "Select Node",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "d93a6b1c.d9e2e8",
+        "order": 0,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "25dd4ac6.3660d6"
+            ]
+        ]
+    },
+    {
+        "id": "4617c0f6.ec13d",
+        "type": "inject",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "78ddab29.a80634"
+            ]
+        ]
+    },
+    {
+        "id": "78ddab29.a80634",
+        "type": "function",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "5681ef8f.18bc2"
+            ]
+        ]
+    },
+    {
+        "id": "25dd4ac6.3660d6",
+        "type": "debug",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 720,
+        "y": 80,
+        "wires": []
     }
 ]
