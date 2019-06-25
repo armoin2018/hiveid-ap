@@ -1989,8 +1989,8 @@
         "y": 500,
         "wires": [
             [
-                "6964cb7.b194a34",
-                "a72ea356.dfc17"
+                "a72ea356.dfc17",
+                "4bd26c8c.731c44"
             ]
         ]
     },
@@ -2106,35 +2106,6 @@
             [],
             [
                 "1f6a8f56.0f3ca1"
-            ]
-        ]
-    },
-    {
-        "id": "6964cb7.b194a34",
-        "type": "switch",
-        "z": "16d0b1f7.5422be",
-        "name": "NodeExists",
-        "property": "flag",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": true,
-        "outputs": 2,
-        "x": 1150,
-        "y": 500,
-        "wires": [
-            [
-                "4bd26c8c.731c44"
-            ],
-            [
-                "9095b7d0.f5b318"
             ]
         ]
     },
@@ -2312,22 +2283,6 @@
         "x": 1130,
         "y": 460,
         "wires": []
-    },
-    {
-        "id": "9095b7d0.f5b318",
-        "type": "function",
-        "z": "16d0b1f7.5422be",
-        "name": "Node Not Registered",
-        "func": "msg.payload = msg.IP + ' is not a valid hive node';\nmsg.topic = \"Invalid Node\";\nmsg.highlight = \"red\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1340,
-        "y": 460,
-        "wires": [
-            [
-                "4ad60835.72eb38"
-            ]
-        ]
     },
     {
         "id": "aac85b05.c667a8",
@@ -10314,7 +10269,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Validate MAC",
-        "func": "var inMac = msg.payload.col2.trim();\nvar inIP = msg.payload.col3.trim();\n\n\nvar TT = global.get('TrainTraxx');\nvar targetKey = null;\n\nvar msg1 = {};\nvar msg2 = {};\n\n\nif (TT !== undefined && TT.hivenode !== undefined) {\n    if (TT.hivenode.columns !== undefined) {\n        for (var i in TT.hivenode.columns) {\n            if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n                targetKey = i;\n            } \n        }\n    } else { \n        msg2 = {\n            payload : \"Missing Hivenode Columns\",\n            title : \"Error\",\n            highlight : \"red\"\n        };\n    }\n    if (TT.hivenode.data !== undefined && targetKey !== null) {\n        for (var t in TT.hivenode.data) {         \n            if (inMac === TT.hivenode.data[t][targetKey]) {\n                msg1 = {\n                    payload : {\n                        MAC : inMac,\n                        IP  : inIP\n                    }\n                };\n                msg2 = {\n                    payload : \"MAC Validated\",\n                    title : \"Update\",\n                    highlight : \"green\"\n                };\n            }\n        }\n    } else {\n        msg2 = {\n            payload : \"Missing Hivenode Data or Unable to find MAC Column\",\n            title : \"Error\",\n            highlight : \"red\"\n        };\n    }   \n}\nreturn [msg1,msg2];\n",
+        "func": "var inMac = msg.payload.col2.trim();\nvar inIP = msg.payload.col3.trim();\n\n\nvar TT = global.get('TrainTraxx');\nvar targetKey = null;\n\nvar msg1 = {};\nvar msg2 = {};\n\n\nif (TT !== undefined && TT.hivenode !== undefined) {\n    if (TT.hivenode.columns !== undefined) {\n        for (var i in TT.hivenode.columns) {\n            if (TT.hivenode.columns[i] === \"MAC_ADDRESS\") {\n                targetKey = i;\n            } \n        }\n    } else { \n        msg2 = {\n            payload : \"Missing Hivenode Columns\",\n            topic : \"Error\",\n            highlight : \"red\"\n        };\n    }\n    if (TT.hivenode.data !== undefined && targetKey !== null) {\n        for (var t in TT.hivenode.data) {         \n            if (inMac === TT.hivenode.data[t][targetKey]) {\n                msg1 = {\n                    payload : {\n                        MAC : inMac,\n                        IP  : inIP\n                    }\n                };\n                msg2 = {\n                    payload : \"MAC Validated\",\n                    topic : \"Update\",\n                    highlight : \"green\"\n                };\n            }\n        }\n    } else {\n        msg2 = {\n            payload : \"Missing Hivenode Data or Unable to find MAC Column\",\n            topic : \"Error\",\n            highlight : \"red\"\n        };\n    }   \n}\nreturn [msg1,msg2];\n",
         "outputs": 2,
         "noerr": 0,
         "x": 880,
