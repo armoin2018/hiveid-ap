@@ -6585,26 +6585,6 @@
         ]
     },
     {
-        "id": "89ae3cce.0e8ef",
-        "type": "inject",
-        "z": "7b5cf843.8f8fc8",
-        "name": "",
-        "topic": "",
-        "payload": "LEASE_FILE",
-        "payloadType": "global",
-        "repeat": "10",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "x": 220,
-        "y": 220,
-        "wires": [
-            [
-                "bec6e433.866148"
-            ]
-        ]
-    },
-    {
         "id": "5ea49fdb.c5819",
         "type": "inject",
         "z": "7b5cf843.8f8fc8",
@@ -9585,7 +9565,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = msg.payload;\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] > 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] > 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
+        "func": "var inProbes = msg.payload;\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] > 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] > 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 890,
@@ -9777,7 +9757,7 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1690,
+        "x": 1730,
         "y": 640,
         "wires": []
     },
@@ -9814,7 +9794,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1410,
+        "x": 1470,
         "y": 680,
         "wires": [
             [
@@ -9938,7 +9918,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1400,
+        "x": 1460,
         "y": 620,
         "wires": [
             [
@@ -9979,7 +9959,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1400,
+        "x": 1460,
         "y": 580,
         "wires": [
             [
@@ -10020,7 +10000,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1400,
+        "x": 1460,
         "y": 540,
         "wires": [
             [
@@ -10144,7 +10124,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1400,
+        "x": 1460,
         "y": 740,
         "wires": [
             [
@@ -10352,5 +10332,265 @@
         "x": 1130,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "aa89a911.032608",
+        "type": "ui_text_input",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Update Endpoint",
+        "label": "",
+        "tooltip": "",
+        "group": "873f13f8.22f2b",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 650,
+        "y": 820,
+        "wires": [
+            [
+                "b0f37200.a15da"
+            ]
+        ]
+    },
+    {
+        "id": "89ae3cce.0e8ef",
+        "type": "inject",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "topic": "",
+        "payload": "LEASE_FILE",
+        "payloadType": "global",
+        "repeat": "30",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "bec6e433.866148"
+            ]
+        ]
+    },
+    {
+        "id": "b0f37200.a15da",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "NEW_URL",
+                "pt": "flow",
+                "to": "msg.payload",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LEASE_FILE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 860,
+        "wires": [
+            [
+                "47768455.2a402c"
+            ]
+        ]
+    },
+    {
+        "id": "8486d1db.95beb",
+        "type": "inject",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "topic": "",
+        "payload": "http://local.hive-id.com:1880/tracker",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 450,
+        "y": 820,
+        "wires": [
+            [
+                "aa89a911.032608"
+            ]
+        ]
+    },
+    {
+        "id": "47768455.2a402c",
+        "type": "exec",
+        "z": "7b5cf843.8f8fc8",
+        "command": "sudo /opt/hiveid-ap/dnsmasq_get_leases.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 790,
+        "y": 920,
+        "wires": [
+            [
+                "15d09f41.6829b1"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "15d09f41.6829b1",
+        "type": "csv",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 1050,
+        "y": 920,
+        "wires": [
+            [
+                "6a707d1d.eb1e14"
+            ]
+        ]
+    },
+    {
+        "id": "6a707d1d.eb1e14",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set URL",
+        "func": "var new_url = flow.get('NEW_URL');\nmsg.url = 'http://' + msg.payload.col3 + ':8080/service_url?service_url=' + new_url;\nmsg.topic = msg.payload.col2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1100,
+        "y": 960,
+        "wires": [
+            [
+                "71656feb.ae931"
+            ]
+        ]
+    },
+    {
+        "id": "71656feb.ae931",
+        "type": "http request",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "authType": "basic",
+        "x": 1150,
+        "y": 1000,
+        "wires": [
+            [
+                "4f73c59b.3a925c"
+            ]
+        ]
+    },
+    {
+        "id": "4f73c59b.3a925c",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "400",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 1310,
+        "y": 1000,
+        "wires": [
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "6a1bac89.34c114"
+            ],
+            [
+                "1fc4e5f6.cb0fda"
+            ]
+        ]
+    },
+    {
+        "id": "6a1bac89.34c114",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Cleared Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Successfully Reset",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Success",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 1000,
+        "wires": [
+            [
+                "14527172.13ccbf"
+            ]
+        ]
     }
 ]
