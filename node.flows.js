@@ -9320,7 +9320,7 @@
         "type": "switch",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "property": "payload.filename",
+        "property": "filename",
         "propertyType": "msg",
         "rules": [
             {
