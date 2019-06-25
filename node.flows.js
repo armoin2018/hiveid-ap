@@ -2062,25 +2062,9 @@
         "y": 200,
         "wires": [
             [
-                "ce501478.c28c58",
                 "243c3d12.726522"
             ]
         ]
-    },
-    {
-        "id": "18150761.7a23b9",
-        "type": "debug",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 990,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "16181bb6.fb2234",
@@ -2094,8 +2078,7 @@
         "y": 220,
         "wires": [
             [
-                "dae90564.436648",
-                "aad654c7.b3ae58"
+                "dae90564.436648"
             ],
             [
                 "bf5fd2d3.ecad8"
@@ -9337,12 +9320,9 @@
         "y": 200,
         "wires": [
             [
-                "d505e776.cc8988",
-                "18150761.7a23b9"
+                "d505e776.cc8988"
             ],
-            [
-                "1a5f397b.63b137"
-            ]
+            []
         ]
     },
     {
@@ -10286,53 +10266,24 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
         "y": 140,
         "wires": [
             [
-                "5681ef8f.18bc2"
+                "5681ef8f.18bc2",
+                "3c5d8351.3fb30c"
             ]
         ]
-    },
-    {
-        "id": "1a5f397b.63b137",
-        "type": "debug",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 990,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "aad654c7.b3ae58",
-        "type": "debug",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 710,
-        "y": 140,
-        "wires": []
     },
     {
         "id": "243c3d12.726522",
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10340,6 +10291,21 @@
         "targetType": "full",
         "x": 990,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "3c5d8351.3fb30c",
+        "type": "debug",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 460,
+        "y": 80,
         "wires": []
     }
 ]
