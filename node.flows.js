@@ -9703,7 +9703,7 @@
         "type": "switch",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "property": "payload",
+        "property": "statusCode",
         "propertyType": "msg",
         "rules": [
             {
@@ -9757,8 +9757,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1730,
-        "y": 640,
+        "x": 1950,
+        "y": 660,
         "wires": []
     },
     {
@@ -9794,8 +9794,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1470,
-        "y": 680,
+        "x": 1570,
+        "y": 700,
         "wires": [
             [
                 "14527172.13ccbf"
@@ -9843,7 +9843,7 @@
         "type": "switch",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "property": "payload",
+        "property": "statusCode",
         "propertyType": "msg",
         "rules": [
             {
@@ -9918,8 +9918,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1460,
-        "y": 620,
+        "x": 1560,
+        "y": 640,
         "wires": [
             [
                 "14527172.13ccbf"
@@ -9959,8 +9959,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1460,
-        "y": 580,
+        "x": 1560,
+        "y": 600,
         "wires": [
             [
                 "14527172.13ccbf"
@@ -10000,8 +10000,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1460,
-        "y": 540,
+        "x": 1560,
+        "y": 560,
         "wires": [
             [
                 "14527172.13ccbf"
@@ -10049,7 +10049,7 @@
         "type": "switch",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "property": "payload",
+        "property": "statusCode",
         "propertyType": "msg",
         "rules": [
             {
@@ -10124,8 +10124,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1460,
-        "y": 740,
+        "x": 1560,
+        "y": 760,
         "wires": [
             [
                 "14527172.13ccbf"
@@ -10193,8 +10193,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 720,
-        "y": 80,
+        "x": 710,
+        "y": 140,
         "wires": []
     },
     {
@@ -10496,6 +10496,8 @@
         "ret": "txt",
         "paytoqs": false,
         "url": "",
+        "tls": "",
+        "proxy": "",
         "authType": "basic",
         "x": 1150,
         "y": 1000,
@@ -10510,7 +10512,7 @@
         "type": "switch",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "property": "payload",
+        "property": "statusCode",
         "propertyType": "msg",
         "rules": [
             {
@@ -10542,7 +10544,7 @@
                 "4226552a.2c89fc"
             ],
             [
-                "4226552a.2c89fc"
+                "1fc4e5f6.cb0fda"
             ],
             [
                 "6a1bac89.34c114"
@@ -10556,13 +10558,13 @@
         "id": "6a1bac89.34c114",
         "type": "change",
         "z": "7b5cf843.8f8fc8",
-        "name": "Cleared Message",
+        "name": "Updated URL",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Successfully Reset",
+                "to": "Successfully Updated",
                 "tot": "str"
             },
             {
@@ -10585,7 +10587,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1490,
+        "x": 1480,
         "y": 1000,
         "wires": [
             [
