@@ -10386,8 +10386,8 @@
                 "t": "set",
                 "p": "NEW_URL",
                 "pt": "flow",
-                "to": "msg.payload",
-                "tot": "str"
+                "to": "payload",
+                "tot": "msg"
             },
             {
                 "t": "set",
