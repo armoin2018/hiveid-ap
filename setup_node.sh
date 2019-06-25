@@ -10,8 +10,8 @@ now=$(date +"%Y%m%d")
 
 /opt/hiveid-ap/system_update.sh
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install -y --force-yes npm nodejs nodered
-sudo apt-get install -y --force-yes libzmq5 libzmq3-dev
+sudo apt-get install --yes --force-yes npm nodejs nodered
+sudo apt-get install --yes --force-yes libzmq5 libzmq3-dev
 export DEBIAN_FRONTEND=dialog
 
 mkdir /home/pi/.nodered 2>/dev/null
