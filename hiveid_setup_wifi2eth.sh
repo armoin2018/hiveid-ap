@@ -1,17 +1,19 @@
 #!/bin/bash
 ############################################################################
 #### Author: Blaine McDonnell (blaine@armoin.com)                       ####
-#### Usage: sudo ./hiveid_setup_wifi2eth.sh PASSWORD                    ####
+#### Usage: sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD          ####
 #### Description: Sets up Raspberry Pi as a WiFi to Ethernet Gateway    ####
-#### Version: 0.20190614                                                ####
+#### Version: 0.20190626                                                ####
 ############################################################################
 
-if [ -z "$1" ]; then 
+if [ -z "$2" ]; then 
     echo "No argument supplied"
-    echo "Usage: hiveid_setup_wifi2eth.sh PASSWORD"
+    echo "Usage: hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD"
+    echo "       IP_PREFIX example 192.168.2"
     exit;
 else 
-    PWD=$1
+    IP_PRE=$1
+    PWD=$2
 fi
 
 /opt/hiveid-ap/system_update.sh
@@ -24,12 +26,11 @@ systemctl set-default multi-user.target
 
 echo "allow-hotplug wlan0
 iface wlan0 inet static
-    address 192.168.2.1
+    address $IP_PRE.1
     netmask 255.255.255.0
-    network 192.168.2.0
-    broadcast 192.168.2.255" > /etc/network/interfaces.d/wlan0
+    network $IP_PRE.0
+    broadcast $IP_PRE.255" > /etc/network/interfaces.d/wlan0
 sed -i "s/^hostname.*$/hostname $HOSTNAME/g" /etc/dhcpcd.conf
-
 
 if [ -f /etc/dhcpcd.conf.orig ]; then 
     mv /etc/dhcpcd.conf.orig /etc/dhcpcd.conf
@@ -37,8 +38,10 @@ else
     cp /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
 fi
 
-echo "interface wlan0
-    static ip_address=192.168.2.1/24" >> /etc/dhcpcd.conf
+echo "static routers=$IP_PRE.1
+static domain_name_servers=$IP_PRE.1 8.8.8.8
+interface wlan0
+    static ip_address=$IP_PRE.1/24" >> /etc/dhcpcd.conf
 
 service dhcpcd restart
 if [ -f /etc/dnsmasq.conf.orig ]; then 
@@ -47,7 +50,7 @@ else
     cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 fi
 echo "interface=wlan0
-dhcp-range=192.168.2.2,192.168.2.254,255.255.255.0,24h" >> /etc/dnsmasq.conf
+dhcp-range=$IP_PRE.2,$IP_PRE.254,255.255.255.0,24h" >> /etc/dnsmasq.conf
 
 echo "interface=wlan0
 driver=nl80211
@@ -80,7 +83,7 @@ iptables -t nat -F
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-CNT=`grep "iptables.ipv4.nat" /etc/rc.local`
+CNT=`grep "iptables.ipv4.nat" /etc/rc.local | wc -l`
 if [[ "$CNT" -eq "0" ]]; then
     sed -i "s/^exit 0$//g" /etc/rc.local
     echo "iptables-restore < /etc/iptables.ipv4.nat

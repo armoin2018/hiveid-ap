@@ -44,13 +44,6 @@ sudo ln -s /opt/openrsd /var/www/html/openrsd
 cd /usr/local/hiveid-ap
 wget https://github.com/esp8266/Arduino/raw/master/tools/espota.py
 
-CNT=`grep "local.hive-id.com" /etc/hosts`
-if [[ "$CNT" -eq "0" ]]; then
-    sudo echo "192.168.2.1	local.hive-id.com" >>/etc/hosts
-else 
-    echo "Local host reference found in hosts file"
-fi
-
 CONF=/etc/hiveid-ap/conf.hiveid.json
 if [ -f $CONF ]; then 
     echo "Existing hiveid configuration file found, skipping"
@@ -72,7 +65,7 @@ else
     sudo cp /opt/hiveid-ap/conf.jmri.json /etc/hiveid-ap/.
 fi
 
-CNT=`grep "net.ifnames" /boot/cmdline.txt`
+CNT=`grep "net.ifnames" /boot/cmdline.txt | wc -l`
 if [[ "$CNT" -eq "0" ]]; then
     sudo sed -i -e "s/$/ net.ifnames=0/" /boot/cmdline.txt
 fi
@@ -81,6 +74,5 @@ pcmanfm --set-wallpaper=/opt/hiveid-ap/nodered/images/hiveid.png --wallpaper-mod
 
 /opt/hiveid-ap/setup_links.sh
 /opt/hiveid-ap/setup_node.sh
-/opt/hiveid-ap/hiveid_set_wifi2eth.sh
 
 echo "Please Reboot"
