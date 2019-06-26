@@ -387,7 +387,7 @@
         "type": "ui_group",
         "z": "",
         "name": "HiveID RFID Module",
-        "tab": "b654d5df.424178",
+        "tab": "e96b9c3.af2826",
         "order": 3,
         "disp": true,
         "width": "6",
@@ -714,10 +714,10 @@
         "type": "ui_group",
         "z": "",
         "name": "Available Firware Versions",
-        "tab": "b654d5df.424178",
+        "tab": "e96b9c3.af2826",
         "order": 2,
         "disp": true,
-        "width": "6",
+        "width": "9",
         "collapse": false
     },
     {
@@ -726,7 +726,7 @@
         "z": "",
         "name": "Node Information",
         "tab": "e96b9c3.af2826",
-        "order": 2,
+        "order": 4,
         "disp": false,
         "width": "6",
         "collapse": false
@@ -2200,8 +2200,8 @@
         "name": "",
         "group": "fbf0d797.e67a78",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "9",
+        "height": "1",
         "passthru": false,
         "label": "Check for Updated Reader Firmware",
         "tooltip": "",
@@ -8510,7 +8510,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "A new firmware version is available",
+                "to": "Firmware folder has changed",
                 "tot": "str"
             },
             {
@@ -9246,17 +9246,17 @@
         "group": "fbf0d797.e67a78",
         "name": "Firmware Versions",
         "order": 2,
-        "width": "6",
+        "width": "9",
         "height": "3",
         "lineType": "one",
-        "actionType": "click",
+        "actionType": "menu",
         "allowHTML": true,
         "x": 890,
         "y": 840,
         "wires": [
             [
-                "b2b04a87.6e3da8",
-                "c5e2ba47.510018"
+                "c5e2ba47.510018",
+                "b5bb12b.96430f"
             ]
         ]
     },
@@ -9305,7 +9305,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware').trim();\nvar tFiles = msg.files.sort().reverse();\nfor (var i in tFiles) {\n    var curFile = tFiles[i].trim();\n    var outFile = '/usr/local/hiveid-ap/ota/' + curFile;\n    results.push({ \n        title: tFiles[i],\n        icon_name : ((outFile === currentFirmware) ? 'fa-check-circle' : 'fa-circle')\n    });\n}\nmsg.payload = results;\nreturn msg;",
+        "func": "var results = [];\nvar currentFirmware = flow.get('currentFirmware').trim();\nvar tFiles = msg.files.sort().reverse();\nfor (var i in tFiles) {\n    var curFile = tFiles[i].trim();\n    var outFile = '/usr/local/hiveid-ap/ota/' + curFile;\n    if (currentFirmware === \"\") {\n        flow.set('currentFirmware',outFile);\n        currentFirmware = outFile;\n    }\n    results.push({ \n        title: tFiles[i],\n        icon_name : ((outFile === currentFirmware) ? 'fa-check-circle' : 'fa-circle'),\n        menu : [\"Set Active\",\"Delete\"]\n    });\n}\nmsg.payload = results;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 670,
@@ -9330,22 +9330,6 @@
         "x": 670,
         "y": 800,
         "wires": []
-    },
-    {
-        "id": "b2b04a87.6e3da8",
-        "type": "function",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "func": "flow.set('currentFirmware','/usr/local/hiveid-ap/ota/' + msg.payload.title);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1110,
-        "y": 840,
-        "wires": [
-            [
-                "ce501478.c28c58"
-            ]
-        ]
     },
     {
         "id": "c5e2ba47.510018",
@@ -10685,5 +10669,130 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "66e86250.0a2bcc",
+        "type": "switch",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "property": "payload.selected",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Set Active",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Delete",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1190,
+        "y": 880,
+        "wires": [
+            [
+                "e145d0ca.70fa1"
+            ],
+            [
+                "628f15b0.39eddc"
+            ]
+        ]
+    },
+    {
+        "id": "628f15b0.39eddc",
+        "type": "fs-ops-delete",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "path": "",
+        "pathType": "str",
+        "filename": "filename",
+        "filenameType": "msg",
+        "x": 1350,
+        "y": 920,
+        "wires": [
+            [
+                "5c4908eb.fb3fa8"
+            ]
+        ]
+    },
+    {
+        "id": "b5bb12b.96430f",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Set Filename",
+        "func": "msg.filename = '/usr/local/hiveid-ap/ota/' + msg.payload.title;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1150,
+        "y": 840,
+        "wires": [
+            [
+                "66e86250.0a2bcc",
+                "d2c9b332.9f9af"
+            ]
+        ]
+    },
+    {
+        "id": "5c4908eb.fb3fa8",
+        "type": "function",
+        "z": "16d0b1f7.5422be",
+        "name": "Handoff",
+        "func": "var curFilename = flow.get('currentFirmware');\nif (msg.filename === curFilename) {\n    flow.set('currentFirmware',\"\");\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1520,
+        "y": 920,
+        "wires": [
+            [
+                "ce501478.c28c58"
+            ]
+        ]
+    },
+    {
+        "id": "e145d0ca.70fa1",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "Set currentFirmware",
+        "rules": [
+            {
+                "t": "set",
+                "p": "currentFirmware",
+                "pt": "flow",
+                "to": "filename",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1380,
+        "y": 880,
+        "wires": [
+            [
+                "ce501478.c28c58"
+            ]
+        ]
+    },
+    {
+        "id": "d2c9b332.9f9af",
+        "type": "debug",
+        "z": "16d0b1f7.5422be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1350,
+        "y": 820,
+        "wires": []
     }
 ]
