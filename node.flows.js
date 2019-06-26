@@ -355,7 +355,7 @@
         "type": "ui_group",
         "z": "",
         "name": "Software Updates",
-        "tab": "b654d5df.424178",
+        "tab": "",
         "order": 1,
         "disp": true,
         "width": "6",
@@ -513,16 +513,6 @@
         "name": "Local Train Activity",
         "icon": "dashboard",
         "order": 5,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "b654d5df.424178",
-        "type": "ui_tab",
-        "z": "",
-        "name": "Updates",
-        "icon": "update",
-        "order": 13,
         "disabled": false,
         "hidden": false
     },
@@ -953,8 +943,8 @@
         "type": "ui_button",
         "z": "a06855ce.9f5488",
         "name": "",
-        "group": "df05b319.59cad",
-        "order": 4,
+        "group": "17f52c5b.cfb014",
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1032,12 +1022,12 @@
         "type": "ui_button",
         "z": "a06855ce.9f5488",
         "name": "",
-        "group": "df05b319.59cad",
-        "order": 2,
+        "group": "17f52c5b.cfb014",
+        "order": 3,
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "Update HiveID Code",
+        "label": "Update HiveID Code (SLOW)",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -1045,7 +1035,7 @@
         "payload": "These upgrades will take time to load and the application will be unavailable during hte upgrades.  Do you want continue?",
         "payloadType": "str",
         "topic": "",
-        "x": 140,
+        "x": 160,
         "y": 460,
         "wires": [
             [
@@ -2916,7 +2906,7 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 2,
+        "order": 4,
         "width": "6",
         "height": "2",
         "name": "",
@@ -2979,7 +2969,7 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 4,
+        "order": 6,
         "width": "6",
         "height": "1",
         "name": "",
@@ -3133,43 +3123,6 @@
         ],
         "outputLabels": [
             "msg"
-        ]
-    },
-    {
-        "id": "ec4da317.03502",
-        "type": "ui_ui_control",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "x": 320,
-        "y": 1000,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e80fb98c.dccd08",
-        "type": "ui_button",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "group": "17f52c5b.cfb014",
-        "order": 3,
-        "width": "6",
-        "height": "1",
-        "passthru": false,
-        "label": "Go to Updates",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "{\"tab\":\"Updates\"}",
-        "payloadType": "json",
-        "topic": "",
-        "x": 120,
-        "y": 1000,
-        "wires": [
-            [
-                "ec4da317.03502"
-            ]
         ]
     },
     {
@@ -6347,7 +6300,7 @@
         "name": "",
         "label": "Change Password",
         "group": "17f52c5b.cfb014",
-        "order": 5,
+        "order": 7,
         "width": "6",
         "height": "3",
         "options": [
@@ -7864,8 +7817,8 @@
         "type": "ui_button",
         "z": "11b2f565.0266ab",
         "name": "",
-        "group": "df05b319.59cad",
-        "order": 1,
+        "group": "17f52c5b.cfb014",
+        "order": 2,
         "width": 0,
         "height": 0,
         "passthru": false,
