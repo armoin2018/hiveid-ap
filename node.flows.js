@@ -2045,14 +2045,14 @@
         "id": "4bd26c8c.731c44",
         "type": "exec",
         "z": "16d0b1f7.5422be",
-        "command": "python /usr/local/hiveid-ap/espota.py ",
+        "command": "sudo python /usr/local/hiveid-ap/espota.py ",
         "addpay": true,
         "append": "",
-        "useSpawn": "false",
+        "useSpawn": "true",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 850,
+        "x": 870,
         "y": 560,
         "wires": [
             [
@@ -10858,8 +10858,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1180,
-        "y": 660,
+        "x": 1150,
+        "y": 640,
         "wires": []
     }
 ]
