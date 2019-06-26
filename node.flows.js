@@ -9497,7 +9497,7 @@
                 "b63b4171.7c8f3"
             ],
             [
-                "1e2d1aa3.003aa5"
+                "aaf2f483.ae9c68"
             ]
         ]
     },
@@ -10768,8 +10768,7 @@
         "y": 560,
         "wires": [
             [
-                "4bd26c8c.731c44",
-                "bb27a44c.33dd78"
+                "8133a096.b87"
             ]
         ]
     },
@@ -10781,23 +10780,35 @@
         "links": [
             "4794cc59.6fea44"
         ],
-        "x": 755,
+        "x": 975,
         "y": 780,
         "wires": []
     },
     {
-        "id": "bb27a44c.33dd78",
-        "type": "debug",
-        "z": "16d0b1f7.5422be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 680,
-        "y": 740,
-        "wires": []
+        "id": "aaf2f483.ae9c68",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.IP",
+                "pt": "msg",
+                "to": "payload.data.IP",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 780,
+        "wires": [
+            [
+                "1e2d1aa3.003aa5"
+            ]
+        ]
     }
 ]
