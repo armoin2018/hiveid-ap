@@ -6509,8 +6509,8 @@
         "tls": "",
         "proxy": "",
         "authType": "basic",
-        "x": 630,
-        "y": 400,
+        "x": 570,
+        "y": 360,
         "wires": [
             [
                 "33a0dcf.5102a24",
@@ -6527,8 +6527,8 @@
         "func": "msg.url = 'http://' + msg.payload.col3 + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nmsg.topic = msg.payload.col2;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 570,
-        "y": 340,
+        "x": 520,
+        "y": 320,
         "wires": [
             [
                 "3176c5dc.e897ba"
@@ -9359,15 +9359,13 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Put into Global.Probes",
-        "func": "var probes = global.get('Probes');\nvar probeHistory = global.get('Probe_History');\n\nif (probes === undefined) {\n    probes = {};\n}\nif (probeHistory === undefined) {\n    probeHistory = {};\n}\nprobes[msg.payload.MAC] = msg.payload;\n//probeHistory[msg.payload.MAC][msg.payload.TIME] = { Success : msg.payload.SUCCESS, Failure : msg.payload.FAILURE };\nglobal.set('Probes',probes);\nglobal.set('Probe_History',probeHistory);\nmsg.payload = probes;\nreturn msg;",
+        "func": "var probes = global.get('Probes');\nvar probeHistory = global.get('Probe_History');\n\nif (probes === undefined) {\n    probes = {};\n}\nif (probeHistory === undefined) {\n    probeHistory = {};\n}\nif (msg.payload.MAC !== undefined) {\n    probes[msg.payload.MAC] = msg.payload;\n    //probeHistory[msg.payload.MAC][msg.payload.TIME] = { Success : msg.payload.SUCCESS, Failure : msg.payload.FAILURE };\n    global.set('Probes',probes);\n    global.set('Probe_History',probeHistory);\n}\nmsg.payload = probes;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 860,
-        "y": 400,
+        "x": 840,
+        "y": 360,
         "wires": [
-            [
-                "9fed95c1.655638"
-            ]
+            []
         ]
     },
     {
@@ -9382,8 +9380,8 @@
         "lineType": "three",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 1140,
-        "y": 440,
+        "x": 720,
+        "y": 460,
         "wires": [
             [
                 "c076d62d.45aac8",
@@ -9396,11 +9394,11 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = msg.payload;\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
+        "func": "var inProbes = global.get('Probes');\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 890,
-        "y": 440,
+        "x": 470,
+        "y": 460,
         "wires": [
             [
                 "273afee4.dd92c2",
@@ -9416,8 +9414,8 @@
         "func": "var probes = global.get('Probe_Health');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.topic] = msg.statusCode;\nglobal.set('Probe_Health',probes);\nmsg.payload = probes;",
         "outputs": 1,
         "noerr": 0,
-        "x": 890,
-        "y": 360,
+        "x": 870,
+        "y": 320,
         "wires": [
             []
         ]
@@ -9433,8 +9431,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1130,
-        "y": 400,
+        "x": 710,
+        "y": 420,
         "wires": []
     },
     {
@@ -9448,8 +9446,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1290,
-        "y": 400,
+        "x": 870,
+        "y": 420,
         "wires": []
     },
     {
@@ -10807,8 +10805,44 @@
         "y": 780,
         "wires": [
             [
-                "1e2d1aa3.003aa5"
+                "1e2d1aa3.003aa5",
+                "76289d6d.c9ddd4"
             ]
         ]
+    },
+    {
+        "id": "2d71dfd5.d0012",
+        "type": "inject",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "9fed95c1.655638"
+            ]
+        ]
+    },
+    {
+        "id": "76289d6d.c9ddd4",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1000,
+        "y": 840,
+        "wires": []
     }
 ]
