@@ -8274,7 +8274,7 @@
         "type": "switch",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "property": "payload",
+        "property": "payload.code",
         "propertyType": "msg",
         "rules": [
             {
