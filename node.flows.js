@@ -206,41 +206,6 @@
         "icon": "node-red/leveldb.png"
     },
     {
-        "id": "a493d433.024998",
-        "type": "subflow",
-        "name": "Tracker Proxy",
-        "info": "",
-        "category": "TrainTraxx",
-        "in": [],
-        "out": [
-            {
-                "x": 560,
-                "y": 142.5,
-                "wires": [
-                    {
-                        "id": "4dfa5b69.319274",
-                        "port": 0
-                    }
-                ]
-            },
-            {
-                "x": 1000,
-                "y": 122.5,
-                "wires": [
-                    {
-                        "id": "3d89b1af.dec3ae",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "outputLabels": [
-            "",
-            "msg"
-        ],
-        "icon": "node-red/white-globe.png"
-    },
-    {
         "id": "a40e76b8.4d8a48",
         "type": "subflow",
         "name": "Get TrainTraxx Data",
@@ -3073,60 +3038,6 @@
         ]
     },
     {
-        "id": "4dfa5b69.319274",
-        "type": "http in",
-        "z": "a493d433.024998",
-        "name": "Tracker",
-        "url": "/tracker",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 450,
-        "y": 82.5,
-        "wires": [
-            [
-                "a7fdb95b.17a5d8"
-            ]
-        ],
-        "outputLabels": [
-            "req"
-        ]
-    },
-    {
-        "id": "a7fdb95b.17a5d8",
-        "type": "function",
-        "z": "a493d433.024998",
-        "name": "Tracker Process",
-        "func": "var config = global.get('TrainTraxx_Config');\nmsg.payload = { \n     DATA: msg.payload.DATA, \n     apikey : config.TrainTraxx_Key \n};\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 640,
-        "y": 82.5,
-        "wires": [
-            [
-                "3d89b1af.dec3ae"
-            ]
-        ]
-    },
-    {
-        "id": "3d89b1af.dec3ae",
-        "type": "http request",
-        "z": "a493d433.024998",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "",
-        "tls": "",
-        "x": 851,
-        "y": 81.5,
-        "wires": [
-            []
-        ],
-        "inputLabels": [
-            "msg.payload"
-        ]
-    },
-    {
         "id": "958d130f.9dbf1",
         "type": "function",
         "z": "a40e76b8.4d8a48",
@@ -3262,32 +3173,14 @@
         ]
     },
     {
-        "id": "6291a610.4d4dc8",
-        "type": "subflow:a493d433.024998",
-        "z": "5e61e22e.7a581c",
-        "name": "",
-        "x": 368.4762725830078,
-        "y": 421.7618713378906,
-        "wires": [
-            [
-                "e7682bc7.41dee8",
-                "9860fd21.83ed9"
-            ],
-            [
-                "8dc0fe46.c010d",
-                "27387db.42dca82"
-            ]
-        ]
-    },
-    {
         "id": "8dc0fe46.c010d",
         "type": "http response",
         "z": "5e61e22e.7a581c",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 647.0317840576172,
-        "y": 384.3174133300781,
+        "x": 630,
+        "y": 500,
         "wires": []
     },
     {
@@ -3295,13 +3188,14 @@
         "type": "debug",
         "z": "5e61e22e.7a581c",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "x": 666.0318145751953,
-        "y": 428.09521484375,
+        "complete": "true",
+        "targetType": "full",
+        "x": 630,
+        "y": 460,
         "wires": []
     },
     {
@@ -3322,8 +3216,8 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 408.25408935546875,
-        "y": 185.87289428710938,
+        "x": 410,
+        "y": 240,
         "wires": [
             [
                 "eb7a7fef.95ee4",
@@ -3359,8 +3253,8 @@
         "links": [
             "b6ed7646.ea36a8"
         ],
-        "x": 249.36517333984375,
-        "y": 186.98397827148438,
+        "x": 251.111083984375,
+        "y": 241.111083984375,
         "wires": [
             [
                 "8f95f0f.8bc931"
@@ -3375,8 +3269,8 @@
         "links": [
             "b1607e3f.fb142"
         ],
-        "x": 595,
-        "y": 160,
+        "x": 615,
+        "y": 220,
         "wires": []
     },
     {
@@ -3387,8 +3281,8 @@
         "links": [
             "a309b660.225d08"
         ],
-        "x": 595,
-        "y": 220,
+        "x": 615,
+        "y": 280,
         "wires": []
     },
     {
@@ -3411,8 +3305,8 @@
         "links": [
             "bb39a9a4.ceacc8"
         ],
-        "x": 616.5079345703125,
-        "y": 478.8888854980469,
+        "x": 615,
+        "y": 380,
         "wires": []
     },
     {
@@ -10592,6 +10486,138 @@
         "wires": [
             [
                 "14527172.13ccbf"
+            ]
+        ]
+    },
+    {
+        "id": "1500441d.dabf1c",
+        "type": "debug",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 630,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e605038b.fdb8e",
+        "type": "http in",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "url": "/tracker",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 310,
+        "y": 420,
+        "wires": [
+            [
+                "2fe76b58.5e83e4",
+                "9860fd21.83ed9",
+                "1500441d.dabf1c",
+                "e7682bc7.41dee8"
+            ]
+        ]
+    },
+    {
+        "id": "2fe76b58.5e83e4",
+        "type": "function",
+        "z": "5e61e22e.7a581c",
+        "name": "Tracker Process",
+        "func": "var config = global.get('TrainTraxx_Config');\nmsg.payload = { \n     DATA: msg.payload.DATA, \n     apikey : config.TrainTraxx_Key \n};\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 460,
+        "wires": [
+            [
+                "109bc3b3.e3035c"
+            ]
+        ]
+    },
+    {
+        "id": "109bc3b3.e3035c",
+        "type": "http request",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "",
+        "tls": "",
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "8dc0fe46.c010d",
+                "27387db.42dca82"
+            ]
+        ],
+        "inputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "f1f0f366.cd2ea",
+        "type": "http in",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "url": "/tracker",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 310,
+        "y": 540,
+        "wires": [
+            [
+                "fcbd7750.5d89e8",
+                "5d227a0a.b803a4"
+            ]
+        ]
+    },
+    {
+        "id": "fcbd7750.5d89e8",
+        "type": "debug",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 630,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "a825a8f8.722a68",
+        "type": "http response",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "5d227a0a.b803a4",
+        "type": "function",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "func": "msg.payload = \"OK\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 580,
+        "wires": [
+            [
+                "a825a8f8.722a68"
             ]
         ]
     }
