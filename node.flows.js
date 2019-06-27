@@ -9994,11 +9994,12 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 490,
-        "y": 140,
+        "x": 330,
+        "y": 180,
         "wires": [
             [
-                "25dd4ac6.3660d6"
+                "25dd4ac6.3660d6",
+                "a6584227.af16d"
             ]
         ]
     },
@@ -10033,8 +10034,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 710,
-        "y": 140,
+        "x": 750,
+        "y": 180,
         "wires": []
     },
     {
@@ -10042,7 +10043,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut[i] = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -10902,6 +10903,77 @@
         "wires": [
             [
                 "4ad60835.72eb38"
+            ]
+        ]
+    },
+    {
+        "id": "e934ecd8.d8f47",
+        "type": "http request",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "bc3ffd46.35405",
+                "25dd4ac6.3660d6"
+            ]
+        ]
+    },
+    {
+        "id": "a6584227.af16d",
+        "type": "function",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "func": "msg.url = 'http://' + msg.payload + ':8080/history_data';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "e934ecd8.d8f47"
+            ]
+        ]
+    },
+    {
+        "id": "f15d0f2c.85c6b",
+        "type": "ui_list",
+        "z": "de72cd33.d0bc",
+        "group": "d93a6b1c.d9e2e8",
+        "name": "Node History",
+        "order": 1,
+        "width": "12",
+        "height": "10",
+        "lineType": "one",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 490,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc3ffd46.35405",
+        "type": "function",
+        "z": "de72cd33.d0bc",
+        "name": "Format List",
+        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    out.push({\n        title : inData[i][1],\n        description: inData[i][0],\n        menu : [\"Resend\"]\n    });\n}\nmsg.payload = out;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 300,
+        "wires": [
+            [
+                "f15d0f2c.85c6b"
             ]
         ]
     }
