@@ -9982,16 +9982,10 @@
         "place": "Select option",
         "group": "d93a6b1c.d9e2e8",
         "order": 0,
-        "width": "3",
+        "width": "12",
         "height": "1",
         "passthru": false,
-        "options": [
-            {
-                "label": "",
-                "value": "",
-                "type": "str"
-            }
-        ],
+        "options": [],
         "payload": "",
         "topic": "",
         "x": 330,
@@ -10011,7 +10005,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "60",
+        "repeat": "30",
         "crontab": "",
         "once": true,
         "onceDelay": "5",
@@ -10043,7 +10037,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    var tempOut = {};\n    tempOut = probes[i].IP;\n    out.push(tempOut);\n}\nmsg.options = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    out.push(probes[i].IP);\n}\nmsg.options = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
