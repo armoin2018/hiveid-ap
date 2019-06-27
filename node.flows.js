@@ -1937,7 +1937,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Create OTA Commands",
-        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = global.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nmsg.payload = ' -i ' + msg.payload.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -s -f ' + currentFirmware;\nmsg.notice = \"Updating \" + msg.payload.IP;\nreturn msg;",
+        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = global.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nmsg.payload = ' -i ' + msg.payload.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -f ' + currentFirmware;\nmsg.notice = \"Updating \" + msg.payload.IP;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 910,
