@@ -1937,7 +1937,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Create OTA Commands",
-        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = global.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nmsg.payload = ' -i ' + msg.payload.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -s -f ' + currentFirmware;\nreturn msg;",
+        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = global.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nmsg.payload = ' -i ' + msg.payload.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -s -f ' + currentFirmware;\nmsg.notice = \"Updating \" + msg.payload.IP;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 910,
@@ -1945,7 +1945,8 @@
         "wires": [
             [
                 "a72ea356.dfc17",
-                "4bd26c8c.731c44"
+                "4bd26c8c.731c44",
+                "2045e47f.324a8c"
             ]
         ]
     },
@@ -2048,7 +2049,7 @@
         "command": "sudo python /usr/local/hiveid-ap/espota.py ",
         "addpay": true,
         "append": "",
-        "useSpawn": "true",
+        "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
@@ -10861,5 +10862,46 @@
         "x": 1150,
         "y": 640,
         "wires": []
+    },
+    {
+        "id": "2045e47f.324a8c",
+        "type": "change",
+        "z": "16d0b1f7.5422be",
+        "name": "Updating Notice",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "notice",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Update Modules",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 500,
+        "wires": [
+            [
+                "4ad60835.72eb38"
+            ]
+        ]
     }
 ]
