@@ -1937,7 +1937,7 @@
         "type": "function",
         "z": "16d0b1f7.5422be",
         "name": "Create OTA Commands",
-        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = global.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nmsg.payload = ' -i ' + msg.payload.IP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -f ' + currentFirmware;\nmsg.notice = \"Updating \" + msg.payload.IP;\nreturn msg;",
+        "func": "var currentFirmware = flow.get('currentFirmware');\nvar gatewayInfo = global.get('gatewayInfo');\nvar gwIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\nvar nodeIP = msg.payload.IP;\nmsg.payload = ' -i ' + nodeIP + ' -I ' + gwIP + ' -p 8266 -a h1v3C0nn3ct -f ' + currentFirmware;\nmsg.notice = \"Updating \" + nodeIP;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 910,
@@ -10658,7 +10658,8 @@
         "y": 880,
         "wires": [
             [
-                "e145d0ca.70fa1"
+                "e145d0ca.70fa1",
+                "d2c9b332.9f9af"
             ],
             [
                 "628f15b0.39eddc"
@@ -10734,8 +10735,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1380,
-        "y": 880,
+        "x": 1520,
+        "y": 860,
         "wires": [
             [
                 "ce501478.c28c58"
