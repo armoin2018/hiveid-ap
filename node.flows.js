@@ -11436,7 +11436,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"hide\":[\"openrsd\"]}}",
+                "to": "{\"tabs\":{\"hide\":\"openrsd\"}}",
                 "tot": "json"
             }
         ],
@@ -11464,7 +11464,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"hide\":[\"phpmyadmin\"]}}",
+                "to": "{\"tabs\":{\"hide\":\"phpmyadmin\"}}",
                 "tot": "json"
             }
         ],
@@ -11492,7 +11492,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"hide\":[\"jmri\"]}}",
+                "to": "{\"tabs\":{\"hide\":\"jmri\"}}",
                 "tot": "json"
             }
         ],
@@ -11515,7 +11515,7 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "Make OpenRSD URL",
-        "func": "msg.url = \"http://\" + IP.internalIPv4 + '/openrsd';\nreturn msg;",
+        "func": "var IP = global.get('IP');\nmsg.url = \"http://\" + IP.internalIPv4 + '/openrsd';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 600,
@@ -11551,7 +11551,7 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "Make phpMyAdmin URL",
-        "func": "msg.url = \"http://\" + IP.internalIPv4 + '/phpmyadmin';\nreturn msg;",
+        "func": "var IP = global.get('IP');\nmsg.url = \"http://\" + IP.internalIPv4 + '/phpmyadmin';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 610,
@@ -11747,8 +11747,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1530,
-        "y": 420,
+        "x": 1510,
+        "y": 380,
         "wires": []
     },
     {
@@ -11807,7 +11807,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"show\":[\"openrsd\"]}}",
+                "to": "{\"tabs\":{\"show\":\"openrsd\"}}",
                 "tot": "json"
             }
         ],
@@ -11820,7 +11820,8 @@
         "y": 380,
         "wires": [
             [
-                "17537b54.bc1095"
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
             ]
         ]
     },
@@ -11834,7 +11835,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"show\":[\"phpmyadmin\"]}}",
+                "to": "{\"tabs\":{\"show\":\"phpmyadmin\"}}",
                 "tot": "json"
             }
         ],
@@ -11847,7 +11848,8 @@
         "y": 460,
         "wires": [
             [
-                "17537b54.bc1095"
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
             ]
         ]
     },
@@ -11861,7 +11863,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"show\":[\"jmri\"]}}",
+                "to": "{\"tabs\":{\"show\":\"jmri\"}}",
                 "tot": "json"
             }
         ],
@@ -11874,7 +11876,8 @@
         "y": 540,
         "wires": [
             [
-                "17537b54.bc1095"
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
             ]
         ]
     },
