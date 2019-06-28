@@ -1601,7 +1601,7 @@
         "type": "debug",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1648,8 +1648,8 @@
         "id": "7f66e017.f90e1",
         "type": "function",
         "z": "f1ec9b2a.1f7298",
-        "name": "Set JRMI",
-        "func": "delete msg.payload;\n\nvar IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JRMI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    msg.headers = {\n        \"Location\" : JMRI_Config.JMRI_Web \n    };\n} else {\n    msg.statusCode = 404;\n}\nreturn msg;",
+        "name": "Set JMRI",
+        "func": "delete msg.payload;\n\nvar IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JMRI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    msg.headers = {\n        \"Location\" : JMRI_Config.JMRI_Web \n    };\n} else {\n    msg.statusCode = 404;\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 660,
@@ -11158,7 +11158,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
+        "x": 920,
         "y": 480,
         "wires": [
             [
@@ -11179,7 +11179,7 @@
         "topic": "",
         "name": "",
         "x": 1230,
-        "y": 480,
+        "y": 560,
         "wires": []
     },
     {
@@ -11618,7 +11618,7 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "Make JMRI URL",
-        "func": "var jmri_config = global.get('JMRI_Config');\nmsg.url = jmri_config.JMRI_Web;\nreturn msg;",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_Web;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 580,
@@ -11639,6 +11639,8 @@
         "ret": "txt",
         "paytoqs": false,
         "url": "",
+        "tls": "",
+        "proxy": "",
         "authType": "basic",
         "x": 810,
         "y": 520,
@@ -11686,7 +11688,7 @@
         "z": "f1ec9b2a.1f7298",
         "name": "Check JMRI Toggle",
         "property": "JMRI_Config.JMRI_ENABLED",
-        "propertyType": "msg",
+        "propertyType": "global",
         "rules": [
             {
                 "t": "true"
