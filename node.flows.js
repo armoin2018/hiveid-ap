@@ -10036,7 +10036,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nconsole.log(probes);\nfor (var i in probes) {\n    out.push(probes[i].IP);\n}\nmsg.options = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nvar ip = flow.get('ip');\nmsg.payload = ip;\n\nconsole.log(probes);\nfor (var i in probes) {\n    out.push(probes[i].IP);\n}\nmsg.options = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -10962,7 +10962,7 @@
         "type": "function",
         "z": "de72cd33.d0bc",
         "name": "Format List",
-        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    var buffer = \n        inData[i][1] + '<br/>' +\n        '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n        '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n        '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n        '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n        '<strong>DATA:</strong>' + inData[i][0].DATA + '<br/>';\n    out.push({\n        title : buffer,\n        description: inData[i][0],\n        menu : [\"Resend\"],\n        history_id : i,\n        ip : inData[i][0].IP\n    });\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    var buffer = \n        inData[i][1] + '<br/>' +\n        '<small>' +\n            '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n            '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n            '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n            '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n            '<strong>DATA:</strong>' + inData[i][0].DATA +\n        '</small>';\n    out.push({\n        title : buffer,\n        description: inData[i][0],\n        menu : [\"Resend\"],\n        history_id : i,\n        ip : inData[i][0].IP\n    });\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -11075,7 +11075,7 @@
         "type": "function",
         "z": "de72cd33.d0bc",
         "name": "",
-        "func": "msg.url = 'http://' + msg.payload.ip + ':8080/resend?' + msg.payload.history_id;\nreturn msg;",
+        "func": "msg.url = 'http://' + msg.payload.ip + ':8080/resend?history=' + msg.payload.history_id;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 490,
@@ -11083,7 +11083,8 @@
         "wires": [
             [
                 "16dedec9.3fe311",
-                "19b72d55.670623"
+                "19b72d55.670623",
+                "8cb4e3c4.bf5ea"
             ]
         ]
     },
@@ -11118,7 +11119,8 @@
         "y": 560,
         "wires": [
             [
-                "a4c458d0.7ffe38"
+                "a4c458d0.7ffe38",
+                "8cb4e3c4.bf5ea"
             ]
         ]
     },
@@ -11155,7 +11157,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
+        "x": 720,
         "y": 480,
         "wires": [
             [
