@@ -12,6 +12,7 @@ sudo chown -R pi:pi /opt/hiveid-ap /opt/openrsd /usr/local/hiveid-ap /etc/hiveid
 
 ln -s /opt/hiveid-ap/nodered/index.php /var/www/html/index.php 2>/dev/null
 ln -s /opt/hiveid-ap/nodered/processing.php /var/www/html/processing.php 2>/dev/null
+ln -s /opt/hiveid-ap/nodered/notavailable.html /var/www/html/notavailable.html 2>/dev/null
 ln -s /opt/hiveid-ap/nodered/images /var/www/html/images 2>/dev/null
 ln -s /opt/hiveid-ap/nodered/css /var/www/html/css 2>/dev/null
 ln -s /opt/hiveid-ap/nodered/scripts /var/www/html/scripts 2>/dev/null
