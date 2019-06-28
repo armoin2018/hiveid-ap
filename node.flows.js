@@ -11928,7 +11928,7 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "func": "msg.payload = {\n    \"tabs\": {\n        \"disable\": [\"jmri\"]\n    }\n};\nreturn msg;",
+        "func": "msg.payload = {\n    \"tabs\": {\n        \"disable\": [\"jmri\",\"node_manager\"]\n    }\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1170,
