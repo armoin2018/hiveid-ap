@@ -11436,7 +11436,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"hide\":\"openrsd\"}}",
+                "to": "{\"tabs\":{\"hide\":[\"openrsd\"],\"disable\":[\"openrsd\"]}}",
                 "tot": "json"
             }
         ],
@@ -11464,7 +11464,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"hide\":\"phpmyadmin\"}}",
+                "to": "{\"tabs\":{\"hide\":[\"phpmyadmin\"],\"disable\":[\"phpmyadmin\"]}}",
                 "tot": "json"
             }
         ],
@@ -11492,7 +11492,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"hide\":\"jmri\"}}",
+                "to": "{\"tabs\":{\"hide\":[\"jmri\"],\"disable\":[\"jmri\"]}}",
                 "tot": "json"
             }
         ],
@@ -11807,7 +11807,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"show\":\"openrsd\"}}",
+                "to": "{\"tabs\":{\"show\":[\"openrsd\"],\"enable\":[\"openrsd\"]}}",
                 "tot": "json"
             }
         ],
@@ -11835,7 +11835,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"show\":\"phpmyadmin\"}}",
+                "to": "{    \"tabs\": {        \"show\": [\"phpmyadmin\"].        \"enable\": [\"phpmyadmin\"]    }}",
                 "tot": "json"
             }
         ],
@@ -11863,7 +11863,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tabs\":{\"show\":\"jmri\"}}",
+                "to": "{\"tabs\":{\"show\":[\"jmri\"],\"enable\":[\"jmri\"]}}",
                 "tot": "json"
             }
         ],
