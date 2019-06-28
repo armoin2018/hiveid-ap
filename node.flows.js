@@ -11928,10 +11928,10 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "func": "msg.payload = {\n    \"tabs\": {\n        \"disable\": [\"jmri\",\"node_manager\"]\n    }\n};\nreturn msg;",
+        "func": "msg.payload = {\n    \"tabs\": {\n        \"hide\": [\"jmri\",\"node_manager\"]\n    }\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1170,
+        "x": 1150,
         "y": 660,
         "wires": [
             [
