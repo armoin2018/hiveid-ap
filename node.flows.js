@@ -1575,10 +1575,10 @@
                 "e5b4b384.ffba8"
             ],
             [
-                "86aa8688.67b188"
+                "b1e60b01.5f1548"
             ],
             [
-                "7f66e017.f90e1"
+                "b4f7b12.29c705"
             ],
             [
                 "f8e90910.c1fb88"
@@ -1592,7 +1592,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 990,
+        "x": 1110,
         "y": 200,
         "wires": []
     },
@@ -1606,7 +1606,7 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 990,
+        "x": 1230,
         "y": 40,
         "wires": []
     },
@@ -1618,7 +1618,7 @@
         "func": "delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.internalIPv4 + '/openrsd'\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 680,
+        "x": 860,
         "y": 80,
         "wires": [
             [
@@ -1635,7 +1635,7 @@
         "func": "delete msg.payload;\nmsg.statusCode = 302;\nvar IP = global.get('IP');\nmsg.headers = {\n    \"Location\" : \"http://\" + IP.internalIPv4  + '/phpmyadmin'\n};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 690,
+        "x": 870,
         "y": 140,
         "wires": [
             [
@@ -1652,7 +1652,7 @@
         "func": "delete msg.payload;\n\nvar IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JMRI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    msg.headers = {\n        \"Location\" : JMRI_Config.JMRI_Web.replace('{{IP}}',IP.internalIPv4) \n    };\n} else {\n    msg.statusCode = 404;\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 660,
+        "x": 840,
         "y": 200,
         "wires": [
             [
@@ -2385,7 +2385,7 @@
         "func": "delete msg.payload;\nmsg.statusCode = 404;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 660,
+        "x": 840,
         "y": 240,
         "wires": [
             [
@@ -2406,11 +2406,11 @@
         "read": true,
         "write": false,
         "throwerror": false,
-        "x": 400,
-        "y": 100,
+        "x": 360,
+        "y": 120,
         "wires": [
             [
-                "f27066a1.a44ba8"
+                "500b5452.219f4c"
             ],
             [
                 "f8e90910.c1fb88"
@@ -11438,6 +11438,13 @@
                 "pt": "msg",
                 "to": "{\"tabs\":{\"hide\":[\"openrsd\"],\"disable\":[\"openrsd\"]}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "OPENRSD_ENABLED",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -11466,6 +11473,13 @@
                 "pt": "msg",
                 "to": "{\"tabs\":{\"hide\":[\"phpmyadmin\"],\"disable\":[\"phpmyadmin\"]}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "PHPMYADMIN_ENABLED",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -11494,6 +11508,13 @@
                 "pt": "msg",
                 "to": "{\"tabs\":{\"hide\":[\"jmri\"],\"disable\":[\"jmri\"]}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "JMRI_ENABLED",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -11504,7 +11525,10 @@
         "x": 1180,
         "y": 580,
         "wires": [
-            []
+            [
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
+            ]
         ]
     },
     {
@@ -11675,7 +11699,7 @@
                 "abb88f0b.bd024"
             ],
             [
-                "b8910435.d8f108"
+                "6bc44f65.6a8c5"
             ]
         ]
     },
@@ -11704,35 +11728,7 @@
                 "b7691c32.91e9"
             ],
             [
-                "b8910435.d8f108"
-            ]
-        ]
-    },
-    {
-        "id": "3874f8e3.0b4ba8",
-        "type": "ui_button",
-        "z": "f1ec9b2a.1f7298",
-        "name": "",
-        "group": "98512fe8.4ad4",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Check URLs",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 110,
-        "y": 480,
-        "wires": [
-            [
-                "8586a5d5.fa8178",
-                "485b2e60.42677",
-                "1658cd8e.e99cb2"
+                "6bc44f65.6a8c5"
             ]
         ]
     },
@@ -11741,7 +11737,7 @@
         "type": "debug",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11755,7 +11751,7 @@
         "type": "debug",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11808,6 +11804,13 @@
                 "pt": "msg",
                 "to": "{\"tabs\":{\"show\":[\"openrsd\"],\"enable\":[\"openrsd\"]}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "OPENRSD_ENABLED",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -11836,6 +11839,13 @@
                 "pt": "msg",
                 "to": "{    \"tabs\": {        \"show\": [\"phpmyadmin\"].        \"enable\": [\"phpmyadmin\"]    }}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "PHPMYADMIN_ENABLED",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -11864,6 +11874,13 @@
                 "pt": "msg",
                 "to": "{\"tabs\":{\"show\":[\"jmri\"],\"enable\":[\"jmri\"]}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "JMRI_ENABLED",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -11885,7 +11902,7 @@
         "type": "debug",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11924,18 +11941,105 @@
         "wires": []
     },
     {
-        "id": "b8910435.d8f108",
-        "type": "function",
+        "id": "b4f7b12.29c705",
+        "type": "switch",
         "z": "f1ec9b2a.1f7298",
-        "name": "",
-        "func": "msg.payload = {\n    \"tabs\": {\n        \"hide\": [\"jmri\",\"node_manager\"]\n    }\n};\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1150,
-        "y": 660,
+        "name": "Is JMRI Enabled",
+        "property": "JMRI_ENABLED",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 600,
+        "y": 200,
         "wires": [
             [
-                "17537b54.bc1095"
+                "7f66e017.f90e1"
+            ],
+            [
+                "c9debb12.f2aa48"
+            ]
+        ]
+    },
+    {
+        "id": "b1e60b01.5f1548",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Is phpMyAdmin Enabled",
+        "property": "PHPMYADMIN_ENABLED",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 140,
+        "wires": [
+            [
+                "86aa8688.67b188"
+            ],
+            [
+                "c9debb12.f2aa48"
+            ]
+        ]
+    },
+    {
+        "id": "500b5452.219f4c",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Is OpenRSD Enabled",
+        "property": "OPENRSD_ENABLED",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 620,
+        "y": 80,
+        "wires": [
+            [
+                "f27066a1.a44ba8"
+            ],
+            [
+                "c9debb12.f2aa48"
+            ]
+        ]
+    },
+    {
+        "id": "c9debb12.f2aa48",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set Not Available",
+        "func": "delete msg.payload;\n\nvar IP = global.get('IP');\nmsg.statusCode = 302;\nmsg.headers = {\n    \"Location\" : 'http://'  + IP.internalIPv4 +'/notavailable.html'\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "9596c547.812608"
             ]
         ]
     }
