@@ -9992,8 +9992,7 @@
         "y": 180,
         "wires": [
             [
-                "25dd4ac6.3660d6",
-                "a6584227.af16d"
+                "f9148982.51c698"
             ]
         ]
     },
@@ -10022,7 +10021,7 @@
         "type": "debug",
         "z": "de72cd33.d0bc",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10069,7 +10068,7 @@
         "type": "debug",
         "z": "de72cd33.d0bc",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10912,8 +10911,8 @@
         "tls": "",
         "proxy": "",
         "authType": "basic",
-        "x": 410,
-        "y": 260,
+        "x": 350,
+        "y": 360,
         "wires": [
             [
                 "25dd4ac6.3660d6",
@@ -10929,8 +10928,8 @@
         "func": "msg.url = 'http://' + msg.payload + ':8080/history_data';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 220,
+        "x": 310,
+        "y": 320,
         "wires": [
             [
                 "e934ecd8.d8f47"
@@ -10949,10 +10948,13 @@
         "lineType": "one",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 610,
-        "y": 400,
+        "x": 470,
+        "y": 440,
         "wires": [
-            []
+            [
+                "ad39e18a.1bfb7",
+                "8cb4e3c4.bf5ea"
+            ]
         ]
     },
     {
@@ -10960,14 +10962,431 @@
         "type": "function",
         "z": "de72cd33.d0bc",
         "name": "Format List",
-        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    out.push({\n        title : inData[i][1],\n        description: inData[i][0],\n        menu : [\"Resend\"]\n    });\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    var buffer = \n        inData[i][1] + '<br/>' +\n        '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n        '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n        '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n        '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n        '<strong>DATA:</strong>' + inData[i][0].DATA + '<br/>';\n    out.push({\n        title : buffer,\n        description: inData[i][0],\n        menu : [\"Resend\"],\n        history_id : i,\n        ip : inData[i][0].IP\n    });\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 630,
-        "y": 340,
+        "x": 410,
+        "y": 400,
         "wires": [
             [
                 "f15d0f2c.85c6b"
+            ]
+        ]
+    },
+    {
+        "id": "f7496a5.3234698",
+        "type": "inject",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "45dfb1bb.c3615"
+            ]
+        ]
+    },
+    {
+        "id": "f9148982.51c698",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Set Flow IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ip",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "25dd4ac6.3660d6"
+            ]
+        ]
+    },
+    {
+        "id": "45dfb1bb.c3615",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Get Flow IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ip",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "ed1d99d1.d840e8"
+            ]
+        ]
+    },
+    {
+        "id": "ed1d99d1.d840e8",
+        "type": "switch",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "a6584227.af16d"
+            ]
+        ]
+    },
+    {
+        "id": "ad39e18a.1bfb7",
+        "type": "function",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "func": "msg.url = 'http://' + msg.payload.ip + ':8080/resend?' + msg.payload.history_id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 480,
+        "wires": [
+            [
+                "16dedec9.3fe311",
+                "19b72d55.670623"
+            ]
+        ]
+    },
+    {
+        "id": "8cb4e3c4.bf5ea",
+        "type": "debug",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 640,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "16dedec9.3fe311",
+        "type": "http request",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 530,
+        "y": 560,
+        "wires": [
+            [
+                "a4c458d0.7ffe38"
+            ]
+        ]
+    },
+    {
+        "id": "19b72d55.670623",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Resending Message",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Resend",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 480,
+        "wires": [
+            [
+                "4ba9673a.c0c578"
+            ]
+        ]
+    },
+    {
+        "id": "4ba9673a.c0c578",
+        "type": "ui_toast",
+        "z": "de72cd33.d0bc",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1230,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a4c458d0.7ffe38",
+        "type": "switch",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "400",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 730,
+        "y": 560,
+        "wires": [
+            [
+                "fc74a717.9d65a8"
+            ],
+            [
+                "f83b8eea.97e57"
+            ],
+            [
+                "8f83ff33.5981c"
+            ],
+            [
+                "2f027c8.3c7cc84"
+            ]
+        ]
+    },
+    {
+        "id": "2f027c8.3c7cc84",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "No Response",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Unable to resend.  No Response",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Resend",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 640,
+        "wires": [
+            [
+                "4ba9673a.c0c578"
+            ]
+        ]
+    },
+    {
+        "id": "8f83ff33.5981c",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Message Resent",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Resend",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 600,
+        "wires": [
+            [
+                "4ba9673a.c0c578"
+            ]
+        ]
+    },
+    {
+        "id": "f83b8eea.97e57",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Page Not Found",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Page Not Found",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Resend",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 560,
+        "wires": [
+            [
+                "4ba9673a.c0c578"
+            ]
+        ]
+    },
+    {
+        "id": "fc74a717.9d65a8",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "HTTP Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Failed to send message",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Resed",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 520,
+        "wires": [
+            [
+                "4ba9673a.c0c578"
             ]
         ]
     }
