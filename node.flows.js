@@ -2071,7 +2071,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4848,7 +4848,8 @@
         "y": 318,
         "wires": [
             [
-                "7481bb81.5ab614"
+                "7481bb81.5ab614",
+                "1f35f075.13291"
             ]
         ],
         "outputLabels": [
@@ -9277,7 +9278,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9292,7 +9293,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9307,7 +9308,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9383,8 +9384,8 @@
         "lineType": "three",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 720,
-        "y": 460,
+        "x": 600,
+        "y": 580,
         "wires": [
             [
                 "c076d62d.45aac8",
@@ -9400,8 +9401,8 @@
         "func": "var inProbes = global.get('Probes');\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
-        "y": 460,
+        "x": 350,
+        "y": 580,
         "wires": [
             [
                 "273afee4.dd92c2",
@@ -9434,8 +9435,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 710,
-        "y": 420,
+        "x": 590,
+        "y": 540,
         "wires": []
     },
     {
@@ -9449,8 +9450,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 870,
-        "y": 420,
+        "x": 750,
+        "y": 540,
         "wires": []
     },
     {
@@ -10035,11 +10036,11 @@
         "id": "78c095e6.19640c",
         "type": "function-npm",
         "z": "de72cd33.d0bc",
-        "name": "",
+        "name": "Get Probe List",
         "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nvar ip = flow.get('ip');\nmsg.payload = ip;\n\nconsole.log(probes);\nfor (var i in probes) {\n    out.push(probes[i].IP);\n}\nmsg.options = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 290,
+        "x": 320,
         "y": 140,
         "wires": [
             [
@@ -10742,7 +10743,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10820,8 +10821,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "10",
-        "x": 270,
-        "y": 460,
+        "x": 290,
+        "y": 540,
         "wires": [
             [
                 "9fed95c1.655638"
@@ -10848,7 +10849,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10924,11 +10925,11 @@
         "id": "a6584227.af16d",
         "type": "function",
         "z": "de72cd33.d0bc",
-        "name": "",
+        "name": "Get History Data",
         "func": "msg.url = 'http://' + msg.payload + ':8080/history_data';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 310,
+        "x": 350,
         "y": 320,
         "wires": [
             [
@@ -10962,7 +10963,7 @@
         "type": "function",
         "z": "de72cd33.d0bc",
         "name": "Format List",
-        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    var buffer = \n        inData[i][1] + '<br/>' +\n        '<small>' +\n            '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n            '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n            '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n            '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n            '<strong>DATA:</strong>' + inData[i][0].DATA +\n        '</small>';\n    out.push({\n        title : buffer,\n        description: inData[i][0],\n        menu : [\"Resend\"],\n        history_id : i,\n        ip : inData[i][0].IP\n    });\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    var buffer = \n        inData[i][1] + '<br/>' +\n        '<small>' +\n            '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n            '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n            '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n            '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n            '<strong>DATA:</strong>' + inData[i][0].DATA + '<hr />' +\n        '</small>';\n    out.push({\n        title : buffer,\n        description: inData[i][0],\n        menu : [\"Resend\"],\n        history_id : i,\n        ip : inData[i][0].IP\n    });\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -11074,11 +11075,11 @@
         "id": "ad39e18a.1bfb7",
         "type": "function",
         "z": "de72cd33.d0bc",
-        "name": "",
+        "name": "Resend History",
         "func": "msg.url = 'http://' + msg.payload.ip + ':8080/resend?history=' + msg.payload.history_id;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 490,
+        "x": 520,
         "y": 480,
         "wires": [
             [
@@ -11099,7 +11100,7 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 640,
+        "x": 770,
         "y": 420,
         "wires": []
     },
@@ -11128,7 +11129,7 @@
         "id": "19b72d55.670623",
         "type": "change",
         "z": "de72cd33.d0bc",
-        "name": "",
+        "name": "Resend Notice",
         "rules": [
             {
                 "t": "set",
@@ -11157,7 +11158,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 720,
+        "x": 800,
         "y": 480,
         "wires": [
             [
@@ -11391,5 +11392,533 @@
                 "4ba9673a.c0c578"
             ]
         ]
+    },
+    {
+        "id": "fbfb003.14577",
+        "type": "inject",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "8586a5d5.fa8178",
+                "485b2e60.42677",
+                "1658cd8e.e99cb2"
+            ]
+        ]
+    },
+    {
+        "id": "17537b54.bc1095",
+        "type": "ui_ui_control",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "x": 1520,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f83c98d4.e446b8",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Hide OpenRSD Tab",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tabs\":{\"hide\":[\"openrsd\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 420,
+        "wires": [
+            [
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
+            ]
+        ]
+    },
+    {
+        "id": "9d089e5e.90ecb",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Hide phpMyAdmin Tab",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tabs\":{\"hide\":[\"phpmyadmin\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 500,
+        "wires": [
+            [
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
+            ]
+        ]
+    },
+    {
+        "id": "6bc44f65.6a8c5",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Hide JMRI Tab",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tabs\":{\"hide\":[\"jmri\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1180,
+        "y": 580,
+        "wires": [
+            [
+                "17537b54.bc1095",
+                "ff5472a3.dc3f6"
+            ]
+        ]
+    },
+    {
+        "id": "8586a5d5.fa8178",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Make OpenRSD URL",
+        "func": "msg.url = \"http://\" + IP.internalIPv4 + '/openrsd';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 440,
+        "wires": [
+            [
+                "38ccee17.2a19e2",
+                "17ca7f76.9126c1"
+            ]
+        ]
+    },
+    {
+        "id": "38ccee17.2a19e2",
+        "type": "http request",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "authType": "basic",
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "a6098b9e.32d1f8",
+                "48fba23e.2bfeac"
+            ]
+        ]
+    },
+    {
+        "id": "485b2e60.42677",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Make phpMyAdmin URL",
+        "func": "msg.url = \"http://\" + IP.internalIPv4 + '/phpmyadmin';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 480,
+        "wires": [
+            [
+                "832d51f1.fe01a",
+                "17ca7f76.9126c1"
+            ]
+        ]
+    },
+    {
+        "id": "832d51f1.fe01a",
+        "type": "http request",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "authType": "basic",
+        "x": 810,
+        "y": 480,
+        "wires": [
+            [
+                "618acb56.9817f4",
+                "a6098b9e.32d1f8"
+            ]
+        ]
+    },
+    {
+        "id": "618acb56.9817f4",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 480,
+        "wires": [
+            [
+                "9d1ae9f2.015d08"
+            ],
+            [
+                "9d089e5e.90ecb"
+            ]
+        ]
+    },
+    {
+        "id": "b7691c32.91e9",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Make JMRI URL",
+        "func": "var jmri_config = global.get('JMRI_Config');\nmsg.url = jmri_config.JMRI_Web;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "166cc3c9.4daa9c",
+                "17ca7f76.9126c1"
+            ]
+        ]
+    },
+    {
+        "id": "166cc3c9.4daa9c",
+        "type": "http request",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "authType": "basic",
+        "x": 810,
+        "y": 520,
+        "wires": [
+            [
+                "cbb60e9f.4986e",
+                "a6098b9e.32d1f8"
+            ]
+        ]
+    },
+    {
+        "id": "cbb60e9f.4986e",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 520,
+        "wires": [
+            [
+                "abb88f0b.bd024"
+            ],
+            [
+                "6bc44f65.6a8c5"
+            ]
+        ]
+    },
+    {
+        "id": "1658cd8e.e99cb2",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Check JMRI Toggle",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 580,
+        "wires": [
+            [
+                "b7691c32.91e9"
+            ],
+            [
+                "6bc44f65.6a8c5"
+            ]
+        ]
+    },
+    {
+        "id": "3874f8e3.0b4ba8",
+        "type": "ui_button",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "group": "98512fe8.4ad4",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Check URLs",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "8586a5d5.fa8178",
+                "485b2e60.42677",
+                "1658cd8e.e99cb2"
+            ]
+        ]
+    },
+    {
+        "id": "ff5472a3.dc3f6",
+        "type": "debug",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1530,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a6098b9e.32d1f8",
+        "type": "debug",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 950,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "48fba23e.2bfeac",
+        "type": "switch",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 440,
+        "wires": [
+            [
+                "b3162cb0.8a30e"
+            ],
+            [
+                "f83c98d4.e446b8"
+            ]
+        ]
+    },
+    {
+        "id": "b3162cb0.8a30e",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Show OpenRSD Tab",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tabs\":{\"show\":[\"openrsd\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 380,
+        "wires": [
+            [
+                "17537b54.bc1095"
+            ]
+        ]
+    },
+    {
+        "id": "9d1ae9f2.015d08",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Show phpMyAdmin Tab",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tabs\":{\"show\":[\"phpmyadmin\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1210,
+        "y": 460,
+        "wires": [
+            [
+                "17537b54.bc1095"
+            ]
+        ]
+    },
+    {
+        "id": "abb88f0b.bd024",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Show JMRI Tab",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tabs\":{\"show\":[\"jmri\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1180,
+        "y": 540,
+        "wires": [
+            [
+                "17537b54.bc1095"
+            ]
+        ]
+    },
+    {
+        "id": "17ca7f76.9126c1",
+        "type": "debug",
+        "z": "f1ec9b2a.1f7298",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 750,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c03ebe92.1f1ad",
+        "type": "link in",
+        "z": "f1ec9b2a.1f7298",
+        "name": "JMRI Toggle Link iLink",
+        "links": [
+            "1f35f075.13291"
+        ],
+        "x": 155,
+        "y": 580,
+        "wires": [
+            [
+                "1658cd8e.e99cb2"
+            ]
+        ]
+    },
+    {
+        "id": "1f35f075.13291",
+        "type": "link out",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI Toggle Link oLink",
+        "links": [
+            "c03ebe92.1f1ad"
+        ],
+        "x": 955,
+        "y": 360,
+        "wires": []
     }
 ]
