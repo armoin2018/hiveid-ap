@@ -8924,7 +8924,8 @@
         "y": 520,
         "wires": [
             [
-                "ae85a3d3.d0052"
+                "ae85a3d3.d0052",
+                "d9d7439e.6f576"
             ]
         ]
     },
@@ -12042,5 +12043,45 @@
                 "9596c547.812608"
             ]
         ]
+    },
+    {
+        "id": "1393349d.e5d17b",
+        "type": "ui_button",
+        "z": "9745920.d8a397",
+        "name": "",
+        "group": "7491149.92351ec",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reload Countries",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "11bd9584.c3dd2a"
+            ]
+        ]
+    },
+    {
+        "id": "d9d7439e.6f576",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 210,
+        "y": 560,
+        "wires": []
     }
 ]
