@@ -8626,7 +8626,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"hide\":[\"network_mode_gateway_settings\"],\"show\":[\"network_mode_wifi_client_setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"hide\":[\"Network_Mode_Gateway_Settings\"],\"show\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -8654,7 +8654,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"show\":[\"network_mode_gateway_settings\"],\"hide\":[\"network_mode_wifi_client_setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\"],\"hide\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -8683,7 +8683,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"show\":[\"network_mode_gateway_settings\",\"network_mode_wifi_client_setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\",\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -9014,8 +9014,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 480,
-        "y": 160,
+        "x": 460,
+        "y": 180,
         "wires": [
             []
         ]
