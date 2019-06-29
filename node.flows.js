@@ -119,6 +119,13 @@
         "info": ""
     },
     {
+        "id": "e5ec0709.570938",
+        "type": "tab",
+        "label": "Services",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "49e2d5c0.49790c",
         "type": "subflow",
         "name": "Reporters to JRMI",
@@ -737,6 +744,27 @@
         "z": "",
         "name": "Node History",
         "tab": "26cecbbc.95c444",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "425824b0.5883fc",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Service Manager",
+        "icon": "dashboard",
+        "order": 14,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f5495812.6a3bb8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Services",
+        "tab": "425824b0.5883fc",
         "order": 1,
         "disp": true,
         "width": "12",
@@ -8934,7 +8962,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "",
-        "func": "var myResults = {};\nfor (var i in msg.payload) {\n    myResults[msg.payload[i][4]] =msg.payload[i][0];\n}\nmsg.payload = myResults;\nreturn msg;",
+        "func": "var myResults = {};\nfor (var i in msg.payload) {\n    myResults[msg.payload[i][4]] =msg.payload[i][0];\n}\nmsg.options = myResults;\nmsg.payload = \"US\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -12083,5 +12111,210 @@
         "x": 210,
         "y": 560,
         "wires": []
+    },
+    {
+        "id": "d7c57529.0d4a48",
+        "type": "ui_list",
+        "z": "e5ec0709.570938",
+        "group": "f5495812.6a3bb8",
+        "name": "Services",
+        "order": 0,
+        "width": "12",
+        "height": "8",
+        "lineType": "one",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "fb7f29d3.860898",
+                "f404518b.68585",
+                "6f09d0df.e8107"
+            ]
+        ]
+    },
+    {
+        "id": "bc7ab0a1.fd039",
+        "type": "inject",
+        "z": "e5ec0709.570938",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "15",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "5297946e.728bec"
+            ]
+        ]
+    },
+    {
+        "id": "5297946e.728bec",
+        "type": "function-npm",
+        "z": "e5ec0709.570938",
+        "name": "",
+        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\n\nvar serviceList =_.sortBy(gatewayInfo.services,['description']);\nconsole.log(serviceList);\nmsg.payload = [];\nif (serviceList !== undefined) {\n    for (var i in serviceList) {\n        var serviceDetails = serviceList[i];\n        var menu = [];\n        var icon_name = '';\n        switch (seviceDetails.SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (i == 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : serviceDetails.description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : i\n        });\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "d7c57529.0d4a48"
+            ]
+        ]
+    },
+    {
+        "id": "fb7f29d3.860898",
+        "type": "function",
+        "z": "e5ec0709.570938",
+        "name": "",
+        "func": "var inPayload=msg.payload;\nvar verb='';\nswitch (inPayload.selected) {\n    case 'Start':\n        verb = 'start';\n        break;\n    case 'Restart':\n        verb = 'restart';\n        break;\n    default:\n        verb = 'stop';\n}\n\n\nflow.set('action',inPayload.selected);\nflow.set('serviceName',inPayload.serviceName);\n\nmsg.payload = verb + ' ' + inPayload.serviceName;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 260,
+        "wires": [
+            [
+                "522c62c7.6a3e3c"
+            ]
+        ]
+    },
+    {
+        "id": "f404518b.68585",
+        "type": "debug",
+        "z": "e5ec0709.570938",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 450,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "522c62c7.6a3e3c",
+        "type": "exec",
+        "z": "e5ec0709.570938",
+        "command": "sudo systemctl",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [],
+            [],
+            [
+                "7175628.a53479c"
+            ]
+        ]
+    },
+    {
+        "id": "6f09d0df.e8107",
+        "type": "function",
+        "z": "e5ec0709.570938",
+        "name": "Create System Message",
+        "func": "msg.payload =inPayload.selected + ' ' + inPayload.serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'orange';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "e16c7e84.1c1f5"
+            ]
+        ]
+    },
+    {
+        "id": "e16c7e84.1c1f5",
+        "type": "ui_toast",
+        "z": "e5ec0709.570938",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 990,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "55b3dff6.2ae17",
+        "type": "function",
+        "z": "e5ec0709.570938",
+        "name": "Create Success Message",
+        "func": "var action = flow.get('action');\nvar serviceName = flow.get('serviceName');\nmsg.payload =action + 'ed ' + serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'green';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "e16c7e84.1c1f5"
+            ]
+        ]
+    },
+    {
+        "id": "257ace74.73c632",
+        "type": "function",
+        "z": "e5ec0709.570938",
+        "name": "Create Failed Message",
+        "func": "var action = flow.get('action');\nvar serviceName = flow.get('serviceName');\nmsg.payload = 'Failed to ' + action + ' ' + serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'red';\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 380,
+        "wires": [
+            [
+                "e16c7e84.1c1f5"
+            ]
+        ]
+    },
+    {
+        "id": "7175628.a53479c",
+        "type": "switch",
+        "z": "e5ec0709.570938",
+        "name": "",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "55b3dff6.2ae17"
+            ],
+            [
+                "257ace74.73c632"
+            ]
+        ]
     }
 ]
