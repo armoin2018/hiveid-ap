@@ -385,7 +385,7 @@
         "z": "",
         "name": "Application Settings",
         "icon": "apps",
-        "order": 7,
+        "order": 6,
         "disabled": false,
         "hidden": false
     },
@@ -487,7 +487,7 @@
         "z": "",
         "name": "Network Mode",
         "icon": "settings_ethernet",
-        "order": 2,
+        "order": 3,
         "disabled": false,
         "hidden": false
     },
@@ -519,7 +519,7 @@
         "z": "",
         "name": "Local Train Activity",
         "icon": "dashboard",
-        "order": 6,
+        "order": 7,
         "disabled": false,
         "hidden": false
     },
@@ -659,7 +659,7 @@
         "z": "",
         "name": "Node Manger",
         "icon": "dashboard",
-        "order": 5,
+        "order": 4,
         "disabled": false,
         "hidden": false
     },
@@ -734,7 +734,7 @@
         "z": "",
         "name": "Node History",
         "icon": "dashboard",
-        "order": 4,
+        "order": 5,
         "disabled": false,
         "hidden": false
     },
@@ -755,7 +755,7 @@
         "z": "",
         "name": "Service Manager",
         "icon": "dashboard",
-        "order": 3,
+        "order": 2,
         "disabled": false,
         "hidden": false
     },
