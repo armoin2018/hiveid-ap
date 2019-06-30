@@ -134,7 +134,8 @@ $services = `systemctl -l --no-pager --no-legend | grep -v "^-" |sort`;
 $serviceList = preg_split('/\n/',$services);
 foreach ($serviceList as $line) {
     if (preg_match('/^([^\s\t]+)[\s\t]+(\w+)\s(\w+)\s(\w+)[\s\t]+(.+)$/',$line,$matches)) {
-        $myResults['services'][$matches[1]] = array(
+        $myResults['services'][] = array(
+            'serviceName' => $matches[1],
             'description' => trim($matches[5]),
             'LOAD' => $matches[2],
             'ACTIVE' => $matches[3],
