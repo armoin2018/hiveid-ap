@@ -9510,11 +9510,16 @@
                 "t": "eq",
                 "v": "Update Firmware",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Show History",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 4,
+        "outputs": 5,
         "x": 610,
         "y": 660,
         "wires": [
@@ -9529,6 +9534,9 @@
             ],
             [
                 "aaf2f483.ae9c68"
+            ],
+            [
+                "9c780fce.f264e"
             ]
         ]
     },
@@ -10213,7 +10221,7 @@
         "delay": "0",
         "topic": "",
         "x": 650,
-        "y": 820,
+        "y": 940,
         "wires": [
             [
                 "b0f37200.a15da"
@@ -10267,7 +10275,7 @@
         "to": "",
         "reg": false,
         "x": 680,
-        "y": 860,
+        "y": 980,
         "wires": [
             [
                 "47768455.2a402c"
@@ -10287,7 +10295,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 450,
-        "y": 820,
+        "y": 940,
         "wires": [
             [
                 "aa89a911.032608"
@@ -10306,7 +10314,7 @@
         "oldrc": false,
         "name": "",
         "x": 790,
-        "y": 920,
+        "y": 1040,
         "wires": [
             [
                 "15d09f41.6829b1"
@@ -10328,7 +10336,7 @@
         "temp": "",
         "skip": "0",
         "x": 1050,
-        "y": 920,
+        "y": 1040,
         "wires": [
             [
                 "6a707d1d.eb1e14"
@@ -10344,7 +10352,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1100,
-        "y": 960,
+        "y": 1080,
         "wires": [
             [
                 "71656feb.ae931"
@@ -10364,7 +10372,7 @@
         "proxy": "",
         "authType": "basic",
         "x": 1150,
-        "y": 1000,
+        "y": 1120,
         "wires": [
             [
                 "4f73c59b.3a925c"
@@ -10402,7 +10410,7 @@
         "repair": false,
         "outputs": 4,
         "x": 1310,
-        "y": 1000,
+        "y": 1120,
         "wires": [
             [
                 "4226552a.2c89fc"
@@ -10452,7 +10460,7 @@
         "to": "",
         "reg": false,
         "x": 1480,
-        "y": 1000,
+        "y": 1120,
         "wires": [
             [
                 "14527172.13ccbf"
@@ -10869,8 +10877,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1000,
-        "y": 840,
+        "x": 1010,
+        "y": 820,
         "wires": []
     },
     {
@@ -11016,7 +11024,7 @@
         "once": true,
         "onceDelay": "5",
         "x": 130,
-        "y": 280,
+        "y": 240,
         "wires": [
             [
                 "45dfb1bb.c3615"
@@ -12314,6 +12322,107 @@
             ],
             [
                 "257ace74.73c632"
+            ]
+        ]
+    },
+    {
+        "id": "5e3f873c.631bc8",
+        "type": "link in",
+        "z": "de72cd33.d0bc",
+        "name": "Node History iLink",
+        "links": [
+            "68c172c3.71484c"
+        ],
+        "x": 75,
+        "y": 360,
+        "wires": [
+            [
+                "cfa94c0e.fd54f"
+            ]
+        ]
+    },
+    {
+        "id": "cfa94c0e.fd54f",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Set IP to Flow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ip",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ 'tab' : 'node_history' }",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "45dfb1bb.c3615",
+                "931f3aa.595e5c8"
+            ]
+        ]
+    },
+    {
+        "id": "931f3aa.595e5c8",
+        "type": "ui_ui_control",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "68c172c3.71484c",
+        "type": "link out",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Node History oLink",
+        "links": [
+            "5e3f873c.631bc8"
+        ],
+        "x": 895,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "9c780fce.f264e",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.data.IP",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 860,
+        "wires": [
+            [
+                "68c172c3.71484c"
             ]
         ]
     }
