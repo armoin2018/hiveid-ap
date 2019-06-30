@@ -12150,7 +12150,7 @@
         "y": 140,
         "wires": [
             [
-                "5297946e.728bec"
+                "9e673fee.fa157"
             ]
         ]
     },
@@ -12159,15 +12159,13 @@
         "type": "function-npm",
         "z": "e5ec0709.570938",
         "name": "",
-        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\n\n//var serviceList =_.sortBy(gatewayInfo.services,['description']);\n//console.log(serviceList);\nmsg.payload = [];\nif (gatewayInfo.services !== undefined) {\n    for (var i in Object.keys(gatewayInfo.services)) {\n        var serviceDetails = gatewayInfo.services[i];\n        var menu = [];\n        var icon_name = '';\n        switch (seviceDetails.SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (i == 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : serviceDetails.description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : i\n        });\n    }\n}\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\n\n//var serviceList =_.sortBy(gatewayInfo.services,['description']);\n//console.log(serviceList);\nmsg.payload = [];\nif (gatewayInfo.services !== undefined) {\n    for (var i in Object.keys(gatewayInfo.services)) {\n        var menu = [];\n        var icon_name = '';\n        switch (gatewayInfo.services[i].SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (i == 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : gatewayInfo.services[i].description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : i\n        });\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 230,
-        "y": 180,
+        "y": 520,
         "wires": [
-            [
-                "d7c57529.0d4a48"
-            ]
+            []
         ]
     },
     {
@@ -12314,6 +12312,22 @@
             ],
             [
                 "257ace74.73c632"
+            ]
+        ]
+    },
+    {
+        "id": "9e673fee.fa157",
+        "type": "function",
+        "z": "e5ec0709.570938",
+        "name": "",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nconsole.log(services);\nmsg.payload = [];\nfor (var i in services) {\n    var menu = [];\n    var icon_name = '';\n    if (services[i].SUB !== undefined) {\n        switch (services[i].SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='directions_run';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (i == 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : services[i].description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : i\n        });\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "d7c57529.0d4a48"
             ]
         ]
     }
