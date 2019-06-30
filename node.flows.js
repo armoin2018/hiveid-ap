@@ -385,7 +385,7 @@
         "z": "",
         "name": "Application Settings",
         "icon": "apps",
-        "order": 6,
+        "order": 7,
         "disabled": false,
         "hidden": false
     },
@@ -419,7 +419,7 @@
         "link": "/",
         "icon": "all_inclusive",
         "target": "iframe",
-        "order": 9
+        "order": 10
     },
     {
         "id": "8e968283.a2d29",
@@ -429,7 +429,7 @@
         "link": "/redir?app=jmri",
         "icon": "train",
         "target": "iframe",
-        "order": 8
+        "order": 9
     },
     {
         "id": "6efda0bd.72343",
@@ -439,7 +439,7 @@
         "link": "/redir?app=openrsd",
         "icon": "fa-cogs",
         "target": "iframe",
-        "order": 10
+        "order": 11
     },
     {
         "id": "38e63d7a.b846e2",
@@ -449,7 +449,7 @@
         "link": "/redir?app=phpmyadmin",
         "icon": "fa-database",
         "target": "newtab",
-        "order": 11
+        "order": 12
     },
     {
         "id": "3808a9b7.8005b6",
@@ -459,7 +459,7 @@
         "link": "https://www.traintraxx.com/traintraxx-application",
         "icon": "fa-train",
         "target": "iframe",
-        "order": 7
+        "order": 8
     },
     {
         "id": "12a9f286.0bbd9d",
@@ -469,7 +469,7 @@
         "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
         "icon": "shopping_cart",
         "target": "newtab",
-        "order": 12
+        "order": 13
     },
     {
         "id": "82d159ac.42e4b8",
@@ -519,7 +519,7 @@
         "z": "",
         "name": "Local Train Activity",
         "icon": "dashboard",
-        "order": 5,
+        "order": 6,
         "disabled": false,
         "hidden": false
     },
@@ -659,7 +659,7 @@
         "z": "",
         "name": "Node Manger",
         "icon": "dashboard",
-        "order": 4,
+        "order": 5,
         "disabled": false,
         "hidden": false
     },
@@ -734,7 +734,7 @@
         "z": "",
         "name": "Node History",
         "icon": "dashboard",
-        "order": 3,
+        "order": 4,
         "disabled": false,
         "hidden": false
     },
@@ -755,7 +755,7 @@
         "z": "",
         "name": "Service Manager",
         "icon": "dashboard",
-        "order": 14,
+        "order": 3,
         "disabled": false,
         "hidden": false
     },
@@ -767,7 +767,7 @@
         "tab": "425824b0.5883fc",
         "order": 1,
         "disp": true,
-        "width": "12",
+        "width": "18",
         "collapse": false
     },
     {
@@ -12119,7 +12119,7 @@
         "group": "f5495812.6a3bb8",
         "name": "Services",
         "order": 0,
-        "width": "12",
+        "width": "18",
         "height": "8",
         "lineType": "one",
         "actionType": "menu",
