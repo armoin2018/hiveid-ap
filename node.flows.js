@@ -12227,7 +12227,7 @@
         "type": "function",
         "z": "e5ec0709.570938",
         "name": "Create System Message",
-        "func": "msg.payload =inPayload.selected + ' ' + inPayload.serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'orange';\nreturn msg;",
+        "func": "var inPayload = msg.payload;\nmsg.payload =inPayload.selected + ' ' + inPayload.serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'orange';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 490,
