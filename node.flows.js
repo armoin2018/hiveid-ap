@@ -12358,7 +12358,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"tab\":\"node_history\"}",
+                "to": "{\"tab\":\"Node History\"}",
                 "tot": "json"
             }
         ],
@@ -12382,7 +12382,7 @@
         "z": "de72cd33.d0bc",
         "name": "",
         "x": 140,
-        "y": 460,
+        "y": 440,
         "wires": [
             []
         ]
