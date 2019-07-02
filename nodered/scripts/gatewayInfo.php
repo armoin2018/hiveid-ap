@@ -28,7 +28,7 @@ if (!empty($netinfoList)) {
 $dnsmasq_file = '/etc/dnsmasq.conf';
 $myResults['dnsmasq'] = parseFile($dnsmasq_file);
 $ifaceID=0;
-if ($server == 'localhost') {
+if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     $myResults['activeSSID'] = `sudo iwgetid`;
     $wpa_supplicant = `sudo cat /etc/wpa_supplicant/wpa_supplicant.conf`;
     preg_match_all('/(^(\w+)\s*\=\s*(\w+)$|^(network)\s*\=\s*\{([^\}]+)\})$/m',$wpa_supplicant,$matches);

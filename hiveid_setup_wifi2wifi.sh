@@ -1,7 +1,7 @@
 #!/bin/bash
 ######################################################################################################
 #### Author: Blaine McDonnell (blaine@armoin.com)                                                 ####
-#### Usage: sudo ./hiveid_setup_wifi2wifi.sh ROOT_IP NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD  ####
+#### Usage: sudo ./hiveid_setup_wifi2wifi.sh IP_PREFIX NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD  ####
 #### Description: Sets up Raspberry Pi as a WiFi to WiFi Gateway                                  ####
 #### Version: 0.20190626                                                                          ####
 ######################################################################################################

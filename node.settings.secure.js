@@ -21,7 +21,10 @@ module.exports = {
         }]
     },
     functionGlobalContext: {
-        os: require("os")
+        os: require("os"),
+        _: require("lodash"),
+        moment: require("moment"),
+        fs : require("fs")
     },
     contextStorage: {
         default: {

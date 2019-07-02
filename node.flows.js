@@ -771,6 +771,17 @@
         "collapse": false
     },
     {
+        "id": "affe8d30.ff20f8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Configured WiFi Networks",
+        "tab": "95d2bc1b.6b456",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -5438,31 +5449,14 @@
         "width": "6",
         "height": "1",
         "passthru": true,
-        "options": [
-            {
-                "label": "Client Only",
-                "value": "client",
-                "type": "str"
-            },
-            {
-                "label": "WiFi to Ethernet",
-                "value": "wifi2eth",
-                "type": "str"
-            },
-            {
-                "label": "WiFi to WiFi",
-                "value": "wifi2wifi",
-                "type": "str"
-            }
-        ],
+        "options": [],
         "payload": "",
         "topic": "",
-        "x": 220,
-        "y": 120,
+        "x": 200,
+        "y": 600,
         "wires": [
             [
-                "6e336cdf.141514",
-                "c6e6e1f6.ece7a"
+                "6e336cdf.141514"
             ]
         ]
     },
@@ -5471,11 +5465,10 @@
         "type": "wifiscan",
         "z": "9745920.d8a397",
         "name": "",
-        "x": 470,
-        "y": 280,
+        "x": 910,
+        "y": 640,
         "wires": [
             [
-                "334b87f0.5ca348",
                 "6ace129c.3ff03c"
             ]
         ]
@@ -5488,15 +5481,15 @@
         "label": "Client Passphrase",
         "tooltip": "",
         "group": "8b01491a.1965e8",
-        "order": 5,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
         "mode": "password",
         "delay": "0",
         "topic": "",
-        "x": 490,
-        "y": 400,
+        "x": 890,
+        "y": 680,
         "wires": [
             [
                 "d35706d5.e8d078"
@@ -5504,40 +5497,25 @@
         ]
     },
     {
-        "id": "334b87f0.5ca348",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 750,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "dcb6ca7.bb4b738",
         "type": "ui_button",
         "z": "9745920.d8a397",
         "name": "",
         "group": "92534c08.7fb13",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": true,
-        "label": "Submit",
+        "label": "Commit Changes",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
         "icon": "",
-        "payload": "Would you like to change modes?",
+        "payload": "Are you sure you want to make changes?",
         "payloadType": "str",
         "topic": "",
-        "x": 200,
-        "y": 640,
+        "x": 190,
+        "y": 1000,
         "wires": [
             [
                 "11542bbf.5c74c4"
@@ -5556,8 +5534,8 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "",
-        "x": 230,
-        "y": 680,
+        "x": 330,
+        "y": 1060,
         "wires": [
             [
                 "f31c81bb.20231"
@@ -5572,11 +5550,10 @@
         "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar gatewayInfo = flow.get('gatewayInfo');\n\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : (gatewayInfo.activeSSID !== undefined && gatewayInfo.activeSSID === inPayload[id].ssid)\n    }); \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 510,
-        "y": 320,
+        "x": 1170,
+        "y": 600,
         "wires": [
             [
-                "334b87f0.5ca348",
                 "d7851c8c.0a68a"
             ]
         ]
@@ -5587,17 +5564,18 @@
         "z": "9745920.d8a397",
         "group": "8b01491a.1965e8",
         "name": "Available Networks",
-        "order": 3,
+        "order": 1,
         "width": "12",
         "height": "4",
         "lineType": "one",
         "actionType": "check",
         "allowHTML": false,
-        "x": 550,
-        "y": 360,
+        "x": 1210,
+        "y": 640,
         "wires": [
             [
-                "fb7f8aa9.d1a0c8"
+                "fb7f8aa9.d1a0c8",
+                "2553d537.6bae72"
             ]
         ]
     },
@@ -5606,8 +5584,8 @@
         "type": "ui_ui_control",
         "z": "9745920.d8a397",
         "name": "",
-        "x": 940,
-        "y": 160,
+        "x": 860,
+        "y": 400,
         "wires": [
             []
         ]
@@ -5634,12 +5612,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 250,
-        "y": 720,
+        "x": 490,
+        "y": 1060,
         "wires": [
             [
-                "5c2a8500.41db6c",
-                "a74e6db4.a0c8d"
+                "5c2a8500.41db6c"
             ],
             []
         ]
@@ -5648,14 +5625,16 @@
         "id": "9360a00d.3a1cf",
         "type": "function",
         "z": "9745920.d8a397",
-        "name": "Set Information",
-        "func": "msg.payload  ={\n    'SSID' :flow.get(\"SSID\"),\n    'passphrase' : flow.get('passphrase')\n};\n    \nreturn msg;",
+        "name": "Setup Command",
+        "func": "//sudo ./hiveid_setup_wifi2wifi.sh IP_PREFIX NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD  ####\nvar IP_PREFIX = flow.get('AP.NETWORK');\nvar NEW_GATEWAY_PWD = flow.get('AP.wpa_passphrase');\nvar REMOTE_SSID = flow.get('Client.wpa_passphrase');\nvar REMOTE_SSID_PWD = flow.get('Client.wpa_passphrase');\n\nmsg.payload = ' '+IP_PREFIX+' \"'+NEW_GATEWAY_PWD+'\" \"' + REMOTE_SSID + '\" \"' + REMOTE_SSID_PWD + '\"';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 580,
-        "y": 760,
+        "x": 1010,
+        "y": 1060,
         "wires": [
-            []
+            [
+                "3818ea0.1ba0216"
+            ]
         ]
     },
     {
@@ -5748,12 +5727,14 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1290,
-        "y": 600,
+        "x": 1330,
+        "y": 1000,
         "wires": [
             [],
             [],
-            []
+            [
+                "36367d64.09fafa"
+            ]
         ]
     },
     {
@@ -5843,8 +5824,8 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 1200,
-        "y": 80,
+        "x": 1260,
+        "y": 440,
         "wires": [
             [
                 "a98e6a09.ccb3c8"
@@ -5868,17 +5849,25 @@
                 "t": "eq",
                 "v": "wifi2wifi",
                 "vt": "str"
+            },
+            {
+                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
-        "x": 350,
-        "y": 760,
+        "outputs": 3,
+        "x": 710,
+        "y": 1060,
         "wires": [
-            [],
+            [
+                "8991baef.ba75c"
+            ],
             [
                 "9360a00d.3a1cf"
+            ],
+            [
+                "9421521f.fba71"
             ]
         ]
     },
@@ -5901,8 +5890,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 40,
+        "x": 1090,
+        "y": 440,
         "wires": [
             [
                 "622978c3.ef9878"
@@ -5928,8 +5917,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1180,
-        "y": 160,
+        "x": 1080,
+        "y": 480,
         "wires": [
             [
                 "696d72e4.693a7c"
@@ -5955,8 +5944,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1200,
-        "y": 280,
+        "x": 1100,
+        "y": 520,
         "wires": [
             [
                 "aa288074.16ba6"
@@ -5978,8 +5967,8 @@
         "mode": "text",
         "delay": 300,
         "topic": "",
-        "x": 1190,
-        "y": 200,
+        "x": 1250,
+        "y": 480,
         "wires": [
             [
                 "4e77f5a5.79a54c"
@@ -6001,100 +5990,11 @@
         "mode": "password",
         "delay": 300,
         "topic": "",
-        "x": 1230,
-        "y": 320,
+        "x": 1270,
+        "y": 520,
         "wires": [
             [
                 "18cdedff.4f3582"
-            ]
-        ]
-    },
-    {
-        "id": "a74e6db4.a0c8d",
-        "type": "fs-ops-access",
-        "z": "9745920.d8a397",
-        "name": "Check RW on Hostapd",
-        "path": "/etc/hostapd",
-        "pathType": "str",
-        "filename": "hostapd.conf",
-        "filenameType": "str",
-        "read": true,
-        "write": true,
-        "throwerror": true,
-        "x": 610,
-        "y": 660,
-        "wires": [
-            [
-                "c7eeb9b5.728988"
-            ],
-            [
-                "82e35654.d406b8"
-            ]
-        ]
-    },
-    {
-        "id": "c7eeb9b5.728988",
-        "type": "function-npm",
-        "z": "9745920.d8a397",
-        "name": "Update Hostapd Config",
-        "func": "var fs = require('fs');\nvar ini = require('ini');\nvar AP = flow.get('AP');\n\nfs.writeFileSync('/etc/hostpad/hostapd.conf', ini.stringify(AP))",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 650,
-        "y": 700,
-        "wires": [
-            [
-                "acd4a1d3.1b2d1"
-            ]
-        ]
-    },
-    {
-        "id": "fbe25c85.8ae56",
-        "type": "ui_toast",
-        "z": "9745920.d8a397",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "topic": "",
-        "name": "Unable to Update",
-        "x": 910,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "82e35654.d406b8",
-        "type": "change",
-        "z": "9745920.d8a397",
-        "name": "Error Message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Unable to update configuration",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "Error",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 860,
-        "y": 660,
-        "wires": [
-            [
-                "fbe25c85.8ae56"
             ]
         ]
     },
@@ -6122,8 +6022,8 @@
         "links": [
             "49f928a1.ffb798"
         ],
-        "x": 835,
-        "y": 740,
+        "x": 1755,
+        "y": 1000,
         "wires": []
     },
     {
@@ -6145,12 +6045,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1240,
-        "y": 120,
+        "x": 1440,
+        "y": 440,
         "wires": [
-            [
-                "dac472ac.dbb31"
-            ]
+            []
         ]
     },
     {
@@ -6172,12 +6070,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1230,
-        "y": 240,
+        "x": 1430,
+        "y": 480,
         "wires": [
-            [
-                "dac472ac.dbb31"
-            ]
+            []
         ]
     },
     {
@@ -6199,12 +6095,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1270,
-        "y": 360,
+        "x": 1450,
+        "y": 520,
         "wires": [
-            [
-                "dac472ac.dbb31"
-            ]
+            []
         ]
     },
     {
@@ -6218,12 +6112,14 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1290,
-        "y": 660,
+        "x": 1330,
+        "y": 1060,
         "wires": [
             [],
             [],
-            []
+            [
+                "36367d64.09fafa"
+            ]
         ]
     },
     {
@@ -8596,12 +8492,11 @@
         "crontab": "",
         "once": true,
         "onceDelay": "10",
-        "x": 240,
-        "y": 80,
+        "x": 200,
+        "y": 520,
         "wires": [
             [
-                "49f70c72.4b3914",
-                "11bd9584.c3dd2a"
+                "8b1d208.d34f7e"
             ]
         ]
     },
@@ -8630,17 +8525,17 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 570,
-        "y": 120,
+        "x": 370,
+        "y": 600,
         "wires": [
             [
-                "c1fa0bab.e36ec8"
+                "94906fa9.19fb88"
             ],
             [
-                "69f0edc8.770fb4"
+                "aaae695a.b63e28"
             ],
             [
-                "7dd85809.d05ae8"
+                "92c527fb.83854"
             ]
         ]
     },
@@ -8654,7 +8549,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"hide\":[\"Network_Mode_Gateway_Settings\"],\"show\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"hide\":[\"Network_Mode_Gateway_Settings\"],\"show\":[\"Network_Mode_WiFi_Client_Setup\",\"Network_Mode_Configured_WiFi_Networks\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -8663,12 +8558,14 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 740,
-        "y": 160,
+        "x": 640,
+        "y": 720,
         "wires": [
             [
                 "6ea9c20a.3165fc",
-                "de4b5039.efb44"
+                "de4b5039.efb44",
+                "11bd9584.c3dd2a",
+                "18316d6a.0b7ff3"
             ]
         ]
     },
@@ -8682,7 +8579,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\"],\"hide\":[\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\"],\"hide\":[\"Network_Mode_WiFi_Client_Setup\",\"Network_Mode_Configured_WiFi_Networks\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -8691,8 +8588,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 740,
-        "y": 120,
+        "x": 640,
+        "y": 620,
         "wires": [
             [
                 "6ea9c20a.3165fc",
@@ -8711,7 +8608,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\",\"Network_Mode_WiFi_Client_Setup\"],\"focus\":true}}",
+                "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\",\"Network_Mode_WiFi_Client_Setup\",\"Network_Mode_Configured_WiFi_Networks\"],\"focus\":true}}",
                 "tot": "json"
             }
         ],
@@ -8720,14 +8617,15 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 740,
-        "y": 80,
+        "x": 620,
+        "y": 520,
         "wires": [
             [
                 "6ea9c20a.3165fc",
                 "c27ed988.853568",
                 "18316d6a.0b7ff3",
-                "de4b5039.efb44"
+                "de4b5039.efb44",
+                "11bd9584.c3dd2a"
             ]
         ]
     },
@@ -8739,43 +8637,15 @@
         "func": "\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 960,
-        "y": 100,
+        "x": 880,
+        "y": 520,
         "wires": [
             [
                 "8912a30e.fa783",
                 "378892a2.c7b34e",
-                "6de2917a.45472"
+                "6de2917a.45472",
+                "f33e692f.60c728"
             ]
-        ]
-    },
-    {
-        "id": "dac472ac.dbb31",
-        "type": "switch",
-        "z": "9745920.d8a397",
-        "name": "Check active Configuration",
-        "property": "gatewayInfo.gateway.mode",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "wifi2eth",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "wifi2wifi",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": true,
-        "outputs": 2,
-        "x": 1520,
-        "y": 240,
-        "wires": [
-            [],
-            []
         ]
     },
     {
@@ -8796,8 +8666,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 180,
-        "y": 280,
+        "x": 900,
+        "y": 600,
         "wires": [
             [
                 "18316d6a.0b7ff3"
@@ -8808,9 +8678,9 @@
         "id": "78ef2933.e795a8",
         "type": "ui_button",
         "z": "9745920.d8a397",
-        "name": "",
+        "name": "Add Network",
         "group": "8b01491a.1965e8",
-        "order": 4,
+        "order": 8,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -8822,8 +8692,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 470,
-        "y": 440,
+        "x": 870,
+        "y": 720,
         "wires": [
             [
                 "c5bb7ed6.c41da"
@@ -8838,7 +8708,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "SSID",
+                "p": "Client.ssid",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -8849,8 +8719,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 770,
-        "y": 360,
+        "x": 1490,
+        "y": 660,
         "wires": [
             []
         ]
@@ -8863,7 +8733,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "passphrase",
+                "p": "Client.psk",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -8874,8 +8744,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
-        "y": 400,
+        "x": 1170,
+        "y": 680,
         "wires": [
             []
         ]
@@ -8885,11 +8755,11 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Set Flow Object",
-        "func": "var wifiNetworks = flow.get('wifi_networks');\nif (wifiNetworks === undefined ) {\n    wifiNetworks = {};\n}\n\nwifiNetworks[flow.get('SSID')] = flow.get('passphrase');\n\nflow.set('wifi_networks',wifiNetworks);\nreturn msg;",
+        "func": "var wifiNetworks = flow.get('wifi_networks');\nif (wifiNetworks === undefined ) {\n    wifiNetworks = [];\n}\n\nvar ssid = flow.get('Client.ssid');\nvar psk = flow.get('Client.psk');\nvar key_mgmt = flow.get('Client.key_mgmt');\n\nfor (var i=0;i<wifiNetwork.length;i++) {\n    if (wifiNetwork[i].ssid === ssid) {\n        wifiNetwork.slice(i,1);\n        i--;\n    }\n}\nwifiNetwork.unshift({\n    'ssid'      :   ssid,\n    'psk'       :   psk,\n    'key_mgmt'  :   key_mgmt\n});\n\nflow.set('wifi_networks',wifiNetworks);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 690,
-        "y": 440,
+        "x": 1160,
+        "y": 720,
         "wires": [
             []
         ]
@@ -8903,15 +8773,15 @@
         "tooltip": "",
         "place": "",
         "group": "8b01491a.1965e8",
-        "order": 1,
+        "order": 6,
         "width": 0,
         "height": 0,
         "passthru": false,
         "options": [],
         "payload": "",
         "topic": "",
-        "x": 480,
-        "y": 520,
+        "x": 1320,
+        "y": 800,
         "wires": [
             [
                 "604da2e4.60c94c"
@@ -8928,8 +8798,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 170,
-        "y": 480,
+        "x": 940,
+        "y": 800,
         "wires": [
             [
                 "84c5c132.32da7"
@@ -8948,12 +8818,11 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 150,
-        "y": 520,
+        "x": 1130,
+        "y": 800,
         "wires": [
             [
-                "ae85a3d3.d0052",
-                "d9d7439e.6f576"
+                "ae85a3d3.d0052"
             ]
         ]
     },
@@ -8962,15 +8831,14 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "",
-        "func": "var myResults = {};\nfor (var i in msg.payload) {\n    myResults[msg.payload[i][4]] =msg.payload[i][0];\n}\nmsg.options = myResults;\nmsg.payload = \"US\";\nreturn msg;",
+        "func": "//var myResults = {};\nmsg.options = [];\nfor (var i in msg.payload) {\n    if (msg.payload[i].ISO2 !== undefined) {\n        var temp = {};\n        temp[msg.payload[i]['Short name']] = msg.payload[i].ISO2;\n        msg.options.push(temp);\n    }\n}\n//msg.options = myResults;\nmsg.payload = \"US\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 290,
-        "y": 520,
+        "x": 1250,
+        "y": 760,
         "wires": [
             [
-                "c258cdac.c9d2",
-                "40edab27.f29304"
+                "c258cdac.c9d2"
             ]
         ]
     },
@@ -8993,74 +8861,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 690,
-        "y": 520,
+        "x": 1350,
+        "y": 840,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "17c79c19.da8cd4",
-        "type": "ui_button",
-        "z": "9745920.d8a397",
-        "name": "",
-        "group": "8b01491a.1965e8",
-        "order": 6,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Commit",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 1000,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c6e6e1f6.ece7a",
-        "type": "change",
-        "z": "9745920.d8a397",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "mode",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 460,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "40edab27.f29304",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 470,
-        "y": 560,
-        "wires": []
     },
     {
         "id": "78afed89.434f04",
@@ -9073,8 +8878,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1280,
-        "y": 720,
+        "x": 1220,
+        "y": 1320,
         "wires": [
             [],
             [],
@@ -9092,8 +8897,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1280,
-        "y": 780,
+        "x": 1220,
+        "y": 1380,
         "wires": [
             [],
             [],
@@ -9110,8 +8915,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 940,
-        "y": 220,
+        "x": 870,
+        "y": 460,
         "wires": []
     },
     {
@@ -10074,7 +9879,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "Get Probe List",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nprobes = _.orderBy(probes, 'IP', 'asc'); \nvar out = [];\nvar ip = flow.get('ip');\nmsg.payload = ip;\n\nconsole.log(probes);\nfor (var i in probes) {\n    out.push(probes[i].IP);\n}\nmsg.options = out;\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nvar ip = flow.get('ip');\nmsg.payload = ip;\n\nvar out = [];\nif (probes !== undefined) {\n    probes = _.orderBy(probes, 'IP', 'asc'); \n    for (var i in probes) {\n        out.push(probes[i].IP);\n    }\n}\nmsg.options = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
@@ -11874,7 +11679,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{    \"tabs\": {        \"show\": [\"phpmyadmin\"].        \"enable\": [\"phpmyadmin\"]    }}",
+                "to": "{\"tabs\":{\"show\":[\"phpmyadmin\"],\"enable\":[\"phpmyadmin\"]}}",
                 "tot": "json"
             },
             {
@@ -12085,8 +11890,8 @@
         "type": "ui_button",
         "z": "9745920.d8a397",
         "name": "",
-        "group": "7491149.92351ec",
-        "order": 1,
+        "group": "8b01491a.1965e8",
+        "order": 7,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -12098,27 +11903,13 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 200,
-        "y": 420,
+        "x": 890,
+        "y": 760,
         "wires": [
             [
                 "11bd9584.c3dd2a"
             ]
         ]
-    },
-    {
-        "id": "d9d7439e.6f576",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 210,
-        "y": 560,
-        "wires": []
     },
     {
         "id": "d7c57529.0d4a48",
@@ -12167,7 +11958,7 @@
         "type": "function-npm",
         "z": "e5ec0709.570938",
         "name": "",
-        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\n\nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nvar serviceList =_.sortBy(services,['description']);\nmsg.payload = [];\nfor (var i in serviceList) {\n    var menu = [];\n    var icon_name = '';\n    switch (serviceList[i].SUB) {\n        case 'listening':\n            icon_name = 'hearing';\n            menu.push('Stop','Restart');\n            break;\n        case 'waiting':\n            icon_name = 'hourglass_empty';\n            menu.push('Stop','Restart');\n            break;\n        case 'running':\n            icon_name ='check_circle';\n            menu.push('Stop','Restart');\n            break;\n        case 'active':\n            icon_name ='check_circle';\n            menu.push('Stop','Restart');\n            break;\n        case 'failed':\n            icon_name = 'error_outline';\n            menu.push('Start');\n            break;\n        case 'exited':\n            icon_name='not_interested';\n            menu.push('Start');\n            break;\n        case 'plugged':\n            menu.push('Eject');\n            icon_name = \"eject\";\n            break;\n        case 'mounted': \n            menu.push('Unmount');\n            icon_name = \"eject\";\n            break;\n    }\n    if (serviceList[i].serviceName === 'boot.mount') {\n        menu = null;\n    }\n    msg.payload.push({ \n        'title' : serviceList[i].description,\n        'menu' : menu,\n        'icon_name' : icon_name,\n        'serviceName' : serviceList[i].serviceName\n    });\n}\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\n\nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nvar serviceList =_.orderBy(services,['description']);\nmsg.payload = [];\nfor (var i in serviceList) {\n    var menu = [];\n    var icon_name = '';\n    switch (serviceList[i].SUB) {\n        case 'listening':\n            icon_name = 'hearing';\n            menu.push('Stop','Restart');\n            break;\n        case 'waiting':\n            icon_name = 'hourglass_empty';\n            menu.push('Stop','Restart');\n            break;\n        case 'running':\n            icon_name ='check_circle';\n            menu.push('Stop','Restart');\n            break;\n        case 'active':\n            icon_name ='check_circle';\n            menu.push('Stop','Restart');\n            break;\n        case 'failed':\n            icon_name = 'error_outline';\n            menu.push('Start');\n            break;\n        case 'exited':\n            icon_name='not_interested';\n            menu.push('Start');\n            break;\n        case 'plugged':\n            menu.push('Eject');\n            icon_name = \"eject\";\n            break;\n        case 'mounted': \n            menu.push('Unmount');\n            icon_name = \"eject\";\n            break;\n    }\n    if (serviceList[i].serviceName === 'boot.mount') {\n        menu = null;\n    }\n    msg.payload.push({ \n        'title' : serviceList[i].description,\n        'menu' : menu,\n        'icon_name' : icon_name,\n        'serviceName' : serviceList[i].serviceName\n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 230,
@@ -12333,8 +12124,8 @@
         "links": [
             "68c172c3.71484c"
         ],
-        "x": 75,
-        "y": 360,
+        "x": 55,
+        "y": 280,
         "wires": [
             [
                 "cfa94c0e.fd54f"
@@ -12368,7 +12159,7 @@
         "to": "",
         "reg": false,
         "x": 120,
-        "y": 400,
+        "y": 320,
         "wires": [
             [
                 "45dfb1bb.c3615",
@@ -12382,7 +12173,7 @@
         "z": "de72cd33.d0bc",
         "name": "",
         "x": 140,
-        "y": 440,
+        "y": 360,
         "wires": [
             []
         ]
@@ -12423,6 +12214,627 @@
         "wires": [
             [
                 "68c172c3.71484c"
+            ]
+        ]
+    },
+    {
+        "id": "8991baef.ba75c",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Setup Command",
+        "func": "//  sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD\nvar IP_PREFIX = flow.get('AP.NETWORK');\nvar PASSWORD = flow.get('AP.wpa_passphrase');\nmsg.payload = ' '+IP_PREFIX+' \"'+PASSWORD+'\"';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1010,
+        "y": 1000,
+        "wires": [
+            [
+                "f310e9f5.ec92e8"
+            ]
+        ]
+    },
+    {
+        "id": "9421521f.fba71",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Setup Command",
+        "func": "var CC = flow.get('CC');\nmsg.payload = 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\\n' +\n              'update_config=1\\n' +\n              'country=' + CC + '\\n';\n              \nvar wifiNetworks = flow.get('wifi_networks');\n\nfor (var i in wifiNetworks) { \n    msg.payload +=  'network = {\\n' +\n                    '   ssid=\"'     + wifiNetowrks[i].ssid      + '\"\\n' + \n                    '   psk=\"'      + wifiNetowrks[i].psk       + '\"\\n' + \n                    '   key_mgmt=\"' + wifiNetowrks[i].key_mgmt  + '\"\\n' +\n                    '}\\n\\n';\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 870,
+        "y": 1120,
+        "wires": [
+            [
+                "63a35640.90a808"
+            ]
+        ]
+    },
+    {
+        "id": "60b76959.e5b748",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "sudo cp /usr/local/hiveid-ap/wpa_supplicant.conf /etc/wpa_supplicant/.",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1120,
+        "y": 1220,
+        "wires": [
+            [],
+            [],
+            [
+                "36367d64.09fafa"
+            ]
+        ]
+    },
+    {
+        "id": "ad579c1a.055678",
+        "type": "ui_toast",
+        "z": "9745920.d8a397",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1850,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "36367d64.09fafa",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1630,
+        "y": 1060,
+        "wires": [
+            [
+                "acd4a1d3.1b2d1",
+                "fab46a1c.2078f"
+            ],
+            [
+                "e9b12a4b.effa5"
+            ]
+        ]
+    },
+    {
+        "id": "fab46a1c.2078f",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Success",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Success",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Network Changes Complete",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1800,
+        "y": 1040,
+        "wires": [
+            [
+                "ad579c1a.055678"
+            ]
+        ]
+    },
+    {
+        "id": "e9b12a4b.effa5",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Failed",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Failed",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Network Changes Failed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1790,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f33e692f.60c728",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "IP Network",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "AP.NETWORK",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 560,
+        "wires": [
+            [
+                "428bf81.8a0e288"
+            ]
+        ]
+    },
+    {
+        "id": "fbdfdfbf.f407a",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Update IP Network",
+        "rules": [
+            {
+                "t": "set",
+                "p": "AP.NETWORK",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1450,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "94906fa9.19fb88",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set Flow for WiFi2WiFi",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', 'wlan1');\n    flow.set('AP.LAN', 'wlan0');\n} else {\n    if (gatewayInfo.gateway.wan.type === 'eth' ) {\n        flow.set('AP.WAN', 'wlan1');   \n    } else {\n        flow.set('AP.WAN', gatewayInfo.gateway.wan.iface);\n    }\n    flow.set('AP.LAN', gatewayInfo.gateway.lan.iface);\n    \n    var lanIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\n    lanIP = lanIP.replace(/\\.\\d{1,3}$/,'');\n    flow.set('AP.NETWORK', lanIP);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 480,
+        "wires": [
+            [
+                "c1fa0bab.e36ec8"
+            ]
+        ]
+    },
+    {
+        "id": "8b1d208.d34f7e",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Setup Mode Options",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\nmsg.options=[];\nif (msg.payload === undefined) {\n    msg.payload = 'client';\n}\nflow.set('mode',msg.payload);\nif (gatewayInfo.interfaces['wlan0'] !== undefined) {\n    msg.options.push({\"Client Only\" : \"client\" });\n    if (gatewayInfo.interfaces['wlan1'] !== undefined) {\n        msg.options.push({\"WiFi to WiFi\" : \"wifi2wifi\"});\n    }    \n    if (gatewayInfo.interfaces['eth0'] !== undefined) {\n        msg.options.push({\"WiFi to Ethernet\" : \"wifi2eth\"});\n    }\n}\nconsole.log(msg.options);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 180,
+        "y": 560,
+        "wires": [
+            [
+                "49f70c72.4b3914",
+                "fee017fa.a01e48"
+            ]
+        ]
+    },
+    {
+        "id": "428bf81.8a0e288",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "IP Network",
+        "tooltip": "",
+        "group": "92534c08.7fb13",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 1270,
+        "y": 560,
+        "wires": [
+            [
+                "fbdfdfbf.f407a"
+            ]
+        ]
+    },
+    {
+        "id": "63a35640.90a808",
+        "type": "file",
+        "z": "9745920.d8a397",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/wpa_supplicant.conf",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 980,
+        "y": 1160,
+        "wires": [
+            [
+                "60b76959.e5b748"
+            ]
+        ]
+    },
+    {
+        "id": "d6213820.be50e8",
+        "type": "ui_list",
+        "z": "9745920.d8a397",
+        "group": "affe8d30.ff20f8",
+        "name": "Network List",
+        "order": 1,
+        "width": "6",
+        "height": "6",
+        "lineType": "one",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 1810,
+        "y": 520,
+        "wires": [
+            [
+                "992790b8.d928b8"
+            ]
+        ]
+    },
+    {
+        "id": "d2bf240f.7728a8",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Build Network List",
+        "func": "var wifiNetworks = flow.get('wifi_networks');\nmsg.options = [];\nif (wifiNetworks !== undefined && wifiNetworks.length > 0) {\n    for (var i=0;i<wifiNetworks.length;i++) { \n        msg.options.push( {\n            title   :   '<strong>SSID</strong>: ' + wifiNetowrks[i].ssid+ '<br/>' + \n                        '<strong>Passphrase</strong>: ' + wifiNetowrks[i].psk+ '<br/>' + \n                        '<strong>Encryption </strong>: ' +  wifiNetowrks[i].key_mgmt+ '<br/>' + \n                        '<hr/>',\n            menu    :   ['Move Up',\"Move Down\",\"Delete\",\"Edit\"],\n            pos     :   i\n        });\n    }\n} else {\n    msg.options = [\"<strong>No Networks Configured</strong\"];\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1770,
+        "y": 480,
+        "wires": [
+            [
+                "d6213820.be50e8"
+            ]
+        ]
+    },
+    {
+        "id": "606bc555.82a404",
+        "type": "inject",
+        "z": "9745920.d8a397",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 1710,
+        "y": 440,
+        "wires": [
+            [
+                "d2bf240f.7728a8"
+            ]
+        ]
+    },
+    {
+        "id": "fee017fa.a01e48",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 350,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "aaae695a.b63e28",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set Flow for WiFi2Eth",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', 'eth0');\n    flow.set('AP.LAN', 'wlan0');\n} else {\n    if (gatewayInfo.gateway.wan.type === 'wan' ) {\n        flow.set('AP.WAN', 'eth0');   \n    } else {\n        flow.set('AP.WAN', gatewayInfo.gateway.wan.iface);\n    }\n    flow.set('AP.LAN', gatewayInfo.gateway.lan.iface);\n    \n    var lanIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\n    lanIP = lanIP.replace(/\\.\\d{1,3}$/,'');\n    flow.set('AP.NETWORK', lanIP);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 580,
+        "wires": [
+            [
+                "69f0edc8.770fb4"
+            ]
+        ]
+    },
+    {
+        "id": "92c527fb.83854",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set Flow for Client",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', null);\n    flow.set('AP.LAN', null);\n} else {\n    flow.set('AP.WAN', null);   \n    flow.set('AP.LAN', null);\n    flow.set('AP.NETWORK', null);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 680,
+        "wires": [
+            [
+                "7dd85809.d05ae8"
+            ]
+        ]
+    },
+    {
+        "id": "2553d537.6bae72",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "Client SSID",
+        "label": "Client SSID",
+        "tooltip": "",
+        "group": "8b01491a.1965e8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 1470,
+        "y": 620,
+        "wires": [
+            [
+                "fb7f8aa9.d1a0c8"
+            ]
+        ]
+    },
+    {
+        "id": "992790b8.d928b8",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "payload.selected",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Move Up",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Move Down",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Delete",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Edit",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 1830,
+        "y": 580,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "88a8cb0d.cc417",
+        "type": "ui_dropdown",
+        "z": "9745920.d8a397",
+        "name": "Security Mode",
+        "label": "Security Mode",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "8b01491a.1965e8",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "WPA-PSK",
+                "value": "WPA-PSK",
+                "type": "str"
+            },
+            {
+                "label": "WPA-EAP",
+                "value": "WPA-EAP",
+                "type": "str"
+            },
+            {
+                "label": "IEEE8021x",
+                "value": "IEEE8021x",
+                "type": "str"
+            },
+            {
+                "label": "NONE",
+                "value": "NONE",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 1680,
+        "y": 800,
+        "wires": [
+            [
+                "bd9072cd.a3d33"
+            ]
+        ]
+    },
+    {
+        "id": "bd9072cd.a3d33",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Client.key_mgmt",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1750,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4e790c3.9bf6e8",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Security Mode",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "WPA-PSK",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 760,
+        "wires": [
+            [
+                "88a8cb0d.cc417"
+            ]
+        ]
+    },
+    {
+        "id": "cae04228.5509f8",
+        "type": "inject",
+        "z": "9745920.d8a397",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 1590,
+        "y": 720,
+        "wires": [
+            [
+                "f4e790c3.9bf6e8"
+            ]
+        ]
+    },
+    {
+        "id": "a945392c.afa13",
+        "type": "ui_button",
+        "z": "9745920.d8a397",
+        "name": "",
+        "group": "affe8d30.ff20f8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Commit Client Changes",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Are you sure you want to make changes?",
+        "payloadType": "str",
+        "topic": "",
+        "x": 210,
+        "y": 1120,
+        "wires": [
+            [
+                "11542bbf.5c74c4"
             ]
         ]
     }

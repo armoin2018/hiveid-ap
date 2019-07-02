@@ -12,7 +12,10 @@ module.exports = {
     httpStatic: '/opt/hiveid-ap/nodered',
     httpAdminRoot: '/',
     functionGlobalContext: {
-        os: require("os")
+        os: require("os"),
+        _: require("lodash"),
+        moment : require("moment"),
+        fs : require("fs")
     },
     contextStorage: {
         default: {
