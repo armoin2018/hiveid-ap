@@ -14,7 +14,7 @@ sudo apt-get install --yes --force-yes git curl firefox-esr iw at network-manage
 sudo apt-get install --yes --force-yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
 sudo apt-get install --yes --force-yes jython arduino arduino-mk
 sudo apt-get install --yes --force-yes libbluetooth-dev libudev-dev pi-bluetooth
-suod apt-get install --yes --force-yes bleachbit
+sudo apt-get install --yes --force-yes bleachbit
 export DEBIAN_FRONTEND=dialog
 
 

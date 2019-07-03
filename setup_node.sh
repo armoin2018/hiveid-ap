@@ -21,8 +21,8 @@ sudo systemctl enable nodered.service
 sudo service nodered start
 
 DATE=`date '+%Y%m%d%H%M%S'`
-sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE 2>/dev/null
-sudo chown -R pi:pi /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
+sudo mkdir /home/pi/.node-red /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE 2>/dev/null
+sudo chown -R pi:pi /home/pi/.node-red /usr/local/hiveid-ap /usr/local/hiveid-ap/backups/ /usr/local/hiveid-ap/backups/$DATE
 CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 if [ -f $CONF ]; then 
     sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
