@@ -29,17 +29,16 @@ php /opt/hiveid-ap/nodered_set_nodes.php
 echo "Setting the flows"
 CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 LINE_DIFF=`diff /opt/hiveid-ap/node.flows.js $CONF | wc -l`
-
-if [ "$LINE_DIFF" -eq "0" ]; then 
-    echo "Skipping flow updates"
-else
-    if [ -f $CONF ]; then 
-        sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
-    fi
-    
+if [! -f $CONF ]; then 
     cp /opt/hiveid-ap/node.flows.js $CONF
+else
+    if [ "$LINE_DIFF" -eq "0" ]; then 
+        echo "Skipping flow updates"
+    else
+        sudo cp $CONF /usr/local/hiveid-ap/backups/$DATE/.
+        cp /opt/hiveid-ap/node.flows.js $CONF
+    fi
 fi
-
 echo "Restoring configuration and restarting Node Red"
 sudo service nodered stop
 cp ~/.node-red/settings.js.temp ~/.node-red/settings.js
