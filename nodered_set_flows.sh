@@ -14,7 +14,7 @@ sudo /opt/hiveid-ap/free_memory.sh
 echo "Setting the flows"
 CONF=/home/pi/.node-red/flows_$HOSTNAME.json
 LINE_DIFF=`diff /opt/hiveid-ap/node.flows.js $CONF | wc -l`
-if [! -f $CONF ]; then 
+if [ ! -f $CONF ]; then 
     echo "Installing initial HiveID Flows"
     cp /opt/hiveid-ap/node.flows.js $CONF
 else
