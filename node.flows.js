@@ -2297,7 +2297,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Get Network Interfaces",
-        "func": "var nics = global.get('networkInterfaces');\nmsg.payload =[];\nconsole.log(nics);\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    console.log(ni);\n    if (nics[ni][0].address !== undefined) {\n        tempIP[ni]=nics[ni][0].address;\n        if (ni !== 'lo') {\n            msg.payload.push({\n                title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][0].address \n            });\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = tempIP['lo'];\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
+        "func": "var os = global.get('os');\nvar nics = {};\nnics = os.getNetworkInterfaces();\nglobal.set('networkInterfaces',nics);\n\n//var nics = global.get('networkInterfaces');\nmsg.payload =[];\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    if (ni !== 'lo') {\n        for (var i =0; i< ni.length;i++) {\n            if (nics[ni][i].family === \"IPv4\" && nics[ni][i].netmast === \"255.255.255.0\") {\n                tempIP[ni]=nics[ni][i].address;\n                msg.payload.push({\n                    title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][i].address \n                });\n            }\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = '127.0.0.1';\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -9337,7 +9337,7 @@
         "repair": false,
         "outputs": 5,
         "x": 610,
-        "y": 660,
+        "y": 720,
         "wires": [
             [
                 "6f1bb70b.a402e8"
@@ -10674,8 +10674,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "10",
-        "x": 290,
-        "y": 540,
+        "x": 270,
+        "y": 520,
         "wires": [
             [
                 "9fed95c1.655638"
@@ -11259,12 +11259,12 @@
         "once": true,
         "onceDelay": "1",
         "x": 130,
-        "y": 440,
+        "y": 380,
         "wires": [
             [
-                "8586a5d5.fa8178",
+                "1658cd8e.e99cb2",
                 "485b2e60.42677",
-                "1658cd8e.e99cb2"
+                "8586a5d5.fa8178"
             ]
         ]
     },
@@ -11773,8 +11773,8 @@
         "links": [
             "1f35f075.13291"
         ],
-        "x": 155,
-        "y": 580,
+        "x": 215,
+        "y": 640,
         "wires": [
             [
                 "1658cd8e.e99cb2"
@@ -11943,7 +11943,7 @@
         "type": "function-npm",
         "z": "e5ec0709.570938",
         "name": "",
-        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\n\nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nvar serviceList =_.orderBy(services,['description']);\nmsg.payload = [];\nfor (var i in serviceList) {\n    var menu = [];\n    var icon_name = '';\n    switch (serviceList[i].SUB) {\n        case 'listening':\n            icon_name = 'hearing';\n            menu.push('Stop','Restart');\n            break;\n        case 'waiting':\n            icon_name = 'hourglass_empty';\n            menu.push('Stop','Restart');\n            break;\n        case 'running':\n            icon_name ='check_circle';\n            menu.push('Stop','Restart');\n            break;\n        case 'active':\n            icon_name ='check_circle';\n            menu.push('Stop','Restart');\n            break;\n        case 'failed':\n            icon_name = 'error_outline';\n            menu.push('Start');\n            break;\n        case 'exited':\n            icon_name='not_interested';\n            menu.push('Start');\n            break;\n        case 'plugged':\n            menu.push('Eject');\n            icon_name = \"eject\";\n            break;\n        case 'mounted': \n            menu.push('Unmount');\n            icon_name = \"eject\";\n            break;\n    }\n    if (serviceList[i].serviceName === 'boot.mount') {\n        menu = null;\n    }\n    msg.payload.push({ \n        'title' : serviceList[i].description,\n        'menu' : menu,\n        'icon_name' : icon_name,\n        'serviceName' : serviceList[i].serviceName\n    });\n}\nreturn msg;",
+        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\nmsg.payload = [];\n    \nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nif (services === undefined ) {\n    msg.payload.push({ 'title' : 'Service list is not available' });\n    \n} else {\n    var serviceList =_.orderBy(services,['description']);\n    for (var i in serviceList) {\n        var menu = [];\n        var icon_name = '';\n        switch (serviceList[i].SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (serviceList[i].serviceName === 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : serviceList[i].description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : serviceList[i].serviceName\n        });\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 230,
@@ -12535,7 +12535,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Build Network List",
-        "func": "var wifiNetworks = flow.get('wifi_networks');\nmsg.payload = [];\nif (wifiNetworks !== undefined && wifiNetworks.length > 0) {\n    for (var i=0;i<wifiNetworks.length;i++) { \n        var menuItems = []\n        if (i > 0) {\n            menuItems.push('Move Up');\n        } \n        if (wifiNetworks.length > 1 && i < wifiNetworks.length-1) {\n            menuItems.push('Move Down');\n        }\n        if (wifiNetworks.length > 1) {\n            menuItems.push('Delete');\n        }\n        menuItems.push('Edit');\n        msg.payload.push( {\n            title   :   '<strong>SSID</strong>: ' + wifiNetworks[i].ssid+ '<br/>' + \n                        '<strong>Passphrase</strong>: ' + String(\"*\").repeat(wifiNetworks[i].psk.length)+ '<br/>' + \n                        '<strong>Encryption </strong>: ' +  wifiNetworks[i].key_mgmt+ '<br/>' + \n                        '<hr/>',\n            menu    :   menuItems,\n            pos     :   i\n        });\n    }\n} else {\n    msg.payload = [\"<strong>No Networks Configured</strong\"];\n}\n\nreturn msg;",
+        "func": "var wifiNetworks = flow.get('wifi_networks');\nmsg.payload = [];\nif (wifiNetworks === undefined ) {\n    msg.payload.push( { title : \"<strong>No Networks Configured</strong\" });\n} else {\n    if (wifiNetworks.length > 0) { \n        msg.payload.push( { title : \"<strong>No Networks Configured</strong\" });\n    } else {\n        for (var i=0;i<wifiNetworks.length;i++) { \n            var menuItems = [];\n            if (i > 0) {\n                menuItems.push('Move Up');\n            } \n            if (wifiNetworks.length > 1 && i < wifiNetworks.length-1) {\n                menuItems.push('Move Down');\n            }\n            if (wifiNetworks.length > 1) {\n                menuItems.push('Delete');\n            }\n            menuItems.push('Edit');\n            msg.payload.push( {\n                title   :   '<strong>SSID</strong>: ' + wifiNetworks[i].ssid+ '<br/>' + \n                            '<strong>Passphrase</strong>: ' + String(\"*\").repeat(wifiNetworks[i].psk.length)+ '<br/>' + \n                            '<strong>Encryption </strong>: ' +  wifiNetworks[i].key_mgmt+ '<br/>' + \n                            '<hr/>',\n                menu    :   menuItems,\n                pos     :   i\n            });\n        }\n    }\n} \n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1770,
@@ -12554,7 +12554,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "",
+        "repeat": "3",
         "crontab": "",
         "once": true,
         "onceDelay": "5",
@@ -12985,9 +12985,9 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "5",
+        "repeat": "1",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
         "x": 1330,
         "y": 200,
@@ -13002,7 +13002,7 @@
         "type": "function-npm",
         "z": "9745920.d8a397",
         "name": "",
-        "func": "var _ = require('lodash');\nvar watchFor = ['AP','Client','OperatingMode','mode','passphrase','wifi_networks'];\n\nfor (var i in watchFor) {\n    var now = flow.get(watchFor[i]);\n    var history = flow.get('history.' + watchFor[i]);\n    if (!_.isEqual(now,history)) {\n        node.send( {\n            payload : watchFor[i],\n            topic : 'Change'\n        });\n        flow.set('history.' + watchFor[i],now);\n    }\n}\nreturn msg;",
+        "func": "var _ = global.get('_');\nvar watchFor = ['AP','Client','OperatingMode','mode','passphrase','wifi_networks'];\n\nfor (var i in watchFor) {\n    var now = flow.get(watchFor[i]);\n    if ( now === undefined ) {\n        now = {};\n    }\n    var history = flow.get('history.' + watchFor[i]);\n    \n    if ( history === undefined ) {\n        history = {};\n    }\n    if (!_.isEqual(now,history)) {\n        node.send( {\n            payload : watchFor[i],\n            topic : 'Change'\n        });\n        flow.set('history.' + watchFor[i],now);\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1530,
@@ -13091,7 +13091,7 @@
             ],
             [
                 "1da80ba8.02607c",
-                "d2bf240f.7728a8"
+                "fc12164c.99dcd8"
             ]
         ]
     },
@@ -13205,5 +13205,20 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "fc12164c.99dcd8",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1910,
+        "y": 240,
+        "wires": []
     }
 ]
