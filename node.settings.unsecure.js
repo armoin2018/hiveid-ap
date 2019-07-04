@@ -22,7 +22,7 @@ module.exports = {
             module:"localfilesystem"
         }
     },
-    exportGlobalContextKeys: false,
+    exportGlobalContextKeys: true,
     logging: {
         console: {
             level: "info",
