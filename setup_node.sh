@@ -3,15 +3,15 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup_node.sh                           ####
 #### Description: Sets up node-red                    ####
-#### Version: 0.20190614                              ####
+#### Version: 0.20190705                              ####
+####          0.20190705  Removed apt-get --force-yes ####
 ##########################################################
 
 now=$(date +"%Y%m%d")
 
 /opt/hiveid-ap/system_update.sh
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install --yes --force-yes npm nodejs nodered
-sudo apt-get install --yes --force-yes libzmq5 libzmq3-dev
+sudo apt-get install --yes npm nodejs nodered libzmq5 libzmq3-dev
 export DEBIAN_FRONTEND=dialog
 
 mkdir /home/pi/.nodered 2>/dev/null

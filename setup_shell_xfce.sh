@@ -3,13 +3,14 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup_shell_xfce.sh                     ####
 #### Description: Sets up xfce4                       ####
-#### Version: 0.20190614                              ####
+#### Version: 0.20190705                              ####
+####          0.20190705  Removed apt-get --force-yes ####
 ##########################################################
 
 /opt/hiveid-ap/system_update.sh
 
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install --yes --force-yes xfce4 xfce4-goodies
+sudo apt-get install --yes xfce4 xfce4-goodies
 export DEBIAN_FRONTEND=dialog
 
 sudo update-alternatives --set x-session-manager /usr/bin/startxfce4

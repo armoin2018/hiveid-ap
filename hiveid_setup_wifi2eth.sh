@@ -3,7 +3,8 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)                       ####
 #### Usage: sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD          ####
 #### Description: Sets up Raspberry Pi as a WiFi to Ethernet Gateway    ####
-#### Version: 0.20190626                                                ####
+#### Version: 0.20190705                                                ####
+####          0.20190705  Removed apt-get --force-yes                   ####
 ############################################################################
 
 if [ -z "$2" ]; then 

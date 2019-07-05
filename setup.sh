@@ -3,18 +3,19 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup.sh                                ####
 #### Description: Installs all packages               ####
-#### Version: 0.20190617                              ####
+#### Version: 0.20190705                              ####
+####          0.20190705  Removed apt-get --force-yes ####
 ##########################################################
 cd /opt/hiveid-ap
 
 /opt/hiveid-ap/system_update.sh
 
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install --yes --force-yes git curl firefox-esr iw at network-manager
-sudo apt-get install --yes --force-yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
-sudo apt-get install --yes --force-yes jython arduino arduino-mk
-sudo apt-get install --yes --force-yes libbluetooth-dev libudev-dev pi-bluetooth
-sudo apt-get install --yes --force-yes bleachbit
+sudo apt-get install --yes git curl firefox-esr iw at network-manager
+sudo apt-get install --yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
+sudo apt-get install --yes jython arduino arduino-mk
+sudo apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
+sudo apt-get install --yes bleachbit
 export DEBIAN_FRONTEND=dialog
 
 
@@ -70,7 +71,10 @@ if [[ "$CNT" -eq "0" ]]; then
     sudo sed -i -e "s/$/ net.ifnames=0/" /boot/cmdline.txt
 fi
 
-pcmanfm --set-wallpaper=/opt/hiveid-ap/nodered/images/hiveid.png --wallpaper-mode=screen
+/opt/hiveid-ap/set_desktop.sh wallpaper "/opt/hiveid-ap/nodered/images/hiveid.png" 
+/opt/hiveid-ap/set_desktop.sh wallpaper_mode fit
+/opt/hiveid-ap/set_desktop.sh desktop_bg "#FF9900"
+/opt/hiveid-ap/set_desktop.sh desktop_shadow "#FF9900"
 
 /opt/hiveid-ap/setup_links.sh
 /opt/hiveid-ap/setup_node.sh
