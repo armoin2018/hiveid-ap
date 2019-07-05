@@ -11,7 +11,7 @@ if [ -z "$2" ]; then
     exit;
 else 
     KEY=$1
-    VAL=`echo $2 | sed -e "s/\//\\\\\//g"`
+    VAL=`echo $2 | sed -e "s@\/@\\\\\/@g"`
 fi
 
 sed -i -e "s/$KEY\=.*$/$KEY=$VAL/" ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
