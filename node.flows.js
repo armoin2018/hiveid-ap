@@ -2297,7 +2297,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Get Network Interfaces",
-        "func": "var os = global.get('os');\nvar nics = {};\nnics = os.getNetworkInterfaces();\nglobal.set('networkInterfaces',nics);\n\n//var nics = global.get('networkInterfaces');\nmsg.payload =[];\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    if (ni !== 'lo') {\n        for (var i =0; i< ni.length;i++) {\n            if (nics[ni][i].family === \"IPv4\" && nics[ni][i].netmast === \"255.255.255.0\") {\n                tempIP[ni]=nics[ni][i].address;\n                msg.payload.push({\n                    title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][i].address \n                });\n            }\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = '127.0.0.1';\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
+        "func": "var os = global.get('os');\nvar nics = {};\nnics = os.getNetworkInterfaces();\nglobal.set('networkInterfaces',nics);\n\n//var nics = global.get('networkInterfaces');\nmsg.payload =[];\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    if (ni !== 'lo') {\n        for (var i =0; i< nics[ni].length;i++) {\n            if (nics[ni][i].family === \"IPv4\" && nics[ni][i].netmask === \"255.255.255.0\") {\n                tempIP[ni]=nics[ni][i].address;\n                msg.payload.push({\n                    title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][i].address \n                });\n            }\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = '127.0.0.1';\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -9890,7 +9890,7 @@
         "type": "function-npm",
         "z": "de72cd33.d0bc",
         "name": "Get Probe List",
-        "func": "var _ = require('lodash');\nvar probes = global.get('Probes');\nvar ip = flow.get('ip');\nmsg.payload = ip;\n\nvar out = [];\nif (probes !== undefined) {\n    probes = _.orderBy(probes, 'IP', 'asc'); \n    for (var i in probes) {\n        out.push(probes[i].IP);\n    }\n}\nmsg.options = out;\nreturn msg;",
+        "func": "var _ = global.get('_');\nvar probes = global.get('Probes');\nvar ip = flow.get('ip');\nmsg.payload = ip;\n\nvar out = [];\nif (probes !== undefined) {\n    probes = _.orderBy(probes, 'IP', 'asc'); \n    for (var i in probes) {\n        out.push(probes[i].IP);\n    }\n}\nmsg.options = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
@@ -11943,7 +11943,7 @@
         "type": "function-npm",
         "z": "e5ec0709.570938",
         "name": "",
-        "func": "var _ = require('lodash');\nvar gatewayInfo = global.get('gatewayInfo');\nmsg.payload = [];\n    \nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nif (services === undefined ) {\n    msg.payload.push({ 'title' : 'Service list is not available' });\n    \n} else {\n    var serviceList =_.orderBy(services,['description']);\n    for (var i in serviceList) {\n        var menu = [];\n        var icon_name = '';\n        switch (serviceList[i].SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (serviceList[i].serviceName === 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : serviceList[i].description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : serviceList[i].serviceName\n        });\n    }\n}\nreturn msg;",
+        "func": "var _ = global.get('_');\nvar gatewayInfo = global.get('gatewayInfo');\nmsg.payload = [];\n    \nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nif (services === undefined ) {\n    msg.payload.push({ 'title' : 'Service list is not available' });\n    \n} else {\n    var serviceList =_.orderBy(services,['description']);\n    for (var i in serviceList) {\n        var menu = [];\n        var icon_name = '';\n        switch (serviceList[i].SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (serviceList[i].serviceName === 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : serviceList[i].description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : serviceList[i].serviceName\n        });\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 230,
@@ -12561,9 +12561,7 @@
         "x": 1830,
         "y": 400,
         "wires": [
-            [
-                "d2bf240f.7728a8"
-            ]
+            []
         ]
     },
     {
@@ -13091,7 +13089,8 @@
             ],
             [
                 "1da80ba8.02607c",
-                "fc12164c.99dcd8"
+                "fc12164c.99dcd8",
+                "d2bf240f.7728a8"
             ]
         ]
     },
