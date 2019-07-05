@@ -14,7 +14,7 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt-get install --yes npm nodejs nodered libzmq5 libzmq3-dev
 export DEBIAN_FRONTEND=dialog
 
-mkdir /home/pi/.nodered 2>/dev/null
+mkdir /home/pi/.node-red 2>/dev/null
 sudo service nodered stop
 sudo chown -R pi:pi /home/pi/.node-red
 sudo systemctl enable nodered.service
