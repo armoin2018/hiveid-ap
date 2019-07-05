@@ -7,8 +7,8 @@
 ####          0.20190705 Changed to v4.17.1           ####
 ##########################################################
 killall PanelPro
-mkdir /home/pi/.config/autostart
-cp PanelPro.desktop /home/pi/.config/autostart/.
+mkdir /home/pi/.config/autostart 2>/dev/null
+cp /opt/hiveid-ap/PanelPro.desktop /home/pi/.config/autostart/.
 
 sudo mkdir /opt/jmri /opt/jmri_backups 2>/dev/null
 cd /opt
@@ -24,5 +24,5 @@ sudo mv JMRI/* .
 sudo rm -rdf JMRI
 sudo rm /opt/jmri/*.tgz
 sudo chown -R pi:pi /opt/jmri /home/pi
-rm -rdf /home/pi/JRMI 2>/dev/null
-ln -s /opt/jrmi /home/pi/JMRI
+rm -rdf /home/pi/JMRI 2>/dev/null
+ln -s /opt/jmri /home/pi/JMRI
