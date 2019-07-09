@@ -117,6 +117,7 @@ if (file_exists($dhcpcd_file)) {
     }
 }
 $routes = preg_split('/\n/',trim(`route -v`));
+$myResults['routes_RAW'] = $routes;
 array_shift($routes);
 if (!empty($routes)) {
     $headerLine = array_shift($routes);
