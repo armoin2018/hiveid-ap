@@ -8788,7 +8788,7 @@
         "order": 4,
         "width": "0",
         "height": "0",
-        "passthru": false,
+        "passthru": true,
         "options": [],
         "payload": "",
         "topic": "",
@@ -12214,7 +12214,8 @@
             [],
             [],
             [
-                "36367d64.09fafa"
+                "36367d64.09fafa",
+                "fda3176a.9f61f8"
             ]
         ]
     },
@@ -13250,5 +13251,20 @@
                 "18316d6a.0b7ff3"
             ]
         ]
+    },
+    {
+        "id": "fda3176a.9f61f8",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1680,
+        "y": 1400,
+        "wires": []
     }
 ]
