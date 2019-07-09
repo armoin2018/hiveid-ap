@@ -12240,7 +12240,7 @@
         "type": "switch",
         "z": "9745920.d8a397",
         "name": "",
-        "property": "payload",
+        "property": "payload.code",
         "propertyType": "msg",
         "rules": [
             {
