@@ -3,10 +3,10 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./system_disable_ipv6.sh                  ####
 #### Description: Disables IPv6                       ####
-#### Version: 0.1                                     ####
+#### Version: 0.20190709                              ####
 ##########################################################
 
-CNT=`grep "net.ipv6.conf.all.disable_ipv6=1" /etc/hosts`
+CNT=`grep "net.ipv6.conf.all.disable_ipv6=1" /etc/sysctl.conf`
 if [[ "$CNT" -eq "0" ]]; then
     echo "net.ipv6.conf.all.disable_ipv6=1
     net.ipv6.conf.default.disable_ipv6=1
