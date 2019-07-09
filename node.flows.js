@@ -408,7 +408,7 @@
         "tab": "95d2bc1b.6b456",
         "order": 4,
         "disp": true,
-        "width": "6",
+        "width": "8",
         "collapse": false
     },
     {
@@ -5512,7 +5512,7 @@
         "type": "ui_button",
         "z": "9745920.d8a397",
         "name": "",
-        "group": "92534c08.7fb13",
+        "group": "7491149.92351ec",
         "order": 5,
         "width": 0,
         "height": 0,
@@ -5525,7 +5525,7 @@
         "payload": "Are you sure you want to make changes?",
         "payloadType": "str",
         "topic": "",
-        "x": 190,
+        "x": 170,
         "y": 1000,
         "wires": [
             [
@@ -13145,32 +13145,6 @@
         "wires": [
             [
                 "d80dbb05.2032d8"
-            ]
-        ]
-    },
-    {
-        "id": "2699b770.907388",
-        "type": "ui_button",
-        "z": "9745920.d8a397",
-        "name": "",
-        "group": "7491149.92351ec",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Reload",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 120,
-        "y": 700,
-        "wires": [
-            [
-                "8b1d208.d34f7e"
             ]
         ]
     },
