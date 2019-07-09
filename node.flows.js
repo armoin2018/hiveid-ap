@@ -6760,7 +6760,7 @@
         "type": "switch",
         "z": "a06855ce.9f5488",
         "name": "",
-        "property": "payload",
+        "property": "payload.code",
         "propertyType": "msg",
         "rules": [
             {
@@ -7124,7 +7124,7 @@
         "type": "switch",
         "z": "a06855ce.9f5488",
         "name": "",
-        "property": "payload",
+        "property": "payload.code",
         "propertyType": "msg",
         "rules": [
             {
