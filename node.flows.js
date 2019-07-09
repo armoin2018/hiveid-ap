@@ -384,7 +384,7 @@
         "type": "ui_tab",
         "z": "",
         "name": "Application Settings",
-        "icon": "apps",
+        "icon": "fa-list",
         "order": 6,
         "disabled": false,
         "hidden": false
@@ -476,7 +476,7 @@
         "type": "ui_tab",
         "z": "",
         "name": "System Summary",
-        "icon": "dashboard",
+        "icon": "fa-area-chart",
         "order": 1,
         "disabled": false,
         "hidden": false
@@ -518,7 +518,7 @@
         "type": "ui_tab",
         "z": "",
         "name": "Local Train Activity",
-        "icon": "dashboard",
+        "icon": "fa-home",
         "order": 7,
         "disabled": false,
         "hidden": false
@@ -658,7 +658,7 @@
         "type": "ui_tab",
         "z": "",
         "name": "Node Manger",
-        "icon": "dashboard",
+        "icon": "fa-microchip",
         "order": 4,
         "disabled": false,
         "hidden": false
@@ -733,7 +733,7 @@
         "type": "ui_tab",
         "z": "",
         "name": "Node History",
-        "icon": "dashboard",
+        "icon": "fa-history",
         "order": 5,
         "disabled": false,
         "hidden": false
@@ -754,7 +754,7 @@
         "type": "ui_tab",
         "z": "",
         "name": "Service Manager",
-        "icon": "dashboard",
+        "icon": "fa-server",
         "order": 2,
         "disabled": false,
         "hidden": false
