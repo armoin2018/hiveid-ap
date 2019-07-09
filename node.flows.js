@@ -5579,14 +5579,13 @@
         "width": "8",
         "height": "4",
         "lineType": "one",
-        "actionType": "check",
+        "actionType": "click",
         "allowHTML": true,
         "x": 1210,
         "y": 640,
         "wires": [
             [
-                "fb7f8aa9.d1a0c8",
-                "2553d537.6bae72"
+                "15371b85.ea9044"
             ]
         ]
     },
@@ -8730,7 +8729,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1550,
+        "x": 1790,
         "y": 680,
         "wires": [
             []
@@ -12499,14 +12498,15 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Build Network List",
-        "func": "var wifiNetworks = flow.get('wifi_networks');\nmsg.payload = [];\nif (wifiNetworks === undefined ) {\n    msg.payload.push( { title : \"<strong>No Networks Configured</strong\" });\n} else {\n    if (wifiNetworks.length > 0) { \n        msg.payload.push( { title : \"<strong>No Networks Configured</strong\" });\n    } else {\n        for (var i=0;i<wifiNetworks.length;i++) { \n            var menuItems = [];\n            if (i > 0) {\n                menuItems.push('Move Up');\n            } \n            if (wifiNetworks.length > 1 && i < wifiNetworks.length-1) {\n                menuItems.push('Move Down');\n            }\n            if (wifiNetworks.length > 1) {\n                menuItems.push('Delete');\n            }\n            menuItems.push('Edit');\n            msg.payload.push( {\n                title   :   '<strong>SSID</strong>: ' + wifiNetworks[i].ssid+ '<br/>' + \n                            '<strong>Passphrase</strong>: ' + String(\"*\").repeat(wifiNetworks[i].psk.length)+ '<br/>' + \n                            '<strong>Encryption </strong>: ' +  wifiNetworks[i].key_mgmt+ '<br/>' + \n                            '<hr/>',\n                menu    :   menuItems,\n                pos     :   i\n            });\n        }\n    }\n} \n\nreturn msg;",
+        "func": "var wifiNetworks = flow.get('wifi_networks');\nmsg.payload = [];\nif (wifiNetworks === undefined ) {\n    msg.payload.push( { title : \"<strong>No Networks Configured</strong\" });\n} else {\n    if (wifiNetworks.length === 0) { \n        msg.payload.push( { title : \"<strong>No Networks Configured</strong\" });\n    } else {\n        for (var i=0;i<wifiNetworks.length;i++) { \n            var menuItems = [];\n            if (i > 0) {\n                menuItems.push('Move Up');\n            } \n            if (wifiNetworks.length > 1 && i < wifiNetworks.length-1) {\n                menuItems.push('Move Down');\n            }\n            if (wifiNetworks.length > 1) {\n                menuItems.push('Delete');\n            }\n            menuItems.push('Edit');\n            msg.payload.push( {\n                title   :   '<strong>SSID</strong>: ' + wifiNetworks[i].ssid+ '<br/>' + \n                            '<strong>Passphrase</strong>: ' + String(\"*\").repeat(wifiNetworks[i].psk.length)+ '<br/>' + \n                            '<strong>Encryption </strong>: ' +  wifiNetworks[i].key_mgmt+ '<br/>' + \n                            '<hr/>',\n                menu    :   menuItems,\n                pos     :   i\n            });\n        }\n    }\n} \n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1770,
         "y": 480,
         "wires": [
             [
-                "d6213820.be50e8"
+                "d6213820.be50e8",
+                "9f07d517.cba208"
             ]
         ]
     },
@@ -12568,11 +12568,11 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "passthru": false,
+        "passthru": true,
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 1470,
+        "x": 1650,
         "y": 620,
         "wires": [
             [
@@ -12933,8 +12933,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 1210,
-        "y": 140,
+        "x": 1250,
+        "y": 160,
         "wires": [
             [
                 "8f9fc8b6.111ef"
@@ -12949,8 +12949,8 @@
         "func": "var _ = global.get('_');\nvar watchFor = ['AP','Client','OperatingMode','mode','passphrase','wifi_networks'];\n\nfor (var i in watchFor) {\n    var now = flow.get(watchFor[i]);\n    if ( now === undefined ) {\n        now = {};\n    }\n    var history = flow.get('history.' + watchFor[i]);\n    \n    if ( history === undefined ) {\n        history = {};\n    }\n    if (!_.isEqual(now,history)) {\n        node.send( {\n            payload : watchFor[i],\n            topic : 'Change'\n        });\n        flow.set('history.' + watchFor[i],now);\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1330,
-        "y": 180,
+        "x": 1350,
+        "y": 200,
         "wires": [
             [
                 "df0e35f6.99d6e8"
@@ -13299,5 +13299,47 @@
                 "8b1d208.d34f7e"
             ]
         ]
+    },
+    {
+        "id": "15371b85.ea9044",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.title",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1440,
+        "y": 620,
+        "wires": [
+            [
+                "2553d537.6bae72"
+            ]
+        ]
+    },
+    {
+        "id": "9f07d517.cba208",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 2030,
+        "y": 400,
+        "wires": []
     }
 ]
