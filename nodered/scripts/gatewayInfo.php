@@ -3,6 +3,8 @@ $myResults = array();
 
 $myResults['hostname'] = trim(`cat /etc/hostname`);
 
+$myResults['lastPull'] = strftime('%Y-%m-%d %H:%M:%S');
+
 $server = (empty($_SERVER['SERVER_ADDR']) || $_SERVER['SERVER_ADDR'] == '::1')
     ? 'localhost'
     : $_SERVER['SERVER_ADDR'];
@@ -25,8 +27,14 @@ if (!empty($netinfoList)) {
     }
 }
 
+# Get the dnsmasq contents
 $dnsmasq_file = '/etc/dnsmasq.conf';
 $myResults['dnsmasq'] = parseFile($dnsmasq_file);
+# clean off comments - 20190709
+foreach ($myResults['dnsmasq'] as $key=>$val) {
+    $myResults['dnsmasq'][$key] = preg_replace('/\#.*$/',$val);
+}
+
 $ifaceID=0;
 if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     $myResults['activeSSID'] = `sudo iwgetid`;
@@ -91,30 +99,54 @@ if (file_exists($dhcpcd_file)) {
     $flag = 0;
     $activeInterface = '';
     foreach ($dhcpcdLines as $line) {
-        if (preg_match('/^[^\t]/',$line)) {
-            $flag=0;
+        if (!empty($line) && !preg_match('/^\#/',$line)) {
+            if (preg_match('/^[^\s\t]/',$line)) {
+                $flag=0;
+            }
+            if (preg_match('/^interface\s(\w+)$/', $line,$matches)) {
+                $activeInterface = $matches[1];
+                $flag = 1;
+            } elseif ($flag == 1 && preg_match('/^[\s\t](.+)$/',$line,$matches)) {
+                $myResults['dhcpcd'][$activeInterface] =  $matches[1];
+            } else {
+                $lineParts = preg_split('/\s/',$line);
+                $setVal = (empty($lineParts[1])) ? true : $lineParts[1];
+                $myResults['dhcpcd'][$lineParts[0]][] = $setVal;
+            }
         }
-        if (preg_match('/^interface\s(\w+)$/', $line,$matches)) {
-            $activeInterface = $matches[1];
-            $flag = 1;
-        } 
-        if ($flag == 1 && preg_match('/^\t(.+)$/',$line,$matches)) {
-            $myResults['dhcpcd'][$activeInterface] =  $matches[1];
+    }
+}
+$routes = preg_split('/\n/',trim(`route -v`));
+array_shift($routes);
+if (!empty($routes)) {
+    $headerLine = array_shift($routes);
+    $headers = preg_split('/\s/',$headerLine);
+    foreach ($routes as $line=>$routeLine) {
+        if (!empty($routeLine)) {
+            $myResults['routes'][] = array_combine($headers,preg_split('/\s/',$routeLine));
         }
     }
 }
 
-$myResults['iptables'] = preg_split('/\n/',trim(`cat /etc/iptables.ipv4.nat`));
-foreach ($myResults['iptables'] as $line) {
-    if (preg_match('/POSTROUTING\s\-o\s(\w+)\s/', $line,$matches)) {
-        $myResults['gateway']['wan']['iface'] = $matches[1];
-        $myResults['gateway']['wan']['type'] = ($matches[1] == 'wlan') 
-            ? 'wifi'
-            : 'eth';
-    }
-}
 
-$myResults['routes'] = preg_split('/\n/',trim(`route -v`));
+$iptables_file =  '/etc/iptables.ipv4.nat';
+if (file_exists($iptables_file)) {
+    $myResults['iptables'] = file_get_contents($iptables_file);
+    foreach ($$myResults['iptables'] as $line) {
+        if (preg_match('/POSTROUTING\s\-o\s(\w+)\s/', $line,$matches)) {
+            $myResults['gateway']['wan']['iface'] = $matches[1];
+            $myResults['gateway']['wan']['type'] = ($matches[1] == 'wlan') 
+                ? 'wifi'
+                : 'eth';
+        }
+    }
+} elseif (!empty($myResults['routes'])) { 
+    $targetInterface = $myResults['routes'][0]['Iface'];
+    $myResults['gateway']['wan']['iface'] = $targetInterface;
+    $myResults['gateway']['wan']['type'] = ($targetInterface == 'wlan') 
+        ? 'wifi'
+        : 'eth';   
+}
 
 if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches)) {
     $myResults['gateway']['lan']['iface'] = $matches[1] . $matches[2];

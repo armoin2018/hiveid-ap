@@ -5637,7 +5637,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Command",
-        "func": "//sudo ./hiveid_setup_wifi2wifi.sh IP_PREFIX NEW_GATEWAY_PWD REMOTE_SSID REMOTE_SSID_PWD  ####\nvar IP_PREFIX = flow.get('AP.NETWORK');\nvar NEW_GATEWAY_PWD = flow.get('AP.wpa_passphrase');\nvar REMOTE_SSID = flow.get('Client.wpa_passphrase');\nvar REMOTE_SSID_PWD = flow.get('Client.wpa_passphrase');\n\nmsg.payload = ' '+IP_PREFIX+' \"'+NEW_GATEWAY_PWD+'\" \"' + REMOTE_SSID + '\" \"' + REMOTE_SSID_PWD + '\"';\nreturn msg;",
+        "func": "//  sudo ./hiveid_setup_wifi2wifi.sh\nmsg.payload =   \" -s=\\\"\" + flow.get('AP.SSID') + \"\\\"\"\n                \" -i=\" + flow.get('AP.NETWORK') +\n                //\" -gip=\" + flow.get('AP.IP') + \n                //\" -gif=\" + flow.get('AP.IFACE') +\n                \" -p=\\\"\" + flow.get('AP.PASSPHRASE') + \"\\\"\" +\n                //\" -ips=\" + flow.get('AP.IP_START') +\n                //\" -ipe=\" + flow.get('AP.IP_END') +\n                \" -gwc=\" + flow.get('AP.CHANNEL') +\n                \" -k=\" + flow.get('AP.KEY_MGMT') +\n                \" -wpa=FALSE\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1010,
@@ -5848,7 +5848,7 @@
         "type": "switch",
         "z": "9745920.d8a397",
         "name": "Switch Operating Mode",
-        "property": "OperatingMode",
+        "property": "mode",
         "propertyType": "flow",
         "rules": [
             {
@@ -5878,7 +5878,7 @@
                 "9360a00d.3a1cf"
             ],
             [
-                "9421521f.fba71"
+                "fd94265b.c31f88"
             ]
         ]
     },
@@ -6045,7 +6045,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "AP.channel",
+                "p": "AP.CHANNEL",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -6070,7 +6070,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "AP.ssid",
+                "p": "AP.SSID",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -6095,7 +6095,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "AP.wpa_passphrase",
+                "p": "AP.PASSPHRASE",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -8719,7 +8719,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "Client.ssid",
+                "p": "Client.WAN_SSID",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -8730,8 +8730,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1490,
-        "y": 660,
+        "x": 1550,
+        "y": 680,
         "wires": [
             []
         ]
@@ -8740,11 +8740,11 @@
         "id": "d35706d5.e8d078",
         "type": "change",
         "z": "9745920.d8a397",
-        "name": "",
+        "name": "set Client.WAN_PASSPHRASE",
         "rules": [
             {
                 "t": "set",
-                "p": "Client.psk",
+                "p": "Client.WAN_PASSPHRASE",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -8755,7 +8755,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1170,
+        "x": 1210,
         "y": 680,
         "wires": [
             []
@@ -8766,7 +8766,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Set Flow Object",
-        "func": "var wifiNetworks = flow.get('wifi_networks');\nif (wifiNetworks === undefined ) {\n    wifiNetworks = [];\n}\n\nvar ssid = flow.get('Client.ssid');\nvar psk = flow.get('Client.psk');\nvar key_mgmt = flow.get('Client.key_mgmt');\n\nfor (var i=0;i<wifiNetworks.length;i++) {\n    if (wifiNetworks[i].ssid === ssid) {\n        wifiNetworks.slice(i,1);\n        i--;\n    }\n}\nwifiNetworks.unshift({\n    'ssid'      :   ssid,\n    'psk'       :   psk,\n    'key_mgmt'  :   key_mgmt\n});\n\nflow.set('wifi_networks',wifiNetworks);\nreturn msg;",
+        "func": "var wifiNetworks = flow.get('wifi_networks');\nif (wifiNetworks === undefined ) {\n    wifiNetworks = [];\n}\n\nvar ssid = flow.get('Client.WAN_SSID');\nvar psk = flow.get('Client.WAN_PASSPHRASE');\nvar key_mgmt = flow.get('Client.WAN_KEY_MGMT');\n\nfor (var i=0;i<wifiNetworks.length;i++) {\n    if (wifiNetworks[i].ssid === ssid) {\n        wifiNetworks.slice(i,1);\n        i--;\n    }\n}\nwifiNetworks.unshift({\n    'ssid'      :   ssid,\n    'psk'       :   psk,\n    'key_mgmt'  :   key_mgmt\n});\n\nflow.set('wifi_networks',wifiNetworks);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1160,
@@ -8841,11 +8841,11 @@
         "id": "ae85a3d3.d0052",
         "type": "function",
         "z": "9745920.d8a397",
-        "name": "",
+        "name": "Create Country Code Options",
         "func": "//var myResults = {};\nmsg.options = [];\nfor (var i in msg.payload) {\n    if (msg.payload[i].ISO2 !== undefined) {\n        var temp = {};\n        temp[msg.payload[i]['Short name']] = msg.payload[i].ISO2;\n        msg.options.push(temp);\n    }\n}\n//msg.options = myResults;\nmsg.payload = \"US\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1250,
+        "x": 1330,
         "y": 760,
         "wires": [
             [
@@ -8857,11 +8857,11 @@
         "id": "604da2e4.60c94c",
         "type": "change",
         "z": "9745920.d8a397",
-        "name": "",
+        "name": "Set Client.WAN_WIFI_CC",
         "rules": [
             {
                 "t": "set",
-                "p": "CC",
+                "p": "Client.WAN_WIFI_CC",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -8872,47 +8872,9 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1350,
+        "x": 1390,
         "y": 840,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "78afed89.434f04",
-        "type": "exec",
-        "z": "9745920.d8a397",
-        "command": "sudo /opt/hiveid-ap/hostapd_set_psk.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 1220,
-        "y": 1320,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "cd4842a5.be2cc",
-        "type": "exec",
-        "z": "9745920.d8a397",
-        "command": "sudo /opt/hiveid-ap/hostapd_set_cnl.sh",
-        "addpay": true,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "oldrc": false,
-        "name": "",
-        "x": 1220,
-        "y": 1380,
-        "wires": [
-            [],
-            [],
             []
         ]
     },
@@ -12207,7 +12169,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Command",
-        "func": "//  sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD\nvar IP_PREFIX = flow.get('AP.NETWORK');\nvar PASSWORD = flow.get('AP.wpa_passphrase');\nmsg.payload = ' '+IP_PREFIX+' \"'+PASSWORD+'\"';\nreturn msg;",
+        "func": "//  sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD\nmsg.payload =   \" -s=\\\"\" + flow.get('AP.SSID') + \"\\\"\"\n                \" -i=\" + flow.get('AP.NETWORK') +\n                //\" -gip=\" + flow.get('AP.IP') + \n                //\" -gif=\" + flow.get('AP.IFACE') +\n                \" -p=\\\"\" + flow.get('AP.PASSPHRASE') + \"\\\"\" +\n                //\" -ips=\" + flow.get('AP.IP_START') +\n                //\" -ipe=\" + flow.get('AP.IP_END') +\n                \" -gwc=\" + flow.get('AP.CHANNEL') +\n                //\" -k=\" + flow.get('AP.KEY_MGMT') +\n                //\" -wan=\" + flow.get('Client.WAN_IFACE') +\n                \"\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1010,
@@ -12223,11 +12185,11 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Command",
-        "func": "var CC = flow.get('CC');\nmsg.payload = 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\\n' +\n              'update_config=1\\n' +\n              'country=' + CC + '\\n';\n              \nvar wifiNetworks = flow.get('wifi_networks');\n\nfor (var i in wifiNetworks) { \n    msg.payload +=  'network = {\\n' +\n                    '   ssid=\"'     + wifiNetowrks[i].ssid      + '\"\\n' + \n                    '   psk=\"'      + wifiNetowrks[i].psk       + '\"\\n' + \n                    '   key_mgmt=\"' + wifiNetowrks[i].key_mgmt  + '\"\\n' +\n                    '}\\n\\n';\n}\n\nreturn msg;",
+        "func": "var CC = flow.get('Client.WAN_WIFI_CC');\nmsg.payload = 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\\n' +\n              'update_config=1\\n' +\n              'country=' + CC + '\\n';\n              \nvar wifiNetworks = flow.get('wifi_networks');\n\nfor (var i in wifiNetworks) { \n    msg.payload +=  'network = {\\n' +\n                    '   ssid=\"'     + wifiNetowrks[i].ssid      + '\"\\n' + \n                    '   psk=\"'      + wifiNetowrks[i].psk       + '\"\\n' + \n                    '   key_mgmt=\"' + wifiNetowrks[i].key_mgmt  + '\"\\n' +\n                    '}\\n\\n';\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 870,
-        "y": 1120,
+        "x": 450,
+        "y": 1340,
         "wires": [
             [
                 "63a35640.90a808"
@@ -12245,8 +12207,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1120,
-        "y": 1220,
+        "x": 1240,
+        "y": 1340,
         "wires": [
             [],
             [],
@@ -12267,7 +12229,7 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1850,
+        "x": 1970,
         "y": 1080,
         "wires": []
     },
@@ -12380,7 +12342,9 @@
         "x": 1790,
         "y": 1120,
         "wires": [
-            []
+            [
+                "ad579c1a.055678"
+            ]
         ]
     },
     {
@@ -12501,8 +12465,8 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 980,
-        "y": 1160,
+        "x": 740,
+        "y": 1340,
         "wires": [
             [
                 "60b76959.e5b748"
@@ -12544,24 +12508,6 @@
             [
                 "d6213820.be50e8"
             ]
-        ]
-    },
-    {
-        "id": "606bc555.82a404",
-        "type": "inject",
-        "z": "9745920.d8a397",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "3",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "5",
-        "x": 1830,
-        "y": 400,
-        "wires": [
-            []
         ]
     },
     {
@@ -12726,8 +12672,8 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 1680,
-        "y": 800,
+        "x": 2020,
+        "y": 840,
         "wires": [
             [
                 "bd9072cd.a3d33"
@@ -12738,11 +12684,11 @@
         "id": "bd9072cd.a3d33",
         "type": "change",
         "z": "9745920.d8a397",
-        "name": "",
+        "name": "set Client.WAN_KEY_MGMT",
         "rules": [
             {
                 "t": "set",
-                "p": "Client.key_mgmt",
+                "p": "Client.WAN_KEY_MGMT",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -12753,8 +12699,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1750,
-        "y": 840,
+        "x": 2100,
+        "y": 880,
         "wires": [
             []
         ]
@@ -12778,8 +12724,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1640,
-        "y": 760,
+        "x": 1980,
+        "y": 800,
         "wires": [
             [
                 "88a8cb0d.cc417"
@@ -12798,8 +12744,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 1590,
-        "y": 720,
+        "x": 1930,
+        "y": 760,
         "wires": [
             [
                 "f4e790c3.9bf6e8"
@@ -12824,11 +12770,11 @@
         "payload": "Are you sure you want to make changes?",
         "payloadType": "str",
         "topic": "",
-        "x": 210,
-        "y": 1120,
+        "x": 190,
+        "y": 1340,
         "wires": [
             [
-                "11542bbf.5c74c4"
+                "9421521f.fba71"
             ]
         ]
     },
@@ -12885,7 +12831,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Edit",
-        "func": "var wifiNetworks = flow.get('wifi_networks');\nwifiNetworks[msg.payload.pos];\nvar msg1 = { payload : wifiNetworks['ssid']};\nvar msg2 = { payload : wifiNetworks['psk']};\nvar msg3 = { payload : wifiNetworks['key_mgmt']};\n\nreturn [msg1,msg2,msg3];",
+        "func": "var wifiNetworks = flow.get('wifi_networks');\ncurNetwork = wifiNetworks[msg.payload.pos];\nvar msg1 = { payload : curNetwork['ssid']};\nvar msg2 = { payload : curNetwork['psk']};\nvar msg3 = { payload : curNetwork['key_mgmt']};\n\nreturn [msg1,msg2,msg3];",
         "outputs": 3,
         "noerr": 0,
         "x": 2030,
@@ -12987,8 +12933,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 1330,
-        "y": 200,
+        "x": 1210,
+        "y": 140,
         "wires": [
             [
                 "8f9fc8b6.111ef"
@@ -12999,12 +12945,12 @@
         "id": "8f9fc8b6.111ef",
         "type": "function-npm",
         "z": "9745920.d8a397",
-        "name": "",
+        "name": "Detect history changes",
         "func": "var _ = global.get('_');\nvar watchFor = ['AP','Client','OperatingMode','mode','passphrase','wifi_networks'];\n\nfor (var i in watchFor) {\n    var now = flow.get(watchFor[i]);\n    if ( now === undefined ) {\n        now = {};\n    }\n    var history = flow.get('history.' + watchFor[i]);\n    \n    if ( history === undefined ) {\n        history = {};\n    }\n    if (!_.isEqual(now,history)) {\n        node.send( {\n            payload : watchFor[i],\n            topic : 'Change'\n        });\n        flow.set('history.' + watchFor[i],now);\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1530,
-        "y": 200,
+        "x": 1330,
+        "y": 180,
         "wires": [
             [
                 "df0e35f6.99d6e8"
@@ -13023,8 +12969,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1930,
-        "y": 120,
+        "x": 1810,
+        "y": 100,
         "wires": []
     },
     {
@@ -13069,7 +13015,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 6,
-        "x": 1700,
+        "x": 1580,
         "y": 200,
         "wires": [
             [
@@ -13172,7 +13118,7 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 2070,
+        "x": 1760,
         "y": 320,
         "wires": [
             [
@@ -13199,7 +13145,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2320,
+        "x": 2010,
         "y": 320,
         "wires": [
             []
@@ -13216,8 +13162,101 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1910,
-        "y": 240,
+        "x": 1770,
+        "y": 220,
         "wires": []
+    },
+    {
+        "id": "fd94265b.c31f88",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "/opt/hiveid-ap/hiveid_setup_client.sh",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1310,
+        "y": 1120,
+        "wires": [
+            [],
+            [],
+            [
+                "b5847f86.9b6b8"
+            ]
+        ]
+    },
+    {
+        "id": "b5847f86.9b6b8",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 1260,
+        "wires": [
+            [
+                "9421521f.fba71"
+            ],
+            [
+                "67c51b99.156844"
+            ]
+        ]
+    },
+    {
+        "id": "67c51b99.156844",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "Failed",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Failed",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Failed to change to Client Mode",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1770,
+        "y": 1260,
+        "wires": [
+            [
+                "ad579c1a.055678"
+            ]
+        ]
     }
 ]

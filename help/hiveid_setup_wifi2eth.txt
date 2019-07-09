@@ -1,0 +1,37 @@
+Usage:      
+    sudo ./hiveid_setup_wifi2eth.sh
+Arguments:  
+    -i=XXX.XXX.XXX --ip_prefix=XXX.XXX.XXX
+        IP Address base to use for access point
+        Default: 192.168.6
+    -s=SSID --ssid=SSID
+        SSID of the gateway
+        Default: Uses the HOSTNAME environment variable
+    -gip=XXX.XXX.XXX.XXX   --gateway_ip=XXX.XXX.XXX.XXX
+        IP address of the gateway
+        Default: Uses the interface IP [IF_PREFIX].1 
+    -gif=Interface   --gateway_iface=Interface
+        Interface for the Gatweay
+        Default: wlan0
+    -p=*******   --passphrase=*******
+        Passphrase for the Gatway
+        Default: password
+    -ips=*******   --ip_start=*******
+        Starting address for the DHCP range for the Gateway
+        Default: Uses the interface IP [IF_PREFIX].2
+    -ipe=*******   --ip_end=*******
+        Ending address for the DHCP range for the Gateway
+        Default: Uses the interface IP [IF_PREFIX].254
+    -gwc=N   --gateway_channel=N
+        Channel of the Gateway
+        Default: 11
+    -k=WPA-PSK --key_mgmt=WPA-PSK
+        Sets the Security Key Management
+        Default: WPA-PSK
+        Options: WPA-PSK, WPA-EAP, IEEE8021X
+        Note: WPA-PSK only supported
+    -wan=interface --wan_iface=interface
+        Sets the interface of the WAN 
+        Default: eth0
+    -h --help -?
+        This screen

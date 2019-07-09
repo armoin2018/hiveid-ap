@@ -1,0 +1,55 @@
+Usage:      
+    sudo ./hiveid_setup_wifi2wifi.sh
+Arguments:  
+    -s=SSID --ssid=SSID
+        SSID that will be used for the access point
+        Default: HOSTNAME environment variable
+    -i=XXX.XXX.XXX --ip_prefix=XXX.XXX.XXX
+        IP Address base to use for access point
+        Default: 192.168.6
+    -gip=XXX.XXX.XXX.XXX --gateway_ip=XXX.XXX.XXX.XXX
+        IP address to be used for the access point device
+        Default: [ip_prefix].1
+    -gif=interface  --gateway_iface=interface
+        Name of the interface that will be used
+        Default: wlan0
+    -ips=XXX.XXX.XXX.XXX --ip_start=XXX.XXX.XXX.XXX
+        Starting IP address for the DHCP Server
+        Default: [ip_prefix].2
+    -ipe=XXX.XXX.XXX.XXX --ip_end=XXX.XXX.XXX.XXX
+        Ending IP address for the DHCP Server
+        Default: [ip_prefix].254
+    --gwc=N --gateway channel=N
+        Access Point Channel
+        Default: 11
+    --p=******* --passphrase=******
+        Access Point Passphrase
+        Default: password
+    -k=WPA-PSK --key_mgmt=WPA-PSK
+        Sets the Security Key Management
+        Default: WPA-PSK
+        Options: WPA-PSK, WPA-EAP, IEEE8021X
+        Note: WPA-PSK only supported
+    -wan=interface --wan_iface=interface
+        Sets the interface of the WAN 
+        Default: wlan1
+    -ws=SSID --wan_ssid=SSID
+        Sets the SSID of the WAN to connect to
+        *Required
+    -wp=******** --wan_passphrase=********
+        Sets the passphrase of the WAN to connect to
+        *Required
+    -wkm=WPA-PSK --wan_key_mgmt=WPA-PSK
+        Sets the Security Key Management
+        Default: WPA-PSK
+        Options: WPA-PSK, WPA-EAP, IEEE8021X
+        Note: WPA-PSK only supported in the script
+    -cc=XX --wan_country_code=XX
+        Sets the country code for the wireless client
+        Default: US
+    -wpa=[TRUE|FALSE] --WPA_CONFIG=[TRUE|FALSE]
+        Determines whether or not to update the wpa_supplicant file 
+        Defaults: TRUE
+    -h --help -?
+        This screen
+    
