@@ -62,10 +62,7 @@ if (file_exists($dhcpcd_file)) {
 # Get the dnsmasq contents
 $dnsmasq_file = '/etc/dnsmasq.conf';
 $myResults['dnsmasq'] = parseFile($dnsmasq_file);
-# clean off comments - 20190709
-foreach ($myResults['dnsmasq'] as $key=>$val) {
-    $myResults['dnsmasq'][$key] = preg_replace('/\#.*$/',$val);
-}
+
 
 $ifaceID=0;
 if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
@@ -194,7 +191,8 @@ function parseFile($inFile) {
         $file = file_get_contents($inFile);
         $a_file = preg_split('/\n/',$file);
         foreach ($a_file as $line) {
-            if (!preg_match('/(^\#|^$)/',$line)) {
+            $line = trim(preg_replace('/\#.*$/',$line));
+            if (!empty($line)) {
                 if (preg_match('/([^\=]*)\=(.+)$/',$line,$matches)) {
                     $myResults[$matches[1]] = $matches[2];
                 }
