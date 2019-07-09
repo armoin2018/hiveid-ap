@@ -8501,7 +8501,7 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": "10",
+        "onceDelay": "5",
         "x": 130,
         "y": 500,
         "wires": [
@@ -8729,7 +8729,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1790,
+        "x": 1710,
         "y": 680,
         "wires": [
             []
@@ -8771,7 +8771,9 @@
         "x": 1160,
         "y": 720,
         "wires": [
-            []
+            [
+                "45696e5e.9f896"
+            ]
         ]
     },
     {
@@ -12790,7 +12792,8 @@
         "y": 480,
         "wires": [
             [
-                "9d1ce5b4.a6cb2"
+                "9d1ce5b4.a6cb2",
+                "45696e5e.9f896"
             ]
         ]
     },
@@ -12806,7 +12809,8 @@
         "y": 520,
         "wires": [
             [
-                "e1ad4523.94f0f8"
+                "e1ad4523.94f0f8",
+                "45696e5e.9f896"
             ]
         ]
     },
@@ -12822,7 +12826,8 @@
         "y": 560,
         "wires": [
             [
-                "d7cbc775.93945"
+                "d7cbc775.93945",
+                "45696e5e.9f896"
             ]
         ]
     },
@@ -12920,125 +12925,6 @@
         "x": 2030,
         "y": 440,
         "wires": []
-    },
-    {
-        "id": "a9f60790.f45368",
-        "type": "inject",
-        "z": "9745920.d8a397",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "1",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "x": 1250,
-        "y": 160,
-        "wires": [
-            [
-                "8f9fc8b6.111ef"
-            ]
-        ]
-    },
-    {
-        "id": "8f9fc8b6.111ef",
-        "type": "function-npm",
-        "z": "9745920.d8a397",
-        "name": "Detect history changes",
-        "func": "var _ = global.get('_');\nvar watchFor = ['AP','Client','OperatingMode','mode','passphrase','wifi_networks'];\n\nfor (var i in watchFor) {\n    var now = flow.get(watchFor[i]);\n    if ( now === undefined ) {\n        now = {};\n    }\n    var history = flow.get('history.' + watchFor[i]);\n    \n    if ( history === undefined ) {\n        history = {};\n    }\n    if (!_.isEqual(now,history)) {\n        node.send( {\n            payload : watchFor[i],\n            topic : 'Change'\n        });\n        flow.set('history.' + watchFor[i],now);\n    }\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1350,
-        "y": 200,
-        "wires": [
-            [
-                "df0e35f6.99d6e8"
-            ]
-        ]
-    },
-    {
-        "id": "1da80ba8.02607c",
-        "type": "ui_toast",
-        "z": "9745920.d8a397",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "topic": "",
-        "name": "",
-        "x": 1810,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "df0e35f6.99d6e8",
-        "type": "switch",
-        "z": "9745920.d8a397",
-        "name": "Director",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "AP",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "Client",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "OperatingMode",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "mode",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "passphrase",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "wifi_networks",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 6,
-        "x": 1580,
-        "y": 200,
-        "wires": [
-            [
-                "1da80ba8.02607c"
-            ],
-            [
-                "1da80ba8.02607c"
-            ],
-            [
-                "1da80ba8.02607c"
-            ],
-            [
-                "1da80ba8.02607c"
-            ],
-            [
-                "1da80ba8.02607c"
-            ],
-            [
-                "1da80ba8.02607c",
-                "fc12164c.99dcd8",
-                "d2bf240f.7728a8"
-            ]
-        ]
     },
     {
         "id": "9d1ce5b4.a6cb2",
@@ -13148,23 +13034,10 @@
         "x": 2010,
         "y": 320,
         "wires": [
-            []
+            [
+                "45696e5e.9f896"
+            ]
         ]
-    },
-    {
-        "id": "fc12164c.99dcd8",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1770,
-        "y": 220,
-        "wires": []
     },
     {
         "id": "fd94265b.c31f88",
@@ -13341,5 +13214,21 @@
         "x": 2030,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "45696e5e.9f896",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Rebuild",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1700,
+        "y": 400,
+        "wires": [
+            [
+                "d2bf240f.7728a8"
+            ]
+        ]
     }
 ]
