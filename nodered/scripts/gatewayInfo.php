@@ -191,7 +191,7 @@ function parseFile($inFile) {
         $file = file_get_contents($inFile);
         $a_file = preg_split('/\n/',$file);
         foreach ($a_file as $line) {
-            $line = trim(preg_replace('/\#.*$/',$line));
+            $line = trim(preg_replace('/\#.*$/',"",$line));
             if (!empty($line)) {
                 if (preg_match('/([^\=]*)\=(.+)$/',$line,$matches)) {
                     $myResults[$matches[1]] = $matches[2];
