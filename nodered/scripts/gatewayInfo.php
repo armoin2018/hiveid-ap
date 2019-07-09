@@ -9,6 +9,16 @@ $server = (empty($_SERVER['SERVER_ADDR']) || $_SERVER['SERVER_ADDR'] == '::1')
     ? 'localhost'
     : $_SERVER['SERVER_ADDR'];
 
+$netinfo = `ip -o address`;
+$netinfoList = preg_split('/\n/', $netinfo);
+if (!empty($netinfoList)) {
+    foreach ($netinfoList as $line) {
+        if (preg_match('/^\d+\:\s(\w+).+inet\s([\d\.]+)\//',$line,$matches)) {
+            $myResults['interfaces'][$matches[1]] = $matches[2]; 
+        }
+    }
+}
+
 $hostapd_file = '/etc/hostapd/hostapd.conf';
 if (file_exists($hostapd_file)) {
     $hostapd = parse_ini_file($hostapd_file);
@@ -17,12 +27,34 @@ if (file_exists($hostapd_file)) {
     }
     $myResults['hostapd'] = $hostapd;
 }
-$netinfo = `ip -o address`;
-$netinfoList = preg_split('/\n/', $netinfo);
-if (!empty($netinfoList)) {
-    foreach ($netinfoList as $line) {
-        if (preg_match('/^\d+\:\s(\w+).+inet\s([\d\.]+)\//',$line,$matches)) {
-            $myResults['interfaces'][$matches[1]] = $matches[2]; 
+
+$dhcpcd_file = '/etc/dhcpcd.conf';
+if (file_exists($dhcpcd_file)) {
+    $dhcpcd = file_get_contents($dhcpcd_file);
+    $dhcpcdLines = preg_split('/\n/',$dhcpcd);
+    $flag = 0;
+    $activeInterface = '';
+    foreach ($dhcpcdLines as $line) {
+        if (!empty($line) && !preg_match('/^\#/',$line)) {
+            if (preg_match('/^[^\s\t]/',$line)) {
+                $flag=0;
+            }
+            if (preg_match('/^interface\s(\w+)$/', $line,$matches)) {
+                $activeInterface = $matches[1];
+                $flag = 1;
+            } elseif ($flag == 1 && preg_match('/^[\s\t](.+)$/',$line,$matches)) {
+                $curLine = trim($matches[1]);
+                $myResults['dhcpcd']['interface'][$activeInterface][] =  $curLine;
+                if (empty($myResults['interfaces'][$activeInterface])) {
+                    if (preg_match('/static ip\_address\=([\d\.]+)\/\d+$/',$curLine,$matches)) {
+                        $myResults['interfaces'][$activeInterface] = $matches[1];
+                    }
+                }
+            } else {
+                $lineParts = preg_split('/\s/',$line);
+                $setVal = (empty($lineParts[1])) ? true : $lineParts[1];
+                $myResults['dhcpcd'][$lineParts[0]][] = $setVal;
+            }
         }
     }
 }
@@ -92,32 +124,8 @@ if (!empty($nmcli)) {
     }
 }
 
-$dhcpcd_file = '/etc/dhcpcd.conf';
-if (file_exists($dhcpcd_file)) {
-    $dhcpcd = file_get_contents($dhcpcd_file);
-    $dhcpcdLines = preg_split('/\n/',$dhcpcd);
-    $flag = 0;
-    $activeInterface = '';
-    foreach ($dhcpcdLines as $line) {
-        if (!empty($line) && !preg_match('/^\#/',$line)) {
-            if (preg_match('/^[^\s\t]/',$line)) {
-                $flag=0;
-            }
-            if (preg_match('/^interface\s(\w+)$/', $line,$matches)) {
-                $activeInterface = $matches[1];
-                $flag = 1;
-            } elseif ($flag == 1 && preg_match('/^[\s\t](.+)$/',$line,$matches)) {
-                $myResults['dhcpcd'][$activeInterface] =  $matches[1];
-            } else {
-                $lineParts = preg_split('/\s/',$line);
-                $setVal = (empty($lineParts[1])) ? true : $lineParts[1];
-                $myResults['dhcpcd'][$lineParts[0]][] = $setVal;
-            }
-        }
-    }
-}
+
 $routes = preg_split('/\n/',trim(`route -v`));
-$myResults['routes_RAW'] = $routes;
 array_shift($routes);
 if (!empty($routes)) {
     $headerLine = array_shift($routes);

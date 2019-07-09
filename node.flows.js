@@ -5558,7 +5558,7 @@
         "type": "function-npm",
         "z": "9745920.d8a397",
         "name": "Structure Wifi List",
-        "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar gatewayInfo = flow.get('gatewayInfo');\n\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : (gatewayInfo.activeSSID !== undefined && gatewayInfo.activeSSID === inPayload[id].ssid)\n    }); \n}\nreturn msg;",
+        "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar gatewayInfo = global.get('gatewayInfo');\n\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    var isChecked = false;\n    if (gatewayInfo.activeSSID !== undefined) {\n       isChecked=(gatewayInfo.activeSSID === inPayload[id].ssid);\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : isChecked\n    }); \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1170,
@@ -8497,14 +8497,14 @@
         "z": "9745920.d8a397",
         "name": "",
         "topic": "",
-        "payload": "gatewayInfo.gateway.mode",
-        "payloadType": "global",
+        "payload": "",
+        "payloadType": "date",
         "repeat": "",
         "crontab": "",
         "once": true,
         "onceDelay": "10",
-        "x": 200,
-        "y": 520,
+        "x": 130,
+        "y": 500,
         "wires": [
             [
                 "8b1d208.d34f7e"
@@ -12420,7 +12420,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Mode Options",
-        "func": "var gatewayInfo = global.get('gatewayInfo');\nmsg.options=[];\nif (msg.payload === undefined) {\n    msg.payload = 'client';\n}\nflow.set('mode',msg.payload);\nif (gatewayInfo.interfaces['wlan0'] !== undefined) {\n    msg.options.push({\"Client Only\" : \"client\" });\n    if (gatewayInfo.interfaces['wlan1'] !== undefined) {\n        msg.options.push({\"WiFi to WiFi\" : \"wifi2wifi\"});\n    }    \n    if (gatewayInfo.interfaces['eth0'] !== undefined) {\n        msg.options.push({\"WiFi to Ethernet\" : \"wifi2eth\"});\n    }\n}\nconsole.log(msg.options);\nreturn msg;",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nvar mode = gatewayInfo.gateway.mode;\n\nmsg.options=[];\nif (mode === undefined) {\n    mode = 'client';\n}\nflow.set('mode',mode);\n\nif (gatewayInfo.interfaces['wlan0'] !== undefined) {\n    msg.options.push({\"Client Only\" : \"client\" });\n    if (gatewayInfo.interfaces['wlan1'] !== undefined) {\n        msg.options.push({\"WiFi to WiFi\" : \"wifi2wifi\"});\n    }    \n    if (gatewayInfo.interfaces['eth0'] !== undefined) {\n        msg.options.push({\"WiFi to Ethernet\" : \"wifi2eth\"});\n    }\n}\nmsg.payload = mode;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 180,
@@ -12521,8 +12521,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 350,
-        "y": 460,
+        "x": 370,
+        "y": 520,
         "wires": []
     },
     {
@@ -13256,6 +13256,47 @@
         "wires": [
             [
                 "ad579c1a.055678"
+            ]
+        ]
+    },
+    {
+        "id": "3f5cd993.aaeaa6",
+        "type": "watch",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "files": "/opt/hiveid-ap/nodered/scripts/gatewayInfo.php",
+        "recursive": "",
+        "x": 200,
+        "y": 1460,
+        "wires": [
+            [
+                "d80dbb05.2032d8"
+            ]
+        ]
+    },
+    {
+        "id": "2699b770.907388",
+        "type": "ui_button",
+        "z": "9745920.d8a397",
+        "name": "",
+        "group": "7491149.92351ec",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reload",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 120,
+        "y": 700,
+        "wires": [
+            [
+                "8b1d208.d34f7e"
             ]
         ]
     }
