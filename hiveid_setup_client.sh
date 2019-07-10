@@ -9,18 +9,19 @@
 ########################################################################################################
 
 # Stopping existing Services
-sudo service stop hostapd
-sudo service stop dhcpcd
-sudo service stop dnsmasq
+service stop hostapd
+service stop dhcpcd
+service stop dnsmasq
 
 # Disabling any AP related services
-sudo systemctl disable hostapd
-sudo systemctl disable dhcpcd
-sudo systemctl disable dnsmasq
+systemctl disable hostapd
+systemctl disable dhcpcd
+systemctl disable dnsmasq
 
-sudo rm /etc/iptables.ipv4.nat
-sudo rm /etc/network/if-post-up.d/zzz_hostapd
+rm /etc/iptables.ipv4.nat
+rm /etc/network/if-post-up.d/zzz_hostapd
 
 # Remove Forwarding Rule and Firewall Rule loader
 sed -i -e "s/^net\.ipv4\.ip\_forward\=1$//g" /etc/sysctl.conf
+echo 0 > /proc/sys/net/ipv4/ip_forward
 sed -i -e "s/iptables\-restore \< \/etc\/iptables\.ipv4\.nat//g" /etc/rc.local

@@ -205,6 +205,7 @@ systemctl start dnsmasq
 
 sed -i -e "s/^net\.ipv4\.ip\_forward\=1$//g" /etc/sysctl.conf
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+echo 1 > /proc/sys/net/ipv4/ip_forward
 
 WAN_IFACE="wlan1"
 sed -i -e "s/\[WAN_IFACE\]/$WAN_IFACE/" /usr/local/hiveid-ap/staging/iptables.ipv4.nat
@@ -218,9 +219,9 @@ exit 0" >> /etc/rc.local
 else
     echo "rc.local is already configured for iptables"
 fi
-
+iptables-restore < /etc/iptables.ipv4.nat
 mkdir /etc/network/if-post-up.d 2>/dev/null
 cp /usr/local/hiveid-ap/staging/zzz_hostapd /etc/network/if-post-up.d/zzz_hostapd
 chmod +x /etc/network/if-post-up.d/zzz_hostapd
-
+/etc/network/if-post-up.d/zzz_hostapd
 echo "Reboot Now"
