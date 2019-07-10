@@ -5,7 +5,11 @@ $myResults['hostname'] = trim(`cat /etc/hostname`);
 $myResults['SERVER'] = $_SERVER;
 $myResults['lastPull'] = strftime('%Y-%m-%d %H:%M:%S');
 
-$server = (empty($_SERVER['SERVER_ADDR']) || $_SERVER['SERVER_ADDR'] == '::1')
+$server = (
+    empty($_SERVER['SERVER_ADDR']) || 
+    $_SERVER['SERVER_ADDR'] == '::1' || 
+    $_SERVER['SERVER_ADDR'] == $_SERVER['REMOTE_ADDR'] || 
+    $_SERVER['REMOTE_ADDR'] == '127.0.0.1')
     ? 'localhost'
     : $_SERVER['SERVER_ADDR'];
 
