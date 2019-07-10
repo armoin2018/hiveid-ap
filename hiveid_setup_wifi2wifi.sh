@@ -108,7 +108,7 @@ if [ -z "$GATEWAY_IP_START" ]; then
     GATEWAY_IP_START="$IP_PRE.2"
 fi
 if [ -z "$GATEWAY_IP_END" ]; then
-    GATEWAY_IP_START="$IP_PRE.254"
+    GATEWAY_IP_END="$IP_PRE.254"
 fi
 if [ -z "$GATEWAY_CHANNEL" ]; then
     GATEWAY_CHANNEL=11

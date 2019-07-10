@@ -2,7 +2,7 @@
 $myResults = array();
 
 $myResults['hostname'] = trim(`cat /etc/hostname`);
-
+$myResults['SERVER'] = $_SERVER;
 $myResults['lastPull'] = strftime('%Y-%m-%d %H:%M:%S');
 
 $server = (empty($_SERVER['SERVER_ADDR']) || $_SERVER['SERVER_ADDR'] == '::1')

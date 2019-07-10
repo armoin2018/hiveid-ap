@@ -1583,8 +1583,7 @@
         "y": 40,
         "wires": [
             [
-                "fed0826d.2117",
-                "372dacb9.a08e74"
+                "fed0826d.2117"
             ]
         ]
     },
@@ -1647,20 +1646,6 @@
         "wires": []
     },
     {
-        "id": "372dacb9.a08e74",
-        "type": "debug",
-        "z": "f1ec9b2a.1f7298",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1230,
-        "y": 40,
-        "wires": []
-    },
-    {
         "id": "f27066a1.a44ba8",
         "type": "function",
         "z": "f1ec9b2a.1f7298",
@@ -1672,8 +1657,7 @@
         "y": 80,
         "wires": [
             [
-                "9596c547.812608",
-                "372dacb9.a08e74"
+                "9596c547.812608"
             ]
         ]
     },
@@ -1689,8 +1673,7 @@
         "y": 140,
         "wires": [
             [
-                "9596c547.812608",
-                "372dacb9.a08e74"
+                "9596c547.812608"
             ]
         ]
     },
@@ -1706,8 +1689,7 @@
         "y": 200,
         "wires": [
             [
-                "9596c547.812608",
-                "372dacb9.a08e74"
+                "9596c547.812608"
             ]
         ]
     },
@@ -2304,7 +2286,6 @@
         "y": 160,
         "wires": [
             [
-                "21cd203b.6f37c",
                 "f564ab88.947548"
             ]
         ]
@@ -2439,8 +2420,7 @@
         "y": 240,
         "wires": [
             [
-                "9596c547.812608",
-                "372dacb9.a08e74"
+                "9596c547.812608"
             ]
         ]
     },
@@ -2923,9 +2903,7 @@
         "x": 310,
         "y": 920,
         "wires": [
-            [
-                "bdc61a3b.3e7758"
-            ]
+            []
         ]
     },
     {
@@ -3031,20 +3009,6 @@
         "layout": "row-spread",
         "x": 500,
         "y": 820,
-        "wires": []
-    },
-    {
-        "id": "bdc61a3b.3e7758",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 510,
-        "y": 920,
         "wires": []
     },
     {
@@ -5636,7 +5600,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Command",
-        "func": "//  sudo ./hiveid_setup_wifi2wifi.sh\nmsg.payload =   \" -s=\\\"\" + flow.get('AP.SSID') + \"\\\"\"\n                \" -i=\" + flow.get('AP.NETWORK') +\n                //\" -gip=\" + flow.get('AP.IP') + \n                //\" -gif=\" + flow.get('AP.IFACE') +\n                \" -p=\\\"\" + flow.get('AP.PASSPHRASE') + \"\\\"\" +\n                //\" -ips=\" + flow.get('AP.IP_START') +\n                //\" -ipe=\" + flow.get('AP.IP_END') +\n                \" -gwc=\" + flow.get('AP.CHANNEL') +\n                \" -k=\" + flow.get('AP.KEY_MGMT') +\n                \" -wpa=FALSE\";\nreturn msg;",
+        "func": "//  sudo ./hiveid_setup_wifi2wifi.sh\nmsg.payload =   \" -s=\\\"\" + flow.get('AP.SSID') + \"\\\"\" +\n                \" -i=\" + flow.get('AP.NETWORK') +\n                //\" -gip=\" + flow.get('AP.IP') + \n                //\" -gif=\" + flow.get('AP.IFACE') +\n                \" -p=\\\"\" + flow.get('AP.PASSPHRASE') + \"\\\"\" +\n                //\" -ips=\" + flow.get('AP.IP_START') +\n                //\" -ipe=\" + flow.get('AP.IP_END') +\n                \" -gwc=\" + flow.get('AP.CHANNEL') +\n                \" -k=\" + flow.get('AP.KEY_MGMT') +\n                \" -wpa=FALSE\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1010,
@@ -5748,101 +5712,6 @@
         ]
     },
     {
-        "id": "622978c3.ef9878",
-        "type": "ui_dropdown",
-        "z": "9745920.d8a397",
-        "name": "",
-        "label": "Channel",
-        "tooltip": "",
-        "place": "Select option",
-        "group": "92534c08.7fb13",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "options": [
-            {
-                "label": "1*",
-                "value": "1",
-                "type": "str"
-            },
-            {
-                "label": "2",
-                "value": "2",
-                "type": "str"
-            },
-            {
-                "label": "3",
-                "value": "3",
-                "type": "str"
-            },
-            {
-                "label": "4",
-                "value": "4",
-                "type": "str"
-            },
-            {
-                "label": "5",
-                "value": "5",
-                "type": "str"
-            },
-            {
-                "label": "6*",
-                "value": "6",
-                "type": "str"
-            },
-            {
-                "label": "7",
-                "value": "7",
-                "type": "str"
-            },
-            {
-                "label": "8",
-                "value": "8",
-                "type": "str"
-            },
-            {
-                "label": "9",
-                "value": "9",
-                "type": "str"
-            },
-            {
-                "label": "10",
-                "value": "10",
-                "type": "str"
-            },
-            {
-                "label": "11*",
-                "value": "11",
-                "type": "str"
-            },
-            {
-                "label": "12",
-                "value": "12",
-                "type": "str"
-            },
-            {
-                "label": "13",
-                "value": "13",
-                "type": "str"
-            },
-            {
-                "label": "Auto Channel",
-                "value": "acs_survey",
-                "type": "str"
-            }
-        ],
-        "payload": "",
-        "topic": "",
-        "x": 1260,
-        "y": 440,
-        "wires": [
-            [
-                "a98e6a09.ccb3c8"
-            ]
-        ]
-    },
-    {
         "id": "5c2a8500.41db6c",
         "type": "switch",
         "z": "9745920.d8a397",
@@ -5878,133 +5747,6 @@
             ],
             [
                 "fd94265b.c31f88"
-            ]
-        ]
-    },
-    {
-        "id": "8912a30e.fa783",
-        "type": "change",
-        "z": "9745920.d8a397",
-        "name": "Get Channel",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "gatewayInfo.hostapd.channel",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1090,
-        "y": 440,
-        "wires": [
-            [
-                "622978c3.ef9878"
-            ]
-        ]
-    },
-    {
-        "id": "378892a2.c7b34e",
-        "type": "change",
-        "z": "9745920.d8a397",
-        "name": "Get SSID",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "gatewayInfo.hostapd.ssid",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1080,
-        "y": 480,
-        "wires": [
-            [
-                "696d72e4.693a7c"
-            ]
-        ]
-    },
-    {
-        "id": "6de2917a.45472",
-        "type": "change",
-        "z": "9745920.d8a397",
-        "name": "Get Passphrase",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "gatewayInfo.hostapd.wpa_passphrase",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
-        "y": 520,
-        "wires": [
-            [
-                "aa288074.16ba6"
-            ]
-        ]
-    },
-    {
-        "id": "696d72e4.693a7c",
-        "type": "ui_text_input",
-        "z": "9745920.d8a397",
-        "name": "",
-        "label": "SSID",
-        "tooltip": "",
-        "group": "92534c08.7fb13",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "mode": "text",
-        "delay": 300,
-        "topic": "",
-        "x": 1250,
-        "y": 480,
-        "wires": [
-            [
-                "4e77f5a5.79a54c"
-            ]
-        ]
-    },
-    {
-        "id": "aa288074.16ba6",
-        "type": "ui_text_input",
-        "z": "9745920.d8a397",
-        "name": "",
-        "label": "Passphrase",
-        "tooltip": "",
-        "group": "92534c08.7fb13",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "mode": "password",
-        "delay": 300,
-        "topic": "",
-        "x": 1270,
-        "y": 520,
-        "wires": [
-            [
-                "18cdedff.4f3582"
             ]
         ]
     },
@@ -6055,7 +5797,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1440,
+        "x": 1340,
         "y": 440,
         "wires": [
             []
@@ -6080,7 +5822,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1430,
+        "x": 1330,
         "y": 480,
         "wires": [
             []
@@ -6105,7 +5847,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1450,
+        "x": 1350,
         "y": 520,
         "wires": [
             []
@@ -6586,21 +6328,6 @@
         "name": "Mismatch Notice",
         "x": 770,
         "y": 1260,
-        "wires": []
-    },
-    {
-        "id": "21cd203b.6f37c",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 610,
-        "y": 200,
         "wires": []
     },
     {
@@ -8546,7 +8273,6 @@
         "wires": [
             [
                 "6ea9c20a.3165fc",
-                "de4b5039.efb44",
                 "11bd9584.c3dd2a",
                 "18316d6a.0b7ff3"
             ]
@@ -8564,6 +8290,13 @@
                 "pt": "msg",
                 "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\"],\"hide\":[\"Network_Mode_WiFi_Client_Setup\",\"Network_Mode_Configured_WiFi_Networks\",\"Network_Mode_Scan_for_WiFi_Networks\"],\"focus\":true}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "default_interface",
+                "pt": "msg",
+                "to": "wlan0",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -8576,8 +8309,7 @@
         "wires": [
             [
                 "6ea9c20a.3165fc",
-                "c27ed988.853568",
-                "de4b5039.efb44"
+                "c27ed988.853568"
             ]
         ]
     },
@@ -8593,6 +8325,13 @@
                 "pt": "msg",
                 "to": "{\"group\":{\"show\":[\"Network_Mode_Gateway_Settings\",\"Network_Mode_WiFi_Client_Setup\",\"Network_Mode_Configured_WiFi_Networks\",\"Network_Mode_Scan_for_WiFi_Networks\"],\"focus\":true}}",
                 "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "default_interface",
+                "pt": "msg",
+                "to": "wlan0",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -8607,7 +8346,6 @@
                 "6ea9c20a.3165fc",
                 "c27ed988.853568",
                 "18316d6a.0b7ff3",
-                "de4b5039.efb44",
                 "11bd9584.c3dd2a"
             ]
         ]
@@ -8617,17 +8355,23 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Gateway",
-        "func": "\nreturn msg;",
-        "outputs": 1,
+        "func": "var gatewayInfo = global.get('gatewayInfo');\nvar AP = flow.get('AP');\n\nif (gatewayInfo !== undefined ) {\n    if (gatewayInfo.hostapd.channel !== undefined) {\n        AP.CHANNEL = gatewayInfo.hostapd.channel;\n    }\n    \n    if (gatewayInfo.hostapd.ssid !== undefined) {\n        AP.SSID = gatewayInfo.hostapd.ssid;\n    }\n    \n    if (gatewayInfo.hostapd.wpa_passphrase !== undefined ) {\n        AP.PASSPHRASE = gatewayInfo.hostapd.wpa_passphrase;\n    }\n    if (gatewayInfo.interfaces[msg.default_interface] !== undefined && gatewayInfo.interfaces[msg.default_interface] !== \"\") {\n        AP.NETWORK  = String(gatewayInfo.interfaces[msg.default_interface]).replace(/\\.\\d+$/g,'');        \n    }\n}\nflow.set('AP',AP);\nvar msg1 = { payload : AP.CHANNEL};\nvar msg2 = { payload : AP.SSID };\nvar msg3 = { payload : AP.PASSPHRASE };\nvar msg4 = { payload : AP.NETWORK  };\nreturn [msg1,msg2,msg3,msg4];",
+        "outputs": 4,
         "noerr": 0,
         "x": 880,
         "y": 520,
         "wires": [
             [
-                "8912a30e.fa783",
-                "378892a2.c7b34e",
-                "6de2917a.45472",
-                "f33e692f.60c728"
+                "622978c3.ef9878"
+            ],
+            [
+                "696d72e4.693a7c"
+            ],
+            [
+                "aa288074.16ba6"
+            ],
+            [
+                "a807bd57.50a54"
             ]
         ]
     },
@@ -8851,20 +8595,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "de4b5039.efb44",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 870,
-        "y": 460,
-        "wires": []
     },
     {
         "id": "dae90564.436648",
@@ -11332,8 +11062,7 @@
         "y": 440,
         "wires": [
             [
-                "38ccee17.2a19e2",
-                "17ca7f76.9126c1"
+                "38ccee17.2a19e2"
             ]
         ]
     },
@@ -11351,7 +11080,6 @@
         "y": 440,
         "wires": [
             [
-                "a6098b9e.32d1f8",
                 "48fba23e.2bfeac"
             ]
         ]
@@ -11368,8 +11096,7 @@
         "y": 480,
         "wires": [
             [
-                "832d51f1.fe01a",
-                "17ca7f76.9126c1"
+                "832d51f1.fe01a"
             ]
         ]
     },
@@ -11387,8 +11114,7 @@
         "y": 480,
         "wires": [
             [
-                "618acb56.9817f4",
-                "a6098b9e.32d1f8"
+                "618acb56.9817f4"
             ]
         ]
     },
@@ -11435,8 +11161,7 @@
         "y": 520,
         "wires": [
             [
-                "166cc3c9.4daa9c",
-                "17ca7f76.9126c1"
+                "166cc3c9.4daa9c"
             ]
         ]
     },
@@ -11456,8 +11181,7 @@
         "y": 520,
         "wires": [
             [
-                "cbb60e9f.4986e",
-                "a6098b9e.32d1f8"
+                "cbb60e9f.4986e"
             ]
         ]
     },
@@ -11533,21 +11257,6 @@
         "complete": "false",
         "x": 1510,
         "y": 380,
-        "wires": []
-    },
-    {
-        "id": "a6098b9e.32d1f8",
-        "type": "debug",
-        "z": "f1ec9b2a.1f7298",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 950,
-        "y": 340,
         "wires": []
     },
     {
@@ -11685,21 +11394,6 @@
                 "ff5472a3.dc3f6"
             ]
         ]
-    },
-    {
-        "id": "17ca7f76.9126c1",
-        "type": "debug",
-        "z": "f1ec9b2a.1f7298",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 750,
-        "y": 340,
-        "wires": []
     },
     {
         "id": "c03ebe92.1f1ad",
@@ -12143,14 +11837,15 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Command",
-        "func": "//  sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD\nmsg.payload =   \" -s=\\\"\" + flow.get('AP.SSID') + \"\\\"\"\n                \" -i=\" + flow.get('AP.NETWORK') +\n                //\" -gip=\" + flow.get('AP.IP') + \n                //\" -gif=\" + flow.get('AP.IFACE') +\n                \" -p=\\\"\" + flow.get('AP.PASSPHRASE') + \"\\\"\" +\n                //\" -ips=\" + flow.get('AP.IP_START') +\n                //\" -ipe=\" + flow.get('AP.IP_END') +\n                \" -gwc=\" + flow.get('AP.CHANNEL') +\n                //\" -k=\" + flow.get('AP.KEY_MGMT') +\n                //\" -wan=\" + flow.get('Client.WAN_IFACE') +\n                \"\";\nreturn msg;",
+        "func": "//  sudo ./hiveid_setup_wifi2eth.sh IP_PREFIX PASSWORD\nmsg.payload =   \" -s=\\\"\" + flow.get('AP.SSID') + \"\\\"\" +\n                \" -i=\" + flow.get('AP.NETWORK') +\n                //\" -gip=\" + flow.get('AP.IP') + \n                //\" -gif=\" + flow.get('AP.IFACE') +\n                \" -p=\\\"\" + flow.get('AP.PASSPHRASE') + \"\\\"\" +\n                //\" -ips=\" + flow.get('AP.IP_START') +\n                //\" -ipe=\" + flow.get('AP.IP_END') +\n                \" -gwc=\" + flow.get('AP.CHANNEL') +\n                //\" -k=\" + flow.get('AP.KEY_MGMT') +\n                //\" -wan=\" + flow.get('Client.WAN_IFACE') +\n                \"\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1010,
         "y": 1000,
         "wires": [
             [
-                "f310e9f5.ec92e8"
+                "f310e9f5.ec92e8",
+                "c5b3cb90.3abfa8"
             ]
         ]
     },
@@ -12187,8 +11882,7 @@
             [],
             [],
             [
-                "36367d64.09fafa",
-                "fda3176a.9f61f8"
+                "36367d64.09fafa"
             ]
         ]
     },
@@ -12323,33 +12017,6 @@
         ]
     },
     {
-        "id": "f33e692f.60c728",
-        "type": "change",
-        "z": "9745920.d8a397",
-        "name": "IP Network",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "AP.NETWORK",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1090,
-        "y": 560,
-        "wires": [
-            [
-                "428bf81.8a0e288"
-            ]
-        ]
-    },
-    {
         "id": "fbdfdfbf.f407a",
         "type": "change",
         "z": "9745920.d8a397",
@@ -12368,7 +12035,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1450,
+        "x": 1350,
         "y": 560,
         "wires": [
             []
@@ -12379,7 +12046,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Set Flow for WiFi2WiFi",
-        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', 'wlan1');\n    flow.set('AP.LAN', 'wlan0');\n} else {\n    if (gatewayInfo.gateway.wan.type === 'eth' ) {\n        flow.set('AP.WAN', 'wlan1');   \n    } else {\n        flow.set('AP.WAN', gatewayInfo.gateway.wan.iface);\n    }\n    flow.set('AP.LAN', gatewayInfo.gateway.lan.iface);\n    \n    var lanIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\n    lanIP = lanIP.replace(/\\.\\d{1,3}$/,'');\n    flow.set('AP.NETWORK', lanIP);\n}\nreturn msg;",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\nflow.set('mode','wifi2wifi');\n\nif (gatewayInfo === undefined || gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', 'wlan1');\n    flow.set('AP.LAN', 'wlan0');\n} else {\n    if (gatewayInfo.gateway.wan === undefined ) {\n        flow.set('AP.WAN','wlan1');\n    } else {\n        if (gatewayInfo.gateway.wan.type === 'wifi' ) {\n           flow.set('AP.WAN', 'wlan1');   \n        } else {\n            flow.set('AP.WAN', gatewayInfo.gateway.wan.iface);\n        }\n    }\n    if (gatewayInfo.gateway.lan === undefined) {\n        flow.set('AP.LAN', 'wlan0');\n    } else {\n        flow.set('AP.LAN', gatewayInfo.gateway.lan.iface);\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 600,
@@ -12395,38 +12062,14 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Setup Mode Options",
-        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nvar mode = gatewayInfo.gateway.mode;\n\nmsg.options=[];\nif (mode === undefined) {\n    mode = 'client';\n}\nflow.set('mode',mode);\n\nif (gatewayInfo.interfaces['wlan0'] !== undefined) {\n    msg.options.push({\"Client Only\" : \"client\" });\n    if (gatewayInfo.interfaces['wlan1'] !== undefined) {\n        msg.options.push({\"WiFi to WiFi\" : \"wifi2wifi\"});\n    }    \n    if (gatewayInfo.interfaces['eth0'] !== undefined) {\n        msg.options.push({\"WiFi to Ethernet\" : \"wifi2eth\"});\n    }\n}\nmsg.payload = mode;\nreturn msg;",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nwhile (gatewayInfo === undefined ) {\n}\n//Set Defaults\nflow.set('AP', {\n   WAN : 'eth0',\n   LAN: 'wlan0', \n   NETWORK : '192.168.6',\n   CHANNEL : 'acs_survey', \n   SSID : gatewayInfo.hostname,\n   PASSPHRASE : 'password' \n});\nvar mode = gatewayInfo.gateway.mode;\n\nmsg.options=[];\nif (mode === undefined) {\n    mode = 'client';\n}\nflow.set('mode',mode);\n\nif (gatewayInfo.interfaces['wlan0'] !== undefined) {\n    msg.options.push({\"Client Only\" : \"client\" });\n    if (gatewayInfo.interfaces['wlan1'] !== undefined) {\n        msg.options.push({\"WiFi to WiFi\" : \"wifi2wifi\"});\n    }    \n    if (gatewayInfo.interfaces['eth0'] !== undefined) {\n        msg.options.push({\"WiFi to Ethernet\" : \"wifi2eth\"});\n    }\n}\nmsg.payload = mode;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 180,
         "y": 560,
         "wires": [
             [
-                "49f70c72.4b3914",
-                "fee017fa.a01e48"
-            ]
-        ]
-    },
-    {
-        "id": "428bf81.8a0e288",
-        "type": "ui_text_input",
-        "z": "9745920.d8a397",
-        "name": "",
-        "label": "IP Network",
-        "tooltip": "",
-        "group": "92534c08.7fb13",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "mode": "text",
-        "delay": "0",
-        "topic": "",
-        "x": 1270,
-        "y": 560,
-        "wires": [
-            [
-                "fbdfdfbf.f407a"
+                "49f70c72.4b3914"
             ]
         ]
     },
@@ -12464,8 +12107,7 @@
         "y": 520,
         "wires": [
             [
-                "992790b8.d928b8",
-                "1801bc3d.93e294"
+                "992790b8.d928b8"
             ]
         ]
     },
@@ -12481,32 +12123,16 @@
         "y": 480,
         "wires": [
             [
-                "d6213820.be50e8",
-                "9f07d517.cba208"
+                "d6213820.be50e8"
             ]
         ]
-    },
-    {
-        "id": "fee017fa.a01e48",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 370,
-        "y": 520,
-        "wires": []
     },
     {
         "id": "aaae695a.b63e28",
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Set Flow for WiFi2Eth",
-        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', 'eth0');\n    flow.set('AP.LAN', 'wlan0');\n} else {\n    if (gatewayInfo.gateway.wan.type === 'wan' ) {\n        flow.set('AP.WAN', 'eth0');   \n    } else {\n        flow.set('AP.WAN', gatewayInfo.gateway.wan.iface);\n    }\n    flow.set('AP.LAN', gatewayInfo.gateway.lan.iface);\n    \n    var lanIP = gatewayInfo.interfaces[gatewayInfo.gateway.lan.iface];\n    lanIP = lanIP.replace(/\\.\\d{1,3}$/,'');\n    flow.set('AP.NETWORK', lanIP);\n}\nreturn msg;",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\nflow.set('mode','wifi2eth');\nif (gatewayInfo === undefined || gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', 'eth0');\n    flow.set('AP.LAN', 'wlan0');\n} else {\n    if (gatewayInfo.gateway.wan === undefined ) {\n        flow.set('AP.WAN','eth0');\n    } else {\n        if (gatewayInfo.gateway.wan.type === 'eth' ) {\n           flow.set('AP.WAN', 'eth0');   \n        } else {\n            flow.set('AP.WAN', gatewayInfo.gateway.wan.iface);\n        }\n    }\n    if (gatewayInfo.gateway.lan === undefined) {\n        flow.set('AP.LAN', 'wlan0');\n    } else {\n        flow.set('AP.LAN', gatewayInfo.gateway.lan.iface);\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 600,
@@ -12522,7 +12148,7 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Set Flow for Client",
-        "func": "var gatewayInfo = global.get('gatewayInfo');\n\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', null);\n    flow.set('AP.LAN', null);\n} else {\n    flow.set('AP.WAN', null);   \n    flow.set('AP.LAN', null);\n    flow.set('AP.NETWORK', null);\n}\nreturn msg;",
+        "func": "var gatewayInfo = global.get('gatewayInfo');\nflow.set('mode','client');\nif (gatewayInfo.gateway === undefined) {\n    flow.set('AP.WAN', null);\n    flow.set('AP.LAN', null);\n} else {\n    flow.set('AP.WAN', null);   \n    flow.set('AP.LAN', null);\n    flow.set('AP.NETWORK', null);\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 590,
@@ -12766,7 +12392,6 @@
         "y": 480,
         "wires": [
             [
-                "9d1ce5b4.a6cb2",
                 "45696e5e.9f896"
             ]
         ]
@@ -12783,7 +12408,6 @@
         "y": 520,
         "wires": [
             [
-                "e1ad4523.94f0f8",
                 "45696e5e.9f896"
             ]
         ]
@@ -12800,7 +12424,6 @@
         "y": 560,
         "wires": [
             [
-                "d7cbc775.93945",
                 "45696e5e.9f896"
             ]
         ]
@@ -12817,8 +12440,7 @@
         "y": 620,
         "wires": [
             [
-                "2553d537.6bae72",
-                "4ffb5df8.8bc554"
+                "2553d537.6bae72"
             ],
             [
                 "57136e46.8c841"
@@ -12883,81 +12505,6 @@
         "name": "",
         "x": 2250,
         "y": 680,
-        "wires": []
-    },
-    {
-        "id": "1801bc3d.93e294",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 2030,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "9d1ce5b4.a6cb2",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 2250,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "e1ad4523.94f0f8",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 2250,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "d7cbc775.93945",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 2250,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "4ffb5df8.8bc554",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 2250,
-        "y": 600,
         "wires": []
     },
     {
@@ -13149,21 +12696,6 @@
         ]
     },
     {
-        "id": "9f07d517.cba208",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 2030,
-        "y": 400,
-        "wires": []
-    },
-    {
         "id": "45696e5e.9f896",
         "type": "function",
         "z": "9745920.d8a397",
@@ -13200,21 +12732,6 @@
         ]
     },
     {
-        "id": "fda3176a.9f61f8",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1680,
-        "y": 1400,
-        "wires": []
-    },
-    {
         "id": "af6a3135.8e4cf",
         "type": "function",
         "z": "a06855ce.9f5488",
@@ -13227,6 +12744,230 @@
         "wires": [
             [
                 "367077e4.def7a8"
+            ]
+        ]
+    },
+    {
+        "id": "c5b3cb90.3abfa8",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1180,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "aa288074.16ba6",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "Passphrase",
+        "tooltip": "",
+        "group": "92534c08.7fb13",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "password",
+        "delay": "0",
+        "topic": "",
+        "x": 1150,
+        "y": 520,
+        "wires": [
+            [
+                "18cdedff.4f3582",
+                "cf1daaf5.782b28"
+            ]
+        ]
+    },
+    {
+        "id": "696d72e4.693a7c",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "SSID",
+        "tooltip": "",
+        "group": "92534c08.7fb13",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 1130,
+        "y": 480,
+        "wires": [
+            [
+                "4e77f5a5.79a54c",
+                "cf1daaf5.782b28"
+            ]
+        ]
+    },
+    {
+        "id": "622978c3.ef9878",
+        "type": "ui_dropdown",
+        "z": "9745920.d8a397",
+        "name": "",
+        "label": "Channel",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "92534c08.7fb13",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "1*",
+                "value": "1",
+                "type": "str"
+            },
+            {
+                "label": "2",
+                "value": "2",
+                "type": "str"
+            },
+            {
+                "label": "3",
+                "value": "3",
+                "type": "str"
+            },
+            {
+                "label": "4",
+                "value": "4",
+                "type": "str"
+            },
+            {
+                "label": "5",
+                "value": "5",
+                "type": "str"
+            },
+            {
+                "label": "6*",
+                "value": "6",
+                "type": "str"
+            },
+            {
+                "label": "7",
+                "value": "7",
+                "type": "str"
+            },
+            {
+                "label": "8",
+                "value": "8",
+                "type": "str"
+            },
+            {
+                "label": "9",
+                "value": "9",
+                "type": "str"
+            },
+            {
+                "label": "10",
+                "value": "10",
+                "type": "str"
+            },
+            {
+                "label": "11*",
+                "value": "11",
+                "type": "str"
+            },
+            {
+                "label": "12",
+                "value": "12",
+                "type": "str"
+            },
+            {
+                "label": "13",
+                "value": "13",
+                "type": "str"
+            },
+            {
+                "label": "Auto Channel",
+                "value": "acs_survey",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 1140,
+        "y": 440,
+        "wires": [
+            [
+                "a98e6a09.ccb3c8",
+                "cf1daaf5.782b28"
+            ]
+        ]
+    },
+    {
+        "id": "cf1daaf5.782b28",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1280,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a807bd57.50a54",
+        "type": "ui_text_input",
+        "z": "9745920.d8a397",
+        "name": "IP Network",
+        "label": "IP Network",
+        "tooltip": "",
+        "group": "92534c08.7fb13",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 1150,
+        "y": 560,
+        "wires": [
+            [
+                "fbdfdfbf.f407a",
+                "cf1daaf5.782b28"
+            ]
+        ]
+    },
+    {
+        "id": "1e933340.0afa8d",
+        "type": "ui_button",
+        "z": "9745920.d8a397",
+        "name": "Reset",
+        "group": "7491149.92351ec",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reset",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "fa-reload",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "8b1d208.d34f7e"
             ]
         ]
     }
