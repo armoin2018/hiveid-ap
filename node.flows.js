@@ -5645,14 +5645,14 @@
         "id": "a5662777.20df48",
         "type": "exec",
         "z": "a06855ce.9f5488",
-        "command": "sudo service hostapd restart",
+        "command": "sudo /etc/network/if-post-up.d/zzz_hostapd",
         "addpay": false,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 500,
+        "x": 550,
         "y": 1080,
         "wires": [
             [],
@@ -5682,7 +5682,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 730,
+        "x": 850,
         "y": 1080,
         "wires": [
             [
@@ -6739,7 +6739,7 @@
         "cancel": "",
         "topic": "",
         "name": "Gateway Restarted",
-        "x": 1090,
+        "x": 1210,
         "y": 1060,
         "wires": []
     },
@@ -6755,7 +6755,7 @@
         "cancel": "",
         "topic": "",
         "name": "Gateway was unable to restart",
-        "x": 1130,
+        "x": 1250,
         "y": 1100,
         "wires": []
     },
@@ -7106,7 +7106,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 900,
+        "x": 1020,
         "y": 1100,
         "wires": [
             [
@@ -7133,7 +7133,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 900,
+        "x": 1020,
         "y": 1060,
         "wires": [
             [
