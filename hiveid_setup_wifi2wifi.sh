@@ -220,8 +220,8 @@ else
     echo "rc.local is already configured for iptables"
 fi
 iptables-restore < /etc/iptables.ipv4.nat
-mkdir /etc/network/if-post-up.d 2>/dev/null
-cp /usr/local/hiveid-ap/staging/zzz_hostapd /etc/network/if-post-up.d/zzz_hostapd
-chmod +x /etc/network/if-post-up.d/zzz_hostapd
-/etc/network/if-post-up.d/zzz_hostapd
+mkdir /etc/network/if-up.d 2>/dev/null
+cp /usr/local/hiveid-ap/staging/zzz_hostapd /etc/network/if-up.d/zzz_hostapd
+chmod +x /etc/network/if-up.d/zzz_hostapd
+/etc/network/if-up.d/zzz_hostapd
 echo "Reboot Now"

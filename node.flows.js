@@ -5645,14 +5645,14 @@
         "id": "a5662777.20df48",
         "type": "exec",
         "z": "a06855ce.9f5488",
-        "command": "sudo /etc/network/if-post-up.d/zzz_hostapd",
+        "command": "sudo /etc/network/if-up.d/zzz_hostapd",
         "addpay": false,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 550,
+        "x": 530,
         "y": 1080,
         "wires": [
             [],
@@ -11848,8 +11848,7 @@
         "y": 1000,
         "wires": [
             [
-                "f310e9f5.ec92e8",
-                "c5b3cb90.3abfa8"
+                "f310e9f5.ec92e8"
             ]
         ]
     },
@@ -12750,21 +12749,6 @@
                 "367077e4.def7a8"
             ]
         ]
-    },
-    {
-        "id": "c5b3cb90.3abfa8",
-        "type": "debug",
-        "z": "9745920.d8a397",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1180,
-        "y": 940,
-        "wires": []
     },
     {
         "id": "aa288074.16ba6",

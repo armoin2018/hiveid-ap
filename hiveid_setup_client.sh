@@ -19,7 +19,7 @@ systemctl disable dhcpcd
 systemctl disable dnsmasq
 
 rm /etc/iptables.ipv4.nat
-rm /etc/network/if-post-up.d/zzz_hostapd
+rm /etc/network/if-up.d/zzz_hostapd
 
 # Remove Forwarding Rule and Firewall Rule loader
 sed -i -e "s/^net\.ipv4\.ip\_forward\=1$//g" /etc/sysctl.conf
