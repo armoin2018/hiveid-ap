@@ -5590,9 +5590,12 @@
         "y": 1060,
         "wires": [
             [
-                "5c2a8500.41db6c"
+                "5c2a8500.41db6c",
+                "978f2906.85f628"
             ],
-            []
+            [
+                "1cc06905.03dfb7"
+            ]
         ]
     },
     {
@@ -5762,7 +5765,8 @@
         "y": 1120,
         "wires": [
             [
-                "a5662777.20df48"
+                "a5662777.20df48",
+                "abba8031.890a8"
             ]
         ]
     },
@@ -12968,6 +12972,104 @@
         "wires": [
             [
                 "8b1d208.d34f7e"
+            ]
+        ]
+    },
+    {
+        "id": "978f2906.85f628",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Starting Updates",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Network Mode Change",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 960,
+        "wires": [
+            [
+                "401f3cf0.347f84"
+            ]
+        ]
+    },
+    {
+        "id": "401f3cf0.347f84",
+        "type": "ui_toast",
+        "z": "9745920.d8a397",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1010,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "1cc06905.03dfb7",
+        "type": "change",
+        "z": "9745920.d8a397",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Cancelled",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Network Mode Change",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 1000,
+        "wires": [
+            [
+                "401f3cf0.347f84"
             ]
         ]
     }
