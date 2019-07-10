@@ -68,7 +68,7 @@ fi
 
 CNT=`grep "net.ifnames" /boot/cmdline.txt | wc -l`
 if [[ "$CNT" -eq "0" ]]; then
-    sudo sed -i -e "s/$/ net.ifnames=0/" /boot/cmdline.txt
+    sudo sed -i -e "s/$/ net.ifnames=0 ipv6.disable=1/" /boot/cmdline.txt
 fi
 
 /opt/hiveid-ap/set_desktop.sh wallpaper "/opt/hiveid-ap/nodered/images/hiveid.png" 

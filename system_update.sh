@@ -11,7 +11,7 @@
 sudo apt-get clean
 sudo rpi-update
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get update 
+sudo apt-get update --allow-releaseinfo-change
 sudo apt-get upgrade --yes 
 sudo apt-get autoremove --yes
 export DEBIAN_FRONTEND=dialog
