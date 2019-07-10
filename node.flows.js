@@ -6283,8 +6283,8 @@
         "y": 1240,
         "wires": [
             [
-                "6a34c3ad.5b1e0c",
-                "34c84103.7b175e"
+                "34c84103.7b175e",
+                "af6a3135.8e4cf"
             ],
             [
                 "4afead2b.1dd184"
@@ -6295,14 +6295,14 @@
         "id": "367077e4.def7a8",
         "type": "exec",
         "z": "a06855ce.9f5488",
-        "command": "/opt/hiveid-ap/change_pwd.sh",
+        "command": "sudo /opt/hiveid-ap/change_pwd.sh",
         "addpay": true,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 970,
+        "x": 1050,
         "y": 1220,
         "wires": [
             [],
@@ -6801,33 +6801,6 @@
         "x": 500,
         "y": 1040,
         "wires": []
-    },
-    {
-        "id": "6a34c3ad.5b1e0c",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "Set Password",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.PASSWORD",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 580,
-        "y": 1220,
-        "wires": [
-            [
-                "367077e4.def7a8"
-            ]
-        ]
     },
     {
         "id": "4a4d9e53.4b233",
@@ -13240,5 +13213,21 @@
         "x": 1680,
         "y": 1400,
         "wires": []
+    },
+    {
+        "id": "af6a3135.8e4cf",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set Password",
+        "func": "msg.payload = '\"' + msg.payload.PASSWORD + '\"';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 1220,
+        "wires": [
+            [
+                "367077e4.def7a8"
+            ]
+        ]
     }
 ]
