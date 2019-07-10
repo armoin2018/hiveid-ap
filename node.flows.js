@@ -5525,11 +5525,11 @@
         "func": "var _ = require('lodash');\nmsg.options = [];\n\nvar icons = {\n    'off' : 'signal_wifi_off',\n    'secure' : [\n        'wifi_lock_1',\n        'wifi_lock_2',\n        'wifi_lock_3',\n        'wifi_lock_4',\n        'wifi_lock'\n    ],\n    'unsecure' : [\n        'signal_wifi_0_bar',\n        'signal_wifi_1_bar',\n        'signal_wifi_2_bar',\n        'signal_wifi_3_bar',\n        'signal_wifi_4_bar'\n    ]\n};\n\nvar inPayload =_.sortBy(msg.payload,['signal_level','ssid']);\nmsg.payload = [];\nvar gatewayInfo = global.get('gatewayInfo');\n\nfor (var id in inPayload) {\n    var secKey = (inPayload[id].security === undefined) ?  'unsecure' : 'secure';\n        \n    var strength =0;\n    switch (true) {\n        case (Number(inPayload[id].signal_level) >= -30):\n            strength = 4;\n            break;\n        case (Number(inPayload[id].signal_level) >= -67):\n            strength = 3;\n            break;\n        case (Number(inPayload[id].signal_level) >= -70):\n            strength = 2;\n            break;\n        case (Number(inPayload[id].signal_level) >= -80):\n            strength = 1;\n            break;\n        default:\n            strength = 0;\n    }\n    var isChecked = false;\n    if (gatewayInfo.activeSSID !== undefined) {\n       isChecked=(gatewayInfo.activeSSID === inPayload[id].ssid);\n    }\n    msg.payload.unshift({   \n        icon_name : icons[secKey][strength],\n        title: inPayload[id].ssid,\n        isChecked : isChecked\n    }); \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1170,
+        "x": 1150,
         "y": 600,
         "wires": [
             [
-                "d7851c8c.0a68a"
+                "b660e9ec.f878a8"
             ]
         ]
     },
@@ -5545,7 +5545,7 @@
         "lineType": "one",
         "actionType": "click",
         "allowHTML": true,
-        "x": 1210,
+        "x": 1290,
         "y": 640,
         "wires": [
             [
@@ -12178,7 +12178,7 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 1650,
+        "x": 1690,
         "y": 620,
         "wires": [
             [
@@ -12691,7 +12691,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1440,
+        "x": 1500,
         "y": 620,
         "wires": [
             [
@@ -13070,6 +13070,29 @@
         "wires": [
             [
                 "401f3cf0.347f84"
+            ]
+        ]
+    },
+    {
+        "id": "b660e9ec.f878a8",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "options",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1110,
+        "y": 640,
+        "wires": [
+            [
+                "d7851c8c.0a68a"
             ]
         ]
     }
