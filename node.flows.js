@@ -1126,12 +1126,11 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 160,
+        "x": 130,
+        "y": 60,
         "wires": [
             [
-                "e8ed6bdd.7a0138",
-                "aac85b05.c667a8"
+                "e8ed6bdd.7a0138"
             ]
         ]
     },
@@ -6333,32 +6332,6 @@
         "x": 770,
         "y": 1260,
         "wires": []
-    },
-    {
-        "id": "7a6bde0d.90a08",
-        "type": "ui_button",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "group": "73493f86.f11df",
-        "order": 1,
-        "width": "6",
-        "height": "1",
-        "passthru": false,
-        "label": "Update Interfaces",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 130,
-        "y": 200,
-        "wires": [
-            [
-                "aac85b05.c667a8"
-            ]
-        ]
     },
     {
         "id": "f564ab88.947548",
@@ -13077,6 +13050,26 @@
         "wires": [
             [
                 "d7851c8c.0a68a"
+            ]
+        ]
+    },
+    {
+        "id": "172675b5.8aa85a",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "aac85b05.c667a8"
             ]
         ]
     }
