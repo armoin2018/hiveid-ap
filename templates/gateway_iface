@@ -1,4 +1,4 @@
-allow-hotplug wlan0
-iface wlan0 inet static
-	address [GATEWAY_IFACE]
+allow-hotplug [GATEWAY_IFACE]
+iface [GATEWAY_IFACE] inet static
+	address [GATEWAY_IP]
 	netmask 255.255.255.0
