@@ -224,4 +224,8 @@ mkdir /etc/network/if-up.d 2>/dev/null
 cp /usr/local/hiveid-ap/staging/zzz_hostapd /etc/network/if-up.d/zzz_hostapd
 chmod +x /etc/network/if-up.d/zzz_hostapd
 /etc/network/if-up.d/zzz_hostapd
+
+iw wlan0 set power_save off
+iw wlan1 set power_save off
+
 echo "Reboot Now"

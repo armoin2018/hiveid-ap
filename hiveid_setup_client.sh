@@ -20,7 +20,7 @@ systemctl disable dnsmasq
 
 rm /etc/iptables.ipv4.nat
 rm /etc/network/if-up.d/zzz_hostapd
-
+iw wlan0 set power_save off
 # Remove Forwarding Rule and Firewall Rule loader
 sed -i -e "s/^net\.ipv4\.ip\_forward\=1$//g" /etc/sysctl.conf
 echo 0 > /proc/sys/net/ipv4/ip_forward
