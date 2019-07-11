@@ -3286,8 +3286,8 @@
         "func": "var curActivity = global.get('Activity');\nif (curActivity === undefined) {\n    curActivity = [];\n}\ncurActivity.unshift(msg.payload.DATA);\n\nwhile (curActivity.length > 10) {\n    curActivity.pop();\n}\n\nglobal.set('Activity',curActivity);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 440,
-        "y": 240,
+        "x": 360,
+        "y": 160,
         "wires": [
             [
                 "d4deb1b2.f1eb5",
@@ -3305,8 +3305,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 670,
-        "y": 160,
+        "x": 590,
+        "y": 80,
         "wires": []
     },
     {
@@ -3317,8 +3317,8 @@
         "property": "payload.DATA",
         "action": "",
         "pretty": false,
-        "x": 370,
-        "y": 160,
+        "x": 290,
+        "y": 80,
         "wires": [
             [
                 "682e65b1.37211c"
@@ -3330,11 +3330,11 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "Format Activity Data",
-        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']];\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        }\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      border: 1px solid #ccc; ' +\n                '      text-align:center;  ' +\n                '      border-spacing: 0px; ' +\n                '   }' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC']);\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
+        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']];\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        }\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:center;  ' +\n                '      border: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC']);\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 480,
-        "y": 280,
+        "x": 400,
+        "y": 200,
         "wires": [
             [
                 "b7ca5c16.bde28",
@@ -3359,8 +3359,8 @@
         "output": "payload.DATA.TIME",
         "outputType": "msg",
         "outTz": "America/Chicago",
-        "x": 400,
-        "y": 200,
+        "x": 320,
+        "y": 120,
         "wires": [
             [
                 "ef8fd901.8301a8"
@@ -3372,13 +3372,13 @@
         "type": "debug",
         "z": "7bef0b7b.d5a104",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 710,
-        "y": 200,
+        "x": 630,
+        "y": 120,
         "wires": []
     },
     {
@@ -3393,8 +3393,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "5",
-        "x": 310,
-        "y": 320,
+        "x": 170,
+        "y": 220,
         "wires": [
             [
                 "d4deb1b2.f1eb5"
@@ -3409,8 +3409,8 @@
         "links": [
             "9860fd21.83ed9"
         ],
-        "x": 255,
-        "y": 160,
+        "x": 175,
+        "y": 80,
         "wires": [
             [
                 "64bf2bc4.ffd124"
@@ -3430,8 +3430,8 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 530,
-        "y": 320,
+        "x": 450,
+        "y": 240,
         "wires": [
             []
         ]
@@ -3673,7 +3673,8 @@
                 "6b1f2358.c1b3ec",
                 "3269a1eb.1446ee",
                 "af088ea1.5922c",
-                "69df09ea.12f168"
+                "69df09ea.12f168",
+                "19f66dc8.d00f62"
             ]
         ]
     },
@@ -3682,7 +3683,7 @@
         "type": "debug",
         "z": "1a726252.d178be",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4894,7 +4895,7 @@
         "type": "function",
         "z": "c3e3e66a.322358",
         "name": "Make Summary",
-        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Object.keys(Stores)) {\n    console.log(store);\n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Object.keys(Stores[store].elements)) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ Object.keys(TStore[element].data).length + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 580,
@@ -4911,7 +4912,7 @@
         "type": "debug",
         "z": "c3e3e66a.322358",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -5401,8 +5402,8 @@
         "func": "var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n/*\nvar TT_LocDataColumns = TT.locations.columns;\nvar locIDs = Object.keys(TT.locations.data);\nvar TT_LocMetaKeyColumns = TT.locations.keys.columns;\nvar iLookup = TT.locations.columnLookup;\nvar mLookup = TT.locations.meta.columnLookup;\nvar mkLookup = TT.locations.keys.columnLookup;\n*/\nfor (var curID in TT.locations.data) { \n    var temp = keyArray(TT.locations.columns,TT.locations.data[curID]);        \n    temp['ID'] = curID;\n    for (var j in TT.locations.meta.data[curID]) {\n        var tempMeta = keyArray(TT.locations.meta.columns,TT.locations.meta.data[curID][j]);        \n        var tempMetaKey = keyArray(TT.locations.keys.columns,TT.locations.keys.data[tempMeta['wp_tt_locationmetakeys_ID']]);        \n        temp[tempMetaKey['meta_key']] = tempMeta['meta_value'];\n    }\n    node.send({\"payload\": { \"activeLoc\" : temp}});\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 397.7833251953125,
-        "y": 175.33331298828125,
+        "x": 380,
+        "y": 180,
         "wires": [
             [
                 "adddbe9.5de4a4",
@@ -6191,7 +6192,7 @@
         "url": "",
         "tls": "",
         "proxy": "",
-        "authType": "basic",
+        "authType": "",
         "x": 570,
         "y": 360,
         "wires": [
@@ -9514,21 +9515,6 @@
         ]
     },
     {
-        "id": "25dd4ac6.3660d6",
-        "type": "debug",
-        "z": "de72cd33.d0bc",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 750,
-        "y": 180,
-        "wires": []
-    },
-    {
         "id": "78c095e6.19640c",
         "type": "function-npm",
         "z": "de72cd33.d0bc",
@@ -9540,8 +9526,7 @@
         "y": 140,
         "wires": [
             [
-                "5681ef8f.18bc2",
-                "3c5d8351.3fb30c"
+                "5681ef8f.18bc2"
             ]
         ]
     },
@@ -9558,21 +9543,6 @@
         "targetType": "full",
         "x": 990,
         "y": 140,
-        "wires": []
-    },
-    {
-        "id": "3c5d8351.3fb30c",
-        "type": "debug",
-        "z": "de72cd33.d0bc",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 460,
-        "y": 80,
         "wires": []
     },
     {
@@ -10412,7 +10382,6 @@
         "y": 360,
         "wires": [
             [
-                "25dd4ac6.3660d6",
                 "bd1976.0bc2e688"
             ]
         ]
@@ -10511,9 +10480,7 @@
         "x": 370,
         "y": 220,
         "wires": [
-            [
-                "25dd4ac6.3660d6"
-            ]
+            []
         ]
     },
     {
@@ -13220,6 +13187,20 @@
         "name": "",
         "x": 1050,
         "y": 340,
+        "wires": []
+    },
+    {
+        "id": "19f66dc8.d00f62",
+        "type": "debug",
+        "z": "1a726252.d178be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 480,
+        "y": 140,
         "wires": []
     }
 ]
