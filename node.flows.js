@@ -10304,7 +10304,7 @@
         "type": "debug",
         "z": "7b5cf843.8f8fc8",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10422,7 +10422,8 @@
         "y": 520,
         "wires": [
             [
-                "ad39e18a.1bfb7"
+                "754c0572.d2d74c",
+                "db68af68.0784a"
             ]
         ]
     },
@@ -10431,7 +10432,7 @@
         "type": "function",
         "z": "de72cd33.d0bc",
         "name": "Format List",
-        "func": "var inData = msg.payload;\n\nvar out = [];\nif (inData === undefined || inData.length === 0) {\n    out.push({\n        title : \"No Data Received\"\n    });\n} else {\n    for (var i in inData) {\n        var buffer = \n            inData[i][1] + '<br/>' +\n            '<small>' +\n                '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n                '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n                '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n                '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n                '<strong>DATA:</strong>' + inData[i][0].DATA + '<hr />' +\n            '</small>';\n        out.push({\n            title : buffer,\n            description: inData[i][0],\n            menu : [\"Resend\"],\n            history_id : i,\n            ip : inData[i][0].IP\n        });\n    }\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var inData = msg.payload;\n\nvar out = [];\nif (inData === undefined || inData.length === 0) {\n    out.push({\n        title : \"No Data Received\"\n    });\n} else {\n    for (var i in inData) {\n        var status= inData[i][1].match(/^([^\\:]+)/);\n        //inData[i][1]\n        var buffer = \n            status[0] + '<br/>' +\n            '<small>' +\n                '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n                '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n                '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n                '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n                '<strong>DATA:</strong>' + inData[i][0].DATA + '<hr />' +\n            '</small>';\n        out.push({\n            title : buffer,\n            description: inData[i][0],\n            menu : [\"Resend\",\"See Details\"],\n            history_id : i,\n            ip : inData[i][0].IP,\n            notes: inData[i][1]\n        });\n    }\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -10546,7 +10547,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "16dedec9.3fe311",
@@ -13205,6 +13206,106 @@
         "complete": "false",
         "x": 480,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "754c0572.d2d74c",
+        "type": "switch",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "property": "payload.selected",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "See Details",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Resend",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 630,
+        "y": 520,
+        "wires": [
+            [
+                "9c6e1dec.f83ac"
+            ],
+            [
+                "ad39e18a.1bfb7"
+            ]
+        ]
+    },
+    {
+        "id": "1fe4ff49.5cde41",
+        "type": "ui_toast",
+        "z": "de72cd33.d0bc",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 930,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c6e1dec.f83ac",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.notes",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Details",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 460,
+        "wires": [
+            [
+                "1fe4ff49.5cde41"
+            ]
+        ]
+    },
+    {
+        "id": "db68af68.0784a",
+        "type": "debug",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 700,
+        "y": 420,
         "wires": []
     }
 ]
