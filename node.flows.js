@@ -9518,7 +9518,7 @@
         "type": "debug",
         "z": "de72cd33.d0bc",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10402,18 +10402,18 @@
         "z": "de72cd33.d0bc",
         "name": "",
         "method": "GET",
-        "ret": "obj",
+        "ret": "txt",
         "paytoqs": false,
         "url": "",
         "tls": "",
         "proxy": "",
-        "authType": "basic",
+        "authType": "",
         "x": 350,
         "y": 360,
         "wires": [
             [
                 "25dd4ac6.3660d6",
-                "bc3ffd46.35405"
+                "bd1976.0bc2e688"
             ]
         ]
     },
@@ -10446,11 +10446,10 @@
         "actionType": "menu",
         "allowHTML": true,
         "x": 470,
-        "y": 440,
+        "y": 520,
         "wires": [
             [
-                "ad39e18a.1bfb7",
-                "8cb4e3c4.bf5ea"
+                "ad39e18a.1bfb7"
             ]
         ]
     },
@@ -10459,11 +10458,11 @@
         "type": "function",
         "z": "de72cd33.d0bc",
         "name": "Format List",
-        "func": "var inData = msg.payload;\nvar out = [];\nfor (var i in inData) {\n    var buffer = \n        inData[i][1] + '<br/>' +\n        '<small>' +\n            '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n            '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n            '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n            '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n            '<strong>DATA:</strong>' + inData[i][0].DATA + '<hr />' +\n        '</small>';\n    out.push({\n        title : buffer,\n        description: inData[i][0],\n        menu : [\"Resend\"],\n        history_id : i,\n        ip : inData[i][0].IP\n    });\n}\nmsg.payload = out;\nreturn msg;",
+        "func": "var inData = msg.payload;\n\nvar out = [];\nif (inData === undefined || inData.length === 0) {\n    out.push({\n        title : \"No Data Received\"\n    });\n} else {\n    for (var i in inData) {\n        var buffer = \n            inData[i][1] + '<br/>' +\n            '<small>' +\n                '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n                '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n                '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n                '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n                '<strong>DATA:</strong>' + inData[i][0].DATA + '<hr />' +\n            '</small>';\n        out.push({\n            title : buffer,\n            description: inData[i][0],\n            menu : [\"Resend\"],\n            history_id : i,\n            ip : inData[i][0].IP\n        });\n    }\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 400,
+        "y": 480,
         "wires": [
             [
                 "f15d0f2c.85c6b"
@@ -10576,29 +10575,13 @@
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 480,
+        "y": 560,
         "wires": [
             [
                 "16dedec9.3fe311",
-                "19b72d55.670623",
-                "8cb4e3c4.bf5ea"
+                "19b72d55.670623"
             ]
         ]
-    },
-    {
-        "id": "8cb4e3c4.bf5ea",
-        "type": "debug",
-        "z": "de72cd33.d0bc",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 770,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "16dedec9.3fe311",
@@ -10613,11 +10596,10 @@
         "proxy": "",
         "authType": "basic",
         "x": 530,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
-                "a4c458d0.7ffe38",
-                "8cb4e3c4.bf5ea"
+                "a4c458d0.7ffe38"
             ]
         ]
     },
@@ -10655,7 +10637,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 480,
+        "y": 560,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10675,7 +10657,7 @@
         "topic": "",
         "name": "",
         "x": 1230,
-        "y": 560,
+        "y": 640,
         "wires": []
     },
     {
@@ -10709,7 +10691,7 @@
         "repair": false,
         "outputs": 4,
         "x": 730,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
                 "fc74a717.9d65a8"
@@ -10759,7 +10741,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 640,
+        "y": 720,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10800,7 +10782,7 @@
         "to": "",
         "reg": false,
         "x": 900,
-        "y": 600,
+        "y": 680,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10841,7 +10823,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10882,7 +10864,7 @@
         "to": "",
         "reg": false,
         "x": 910,
-        "y": 520,
+        "y": 600,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -13072,5 +13054,172 @@
                 "aac85b05.c667a8"
             ]
         ]
+    },
+    {
+        "id": "7f06f936.cd37d8",
+        "type": "json",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 440,
+        "wires": [
+            [
+                "bc3ffd46.35405"
+            ]
+        ]
+    },
+    {
+        "id": "6bb207af.acc748",
+        "type": "function",
+        "z": "de72cd33.d0bc",
+        "name": "Strip out Line Returns",
+        "func": "if (typeof msg.payload === \"string\") {\n  msg.payload = String(msg.payload).replace(/\\n/g,\" \");\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 400,
+        "wires": [
+            [
+                "7f06f936.cd37d8"
+            ]
+        ]
+    },
+    {
+        "id": "bd1976.0bc2e688",
+        "type": "switch",
+        "z": "de72cd33.d0bc",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 3,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "6bb207af.acc748"
+            ],
+            [
+                "76410a14.88a9b4"
+            ],
+            [
+                "f1041d8.a9ba2e"
+            ]
+        ]
+    },
+    {
+        "id": "76410a14.88a9b4",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Error Occurred",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "An Error Occurred Getting History",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Error",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 340,
+        "wires": [
+            [
+                "d92cf904.8c4698"
+            ]
+        ]
+    },
+    {
+        "id": "f1041d8.a9ba2e",
+        "type": "change",
+        "z": "de72cd33.d0bc",
+        "name": "Unable to reach host",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Unable to reach host",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Error",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d92cf904.8c4698",
+        "type": "ui_toast",
+        "z": "de72cd33.d0bc",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1050,
+        "y": 340,
+        "wires": []
     }
 ]
