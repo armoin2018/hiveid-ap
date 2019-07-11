@@ -143,25 +143,23 @@ if (!empty($routes)) {
 $iptables_file =  '/etc/iptables.ipv4.nat';
 if (file_exists($iptables_file)) {
     $myResults['iptables'] = file_get_contents($iptables_file);
-    foreach ($$myResults['iptables'] as $line) {
-        if (preg_match('/POSTROUTING\s\-o\s(\w+)\s/', $line,$matches)) {
-            $myResults['gateway']['wan']['iface'] = $matches[1];
-            $myResults['gateway']['wan']['type'] = ($matches[1] == 'wlan') 
-                ? 'wifi'
-                : 'eth';
-        }
+    if (preg_match('/POSTROUTING\s\-o\s(\w+)\s/', $myResults['iptables'],$matches)) {
+        $myResults['gateway']['wan']['iface'] = $matches[1];
+        $myResults['gateway']['wan']['type'] = (preg_match('/wlan/',$matches[1])) 
+            ? 'wifi'
+            : 'eth';
     }
 } elseif (!empty($myResults['routes'])) { 
     $targetInterface = $myResults['routes'][0]['Iface'];
     $myResults['gateway']['wan']['iface'] = $targetInterface;
-    $myResults['gateway']['wan']['type'] = ($targetInterface == 'wlan') 
+    $myResults['gateway']['wan']['type'] = (preg_match('/wlan/',$targetInterface)) 
         ? 'wifi'
         : 'eth';   
 }
 
 if (preg_match('/(wlan|eth)(\d+)/',$myResults['dnsmasq']['interface'],$matches)) {
     $myResults['gateway']['lan']['iface'] = $matches[1] . $matches[2];
-    $myResults['gateway']['lan']['type'] = ($matches[1] == 'wlan') 
+    $myResults['gateway']['lan']['type'] = (preg_match('/wlan/',$matches[1])) 
         ? 'wifi'
         : 'eth';
 }
