@@ -161,6 +161,7 @@ cp  /etc/dhcpcd.conf \
     /etc/iptables.ipv4.nat \
     /etc/rc.local \
     /etc/hostapd/wpa_supplicant.conf \
+    /etc/network/interfaces.d/* \
     /usr/local/hiveid-ap/staging_backup/.
 
 
@@ -169,6 +170,11 @@ GATEWAY_IFACE="wlan0"
 
 sed -i -e "s/^d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}[\s\t]*local\.hive\-id\.com$//g" /etc/hosts
 sudo echo "$GATEWAY_IP	local.hive-id.com" >>/etc/hosts
+
+sed -i -e "s/\[GATEWAY_IP\]/$GATEWAY_IP/" /usr/local/hiveid-ap/staging/gateway_iface
+sed -i -e "s/\[GATEWAY_IFACE\]/$GATEWAY_IFACE/" /usr/local/hiveid-ap/staging/gateway_iface
+cp /usr/local/hiveid-ap/staging/gateway_iface /etc/network/interfaces.d/$GATEWAY_IFACE
+
 
 sed -i -e "s/\[GATEWAY_IP\]/$GATEWAY_IP/" /usr/local/hiveid-ap/staging/dhcpcd.conf
 sed -i -e "s/\[GATEWAY_IFACE\]/$GATEWAY_IFACE/" /usr/local/hiveid-ap/staging/dhcpcd.conf

@@ -122,12 +122,17 @@ cp  /etc/dhcpcd.conf \
     /etc/sysctl.conf \
     /etc/iptables.ipv4.nat \
     /etc/rc.local \
+    /etc/network/interfaces.d/* \
     /usr/local/hiveid-ap/staging_backup/.
 
 # Compress files here 
 
 sudo sed -i -e "s/^d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}[\s\t]*local\.hive\-id\.com$//g" /etc/hosts
 sudo echo "$GATEWAY_IP	local.hive-id.com" >>/etc/hosts
+
+sed -i -e "s/\[GATEWAY_IP\]/$GATEWAY_IP/" /usr/local/hiveid-ap/staging/gateway_iface
+sed -i -e "s/\[GATEWAY_IFACE\]/$GATEWAY_IFACE/" /usr/local/hiveid-ap/staging/gateway_iface
+cp /usr/local/hiveid-ap/staging/gateway_iface /etc/network/interfaces.d/$GATEWAY_IFACE
 
 sed -i -e "s/\[GATEWAY_IP\]/$GATEWAY_IP/" /usr/local/hiveid-ap/staging/dhcpcd.conf
 sed -i -e "s/\[GATEWAY_IFACE\]/$GATEWAY_IFACE/" /usr/local/hiveid-ap/staging/dhcpcd.conf
@@ -149,6 +154,8 @@ sed -i -e "s/\[KEY_MGMT\]/$KEY_MGMT/" /usr/local/hiveid-ap/staging/hostapd.conf
 cp /usr/local/hiveid-ap/staging/hostapd.conf /etc/hostapd/hostapd.conf
 
 echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" > /etc/default/hostapd
+
+
 
 systemctl unmask hostapd
 systemctl enable hostapd
