@@ -126,56 +126,6 @@
         "info": ""
     },
     {
-        "id": "49e2d5c0.49790c",
-        "type": "subflow",
-        "name": "Reporters to JRMI",
-        "info": "",
-        "category": "JMRI",
-        "in": [
-            {
-                "x": 114.75,
-                "y": 162,
-                "wires": [
-                    {
-                        "id": "4369543.5731eac"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 1272,
-                "y": 240,
-                "wires": [
-                    {
-                        "id": "82f1526e.9323b",
-                        "port": 0
-                    },
-                    {
-                        "id": "b6bbb1e6.4ca5f",
-                        "port": 0
-                    }
-                ]
-            },
-            {
-                "x": 1272,
-                "y": 400,
-                "wires": [
-                    {
-                        "id": "5b9a0.b59166604",
-                        "port": 0
-                    },
-                    {
-                        "id": "dd61c8d5.569b88",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "icon": "node-red/inject.png"
-    },
-    {
         "id": "8b10dcf.dc4c82",
         "type": "subflow",
         "name": "Get JMRI Info",
@@ -2528,295 +2478,6 @@
         ]
     },
     {
-        "id": "82f1526e.9323b",
-        "type": "http request",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "method": "POST",
-        "ret": "obj",
-        "url": "",
-        "tls": "",
-        "x": 1102,
-        "y": 200,
-        "wires": [
-            []
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg.payload"
-        ]
-    },
-    {
-        "id": "511bdb33.ee5724",
-        "type": "function",
-        "z": "49e2d5c0.49790c",
-        "name": "JRMI Reporters Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nmsg.verb = 'PUT';\nvar reporterName = 'FR' + String(curReporters.nextID);\nif (curReporters.map[RFIDRequest.MAC] !== undefined) {\n    var reporterId = curReporters.map[RFIDRequest.MAC];\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n} else if (curReporters.available.length > 0) {\n    var reporterId = curReporters.available.pop();\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": {\n      \"name\": reporterName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  String(Date.now()),\n      \"report\": RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'reporter';\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 682,
-        "y": 240,
-        "wires": [
-            [
-                "7964a429.ca37ac"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "3cde87df.2bf038",
-        "type": "json",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 462,
-        "y": 320,
-        "wires": [
-            [
-                "511bdb33.ee5724",
-                "cf82d6f2.a988c8"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "7964a429.ca37ac",
-        "type": "switch",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 882,
-        "y": 240,
-        "wires": [
-            [
-                "82f1526e.9323b"
-            ],
-            [
-                "b6bbb1e6.4ca5f"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg",
-            "msg"
-        ]
-    },
-    {
-        "id": "b6bbb1e6.4ca5f",
-        "type": "http request",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "method": "PUT",
-        "ret": "obj",
-        "url": "",
-        "tls": "",
-        "x": 1102,
-        "y": 280,
-        "wires": [
-            []
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg.payload"
-        ]
-    },
-    {
-        "id": "5b9a0.b59166604",
-        "type": "http request",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "method": "POST",
-        "ret": "obj",
-        "url": "",
-        "tls": "",
-        "x": 1102,
-        "y": 360,
-        "wires": [
-            []
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "cf82d6f2.a988c8",
-        "type": "function",
-        "z": "49e2d5c0.49790c",
-        "name": "JRMI Sensors Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nmsg.verb = 'PUT';\nvar sensorName = 'FS' + String(curSensors.nextID);\nif (curSensors.map[RFIDRequest.MAC] !== undefined) {\n    var sensorId = curSensors.map[RFIDRequest.MAC];\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n} else if (curSensors.available.length > 0) {\n    var sensorId = curSensors.available.pop();\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": {\n      \"name\": sensorName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'sensor';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 680.75,
-        "y": 400,
-        "wires": [
-            [
-                "787abb70.82ed24"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "787abb70.82ed24",
-        "type": "switch",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 882,
-        "y": 400,
-        "wires": [
-            [
-                "5b9a0.b59166604"
-            ],
-            [
-                "dd61c8d5.569b88"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg",
-            "msg"
-        ]
-    },
-    {
-        "id": "dd61c8d5.569b88",
-        "type": "http request",
-        "z": "49e2d5c0.49790c",
-        "name": "",
-        "method": "PUT",
-        "ret": "obj",
-        "url": "",
-        "tls": "",
-        "x": 1102,
-        "y": 440,
-        "wires": [
-            []
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "4369543.5731eac",
-        "type": "switch",
-        "z": "49e2d5c0.49790c",
-        "name": "Is Enabled",
-        "property": "JMRI_Config.JMRI_ENABLED",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 151,
-        "y": 294,
-        "wires": [
-            [
-                "d84e2602.59e048"
-            ],
-            []
-        ],
-        "outputLabels": [
-            "msg.payload.DATA",
-            ""
-        ]
-    },
-    {
-        "id": "d84e2602.59e048",
-        "type": "change",
-        "z": "49e2d5c0.49790c",
-        "name": "Move Data to Payload",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.DATA",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 237,
-        "y": 367,
-        "wires": [
-            [
-                "3cde87df.2bf038"
-            ]
-        ]
-    },
-    {
         "id": "b50ad81b.505278",
         "type": "function",
         "z": "8b10dcf.dc4c82",
@@ -3738,6 +3399,7 @@
         "type": "subflow:8b10dcf.dc4c82",
         "z": "164213bd.e3dd4c",
         "name": "",
+        "env": [],
         "x": 848.888916015625,
         "y": 410,
         "wires": [
@@ -3773,6 +3435,7 @@
         "type": "subflow:8b10dcf.dc4c82",
         "z": "164213bd.e3dd4c",
         "name": "",
+        "env": [],
         "x": 848.888916015625,
         "y": 370,
         "wires": [
@@ -4018,46 +3681,7 @@
         "y": 402.22222900390625,
         "wires": [
             [
-                "79ba309.678a2d"
-            ]
-        ]
-    },
-    {
-        "id": "79ba309.678a2d",
-        "type": "switch",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "property": "JMRI_Config.JMRI_ENABLED",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 156.66672261555988,
-        "y": 402.2222730848524,
-        "wires": [
-            [
-                "2e9b3ddd.033352"
-            ]
-        ]
-    },
-    {
-        "id": "2e9b3ddd.033352",
-        "type": "subflow:49e2d5c0.49790c",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "x": 350,
-        "y": 400,
-        "wires": [
-            [
-                "1d5514d.8e83eeb"
-            ],
-            [
-                "caab416.28359c"
+                "39caeee1.346892"
             ]
         ]
     },
@@ -5225,15 +4849,14 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Format Locations",
-        "func": "var JMRI = global.get('JMRI'); \nvar addFlag = true;\nvar changeFlag = false;\nfor (var i in JMRI.locations.data) {\n    var tempData = JMRI.locations.data[i];\n    if (msg.payload.activeLoc['NAME'] === tempData['name']) {\n        addFlag = false;\n        if ((msg.payload.activeLoc['Length'] !== undefined && tempData['length'] != msg.payload.activeLoc['Length']) || (msg.payload.activeLoc['Comment'] !== undefined && tempData['comment'] != msg.payload.activeLoc['Comment'])) {\n            changeFlag = true;\n        }\n    }\n}\nif (addFlag === true) {\n    msg.verb = 'POST'; // 'PUT';\n} \nif (changeFlag === true) {\n    msg.verb = 'POST'; \n}\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'locations';\n\nvar temp =  {\n    \"type\": \"location\",\n    \"data\": {\n        \"id\": msg.payload.activeLoc['ID'],\n        \"name\": msg.payload.activeLoc['NAME'],\n        \"length\": ((msg.payload.activeLoc['Length'] !== undefined) ? msg.payload.activeLoc['Length'] : 0 ),\n        \"comment\":  ((msg.payload.activeLoc['Comment'] !== undefined) ? msg.payload.activeLoc['Comment'] : 0 )\n    }\n};\nmsg.payload = temp;\nreturn msg;\n",
+        "func": "var JMRI = global.get('JMRI'); \nvar addFlag = true;\nvar changeFlag = false;\nconsole.log(msg.payload);\nfor (var i in JMRI.locations.data) {\n    var tempData = JMRI.locations.data[i];\n    if (msg.payload['NAME'] === tempData['name']) {\n        addFlag = false;\n        if ((msg.payload['Length'] !== undefined && tempData['length'] != msg.payload['Length']) || (msg.payload['Comment'] !== undefined && tempData['comment'] != msg.payload['Comment'])) {\n            changeFlag = true;\n        }\n    }\n}\nif (addFlag === true) {\n    msg.verb = 'POST'; // 'PUT';\n} \nif (changeFlag === true) {\n    msg.verb = 'POST'; \n}\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'locations';\n\nmsg.payload =  {\n    \"type\": \"location\",\n    \"data\": {\n        \"id\": msg.payload['ID'],\n        \"name\": msg.payload['NAME'],\n        \"length\": ((msg.payload['Length'] !== undefined) ? msg.payload['Length'] : 0 ),\n        \"comment\":  ((msg.payload['Comment'] !== undefined) ? msg.payload['Comment'] : 0 )\n    }\n};\nconsole.log(msg.payload);\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 860.71435546875,
-        "y": 175.85711669921875,
+        "x": 610,
+        "y": 320,
         "wires": [
             [
-                "783ce65.3454618",
-                "adddbe9.5de4a4"
+                "b109209b.bf36f"
             ]
         ]
     },
@@ -5376,8 +4999,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 122.85714721679688,
-        "y": 175.71429443359375,
+        "x": 370,
+        "y": 280,
         "wires": [
             [
                 "dbf25248.8540c"
@@ -5394,8 +5017,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 816.857177734375,
-        "y": 232.42852783203125,
+        "x": 370,
+        "y": 380,
         "wires": []
     },
     {
@@ -5403,11 +5026,11 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "parseLocations",
-        "func": "var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n/*\nvar TT_LocDataColumns = TT.locations.columns;\nvar locIDs = Object.keys(TT.locations.data);\nvar TT_LocMetaKeyColumns = TT.locations.keys.columns;\nvar iLookup = TT.locations.columnLookup;\nvar mLookup = TT.locations.meta.columnLookup;\nvar mkLookup = TT.locations.keys.columnLookup;\n*/\nfor (var curID in TT.locations.data) { \n    var temp = keyArray(TT.locations.columns,TT.locations.data[curID]);        \n    temp['ID'] = curID;\n    for (var j in TT.locations.meta.data[curID]) {\n        var tempMeta = keyArray(TT.locations.meta.columns,TT.locations.meta.data[curID][j]);        \n        var tempMetaKey = keyArray(TT.locations.keys.columns,TT.locations.keys.data[tempMeta['wp_tt_locationmetakeys_ID']]);        \n        temp[tempMetaKey['meta_key']] = tempMeta['meta_value'];\n    }\n    node.send({\"payload\": { \"activeLoc\" : temp}});\n}\n\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\n\n/*\nvar TT_LocDataColumns = TT.locations.columns;\nvar locIDs = Object.keys(TT.locations.data);\nvar TT_LocMetaKeyColumns = TT.locations.keys.columns;\nvar iLookup = TT.locations.columnLookup;\nvar mLookup = TT.locations.meta.columnLookup;\nvar mkLookup = TT.locations.keys.columnLookup;\n*/\nfor (var curID in TT.locations.data) { \n    var temp = hive.array_combine(TT.locations.columns,TT.locations.data[curID]);        \n    temp['ID'] = Number(curID);\n    for (var j in TT.locations.meta.data[curID]) {\n        var tempMeta = hive.array_combine(TT.locations.meta.columns,TT.locations.meta.data[curID][j]);        \n        var tempMetaKey = hive.array_combine(TT.locations.keys.columns,TT.locations.keys.data[tempMeta['wp_tt_locationmetakeys_ID']]);        \n        temp[tempMetaKey['meta_key']] = tempMeta['meta_value'];\n    }\n    msg.payload = temp;\n    node.send(msg);\n        \n    //node.send({\"payload\": { \"activeLoc\" : temp}});\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 380,
-        "y": 180,
+        "x": 400,
+        "y": 320,
         "wires": [
             [
                 "adddbe9.5de4a4",
@@ -9958,8 +9581,11 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
+        "paytoqs": false,
         "url": "",
         "tls": "",
+        "proxy": "",
+        "authType": "",
         "x": 390,
         "y": 500,
         "wires": [
@@ -13306,6 +12932,383 @@
         "targetType": "full",
         "x": 700,
         "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a81a4979.06f088",
+        "type": "inject",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "515c41c1.5c104"
+            ]
+        ]
+    },
+    {
+        "id": "515c41c1.5c104",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Setup Shared Functions",
+        "func": "var inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\nglobal.set('hive', inObject);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b109209b.bf36f",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 790,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "18cf4265.28d82e",
+        "type": "http request",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI POST Call for Reporters",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "1d5514d.8e83eeb",
+                "99b19d98.cf379"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "deb0f6c8.09aad8",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "JRMI Reporters Process",
+        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\nmsg.verb = 'PUT';\nvar reporterName = 'IRHIVE' + String(curReporters.nextID);\nvar reporterId = 0;\nif (curReporters.map[RFIDRequest.MAC] !== undefined) {\n    reporterId = curReporters.map[RFIDRequest.MAC];\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n} else if (curReporters.available.length > 0) {\n    reporterId = curReporters.available.pop();\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": {\n      \"name\": reporterName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  String(Date.now()),\n      \"report\": RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 520,
+        "wires": [
+            [
+                "ad0a5cb3.3290c"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "2ad51dda.2abfc2",
+        "type": "json",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "deb0f6c8.09aad8",
+                "d1fcbae3.09c268"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "ad0a5cb3.3290c",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 550,
+        "y": 520,
+        "wires": [
+            [
+                "18cf4265.28d82e"
+            ],
+            [
+                "13de50e.c4915af"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg",
+            "msg"
+        ]
+    },
+    {
+        "id": "13de50e.c4915af",
+        "type": "http request",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI PUT Call for Reporters",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 780,
+        "y": 540,
+        "wires": [
+            [
+                "1d5514d.8e83eeb",
+                "99b19d98.cf379"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "a1acd01b.94d2a",
+        "type": "http request",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI POST Call for Sensors",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 780,
+        "y": 580,
+        "wires": [
+            [
+                "caab416.28359c",
+                "99b19d98.cf379"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "d1fcbae3.09c268",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "JRMI Sensors Process",
+        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\nmsg.verb = 'PUT';\nvar sensorName = 'ISHIVE' + String(curSensors.nextID);\nvar sensorId = 0;\nif (curSensors.map[RFIDRequest.MAC] !== undefined) {\n    sensorId = curSensors.map[RFIDRequest.MAC];\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n} else if (curSensors.available.length > 0) {\n    sensorId = curSensors.available.pop();\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": {\n      \"name\": sensorName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 600,
+        "wires": [
+            [
+                "e611cfd.543b13"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "e611cfd.543b13",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 550,
+        "y": 600,
+        "wires": [
+            [
+                "a1acd01b.94d2a"
+            ],
+            [
+                "479ccf30.ba70f"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg",
+            "msg"
+        ]
+    },
+    {
+        "id": "479ccf30.ba70f",
+        "type": "http request",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI PUT Call for Sensors",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 780,
+        "y": 620,
+        "wires": [
+            [
+                "caab416.28359c",
+                "99b19d98.cf379"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "39caeee1.346892",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "Is Enabled",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "d88d214d.ddf25"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "msg.payload.DATA",
+            ""
+        ]
+    },
+    {
+        "id": "d88d214d.ddf25",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Move Data to Payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.DATA",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 480,
+        "wires": [
+            [
+                "2ad51dda.2abfc2"
+            ]
+        ]
+    },
+    {
+        "id": "99b19d98.cf379",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1150,
+        "y": 580,
         "wires": []
     }
 ]
