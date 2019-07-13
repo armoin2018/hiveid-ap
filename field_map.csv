@@ -1,0 +1,61 @@
+JMRI_Type,JMRI,TrainTraxx_Type,TrainTraxx
+car,name,inventory,Inventory Type
+car,name,inventory,NAME
+car,number,inventory,Car #
+,,inventory,AAR
+,,inventory,Axles
+car,length,inventory,Car Length
+car,weight,inventory,Weight
+car,weightTons,inventory,Weight (T)
+,,inventory,Reporting Mark
+car,carType,inventory,Car Type
+car,color,inventory,Color
+,,inventory,Image
+car,road,inventory,Road Name
+car,number,inventory,Road Number
+,,inventory,Track Scale
+car,owner,,
+car,built,inventory,built
+car,comment,inventory,comment
+car,outOfService,inventory,outOfService
+car,load,inventory,Load
+car,hazardous,inventory,Hazardous
+car,caboose,inventory,Caboose
+car,passenger,inventory,Passenger
+car,fred,inventory,FRED
+car,removeComment,inventory,Remove Comment
+car,addComment,inventory,Add Comment
+car,kernel,inventory,Kernel
+car,utility,inventory,Utility
+car,finalDestination,inventory,finalDestination
+car,returnWhenEmpty,inventory,Return When Empty
+car,status,inventory,Status
+car,location,,
+car,rfid,,
+engine,name,inventory,NAME
+engine,number,inventory,Road Number
+engine,number,inventory,Car #
+engine,road,inventory,Road Name
+engine,rfid,,
+engine,carType,inventory,Car Type
+engine,length,inventory,Car Length
+engine,weight,inventory,Weight
+engine,weightTons,inventory,Weight (T)
+engine,color,inventory,Color
+engine,owner,,
+engine,built,inventory,Built
+engine,comment,inventory,Comment
+engine,outOfService,inventory,Out of Service
+engine,location,,
+engine,destination,inventory,Destination
+engine,model,inventory,Model
+engine,consist,inventory,Consist
+location,userName,locations,NAME
+location,name,locations,JMRI Name
+location,length,locations,Length
+location,comment,locations,Comments
+location,reporter,locations,Reporter
+location,carType,,
+location,track,,
+location,location,locations,PARENT
+location,type,locations,Location Type

@@ -11233,8 +11233,8 @@
         "func": "var action = flow.get('action');\nvar serviceName = flow.get('serviceName');\nmsg.payload =action + 'ed ' + serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'green';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 730,
-        "y": 340,
+        "x": 750,
+        "y": 280,
         "wires": [
             [
                 "e16c7e84.1c1f5"
@@ -11249,8 +11249,8 @@
         "func": "var action = flow.get('action');\nvar serviceName = flow.get('serviceName');\nmsg.payload = 'Failed to ' + action + ' ' + serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'red';\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 730,
-        "y": 380,
+        "x": 750,
+        "y": 320,
         "wires": [
             [
                 "e16c7e84.1c1f5"
@@ -11277,8 +11277,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 530,
-        "y": 360,
+        "x": 550,
+        "y": 300,
         "wires": [
             [
                 "55b3dff6.2ae17"
@@ -12950,7 +12950,8 @@
         "y": 560,
         "wires": [
             [
-                "515c41c1.5c104"
+                "515c41c1.5c104",
+                "5ce0926d.37562c"
             ]
         ]
     },
@@ -12962,8 +12963,8 @@
         "func": "var inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\nglobal.set('hive', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 220,
-        "y": 620,
+        "x": 410,
+        "y": 600,
         "wires": [
             []
         ]
@@ -13310,5 +13311,83 @@
         "x": 1150,
         "y": 580,
         "wires": []
+    },
+    {
+        "id": "5ce0926d.37562c",
+        "type": "file in",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/opt/hiveid-ap/field_map.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "x": 420,
+        "y": 560,
+        "wires": [
+            [
+                "c05715cf.f986d8"
+            ]
+        ]
+    },
+    {
+        "id": "c05715cf.f986d8",
+        "type": "csv",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 650,
+        "y": 560,
+        "wires": [
+            [
+                "9a5cfaf0.6b0dd8"
+            ]
+        ]
+    },
+    {
+        "id": "9a5cfaf0.6b0dd8",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "Set FlowMap",
+        "rules": [
+            {
+                "t": "set",
+                "p": "FlowMap",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "76fe4df1.0e87b4",
+        "type": "watch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "files": "/opt/hiveid-ap/field_map.csv",
+        "recursive": "",
+        "x": 200,
+        "y": 520,
+        "wires": [
+            [
+                "5ce0926d.37562c"
+            ]
+        ]
     }
 ]
