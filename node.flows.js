@@ -743,6 +743,15 @@
         "collapse": false
     },
     {
+        "id": "71797628.06a3f8",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "a9319cec.7d9c",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -1080,7 +1089,8 @@
         "y": 60,
         "wires": [
             [
-                "e8ed6bdd.7a0138"
+                "e8ed6bdd.7a0138",
+                "26beefe6.cfd83"
             ]
         ]
     },
@@ -2734,8 +2744,11 @@
         "name": "",
         "method": "GET",
         "ret": "obj",
+        "paytoqs": false,
         "url": "",
         "tls": "",
+        "proxy": "",
+        "authType": "",
         "x": 670,
         "y": 140,
         "wires": [
@@ -2788,7 +2801,7 @@
         "type": "function",
         "z": "a40e76b8.4d8a48",
         "name": "Set the URL",
-        "func": "var table = msg.payload;\nvar config = global.get('TrainTraxx_Config');\nmsg.payload = config.TrainTraxx_API + table + '?apikey=' + config.TrainTraxx_Key;\nflow.set('curTable',table)\nreturn msg;",
+        "func": "var table = msg.payload;\nmsg.topic = table;\nvar config = global.get('TrainTraxx_Config');\nmsg.payload = config.TrainTraxx_API + table + '?apikey=' + config.TrainTraxx_Key;\nflow.set('curTable',table);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -2837,9 +2850,9 @@
         "z": "5e61e22e.7a581c",
         "name": "Refresh All",
         "group": "a9319cec.7d9c",
-        "order": 3,
-        "width": 0,
-        "height": 0,
+        "order": 5,
+        "width": "5",
+        "height": "1",
         "passthru": false,
         "label": "Refresh All",
         "tooltip": "",
@@ -2900,7 +2913,8 @@
         "z": "5e61e22e.7a581c",
         "name": "TrainTraxx Data oLink",
         "links": [
-            "b1607e3f.fb142"
+            "b1607e3f.fb142",
+            "92bfa11.5cbe86"
         ],
         "x": 615,
         "y": 220,
@@ -3058,7 +3072,7 @@
         "once": true,
         "onceDelay": "5",
         "x": 170,
-        "y": 220,
+        "y": 200,
         "wires": [
             [
                 "d4deb1b2.f1eb5"
@@ -3101,225 +3115,15 @@
         ]
     },
     {
-        "id": "cde5452b.0a9148",
-        "type": "subflow:a40e76b8.4d8a48",
-        "z": "1a726252.d178be",
-        "name": "",
-        "x": 723.3333740234375,
-        "y": 344.4444580078125,
-        "wires": [
-            [
-                "acfec978.dad798"
-            ]
-        ]
-    },
-    {
-        "id": "3269a1eb.1446ee",
-        "type": "function",
-        "z": "1a726252.d178be",
-        "name": "Set Inventory",
-        "func": "msg.payload = 'inventory';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 493.3333740234375,
-        "y": 344.4444580078125,
-        "wires": [
-            [
-                "cde5452b.0a9148"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "af088ea1.5922c",
-        "type": "function",
-        "z": "1a726252.d178be",
-        "name": "Set Locations",
-        "func": "msg.payload = 'locations';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 503.3333740234375,
-        "y": 384.4444580078125,
-        "wires": [
-            [
-                "b39cf6ea.e288a8"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "69df09ea.12f168",
-        "type": "function",
-        "z": "1a726252.d178be",
-        "name": "Set Tags",
-        "func": "msg.payload = 'tags';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 483.3333740234375,
-        "y": 424.4444580078125,
-        "wires": [
-            [
-                "1e02b589.644c4a"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "b39cf6ea.e288a8",
-        "type": "subflow:a40e76b8.4d8a48",
-        "z": "1a726252.d178be",
-        "name": "",
-        "x": 723.3333740234375,
-        "y": 384.4444580078125,
-        "wires": [
-            [
-                "acfec978.dad798"
-            ]
-        ]
-    },
-    {
-        "id": "1e02b589.644c4a",
-        "type": "subflow:a40e76b8.4d8a48",
-        "z": "1a726252.d178be",
-        "name": "",
-        "x": 723.3333740234375,
-        "y": 424.4444580078125,
-        "wires": [
-            [
-                "acfec978.dad798"
-            ]
-        ]
-    },
-    {
-        "id": "d90b9ce9.5206e",
-        "type": "subflow:a40e76b8.4d8a48",
-        "z": "1a726252.d178be",
-        "name": "",
-        "x": 723.3333740234375,
-        "y": 304.4444580078125,
-        "wires": [
-            [
-                "acfec978.dad798"
-            ]
-        ]
-    },
-    {
-        "id": "6b1f2358.c1b3ec",
-        "type": "function",
-        "z": "1a726252.d178be",
-        "name": "Set Hivegateway",
-        "func": "msg.payload = 'hivegateway';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 513.3333740234375,
-        "y": 304.4444580078125,
-        "wires": [
-            [
-                "d90b9ce9.5206e"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "854f0a6f.328a88",
-        "type": "subflow:a40e76b8.4d8a48",
-        "z": "1a726252.d178be",
-        "name": "",
-        "x": 723.3333740234375,
-        "y": 264.4444580078125,
-        "wires": [
-            [
-                "acfec978.dad798"
-            ]
-        ]
-    },
-    {
-        "id": "98175d0.98d66a",
-        "type": "function",
-        "z": "1a726252.d178be",
-        "name": "Set Hivenode",
-        "func": "msg.payload = 'hivenode';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 503.3333740234375,
-        "y": 264.4444580078125,
-        "wires": [
-            [
-                "854f0a6f.328a88"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "20862159.6fab0e",
-        "type": "subflow:a40e76b8.4d8a48",
-        "z": "1a726252.d178be",
-        "name": "",
-        "x": 723.3333740234375,
-        "y": 224.4444580078125,
-        "wires": [
-            [
-                "acfec978.dad798"
-            ]
-        ]
-    },
-    {
-        "id": "12f5f078.d26ae",
-        "type": "function",
-        "z": "1a726252.d178be",
-        "name": "Set Images",
-        "func": "msg.payload = 'images';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 493.3333740234375,
-        "y": 224.4444580078125,
-        "wires": [
-            [
-                "20862159.6fab0e"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
         "id": "248da61.73dc05a",
         "type": "ui_button",
         "z": "1a726252.d178be",
         "name": "Refresh TrainTraxx",
         "group": "a9319cec.7d9c",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
+        "order": 3,
+        "width": "5",
+        "height": "1",
+        "passthru": true,
         "label": "Refresh TrainTraxx",
         "tooltip": "",
         "color": "#fff",
@@ -3328,17 +3132,11 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 217.77783203125,
-        "y": 318.8889465332031,
+        "x": 250,
+        "y": 460,
         "wires": [
             [
-                "12f5f078.d26ae",
-                "98175d0.98d66a",
-                "6b1f2358.c1b3ec",
-                "3269a1eb.1446ee",
-                "af088ea1.5922c",
-                "69df09ea.12f168",
-                "19f66dc8.d00f62"
+                "251b3c83.10ad94"
             ]
         ]
     },
@@ -3349,11 +3147,12 @@
         "name": "",
         "active": true,
         "tosidebar": true,
-        "console": false,
+        "console": true,
         "tostatus": false,
         "complete": "true",
-        "x": 1044.000244140625,
-        "y": 319.5555725097656,
+        "targetType": "full",
+        "x": 1190,
+        "y": 400,
         "wires": []
     },
     {
@@ -3362,143 +3161,15 @@
         "z": "1a726252.d178be",
         "name": "TrainTraxx Data iLink",
         "links": [
-            "eb7a7fef.95ee4"
+            "eb7a7fef.95ee4",
+            "e37006db.0ea648"
         ],
-        "x": 195,
-        "y": 260,
+        "x": 215,
+        "y": 420,
         "wires": [
             [
                 "248da61.73dc05a"
             ]
-        ]
-    },
-    {
-        "id": "1d5514d.8e83eeb",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Reporters",
-        "func": "msg.payload = 'reporters';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 608.888916015625,
-        "y": 370,
-        "wires": [
-            [
-                "629617.5b00f9e8"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "7e5966b.6a5d998",
-        "type": "subflow:8b10dcf.dc4c82",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "env": [],
-        "x": 848.888916015625,
-        "y": 410,
-        "wires": [
-            [
-                "304356e3.df8eba"
-            ]
-        ]
-    },
-    {
-        "id": "caab416.28359c",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Sensors",
-        "func": "msg.payload = 'sensors';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 598.888916015625,
-        "y": 410,
-        "wires": [
-            [
-                "7e5966b.6a5d998"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "629617.5b00f9e8",
-        "type": "subflow:8b10dcf.dc4c82",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "env": [],
-        "x": 848.888916015625,
-        "y": 370,
-        "wires": [
-            [
-                "304356e3.df8eba"
-            ]
-        ]
-    },
-    {
-        "id": "41492e9b.c0ccc",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Engine",
-        "func": "msg.payload = 'engines';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 598.888916015625,
-        "y": 250,
-        "wires": [
-            [
-                "2cfec4dc.7dbadc"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "2cfec4dc.7dbadc",
-        "type": "subflow:8b10dcf.dc4c82",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "x": 853.888916015625,
-        "y": 250,
-        "wires": [
-            [
-                "304356e3.df8eba"
-            ]
-        ]
-    },
-    {
-        "id": "709e363a.e33718",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Cars",
-        "func": "msg.payload = 'cars';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 588.888916015625,
-        "y": 210,
-        "wires": [
-            [
-                "d3aedf1f.c858c"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
         ]
     },
     {
@@ -3507,103 +3178,20 @@
         "z": "164213bd.e3dd4c",
         "name": "",
         "env": [],
-        "x": 848.888916015625,
-        "y": 210,
+        "x": 660,
+        "y": 840,
         "wires": [
             [
-                "304356e3.df8eba"
+                "d82540e3.3f571",
+                "8384e2e4.e9412"
             ]
         ]
-    },
-    {
-        "id": "8572684d.002f18",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Trains",
-        "func": "msg.payload = 'trains';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 588.888916015625,
-        "y": 329,
-        "wires": [
-            [
-                "d69f8500.af92a8"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "d69f8500.af92a8",
-        "type": "subflow:8b10dcf.dc4c82",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "x": 848.888916015625,
-        "y": 330,
-        "wires": [
-            [
-                "304356e3.df8eba"
-            ]
-        ]
-    },
-    {
-        "id": "40385e28.6afcf",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Locations",
-        "func": "msg.payload = 'locations';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 608.888916015625,
-        "y": 290,
-        "wires": [
-            [
-                "1fcc12f.b4a5ced"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "1fcc12f.b4a5ced",
-        "type": "subflow:8b10dcf.dc4c82",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "x": 848.888916015625,
-        "y": 290,
-        "wires": [
-            [
-                "304356e3.df8eba"
-            ]
-        ]
-    },
-    {
-        "id": "304356e3.df8eba",
-        "type": "debug",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1131.5556640625,
-        "y": 312.22222900390625,
-        "wires": []
     },
     {
         "id": "3c4a9a1c.addf66",
         "type": "switch",
         "z": "164213bd.e3dd4c",
-        "name": "",
+        "name": "JMRI Enabled",
         "property": "JMRI_Config.JMRI_ENABLED",
         "propertyType": "global",
         "rules": [
@@ -3614,16 +3202,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 347.77789306640625,
-        "y": 310.9999694824219,
+        "x": 160,
+        "y": 740,
         "wires": [
             [
-                "709e363a.e33718",
-                "41492e9b.c0ccc",
-                "40385e28.6afcf",
-                "8572684d.002f18",
-                "1d5514d.8e83eeb",
-                "caab416.28359c"
+                "d6522db.4d47bd"
             ]
         ]
     },
@@ -3634,8 +3217,8 @@
         "name": "Refresh JMRI",
         "group": "a9319cec.7d9c",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "5",
+        "height": "1",
         "passthru": true,
         "label": "Refresh JMRI",
         "tooltip": "",
@@ -3645,11 +3228,11 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 176.66668701171875,
-        "y": 312.2221374511719,
+        "x": 180,
+        "y": 960,
         "wires": [
             [
-                "3c4a9a1c.addf66"
+                "912ca386.46614"
             ]
         ]
     },
@@ -3659,10 +3242,11 @@
         "z": "164213bd.e3dd4c",
         "name": "JMRI Data iLink",
         "links": [
-            "ef86f5e4.672e98"
+            "ef86f5e4.672e98",
+            "391c0a36.ebdac6"
         ],
-        "x": 41.111114501953125,
-        "y": 312.22222900390625,
+        "x": 175,
+        "y": 920,
         "wires": [
             [
                 "b0a1d979.9f8538"
@@ -3677,8 +3261,8 @@
         "links": [
             "e7682bc7.41dee8"
         ],
-        "x": 38.88893127441406,
-        "y": 402.22222900390625,
+        "x": 175,
+        "y": 360,
         "wires": [
             [
                 "39caeee1.346892"
@@ -3700,8 +3284,8 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 763,
-        "y": 241,
+        "x": 770,
+        "y": 280,
         "wires": [
             [
                 "6c7bd810.48e988"
@@ -3730,8 +3314,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1041.9999389648438,
-        "y": 241,
+        "x": 1070,
+        "y": 280,
         "wires": [
             [
                 "ed5837b0.97eb08"
@@ -3757,8 +3341,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 492,
-        "y": 242,
+        "x": 500,
+        "y": 280,
         "wires": [
             [
                 "c1968950.ab2378"
@@ -3823,7 +3407,8 @@
             [
                 "67bb3f95.44b5",
                 "29b4d282.40a57e",
-                "639c3c57.932cb4"
+                "639c3c57.932cb4",
+                "e054e355.832a2"
             ]
         ]
     },
@@ -3846,8 +3431,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1318.9999389648438,
-        "y": 292.1111145019531,
+        "x": 1420,
+        "y": 340,
         "wires": [
             [
                 "4aa8df10.db935"
@@ -3862,8 +3447,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 1505,
-        "y": 292.1111145019531,
+        "x": 1390,
+        "y": 380,
         "wires": [
             [
                 "bce53b01.90a798"
@@ -3879,8 +3464,8 @@
         "appendNewline": true,
         "createDir": true,
         "overwriteFile": "true",
-        "x": 1724.9999389648438,
-        "y": 291.1111145019531,
+        "x": 1500,
+        "y": 420,
         "wires": [
             [
                 "b6ed7646.ea36a8"
@@ -3937,8 +3522,8 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 759.9999389648438,
-        "y": 291.1111145019531,
+        "x": 770,
+        "y": 320,
         "wires": [
             [
                 "c67eb33e.1b383"
@@ -3967,8 +3552,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1038.9998779296875,
-        "y": 291.1111145019531,
+        "x": 1070,
+        "y": 320,
         "wires": [
             [
                 "ed5837b0.97eb08"
@@ -3994,8 +3579,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 488.99993896484375,
-        "y": 292.1111145019531,
+        "x": 500,
+        "y": 320,
         "wires": [
             [
                 "af7f7821.c09708"
@@ -4017,8 +3602,8 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 737.9999389648438,
-        "y": 340.1111145019531,
+        "x": 750,
+        "y": 360,
         "wires": [
             [
                 "f62192c2.b1a95"
@@ -4047,8 +3632,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1036.9998779296875,
-        "y": 340.1111145019531,
+        "x": 1070,
+        "y": 360,
         "wires": [
             [
                 "ed5837b0.97eb08"
@@ -4074,8 +3659,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 486.99993896484375,
-        "y": 341.1111145019531,
+        "x": 499,
+        "y": 361,
         "wires": [
             [
                 "bec6eea2.5b2af"
@@ -4090,8 +3675,8 @@
         "links": [
             "f6d7de28.90ff4"
         ],
-        "x": 1682,
-        "y": 364,
+        "x": 1395,
+        "y": 460,
         "wires": []
     },
     {
@@ -4183,8 +3768,8 @@
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 354.99993896484375,
-        "y": 142,
+        "x": 400,
+        "y": 160,
         "wires": [
             [
                 "f2093035.96ce4"
@@ -4199,8 +3784,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 595.9999389648438,
-        "y": 142,
+        "x": 610,
+        "y": 160,
         "wires": [
             [
                 "d8b6e1a9.98737"
@@ -4226,8 +3811,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 774.9999389648438,
-        "y": 142,
+        "x": 790,
+        "y": 160,
         "wires": [
             [
                 "16ca6d5b.3ce5e3",
@@ -4306,8 +3891,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 182.99993896484375,
-        "y": 74,
+        "x": 130,
+        "y": 160,
         "wires": [
             [
                 "fe07428b.41ec6"
@@ -4321,8 +3906,8 @@
         "name": "",
         "files": "/etc/hiveid-ap/conf.jmri.json",
         "recursive": "",
-        "x": 174.49993896484375,
-        "y": 202,
+        "x": 160,
+        "y": 120,
         "wires": [
             [
                 "fe07428b.41ec6"
@@ -4475,7 +4060,7 @@
         "width": 0,
         "height": 0,
         "passthru": false,
-        "decouple": "false",
+        "decouple": "true",
         "topic": "jmri_switch",
         "style": "",
         "onvalue": "true",
@@ -4506,12 +4091,12 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "",
+        "repeat": "1",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": "5",
-        "x": 180,
-        "y": 160,
+        "x": 210,
+        "y": 120,
         "wires": [
             [
                 "d8e243ba.8292b"
@@ -4526,8 +4111,8 @@
         "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"90%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 580,
-        "y": 220,
+        "x": 420,
+        "y": 160,
         "wires": [
             [
                 "b6b1b343.577db",
@@ -4545,8 +4130,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 778.0000610351562,
-        "y": 165.4166259765625,
+        "x": 590,
+        "y": 200,
         "wires": []
     },
     {
@@ -4562,36 +4147,10 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 783.0001220703125,
-        "y": 219.6666259765625,
+        "x": 600,
+        "y": 160,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "1134ccf2.362973",
-        "type": "ui_button",
-        "z": "c3e3e66a.322358",
-        "name": "",
-        "group": "4411c851.baef98",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Refresh Summary",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 290,
-        "y": 300,
-        "wires": [
-            [
-                "5e90f355.24e56c"
-            ]
         ]
     },
     {
@@ -4613,7 +4172,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 750,
+        "x": 510,
         "y": 100,
         "wires": [
             []
@@ -4642,8 +4201,8 @@
         "offvalueType": "bool",
         "officon": "",
         "offcolor": "",
-        "x": 410,
-        "y": 100,
+        "x": 430,
+        "y": 60,
         "wires": [
             [
                 "6c40f02a.6f059"
@@ -4665,8 +4224,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 340,
-        "y": 220,
+        "x": 250,
+        "y": 160,
         "wires": [
             [
                 "5e90f355.24e56c"
@@ -4678,6 +4237,7 @@
         "type": "subflow:8b10dcf.dc4c82",
         "z": "41757e63.7ce36",
         "name": "",
+        "env": [],
         "x": 497,
         "y": 107,
         "wires": [
@@ -4720,8 +4280,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 687,
-        "y": 147,
+        "x": 690,
+        "y": 120,
         "wires": []
     },
     {
@@ -4734,8 +4294,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 687,
-        "y": 67,
+        "x": 690,
+        "y": 80,
         "wires": []
     },
     {
@@ -4766,108 +4326,13 @@
         ]
     },
     {
-        "id": "cccdade7.ec80b",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "parseInventory",
-        "func": "var TT = global.get('TrainTraxx');\n\nvar keyArray = function(inKeys,inValues) {\n    global.set('here','keyArray start');\n    var myResults = {};\n    \n    for (var ki=0;ki<inKeys.length;i++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    global.set('here','keyArray done');\n    return myResults;\n};\n\nvar arrayFlip = function(inObject) {\n    node.log('arrayFlip');\n    var myResults = {};\n    for (var ai in inObject) {\n        myResults[inObject[ai]] = parseInt(ai);\n    }\n    return myResults;\n};\n\nvar TT_InvDataColumns = TT.inventory.columns;\nvar invIDs = Object.keys(TT.inventory.data);\nvar TT_InvMetaKeyColumns = TT.inventory.keys.columns;\nvar iLookup = TT.inventory.columnLookup;\nvar mLookup = TT.inventory.meta.columnLookup;\nvar mkLookup = TT.inventory.keys.columnLookup;\nvar i = 0;\nmsg.payload.DATA = [];\nfor (var curID in TT.inventory.data) { \n    var temp = {};\n    temp=keyArray(TT_InvDataColumns,TT.inventory.data[curID]);        \n    temp['ID'] = curID;\n    temp['NAME'] = TT.inventory.data[curID][iLookup['NAME']];\n    var keysWVals = Object.keys(TT.inventory.meta.data[curID]);\n    for (var j=0; j< keysWVals.length;j++) {\n        var curKeyID=keysWVals[j];\n        var keyName = TT.inventory.keys.data[curKeyID][mkLookup['meta_key']];\n        temp[keyName] = TT.inventory.meta.data[curID][curKeyID][mLookup['meta_value']];\n    }\n    node.send({\"payload\": { \"activeInv\" : temp}});\n    i++;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 395.71435546875,
-        "y": 112.85711669921875,
-        "wires": [
-            [
-                "87df2a6f.156728"
-            ]
-        ]
-    },
-    {
-        "id": "b5cb9bf3.aba9a8",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Format Engine",
-        "func": "var temp =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": msg.payload.activeInv['Road Mark'] + msg.payload.activeInv['Road Number'],\n      \"number\": msg.payload.activeInv['Road Number'],\n      \"road\": msg.payload.activeInv['Road Mark'],\n      \"type\": msg.payload.activeInv['Car Type'],\n      \"length\": msg.payload.activeInv['Length'],\n      \"color\": msg.payload.activeInv['Color'],\n      \"model\": ((msg.payload.activeInv['Model'] !== undefined) ? msg.payload.activeInv['Model'] : null)\n    }\n  };\nmsg.payload = temp;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 860.71435546875,
-        "y": 87.85711669921875,
-        "wires": [
-            [
-                "783ce65.3454618"
-            ]
-        ]
-    },
-    {
-        "id": "55a4af9.b32635",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Format Car",
-        "func": "var temp =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": msg.payload.activeInv['Road Mark'] + msg.payload.activeInv['Road Number'],\n      \"number\": msg.payload.activeInv['Road Number'],\n      \"road\": msg.payload.activeInv['Road Mark'],\n      \"type\": msg.payload.activeInv['Car Type'],\n      \"length\": msg.payload.activeInv['Length'],\n      \"color\": msg.payload.activeInv['Color'],\n      \"load\": ((msg.payload.activeInv['Initial Load State'] !== undefined) ? msg.payload.activeInv['Initial Load State'] : \"E\"),\n      \"hazardous\": ((msg.payload.activeInv['Hazardous'] !== undefined) ? msg.payload.activeInv['Hazardous'] : false),\n      \"utility\": ((msg.payload.activeInv['Utility'] !== undefined)? msg.payload.activeInv['Utility'] : false),\n      \"returnWhenEmpty\": ((msg.payload.activeInv['Return When Empty'] !== undefined) ?  msg.payload.activeInv['Return When Empty'] : null),\n      \"status\": ((msg.payload.activeInv['Initial Status'] !== undefined) ? msg.payload.activeInv['Initial Status'] : \"\")\n    }\n  };\nmsg.payload = temp;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 849.71435546875,
-        "y": 127.85711669921875,
-        "wires": [
-            [
-                "783ce65.3454618"
-            ]
-        ]
-    },
-    {
-        "id": "87df2a6f.156728",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "Split Inv Type",
-        "property": "payload.activeInv.Type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "Engine",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 629.71435546875,
-        "y": 112.85711669921875,
-        "wires": [
-            [
-                "b5cb9bf3.aba9a8"
-            ],
-            [
-                "55a4af9.b32635"
-            ]
-        ]
-    },
-    {
-        "id": "c1f39a87.2b8348",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Format Locations",
-        "func": "var JMRI = global.get('JMRI'); \nvar addFlag = true;\nvar changeFlag = false;\nconsole.log(msg.payload);\nfor (var i in JMRI.locations.data) {\n    var tempData = JMRI.locations.data[i];\n    if (msg.payload['NAME'] === tempData['name']) {\n        addFlag = false;\n        if ((msg.payload['Length'] !== undefined && tempData['length'] != msg.payload['Length']) || (msg.payload['Comment'] !== undefined && tempData['comment'] != msg.payload['Comment'])) {\n            changeFlag = true;\n        }\n    }\n}\nif (addFlag === true) {\n    msg.verb = 'POST'; // 'PUT';\n} \nif (changeFlag === true) {\n    msg.verb = 'POST'; \n}\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = config.JMRI_API + 'locations';\n\nmsg.payload =  {\n    \"type\": \"location\",\n    \"data\": {\n        \"id\": msg.payload['ID'],\n        \"name\": msg.payload['NAME'],\n        \"length\": ((msg.payload['Length'] !== undefined) ? msg.payload['Length'] : 0 ),\n        \"comment\":  ((msg.payload['Comment'] !== undefined) ? msg.payload['Comment'] : 0 )\n    }\n};\nconsole.log(msg.payload);\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 610,
-        "y": 320,
-        "wires": [
-            [
-                "b109209b.bf36f"
-            ]
-        ]
-    },
-    {
         "id": "ee7a4b50.bf36e8",
         "type": "comment",
         "z": "3d602d50.39dab2",
         "name": "Sample Car Object",
         "info": "msg.payload =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": \"AA123\",\n      \"number\": \"123\",\n      \"road\": \"AA\",\n      \"type\": \"Baggage\",\n      \"length\": \"32\",\n      \"color\": \"Black\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"destination\": null,\n      \"load\": \"E\",\n      \"hazardous\": false,\n      \"removeComment\": \"\",\n      \"addComment\": \"\",\n      \"kernel\": \"\",\n      \"utility\": false,\n      \"finalDestination\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"returnWhenEmpty\": null,\n      \"status\": \"\"\n    }\n  };\nreturn msg;",
-        "x": 124.57144165039062,
-        "y": 224.85714721679688,
+        "x": 1470,
+        "y": 620,
         "wires": []
     },
     {
@@ -4876,8 +4341,8 @@
         "z": "3d602d50.39dab2",
         "name": "Sample Engine Object",
         "info": "msg.payload =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": \"ACL1234\",\n      \"number\": \"1234\",\n      \"road\": \"ACL\",\n      \"type\": \"Diesel\",\n      \"length\": \"54\",\n      \"color\": \"\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": null,\n      \"destination\": null,\n      \"model\": \"E8\",\n      \"consist\": \"\"\n    }\n  };\n  \n \nreturn msg;",
-        "x": 133.57144165039062,
-        "y": 341.8571472167969,
+        "x": 1479,
+        "y": 737,
         "wires": []
     },
     {
@@ -4886,8 +4351,8 @@
         "z": "3d602d50.39dab2",
         "name": "Sample Locations Object",
         "info": "msg.payload =    {\n    \"type\": \"location\",\n    \"data\": {\n      \"name\": \"Test Location\",\n      \"id\": \"1\",\n      \"length\": 40,\n      \"comment\": \"\"\n    }\n  };\nreturn msg;",
-        "x": 143.57144165039062,
-        "y": 302.8571472167969,
+        "x": 1489,
+        "y": 698,
         "wires": []
     },
     {
@@ -4896,145 +4361,33 @@
         "z": "3d602d50.39dab2",
         "name": "Sample Train Object",
         "info": "msg.payload =  {\n    \"type\": \"train\",\n    \"data\": {\n      \"name\": \"Test Train 1\",\n      \"iconName\": \"Test Train 1\",\n      \"id\": \"1\",\n      \"departureTime\": \"03:00\",\n      \"description\": \"Test Train \",\n      \"comment\": \"\",\n      \"route\": \"Test Route\",\n      \"routeId\": \"1\",\n      \"locations\": [\n        {\n          \"id\": \"1r2\",\n          \"name\": \"Test Location\",\n          \"trainDirection\": \"East\",\n          \"comment\": \"\",\n          \"sequenceId\": 2,\n          \"expectedArrivalTime\": \"03:00\",\n          \"expectedDepartureTime\": \"03:00\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"length\": 40,\n            \"comment\": \"\"\n          }\n        }\n      ],\n      \"engines\": [],\n      \"cars\": [\n        {\n          \"id\": \"AA123\",\n          \"number\": \"123\",\n          \"road\": \"AA\",\n          \"type\": \"Baggage\",\n          \"length\": \"32\",\n          \"color\": \"Black\",\n          \"owner\": \"\",\n          \"comment\": \"\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"destination\": null,\n          \"load\": \"E\",\n          \"hazardous\": false,\n          \"removeComment\": \"\",\n          \"addComment\": \"\",\n          \"kernel\": \"\",\n          \"utility\": false,\n          \"finalDestination\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"returnWhenEmpty\": null,\n          \"status\": \"\"\n        }\n      ],\n      \"trainDepartsName\": \"Test Location\",\n      \"trainTerminatesName\": \"Test Location\",\n      \"location\": \"\",\n      \"status\": \"\",\n      \"statusCode\": 65535,\n      \"length\": 0,\n      \"weight\": 0,\n      \"caboose\": \"\"\n    }\n  };\nreturn msg;",
-        "x": 124.57144165039062,
-        "y": 263.8571472167969,
-        "wires": []
-    },
-    {
-        "id": "717d881.3195878",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "method": "POST",
-        "ret": "txt",
-        "url": "",
-        "tls": "",
-        "x": 1338.71435546875,
-        "y": 100.85711669921875,
-        "wires": [
-            [
-                "bf6aa2b.c3b3b6"
-            ]
-        ]
-    },
-    {
-        "id": "783ce65.3454618",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "Route Verb",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1151.71435546875,
-        "y": 128.85711669921875,
-        "wires": [
-            [
-                "717d881.3195878"
-            ],
-            [
-                "1912be33.f43e72"
-            ]
-        ]
-    },
-    {
-        "id": "1912be33.f43e72",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "method": "PUT",
-        "ret": "txt",
-        "url": "",
-        "tls": "",
-        "x": 1334.71435546875,
-        "y": 159.85711669921875,
-        "wires": [
-            [
-                "bf6aa2b.c3b3b6"
-            ]
-        ]
-    },
-    {
-        "id": "bf6aa2b.c3b3b6",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1501.4286804199219,
-        "y": 128.5714111328125,
+        "x": 1470,
+        "y": 659,
         "wires": []
     },
     {
         "id": "f51f6fd0.01c5d",
         "type": "ui_button",
         "z": "3d602d50.39dab2",
-        "name": "",
+        "name": "TrainTraxx to JMRI",
         "group": "a9319cec.7d9c",
-        "order": 4,
-        "width": 0,
-        "height": 0,
+        "order": 7,
+        "width": "5",
+        "height": "1",
         "passthru": false,
         "label": "TrainTraxx to JMRI",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
         "icon": "cloud_download",
-        "payload": "",
+        "payload": "Clicked",
         "payloadType": "str",
         "topic": "",
-        "x": 370,
-        "y": 280,
+        "x": 490,
+        "y": 40,
         "wires": [
             [
-                "dbf25248.8540c"
-            ]
-        ]
-    },
-    {
-        "id": "adddbe9.5de4a4",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 370,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "dbf25248.8540c",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "parseLocations",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\n\n/*\nvar TT_LocDataColumns = TT.locations.columns;\nvar locIDs = Object.keys(TT.locations.data);\nvar TT_LocMetaKeyColumns = TT.locations.keys.columns;\nvar iLookup = TT.locations.columnLookup;\nvar mLookup = TT.locations.meta.columnLookup;\nvar mkLookup = TT.locations.keys.columnLookup;\n*/\nfor (var curID in TT.locations.data) { \n    var temp = hive.array_combine(TT.locations.columns,TT.locations.data[curID]);        \n    temp['ID'] = Number(curID);\n    for (var j in TT.locations.meta.data[curID]) {\n        var tempMeta = hive.array_combine(TT.locations.meta.columns,TT.locations.meta.data[curID][j]);        \n        var tempMetaKey = hive.array_combine(TT.locations.keys.columns,TT.locations.keys.data[tempMeta['wp_tt_locationmetakeys_ID']]);        \n        temp[tempMetaKey['meta_key']] = tempMeta['meta_value'];\n    }\n    msg.payload = temp;\n    node.send(msg);\n        \n    //node.send({\"payload\": { \"activeLoc\" : temp}});\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 400,
-        "y": 320,
-        "wires": [
-            [
-                "adddbe9.5de4a4",
-                "c1f39a87.2b8348"
+                "509dfa72.51cfc4"
             ]
         ]
     },
@@ -5707,21 +5060,6 @@
         ]
     },
     {
-        "id": "33a0dcf.5102a24",
-        "type": "debug",
-        "z": "7b5cf843.8f8fc8",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 810,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "b1933c19.2d82f",
         "type": "csv",
         "z": "7b5cf843.8f8fc8",
@@ -5737,8 +5075,7 @@
         "y": 280,
         "wires": [
             [
-                "33a0dcf.5102a24",
-                "5d886417.9ca5ec"
+                "c29072b.60bee9"
             ]
         ]
     },
@@ -5792,7 +5129,7 @@
             {
                 "t": "set",
                 "p": "LEASE_FILE",
-                "pt": "global",
+                "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
             }
@@ -5820,13 +5157,12 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 570,
+        "x": 550,
         "y": 360,
         "wires": [
             [
-                "33a0dcf.5102a24",
-                "533870c4.2662",
-                "dd94a3fd.ae674"
+                "505e45d0.cb662c",
+                "33a5186c.ba9b08"
             ]
         ]
     },
@@ -5835,7 +5171,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Set URL",
-        "func": "msg.url = 'http://' + msg.payload.col3 + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nmsg.topic = msg.payload.col2;\nreturn msg;",
+        "func": "msg.url = 'http://' + msg.IP + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 520,
@@ -7506,8 +6842,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 700,
-        "y": 480,
+        "x": 670,
+        "y": 500,
         "wires": []
     },
     {
@@ -8127,12 +7463,12 @@
         "type": "file in",
         "z": "9745920.d8a397",
         "name": "",
-        "filename": "/opt/hiveid-ap/CC.csv",
+        "filename": "/opt/hiveid-ap/data/CC.csv",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 940,
+        "x": 920,
         "y": 800,
         "wires": [
             [
@@ -8467,7 +7803,7 @@
         "to": "",
         "reg": false,
         "x": 890,
-        "y": 400,
+        "y": 440,
         "wires": [
             [
                 "93535d75.79ef"
@@ -8478,11 +7814,11 @@
         "id": "533870c4.2662",
         "type": "function",
         "z": "7b5cf843.8f8fc8",
-        "name": "Put into Global.Probes",
-        "func": "var probes = global.get('Probes');\nvar probeHistory = global.get('Probe_History');\n\nif (probes === undefined) {\n    probes = {};\n}\nif (probeHistory === undefined) {\n    probeHistory = {};\n}\nif (msg.payload.MAC !== undefined) {\n    probes[msg.payload.MAC] = msg.payload;\n    //probeHistory[msg.payload.MAC][msg.payload.TIME] = { Success : msg.payload.SUCCESS, Failure : msg.payload.FAILURE };\n    global.set('Probes',probes);\n    global.set('Probe_History',probeHistory);\n}\nmsg.payload = probes;\nreturn msg;",
+        "name": "Put into flow.Probes",
+        "func": "var probes = flow.get('Probes');\nvar probeHistory = flow.get('Probe_History');\n\nif (probes === undefined) {\n    probes = {};\n}\nif (probeHistory === undefined) {\n    probeHistory = {};\n}\nif (probeHistory[msg.MAC] === undefined) {\n    probeHistory[msg.MAC] = {};\n}\nif (msg.MAC !== undefined) {\n    probes[msg.MAC] = msg.payload;\n    var tempKeys = Object.keys(probeHistory[msg.MAC]);\n    if (tempKeys.length >= 10) {\n        delete probeHistory[msg.MAC][tempKeys[0]];\n    }\n    probeHistory[msg.MAC][msg.payload.TIME] = { \n        Success : msg.payload.SUCCESS, \n        Failure : msg.payload.FAILURE \n    };\n    flow.set('Probes',probes);\n    flow.set('Probe_History',probeHistory);\n}\nmsg.payload = probes;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 840,
+        "x": 1140,
         "y": 360,
         "wires": [
             []
@@ -8500,11 +7836,10 @@
         "lineType": "three",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 600,
+        "x": 540,
         "y": 580,
         "wires": [
             [
-                "c076d62d.45aac8",
                 "7fe7a3b.bd6b85c"
             ]
         ]
@@ -8514,15 +7849,14 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = global.get('Probes');\nmsg.payload = [];\nvar inHealth = global.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
+        "func": "var inProbes = flow.get('Probes');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
         "y": 580,
         "wires": [
             [
-                "273afee4.dd92c2",
-                "25a99b27.5ec354"
+                "273afee4.dd92c2"
             ]
         ]
     },
@@ -8531,44 +7865,14 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Set Health Messges for Probes",
-        "func": "var probes = global.get('Probe_Health');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.topic] = msg.statusCode;\nglobal.set('Probe_Health',probes);\nmsg.payload = probes;",
+        "func": "var probes = flow.get('Probe_Health');\nif (probes === undefined) {\n    probes = {};\n}\nprobes[msg.MAC] = msg.statusCode;\nflow.set('Probe_Health',probes);\nmsg.payload = probes;",
         "outputs": 1,
         "noerr": 0,
-        "x": 870,
+        "x": 1170,
         "y": 320,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "25a99b27.5ec354",
-        "type": "debug",
-        "z": "7b5cf843.8f8fc8",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 590,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "c076d62d.45aac8",
-        "type": "debug",
-        "z": "7b5cf843.8f8fc8",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 750,
-        "y": 540,
-        "wires": []
     },
     {
         "id": "7fe7a3b.bd6b85c",
@@ -8608,7 +7912,7 @@
         "repair": false,
         "outputs": 5,
         "x": 610,
-        "y": 720,
+        "y": 700,
         "wires": [
             [
                 "6f1bb70b.a402e8"
@@ -9291,12 +8595,12 @@
         "name": "",
         "topic": "",
         "payload": "LEASE_FILE",
-        "payloadType": "global",
+        "payloadType": "flow",
         "repeat": "30",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 220,
+        "x": 210,
         "y": 220,
         "wires": [
             [
@@ -9322,7 +8626,7 @@
                 "p": "payload",
                 "pt": "msg",
                 "to": "LEASE_FILE",
-                "tot": "global"
+                "tot": "flow"
             }
         ],
         "action": "",
@@ -9426,7 +8730,7 @@
         "url": "",
         "tls": "",
         "proxy": "",
-        "authType": "basic",
+        "authType": "",
         "x": 1150,
         "y": 1120,
         "wires": [
@@ -9668,11 +8972,11 @@
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "reload",
+        "label": "Flush Cache",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
-        "icon": "",
+        "icon": "fa-reload",
         "payload": "",
         "payloadType": "str",
         "topic": "",
@@ -9693,21 +8997,28 @@
             {
                 "t": "set",
                 "p": "Probe_Health",
-                "pt": "global",
+                "pt": "flow",
                 "to": "{}",
                 "tot": "json"
             },
             {
                 "t": "set",
                 "p": "Probe_History",
-                "pt": "global",
+                "pt": "flow",
                 "to": "{}",
                 "tot": "json"
             },
             {
                 "t": "set",
                 "p": "Probes",
-                "pt": "global",
+                "pt": "flow",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "Probe_Ignore",
+                "pt": "flow",
                 "to": "{}",
                 "tot": "json"
             }
@@ -9873,7 +9184,7 @@
         "links": [
             "4794cc59.6fea44"
         ],
-        "x": 975,
+        "x": 895,
         "y": 780,
         "wires": []
     },
@@ -9900,8 +9211,7 @@
         "y": 780,
         "wires": [
             [
-                "1e2d1aa3.003aa5",
-                "76289d6d.c9ddd4"
+                "1e2d1aa3.003aa5"
             ]
         ]
     },
@@ -9924,21 +9234,6 @@
                 "9fed95c1.655638"
             ]
         ]
-    },
-    {
-        "id": "76289d6d.c9ddd4",
-        "type": "debug",
-        "z": "7b5cf843.8f8fc8",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1010,
-        "y": 820,
-        "wires": []
     },
     {
         "id": "2dc22e8d.c4bbd2",
@@ -10235,7 +9530,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 560,
+        "y": 540,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10339,7 +9634,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 720,
+        "y": 700,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10380,7 +9675,7 @@
         "to": "",
         "reg": false,
         "x": 900,
-        "y": 680,
+        "y": 660,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10421,7 +9716,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 640,
+        "y": 620,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -10462,7 +9757,7 @@
         "to": "",
         "reg": false,
         "x": 910,
-        "y": 600,
+        "y": 580,
         "wires": [
             [
                 "4ba9673a.c0c578"
@@ -11095,8 +10390,8 @@
         "lineType": "one",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 280,
-        "y": 220,
+        "x": 160,
+        "y": 120,
         "wires": [
             [
                 "fb7f29d3.860898",
@@ -11117,8 +10412,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "10",
-        "x": 230,
-        "y": 140,
+        "x": 110,
+        "y": 40,
         "wires": [
             [
                 "5297946e.728bec"
@@ -11133,8 +10428,8 @@
         "func": "var _ = global.get('_');\nvar gatewayInfo = global.get('gatewayInfo');\nmsg.payload = [];\n    \nvar services = {};\nif (gatewayInfo['services'] !== undefined) {\n    services = gatewayInfo['services'];\n}\nif (services === undefined ) {\n    msg.payload.push({ 'title' : 'Service list is not available' });\n    \n} else {\n    var serviceList =_.orderBy(services,['description']);\n    for (var i in serviceList) {\n        var menu = [];\n        var icon_name = '';\n        switch (serviceList[i].SUB) {\n            case 'listening':\n                icon_name = 'hearing';\n                menu.push('Stop','Restart');\n                break;\n            case 'waiting':\n                icon_name = 'hourglass_empty';\n                menu.push('Stop','Restart');\n                break;\n            case 'running':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'active':\n                icon_name ='check_circle';\n                menu.push('Stop','Restart');\n                break;\n            case 'failed':\n                icon_name = 'error_outline';\n                menu.push('Start');\n                break;\n            case 'exited':\n                icon_name='not_interested';\n                menu.push('Start');\n                break;\n            case 'plugged':\n                menu.push('Eject');\n                icon_name = \"eject\";\n                break;\n            case 'mounted': \n                menu.push('Unmount');\n                icon_name = \"eject\";\n                break;\n        }\n        if (serviceList[i].serviceName === 'boot.mount') {\n            menu = null;\n        }\n        msg.payload.push({ \n            'title' : serviceList[i].description,\n            'menu' : menu,\n            'icon_name' : icon_name,\n            'serviceName' : serviceList[i].serviceName\n        });\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 230,
-        "y": 180,
+        "x": 110,
+        "y": 80,
         "wires": [
             [
                 "d7c57529.0d4a48"
@@ -11149,8 +10444,8 @@
         "func": "var inPayload=msg.payload;\nvar verb='';\nswitch (inPayload.selected) {\n    case 'Start':\n        verb = 'start';\n        break;\n    case 'Restart':\n        verb = 'restart';\n        break;\n    default:\n        verb = 'stop';\n}\n\n\nflow.set('action',inPayload.selected);\nflow.set('serviceName',inPayload.serviceName);\n\nmsg.payload = verb + ' ' + inPayload.serviceName;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 310,
-        "y": 260,
+        "x": 190,
+        "y": 160,
         "wires": [
             [
                 "522c62c7.6a3e3c"
@@ -11168,8 +10463,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 450,
-        "y": 220,
+        "x": 330,
+        "y": 120,
         "wires": []
     },
     {
@@ -11183,8 +10478,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 380,
-        "y": 300,
+        "x": 260,
+        "y": 220,
         "wires": [
             [],
             [],
@@ -11201,8 +10496,8 @@
         "func": "var inPayload = msg.payload;\nmsg.payload =inPayload.selected + ' ' + inPayload.serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'orange';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 490,
-        "y": 180,
+        "x": 390,
+        "y": 80,
         "wires": [
             [
                 "e16c7e84.1c1f5"
@@ -11221,8 +10516,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 990,
-        "y": 180,
+        "x": 950,
+        "y": 80,
         "wires": []
     },
     {
@@ -11233,8 +10528,8 @@
         "func": "var action = flow.get('action');\nvar serviceName = flow.get('serviceName');\nmsg.payload =action + 'ed ' + serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'green';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 750,
-        "y": 280,
+        "x": 630,
+        "y": 200,
         "wires": [
             [
                 "e16c7e84.1c1f5"
@@ -11249,8 +10544,8 @@
         "func": "var action = flow.get('action');\nvar serviceName = flow.get('serviceName');\nmsg.payload = 'Failed to ' + action + ' ' + serviceName;\nmsg.topic = 'System Command';\nmsg.highlight = 'red';\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 750,
-        "y": 320,
+        "x": 630,
+        "y": 240,
         "wires": [
             [
                 "e16c7e84.1c1f5"
@@ -11277,8 +10572,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 550,
-        "y": 300,
+        "x": 430,
+        "y": 220,
         "wires": [
             [
                 "55b3dff6.2ae17"
@@ -11359,7 +10654,7 @@
             "5e3f873c.631bc8"
         ],
         "x": 895,
-        "y": 860,
+        "y": 820,
         "wires": []
     },
     {
@@ -11382,7 +10677,7 @@
         "to": "",
         "reg": false,
         "x": 790,
-        "y": 860,
+        "y": 820,
         "wires": [
             [
                 "68c172c3.71484c"
@@ -12821,20 +12116,6 @@
         "wires": []
     },
     {
-        "id": "19f66dc8.d00f62",
-        "type": "debug",
-        "z": "1a726252.d178be",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 480,
-        "y": 140,
-        "wires": []
-    },
-    {
         "id": "754c0572.d2d74c",
         "type": "switch",
         "z": "de72cd33.d0bc",
@@ -12856,7 +12137,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 630,
+        "x": 650,
         "y": 520,
         "wires": [
             [
@@ -12879,8 +12160,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 930,
-        "y": 460,
+        "x": 1210,
+        "y": 500,
         "wires": [
             []
         ]
@@ -12911,8 +12192,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 740,
-        "y": 460,
+        "x": 920,
+        "y": 500,
         "wires": [
             [
                 "1fe4ff49.5cde41"
@@ -12930,8 +12211,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 700,
-        "y": 420,
+        "x": 650,
+        "y": 480,
         "wires": []
     },
     {
@@ -12944,45 +12225,18 @@
         "payloadType": "date",
         "repeat": "",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
-        "x": 140,
-        "y": 560,
+        "x": 730,
+        "y": 800,
         "wires": [
             [
-                "515c41c1.5c104",
-                "5ce0926d.37562c"
+                "5ce0926d.37562c",
+                "874355e1.db5228",
+                "337e2284.c5ea3e",
+                "d619f02a.37bcb"
             ]
         ]
-    },
-    {
-        "id": "515c41c1.5c104",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Setup Shared Functions",
-        "func": "var inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\nglobal.set('hive', inObject);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 410,
-        "y": 600,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b109209b.bf36f",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 790,
-        "y": 280,
-        "wires": []
     },
     {
         "id": "18cf4265.28d82e",
@@ -13000,8 +12254,8 @@
         "y": 500,
         "wires": [
             [
-                "1d5514d.8e83eeb",
-                "99b19d98.cf379"
+                "99b19d98.cf379",
+                "1d504262.54c26e"
             ]
         ],
         "inputLabels": [
@@ -13016,7 +12270,7 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "JRMI Reporters Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\nmsg.verb = 'PUT';\nvar reporterName = 'IRHIVE' + String(curReporters.nextID);\nvar reporterId = 0;\nif (curReporters.map[RFIDRequest.MAC] !== undefined) {\n    reporterId = curReporters.map[RFIDRequest.MAC];\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n} else if (curReporters.available.length > 0) {\n    reporterId = curReporters.available.pop();\n    reporterName = curReporters.data[reporterId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": {\n      \"name\": reporterName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  String(Date.now()),\n      \"report\": RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter';\n\nreturn msg;",
+        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nreporter.report = RFIDRequest.UID;\nreporter.comment = String(Date.now());\nreporter.state = 2;\nmsg.verb = reporter.verb;\ndelete reporter.verb;\n\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": reporter\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter';\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -13112,8 +12366,8 @@
         "y": 540,
         "wires": [
             [
-                "1d5514d.8e83eeb",
-                "99b19d98.cf379"
+                "99b19d98.cf379",
+                "1d504262.54c26e"
             ]
         ],
         "inputLabels": [
@@ -13139,8 +12393,8 @@
         "y": 580,
         "wires": [
             [
-                "caab416.28359c",
-                "99b19d98.cf379"
+                "99b19d98.cf379",
+                "9a02981f.13c5c8"
             ]
         ],
         "inputLabels": [
@@ -13155,7 +12409,7 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "JRMI Sensors Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\nmsg.verb = 'PUT';\nvar sensorName = 'ISHIVE' + String(curSensors.nextID);\nvar sensorId = 0;\nif (curSensors.map[RFIDRequest.MAC] !== undefined) {\n    sensorId = curSensors.map[RFIDRequest.MAC];\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n} else if (curSensors.available.length > 0) {\n    sensorId = curSensors.available.pop();\n    sensorName = curSensors.data[sensorId].name;\n    msg.verb = 'POST';\n}\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": {\n      \"name\": sensorName,\n      \"userName\": RFIDRequest.MAC,\n      \"state\": 4,\n      \"comment\":  RFIDRequest.UID\n    }\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor';\nreturn msg;",
+        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar sensor = hive.getSensorName(RFIDRequest.MAC);\nsensor.comment = String(Date.now());\nsensor.state = 2;\nmsg.verb = sensor.verb;\ndelete sensor.verb;\n\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": sensor\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor';\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 340,
@@ -13228,8 +12482,8 @@
         "y": 620,
         "wires": [
             [
-                "caab416.28359c",
-                "99b19d98.cf379"
+                "99b19d98.cf379",
+                "9a02981f.13c5c8"
             ]
         ],
         "inputLabels": [
@@ -13308,8 +12562,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1150,
-        "y": 580,
+        "x": 1070,
+        "y": 560,
         "wires": []
     },
     {
@@ -13317,13 +12571,13 @@
         "type": "file in",
         "z": "3d602d50.39dab2",
         "name": "",
-        "filename": "/opt/hiveid-ap/field_map.csv",
+        "filename": "/opt/hiveid-ap/data/field_map.csv",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 420,
-        "y": 560,
+        "x": 1080,
+        "y": 680,
         "wires": [
             [
                 "c05715cf.f986d8"
@@ -13342,8 +12596,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 650,
-        "y": 560,
+        "x": 1010,
+        "y": 720,
         "wires": [
             [
                 "9a5cfaf0.6b0dd8"
@@ -13369,8 +12623,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 810,
-        "y": 560,
+        "x": 1170,
+        "y": 720,
         "wires": [
             []
         ]
@@ -13380,14 +12634,2637 @@
         "type": "watch",
         "z": "3d602d50.39dab2",
         "name": "",
-        "files": "/opt/hiveid-ap/field_map.csv",
+        "files": "/opt/hiveid-ap/data/field_map.csv",
         "recursive": "",
-        "x": 200,
-        "y": 520,
+        "x": 620,
+        "y": 680,
         "wires": [
             [
                 "5ce0926d.37562c"
             ]
         ]
+    },
+    {
+        "id": "874355e1.db5228",
+        "type": "function-npm",
+        "z": "3d602d50.39dab2",
+        "name": "Setup Flow Functions",
+        "func": "var FlowMap = flow.get('FlowMap');\nvar CarTypeMap = flow.get('CarTypeMap');\nvar RoadNameMap = flow.get('RoadNameMap');\nvar inObject = {};\ninObject.jmri2tt = function(type,key) {\n    var myResults = {};\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type !== undefined && \n                FlowMap[i].JMRI_Type === type  &&\n                FlowMap[i].JMRI === key\n        ) {\n            myResults = { \n                type : FlowMap[i].TrainTraxx_Type,\n                key  : FlowMap[i].TrainTraxx\n            };\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri = function(type,key) {\n    var myResults = {};\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type === type  &&\n                FlowMap[i].TrainTraxx === key\n        ) {\n            myResults = { \n                type : FlowMap[i].JMRI_Type,\n                key  : FlowMap[i].JMRI\n            };\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_carType = function(name) {\n    var myResults = name;\n    for (var i in CarTypeMap) {\n        if (CarTypeMap[i].col1 === name) {\n            myResults = CarTypeMap[i].col2;\n        }\n    }\n    return myResults;\n}\n\ninObject.tt2jmri_RoadName = function(name) {\n    var myResults = name;\n    for (var i in RoadNameMap) {\n        if (RoadNameMap[i]['Road Name'] === name || RoadNameMap[i]['Road Short Name'] === name ) {\n            myResults = RoadNameMap[i]['Road Short Name'];\n        }\n    }\n    return myResults;\n}\n\n\nflow.set('sync', inObject);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1040,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c313e37.a5d6d",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "Restructure Data Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1340,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "87d6b3a0.2d3b2",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Restructure Data",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar array_combine = hive.array_combine;\nvar invColumns = TT.inventory.columns;\nvar metaColumns = TT.inventory.meta.columns;\nvar metaKeyColumns = TT.inventory.keys.columns;\nvar TagData = msg.payload;\ncurRecord = {};\nvar KeyRecords = {};\n\nvar columnList = ['NAME'];\nfor (var KeyID in TT.inventory.keys.data) {\n    var curKey = TT.inventory.keys.data[KeyID];\n    KeyRecords[KeyID] = array_combine(metaKeyColumns,curKey);\n    KeyRecords[KeyID]['ID'] = KeyID;\n    columnList.push(KeyRecords[KeyID]['meta_key']);\n}\n\nvar InvRecords = {};\nvar curMetaRecord = {};\nmsg.payload = [];\n\nfor (var InvID in TT.inventory.data) {\n    var curInv = TT.inventory.data[InvID];\n    \n    var InvRecord = array_combine(invColumns,curInv);\n    var tempRecord = {};\n    tempRecord['JMRI_TAGNAME'] = TagData[InvID];\n    \n    for (var i in columnList) {\n        var columnName = columnList[i];\n        tempRecord[columnName] = '';\n    }\n    tempRecord['NAME'] = InvRecord.NAME;\n    for (var MetaID in TT.inventory.meta.data[InvID]) {\n        var curMeta = TT.inventory.meta.data[InvID][MetaID];\n        curMetaRecord[MetaID] = array_combine(metaColumns,curMeta);\n        //curMetaRecord[MetaID]['ID'] = MetaID;\n        curMetaRecord[MetaID]['key'] = KeyRecords[curMetaRecord[MetaID]['wp_tt_inventorymetakeys_ID']];\n        tempRecord[curMetaRecord[MetaID]['key']['meta_key']] = curMetaRecord[MetaID]['meta_value'];\n    }\n    msg.payload.push(tempRecord);\n    //InvRecords[InvID]['meta'] = curMetaRecord;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 950,
+        "y": 260,
+        "wires": [
+            [
+                "9678a17d.f9233",
+                "20f89dba.b8f4e2",
+                "8c313e37.a5d6d",
+                "621572f.7860c8c"
+            ]
+        ]
+    },
+    {
+        "id": "505e45d0.cb662c",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Check Web Response",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ECONNREFUSED",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "EHOSTUNREACH",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ETIMEDOUT",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "200",
+                "vt": "num"
+            },
+            {
+                "t": "gte",
+                "v": "400",
+                "vt": "num"
+            },
+            {
+                "t": "gte",
+                "v": "500",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 7,
+        "x": 780,
+        "y": 360,
+        "wires": [
+            [
+                "dd94a3fd.ae674",
+                "533870c4.2662",
+                "ea44f051.87de7",
+                "730417c4.d8b998"
+            ],
+            [
+                "ea44f051.87de7",
+                "533870c4.2662",
+                "dd94a3fd.ae674",
+                "730417c4.d8b998"
+            ],
+            [
+                "ea44f051.87de7",
+                "533870c4.2662",
+                "dd94a3fd.ae674",
+                "730417c4.d8b998"
+            ],
+            [
+                "533870c4.2662",
+                "dd94a3fd.ae674"
+            ],
+            [
+                "ea44f051.87de7",
+                "533870c4.2662",
+                "dd94a3fd.ae674",
+                "730417c4.d8b998"
+            ],
+            [
+                "ea44f051.87de7",
+                "533870c4.2662",
+                "dd94a3fd.ae674",
+                "730417c4.d8b998"
+            ],
+            [
+                "ea44f051.87de7",
+                "533870c4.2662",
+                "dd94a3fd.ae674",
+                "730417c4.d8b998"
+            ]
+        ]
+    },
+    {
+        "id": "c29072b.60bee9",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "IP",
+                "pt": "msg",
+                "to": "payload.col3",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "MAC",
+                "pt": "msg",
+                "to": "payload.col2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 280,
+        "wires": [
+            [
+                "844374de.7720c8"
+            ]
+        ]
+    },
+    {
+        "id": "841793ca.71042",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Pass Records",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1120,
+        "y": 280,
+        "wires": [
+            [
+                "5d886417.9ca5ec"
+            ],
+            [
+                "cd10624b.e083b"
+            ]
+        ]
+    },
+    {
+        "id": "ea44f051.87de7",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Manage Probe Ignore List",
+        "func": "var Probe_Ignore = flow.get('Probe_Ignore');\nif (Probe_Ignore === undefined) {\n    Probe_Ignore = {};\n}\nvar retryCount = 0;\nvar startTimer= Date.now();\nif (Probe_Ignore[msg.MAC] !== undefined) {\n    retryCount = Probe_Ignore[msg.MAC].RetryCount;\n    startTimer = Probe_Ignore[msg.MAC].StartTimer;\n}\nProbe_Ignore[msg.MAC] = { \n    Reason : msg.statusCode,\n    Time : Date.now(),\n    StartTimer : startTimer,\n    RetryCount : ++retryCount\n};  \nflow.set('Probe_Ignore',Probe_Ignore);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1150,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "844374de.7720c8",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Check Ignore List",
+        "func": "var Probe_Ignore = flow.get('Probe_Ignore');\nif (Probe_Ignore === undefined) {\n    Probe_Ignore = {};\n}\n/* If the probe is over 300 / 5 Minutes, Try again */\n\nvar retry_num = 3;\nvar retry_wait = 300000;\nmsg.payload = true;\n\nif (Probe_Ignore[msg.MAC] !== undefined) {\n    if ((Date.now() - Probe_Ignore[msg.MAC].StartTimer) >= retry_wait) {\n        delete Probe_Ignore[msg.MAC];\n    }\n    if (Probe_Ignore[msg.MAC] !== undefined ) { \n        if (Probe_Ignore[msg.MAC].RetryCount > retry_num) {\n            msg.payload = false;\n        }\n    } \n} \nflow.set('Probe_Ignore',Probe_Ignore);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "841793ca.71042"
+            ]
+        ]
+    },
+    {
+        "id": "730417c4.d8b998",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Post Check Web Response Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1190,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c8efac4.157725",
+        "type": "comment",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Updates",
+        "info": "Need to make sure the Probe_Ignore works",
+        "x": 200,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "33a5186c.ba9b08",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Post Web Request",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "cd10624b.e083b",
+        "type": "debug",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Probe Ignored",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1400,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2ec96926.6bdab6",
+        "type": "file",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/traintraxx.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1060,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20f89dba.b8f4e2",
+        "type": "json",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 930,
+        "y": 300,
+        "wires": [
+            [
+                "2ec96926.6bdab6"
+            ]
+        ]
+    },
+    {
+        "id": "9678a17d.f9233",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Convert Data",
+        "func": "var inData = msg.payload;\nvar JMRI_Config = global.get('JMRI_Config');\nvar JMRI = global.get('JMRI');\nvar IP = global.get('IP');\nvar sync = flow.get('sync');\n\nfor (var i in inData) {\n    var curRecord = inData[i];\n    var type = 'car';\n    if (curRecord['Inventory Type'] !== undefined && curRecord['Inventory Type'] !== \"\") {\n        type = curRecord['Inventory Type'].toLowerCase();    \n    }\n    \n    var temp = {\n        payload : {\n            \"type\" : type\n            ,\"data\" : {}\n        }\n        ,verb : 'PUT'\n        ,url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + type\n    };\n    \n    for (var fieldName in curRecord) {\n        var targetField = sync.tt2jmri('inventory',fieldName);\n        if (targetField.key !== undefined && curRecord[fieldName] !== \"\" && curRecord[fieldName] !== null) {\n            temp.payload['data'][targetField.key] = curRecord[fieldName];\n        }\n    }\n    temp.payload['data']['carType'] = sync.tt2jmri_carType(temp.payload['data']['carType']);\n    temp.payload['data']['rfid'] = (curRecord['JMRI_TAGNAME'] === undefined) ? \"\" : curRecord['JMRI_TAGNAME'];\n        \n    if (curRecord['Road Name'] === undefined) {\n        curRecord['Road Name'] = sync.tt2jmri_RoadName(temp.payload['data']['Road Name']);\n    }\n    \n    var name = curRecord['Road Name'] + curRecord['Road Number'];\n    temp.payload['data']['name'] = name;\n    \n    \n    var exists = false;\n    \n    for (var jmriID in JMRI.cars.data) {\n        if (name === JMRI.cars.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    for (var jmriID in JMRI.engines.data) {\n        if (name === JMRI.engines.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    \n    if (exists === true) {\n        temp.verb = 'POST';\n    } \n    \n    node.send(temp);\n}\nflow.set('running_inventoryImport', false);\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1290,
+        "y": 260,
+        "wires": [
+            [
+                "9c3a93e3.fade",
+                "e9e4d9c.a3be928",
+                "52cbe0db.c277c"
+            ]
+        ]
+    },
+    {
+        "id": "e4ecf803.e3e288",
+        "type": "comment",
+        "z": "3d602d50.39dab2",
+        "name": "TODO",
+        "info": "Add in RFID Matching\nRoad Mark Mapping \n\n\nLocation Update interface for engine and car\n",
+        "x": 90,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c4687444.fb6708",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Add Tags",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar tagColumns = TT.tags.columns;\nmsg.payload = {};\nvar msg2 = {payload : [] };\n\nfor (var tagID in TT.tags.data) {\n    var curTag = hive.array_combine(tagColumns, TT.tags.data[tagID]);\n    curTag['ID'] = tagID;\n    curTag['JMRI_IDTAG'] = 'IDHIVE' + tagID;\n    msg2.payload.push(curTag);\n    if (curTag['wp_tt_inventory_ID'] !== undefined && curTag['wp_tt_inventory_ID'] !== \"\") {\n        msg.payload[curTag['wp_tt_inventory_ID']] = curTag['JMRI_IDTAG'];         \n    }\n}\nreturn [msg,msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 540,
+        "y": 260,
+        "wires": [
+            [
+                "87d6b3a0.2d3b2",
+                "3d9fe886.dbd038"
+            ],
+            [
+                "405bbea4.15dd8"
+            ]
+        ]
+    },
+    {
+        "id": "8e6dfe75.eac0d",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Sync Sensors & Reporters",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar array_combine = hive.array_combine;\nvar getSensorName   = hive.getSensorName;\nvar getReporterName = hive.getReporterName;\n\nvar hiveColumns = TT.hivenode.columns;\n\nfor (var nodeID in TT.hivenode.data) {\n    var nodeData = array_combine(hiveColumns,TT.hivenode.data[nodeID]);\n    \n    var reporterObject = getReporterName(nodeData['MAC_ADDRESS']);\n    var sensorObject = getSensorName(nodeData['MAC_ADDRESS']);\n    var r_verb = reporterObject.verb;\n    var s_verb = sensorObject.verb;\n    delete reporterObject.verb;\n    delete sensorObject.verb;\n    reporterObject.report =null;\n    reporterObject.value =\"\";\n    reporterObject.lastReport =null;\n    node.send({\n        payload : { type: \"reporters\", data : reporterObject},\n        url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter',\n        verb : r_verb\n    });\n    node.send({\n        payload : { type : \"sensors\", data : sensorObject},\n        url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor',\n        verb : s_verb\n    });\n}\nflow.set('running_sensorImport', false);\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "c4837cb3.347e1"
+            ]
+        ]
+    },
+    {
+        "id": "e10f4679.205708",
+        "type": "file",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/tags.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 690,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "405bbea4.15dd8",
+        "type": "json",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 570,
+        "y": 300,
+        "wires": [
+            [
+                "e10f4679.205708"
+            ]
+        ]
+    },
+    {
+        "id": "3d9fe886.dbd038",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "Tag Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 930,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "97eed347.84621",
+        "type": "file",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/formatted.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1600,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c3a93e3.fade",
+        "type": "json",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 1470,
+        "y": 300,
+        "wires": [
+            [
+                "97eed347.84621"
+            ]
+        ]
+    },
+    {
+        "id": "5e89fd1e.bd8354",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "PUT Record",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1630,
+        "y": 240,
+        "wires": [
+            [
+                "d939d611.5a0548"
+            ]
+        ]
+    },
+    {
+        "id": "d939d611.5a0548",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "Convert Data Request Results",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1890,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c7a96328.94569",
+        "type": "watch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "files": "/opt/hiveid-ap/data/CC.csv",
+        "recursive": "",
+        "x": 600,
+        "y": 800,
+        "wires": [
+            [
+                "11bd9584.c3dd2a"
+            ]
+        ]
+    },
+    {
+        "id": "337e2284.c5ea3e",
+        "type": "file in",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/opt/hiveid-ap/data/traintraxx_to_jmri.cartypes.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "x": 1130,
+        "y": 600,
+        "wires": [
+            [
+                "2c706ed6.288632"
+            ]
+        ]
+    },
+    {
+        "id": "2c706ed6.288632",
+        "type": "csv",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "sep": ",",
+        "hdrin": false,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 1010,
+        "y": 640,
+        "wires": [
+            [
+                "fe3937c2.70aef8"
+            ]
+        ]
+    },
+    {
+        "id": "fe3937c2.70aef8",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "Set CarTypeMap",
+        "rules": [
+            {
+                "t": "set",
+                "p": "CarTypeMap",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a8c5ab2.004918",
+        "type": "watch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.cartypes.csv",
+        "recursive": "",
+        "x": 670,
+        "y": 600,
+        "wires": [
+            [
+                "337e2284.c5ea3e"
+            ]
+        ]
+    },
+    {
+        "id": "7735206a.707b8",
+        "type": "comment",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "info": "msg.payload = {\n    \"type\" : type\n    ,\"data\" : {\n        \"name\" : curRecord['Road Name'] + curRecord['Road Number']\n        ,\"number\" : ((curRecord['Road Number'] === undefined) ? \"\" : curRecord['Road Number'])\n        ,\"road\" : ((curRecord['Road Name'] === undefined) ? \"\" : curRecord['Road Name'])\n        ,\"rfid\" : ((curRecord['JMRI_TAGNAME'] === undefined) ? \"\" : curRecord['JMRI_TAGNAME'])\n        ,\"carType\" : ((curRecord['Car Type'] === undefined) ? \"\" : curRecord['Car Type'])\n        ,\"length\" : ((curRecord['Length'] === undefined) ? \"\" : curRecord['Length'])\n        ,\"weight\" : ((curRecord['Weight']  === undefined) ? \"\" : curRecord['Weight'])\n        ,\"weightTons\" : ((curRecord['Weight Tons'] === undefined) ? \"\" : curRecord['Weight Tons'])\n        ,\"color\" : ((curRecord['Color'] === undefined) ? \"\" : curRecord['Color'])\n        ,\"owner\" : ((curRecord['owner'] === undefined) ? \"\" : curRecord['owner'])\n        ,\"built\" : ((curRecord['Year Built'] === undefined) ? \"\" : curRecord['Year Built'])\n        ,\"comment\" : ((curRecord[\"Comment\"] === undefined) ? \"\" : curRecord[\"Comment\"] )\n        /*\n        \"outOfService\" : ((curRecord[\"outOfService\"] === undefined) ? false : curRecord[\"outOfService\"] ),\n        \"location\" : {\n          \"userName\" : curRecord[\"location_userName\"]\n          ,\"name\" : ((curRecord[\"location_name\"] === undefined) ? \"\" : curRecord[\"location_name\"])\n          ,\"route\" : ((curRecord[\"location_route\"] === undefined) ? null : curRecord[\"location_route\"] )\n          ,\"track\" : {\n              \"userName\" : ((curRecord[\"track_userName\"] === undefined) ? \"\" : curRecord[\"track_userName\"])\n              ,\"name\" : ((curRecord[\"track_name\"] === undefined) ? \"\" : curRecord[\"track_name\"])\n          }\n        },\n        ,\"destination\" : ((curRecord[\"Destination\"] === undefined) ? null : curRecord[\"Destination\"])\n        ,\"load\" : ((curRecord[\"Load\"] === undefined) ? \"E\" : curRecord[\"Load\"])\n        */\n        ,\"hazardous\" : ((curRecord[\"Hazardous\"] === undefined) ? false : curRecord[\"Hazardous\"])\n        ,\"caboose\" : ((curRecord[\"Caboose\"] === undefined) ? false : curRecord[\"Caboose\"])\n        ,\"passenger\" : ((curRecord[\"Passenger\"] === undefined) ? false : curRecord[\"Passenger\"])\n        ,\"fred\" : ((curRecord[\"fred\"] === undefined) ? false : curRecord[\"fred\"])\n        /*\n        ,\"removeComment\": ((curRecord[\"removeComment\"] === undefined) ? \"\" : curRecord[\"removeComment\"])\n        ,\"addComment\" : ((curRecord[\"addComment\"] === undefined) ? \"\" : curRecord[\"addComment\"])\n        */\n        ,\"kernel\" : ((curRecord[\"kernel\"] === undefined) ? \"\" : curRecord[\"kernel\"])\n        ,\"utility\" : ((curRecord[\"Utility\"] === undefined) ? false : curRecord[\"Utility\"])\n        /*\n        ,\"finalDestination\": ((curRecord[\"finalDestination\"] === undefined) ? null : curRecord[\"finalDestination\"])\n        ,\"returnWhenEmpty\" : ((curRecord[\"returnWhenEmpty\"] === undefined) ? null : curRecord[\"returnWhenEmpty\"])\n        ,\"status\" : ((curRecord[\"Status\"] === undefined) ? \"\" : curRecord[\"Status\"])\n        */\n    }\n};",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "621572f.7860c8c",
+        "type": "file",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/formatted.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 1400,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d619f02a.37bcb",
+        "type": "file in",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/opt/hiveid-ap/data/traintraxx_to_jmri.roadnames.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "x": 1140,
+        "y": 520,
+        "wires": [
+            [
+                "56c30c3b.453964"
+            ]
+        ]
+    },
+    {
+        "id": "56c30c3b.453964",
+        "type": "csv",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 1010,
+        "y": 560,
+        "wires": [
+            [
+                "cc6a1299.94f3d"
+            ]
+        ]
+    },
+    {
+        "id": "cc6a1299.94f3d",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "Set RoadNameMap",
+        "rules": [
+            {
+                "t": "set",
+                "p": "RoadNameMap",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc56b04e.43706",
+        "type": "watch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.roadnames.csv",
+        "recursive": "",
+        "x": 680,
+        "y": 520,
+        "wires": [
+            [
+                "d619f02a.37bcb"
+            ]
+        ]
+    },
+    {
+        "id": "e9e4d9c.a3be928",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "Convert Data Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1520,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "cb1c3e2b.f563f",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "POST Record",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1640,
+        "y": 280,
+        "wires": [
+            [
+                "d939d611.5a0548"
+            ]
+        ]
+    },
+    {
+        "id": "52cbe0db.c277c",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1470,
+        "y": 260,
+        "wires": [
+            [
+                "5e89fd1e.bd8354"
+            ],
+            [
+                "cb1c3e2b.f563f"
+            ]
+        ]
+    },
+    {
+        "id": "5cbff943.93c3d8",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "PUT Record",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 400,
+        "wires": [
+            [
+                "23864cb1.1549e4"
+            ]
+        ]
+    },
+    {
+        "id": "23864cb1.1549e4",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "Sensor and Reporter PUT Request Results",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1290,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "17099e33.62b822",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Success Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Loaded",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 320,
+        "wires": [
+            [
+                "88f82183.257c6"
+            ]
+        ]
+    },
+    {
+        "id": "a57b40ed.f9d87",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Failed Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Failed to load",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 360,
+        "wires": [
+            [
+                "88f82183.257c6"
+            ]
+        ]
+    },
+    {
+        "id": "88f82183.257c6",
+        "type": "ui_toast",
+        "z": "1a726252.d178be",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1450,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5b349664.1dbb58",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1010,
+        "y": 340,
+        "wires": [
+            [
+                "17099e33.62b822",
+                "acfec978.dad798"
+            ],
+            [
+                "a57b40ed.f9d87",
+                "acfec978.dad798"
+            ]
+        ]
+    },
+    {
+        "id": "d220cd55.03db3",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "TableList Iterator",
+        "func": "var queue = flow.get('queue');\nvar curTable = queue.pop();\nflow.set('queue',queue);    \nmsg.payload = curTable;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "4c451931.da5c48",
+                "e1a8c6f1.741178",
+                "7a15f834.c09ad8"
+            ]
+        ]
+    },
+    {
+        "id": "4c451931.da5c48",
+        "type": "subflow:a40e76b8.4d8a48",
+        "z": "1a726252.d178be",
+        "name": "",
+        "env": [],
+        "x": 750,
+        "y": 340,
+        "wires": [
+            [
+                "5b349664.1dbb58",
+                "881bf492.b6f288"
+            ]
+        ]
+    },
+    {
+        "id": "e1a8c6f1.741178",
+        "type": "debug",
+        "z": "1a726252.d178be",
+        "name": "TrainTraxx Request",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 760,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "251b3c83.10ad94",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Set Defaults",
+        "rules": [
+            {
+                "t": "set",
+                "p": "queue",
+                "pt": "flow",
+                "to": "[     \"images\",\"hivenode\",\"hivegateway\",\"inventory\",\"locations\",\"tags\" ]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "stored",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "ready",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "sync_TrainTraxx_Running",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 500,
+        "wires": [
+            [
+                "99908d40.fdccd"
+            ]
+        ]
+    },
+    {
+        "id": "d0c91487.a2c9f8",
+        "type": "inject",
+        "z": "1a726252.d178be",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": ".3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "3b2bff91.5df5c",
+                "8815dd85.1aad7"
+            ]
+        ]
+    },
+    {
+        "id": "6f9cb799.5e91b8",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "Check Queue",
+        "property": "queue",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "d220cd55.03db3"
+            ],
+            [
+                "1bd17d0c.d85c33"
+            ]
+        ]
+    },
+    {
+        "id": "a7930ef3.37167",
+        "type": "json",
+        "z": "1a726252.d178be",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 950,
+        "y": 460,
+        "wires": [
+            [
+                "e63d9d41.4e13a"
+            ]
+        ]
+    },
+    {
+        "id": "7ac3338d.67d9bc",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 380,
+        "wires": [
+            [
+                "d0fcfe77.93e15",
+                "a138fd5d.814f7"
+            ]
+        ]
+    },
+    {
+        "id": "e63d9d41.4e13a",
+        "type": "file",
+        "z": "1a726252.d178be",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/global.TrainTraxx.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1100,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a15f834.c09ad8",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Set running to true",
+        "rules": [
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a457be0.b5c934",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "IsRunning",
+        "property": "running",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 260,
+        "y": 320,
+        "wires": [
+            [
+                "6f9cb799.5e91b8"
+            ]
+        ]
+    },
+    {
+        "id": "881bf492.b6f288",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Set running to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1bd17d0c.d85c33",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "IsStored",
+        "property": "stored",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 480,
+        "y": 380,
+        "wires": [
+            [],
+            [
+                "7ac3338d.67d9bc"
+            ]
+        ]
+    },
+    {
+        "id": "d0fcfe77.93e15",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Set stored & ready",
+        "rules": [
+            {
+                "t": "set",
+                "p": "stored",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "ready",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "sync_TrainTraxx_Running",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3f878593.6803ba",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "isReady",
+        "property": "ready",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 240,
+        "y": 280,
+        "wires": [
+            [
+                "7a457be0.b5c934"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a83d9cb5.f57d6",
+        "type": "inject",
+        "z": "1a726252.d178be",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": ".5",
+        "x": 270,
+        "y": 500,
+        "wires": [
+            [
+                "251b3c83.10ad94"
+            ]
+        ]
+    },
+    {
+        "id": "4666efa0.8b193",
+        "type": "watch",
+        "z": "1a726252.d178be",
+        "name": "",
+        "files": "/usr/local/hiveid-ap/cache/global.TrainTraxx.json",
+        "recursive": "",
+        "x": 340,
+        "y": 540,
+        "wires": [
+            [
+                "99908d40.fdccd"
+            ]
+        ]
+    },
+    {
+        "id": "b85917e0.96a9d8",
+        "type": "file in",
+        "z": "1a726252.d178be",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/global.TrainTraxx.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 410,
+        "y": 580,
+        "wires": [
+            [
+                "1908bb15.312be5"
+            ]
+        ]
+    },
+    {
+        "id": "1908bb15.312be5",
+        "type": "json",
+        "z": "1a726252.d178be",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 620,
+        "wires": [
+            [
+                "982469e0.a9d008"
+            ]
+        ]
+    },
+    {
+        "id": "982469e0.a9d008",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "sync_TrainTraxx_Running",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "99908d40.fdccd",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "USE_CACHE",
+        "property": "TrainTraxx_Config.USE_CACHE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 540,
+        "wires": [
+            [
+                "b85917e0.96a9d8"
+            ]
+        ]
+    },
+    {
+        "id": "3b2bff91.5df5c",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "USE_CACHE",
+        "property": "TrainTraxx_Config.USE_CACHE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "3f878593.6803ba"
+            ]
+        ]
+    },
+    {
+        "id": "d18c15f1.f2b5a8",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config.USE_CACHE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.USE_CACHE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 400,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "e054e355.832a2",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Config.USE_CACHE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.USE_CACHE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 400,
+        "wires": [
+            [
+                "7e321db7.883104"
+            ]
+        ]
+    },
+    {
+        "id": "7e321db7.883104",
+        "type": "ui_switch",
+        "z": "fd2ebb8a.240a38",
+        "name": "Use Cache",
+        "label": "Use Cache",
+        "tooltip": "",
+        "group": "c39736a3.dcaf08",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "d18c15f1.f2b5a8"
+            ]
+        ]
+    },
+    {
+        "id": "a138fd5d.814f7",
+        "type": "switch",
+        "z": "1a726252.d178be",
+        "name": "IsNotEmpty",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 950,
+        "y": 420,
+        "wires": [
+            [
+                "a7930ef3.37167"
+            ]
+        ]
+    },
+    {
+        "id": "38cfc2d.0fa403e",
+        "type": "inject",
+        "z": "c3e3e66a.322358",
+        "name": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "698f0b12.de04a4"
+            ]
+        ]
+    },
+    {
+        "id": "2b331372.0578fc",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1110,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "fea77fb9.80682",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Success Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Loaded",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1150,
+        "y": 820,
+        "wires": [
+            [
+                "864e8e1e.a5359"
+            ]
+        ]
+    },
+    {
+        "id": "77fc7701.691628",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Failed Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Failed to load",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 860,
+        "wires": [
+            [
+                "864e8e1e.a5359"
+            ]
+        ]
+    },
+    {
+        "id": "864e8e1e.a5359",
+        "type": "ui_toast",
+        "z": "164213bd.e3dd4c",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1370,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "8384e2e4.e9412",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 930,
+        "y": 840,
+        "wires": [
+            [
+                "fea77fb9.80682",
+                "2b331372.0578fc"
+            ],
+            [
+                "77fc7701.691628",
+                "2b331372.0578fc"
+            ]
+        ]
+    },
+    {
+        "id": "4ca45c93.8fc0f4",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "TableList Iterator",
+        "func": "var queue = flow.get('queue');\nvar curTable = queue.pop();\nflow.set('queue',queue);    \nmsg.payload = curTable;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 840,
+        "wires": [
+            [
+                "b5fe78d9.7a6e58",
+                "f8b2bdc2.f0e25",
+                "d3aedf1f.c858c"
+            ]
+        ]
+    },
+    {
+        "id": "b5fe78d9.7a6e58",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI Request",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 660,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "38f814e7.95f47c",
+        "type": "inject",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": ".3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 130,
+        "y": 700,
+        "wires": [
+            [
+                "3c4a9a1c.addf66",
+                "f15a725e.ee9ed"
+            ]
+        ]
+    },
+    {
+        "id": "910e7072.24197",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "Check Queue",
+        "property": "queue",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 860,
+        "wires": [
+            [
+                "4ca45c93.8fc0f4"
+            ],
+            [
+                "767ca1ff.14e85"
+            ]
+        ]
+    },
+    {
+        "id": "5209c9f8.ade9a8",
+        "type": "json",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 870,
+        "y": 960,
+        "wires": [
+            [
+                "4d27f498.523a5c"
+            ]
+        ]
+    },
+    {
+        "id": "54e18f30.77cce",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 880,
+        "wires": [
+            [
+                "1634e571.c471cb",
+                "2f44323a.d4024e"
+            ]
+        ]
+    },
+    {
+        "id": "4d27f498.523a5c",
+        "type": "file",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "filename": "/usr/local/hiveid-ap/cache/global.JMRI.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1010,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f8b2bdc2.f0e25",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Set running to true",
+        "rules": [
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "511c17c9.c0ecb8",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "IsRunning",
+        "property": "running",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 180,
+        "y": 820,
+        "wires": [
+            [
+                "910e7072.24197"
+            ]
+        ]
+    },
+    {
+        "id": "d82540e3.3f571",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Set running to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1150,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "767ca1ff.14e85",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "IsStored",
+        "property": "stored",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 400,
+        "y": 880,
+        "wires": [
+            [],
+            [
+                "54e18f30.77cce"
+            ]
+        ]
+    },
+    {
+        "id": "1634e571.c471cb",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Set stored & ready",
+        "rules": [
+            {
+                "t": "set",
+                "p": "stored",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "ready",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "sync_JMRI_Running",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d6522db.4d47bd",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "isReady",
+        "property": "ready",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 160,
+        "y": 780,
+        "wires": [
+            [
+                "511c17c9.c0ecb8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2f44323a.d4024e",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "IsNotEmpty",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 870,
+        "y": 920,
+        "wires": [
+            [
+                "5209c9f8.ade9a8"
+            ]
+        ]
+    },
+    {
+        "id": "912ca386.46614",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Defaults",
+        "rules": [
+            {
+                "t": "set",
+                "p": "queue",
+                "pt": "flow",
+                "to": "[\"cars\",\"engines\",\"locations\",\"trains\",\"reporters\",\"sensors\"]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "stored",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "ready",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "sync_JMRI_Running",
+                "pt": "global",
+                "to": "JMRI_Config.JMRI_ENABLED",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "853d6b3d.540508",
+        "type": "inject",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": ".5",
+        "x": 190,
+        "y": 1000,
+        "wires": [
+            [
+                "912ca386.46614"
+            ]
+        ]
+    },
+    {
+        "id": "9a02981f.13c5c8",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Defaults for Sensors",
+        "rules": [
+            {
+                "t": "set",
+                "p": "queue",
+                "pt": "flow",
+                "to": "[\"sensors\"]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "stored",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "ready",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d504262.54c26e",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Set Defaults for Reporters",
+        "rules": [
+            {
+                "t": "set",
+                "p": "queue",
+                "pt": "flow",
+                "to": "[\"reporters\"]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "stored",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "ready",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "26beefe6.cfd83",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Setup Global Functions",
+        "func": "var inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : mac.toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    for (var id in JMRI[deviceType].data) {\n        var curDevice = JMRI[deviceType].data[id];\n        if (myResults.userName === curDevice.userName) {\n            myResults.name = curDevice.userName;\n            myResults.state = JMRI[deviceType].data[id].state;\n            myResults.verb = 'POST';\n        }\n    }    \n    if (myResults.name === '') {\n        var columnNames = TT.hivenode.columns;\n        for (var nodeId in TT.hivenode.data) {\n            var curNode = inObject.array_combine(columnNames,TT.hivenode.data[nodeId]);\n            if (curNode['MAC_ADDRESS'].toUpperCase() === myResults.userName) { \n                myResults.name = prefix + nodeId;\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\n\nglobal.set('hive', inObject);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3e69b810.d13a98",
+        "type": "comment",
+        "z": "164213bd.e3dd4c",
+        "name": "TODO ",
+        "info": "Redo JMRI Reporter/Sensor Process for new global functions",
+        "x": 590,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f71aa49b.888108",
+        "type": "comment",
+        "z": "c3e3e66a.322358",
+        "name": "TODO",
+        "info": "Need to setup how many per page the activity screen will hold\n\nPer Page Options and Page toggle Options",
+        "x": 130,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c4837cb3.347e1",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 820,
+        "y": 420,
+        "wires": [
+            [
+                "5cbff943.93c3d8"
+            ],
+            [
+                "6a59731.add798c"
+            ]
+        ]
+    },
+    {
+        "id": "6a59731.add798c",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "POST Record",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1000,
+        "y": 440,
+        "wires": [
+            [
+                "23864cb1.1549e4"
+            ]
+        ]
+    },
+    {
+        "id": "509dfa72.51cfc4",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "syncs_Running",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "import_Requested",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "running_inventoryImport",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "running_sensorImport",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 40,
+        "wires": [
+            [
+                "391c0a36.ebdac6",
+                "e37006db.0ea648"
+            ]
+        ]
+    },
+    {
+        "id": "6da11f5.6279ae",
+        "type": "ui_template",
+        "z": "1a726252.d178be",
+        "group": "a9319cec.7d9c",
+        "name": "TrainTraxx Refresh Status",
+        "order": 4,
+        "width": "1",
+        "height": "1",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 590,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8815dd85.1aad7",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "",
+        "func": "var running = global.get('sync_TrainTraxx_Running');\nif (running !== undefined && running === true) {\n    msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\n} else {\n    msg.template = '';\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "6da11f5.6279ae"
+            ]
+        ]
+    },
+    {
+        "id": "8f8c1443.c1b888",
+        "type": "ui_template",
+        "z": "164213bd.e3dd4c",
+        "group": "a9319cec.7d9c",
+        "name": "JMRI Refresh Status",
+        "order": 2,
+        "width": "1",
+        "height": "1",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 560,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f15a725e.ee9ed",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "func": "var running = global.get('sync_JMRI_Running');\nif (running !== undefined && running === true) {\n    msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\n} else {\n    msg.template = '';\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 700,
+        "wires": [
+            [
+                "8f8c1443.c1b888"
+            ]
+        ]
+    },
+    {
+        "id": "e37006db.0ea648",
+        "type": "link out",
+        "z": "3d602d50.39dab2",
+        "name": "TrainTraxx2JMRI Data oLink to TrainTraxx Data iLink",
+        "links": [
+            "b1607e3f.fb142"
+        ],
+        "x": 915,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "391c0a36.ebdac6",
+        "type": "link out",
+        "z": "3d602d50.39dab2",
+        "name": "TrainTraxx2JMRI Data oLink to JMRI Data iLink",
+        "links": [
+            "a309b660.225d08"
+        ],
+        "x": 915,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "30a30fe7.442ff",
+        "type": "inject",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": ".3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "205d5e6.04201a2"
+            ]
+        ]
+    },
+    {
+        "id": "389170d2.26dd4",
+        "type": "ui_template",
+        "z": "3d602d50.39dab2",
+        "group": "a9319cec.7d9c",
+        "name": "Sync Refresh Status",
+        "order": 8,
+        "width": "1",
+        "height": "1",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 700,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "205d5e6.04201a2",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Process Sync Rules",
+        "func": "var syncs_Running =  flow.get('syncs_Running');\n\nvar sync_TrainTraxx_Running =  global.get('sync_TrainTraxx_Running');\nvar tr = (sync_TrainTraxx_Running !== undefined && sync_TrainTraxx_Running === true)  ? true : false;\n\nvar sync_JMRI_Running =  global.get('sync_JMRI_Running');\nvar jr = (sync_JMRI_Running !== undefined && sync_JMRI_Running === true)  ? true : false;\n\nvar import_Requested = flow.get('import_Requested');\nvar requested = (import_Requested !== undefined && import_Requested === true) ? true : false;\n\nvar running_inventoryImport =  flow.get('running_inventoryImport');\nvar ir = (running_inventoryImport !== undefined && running_inventoryImport === true) ? true : false;\n\nvar running_sensorImport =  flow.get('running_sensorImport');\nvar sr = (running_sensorImport !== undefined && running_sensorImport === true)  ? true : false;\n\n\nif (syncs_Running !== undefined && syncs_Running === true) {\n    msg.payload = 'RUNNING'; /* going to show the processing image */\n    if (!tr && !jr && !ir && !sr) { \n        if (!import_Requested) {\n            flow.set('import_Requested',true);\n            flow.set('running_inventoryImport',true);\n            flow.set('running_sensorImport',true);\n            msg.payload = 'SYNC'; /* going to show processing and start sync of inventory, sensors, reporters*/\n        } else {\n            flow.set('syncs_Running', false);\n            msg.payload = 'REIMPORT_JMRI';\n        }\n    } \n} else { \n    msg.payload = 'IDLE';\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "41a53859.053fd8"
+            ]
+        ]
+    },
+    {
+        "id": "41a53859.053fd8",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "Check Sync States",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "RUNNING",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SYNC",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "REIMPORT_JMRI",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "14da4623.e5117a"
+            ],
+            [
+                "14da4623.e5117a",
+                "c4687444.fb6708",
+                "8e6dfe75.eac0d"
+            ],
+            [
+                "391c0a36.ebdac6",
+                "14da4623.e5117a"
+            ],
+            [
+                "fc6242a0.78e74"
+            ]
+        ]
+    },
+    {
+        "id": "14da4623.e5117a",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "Set Image",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "<img src=\"/images/processing.png\" height=\"48px\">",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 100,
+        "wires": [
+            [
+                "389170d2.26dd4"
+            ]
+        ]
+    },
+    {
+        "id": "fc6242a0.78e74",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "Set Blank",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": " ",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "389170d2.26dd4"
+            ]
+        ]
+    },
+    {
+        "id": "ed76ed84.1d152",
+        "type": "comment",
+        "z": "164213bd.e3dd4c",
+        "name": "TODO",
+        "info": "Need to adjust Car location based on read",
+        "x": 410,
+        "y": 400,
+        "wires": []
     }
 ]

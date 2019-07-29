@@ -18,7 +18,7 @@ sudo tar -zcvf jmri_$now.tar.gz jmri
 sudo mv jmri_$now.tar.gz /opt/jmri_backups/.
 cd /opt/jmri
 sudo rm -rdf *
-sudo wget https://github.com/JMRI/JMRI/releases/download/v4.17.1/JMRI.4.17.1+R4f9f3e1.tgz
+sudo wget https://github.com/JMRI/JMRI/releases/download/v4.17.2/JMRI.4.17.2+Re9dde08.tgz
 sudo tar -xvf *.tgz
 sudo mv JMRI/* .
 sudo rm -rdf JMRI

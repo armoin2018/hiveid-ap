@@ -6,7 +6,7 @@ car,number,inventory,Car #
 ,,inventory,Axles
 car,length,inventory,Car Length
 car,weight,inventory,Weight
-car,weightTons,inventory,Weight (T)
+car,weightTons,inventory,Weight Tons
 ,,inventory,Reporting Mark
 car,carType,inventory,Car Type
 car,color,inventory,Color
