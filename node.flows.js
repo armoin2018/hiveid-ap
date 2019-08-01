@@ -767,7 +767,7 @@
         "delay": "0",
         "topic": "",
         "x": 830,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "5e56d465.6b35ac",
@@ -783,7 +783,7 @@
         "files": "/etc/hostname",
         "recursive": "",
         "x": 120,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "e8ed6bdd.7a0138"
@@ -810,7 +810,7 @@
         "to": "",
         "reg": false,
         "x": 620,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "5a317a8b.60a8b4"
@@ -827,7 +827,7 @@
         "chunk": false,
         "sendError": false,
         "x": 380,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "109b7ab9.c9eb25"
@@ -846,7 +846,7 @@
         "oldrc": false,
         "name": "",
         "x": 1560,
-        "y": 100,
+        "y": 140,
         "wires": [
             [],
             [],
@@ -874,7 +874,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 100,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "5a9407e8.fa2398"
@@ -893,7 +893,7 @@
         "oldrc": false,
         "name": "",
         "x": 1370,
-        "y": 280,
+        "y": 320,
         "wires": [
             [],
             [],
@@ -919,7 +919,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 110,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "a6afd8dd.732578"
@@ -938,7 +938,7 @@
         "oldrc": false,
         "name": "",
         "x": 1020,
-        "y": 580,
+        "y": 620,
         "wires": [
             [],
             [],
@@ -966,7 +966,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 120,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "de3137d8.c9ba48",
@@ -986,7 +986,7 @@
         "oldrc": false,
         "name": "",
         "x": 490,
-        "y": 380,
+        "y": 420,
         "wires": [
             [],
             [],
@@ -1016,7 +1016,7 @@
         "repair": false,
         "outputs": 2,
         "x": 730,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "5a9407e8.fa2398"
@@ -1045,7 +1045,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 160,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "62a9a8a6.197848"
@@ -1064,7 +1064,7 @@
         "oldrc": false,
         "name": "",
         "x": 1110,
-        "y": 460,
+        "y": 500,
         "wires": [
             [],
             [],
@@ -1086,7 +1086,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 60,
+        "y": 100,
         "wires": [
             [
                 "e8ed6bdd.7a0138",
@@ -1107,7 +1107,7 @@
         "topic": "Ready to Reboot?",
         "name": "Reboot",
         "x": 980,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "d5da6758.1961a8"
@@ -1127,7 +1127,7 @@
         "topic": "",
         "name": "Shutdown",
         "x": 410,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "c3ea8792.391e88"
@@ -1149,8 +1149,8 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 700,
-        "y": 140,
+        "x": 840,
+        "y": 200,
         "wires": [
             [
                 "c20928f5.da0458"
@@ -1179,8 +1179,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 770,
-        "y": 180,
+        "x": 910,
+        "y": 240,
         "wires": [
             [
                 "e82f7a29.794508"
@@ -1206,8 +1206,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 100,
+        "x": 800,
+        "y": 160,
         "wires": [
             [
                 "e9af9d2a.be78f"
@@ -1223,8 +1223,8 @@
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 330,
-        "y": 140,
+        "x": 470,
+        "y": 200,
         "wires": [
             [
                 "82e7fea3.bd2b3"
@@ -1239,8 +1239,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 290,
-        "y": 180,
+        "x": 430,
+        "y": 240,
         "wires": [
             [
                 "7e78409d.ec487"
@@ -1266,8 +1266,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 220,
+        "x": 510,
+        "y": 280,
         "wires": [
             [
                 "616d5896.3683f8",
@@ -1295,8 +1295,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1080,
-        "y": 300,
+        "x": 1220,
+        "y": 360,
         "wires": [
             [
                 "5fdfad93.b1d8b4"
@@ -1311,8 +1311,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 1090,
-        "y": 340,
+        "x": 1230,
+        "y": 400,
         "wires": [
             [
                 "c4cecae6.b7be98"
@@ -1328,8 +1328,8 @@
         "appendNewline": true,
         "createDir": true,
         "overwriteFile": "true",
-        "x": 1190,
-        "y": 380,
+        "x": 1330,
+        "y": 440,
         "wires": [
             []
         ]
@@ -1346,8 +1346,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 130,
-        "y": 220,
+        "x": 210,
+        "y": 200,
         "wires": [
             [
                 "b22ac622.eba508"
@@ -1361,8 +1361,8 @@
         "name": "",
         "files": "/etc/hiveid-ap/conf.hiveid.json",
         "recursive": "",
-        "x": 280,
-        "y": 100,
+        "x": 420,
+        "y": 160,
         "wires": [
             [
                 "b22ac622.eba508"
@@ -1384,8 +1384,8 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 700,
-        "y": 260,
+        "x": 840,
+        "y": 320,
         "wires": [
             [
                 "4e44260a.1a98e8"
@@ -1414,8 +1414,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 770,
-        "y": 300,
+        "x": 910,
+        "y": 360,
         "wires": [
             [
                 "e82f7a29.794508"
@@ -1441,8 +1441,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 220,
+        "x": 800,
+        "y": 280,
         "wires": [
             [
                 "3d193b84.ed7754"
@@ -1464,8 +1464,8 @@
         "mode": "text",
         "delay": "0",
         "topic": "",
-        "x": 680,
-        "y": 380,
+        "x": 820,
+        "y": 440,
         "wires": [
             [
                 "aff72860.1b2878"
@@ -1494,8 +1494,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 770,
-        "y": 420,
+        "x": 910,
+        "y": 480,
         "wires": [
             [
                 "e82f7a29.794508"
@@ -1521,8 +1521,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 340,
+        "x": 800,
+        "y": 400,
         "wires": [
             [
                 "e2c2ad9c.caed1"
@@ -2223,7 +2223,7 @@
         "type": "debug",
         "z": "16d0b1f7.5422be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2242,7 +2242,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "f564ab88.947548"
@@ -2262,7 +2262,7 @@
         "topic": "",
         "name": "Change Name",
         "x": 1040,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
                 "e3822aa5.ea2aa8"
@@ -2292,7 +2292,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1270,
-        "y": 40,
+        "y": 80,
         "wires": [
             [
                 "5dec6d17.a36824"
@@ -2325,7 +2325,7 @@
         "repair": false,
         "outputs": 2,
         "x": 730,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "1ed4aa5a.8af176",
@@ -2359,7 +2359,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1150,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "7cb7f74b.562db8"
@@ -2416,7 +2416,7 @@
         "msgArray": false,
         "msgTemp": false,
         "x": 330,
-        "y": 740,
+        "y": 780,
         "wires": [
             [
                 "fed4cd3c.abeae"
@@ -2460,7 +2460,7 @@
         "useOldStyle": false,
         "outputs": 1,
         "x": 550,
-        "y": 740,
+        "y": 780,
         "wires": [
             []
         ]
@@ -2478,7 +2478,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 780,
+        "y": 820,
         "wires": [
             [
                 "c9aa36d9.5823f8",
@@ -2492,7 +2492,7 @@
         "type": "function",
         "z": "8b10dcf.dc4c82",
         "name": "Set Map",
-        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nfor (var i = 0; i < currentRecords.length; i++) {\n    console.log(i,currentRecords[i]);\n    if (currentRecords[i].data !== undefined) {\n        if (currentRecords[i].data.userName === null) {\n            msg.payload.available.push(i); \n        } else {\n            msg.payload.map[currentRecords[i].data.userName] = i;\n        }\n        msg.payload.data[i] = currentRecords[i].data;\n        if (currentRecords[i].data.name !== undefined) {\n            msg.payload.nextID =Number(currentRecords[i].data.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n}  \n\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+msg.topic,msg.payload);\nreturn msg;",
+        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nfor (var i = 0; i < currentRecords.length; i++) {\n    if (currentRecords[i].data !== undefined) {\n        if (currentRecords[i].data.userName === null) {\n            msg.payload.available.push(i); \n        } else {\n            msg.payload.map[currentRecords[i].data.userName] = i;\n        }\n        msg.payload.data[i] = currentRecords[i].data;\n        if (currentRecords[i].data.name !== undefined) {\n            msg.payload.nextID =Number(currentRecords[i].data.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n}  \n\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+msg.topic,msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 605,
@@ -2561,7 +2561,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "9ba3f6e7.d8b438"
@@ -2574,7 +2574,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 920,
+        "y": 960,
         "wires": [
             []
         ]
@@ -2585,7 +2585,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 820,
+        "y": 860,
         "wires": [
             [
                 "8a7998a8.747678"
@@ -2598,7 +2598,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 780,
+        "y": 820,
         "wires": [
             [
                 "2e18a81a.662928"
@@ -2618,7 +2618,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 710,
-        "y": 880,
+        "y": 920,
         "wires": []
     },
     {
@@ -2634,7 +2634,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "302dd467.6f1a0c",
@@ -2665,7 +2665,7 @@
         "seg1": "",
         "seg2": "",
         "x": 720,
-        "y": 780,
+        "y": 820,
         "wires": []
     },
     {
@@ -2681,7 +2681,7 @@
         "format": "{{msg.payload.uptime}} seconds",
         "layout": "row-spread",
         "x": 500,
-        "y": 820,
+        "y": 860,
         "wires": []
     },
     {
@@ -2693,7 +2693,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "2a113082.e508b"
@@ -2709,7 +2709,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 510,
-        "y": 780,
+        "y": 820,
         "wires": [
             [],
             [
@@ -3050,7 +3050,7 @@
         "type": "debug",
         "z": "7bef0b7b.d5a104",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3101,9 +3101,9 @@
         "z": "7bef0b7b.d5a104",
         "group": "3220fafa.330906",
         "name": "TrainTraxx Activity",
-        "order": 0,
-        "width": "0",
-        "height": "0",
+        "order": 1,
+        "width": "12",
+        "height": "12",
         "format": "",
         "storeOutMessages": false,
         "fwdInMessages": true,
@@ -3145,7 +3145,7 @@
         "type": "debug",
         "z": "1a726252.d178be",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
@@ -3178,8 +3178,8 @@
         "z": "164213bd.e3dd4c",
         "name": "",
         "env": [],
-        "x": 660,
-        "y": 840,
+        "x": 700,
+        "y": 960,
         "wires": [
             [
                 "d82540e3.3f571",
@@ -3202,8 +3202,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 160,
-        "y": 740,
+        "x": 200,
+        "y": 860,
         "wires": [
             [
                 "d6522db.4d47bd"
@@ -3228,8 +3228,8 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 180,
-        "y": 960,
+        "x": 220,
+        "y": 1080,
         "wires": [
             [
                 "912ca386.46614"
@@ -3245,8 +3245,8 @@
             "ef86f5e4.672e98",
             "391c0a36.ebdac6"
         ],
-        "x": 175,
-        "y": 920,
+        "x": 215,
+        "y": 1040,
         "wires": [
             [
                 "b0a1d979.9f8538"
@@ -3261,8 +3261,8 @@
         "links": [
             "e7682bc7.41dee8"
         ],
-        "x": 175,
-        "y": 360,
+        "x": 195,
+        "y": 300,
         "wires": [
             [
                 "39caeee1.346892"
@@ -4108,7 +4108,7 @@
         "type": "function",
         "z": "c3e3e66a.322358",
         "name": "Make Summary",
-        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"90%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"90%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 420,
@@ -4125,7 +4125,7 @@
         "type": "debug",
         "z": "c3e3e66a.322358",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4142,7 +4142,7 @@
         "name": "Summary",
         "order": 1,
         "width": "6",
-        "height": "8",
+        "height": "10",
         "format": "",
         "storeOutMessages": false,
         "fwdInMessages": true,
@@ -4289,7 +4289,7 @@
         "type": "debug",
         "z": "41757e63.7ce36",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4332,7 +4332,7 @@
         "name": "Sample Car Object",
         "info": "msg.payload =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": \"AA123\",\n      \"number\": \"123\",\n      \"road\": \"AA\",\n      \"type\": \"Baggage\",\n      \"length\": \"32\",\n      \"color\": \"Black\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"destination\": null,\n      \"load\": \"E\",\n      \"hazardous\": false,\n      \"removeComment\": \"\",\n      \"addComment\": \"\",\n      \"kernel\": \"\",\n      \"utility\": false,\n      \"finalDestination\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"returnWhenEmpty\": null,\n      \"status\": \"\"\n    }\n  };\nreturn msg;",
         "x": 1470,
-        "y": 620,
+        "y": 820,
         "wires": []
     },
     {
@@ -4342,7 +4342,7 @@
         "name": "Sample Engine Object",
         "info": "msg.payload =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": \"ACL1234\",\n      \"number\": \"1234\",\n      \"road\": \"ACL\",\n      \"type\": \"Diesel\",\n      \"length\": \"54\",\n      \"color\": \"\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": null,\n      \"destination\": null,\n      \"model\": \"E8\",\n      \"consist\": \"\"\n    }\n  };\n  \n \nreturn msg;",
         "x": 1479,
-        "y": 737,
+        "y": 937,
         "wires": []
     },
     {
@@ -4352,7 +4352,7 @@
         "name": "Sample Locations Object",
         "info": "msg.payload =    {\n    \"type\": \"location\",\n    \"data\": {\n      \"name\": \"Test Location\",\n      \"id\": \"1\",\n      \"length\": 40,\n      \"comment\": \"\"\n    }\n  };\nreturn msg;",
         "x": 1489,
-        "y": 698,
+        "y": 898,
         "wires": []
     },
     {
@@ -4362,7 +4362,7 @@
         "name": "Sample Train Object",
         "info": "msg.payload =  {\n    \"type\": \"train\",\n    \"data\": {\n      \"name\": \"Test Train 1\",\n      \"iconName\": \"Test Train 1\",\n      \"id\": \"1\",\n      \"departureTime\": \"03:00\",\n      \"description\": \"Test Train \",\n      \"comment\": \"\",\n      \"route\": \"Test Route\",\n      \"routeId\": \"1\",\n      \"locations\": [\n        {\n          \"id\": \"1r2\",\n          \"name\": \"Test Location\",\n          \"trainDirection\": \"East\",\n          \"comment\": \"\",\n          \"sequenceId\": 2,\n          \"expectedArrivalTime\": \"03:00\",\n          \"expectedDepartureTime\": \"03:00\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"length\": 40,\n            \"comment\": \"\"\n          }\n        }\n      ],\n      \"engines\": [],\n      \"cars\": [\n        {\n          \"id\": \"AA123\",\n          \"number\": \"123\",\n          \"road\": \"AA\",\n          \"type\": \"Baggage\",\n          \"length\": \"32\",\n          \"color\": \"Black\",\n          \"owner\": \"\",\n          \"comment\": \"\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"destination\": null,\n          \"load\": \"E\",\n          \"hazardous\": false,\n          \"removeComment\": \"\",\n          \"addComment\": \"\",\n          \"kernel\": \"\",\n          \"utility\": false,\n          \"finalDestination\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"returnWhenEmpty\": null,\n          \"status\": \"\"\n        }\n      ],\n      \"trainDepartsName\": \"Test Location\",\n      \"trainTerminatesName\": \"Test Location\",\n      \"location\": \"\",\n      \"status\": \"\",\n      \"statusCode\": 65535,\n      \"length\": 0,\n      \"weight\": 0,\n      \"caboose\": \"\"\n    }\n  };\nreturn msg;",
         "x": 1470,
-        "y": 659,
+        "y": 859,
         "wires": []
     },
     {
@@ -4613,7 +4613,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 180,
-        "y": 1080,
+        "y": 1120,
         "wires": [
             [
                 "a5662777.20df48",
@@ -4633,7 +4633,7 @@
         "oldrc": false,
         "name": "",
         "x": 530,
-        "y": 1080,
+        "y": 1120,
         "wires": [
             [],
             [],
@@ -4663,7 +4663,7 @@
         "repair": false,
         "outputs": 2,
         "x": 850,
-        "y": 1080,
+        "y": 1120,
         "wires": [
             [
                 "6d76fe5b.cb776"
@@ -4742,7 +4742,7 @@
             "acd4a1d3.1b2d1"
         ],
         "x": 295,
-        "y": 1120,
+        "y": 1160,
         "wires": [
             [
                 "a5662777.20df48",
@@ -4878,7 +4878,7 @@
         "to": "",
         "reg": false,
         "x": 1060,
-        "y": 40,
+        "y": 80,
         "wires": [
             []
         ]
@@ -4903,7 +4903,7 @@
         "to": "",
         "reg": false,
         "x": 1530,
-        "y": 40,
+        "y": 80,
         "wires": [
             [
                 "60e46d31.c31c34"
@@ -4929,7 +4929,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 120,
-        "y": 680,
+        "y": 720,
         "wires": [
             [
                 "e1986986.8508b8"
@@ -4948,7 +4948,7 @@
         "oldrc": false,
         "name": "",
         "x": 490,
-        "y": 680,
+        "y": 720,
         "wires": [
             [],
             [],
@@ -4990,7 +4990,7 @@
         "cancel": "Cancel",
         "topic": "",
         "x": 130,
-        "y": 1240,
+        "y": 1280,
         "wires": [
             [
                 "ff08124.c1692f"
@@ -5006,7 +5006,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 350,
-        "y": 1240,
+        "y": 1280,
         "wires": [
             [
                 "34c84103.7b175e",
@@ -5029,7 +5029,7 @@
         "oldrc": false,
         "name": "",
         "x": 1050,
-        "y": 1220,
+        "y": 1260,
         "wires": [
             [],
             [],
@@ -5203,7 +5203,7 @@
         "repair": false,
         "outputs": 2,
         "x": 760,
-        "y": 680,
+        "y": 720,
         "wires": [
             [
                 "1d57def3.36f541"
@@ -5226,7 +5226,7 @@
         "topic": "",
         "name": "Success Notification",
         "x": 1220,
-        "y": 660,
+        "y": 700,
         "wires": []
     },
     {
@@ -5242,7 +5242,7 @@
         "topic": "",
         "name": "Failed Notification",
         "x": 1210,
-        "y": 700,
+        "y": 740,
         "wires": []
     },
     {
@@ -5258,7 +5258,7 @@
         "topic": "",
         "name": "HiveID Upgrade Notification",
         "x": 460,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "550e8e3f.404b2"
@@ -5278,7 +5278,7 @@
         "topic": "",
         "name": "OS Upgrade Notification",
         "x": 450,
-        "y": 340,
+        "y": 380,
         "wires": []
     },
     {
@@ -5294,7 +5294,7 @@
         "topic": "",
         "name": "Mismatch Notice",
         "x": 770,
-        "y": 1260,
+        "y": 1300,
         "wires": []
     },
     {
@@ -5310,7 +5310,7 @@
         "actionType": "none",
         "allowHTML": true,
         "x": 650,
-        "y": 160,
+        "y": 200,
         "wires": [
             []
         ]
@@ -5323,7 +5323,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1870,
-        "y": 440,
+        "y": 480,
         "wires": []
     },
     {
@@ -5335,7 +5335,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1640,
-        "y": 440,
+        "y": 480,
         "wires": [
             [
                 "127b37d8.6c9228"
@@ -5355,7 +5355,7 @@
         "topic": "",
         "name": "Show Update Failure",
         "x": 1220,
-        "y": 380,
+        "y": 420,
         "wires": []
     },
     {
@@ -5379,7 +5379,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1410,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "c4eefb13.3f05d8"
@@ -5412,7 +5412,7 @@
         "repair": false,
         "outputs": 2,
         "x": 730,
-        "y": 460,
+        "y": 500,
         "wires": [
             [
                 "60e3884f.3df908",
@@ -5444,7 +5444,7 @@
         "repair": false,
         "outputs": 2,
         "x": 830,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "5a9407e8.fa2398"
@@ -5467,7 +5467,7 @@
         "topic": "",
         "name": "Restarting Gateway Services",
         "x": 500,
-        "y": 1040,
+        "y": 1080,
         "wires": []
     },
     {
@@ -5483,7 +5483,7 @@
         "topic": "",
         "name": "Restart Notice",
         "x": 760,
-        "y": 1180,
+        "y": 1220,
         "wires": []
     },
     {
@@ -5499,7 +5499,7 @@
         "topic": "",
         "name": "Not rebooting message",
         "x": 1230,
-        "y": 220,
+        "y": 260,
         "wires": []
     },
     {
@@ -5521,7 +5521,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 160,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "1d5c0d1d.86fb23"
@@ -5541,7 +5541,7 @@
         "topic": "",
         "name": "Restart Node-Red",
         "x": 630,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "1ecb5d68.ee8303"
@@ -5571,7 +5571,7 @@
         "repair": false,
         "outputs": 2,
         "x": 890,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "260fc6de.f3479a",
@@ -5594,7 +5594,7 @@
         "oldrc": false,
         "name": "",
         "x": 1160,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [],
             [],
@@ -5622,7 +5622,7 @@
         "repair": false,
         "outputs": 2,
         "x": 950,
-        "y": 1300,
+        "y": 1340,
         "wires": [
             [
                 "1d5c0d1d.86fb23"
@@ -5645,7 +5645,7 @@
         "topic": "",
         "name": "Password Change Failure",
         "x": 1370,
-        "y": 1300,
+        "y": 1340,
         "wires": []
     },
     {
@@ -5661,7 +5661,7 @@
         "topic": "",
         "name": "Not Restarting Node-Red",
         "x": 1370,
-        "y": 1420,
+        "y": 1460,
         "wires": []
     },
     {
@@ -5677,7 +5677,7 @@
         "topic": "",
         "name": "Gateway Restarted",
         "x": 1210,
-        "y": 1060,
+        "y": 1100,
         "wires": []
     },
     {
@@ -5693,7 +5693,7 @@
         "topic": "",
         "name": "Gateway was unable to restart",
         "x": 1250,
-        "y": 1100,
+        "y": 1140,
         "wires": []
     },
     {
@@ -5709,7 +5709,7 @@
         "topic": "",
         "name": "Restarting Node-Red",
         "x": 1360,
-        "y": 1340,
+        "y": 1380,
         "wires": []
     },
     {
@@ -5725,7 +5725,7 @@
         "topic": "",
         "name": "Shutting Down",
         "x": 1200,
-        "y": 540,
+        "y": 580,
         "wires": []
     },
     {
@@ -5741,7 +5741,7 @@
         "topic": "",
         "name": "Not shutting down",
         "x": 1210,
-        "y": 620,
+        "y": 660,
         "wires": []
     },
     {
@@ -5757,7 +5757,7 @@
         "topic": "",
         "name": "Shutdown Requested",
         "x": 1640,
-        "y": 560,
+        "y": 600,
         "wires": []
     },
     {
@@ -5781,7 +5781,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1230,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "fa5f799c.9399d8"
@@ -5804,7 +5804,7 @@
         "topic": "",
         "name": "Shutdown Request Failed",
         "x": 1650,
-        "y": 600,
+        "y": 640,
         "wires": []
     },
     {
@@ -5820,7 +5820,7 @@
         "topic": "",
         "name": "Upgrade Started",
         "x": 1210,
-        "y": 420,
+        "y": 460,
         "wires": []
     },
     {
@@ -5836,7 +5836,7 @@
         "topic": "",
         "name": "Not Upgrading",
         "x": 1200,
-        "y": 500,
+        "y": 540,
         "wires": []
     },
     {
@@ -5852,7 +5852,7 @@
         "topic": "",
         "name": "Failed to schedule upgrade",
         "x": 1800,
-        "y": 480,
+        "y": 520,
         "wires": []
     },
     {
@@ -5882,7 +5882,7 @@
         "to": "",
         "reg": false,
         "x": 400,
-        "y": 1380,
+        "y": 1420,
         "wires": [
             [
                 "74ca8036.a5bdb"
@@ -5909,7 +5909,7 @@
         "to": "",
         "reg": false,
         "x": 580,
-        "y": 1180,
+        "y": 1220,
         "wires": [
             [
                 "4a4d9e53.4b233"
@@ -5936,7 +5936,7 @@
         "to": "",
         "reg": false,
         "x": 580,
-        "y": 1260,
+        "y": 1300,
         "wires": [
             [
                 "7a652293.01ccbc"
@@ -5963,7 +5963,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1300,
+        "y": 1340,
         "wires": [
             [
                 "1d72c2d2.dd9c8d"
@@ -5990,7 +5990,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1340,
+        "y": 1380,
         "wires": [
             [
                 "a03e3ca8.3c9c3"
@@ -6017,7 +6017,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1420,
+        "y": 1460,
         "wires": [
             [
                 "fe750cdf.f1c19"
@@ -6044,7 +6044,7 @@
         "to": "",
         "reg": false,
         "x": 1020,
-        "y": 1100,
+        "y": 1140,
         "wires": [
             [
                 "97476705.d5f628"
@@ -6071,7 +6071,7 @@
         "to": "",
         "reg": false,
         "x": 1020,
-        "y": 1060,
+        "y": 1100,
         "wires": [
             [
                 "b644d7aa.00e728"
@@ -6098,7 +6098,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 700,
+        "y": 740,
         "wires": [
             [
                 "e992e762.65fa68"
@@ -6125,7 +6125,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 660,
+        "y": 700,
         "wires": [
             [
                 "b7ef9aeb.b31358"
@@ -6152,7 +6152,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 620,
+        "y": 660,
         "wires": [
             [
                 "f0e52c51.44523"
@@ -6179,7 +6179,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 540,
+        "y": 580,
         "wires": [
             [
                 "807662dd.7d8ab"
@@ -6206,7 +6206,7 @@
         "to": "",
         "reg": false,
         "x": 1440,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "c393816f.5e065"
@@ -6233,7 +6233,7 @@
         "to": "",
         "reg": false,
         "x": 1440,
-        "y": 600,
+        "y": 640,
         "wires": [
             [
                 "c3826261.4667"
@@ -6260,7 +6260,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "57136f85.b74d3"
@@ -6287,7 +6287,7 @@
         "to": "",
         "reg": false,
         "x": 1580,
-        "y": 480,
+        "y": 520,
         "wires": [
             [
                 "2223aa48.2be086"
@@ -6314,7 +6314,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "e60f8bcd.255b68"
@@ -6341,7 +6341,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 380,
+        "y": 420,
         "wires": [
             [
                 "6ee73805.11a858"
@@ -6368,7 +6368,7 @@
         "to": "",
         "reg": false,
         "x": 1000,
-        "y": 220,
+        "y": 260,
         "wires": [
             [
                 "bd2d57f0.2622f8"
@@ -7079,7 +7079,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 140,
-        "y": 1520,
+        "y": 1560,
         "wires": [
             [
                 "d80dbb05.2032d8"
@@ -7099,7 +7099,7 @@
         "proxy": "",
         "authType": "basic",
         "x": 350,
-        "y": 1520,
+        "y": 1560,
         "wires": [
             [
                 "b1b40989.5d3408"
@@ -7126,7 +7126,7 @@
         "to": "",
         "reg": false,
         "x": 600,
-        "y": 1520,
+        "y": 1560,
         "wires": [
             []
         ]
@@ -9356,7 +9356,7 @@
         "func": "var inData = msg.payload;\n\nvar out = [];\nif (inData === undefined || inData.length === 0) {\n    out.push({\n        title : \"No Data Received\"\n    });\n} else {\n    for (var i in inData) {\n        var status= inData[i][1].match(/^([^\\:]+)/);\n        //inData[i][1]\n        var buffer = \n            status[0] + '<br/>' +\n            '<small>' +\n                '<strong>TIME:</strong>' + inData[i][0].TIME + '<br/>' +\n                '<strong>MAC:</strong>' + inData[i][0].MAC + '<br/>' +\n                '<strong>Signal:</strong>' + inData[i][0].RSSI + '<br/>' +\n                '<strong>UID:</strong>' + inData[i][0].UID + '<br/>' +\n                '<strong>DATA:</strong>' + inData[i][0].DATA + '<hr />' +\n            '</small>';\n        out.push({\n            title : buffer,\n            description: inData[i][0],\n            menu : [\"Resend\",\"See Details\"],\n            history_id : i,\n            ip : inData[i][0].IP,\n            notes: inData[i][1]\n        });\n    }\n}\nmsg.payload = out;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 410,
+        "x": 390,
         "y": 480,
         "wires": [
             [
@@ -10457,7 +10457,7 @@
         "type": "debug",
         "z": "e5ec0709.570938",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11512,7 +11512,7 @@
         "files": "/opt/hiveid-ap/nodered/scripts/gatewayInfo.php",
         "recursive": "",
         "x": 200,
-        "y": 1460,
+        "y": 1500,
         "wires": [
             [
                 "d80dbb05.2032d8"
@@ -11591,7 +11591,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 580,
-        "y": 1220,
+        "y": 1260,
         "wires": [
             [
                 "367077e4.def7a8"
@@ -11747,7 +11747,7 @@
         "type": "debug",
         "z": "9745920.d8a397",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11941,7 +11941,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "aac85b05.c667a8"
@@ -12205,7 +12205,7 @@
         "type": "debug",
         "z": "de72cd33.d0bc",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -12228,7 +12228,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 730,
-        "y": 800,
+        "y": 1000,
         "wires": [
             [
                 "5ce0926d.37562c",
@@ -12239,45 +12239,19 @@
         ]
     },
     {
-        "id": "18cf4265.28d82e",
-        "type": "http request",
-        "z": "164213bd.e3dd4c",
-        "name": "JMRI POST Call for Reporters",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 790,
-        "y": 500,
-        "wires": [
-            [
-                "99b19d98.cf379",
-                "1d504262.54c26e"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg.payload"
-        ]
-    },
-    {
         "id": "deb0f6c8.09aad8",
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "JRMI Reporters Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nreporter.report = RFIDRequest.UID;\nreporter.comment = String(Date.now());\nreporter.state = 2;\nmsg.verb = reporter.verb;\ndelete reporter.verb;\n\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": reporter\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter';\n\nreturn msg;",
+        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nvar tag = hive.getTagName(RFIDRequest.UID);\nvar inventory = hive.getInventoryName(RFIDRequest.UID);\nreporter['value'] = inventory.inventory.NAME;\nreporter['report'] = tag.name; \nreporter['comment'] = global.get('timestamp');\n\nreporter['state'] = 2;\nmsg.verb = reporter.verb;\ndelete reporter.verb;\n\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": reporter\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter';\nmsg.topic = 'reporters';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
         "y": 520,
         "wires": [
             [
-                "ad0a5cb3.3290c"
+                "2aac0d87.303432",
+                "a8fe1029.250ed"
             ]
         ],
         "inputLabels": [
@@ -12299,102 +12273,10 @@
         "y": 520,
         "wires": [
             [
-                "deb0f6c8.09aad8",
-                "d1fcbae3.09c268"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "ad0a5cb3.3290c",
-        "type": "switch",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": true,
-        "outputs": 2,
-        "x": 550,
-        "y": 520,
-        "wires": [
-            [
-                "18cf4265.28d82e"
-            ],
-            [
-                "13de50e.c4915af"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg",
-            "msg"
-        ]
-    },
-    {
-        "id": "13de50e.c4915af",
-        "type": "http request",
-        "z": "164213bd.e3dd4c",
-        "name": "JMRI PUT Call for Reporters",
-        "method": "PUT",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 780,
-        "y": 540,
-        "wires": [
-            [
-                "99b19d98.cf379",
-                "1d504262.54c26e"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg.payload"
-        ]
-    },
-    {
-        "id": "a1acd01b.94d2a",
-        "type": "http request",
-        "z": "164213bd.e3dd4c",
-        "name": "JMRI POST Call for Sensors",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 780,
-        "y": 580,
-        "wires": [
-            [
-                "99b19d98.cf379",
-                "9a02981f.13c5c8"
+                "d1fcbae3.09c268",
+                "17868bf3.ddc944",
+                "cbb05792.286828",
+                "deb0f6c8.09aad8"
             ]
         ],
         "inputLabels": [
@@ -12409,81 +12291,15 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "JRMI Sensors Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar sensor = hive.getSensorName(RFIDRequest.MAC);\nsensor.comment = String(Date.now());\nsensor.state = 2;\nmsg.verb = sensor.verb;\ndelete sensor.verb;\n\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": sensor\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor';\n\nreturn msg;",
+        "func": "var RFIDRequest = msg.payload;\nvar curSensors = global.get('JMRI.sensors');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar sensor = hive.getSensorName(RFIDRequest.MAC);\nsensor.comment = global.get('timestamp');\nsensor.state = 2;\nmsg.verb = sensor.verb;\ndelete sensor.verb;\n\nmsg.payload = {\n    \"type\": \"sensor\",\n    \"data\": sensor\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor';\nmsg.topic = 'sensors';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 340,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
-                "e611cfd.543b13"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg"
-        ]
-    },
-    {
-        "id": "e611cfd.543b13",
-        "type": "switch",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": true,
-        "outputs": 2,
-        "x": 550,
-        "y": 600,
-        "wires": [
-            [
-                "a1acd01b.94d2a"
-            ],
-            [
-                "479ccf30.ba70f"
-            ]
-        ],
-        "inputLabels": [
-            "msg"
-        ],
-        "outputLabels": [
-            "msg",
-            "msg"
-        ]
-    },
-    {
-        "id": "479ccf30.ba70f",
-        "type": "http request",
-        "z": "164213bd.e3dd4c",
-        "name": "JMRI PUT Call for Sensors",
-        "method": "PUT",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 780,
-        "y": 620,
-        "wires": [
-            [
-                "99b19d98.cf379",
-                "9a02981f.13c5c8"
+                "2aac0d87.303432",
+                "a8fe1029.250ed"
             ]
         ],
         "inputLabels": [
@@ -12509,10 +12325,10 @@
             }
         ],
         "checkall": "true",
-        "repair": false,
+        "repair": true,
         "outputs": 2,
-        "x": 110,
-        "y": 440,
+        "x": 150,
+        "y": 340,
         "wires": [
             [
                 "d88d214d.ddf25"
@@ -12543,28 +12359,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 160,
-        "y": 480,
+        "x": 180,
+        "y": 380,
         "wires": [
             [
                 "2ad51dda.2abfc2"
             ]
         ]
-    },
-    {
-        "id": "99b19d98.cf379",
-        "type": "debug",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1070,
-        "y": 560,
-        "wires": []
     },
     {
         "id": "5ce0926d.37562c",
@@ -12577,7 +12378,7 @@
         "sendError": false,
         "encoding": "utf8",
         "x": 1080,
-        "y": 680,
+        "y": 880,
         "wires": [
             [
                 "c05715cf.f986d8"
@@ -12597,7 +12398,7 @@
         "temp": "",
         "skip": "0",
         "x": 1010,
-        "y": 720,
+        "y": 920,
         "wires": [
             [
                 "9a5cfaf0.6b0dd8"
@@ -12624,7 +12425,7 @@
         "to": "",
         "reg": false,
         "x": 1170,
-        "y": 720,
+        "y": 920,
         "wires": [
             []
         ]
@@ -12637,7 +12438,7 @@
         "files": "/opt/hiveid-ap/data/field_map.csv",
         "recursive": "",
         "x": 620,
-        "y": 680,
+        "y": 880,
         "wires": [
             [
                 "5ce0926d.37562c"
@@ -12653,7 +12454,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1040,
-        "y": 800,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -12669,8 +12470,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1340,
-        "y": 160,
+        "x": 1380,
+        "y": 40,
         "wires": []
     },
     {
@@ -12681,8 +12482,8 @@
         "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar array_combine = hive.array_combine;\nvar invColumns = TT.inventory.columns;\nvar metaColumns = TT.inventory.meta.columns;\nvar metaKeyColumns = TT.inventory.keys.columns;\nvar TagData = msg.payload;\ncurRecord = {};\nvar KeyRecords = {};\n\nvar columnList = ['NAME'];\nfor (var KeyID in TT.inventory.keys.data) {\n    var curKey = TT.inventory.keys.data[KeyID];\n    KeyRecords[KeyID] = array_combine(metaKeyColumns,curKey);\n    KeyRecords[KeyID]['ID'] = KeyID;\n    columnList.push(KeyRecords[KeyID]['meta_key']);\n}\n\nvar InvRecords = {};\nvar curMetaRecord = {};\nmsg.payload = [];\n\nfor (var InvID in TT.inventory.data) {\n    var curInv = TT.inventory.data[InvID];\n    \n    var InvRecord = array_combine(invColumns,curInv);\n    var tempRecord = {};\n    tempRecord['JMRI_TAGNAME'] = TagData[InvID];\n    \n    for (var i in columnList) {\n        var columnName = columnList[i];\n        tempRecord[columnName] = '';\n    }\n    tempRecord['NAME'] = InvRecord.NAME;\n    for (var MetaID in TT.inventory.meta.data[InvID]) {\n        var curMeta = TT.inventory.meta.data[InvID][MetaID];\n        curMetaRecord[MetaID] = array_combine(metaColumns,curMeta);\n        //curMetaRecord[MetaID]['ID'] = MetaID;\n        curMetaRecord[MetaID]['key'] = KeyRecords[curMetaRecord[MetaID]['wp_tt_inventorymetakeys_ID']];\n        tempRecord[curMetaRecord[MetaID]['key']['meta_key']] = curMetaRecord[MetaID]['meta_value'];\n    }\n    msg.payload.push(tempRecord);\n    //InvRecords[InvID]['meta'] = curMetaRecord;\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 950,
-        "y": 260,
+        "x": 990,
+        "y": 140,
         "wires": [
             [
                 "9678a17d.f9233",
@@ -12940,8 +12741,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1060,
-        "y": 340,
+        "x": 1100,
+        "y": 220,
         "wires": [
             []
         ]
@@ -12954,8 +12755,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 930,
-        "y": 300,
+        "x": 970,
+        "y": 180,
         "wires": [
             [
                 "2ec96926.6bdab6"
@@ -12970,8 +12771,8 @@
         "func": "var inData = msg.payload;\nvar JMRI_Config = global.get('JMRI_Config');\nvar JMRI = global.get('JMRI');\nvar IP = global.get('IP');\nvar sync = flow.get('sync');\n\nfor (var i in inData) {\n    var curRecord = inData[i];\n    var type = 'car';\n    if (curRecord['Inventory Type'] !== undefined && curRecord['Inventory Type'] !== \"\") {\n        type = curRecord['Inventory Type'].toLowerCase();    \n    }\n    \n    var temp = {\n        payload : {\n            \"type\" : type\n            ,\"data\" : {}\n        }\n        ,verb : 'PUT'\n        ,url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + type\n    };\n    \n    for (var fieldName in curRecord) {\n        var targetField = sync.tt2jmri('inventory',fieldName);\n        if (targetField.key !== undefined && curRecord[fieldName] !== \"\" && curRecord[fieldName] !== null) {\n            temp.payload['data'][targetField.key] = curRecord[fieldName];\n        }\n    }\n    temp.payload['data']['carType'] = sync.tt2jmri_carType(temp.payload['data']['carType']);\n    temp.payload['data']['rfid'] = (curRecord['JMRI_TAGNAME'] === undefined) ? \"\" : curRecord['JMRI_TAGNAME'];\n        \n    if (curRecord['Road Name'] === undefined) {\n        curRecord['Road Name'] = sync.tt2jmri_RoadName(temp.payload['data']['Road Name']);\n    }\n    \n    var name = curRecord['Road Name'] + curRecord['Road Number'];\n    temp.payload['data']['name'] = name;\n    \n    \n    var exists = false;\n    \n    for (var jmriID in JMRI.cars.data) {\n        if (name === JMRI.cars.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    for (var jmriID in JMRI.engines.data) {\n        if (name === JMRI.engines.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    \n    if (exists === true) {\n        temp.verb = 'POST';\n    } \n    \n    node.send(temp);\n}\nflow.set('running_inventoryImport', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1290,
-        "y": 260,
+        "x": 1330,
+        "y": 140,
         "wires": [
             [
                 "9c3a93e3.fade",
@@ -13006,7 +12807,8 @@
                 "3d9fe886.dbd038"
             ],
             [
-                "405bbea4.15dd8"
+                "405bbea4.15dd8",
+                "3ca5628c.c8f32e"
             ]
         ]
     },
@@ -13069,8 +12871,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 930,
-        "y": 220,
+        "x": 970,
+        "y": 100,
         "wires": []
     },
     {
@@ -13083,8 +12885,8 @@
         "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 1600,
-        "y": 340,
+        "x": 1640,
+        "y": 220,
         "wires": [
             []
         ]
@@ -13097,8 +12899,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 1470,
-        "y": 300,
+        "x": 1510,
+        "y": 180,
         "wires": [
             [
                 "97eed347.84621"
@@ -13117,8 +12919,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1630,
-        "y": 240,
+        "x": 1670,
+        "y": 120,
         "wires": [
             [
                 "d939d611.5a0548"
@@ -13136,8 +12938,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1890,
-        "y": 240,
+        "x": 1930,
+        "y": 120,
         "wires": []
     },
     {
@@ -13166,7 +12968,7 @@
         "sendError": false,
         "encoding": "utf8",
         "x": 1130,
-        "y": 600,
+        "y": 800,
         "wires": [
             [
                 "2c706ed6.288632"
@@ -13186,7 +12988,7 @@
         "temp": "",
         "skip": "0",
         "x": 1010,
-        "y": 640,
+        "y": 840,
         "wires": [
             [
                 "fe3937c2.70aef8"
@@ -13213,7 +13015,7 @@
         "to": "",
         "reg": false,
         "x": 1190,
-        "y": 640,
+        "y": 840,
         "wires": [
             []
         ]
@@ -13226,7 +13028,7 @@
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.cartypes.csv",
         "recursive": "",
         "x": 670,
-        "y": 600,
+        "y": 800,
         "wires": [
             [
                 "337e2284.c5ea3e"
@@ -13253,8 +13055,8 @@
         "createDir": true,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 1400,
-        "y": 200,
+        "x": 1440,
+        "y": 80,
         "wires": [
             []
         ]
@@ -13270,7 +13072,7 @@
         "sendError": false,
         "encoding": "utf8",
         "x": 1140,
-        "y": 520,
+        "y": 720,
         "wires": [
             [
                 "56c30c3b.453964"
@@ -13290,7 +13092,7 @@
         "temp": "",
         "skip": "0",
         "x": 1010,
-        "y": 560,
+        "y": 760,
         "wires": [
             [
                 "cc6a1299.94f3d"
@@ -13317,7 +13119,7 @@
         "to": "",
         "reg": false,
         "x": 1190,
-        "y": 560,
+        "y": 760,
         "wires": [
             []
         ]
@@ -13330,7 +13132,7 @@
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.roadnames.csv",
         "recursive": "",
         "x": 680,
-        "y": 520,
+        "y": 720,
         "wires": [
             [
                 "d619f02a.37bcb"
@@ -13342,14 +13144,14 @@
         "type": "debug",
         "z": "3d602d50.39dab2",
         "name": "Convert Data Debug",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1520,
-        "y": 380,
+        "x": 1580,
+        "y": 260,
         "wires": []
     },
     {
@@ -13364,8 +13166,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1640,
-        "y": 280,
+        "x": 1680,
+        "y": 160,
         "wires": [
             [
                 "d939d611.5a0548"
@@ -13394,8 +13196,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1470,
-        "y": 260,
+        "x": 1510,
+        "y": 140,
         "wires": [
             [
                 "5e89fd1e.bd8354"
@@ -13429,14 +13231,14 @@
         "id": "23864cb1.1549e4",
         "type": "debug",
         "z": "3d602d50.39dab2",
-        "name": "Sensor and Reporter PUT Request Results",
+        "name": "Sensor and Reporter Request Results",
         "active": true,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1290,
+        "x": 1280,
         "y": 420,
         "wires": []
     },
@@ -13609,7 +13411,7 @@
         "type": "debug",
         "z": "1a726252.d178be",
         "name": "TrainTraxx Request",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
@@ -14232,12 +14034,12 @@
         "name": "",
         "active": false,
         "tosidebar": true,
-        "console": true,
+        "console": false,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1110,
-        "y": 900,
+        "x": 1150,
+        "y": 1020,
         "wires": []
     },
     {
@@ -14273,8 +14075,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 820,
+        "x": 1190,
+        "y": 940,
         "wires": [
             [
                 "864e8e1e.a5359"
@@ -14314,8 +14116,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1140,
-        "y": 860,
+        "x": 1180,
+        "y": 980,
         "wires": [
             [
                 "864e8e1e.a5359"
@@ -14334,8 +14136,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1370,
-        "y": 840,
+        "x": 1410,
+        "y": 960,
         "wires": []
     },
     {
@@ -14358,8 +14160,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 930,
-        "y": 840,
+        "x": 970,
+        "y": 960,
         "wires": [
             [
                 "fea77fb9.80682",
@@ -14379,8 +14181,8 @@
         "func": "var queue = flow.get('queue');\nvar curTable = queue.pop();\nflow.set('queue',queue);    \nmsg.payload = curTable;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 430,
-        "y": 840,
+        "x": 470,
+        "y": 960,
         "wires": [
             [
                 "b5fe78d9.7a6e58",
@@ -14396,12 +14198,12 @@
         "name": "JMRI Request",
         "active": false,
         "tosidebar": true,
-        "console": true,
+        "console": false,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 660,
-        "y": 760,
+        "x": 700,
+        "y": 880,
         "wires": []
     },
     {
@@ -14416,8 +14218,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "x": 130,
-        "y": 700,
+        "x": 170,
+        "y": 820,
         "wires": [
             [
                 "3c4a9a1c.addf66",
@@ -14443,8 +14245,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 220,
-        "y": 860,
+        "x": 260,
+        "y": 980,
         "wires": [
             [
                 "4ca45c93.8fc0f4"
@@ -14462,8 +14264,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 870,
-        "y": 960,
+        "x": 910,
+        "y": 1080,
         "wires": [
             [
                 "4d27f498.523a5c"
@@ -14489,8 +14291,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 880,
+        "x": 700,
+        "y": 1000,
         "wires": [
             [
                 "1634e571.c471cb",
@@ -14508,8 +14310,8 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1010,
-        "y": 1000,
+        "x": 1050,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -14533,8 +14335,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
-        "y": 800,
+        "x": 710,
+        "y": 920,
         "wires": [
             []
         ]
@@ -14554,8 +14356,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 180,
-        "y": 820,
+        "x": 220,
+        "y": 940,
         "wires": [
             [
                 "910e7072.24197"
@@ -14581,8 +14383,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 780,
+        "x": 1190,
+        "y": 900,
         "wires": [
             []
         ]
@@ -14605,8 +14407,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 400,
-        "y": 880,
+        "x": 440,
+        "y": 1000,
         "wires": [
             [],
             [
@@ -14647,8 +14449,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 890,
-        "y": 880,
+        "x": 930,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -14671,8 +14473,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 160,
-        "y": 780,
+        "x": 200,
+        "y": 900,
         "wires": [
             [
                 "511c17c9.c0ecb8"
@@ -14695,8 +14497,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 870,
-        "y": 920,
+        "x": 910,
+        "y": 1040,
         "wires": [
             [
                 "5209c9f8.ade9a8"
@@ -14713,7 +14515,7 @@
                 "t": "set",
                 "p": "queue",
                 "pt": "flow",
-                "to": "[\"cars\",\"engines\",\"locations\",\"trains\",\"reporters\",\"sensors\"]",
+                "to": "[\"cars\",\"engines\",\"locations\",\"trains\",\"reporters\",\"sensors\",\"idTag\"]",
                 "tot": "json"
             },
             {
@@ -14750,8 +14552,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 1000,
+        "x": 410,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -14768,8 +14570,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": ".5",
-        "x": 190,
-        "y": 1000,
+        "x": 230,
+        "y": 1120,
         "wires": [
             [
                 "912ca386.46614"
@@ -14777,107 +14579,15 @@
         ]
     },
     {
-        "id": "9a02981f.13c5c8",
-        "type": "change",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Defaults for Sensors",
-        "rules": [
-            {
-                "t": "set",
-                "p": "queue",
-                "pt": "flow",
-                "to": "[\"sensors\"]",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "stored",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "ready",
-                "pt": "flow",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "running",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1130,
-        "y": 600,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1d504262.54c26e",
-        "type": "change",
-        "z": "164213bd.e3dd4c",
-        "name": "Set Defaults for Reporters",
-        "rules": [
-            {
-                "t": "set",
-                "p": "queue",
-                "pt": "flow",
-                "to": "[\"reporters\"]",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "stored",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "ready",
-                "pt": "flow",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "running",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1130,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "26beefe6.cfd83",
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Setup Global Functions",
-        "func": "var inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : mac.toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    for (var id in JMRI[deviceType].data) {\n        var curDevice = JMRI[deviceType].data[id];\n        if (myResults.userName === curDevice.userName) {\n            myResults.name = curDevice.userName;\n            myResults.state = JMRI[deviceType].data[id].state;\n            myResults.verb = 'POST';\n        }\n    }    \n    if (myResults.name === '') {\n        var columnNames = TT.hivenode.columns;\n        for (var nodeId in TT.hivenode.data) {\n            var curNode = inObject.array_combine(columnNames,TT.hivenode.data[nodeId]);\n            if (curNode['MAC_ADDRESS'].toUpperCase() === myResults.userName) { \n                myResults.name = prefix + nodeId;\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\n\nglobal.set('hive', inObject);\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : mac.toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    for (var id in JMRI[deviceType].data) {\n        var curDevice = JMRI[deviceType].data[id];\n        if (myResults.userName === curDevice.userName) {\n            myResults.name = curDevice.name;\n            myResults.state = JMRI[deviceType].data[id].state;\n            myResults.verb = 'POST';\n        }\n    }    \n    if (myResults.name === '') {\n        var columnNames = TT.hivenode.columns;\n        for (var nodeId in TT.hivenode.data) {\n            var curNode = inObject.array_combine(columnNames,TT.hivenode.data[nodeId]);\n            if (curNode['MAC_ADDRESS'].toUpperCase() === myResults.userName) { \n                myResults.name = prefix + nodeId;\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var hivenodeColumns = TT.hivenode.columns;\n    var activeHivenode = {};\n    for (var hivenodeID in TT.hivenode.data) {\n        var curHivenode = inObject.array_combine(hivenodeColumns, TT.hivenode.data[hivenodeID]);\n        if (curHivenode.MAC_ADDRESS.toUpperCase() == mac.toUpperCase()) {\n            activeHivenode = curHivenode;\n        }\n    }\n    var activeLocation = {};\n    if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n        activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var tagsColumns = TT.tags.columns;\n    var activeTag = {};\n    for (var tagID in TT.tags.data) {\n        var curTag = inObject.array_combine(tagsColumns, TT.tags.data[tagID]);\n        if (curTag.TAG_UID.toUpperCase() == uid.toUpperCase()) {\n            activeTag = curTag;\n        }\n    }\n    \n    var activeInventory = {};\n    if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n        activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n    }\n\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    for (var id in JMRI.idTag.data) {\n        var curTag = JMRI.idTag.data[id];\n        if (curTag.userName === uid) {\n            myResults.name = curTag.name;   \n        }\n    } \n    if (myResults.name === undefined) {\n        myResults.verb = 'PUT';\n        myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n    }\n    return myResults;\n}\nglobal.set('hive', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 40,
+        "y": 80,
         "wires": [
             []
         ]
@@ -15052,8 +14762,8 @@
         "storeOutMessages": true,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 560,
-        "y": 700,
+        "x": 600,
+        "y": 820,
         "wires": [
             []
         ]
@@ -15066,8 +14776,8 @@
         "func": "var running = global.get('sync_JMRI_Running');\nif (running !== undefined && running === true) {\n    msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\n} else {\n    msg.template = '';\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 350,
-        "y": 700,
+        "x": 390,
+        "y": 820,
         "wires": [
             [
                 "8f8c1443.c1b888"
@@ -15266,5 +14976,474 @@
         "x": 410,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "17868bf3.ddc944",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "Temp Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 290,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a75a0852.7ad338",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Sync Locations",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\n\nvar locationColumns = TT.locations.columns;\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    \n    var metaColumns = TT.locations.meta.columns;\n    for (var metaID in TT.locations.meta.data) {\n        var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID]);\n        \n        //var curLocations = TT.locations.data[locationID];\n    }\n}\n\n\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 520,
+        "wires": [
+            [
+                "32e6b896.c7b848"
+            ]
+        ]
+    },
+    {
+        "id": "ab94abd6.2d7c68",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "PUT Record",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 990,
+        "y": 500,
+        "wires": [
+            [
+                "d38f60fc.3dcee"
+            ]
+        ]
+    },
+    {
+        "id": "d38f60fc.3dcee",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "Location Request Results",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1240,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "32e6b896.c7b848",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 820,
+        "y": 520,
+        "wires": [
+            [
+                "ab94abd6.2d7c68"
+            ],
+            [
+                "62352b07.56d274"
+            ]
+        ]
+    },
+    {
+        "id": "62352b07.56d274",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "POST Record",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1000,
+        "y": 540,
+        "wires": [
+            [
+                "d38f60fc.3dcee"
+            ]
+        ]
+    },
+    {
+        "id": "3ca5628c.c8f32e",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Setup JMRI Tags",
+        "func": "/*\n    {\n        \"wp_users_ID\": 1,\n        \"wp_tt_inventory_ID\": 2048,\n        \"NAME\": \"CAR: (ID: 3150)\",\n        \"START_DATE\": \"2019-07-11 13:19:04\",\n        \"END_DATE\": \"2999-01-01 01:00:00\",\n        \"TAG_UID\": \"35 6e 60 c9\",\n        \"TAG_DATA\": \"35 6e 60 c9 f2 08 04 00 01 35 e2 f3 c1 39 ce 1d ee 91\",\n        \"PICCType\": \"MIFARE 1KB\",\n        \"TAG_KEY\": \"ff ff ff ff ff ff\",\n        \"ID\": \"3150\",\n        \"JMRI_IDTAG\": \"IDHIVE3150\"\n    }\n    \n    {\n        \"type\": \"idTag\",\n        \"data\": {\n            \"name\": \"IDHIVE4\",\n            \"userName\": \"1234569\",\n            \"comment\": \"test\",\n            \"properties\": [],\n            \"state\": 2,\n            \"reporter\": null,\n            \"time\": null\n        }\n    }\n    \n*/\nvar TT = global.get('TrainTraxx');\nvar IP = global.get('IP');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar inventoryColumns = TT.inventory.columns;\n\nvar inTags = msg.payload;\nmsg.payload = [];\nfor (var id in inTags) {\n    var curTag = inTags[id];\n    var curInv = { NAME : \"\" };\n    if (Number(curTag['wp_tt_inventory_ID']) > 0) {\n        curInv = hive.array_combine(inventoryColumns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n    }\n    var verb = \"PUT\";\n    for (var j_id in JMRI.idTag) {\n        var curJTag = JMRI.idTag[j_id];\n        if (curJTag.name === curTag.JMRI_IDTAG) {\n            verb = \"POST\";\n        }\n    }\n    var tempMsg = {\n        payload : {\n            \"type\" : \"idTag\",\n            \"data\" : {\n                \"name\" : curTag.JMRI_IDTAG,\n                \"userName\" : curTag.TAG_UID,\n                \"comment\" : curInv.NAME\n            }\n        }\n        ,verb : verb\n        ,url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + \"idTag\"\n        \n    };\n    node.send(tempMsg);\n    //msg.payload.push(tempMsg);\n}\n//return msg;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 990,
+        "y": 260,
+        "wires": [
+            [
+                "3bd4107f.d2b5a",
+                "532bcbb4.e7e124"
+            ]
+        ]
+    },
+    {
+        "id": "3bd4107f.d2b5a",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1170,
+        "y": 260,
+        "wires": [
+            [
+                "80beb66.488e048"
+            ],
+            [
+                "1b1d2a52.6a7416"
+            ]
+        ]
+    },
+    {
+        "id": "80beb66.488e048",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "PUT Record",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1350,
+        "y": 280,
+        "wires": [
+            [
+                "eb2487f0.797a08"
+            ]
+        ]
+    },
+    {
+        "id": "1b1d2a52.6a7416",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "POST Record",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1360,
+        "y": 320,
+        "wires": [
+            [
+                "eb2487f0.797a08"
+            ]
+        ]
+    },
+    {
+        "id": "eb2487f0.797a08",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "TrainTraxx to JMRI Tags Results",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1620,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "532bcbb4.e7e124",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "TrainTraxx to JMRI tag sync",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1070,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "cbb05792.286828",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "JRMI idTag Process",
+        "func": "var RFIDRequest = msg.payload;\n\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nvar tag = hive.getTagName(RFIDRequest.UID);\ntag[\"reporter\"]= reporter.name;\nmsg.verb = tag.verb;\ndelete tag.verb;\nmsg.payload = {\n    \"type\": \"idTag\",\n    \"data\": tag\n};\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'idTag';\nmsg.topic = 'idTag';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 600,
+        "wires": [
+            [
+                "2aac0d87.303432",
+                "a8fe1029.250ed"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "7833a144.2c0f9",
+        "type": "http request",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI POST Call",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 740,
+        "y": 540,
+        "wires": [
+            [
+                "97f4993.8250368",
+                "d134657a.d3a028"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "2aac0d87.303432",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 570,
+        "y": 560,
+        "wires": [
+            [
+                "7833a144.2c0f9"
+            ],
+            [
+                "874bf5ac.219458"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg",
+            "msg"
+        ]
+    },
+    {
+        "id": "874bf5ac.219458",
+        "type": "http request",
+        "z": "164213bd.e3dd4c",
+        "name": "JMRI PUT Call",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 740,
+        "y": 580,
+        "wires": [
+            [
+                "97f4993.8250368",
+                "d134657a.d3a028"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "97f4993.8250368",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "set defaults",
+        "func": "flow.set('stored',false);\n\nvar queue = flow.get('queue');\nvar flag = false;\nfor (var i in queue) {\n    if (queue[i] === msg.topic) {\n        flag = true;\n    }\n}\nif (flag === false) {\n    queue.push(msg.topic);\n}\nflow.set('queue',queue);\nflow.set('ready',true);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 990,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d134657a.d3a028",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 990,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "a8fe1029.250ed",
+        "type": "debug",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 600,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f83d3ea6.5e836",
+        "type": "moment",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "America/Chicago",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "YYYY-MM-DD HH:mm:ss",
+        "locale": "en_US",
+        "output": "timestamp",
+        "outputType": "global",
+        "outTz": "America/Chicago",
+        "x": 400,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3519a7e2.480e68",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "f83d3ea6.5e836"
+            ]
+        ]
+    },
+    {
+        "id": "30bd919d.10fcfe",
+        "type": "ui_button",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "group": "3220fafa.330906",
+        "order": 2,
+        "width": "12",
+        "height": "1",
+        "passthru": false,
+        "label": "Refresh Activity",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "d4deb1b2.f1eb5"
+            ]
+        ]
     }
 ]
