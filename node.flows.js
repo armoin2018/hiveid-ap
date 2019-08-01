@@ -1538,8 +1538,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 220,
-        "y": 40,
+        "x": 200,
+        "y": 60,
         "wires": [
             [
                 "fed0826d.2117"
@@ -1570,12 +1570,17 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "jmri_ops",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "true",
-        "repair": false,
-        "outputs": 4,
+        "repair": true,
+        "outputs": 5,
         "x": 240,
         "y": 200,
         "wires": [
@@ -1584,6 +1589,9 @@
             ],
             [
                 "b1e60b01.5f1548"
+            ],
+            [
+                "b4f7b12.29c705"
             ],
             [
                 "b4f7b12.29c705"
@@ -1641,7 +1649,7 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "Set JMRI",
-        "func": "delete msg.payload;\n\nvar IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JMRI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    msg.headers = {\n        \"Location\" : JMRI_Config.JMRI_Web.replace('{{IP}}',IP.internalIPv4) \n    };\n} else {\n    msg.statusCode = 404;\n}\nreturn msg;",
+        "func": "var IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JMRI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    var target = global.get(msg.payload.app.toUpperCase() + '_URL');\n    \n    msg.headers = {\n        \"Location\" : target\n    };\n} else {\n    msg.statusCode = 404;\n}\ndelete msg.payload;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 840,
@@ -9776,8 +9784,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "x": 130,
-        "y": 380,
+        "x": 230,
+        "y": 440,
         "wires": [
             [
                 "1658cd8e.e99cb2",
@@ -10006,7 +10014,7 @@
         "type": "function",
         "z": "f1ec9b2a.1f7298",
         "name": "Make JMRI URL",
-        "func": "var IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_Web.replace('{{IP}}',IP.internalIPv4);\nreturn msg;",
+        "func": "var IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_Web.replace('{{IP}}',IP.internalIPv4);\nglobal.set('JMRI_URL',msg.url);\nglobal.set('JMRI_OPS_URL',msg.url +'operations/trains');\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 580,
@@ -10291,7 +10299,7 @@
             }
         ],
         "checkall": "true",
-        "repair": false,
+        "repair": true,
         "outputs": 2,
         "x": 600,
         "y": 200,
@@ -12227,8 +12235,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 730,
-        "y": 1000,
+        "x": 810,
+        "y": 960,
         "wires": [
             [
                 "5ce0926d.37562c",
@@ -12454,7 +12462,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1040,
-        "y": 1000,
+        "y": 960,
         "wires": [
             []
         ]
@@ -14997,14 +15005,14 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Sync Locations",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\n\nvar locationColumns = TT.locations.columns;\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    \n    var metaColumns = TT.locations.meta.columns;\n    for (var metaID in TT.locations.meta.data) {\n        var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID]);\n        \n        //var curLocations = TT.locations.data[locationID];\n    }\n}\n\n\nreturn;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\nvar myResults = [];\nvar metaKeys = {};\nvar keyColumns = TT.locations.keys.columns;\nfor (var keyID in TT.locations.keys.data) {\n    var curKey = TT.locations.keys.data[keyID];    \n    metaKeys[keyID] =  hive.array_combine(keyColumns,curKey);\n}\n\nvar locationColumns = TT.locations.columns;\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    curLocation['ID'] = locationID;\n    var metaColumns = TT.locations.meta.columns;\n    for (var metaID in TT.locations.meta.data[locationID]) {\n        var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID][metaID]);\n        curLocation[metaKeys[curMeta['wp_tt_locationmetakeys_ID']]['meta_key']] = curMeta['meta_value'];\n    }\n    myResults.push(curLocation);\n}\n\nmsg.payload = myResults;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 560,
+        "x": 460,
         "y": 520,
         "wires": [
             [
-                "32e6b896.c7b848"
+                "ab7e39fe.355a28"
             ]
         ]
     },
@@ -15443,6 +15451,47 @@
         "wires": [
             [
                 "d4deb1b2.f1eb5"
+            ]
+        ]
+    },
+    {
+        "id": "ab7e39fe.355a28",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 500,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d64d52a9.82f0c",
+        "type": "ui_button",
+        "z": "3d602d50.39dab2",
+        "name": "Sync Locations",
+        "group": "511f0851.ca4e98",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Sync Locations",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 420,
+        "y": 480,
+        "wires": [
+            [
+                "a75a0852.7ad338"
             ]
         ]
     }
