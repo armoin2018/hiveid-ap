@@ -4391,8 +4391,8 @@
         "payload": "Clicked",
         "payloadType": "str",
         "topic": "",
-        "x": 490,
-        "y": 40,
+        "x": 270,
+        "y": 60,
         "wires": [
             [
                 "509dfa72.51cfc4"
@@ -12235,14 +12235,15 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 810,
-        "y": 960,
+        "x": 130,
+        "y": 1000,
         "wires": [
             [
                 "5ce0926d.37562c",
                 "874355e1.db5228",
                 "337e2284.c5ea3e",
-                "d619f02a.37bcb"
+                "d619f02a.37bcb",
+                "cbce0132.b2547"
             ]
         ]
     },
@@ -12385,8 +12386,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 1080,
-        "y": 880,
+        "x": 560,
+        "y": 1200,
         "wires": [
             [
                 "c05715cf.f986d8"
@@ -12405,8 +12406,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 1010,
-        "y": 920,
+        "x": 490,
+        "y": 1240,
         "wires": [
             [
                 "9a5cfaf0.6b0dd8"
@@ -12432,8 +12433,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1170,
-        "y": 920,
+        "x": 650,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -12445,8 +12446,8 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/field_map.csv",
         "recursive": "",
-        "x": 620,
-        "y": 880,
+        "x": 540,
+        "y": 1160,
         "wires": [
             [
                 "5ce0926d.37562c"
@@ -12458,45 +12459,29 @@
         "type": "function-npm",
         "z": "3d602d50.39dab2",
         "name": "Setup Flow Functions",
-        "func": "var FlowMap = flow.get('FlowMap');\nvar CarTypeMap = flow.get('CarTypeMap');\nvar RoadNameMap = flow.get('RoadNameMap');\nvar inObject = {};\ninObject.jmri2tt = function(type,key) {\n    var myResults = {};\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type !== undefined && \n                FlowMap[i].JMRI_Type === type  &&\n                FlowMap[i].JMRI === key\n        ) {\n            myResults = { \n                type : FlowMap[i].TrainTraxx_Type,\n                key  : FlowMap[i].TrainTraxx\n            };\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri = function(type,key) {\n    var myResults = {};\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type === type  &&\n                FlowMap[i].TrainTraxx === key\n        ) {\n            myResults = { \n                type : FlowMap[i].JMRI_Type,\n                key  : FlowMap[i].JMRI\n            };\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_carType = function(name) {\n    var myResults = name;\n    for (var i in CarTypeMap) {\n        if (CarTypeMap[i].col1 === name) {\n            myResults = CarTypeMap[i].col2;\n        }\n    }\n    return myResults;\n}\n\ninObject.tt2jmri_RoadName = function(name) {\n    var myResults = name;\n    for (var i in RoadNameMap) {\n        if (RoadNameMap[i]['Road Name'] === name || RoadNameMap[i]['Road Short Name'] === name ) {\n            myResults = RoadNameMap[i]['Road Short Name'];\n        }\n    }\n    return myResults;\n}\n\n\nflow.set('sync', inObject);\nreturn msg;",
+        "func": "var FlowMap = flow.get('FlowMap');\nvar CarTypeMap = flow.get('CarTypeMap');\nvar RoadNameMap = flow.get('RoadNameMap');\nvar ColorMap = flow.get('ColorMap');\nvar inObject = {};\ninObject.jmri2tt = function(type,key) {\n    var myResults = {};\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type !== undefined && \n                FlowMap[i].JMRI_Type === type  &&\n                FlowMap[i].JMRI === key\n        ) {\n            myResults = { \n                type : FlowMap[i].TrainTraxx_Type,\n                key  : FlowMap[i].TrainTraxx\n            };\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri = function(type,key) {\n    var myResults = {};\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type !== undefined && \n                FlowMap[i].TrainTraxx_Type === type  &&\n                FlowMap[i].TrainTraxx === key\n        ) {\n            myResults = { \n                type : FlowMap[i].JMRI_Type,\n                key  : FlowMap[i].JMRI\n            };\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_color = function(name) {\n    var myResults = name;\n    for (var i in ColorMap) {\n        if (ColorMap[i].TrainTraxx.toLowerCase() === name.toLowerCase()) {\n            myResults = ColorMap[i].JMRI;\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_carType = function(name) {\n    var myResults = name;\n    for (var i in CarTypeMap) {\n        if (CarTypeMap[i].col1 === name) {\n            myResults = CarTypeMap[i].col2;\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_RoadName = function(name) {\n    var myResults = name;\n    for (var i in RoadNameMap) {\n        if (RoadNameMap[i]['Road Name'] === name || RoadNameMap[i]['Road Short Name'] === name ) {\n            myResults = RoadNameMap[i]['Road Short Name'];\n        }\n    }\n    return myResults;\n};\n\nflow.set('sync', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1040,
-        "y": 960,
+        "x": 140,
+        "y": 1040,
         "wires": [
             []
         ]
     },
     {
-        "id": "8c313e37.a5d6d",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "Restructure Data Debug",
-        "active": false,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1380,
-        "y": 40,
-        "wires": []
-    },
-    {
         "id": "87d6b3a0.2d3b2",
         "type": "function",
         "z": "3d602d50.39dab2",
-        "name": "Restructure Data",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar array_combine = hive.array_combine;\nvar invColumns = TT.inventory.columns;\nvar metaColumns = TT.inventory.meta.columns;\nvar metaKeyColumns = TT.inventory.keys.columns;\nvar TagData = msg.payload;\ncurRecord = {};\nvar KeyRecords = {};\n\nvar columnList = ['NAME'];\nfor (var KeyID in TT.inventory.keys.data) {\n    var curKey = TT.inventory.keys.data[KeyID];\n    KeyRecords[KeyID] = array_combine(metaKeyColumns,curKey);\n    KeyRecords[KeyID]['ID'] = KeyID;\n    columnList.push(KeyRecords[KeyID]['meta_key']);\n}\n\nvar InvRecords = {};\nvar curMetaRecord = {};\nmsg.payload = [];\n\nfor (var InvID in TT.inventory.data) {\n    var curInv = TT.inventory.data[InvID];\n    \n    var InvRecord = array_combine(invColumns,curInv);\n    var tempRecord = {};\n    tempRecord['JMRI_TAGNAME'] = TagData[InvID];\n    \n    for (var i in columnList) {\n        var columnName = columnList[i];\n        tempRecord[columnName] = '';\n    }\n    tempRecord['NAME'] = InvRecord.NAME;\n    for (var MetaID in TT.inventory.meta.data[InvID]) {\n        var curMeta = TT.inventory.meta.data[InvID][MetaID];\n        curMetaRecord[MetaID] = array_combine(metaColumns,curMeta);\n        //curMetaRecord[MetaID]['ID'] = MetaID;\n        curMetaRecord[MetaID]['key'] = KeyRecords[curMetaRecord[MetaID]['wp_tt_inventorymetakeys_ID']];\n        tempRecord[curMetaRecord[MetaID]['key']['meta_key']] = curMetaRecord[MetaID]['meta_value'];\n    }\n    msg.payload.push(tempRecord);\n    //InvRecords[InvID]['meta'] = curMetaRecord;\n}\nreturn msg;",
+        "name": "Sync Inventory",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar tagLookup = flow.get('tagLookup');\n\nvar invColumns = TT.inventory.columns;\nvar metaColumns = TT.inventory.meta.columns;\nvar metaKeyColumns = TT.inventory.keys.columns;\ncurRecord = {};\nvar KeyRecords = {};\n\nvar columnList = ['NAME'];\nfor (var KeyID in TT.inventory.keys.data) {\n    var curKey = TT.inventory.keys.data[KeyID];\n    KeyRecords[KeyID] = hive.array_combine(metaKeyColumns,curKey);\n    KeyRecords[KeyID]['ID'] = KeyID;\n    columnList.push(KeyRecords[KeyID]['meta_key']);\n}\n\nvar InvRecords = {};\nvar curMetaRecord = {};\nmsg.payload = [];\n\nfor (var InvID in TT.inventory.data) {\n    var curInv = TT.inventory.data[InvID];\n    \n    var InvRecord = hive.array_combine(invColumns,curInv);\n    var tempRecord = {\"JMRI_TAGNAME\" : \"\"};\n    if (tagLookup['ID'][InvID] !== undefined) {\n        tempRecord['JMRI_TAGNAME'] = tagLookup['ID'][InvID];\n    }\n    \n    for (var i in columnList) {\n        var columnName = columnList[i];\n        tempRecord[columnName] = '';\n    }\n    tempRecord['NAME'] = InvRecord.NAME;\n    for (var MetaID in TT.inventory.meta.data[InvID]) {\n        var curMeta = TT.inventory.meta.data[InvID][MetaID];\n        curMetaRecord[MetaID] = hive.array_combine(metaColumns,curMeta);\n        curMetaRecord[MetaID]['key'] = KeyRecords[curMetaRecord[MetaID]['wp_tt_inventorymetakeys_ID']];\n        tempRecord[curMetaRecord[MetaID]['key']['meta_key']] = curMetaRecord[MetaID]['meta_value'];\n    }\n    msg.payload.push(tempRecord);\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 990,
-        "y": 140,
+        "x": 600,
+        "y": 320,
         "wires": [
             [
                 "9678a17d.f9233",
                 "20f89dba.b8f4e2",
-                "8c313e37.a5d6d",
                 "621572f.7860c8c"
             ]
         ]
@@ -12749,8 +12734,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1100,
-        "y": 220,
+        "x": 720,
+        "y": 400,
         "wires": [
             []
         ]
@@ -12763,8 +12748,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 970,
-        "y": 180,
+        "x": 590,
+        "y": 360,
         "wires": [
             [
                 "2ec96926.6bdab6"
@@ -12776,15 +12761,14 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Convert Data",
-        "func": "var inData = msg.payload;\nvar JMRI_Config = global.get('JMRI_Config');\nvar JMRI = global.get('JMRI');\nvar IP = global.get('IP');\nvar sync = flow.get('sync');\n\nfor (var i in inData) {\n    var curRecord = inData[i];\n    var type = 'car';\n    if (curRecord['Inventory Type'] !== undefined && curRecord['Inventory Type'] !== \"\") {\n        type = curRecord['Inventory Type'].toLowerCase();    \n    }\n    \n    var temp = {\n        payload : {\n            \"type\" : type\n            ,\"data\" : {}\n        }\n        ,verb : 'PUT'\n        ,url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + type\n    };\n    \n    for (var fieldName in curRecord) {\n        var targetField = sync.tt2jmri('inventory',fieldName);\n        if (targetField.key !== undefined && curRecord[fieldName] !== \"\" && curRecord[fieldName] !== null) {\n            temp.payload['data'][targetField.key] = curRecord[fieldName];\n        }\n    }\n    temp.payload['data']['carType'] = sync.tt2jmri_carType(temp.payload['data']['carType']);\n    temp.payload['data']['rfid'] = (curRecord['JMRI_TAGNAME'] === undefined) ? \"\" : curRecord['JMRI_TAGNAME'];\n        \n    if (curRecord['Road Name'] === undefined) {\n        curRecord['Road Name'] = sync.tt2jmri_RoadName(temp.payload['data']['Road Name']);\n    }\n    \n    var name = curRecord['Road Name'] + curRecord['Road Number'];\n    temp.payload['data']['name'] = name;\n    \n    \n    var exists = false;\n    \n    for (var jmriID in JMRI.cars.data) {\n        if (name === JMRI.cars.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    for (var jmriID in JMRI.engines.data) {\n        if (name === JMRI.engines.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    \n    if (exists === true) {\n        temp.verb = 'POST';\n    } \n    \n    node.send(temp);\n}\nflow.set('running_inventoryImport', false);\nreturn;",
+        "func": "var inData = msg.payload;\nvar JMRI_URL = global.get('JMRI_URL');\nvar JMRI = global.get('JMRI');\nvar sync = flow.get('sync');\nvar hive = flow.get('hive');\n\nfor (var i in inData) {\n    var curRecord = inData[i];\n    var type = 'car';\n    if (curRecord['Inventory Type'] !== undefined && curRecord['Inventory Type'] !== \"\") {\n        type = curRecord['Inventory Type'].toLowerCase();    \n    }\n    \n    var temp = {\n        payload : {\n            \"type\" : type,\n            \"data\" : {}\n        },\n        verb : 'PUT',\n        url : JMRI_URL + 'json/' + type\n    };\n    \n    for (var fieldName in curRecord) {\n        var targetField = sync.tt2jmri('inventory',fieldName);\n        if (targetField.key !== undefined && curRecord[fieldName] !== \"\" && curRecord[fieldName] !== null) {\n            temp.payload['data'][targetField.key] = curRecord[fieldName];\n        }\n    }\n    if (temp.payload['data']['carType'] !== undefined) {\n        temp.payload['data']['carType'] = sync.tt2jmri_carType(temp.payload['data']['carType']);\n    }\n    \n    if (temp.payload['data']['color'] !== undefined) {\n        temp.payload['data']['color'] = sync.tt2jmri_color(temp.payload['data']['color']);\n    }\n    \n        \n    if (curRecord['Road Name'] === undefined) {\n        curRecord['Road Name'] = sync.tt2jmri_RoadName(temp.payload['data']['Road Name']);\n    }\n    \n    var name = curRecord['Road Name'] + curRecord['Road Number'];\n    temp.payload['data']['name'] = name;\n    \n    temp.payload['data']['rfid'] = curRecord['JMRI_TAGNAME'];\n    \n    \n    var exists = false;\n    \n    for (var jmriID in JMRI.cars.data) {\n        if (name === JMRI.cars.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    for (var jmriID in JMRI.engines.data) {\n        if (name === JMRI.engines.data[jmriID].name) {\n            exists = true;\n        }\n    }\n    \n    if (exists === true) {\n        temp.verb = 'POST';\n    } \n    \n    node.send(temp);\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1330,
-        "y": 140,
+        "x": 1030,
+        "y": 320,
         "wires": [
             [
                 "9c3a93e3.fade",
-                "e9e4d9c.a3be928",
                 "52cbe0db.c277c"
             ]
         ]
@@ -12807,16 +12791,14 @@
         "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar tagColumns = TT.tags.columns;\nmsg.payload = {};\nvar msg2 = {payload : [] };\n\nfor (var tagID in TT.tags.data) {\n    var curTag = hive.array_combine(tagColumns, TT.tags.data[tagID]);\n    curTag['ID'] = tagID;\n    curTag['JMRI_IDTAG'] = 'IDHIVE' + tagID;\n    msg2.payload.push(curTag);\n    if (curTag['wp_tt_inventory_ID'] !== undefined && curTag['wp_tt_inventory_ID'] !== \"\") {\n        msg.payload[curTag['wp_tt_inventory_ID']] = curTag['JMRI_IDTAG'];         \n    }\n}\nreturn [msg,msg2];",
         "outputs": 2,
         "noerr": 0,
-        "x": 540,
-        "y": 260,
+        "x": 680,
+        "y": 60,
         "wires": [
             [
-                "87d6b3a0.2d3b2",
                 "3d9fe886.dbd038"
             ],
             [
-                "405bbea4.15dd8",
-                "3ca5628c.c8f32e"
+                "405bbea4.15dd8"
             ]
         ]
     },
@@ -12825,11 +12807,11 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Sync Sensors & Reporters",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar array_combine = hive.array_combine;\nvar getSensorName   = hive.getSensorName;\nvar getReporterName = hive.getReporterName;\n\nvar hiveColumns = TT.hivenode.columns;\n\nfor (var nodeID in TT.hivenode.data) {\n    var nodeData = array_combine(hiveColumns,TT.hivenode.data[nodeID]);\n    \n    var reporterObject = getReporterName(nodeData['MAC_ADDRESS']);\n    var sensorObject = getSensorName(nodeData['MAC_ADDRESS']);\n    var r_verb = reporterObject.verb;\n    var s_verb = sensorObject.verb;\n    delete reporterObject.verb;\n    delete sensorObject.verb;\n    reporterObject.report =null;\n    reporterObject.value =\"\";\n    reporterObject.lastReport =null;\n    node.send({\n        payload : { type: \"reporters\", data : reporterObject},\n        url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter',\n        verb : r_verb\n    });\n    node.send({\n        payload : { type : \"sensors\", data : sensorObject},\n        url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor',\n        verb : s_verb\n    });\n}\nflow.set('running_sensorImport', false);\nreturn;",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar array_combine = hive.array_combine;\nvar getSensorName   = hive.getSensorName;\nvar getReporterName = hive.getReporterName;\n\nvar hiveColumns = TT.hivenode.columns;\n\nfor (var nodeID in TT.hivenode.data) {\n    var nodeData = array_combine(hiveColumns,TT.hivenode.data[nodeID]);\n    \n    var reporterObject = getReporterName(nodeData['MAC_ADDRESS']);\n    var sensorObject = getSensorName(nodeData['MAC_ADDRESS']);\n    var r_verb = reporterObject.verb;\n    var s_verb = sensorObject.verb;\n    delete reporterObject.verb;\n    delete sensorObject.verb;\n    reporterObject.report =null;\n    reporterObject.value =\"\";\n    reporterObject.lastReport =null;\n    node.send({\n        payload : { type: \"reporters\", data : reporterObject},\n        url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter',\n        verb : r_verb\n    });\n    node.send({\n        payload : { type : \"sensors\", data : sensorObject},\n        url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'sensor',\n        verb : s_verb\n    });\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 600,
-        "y": 420,
+        "x": 640,
+        "y": 500,
         "wires": [
             [
                 "c4837cb3.347e1"
@@ -12846,8 +12828,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 690,
-        "y": 340,
+        "x": 1010,
+        "y": 60,
         "wires": [
             []
         ]
@@ -12860,8 +12842,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 570,
-        "y": 300,
+        "x": 870,
+        "y": 20,
         "wires": [
             [
                 "e10f4679.205708"
@@ -12879,7 +12861,7 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 970,
+        "x": 770,
         "y": 100,
         "wires": []
     },
@@ -12893,8 +12875,8 @@
         "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 1640,
-        "y": 220,
+        "x": 1160,
+        "y": 400,
         "wires": [
             []
         ]
@@ -12907,8 +12889,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 1510,
-        "y": 180,
+        "x": 1030,
+        "y": 360,
         "wires": [
             [
                 "97eed347.84621"
@@ -12927,8 +12909,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1670,
-        "y": 120,
+        "x": 1390,
+        "y": 300,
         "wires": [
             [
                 "d939d611.5a0548"
@@ -12940,14 +12922,14 @@
         "type": "debug",
         "z": "3d602d50.39dab2",
         "name": "Convert Data Request Results",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1930,
-        "y": 120,
+        "x": 1650,
+        "y": 300,
         "wires": []
     },
     {
@@ -12975,8 +12957,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 1130,
-        "y": 800,
+        "x": 610,
+        "y": 1080,
         "wires": [
             [
                 "2c706ed6.288632"
@@ -12995,8 +12977,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 1010,
-        "y": 840,
+        "x": 490,
+        "y": 1120,
         "wires": [
             [
                 "fe3937c2.70aef8"
@@ -13022,8 +13004,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 840,
+        "x": 670,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -13035,8 +13017,8 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.cartypes.csv",
         "recursive": "",
-        "x": 670,
-        "y": 800,
+        "x": 590,
+        "y": 1040,
         "wires": [
             [
                 "337e2284.c5ea3e"
@@ -13063,8 +13045,8 @@
         "createDir": true,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 1440,
-        "y": 80,
+        "x": 1180,
+        "y": 440,
         "wires": [
             []
         ]
@@ -13079,8 +13061,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 1140,
-        "y": 720,
+        "x": 620,
+        "y": 960,
         "wires": [
             [
                 "56c30c3b.453964"
@@ -13099,8 +13081,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 1010,
-        "y": 760,
+        "x": 490,
+        "y": 1000,
         "wires": [
             [
                 "cc6a1299.94f3d"
@@ -13126,8 +13108,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 760,
+        "x": 670,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -13139,28 +13121,13 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.roadnames.csv",
         "recursive": "",
-        "x": 680,
-        "y": 720,
+        "x": 600,
+        "y": 920,
         "wires": [
             [
                 "d619f02a.37bcb"
             ]
         ]
-    },
-    {
-        "id": "e9e4d9c.a3be928",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "Convert Data Debug",
-        "active": false,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1580,
-        "y": 260,
-        "wires": []
     },
     {
         "id": "cb1c3e2b.f563f",
@@ -13174,8 +13141,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1680,
-        "y": 160,
+        "x": 1400,
+        "y": 340,
         "wires": [
             [
                 "d939d611.5a0548"
@@ -13204,8 +13171,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1510,
-        "y": 140,
+        "x": 1230,
+        "y": 320,
         "wires": [
             [
                 "5e89fd1e.bd8354"
@@ -13227,8 +13194,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 990,
-        "y": 400,
+        "x": 870,
+        "y": 540,
         "wires": [
             [
                 "23864cb1.1549e4"
@@ -13240,14 +13207,14 @@
         "type": "debug",
         "z": "3d602d50.39dab2",
         "name": "Sensor and Reporter Request Results",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1280,
-        "y": 420,
+        "x": 1160,
+        "y": 540,
         "wires": []
     },
     {
@@ -14591,7 +14558,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Setup Global Functions",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : mac.toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    for (var id in JMRI[deviceType].data) {\n        var curDevice = JMRI[deviceType].data[id];\n        if (myResults.userName === curDevice.userName) {\n            myResults.name = curDevice.name;\n            myResults.state = JMRI[deviceType].data[id].state;\n            myResults.verb = 'POST';\n        }\n    }    \n    if (myResults.name === '') {\n        var columnNames = TT.hivenode.columns;\n        for (var nodeId in TT.hivenode.data) {\n            var curNode = inObject.array_combine(columnNames,TT.hivenode.data[nodeId]);\n            if (curNode['MAC_ADDRESS'].toUpperCase() === myResults.userName) { \n                myResults.name = prefix + nodeId;\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var hivenodeColumns = TT.hivenode.columns;\n    var activeHivenode = {};\n    for (var hivenodeID in TT.hivenode.data) {\n        var curHivenode = inObject.array_combine(hivenodeColumns, TT.hivenode.data[hivenodeID]);\n        if (curHivenode.MAC_ADDRESS.toUpperCase() == mac.toUpperCase()) {\n            activeHivenode = curHivenode;\n        }\n    }\n    var activeLocation = {};\n    if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n        activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var tagsColumns = TT.tags.columns;\n    var activeTag = {};\n    for (var tagID in TT.tags.data) {\n        var curTag = inObject.array_combine(tagsColumns, TT.tags.data[tagID]);\n        if (curTag.TAG_UID.toUpperCase() == uid.toUpperCase()) {\n            activeTag = curTag;\n        }\n    }\n    \n    var activeInventory = {};\n    if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n        activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n    }\n\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    for (var id in JMRI.idTag.data) {\n        var curTag = JMRI.idTag.data[id];\n        if (curTag.userName === uid) {\n            myResults.name = curTag.name;   \n        }\n    } \n    if (myResults.name === undefined) {\n        myResults.verb = 'PUT';\n        myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n    }\n    return myResults;\n}\nglobal.set('hive', inObject);\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = {};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : mac.toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    if (JMRI[deviceType] !== undefined && JMRI[deviceType].data !== undefined && JMRI[deviceType].data.length > 0) {\n        for (var id in JMRI[deviceType].data) {\n            var curDevice = JMRI[deviceType].data[id];\n            if (myResults.userName === curDevice.userName) {\n                myResults.name = curDevice.name;\n                myResults.state = JMRI[deviceType].data[id].state;\n                myResults.verb = 'POST';\n            }\n        }\n    }\n    if (myResults.name === '') {\n        for (var nodeId in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeId]);\n            if (curNode['MAC_ADDRESS'].toUpperCase() === myResults.userName) { \n                myResults.name = prefix + nodeId;\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var activeHivenode = {};\n    for (var hivenodeID in TT.hivenode.data) {\n        var curHivenode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[hivenodeID]);\n        if (curHivenode.MAC_ADDRESS.toUpperCase() == mac.toUpperCase()) {\n            activeHivenode = curHivenode;\n        }\n    }\n    var activeLocation = {};\n    if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n        activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var activeTag = {};\n    for (var tagID in TT.tags.data) {\n        var curTag = inObject.array_combine(TT.tags.columns, TT.tags.data[tagID]);\n        if (curTag.TAG_UID.toUpperCase() == uid.toUpperCase()) {\n            activeTag = curTag;\n        }\n    }\n    \n    var activeInventory = {};\n    if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n        activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n    }\n\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    for (var id in JMRI.idTag.data) {\n        var curTag = JMRI.idTag.data[id];\n        if (curTag.userName === uid) {\n            myResults.name = curTag.name;   \n        }\n    } \n    if (myResults.name === undefined) {\n        myResults.verb = 'PUT';\n        myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n    }\n    return myResults;\n};\n\n\n\ninObject.getJMRILocation = function(userName) {\n    var myResults = {};\n    for (var lID in JMRI.locations.data) {\n        var curLocation = JMRI.locations.data[lID];\n        if (curLocation.userName === userName) {\n            myResults = curLocation;\n        }\n    }\n    return myResults;\n};\n\ninObject.getJMRILocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    for (var lID in JMRI.locations.data) {\n        var curLocation = JMRI.locations.data[lID];\n        if (curLocation.name === jmriName) {\n            myResults = curLocation;\n        }\n    }\n    return myResults;\n};\n\ninObject.getJMRISubLocation = function(userName) {\n    var myResults = {};\n    for (var lID in JMRI.locations.data) {\n        var curLocation = JMRI.locations.data[lID];\n        for (var tID in curLocation.track) {\n            var curTrack = curLocation.track[tID];\n            if (curTrack.userName === userName) {\n                myResults = curTrack;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.getJMRISubLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    for (var lID in JMRI.locations.data) {\n        var curLocation = JMRI.locations.data[lID];\n        for (var tID in curLocation.track) {\n            var curTrack = curLocation.track[tID];\n            if (curTrack.name === jmriName) {\n                myResults = curTrack;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.getJMRIReporterNameByLocation = function(userName) {\n    var myResults = \"\";\n    var lookupID = null;\n    for (var lID in TT.locations.data) {\n        var curLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[lID]);\n        if (curLocation.NAME === userName) {\n            lookupID = Number(lID);\n        }\n    }\n    if (Number(lookupID) >0) {\n        for (var nodeID in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[nodeID]);\n            if (Number(curNode['wp_tt_locations_ID']) === lookupID) {\n                var tempResults= inObject.getReporterName(curNode['MAC_ADDRESS']);\n                myResults = tempResults['name'];\n            }\n        }\n    }\n    return myResults;\n};\n\nglobal.set('hive', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -14642,8 +14609,8 @@
         "checkall": "false",
         "repair": true,
         "outputs": 2,
-        "x": 820,
-        "y": 420,
+        "x": 590,
+        "y": 560,
         "wires": [
             [
                 "5cbff943.93c3d8"
@@ -14665,8 +14632,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1000,
-        "y": 440,
+        "x": 880,
+        "y": 580,
         "wires": [
             [
                 "23864cb1.1549e4"
@@ -14681,31 +14648,17 @@
         "rules": [
             {
                 "t": "set",
-                "p": "syncs_Running",
+                "p": "queue",
+                "pt": "flow",
+                "to": "[\"TrainTraxx\",\"JMRI\",\"tags\",\"JMRI\",\"inventory\",\"sensors\",\"JMRI\",\"locations\",\"JMRI\"]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "start",
                 "pt": "flow",
                 "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "import_Requested",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "running_inventoryImport",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "running_sensorImport",
-                "pt": "flow",
-                "to": "false",
-                "tot": "bool"
+                "tot": "str"
             }
         ],
         "action": "",
@@ -14713,13 +14666,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 720,
-        "y": 40,
+        "x": 480,
+        "y": 60,
         "wires": [
-            [
-                "391c0a36.ebdac6",
-                "e37006db.0ea648"
-            ]
+            []
         ]
     },
     {
@@ -14800,8 +14750,8 @@
         "links": [
             "b1607e3f.fb142"
         ],
-        "x": 915,
-        "y": 20,
+        "x": 475,
+        "y": 100,
         "wires": []
     },
     {
@@ -14812,8 +14762,8 @@
         "links": [
             "a309b660.225d08"
         ],
-        "x": 915,
-        "y": 60,
+        "x": 475,
+        "y": 140,
         "wires": []
     },
     {
@@ -14829,10 +14779,10 @@
         "once": true,
         "onceDelay": "1",
         "x": 110,
-        "y": 220,
+        "y": 420,
         "wires": [
             [
-                "205d5e6.04201a2"
+                "353f0842.9ef0c8"
             ]
         ]
     },
@@ -14845,134 +14795,14 @@
         "order": 8,
         "width": "1",
         "height": "1",
-        "format": "<div ng-bind-html=\"msg.payload\"></div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
+        "format": "",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
         "templateScope": "local",
-        "x": 700,
-        "y": 100,
+        "x": 180,
+        "y": 500,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "205d5e6.04201a2",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Process Sync Rules",
-        "func": "var syncs_Running =  flow.get('syncs_Running');\n\nvar sync_TrainTraxx_Running =  global.get('sync_TrainTraxx_Running');\nvar tr = (sync_TrainTraxx_Running !== undefined && sync_TrainTraxx_Running === true)  ? true : false;\n\nvar sync_JMRI_Running =  global.get('sync_JMRI_Running');\nvar jr = (sync_JMRI_Running !== undefined && sync_JMRI_Running === true)  ? true : false;\n\nvar import_Requested = flow.get('import_Requested');\nvar requested = (import_Requested !== undefined && import_Requested === true) ? true : false;\n\nvar running_inventoryImport =  flow.get('running_inventoryImport');\nvar ir = (running_inventoryImport !== undefined && running_inventoryImport === true) ? true : false;\n\nvar running_sensorImport =  flow.get('running_sensorImport');\nvar sr = (running_sensorImport !== undefined && running_sensorImport === true)  ? true : false;\n\n\nif (syncs_Running !== undefined && syncs_Running === true) {\n    msg.payload = 'RUNNING'; /* going to show the processing image */\n    if (!tr && !jr && !ir && !sr) { \n        if (!import_Requested) {\n            flow.set('import_Requested',true);\n            flow.set('running_inventoryImport',true);\n            flow.set('running_sensorImport',true);\n            msg.payload = 'SYNC'; /* going to show processing and start sync of inventory, sensors, reporters*/\n        } else {\n            flow.set('syncs_Running', false);\n            msg.payload = 'REIMPORT_JMRI';\n        }\n    } \n} else { \n    msg.payload = 'IDLE';\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 160,
-        "y": 280,
-        "wires": [
-            [
-                "41a53859.053fd8"
-            ]
-        ]
-    },
-    {
-        "id": "41a53859.053fd8",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "Check Sync States",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "RUNNING",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "SYNC",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "REIMPORT_JMRI",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 4,
-        "x": 170,
-        "y": 360,
-        "wires": [
-            [
-                "14da4623.e5117a"
-            ],
-            [
-                "14da4623.e5117a",
-                "c4687444.fb6708",
-                "8e6dfe75.eac0d"
-            ],
-            [
-                "391c0a36.ebdac6",
-                "14da4623.e5117a"
-            ],
-            [
-                "fc6242a0.78e74"
-            ]
-        ]
-    },
-    {
-        "id": "14da4623.e5117a",
-        "type": "change",
-        "z": "3d602d50.39dab2",
-        "name": "Set Image",
-        "rules": [
-            {
-                "t": "set",
-                "p": "template",
-                "pt": "msg",
-                "to": "<img src=\"/images/processing.png\" height=\"48px\">",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 450,
-        "y": 100,
-        "wires": [
-            [
-                "389170d2.26dd4"
-            ]
-        ]
-    },
-    {
-        "id": "fc6242a0.78e74",
-        "type": "change",
-        "z": "3d602d50.39dab2",
-        "name": "Set Blank",
-        "rules": [
-            {
-                "t": "set",
-                "p": "template",
-                "pt": "msg",
-                "to": " ",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 440,
-        "y": 140,
-        "wires": [
-            [
-                "389170d2.26dd4"
-            ]
         ]
     },
     {
@@ -15001,22 +14831,6 @@
         "wires": []
     },
     {
-        "id": "a75a0852.7ad338",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Sync Locations",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\nvar myResults = [];\nvar metaKeys = {};\nvar keyColumns = TT.locations.keys.columns;\nfor (var keyID in TT.locations.keys.data) {\n    var curKey = TT.locations.keys.data[keyID];    \n    metaKeys[keyID] =  hive.array_combine(keyColumns,curKey);\n}\n\nvar locationColumns = TT.locations.columns;\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    curLocation['ID'] = locationID;\n    var metaColumns = TT.locations.meta.columns;\n    for (var metaID in TT.locations.meta.data[locationID]) {\n        var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID][metaID]);\n        curLocation[metaKeys[curMeta['wp_tt_locationmetakeys_ID']]['meta_key']] = curMeta['meta_value'];\n    }\n    myResults.push(curLocation);\n}\n\nmsg.payload = myResults;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 460,
-        "y": 520,
-        "wires": [
-            [
-                "ab7e39fe.355a28"
-            ]
-        ]
-    },
-    {
         "id": "ab94abd6.2d7c68",
         "type": "http request",
         "z": "3d602d50.39dab2",
@@ -15028,8 +14842,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 990,
-        "y": 500,
+        "x": 830,
+        "y": 680,
         "wires": [
             [
                 "d38f60fc.3dcee"
@@ -15041,48 +14855,15 @@
         "type": "debug",
         "z": "3d602d50.39dab2",
         "name": "Location Request Results",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1240,
-        "y": 520,
+        "x": 1080,
+        "y": 680,
         "wires": []
-    },
-    {
-        "id": "32e6b896.c7b848",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": true,
-        "outputs": 2,
-        "x": 820,
-        "y": 520,
-        "wires": [
-            [
-                "ab94abd6.2d7c68"
-            ],
-            [
-                "62352b07.56d274"
-            ]
-        ]
     },
     {
         "id": "62352b07.56d274",
@@ -15096,8 +14877,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1000,
-        "y": 540,
+        "x": 840,
+        "y": 720,
         "wires": [
             [
                 "d38f60fc.3dcee"
@@ -15109,15 +14890,14 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Setup JMRI Tags",
-        "func": "/*\n    {\n        \"wp_users_ID\": 1,\n        \"wp_tt_inventory_ID\": 2048,\n        \"NAME\": \"CAR: (ID: 3150)\",\n        \"START_DATE\": \"2019-07-11 13:19:04\",\n        \"END_DATE\": \"2999-01-01 01:00:00\",\n        \"TAG_UID\": \"35 6e 60 c9\",\n        \"TAG_DATA\": \"35 6e 60 c9 f2 08 04 00 01 35 e2 f3 c1 39 ce 1d ee 91\",\n        \"PICCType\": \"MIFARE 1KB\",\n        \"TAG_KEY\": \"ff ff ff ff ff ff\",\n        \"ID\": \"3150\",\n        \"JMRI_IDTAG\": \"IDHIVE3150\"\n    }\n    \n    {\n        \"type\": \"idTag\",\n        \"data\": {\n            \"name\": \"IDHIVE4\",\n            \"userName\": \"1234569\",\n            \"comment\": \"test\",\n            \"properties\": [],\n            \"state\": 2,\n            \"reporter\": null,\n            \"time\": null\n        }\n    }\n    \n*/\nvar TT = global.get('TrainTraxx');\nvar IP = global.get('IP');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar inventoryColumns = TT.inventory.columns;\n\nvar inTags = msg.payload;\nmsg.payload = [];\nfor (var id in inTags) {\n    var curTag = inTags[id];\n    var curInv = { NAME : \"\" };\n    if (Number(curTag['wp_tt_inventory_ID']) > 0) {\n        curInv = hive.array_combine(inventoryColumns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n    }\n    var verb = \"PUT\";\n    for (var j_id in JMRI.idTag) {\n        var curJTag = JMRI.idTag[j_id];\n        if (curJTag.name === curTag.JMRI_IDTAG) {\n            verb = \"POST\";\n        }\n    }\n    var tempMsg = {\n        payload : {\n            \"type\" : \"idTag\",\n            \"data\" : {\n                \"name\" : curTag.JMRI_IDTAG,\n                \"userName\" : curTag.TAG_UID,\n                \"comment\" : curInv.NAME\n            }\n        }\n        ,verb : verb\n        ,url : JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + \"idTag\"\n        \n    };\n    node.send(tempMsg);\n    //msg.payload.push(tempMsg);\n}\n//return msg;\nreturn msg;",
+        "func": "/*\n    {\n        \"wp_users_ID\": 1,\n        \"wp_tt_inventory_ID\": 2048,\n        \"NAME\": \"CAR: (ID: 3150)\",\n        \"START_DATE\": \"2019-07-11 13:19:04\",\n        \"END_DATE\": \"2999-01-01 01:00:00\",\n        \"TAG_UID\": \"35 6e 60 c9\",\n        \"TAG_DATA\": \"35 6e 60 c9 f2 08 04 00 01 35 e2 f3 c1 39 ce 1d ee 91\",\n        \"PICCType\": \"MIFARE 1KB\",\n        \"TAG_KEY\": \"ff ff ff ff ff ff\",\n        \"ID\": \"3150\",\n        \"JMRI_IDTAG\": \"IDHIVE3150\"\n    }\n    \n    {\n        \"type\": \"idTag\",\n        \"data\": {\n            \"name\": \"IDHIVE4\",\n            \"userName\": \"1234569\",\n            \"comment\": \"test\",\n            \"properties\": [],\n            \"state\": 2,\n            \"reporter\": null,\n            \"time\": null\n        }\n    }\n    \n*/\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_URL = global.get('JMRI_URL');\nvar hive = global.get('hive');\nvar tagLookup = flow.get('tagLookup');\nif (tagLookup === undefined) {\n    tagLookup = { 'ID' : {}, 'NAME' : {}};\n}\n\nfor (var id in TT.tags.data) {\n    var curTag = hive.array_combine(TT.tags.columns,TT.tags.data[id]);\n    curTag['JMRI_IDTAG'] = 'IDHIVE' + id;\n    var curInv = { NAME : \"\" };\n    if (Number(curTag['wp_tt_inventory_ID']) > 0) {\n        curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n    }\n    tagLookup['ID'][curTag['wp_tt_inventory_ID']] = curTag['JMRI_IDTAG'];\n    tagLookup['NAME'][curInv.NAME] = curTag['JMRI_IDTAG'];\n    var verb = \"PUT\";\n    for (var j_id in JMRI.idTag) {\n        var curJTag = JMRI.idTag[j_id];\n        if (curJTag.name === curTag.JMRI_IDTAG) {\n            verb = \"POST\";\n        }\n    }\n    var tempMsg = {\n        payload : {\n            \"type\" : \"idTag\",\n            \"data\" : {\n                \"name\" : curTag.JMRI_IDTAG,\n                \"userName\" : curTag.TAG_UID,\n                \"comment\" : curInv.NAME\n            }\n        },\n        verb : verb,\n        url : JMRI_URL + \"json/idTag\"\n        \n    };\n    node.send(tempMsg);\n}\nflow.set('tagLookup',tagLookup);\nflow.set('active',false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 990,
-        "y": 260,
+        "x": 610,
+        "y": 180,
         "wires": [
             [
-                "3bd4107f.d2b5a",
-                "532bcbb4.e7e124"
+                "3bd4107f.d2b5a"
             ]
         ]
     },
@@ -15143,8 +14923,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1170,
-        "y": 260,
+        "x": 590,
+        "y": 240,
         "wires": [
             [
                 "80beb66.488e048"
@@ -15166,8 +14946,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1350,
-        "y": 280,
+        "x": 830,
+        "y": 220,
         "wires": [
             [
                 "eb2487f0.797a08"
@@ -15186,8 +14966,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1360,
-        "y": 320,
+        "x": 840,
+        "y": 260,
         "wires": [
             [
                 "eb2487f0.797a08"
@@ -15199,29 +14979,14 @@
         "type": "debug",
         "z": "3d602d50.39dab2",
         "name": "TrainTraxx to JMRI Tags Results",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1620,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "532bcbb4.e7e124",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "TrainTraxx to JMRI tag sync",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1070,
-        "y": 320,
+        "x": 1100,
+        "y": 240,
         "wires": []
     },
     {
@@ -15455,43 +15220,233 @@
         ]
     },
     {
-        "id": "ab7e39fe.355a28",
-        "type": "debug",
+        "id": "b88f5f93.adc52",
+        "type": "function",
         "z": "3d602d50.39dab2",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "x": 500,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "d64d52a9.82f0c",
-        "type": "ui_button",
-        "z": "3d602d50.39dab2",
-        "name": "Sync Locations",
-        "group": "511f0851.ca4e98",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Sync Locations",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 420,
-        "y": 480,
+        "name": "Format Locations",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\nvar _ = global.get('_');\nvar FlowMap = flow.get('FlowMap');\nmsg.payload = { 'PUT' : {}, 'POST' : {}};\nvar metaKeys = {};\nvar keyColumns = TT.locations.keys.columns;\nfor (var keyID in TT.locations.keys.data) {\n    var curKey = TT.locations.keys.data[keyID];    \n    metaKeys[keyID] =  hive.array_combine(keyColumns,curKey);\n}\n\nvar locationColumns = TT.locations.columns;\nvar tempTrack = [];\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    curLocation.userName = curLocation['NAME'];\n    var parentID = curLocation['wp_tt_locations_PARENT_ID'];\n    var metaColumns = TT.locations.meta.columns;\n    if (TT.locations.meta.data[locationID] !== undefined ) {\n        for (var metaID in TT.locations.meta.data[locationID]) {\n            var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID][metaID]);\n            curLocation[metaKeys[curMeta['wp_tt_locationmetakeys_ID']]['meta_key']] = curMeta['meta_value'];\n        }\n    }\n    /* Translate Fields */\n    for (var i in FlowMap) {\n        var curMap = FlowMap[i];\n        if (curMap.TrainTraxx_Type === 'locations' && curLocation[curMap.TrainTraxx] !== undefined) {\n            curLocation[curMap.JMRI] = curLocation[curMap.TrainTraxx];\n        }\n    }\n    \n    /* Get Reporter */\n    curLocation.reporter = hive.getJMRIReporterNameByLocation(curLocation.userName);\n    /* Clean out unused entries */\n    var validFields = ['userName','name','comment','length','location','reporter','type', 'carType','reporterObj'];\n    var tempComment = [];\n    for (var a in curLocation) {\n        var flag = false;\n        for (var b in validFields) {\n            if (a === validFields[b]) {\n                flag = true;\n            }\n        }\n        if (flag === false) {\n            tempComment.push(a + ': ' + curLocation[a]);\n            delete curLocation[a];\n        }\n    }\n    if (curLocation['comment'] === undefined) {\n        curLocation['comment'] = \"\";\n    }\n    curLocation['comment'] += tempComment.join('\\n');\n\n    if (Number(parentID) > 0) {\n        /* Need to append to POST or PUT depending on if it exists or the parent exists\n            Location can be defined based on extracting the parent as well which will define\n            its assoc array key\n        */\n        \n        tempTrack = hive.getJMRISubLocation(curLocation.userName);\n        /* check to see if the sublocation already exists */\n        if (tempTrack.location !== undefined && Number(tempTrack.location) > 0) {\n            /* Add it to the track object of the POST object */\n            /* Need to converge the tempTrack data with updates from TrainTraxx */\n            for (var x in curLocation) {\n                tempTrack[x] = curLocation[x];\n            }\n            if (msg.payload['POST'][tempTrack.location] === undefined) {\n                msg.payload['POST'][tempTrack.location] = { 'track' : []};\n            }\n            msg.payload['POST'][tempTrack.location].track.push(tempTrack);\n        } else {\n            /* Add it to the track object of the PUT object */\n            var parentLocation =hive.array_combine(locationColumns,TT.locations.data[parentID]);\n            var tempParent = hive.getJMRILocation(parentLocation.NAME);\n            if (tempParent.name !== undefined && tempParent.name !== '') {\n                if (msg.payload['POST'][tempParent.name] === undefined ) {\n                    msg.payload['POST'][tempParent.name] = {  'track' : [] };\n                }\n                msg.payload['POST'][tempParent.name].track.push(curLocation);\n            } else {\n                if (msg.payload['PUT'][parentID] === undefined) {\n                    msg.payload['PUT'][parentID] = { 'track' : [] };\n                }\n                msg.payload['PUT'][parentID].track.push(curLocation);\n            }\n        }\n    } else {\n        jmriLocation = hive.getJMRILocation(curLocation.userName);\n        delete curLocation.type;\n        if (jmriLocation.name !== undefined) {\n            tempTrack = []; \n            if (msg.payload['POST'][jmriLocation.name] === undefined) {\n                msg.payload['POST'][jmriLocation.name] = {  'track' : [] };\n            }\n            if (msg.payload['POST'][jmriLocation.name].track.length > 0) {\n                tempTrack = msg.payload['POST'][jmriLocation.name].track;\n            }\n            msg.payload['POST'][jmriLocation.name] = _.clone(curLocation);\n            msg.payload['POST'][jmriLocation.name].track = tempTrack;\n        } else {\n            tempTrack = []; \n            if (msg.payload['PUT'][locationID] === undefined) {\n                msg.payload['PUT'][locationID] = {  'track' : [] };\n            }\n            if (msg.payload['PUT'][locationID].track.length > 0) {\n                tempTrack = msg.payload['PUT'][locationID].track;\n            }\n            msg.payload['PUT'][locationID] = _.clone(curLocation);\n            msg.payload['PUT'][locationID].track = tempTrack;\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 640,
         "wires": [
             [
-                "a75a0852.7ad338"
+                "c5a45dee.0d697"
+            ]
+        ]
+    },
+    {
+        "id": "c5a45dee.0d697",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Break up Location Messages",
+        "func": "var JMRI_URL = global.get('JMRI_URL');\nfor (var verb in msg.payload) {\n    for (var id in msg.payload[verb]) {\n        var temp = {\n            payload : {\n                \"type\" : \"location\",\n                \"data\" : msg.payload[verb][id]\n            },\n            verb : verb,\n            url : JMRI_URL + 'json/location',\n            headers : {'content-type':'application/json'}\n        };\n        node.send(temp);\n    }\n}\nflow.set('active', false);\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 640,
+        "wires": [
+            [
+                "cf8fb8dd.4eeec8"
+            ]
+        ]
+    },
+    {
+        "id": "cf8fb8dd.4eeec8",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "verb",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "PUT",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "POST",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 590,
+        "y": 700,
+        "wires": [
+            [
+                "ab94abd6.2d7c68"
+            ],
+            [
+                "62352b07.56d274"
+            ]
+        ]
+    },
+    {
+        "id": "cbce0132.b2547",
+        "type": "file in",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "filename": "/opt/hiveid-ap/data/traintraxx_to_jmri.colors.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "x": 600,
+        "y": 840,
+        "wires": [
+            [
+                "8de4ae07.976cd"
+            ]
+        ]
+    },
+    {
+        "id": "8de4ae07.976cd",
+        "type": "csv",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 490,
+        "y": 880,
+        "wires": [
+            [
+                "347260e5.7d676"
+            ]
+        ]
+    },
+    {
+        "id": "347260e5.7d676",
+        "type": "change",
+        "z": "3d602d50.39dab2",
+        "name": "Set ColorMap",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ColorMap",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ddb5369.8da73c8",
+        "type": "watch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.colors.csv",
+        "recursive": "",
+        "x": 580,
+        "y": 800,
+        "wires": [
+            [
+                "cbce0132.b2547"
+            ]
+        ]
+    },
+    {
+        "id": "16944a31.10d486",
+        "type": "switch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "eq",
+                "v": "TrainTraxx",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "JMRI",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "tags",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "inventory",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sensors",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "locations",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 7,
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "e37006db.0ea648"
+            ],
+            [
+                "391c0a36.ebdac6"
+            ],
+            [
+                "3ca5628c.c8f32e"
+            ],
+            [
+                "87d6b3a0.2d3b2"
+            ],
+            [
+                "8e6dfe75.eac0d"
+            ],
+            [
+                "b88f5f93.adc52"
+            ]
+        ]
+    },
+    {
+        "id": "353f0842.9ef0c8",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Queue Manager",
+        "func": "var start = flow.get('start');\n\nvar queue = flow.get('queue');\nvar active = flow.get('active');\nvar working = flow.get('working');\nvar msg2 = {};\nmsg.payload = \"\";\nmsg2.template = \"\";\nif (queue === undefined) {\n    queue = [];\n}\nif (working === undefined) {\n    working = '';\n}\nif (active === undefined) {\n    active = false;\n}\n\nif (start !== false) {\n    var sync_JMRI_Running =global.get('sync_JMRI_Running');\n    var sync_TrainTraxx_Running = global.get('sync_TrainTraxx_Running');\n    msg2.template = '<img src=\"/images/processing.png\" height=\"48px\">';\n    if ((working === 'JMRI' && sync_JMRI_Running === false) || (working === 'TrainTraxx' && sync_TrainTraxx_Running === false)) {\n         active = false;\n    }\n    if (queue.length > 0) {\n        if (active === false) {\n            msg.payload = queue.shift();\n            working = msg.payload;\n            active = true;\n            node.status({fill:\"green\",shape:\"ring\",text:\"Running - Queue Length \" + queue.length + ' Working on - ' + working});\n        }   \n    } else {\n        node.status({fill:\"red\",shape:\"ring\",text:\"Complete\"});\n        active = false;\n        start = false;\n        working = \"\";\n        msg2.template = \"\";\n    }\n} else {\n    node.status({fill:\"red\",shape:\"ring\",text:\"Idle\"});\n    active = false;\n}\n\nflow.set('working',working);\nflow.set('active',active);\nflow.set('queue',queue);\nflow.set('start',start);\n\nreturn [msg,msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "16944a31.10d486"
+            ],
+            [
+                "389170d2.26dd4"
             ]
         ]
     }
