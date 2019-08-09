@@ -15808,8 +15808,8 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 440,
-        "y": 380,
+        "x": 500,
+        "y": 340,
         "wires": [
             [
                 "97a995d3.1794c8",
@@ -15825,8 +15825,8 @@
         "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\n\nmsg.options=[];\nif (JMRI_Config.JMRI_ENABLED === true) {\n    \n    for (var cID in JMRI.cars.data) {\n        msg.options.push(String(JMRI.cars.data[cID].name));\n    }\n    for (var eID in JMRI.engines.data) {\n        msg.options.push(String(JMRI.engines.data[eID].name));\n    }\n}\n\n\nif (JMRI_Config.JMRI_ENABLED === false || msg.options.length === 0) { \n    var metaKeys = {};\n    var rnameKey = null;\n    var rnumKey  = null;\n    for (var kID in TT.inventory.keys.data) {\n        var curKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n        metaKeys[kID] = curKey;\n        if (curKey['meta_key'] === 'Road Name') {\n            rnameKey = kID;\n        }\n        if (curKey['meta_key'] === 'Road Number') {\n            rnumKey = kID;\n        }\n    }\n    for (var iID in TT.inventory.data) {\n        var RNAME = '';\n        var RNUM = '';\n        var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n        for (var mID in TT.inventory.meta.data[iID]) {\n            var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[mID]);\n            if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnameKey)) {\n                RNAME = curMeta['meta_value'];\n            }\n            if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnumKey)) {\n                RNUM = curMeta['meta_value'];\n            }\n        }\n        if (RNAME !== '' && RNUM !== '' ) {\n            msg.options.push(RNAME + String(RNUM));\n        } else {\n            msg.options.push(curInv.NAME);\n        }\n    }\n}\n\nmsg.options.sort();\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 410,
-        "y": 340,
+        "x": 470,
+        "y": 300,
         "wires": [
             [
                 "bcf9b4a9.b55878"
@@ -15842,8 +15842,8 @@
             "a02f6d2c.9c107",
             "87e07238.a48f2"
         ],
-        "x": 255,
-        "y": 340,
+        "x": 315,
+        "y": 300,
         "wires": [
             [
                 "5a4e3756.aa1e78"
@@ -15869,8 +15869,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
-        "y": 440,
+        "x": 730,
+        "y": 400,
         "wires": [
             [
                 "8ef9989f.da8ae8"
@@ -15882,11 +15882,11 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "Search Inventory",
-        "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\n\nvar inName = msg.payload;\nvar jmri_Info = '';\nvar tt_Info = '';\n\nmsg.template =  '<style>' +\n                '   .info_header {color:#fff; background-color: #f90;} ' +\n                '   .info_title { font-weight: bold;} ' +\n                '</style>' +\n                '<div style=\"height:720px;\"><table width=\"100%\">';\nif (JMRI_Config.JMRI_ENABLED === true) {\n    var types = ['cars','engines'];\n    msg.template += '<tr><th class=\"info_header\" colspan=\"2\">JMRI Info</th></tr>';\n    for (var typeID in types) {\n        var curType = types[typeID];\n        for (var jID in JMRI[curType].data) {\n            var curCar = JMRI[curType].data[jID];\n            if (curCar.name === inName) {\n                msg.template += '<tr><td class=\"info_title\">Name:</td><td>' +curCar.name + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Car Type:</td><td>' + ((curCar.carType === undefined || curCar.carType === \"\") ? 'Unknown' : curCar.carType) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Color:</td><td><div class=\"colorBlock\" style=\"background-color:' + ((curCar.color === undefined) ? '#fff' : curCar.color) + ';\">&nbsp;</div></td></tr>' +\n                            '<tr><td class=\"info_title\">Length:</td><td>' + ((curCar.length === undefined) ? 'Unknown' : curCar.length) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight:</td><td>' + ((curCar.weight === undefined) ? 'Unknown' : curCar.weight) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight Tons:</td><td>' + ((curCar.weightTons === undefined) ? 'Unknown' : curCar.weightTons) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Load:</td><td>' + ((curCar.load === undefined) ? 'Unknown' : curCar.load) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Out of Service:</td><td>' + ((curCar.outOfService === false) ? 'No' : 'Yes') + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Last Location:</td><td>' + ((curCar.location === undefined || curCar.location === null) ? 'Unknown' : curCar.location) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Destination:</td><td>' + ((curCar.destination  === undefined || curCar.destination=== null) ? 'Not Set' : curCar.destination) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Final Destination:</td><td>' + ((curCar.finalDestination  === undefined || curCar.finalDestination === null) ? 'Not Set' : curCar.finalDestination) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Return When Empty:</td><td>' + ((curCar.returnWhenEmpty  === undefined || curCar.returnWhenEmpty  === null) ? 'Not Set' : curCar.returnWhenEmpty) + '</td></tr>';\n            }\n        }\n    }\n}\n\nvar metaKeys = {};\nfor (var kID in TT.inventory.keys.data) {\n    metaKeys[kID] = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n}\n\nmsg.template += '<tr><th class=\"info_header\" colspan=\"2\">TrainTraxx Info</th></tr>';\nfor (var iID in TT.inventory.data) {\n    var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n    var tempOut = {'Road Name' :'','Road Number' :''};\n    for (var mID in TT.inventory.meta.data[iID]) {\n        var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[iID][mID]);\n        var metaKeyID =curMeta['wp_tt_inventorymetakeys_ID'];\n        var tempVal ='';\n        switch (metaKeys[metaKeyID]['OUTPUT_FORMAT']) {\n            case 'image' :\n            case 'train-image' :    \n                break;\n            case 'color':\n                tempVal = '<div class=\"colorBlock\" style=\"background-color:' + curMeta['meta_value'] + ';\">&nbsp;</div>';\n                break;\n            case 'tickCross':\n                tempVal = (curMeta['meta_value'] === true) ? 'Yes' : 'No';\n                break;\n            default: \n                tempVal = curMeta['meta_value'];\n        }\n        if (tempVal !== '') {\n            tempOut[metaKeys[metaKeyID]['meta_key']] = tempVal;\n        }\n    }\n    if (inName === tempOut['Road Name'] + String(tempOut['Road Number']) || inName === curInv.NAME) {\n        msg.template += '<tr><td class=\"info_title\">Name:</td><td>' + curInv.NAME + '</td></tr>'; \n        if (imageRef_Inv[iID] !== undefined) {\n            msg.template += '<tr><td class=\"info_title\">Image:</td><td><img src=\"' + imageRef_Inv[iID].localurl + '\" width=\"100px\"></td></tr>'; \n        }\n        for (var meta_key in tempOut) {\n            msg.template += '<tr><td class=\"info_title\">' + meta_key + ':</td><td>' + tempOut[meta_key] + '</td></tr>';\n        }\n    } \n    /* \n    Find the last reported location \n        This is going to require more information to be pulled from TrainTraxx\n    */\n}\nmsg.template += '</table></div>';\nreturn msg;\n",
+        "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\n\nvar inName = msg.payload;\nvar jmri_Info = '';\nvar tt_Info = '';\n\nmsg.template =  '<style>' +\n                '   .info_header {color:#fff; background-color: #f90;} ' +\n                '   .info_title { font-weight: bold;} ' +\n                '</style>' +\n                '<div style=\"height:720px;\"><table width=\"100%\">';\nif (JMRI_Config.JMRI_ENABLED === true) {\n    var types = ['cars','engines'];\n    msg.template += '<tr><th class=\"info_header\" colspan=\"2\">JMRI Info</th></tr>';\n    for (var typeID in types) {\n        var curType = types[typeID];\n        for (var jID in JMRI[curType].data) {\n            var curCar = JMRI[curType].data[jID];\n            if (curCar.name === inName) {\n                msg.template += '<tr><td class=\"info_title\">Name:</td><td>' +curCar.name + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Car Type:</td><td>' + ((curCar.carType === undefined || curCar.carType === \"\") ? 'Unknown' : curCar.carType) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Color:</td><td><div class=\"colorBlock\" style=\"background-color:' + ((curCar.color === undefined) ? '#fff' : curCar.color) + ';\">&nbsp;</div></td></tr>' +\n                            '<tr><td class=\"info_title\">Length:</td><td>' + ((curCar.length === undefined || curCar.length === \"\") ? 'Unknown' : curCar.length) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight:</td><td>' + ((curCar.weight === undefined || curCar.weight === \"\") ? 'Unknown' : curCar.weight) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight Tons:</td><td>' + ((curCar.weightTons === undefined || curCar.weightTons === \"\") ? 'Unknown' : curCar.weightTons) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Load:</td><td>' + ((curCar.load === undefined || curCar.load === \"\") ? 'Unknown' : curCar.load) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">RFID:</td><td>' + ((curCar.rfid === undefined || curCar.rfid ===\"\") ? 'Not Set' : curCar.rfid ) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Out of Service:</td><td>' + ((curCar.outOfService === false) ? 'No' : 'Yes') + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Last Location:</td><td>' + ((curCar.location === undefined || curCar.location === null) ? 'Unknown' : curCar.location) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Destination:</td><td>' + ((curCar.destination  === undefined || curCar.destination=== null) ? 'Not Set' : curCar.destination) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Final Destination:</td><td>' + ((curCar.finalDestination  === undefined || curCar.finalDestination === null) ? 'Not Set' : curCar.finalDestination) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Return When Empty:</td><td>' + ((curCar.returnWhenEmpty  === undefined || curCar.returnWhenEmpty  === null) ? 'Not Set' : curCar.returnWhenEmpty) + '</td></tr>';\n            }\n        }\n    }\n}\n\nvar metaKeys = {};\nfor (var kID in TT.inventory.keys.data) {\n    metaKeys[kID] = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n}\n\nmsg.template += '<tr><th class=\"info_header\" colspan=\"2\">TrainTraxx Info</th></tr>';\nfor (var iID in TT.inventory.data) {\n    var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n    var tempOut = {'Road Name' :'','Road Number' :''};\n    for (var mID in TT.inventory.meta.data[iID]) {\n        var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[iID][mID]);\n        var metaKeyID =curMeta['wp_tt_inventorymetakeys_ID'];\n        var tempVal ='';\n        switch (metaKeys[metaKeyID]['OUTPUT_FORMAT']) {\n            case 'image' :\n            case 'train-image' :    \n                break;\n            case 'color':\n                tempVal = '<div class=\"colorBlock\" style=\"background-color:' + curMeta['meta_value'] + ';\">&nbsp;</div>';\n                break;\n            case 'tickCross':\n                tempVal = (curMeta['meta_value'] === true) ? 'Yes' : 'No';\n                break;\n            default: \n                tempVal = curMeta['meta_value'];\n        }\n        if (tempVal !== '') {\n            tempOut[metaKeys[metaKeyID]['meta_key']] = tempVal;\n        }\n    }\n    if (inName === tempOut['Road Name'] + String(tempOut['Road Number']) || inName === curInv.NAME) {\n        msg.template += '<tr><td class=\"info_title\">Name:</td><td>' + curInv.NAME + '</td></tr>'; \n        if (imageRef_Inv[iID] !== undefined) {\n            msg.template += '<tr><td class=\"info_title\">Image:</td><td><img src=\"' + imageRef_Inv[iID].localurl + '\" width=\"100px\"></td></tr>'; \n        }\n        for (var meta_key in tempOut) {\n            msg.template += '<tr><td class=\"info_title\">' + meta_key + ':</td><td>' + tempOut[meta_key] + '</td></tr>';\n        }\n    } \n    /* \n    Find the last reported location \n        This is going to require more information to be pulled from TrainTraxx\n    */\n}\nmsg.template += '</table></div>';\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 670,
-        "y": 380,
+        "x": 730,
+        "y": 340,
         "wires": [
             [
                 "8ef9989f.da8ae8",
@@ -15907,8 +15907,8 @@
         "storeOutMessages": false,
         "fwdInMessages": false,
         "templateScope": "local",
-        "x": 900,
-        "y": 380,
+        "x": 960,
+        "y": 340,
         "wires": [
             []
         ]
@@ -15948,8 +15948,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 910,
-        "y": 340,
+        "x": 970,
+        "y": 300,
         "wires": []
     }
 ]
