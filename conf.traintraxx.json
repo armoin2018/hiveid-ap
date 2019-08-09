@@ -2,5 +2,6 @@
     "TrainTraxx_API": "https://www.traintraxx.com/wp-json/traintraxx/v2/custom/",
     "TrainTraxx_Web": "https://www.traintraxx.com",
     "TrainTraxx_Key": "",
-    "USE_CACHE" : false
+    "USE_CACHE" : false,
+    "ACTIVITY_SIZE" : 10
 }

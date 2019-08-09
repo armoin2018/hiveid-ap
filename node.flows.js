@@ -335,9 +335,9 @@
         "z": "",
         "name": "Application Settings",
         "icon": "fa-list",
-        "order": 6,
+        "order": 11,
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "5ffcbee0.a5304",
@@ -369,7 +369,7 @@
         "link": "/",
         "icon": "all_inclusive",
         "target": "iframe",
-        "order": 10
+        "order": 14
     },
     {
         "id": "8e968283.a2d29",
@@ -379,7 +379,7 @@
         "link": "/redir?app=jmri",
         "icon": "train",
         "target": "iframe",
-        "order": 9
+        "order": 8
     },
     {
         "id": "6efda0bd.72343",
@@ -389,7 +389,7 @@
         "link": "/redir?app=openrsd",
         "icon": "fa-cogs",
         "target": "iframe",
-        "order": 11
+        "order": 10
     },
     {
         "id": "38e63d7a.b846e2",
@@ -399,7 +399,7 @@
         "link": "/redir?app=phpmyadmin",
         "icon": "fa-database",
         "target": "newtab",
-        "order": 12
+        "order": 9
     },
     {
         "id": "3808a9b7.8005b6",
@@ -409,7 +409,7 @@
         "link": "https://www.traintraxx.com/traintraxx-application",
         "icon": "fa-train",
         "target": "iframe",
-        "order": 8
+        "order": 6
     },
     {
         "id": "12a9f286.0bbd9d",
@@ -419,7 +419,7 @@
         "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
         "icon": "shopping_cart",
         "target": "newtab",
-        "order": 13
+        "order": 7
     },
     {
         "id": "82d159ac.42e4b8",
@@ -437,9 +437,9 @@
         "z": "",
         "name": "Network Mode",
         "icon": "settings_ethernet",
-        "order": 3,
+        "order": 12,
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "bdaf72c3.2be81",
@@ -469,7 +469,7 @@
         "z": "",
         "name": "Local Train Activity",
         "icon": "fa-home",
-        "order": 7,
+        "order": 2,
         "disabled": false,
         "hidden": false
     },
@@ -479,7 +479,7 @@
         "z": "",
         "name": "Manage Information",
         "tab": "1aab9ee9.8893d1",
-        "order": 3,
+        "order": 4,
         "disp": true,
         "width": "6",
         "collapse": true
@@ -641,9 +641,9 @@
         "z": "",
         "name": "Under Development",
         "icon": "dashboard",
-        "order": 14,
-        "disabled": false,
-        "hidden": false
+        "order": 15,
+        "disabled": true,
+        "hidden": true
     },
     {
         "id": "511f0851.ca4e98",
@@ -686,7 +686,7 @@
         "icon": "fa-history",
         "order": 5,
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "d93a6b1c.d9e2e8",
@@ -705,9 +705,9 @@
         "z": "",
         "name": "Service Manager",
         "icon": "fa-server",
-        "order": 2,
+        "order": 13,
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "f5495812.6a3bb8",
@@ -750,6 +750,36 @@
         "order": 6,
         "width": 1,
         "height": 1
+    },
+    {
+        "id": "d1a2c2c2.3b2b4",
+        "type": "ui_link",
+        "z": "",
+        "name": "JMRI Operations",
+        "link": "/redir?app=jmri_ops",
+        "icon": "train",
+        "target": "iframe",
+        "order": 3
+    },
+    {
+        "id": "6e752ac1.4f63f4",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "98512fe8.4ad4",
+        "order": 3,
+        "width": "6",
+        "height": 1
+    },
+    {
+        "id": "d3d8accc.c9188",
+        "type": "ui_group",
+        "z": "",
+        "name": "Find Inventory",
+        "tab": "1aab9ee9.8893d1",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "5a317a8b.60a8b4",
@@ -861,7 +891,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 2,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -870,10 +900,10 @@
         "color": "",
         "bgcolor": "",
         "icon": "autorenew",
-        "payload": "",
+        "payload": "Do you want to Reboot?",
         "payloadType": "str",
         "topic": "",
-        "x": 100,
+        "x": 700,
         "y": 320,
         "wires": [
             [
@@ -906,7 +936,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 3,
+        "order": 7,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1104,7 +1134,7 @@
         "outputs": 1,
         "ok": "OK",
         "cancel": "Cancel",
-        "topic": "Ready to Reboot?",
+        "topic": "Reboot",
         "name": "Reboot",
         "x": 980,
         "y": 320,
@@ -1538,8 +1568,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 200,
-        "y": 60,
+        "x": 80,
+        "y": 120,
         "wires": [
             [
                 "fed0826d.2117"
@@ -2969,11 +2999,11 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "setLocalActivityData",
-        "func": "var curActivity = global.get('Activity');\nif (curActivity === undefined) {\n    curActivity = [];\n}\ncurActivity.unshift(msg.payload.DATA);\n\nwhile (curActivity.length > 10) {\n    curActivity.pop();\n}\n\nglobal.set('Activity',curActivity);\nreturn msg;",
+        "func": "var curActivity = global.get('Activity');\nvar TrainTraxx_Config = global.get('TrainTraxx_Config');\nif (curActivity === undefined) {\n    curActivity = [];\n}\nif (TrainTraxx_Config.ACTIVITY_SIZE === undefined) {\n    TrainTraxx_Config.ACTIVITY_SIZE = 10;\n}\n\ncurActivity.unshift(msg.payload.DATA);\n\nwhile (curActivity.length > Number(TrainTraxx_Config.ACTIVITY_SIZE)) {\n    curActivity.pop();\n}\n\nglobal.set('Activity',curActivity);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 360,
-        "y": 160,
+        "x": 540,
+        "y": 180,
         "wires": [
             [
                 "6902f9b7.cd47e8",
@@ -2991,8 +3021,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 590,
-        "y": 80,
+        "x": 770,
+        "y": 100,
         "wires": []
     },
     {
@@ -3003,28 +3033,11 @@
         "property": "payload.DATA",
         "action": "",
         "pretty": false,
-        "x": 290,
-        "y": 80,
+        "x": 470,
+        "y": 100,
         "wires": [
             [
                 "682e65b1.37211c"
-            ]
-        ]
-    },
-    {
-        "id": "d4deb1b2.f1eb5",
-        "type": "function",
-        "z": "7bef0b7b.d5a104",
-        "name": "Format Activity Data",
-        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar imageRef = global.get('imageRef');\n\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']].toUpperCase();\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        } else {\n            return 'Unknown';\n        }\n    } else {\n        return 'Not assigned';\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:center;  ' +\n                '      border: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef[invID] !== undefined) {\n            tempRow.Image = imageRef[invID].localurl;\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 800,
-        "y": 160,
-        "wires": [
-            [
-                "b7ca5c16.bde28",
-                "fc758d5.841bd7"
             ]
         ]
     },
@@ -3045,27 +3058,13 @@
         "output": "payload.DATA.TIME",
         "outputType": "msg",
         "outTz": "America/Chicago",
-        "x": 320,
-        "y": 120,
+        "x": 500,
+        "y": 140,
         "wires": [
             [
                 "ef8fd901.8301a8"
             ]
         ]
-    },
-    {
-        "id": "b7ca5c16.bde28",
-        "type": "debug",
-        "z": "7bef0b7b.d5a104",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 730,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "deb73202.c811c",
@@ -3079,11 +3078,12 @@
         "crontab": "",
         "once": true,
         "onceDelay": "5",
-        "x": 170,
-        "y": 200,
+        "x": 230,
+        "y": 180,
         "wires": [
             [
-                "ad4add7.ad9572"
+                "ad4add7.ad9572",
+                "5a4e3756.aa1e78"
             ]
         ]
     },
@@ -3095,8 +3095,8 @@
         "links": [
             "9860fd21.83ed9"
         ],
-        "x": 175,
-        "y": 80,
+        "x": 355,
+        "y": 100,
         "wires": [
             [
                 "64bf2bc4.ffd124"
@@ -3116,8 +3116,8 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 790,
-        "y": 240,
+        "x": 970,
+        "y": 260,
         "wires": [
             []
         ]
@@ -3416,7 +3416,8 @@
                 "67bb3f95.44b5",
                 "29b4d282.40a57e",
                 "639c3c57.932cb4",
-                "e054e355.832a2"
+                "e054e355.832a2",
+                "68c8ebf9.5924f4"
             ]
         ]
     },
@@ -4116,7 +4117,7 @@
         "type": "function",
         "z": "c3e3e66a.322358",
         "name": "Make Summary",
-        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"90%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\" style=\\\"background-color:#f90;color:#fff;\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold;\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 420,
@@ -4150,7 +4151,7 @@
         "name": "Summary",
         "order": 1,
         "width": "6",
-        "height": "10",
+        "height": "7",
         "format": "",
         "storeOutMessages": false,
         "fwdInMessages": true,
@@ -4608,7 +4609,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 1,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -5516,7 +5517,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 2,
+        "order": 6,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -13543,7 +13544,8 @@
                 "d0fcfe77.93e15",
                 "a138fd5d.814f7",
                 "a6d06b01.0ca268",
-                "69ebbb16.225d34"
+                "69ebbb16.225d34",
+                "a02f6d2c.9c107"
             ]
         ]
     },
@@ -13827,7 +13829,9 @@
         "x": 500,
         "y": 620,
         "wires": [
-            []
+            [
+                "a02f6d2c.9c107"
+            ]
         ]
     },
     {
@@ -13896,7 +13900,7 @@
         "to": "",
         "reg": false,
         "x": 1060,
-        "y": 400,
+        "y": 500,
         "wires": [
             [
                 "ed5837b0.97eb08"
@@ -13923,7 +13927,7 @@
         "to": "",
         "reg": false,
         "x": 490,
-        "y": 400,
+        "y": 500,
         "wires": [
             [
                 "7e321db7.883104"
@@ -13934,8 +13938,8 @@
         "id": "7e321db7.883104",
         "type": "ui_switch",
         "z": "fd2ebb8a.240a38",
-        "name": "Use Cache",
-        "label": "Use Cache",
+        "name": "Offline Mode",
+        "label": "Offline Mode",
         "tooltip": "",
         "group": "c39736a3.dcaf08",
         "order": 4,
@@ -13954,7 +13958,7 @@
         "officon": "",
         "offcolor": "",
         "x": 730,
-        "y": 400,
+        "y": 500,
         "wires": [
             [
                 "d18c15f1.f2b5a8"
@@ -14273,7 +14277,8 @@
         "wires": [
             [
                 "1634e571.c471cb",
-                "2f44323a.d4024e"
+                "2f44323a.d4024e",
+                "87e07238.a48f2"
             ]
         ]
     },
@@ -15213,8 +15218,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 180,
-        "y": 240,
+        "x": 440,
+        "y": 260,
         "wires": [
             [
                 "ad4add7.ad9572"
@@ -15528,8 +15533,8 @@
         "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']].toUpperCase();\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        } else {\n            return 'Unknown';\n        }\n    } else {\n        return 'Not assigned';\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 460,
-        "y": 240,
+        "x": 700,
+        "y": 260,
         "wires": [
             [
                 "fc758d5.841bd7"
@@ -15567,5 +15572,384 @@
                 "e9df0f66.66f1e"
             ]
         ]
+    },
+    {
+        "id": "28f0eae3.a001c6",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "Change Network Mode",
+        "group": "73493f86.f11df",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Change Network Mode",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Network Mode\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "c4940fa6.420ef"
+            ]
+        ]
+    },
+    {
+        "id": "c4940fa6.420ef",
+        "type": "ui_ui_control",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "x": 460,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b5990f14.1aa5",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "Service Manager",
+        "group": "98512fe8.4ad4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Service Manager",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Service Manager\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "c4940fa6.420ef"
+            ]
+        ]
+    },
+    {
+        "id": "71695295.13227c",
+        "type": "ui_button",
+        "z": "a06855ce.9f5488",
+        "name": "Application Settings",
+        "group": "98512fe8.4ad4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Application Settings",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Application Settings\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 140,
+        "y": 320,
+        "wires": [
+            [
+                "c4940fa6.420ef"
+            ]
+        ]
+    },
+    {
+        "id": "45022f28.7c1de",
+        "type": "http in",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Ops Endpoint",
+        "url": "/ops",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "4b6480eb.41615"
+            ]
+        ]
+    },
+    {
+        "id": "4b6480eb.41615",
+        "type": "change",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set to jmri_ops",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.app",
+                "pt": "msg",
+                "to": "jmri_ops",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "fed0826d.2117"
+            ]
+        ]
+    },
+    {
+        "id": "68c8ebf9.5924f4",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Config.ACTIVITY_SIZE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.ACTIVITY_SIZE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 460,
+        "wires": [
+            [
+                "65aeae7a.7ab35"
+            ]
+        ]
+    },
+    {
+        "id": "65aeae7a.7ab35",
+        "type": "ui_text_input",
+        "z": "fd2ebb8a.240a38",
+        "name": "Activity to Display Locally",
+        "label": "Activity to Display Locally",
+        "tooltip": "",
+        "group": "c39736a3.dcaf08",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 771,
+        "y": 459,
+        "wires": [
+            [
+                "e99c9bca.0c1528"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "e99c9bca.0c1528",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config.ACTIVITY_SIZE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.ACTIVITY_SIZE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 460,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "bcf9b4a9.b55878",
+        "type": "ui_dropdown",
+        "z": "7bef0b7b.d5a104",
+        "name": "Inventory Name",
+        "label": "",
+        "tooltip": "",
+        "place": "Select Inventory Name",
+        "group": "d3d8accc.c9188",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 440,
+        "y": 380,
+        "wires": [
+            [
+                "97a995d3.1794c8",
+                "6dab22fb.981f0c"
+            ]
+        ]
+    },
+    {
+        "id": "5a4e3756.aa1e78",
+        "type": "function",
+        "z": "7bef0b7b.d5a104",
+        "name": "Build Inventory Name List",
+        "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\n\nmsg.options=[];\nif (JMRI_Config.JMRI_ENABLED === true) {\n    \n    for (var cID in JMRI.cars.data) {\n        msg.options.push(String(JMRI.cars.data[cID].name));\n    }\n    for (var eID in JMRI.engines.data) {\n        msg.options.push(String(JMRI.engines.data[eID].name));\n    }\n}\n\n\nif (JMRI_Config.JMRI_ENABLED === false || msg.options.length === 0) { \n    var metaKeys = {};\n    var rnameKey = null;\n    var rnumKey  = null;\n    for (var kID in TT.inventory.keys.data) {\n        var curKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n        metaKeys[kID] = curKey;\n        if (curKey['meta_key'] === 'Road Name') {\n            rnameKey = kID;\n        }\n        if (curKey['meta_key'] === 'Road Number') {\n            rnumKey = kID;\n        }\n    }\n    for (var iID in TT.inventory.data) {\n        var RNAME = '';\n        var RNUM = '';\n        var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n        for (var mID in TT.inventory.meta.data[iID]) {\n            var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[mID]);\n            if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnameKey)) {\n                RNAME = curMeta['meta_value'];\n            }\n            if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnumKey)) {\n                RNUM = curMeta['meta_value'];\n            }\n        }\n        if (RNAME !== '' && RNUM !== '' ) {\n            msg.options.push(RNAME + String(RNUM));\n        } else {\n            msg.options.push(curInv.NAME);\n        }\n    }\n}\n\nmsg.options.sort();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 340,
+        "wires": [
+            [
+                "bcf9b4a9.b55878"
+            ]
+        ]
+    },
+    {
+        "id": "994a6f66.58304",
+        "type": "link in",
+        "z": "7bef0b7b.d5a104",
+        "name": "Summary Find Inventory iLink",
+        "links": [
+            "a02f6d2c.9c107",
+            "87e07238.a48f2"
+        ],
+        "x": 255,
+        "y": 340,
+        "wires": [
+            [
+                "5a4e3756.aa1e78"
+            ]
+        ]
+    },
+    {
+        "id": "97a995d3.1794c8",
+        "type": "change",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 440,
+        "wires": [
+            [
+                "8ef9989f.da8ae8"
+            ]
+        ]
+    },
+    {
+        "id": "6dab22fb.981f0c",
+        "type": "function",
+        "z": "7bef0b7b.d5a104",
+        "name": "Search Inventory",
+        "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\n\nvar inName = msg.payload;\nvar jmri_Info = '';\nvar tt_Info = '';\n\nmsg.template =  '<style>' +\n                '   .info_header {color:#fff; background-color: #f90;} ' +\n                '   .info_title { font-weight: bold;} ' +\n                '</style>' +\n                '<div style=\"height:720px;\"><table width=\"100%\">';\nif (JMRI_Config.JMRI_ENABLED === true) {\n    var types = ['cars','engines'];\n    msg.template += '<tr><th class=\"info_header\" colspan=\"2\">JMRI Info</th></tr>';\n    for (var typeID in types) {\n        var curType = types[typeID];\n        for (var jID in JMRI[curType].data) {\n            var curCar = JMRI[curType].data[jID];\n            if (curCar.name === inName) {\n                msg.template += '<tr><td class=\"info_title\">Car Type:</td><td>' + ((curCar.carType === undefined || curCar.carType === \"\") ? 'Unknown' : curCar.carType) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Color:</td><td><div class=\"colorBlock\" style=\"background-color:' + ((curCar.color === undefined) ? '#fff' : curCar.color) + ';\">&nbsp;</div></td></tr>' +\n                            '<tr><td class=\"info_title\">Length:</td><td>' + ((curCar.length === undefined) ? 'Unknown' : curCar.length) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight:</td><td>' + ((curCar.weight === undefined) ? 'Unknown' : curCar.weight) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight Tons:</td><td>' + ((curCar.weightTons === undefined) ? 'Unknown' : curCar.weightTons) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Load:</td><td>' + ((curCar.load === undefined) ? 'Unknown' : curCar.load) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Out of Service:</td><td>' + ((curCar.outOfService === false) ? 'No' : 'Yes') + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Last Location:</td><td>' + ((curCar.location === undefined) ? 'Unknown' : curCar.location) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Destination:</td><td>' + ((curCar.destination  === undefined) ? 'Not Set' : curCar.destination) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Final Destination:</td><td>' + ((curCar.finalDestination  === undefined) ? 'Not Set' : curCar.finalDestination) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Return When Empty:</td><td>' + ((curCar.returnWhenEmpty  === undefined) ? 'Not Set' : curCar.returnWhenEmpty) + '</td></tr>';\n            }\n        }\n    }\n}\n\nvar metaKeys = {};\nfor (var kID in TT.inventory.keys.data) {\n    metaKeys[kID] = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n}\n\nmsg.template += '<tr><th class=\"info_header\" colspan=\"2\">TrainTraxx Info</th></tr>';\nfor (var iID in TT.inventory.data) {\n    var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n    var tempOut = {'Road Name' :'','Road Number' :''};\n    for (var mID in TT.inventory.meta.data[iID]) {\n        var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[iID][mID]);\n        var metaKeyID =curMeta['wp_tt_inventorymetakeys_ID'];\n        var tempVal ='';\n        switch (metaKeys[metaKeyID]['OUTPUT_FORMAT']) {\n            case 'image' :\n            case 'train-image' :    \n                break;\n            case 'color':\n                tempVal = '<div class=\"colorBlock\" style=\"background-color:' + curMeta['meta_value'] + ';\">&nbsp;</div>';\n                break;\n            case 'tickCross':\n                tempVal = (curMeta['meta_value'] === true) ? 'Yes' : 'No';\n                break;\n            default: \n                tempVal = curMeta['meta_value'];\n        }\n        if (tempVal !== '') {\n            tempOut[metaKeys[metaKeyID]['meta_key']] = tempVal;\n        }\n    }\n    if (inName === tempOut['Road Name'] + String(tempOut['Road Number']) || inName === curInv.NAME) {\n        msg.template += '<tr><td class=\"info_title\">Name:</td><td>' + curInv.NAME + '</td></tr>'; \n        if (imageRef_Inv[iID] !== undefined) {\n            msg.template += '<tr><td class=\"info_title\">Image:</td><td><img src=\"' + imageRef_Inv[iID].localurl + '\" width=\"100px\"></td></tr>'; \n        }\n        for (var meta_key in tempOut) {\n            msg.template += '<tr><td class=\"info_title\">' + meta_key + ':</td><td>' + tempOut[meta_key] + '</td></tr>';\n        }\n    } \n    /* \n    Find the last reported location \n        This is going to require more information to be pulled from TrainTraxx\n    */\n}\nmsg.template += '</table></div>';\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 380,
+        "wires": [
+            [
+                "8ef9989f.da8ae8",
+                "5fe29bf3.652b14"
+            ]
+        ]
+    },
+    {
+        "id": "8ef9989f.da8ae8",
+        "type": "ui_template",
+        "z": "7bef0b7b.d5a104",
+        "group": "d3d8accc.c9188",
+        "name": "Search Results",
+        "order": 2,
+        "width": "6",
+        "height": "7",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "templateScope": "local",
+        "x": 900,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a02f6d2c.9c107",
+        "type": "link out",
+        "z": "1a726252.d178be",
+        "name": "Summary Find Inventory oLink",
+        "links": [
+            "994a6f66.58304"
+        ],
+        "x": 915,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "87e07238.a48f2",
+        "type": "link out",
+        "z": "164213bd.e3dd4c",
+        "name": "Summary Find Inventory oLink",
+        "links": [
+            "994a6f66.58304"
+        ],
+        "x": 875,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "5fe29bf3.652b14",
+        "type": "debug",
+        "z": "7bef0b7b.d5a104",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 910,
+        "y": 340,
+        "wires": []
     }
 ]
