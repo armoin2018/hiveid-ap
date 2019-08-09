@@ -2976,8 +2976,8 @@
         "y": 160,
         "wires": [
             [
-                "d4deb1b2.f1eb5",
-                "6902f9b7.cd47e8"
+                "6902f9b7.cd47e8",
+                "ad4add7.ad9572"
             ]
         ]
     },
@@ -3019,8 +3019,8 @@
         "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar imageRef = global.get('imageRef');\n\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']].toUpperCase();\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        } else {\n            return 'Unknown';\n        }\n    } else {\n        return 'Not assigned';\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:center;  ' +\n                '      border: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table>' +\n    '<tr><th>Image</th><th>Time</th><th>Name</th><th>Location</th></tr>';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \"Location\" : \"\", \"Name\" : \"\", \"Time\" : \"\", \"Image\" : \"\"};\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef[invID] !== undefined) {\n            tempRow.Image = imageRef[invID].localurl;\n        }\n    }\n    msg.template += '<tr>' +\n        '<td><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td>' + activity[i].TIME + '</td>' +\n        '<td>' + tempRow.Name + '</td>' + \n        '<td>' + tempRow.Location + '</td></tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 400,
-        "y": 200,
+        "x": 800,
+        "y": 160,
         "wires": [
             [
                 "b7ca5c16.bde28",
@@ -3063,7 +3063,7 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 630,
+        "x": 730,
         "y": 120,
         "wires": []
     },
@@ -3083,7 +3083,7 @@
         "y": 200,
         "wires": [
             [
-                "d4deb1b2.f1eb5"
+                "ad4add7.ad9572"
             ]
         ]
     },
@@ -3116,7 +3116,7 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 450,
+        "x": 790,
         "y": 240,
         "wires": [
             []
@@ -4138,8 +4138,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 590,
-        "y": 200,
+        "x": 650,
+        "y": 160,
         "wires": []
     },
     {
@@ -4155,8 +4155,8 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 600,
-        "y": 160,
+        "x": 660,
+        "y": 220,
         "wires": [
             []
         ]
@@ -7857,7 +7857,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = flow.get('Probes');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
+        "func": "var inProbes = flow.get('Probes');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                    '<hr/>' +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -13542,7 +13542,8 @@
             [
                 "d0fcfe77.93e15",
                 "a138fd5d.814f7",
-                "a6d06b01.0ca268"
+                "a6d06b01.0ca268",
+                "69ebbb16.225d34"
             ]
         ]
     },
@@ -15216,7 +15217,7 @@
         "y": 240,
         "wires": [
             [
-                "d4deb1b2.f1eb5"
+                "ad4add7.ad9572"
             ]
         ]
     },
@@ -15455,12 +15456,12 @@
         "id": "a6d06b01.0ca268",
         "type": "function",
         "z": "1a726252.d178be",
-        "name": "Cache Images",
-        "func": "var fs = global.get('fs');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageCacheFolder = '/var/www/html/imageCache/';\nvar IP = global.get('IP');\nvar imageCacheURL = 'http://' + IP.internalIPv4 + '/imageCache/';\n\nvar ImageKey = null;\nfor (var kID in TT.inventory.keys.data) {\n    var curKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n    if (curKey['meta_key'] === 'Image') {\n        ImageKey = Number(kID);\n    }\n}\nmsg.payload = [];\nvar imageRef = {};\nfor (var iID in TT.inventory.meta.data ) {\n    for (var vID in TT.inventory.meta.data[iID] ) {\n        var curImage = hive.array_combine(TT.inventory.meta.columns, TT.inventory.meta.data[iID][vID]);\n        if (curImage['wp_tt_inventorymetakeys_ID'] === ImageKey) {\n            var t_sourceURL= curImage['meta_value'].split(/\\|\\|/);\n            var sourceURL = t_sourceURL.pop();\n            var t_fileName = sourceURL.match(/\\/([^\\/]+)$/);\n            var fileName = t_fileName[1];\n            imageRef[iID] = {\n              url  :  sourceURL,\n              filename :  imageCacheFolder + fileName,\n              localurl   :  imageCacheURL + fileName\n            };\n            \n        }\n    }\n}\nglobal.set('imageRef',imageRef);    \n    \nreturn msg;",
+        "name": "Cache Inv Images",
+        "func": "var fs = global.get('fs');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageCacheFolder = '/var/www/html/imageCache/';\nvar IP = global.get('IP');\nvar imageCacheURL = 'http://' + IP.internalIPv4 + '/imageCache/';\n\nvar ImageKey = null;\nfor (var kID in TT.inventory.keys.data) {\n    var curKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n    if (curKey['meta_key'] === 'Image') {\n        ImageKey = Number(kID);\n    }\n}\nmsg.payload = [];\nvar imageRef_Inv = {};\nfor (var iID in TT.inventory.meta.data ) {\n    for (var vID in TT.inventory.meta.data[iID] ) {\n        var curImage = hive.array_combine(TT.inventory.meta.columns, TT.inventory.meta.data[iID][vID]);\n        if (curImage['wp_tt_inventorymetakeys_ID'] === ImageKey) {\n            var t_sourceURL= curImage['meta_value'].split(/\\|\\|/);\n            var sourceURL = t_sourceURL.pop();\n            var t_fileName = sourceURL.match(/\\/([^\\/]+)$/);\n            var fileName = t_fileName[1];\n            imageRef_Inv[iID] = {\n              url  :  sourceURL,\n              filename :  imageCacheFolder + fileName,\n              localurl   :  imageCacheURL + fileName\n            };\n            \n        }\n    }\n}\nglobal.set('imageRef_Inv',imageRef_Inv);    \n    \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 980,
-        "y": 580,
+        "x": 990,
+        "y": 560,
         "wires": [
             [
                 "999959cb.c42498"
@@ -15471,12 +15472,12 @@
         "id": "999959cb.c42498",
         "type": "function",
         "z": "1a726252.d178be",
-        "name": "Send Image Requests",
-        "func": "var fs = global.get('fs');\nvar imageRef = global.get('imageRef');\n\nfor (var id in imageRef) {\n    if (!fs.existsSync(imageRef[id].filename)) {\n        \n        node.send({\n            url : imageRef[id].url,\n            filename : imageRef[id].filename\n        });\n    }\n}\nreturn;",
+        "name": "Send Inv Image Requests",
+        "func": "var fs = global.get('fs');\nvar imageRef_Inv = global.get('imageRef_Inv');\n\nfor (var id in imageRef_Inv) {\n    if (!fs.existsSync(imageRef_Inv[id].filename)) {\n        \n        node.send({\n            url : imageRef_Inv[id].url,\n            filename : imageRef_Inv[id].filename\n        });\n    }\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1220,
-        "y": 580,
+        "x": 1230,
+        "y": 560,
         "wires": [
             [
                 "e9df0f66.66f1e"
@@ -15495,8 +15496,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1210,
-        "y": 620,
+        "x": 1470,
+        "y": 560,
         "wires": [
             [
                 "16325193.5d5f2e"
@@ -15513,10 +15514,58 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1210,
-        "y": 660,
+        "x": 1470,
+        "y": 600,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "ad4add7.ad9572",
+        "type": "function",
+        "z": "7bef0b7b.d5a104",
+        "name": "Format Activity Data",
+        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\n\nvar array_key = function(keys,vals) {\n    var myResults = {};\n    for (var x in keys) {\n        myResults[keys[x]] = vals[x];\n    }\n    return myResults;\n};\n\nvar getInvIDbyTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        var tagCol = TT.tags.columnLookup['TAG_UID'];\n        var invCol = TT.tags.columnLookup['wp_tt_inventory_ID'];\n        for (var t in TT.tags.data) {\n            var tuid = TT.tags.data[t][tagCol];\n            if (tuid === uid) {\n                return TT.tags.data[t][invCol];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getHNLocByMac = function(mac) {\n    if (mac !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var tmac = TT.hivenode.data[t][TT.hivenode.columnLookup['MAC_ADDRESS']].toUpperCase();\n            if (tmac === mac) {\n                return TT.hivenode.data[t][TT.hivenode.columnLookup['wp_tt_locations_ID']];\n            }\n        }  \n    } \n    return null;\n};\n\nvar getLocNameByID = function(lid) {\n    if (lid !== undefined && lid > 0) {\n        var tempLoc = array_key(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            return tempLoc['NAME'];\n        } else {\n            return 'Unknown';\n        }\n    } else {\n        return 'Not assigned';\n    }\n    return null;\n};\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = getInvIDbyTag(activity[i]['UID']);\n    \n    var locID = getHNLocByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = getLocNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = array_key(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  array_key(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = array_key(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "fc758d5.841bd7"
+            ]
+        ]
+    },
+    {
+        "id": "69ebbb16.225d34",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Cache Loc Images",
+        "func": "var fs = global.get('fs');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageCacheFolder = '/var/www/html/imageCache/';\nvar IP = global.get('IP');\nvar imageCacheURL = 'http://' + IP.internalIPv4 + '/imageCache/';\n\nvar ImageKey = null;\nfor (var kID in TT.locations.keys.data) {\n    var curKey = hive.array_combine(TT.locations.keys.columns,TT.locations.keys.data[kID]);\n    if (curKey['meta_key'] === 'Image') {\n        ImageKey = Number(kID);\n    }\n}\nmsg.payload = [];\nvar imageRef_Loc = {};\nfor (var iID in TT.locations.meta.data ) {\n    for (var vID in TT.locations.meta.data[iID] ) {\n        var curImage = hive.array_combine(TT.locations.meta.columns, TT.locations.meta.data[iID][vID]);\n        if (curImage['wp_tt_locationmetakeys_ID'] === ImageKey) {\n            var t_sourceURL= curImage['meta_value'].split(/\\|\\|/);\n            var sourceURL = t_sourceURL.pop();\n            var t_fileName = sourceURL.match(/\\/([^\\/]+)$/);\n            var fileName = t_fileName[1];\n            imageRef_Loc[iID] = {\n              url  :  sourceURL,\n              filename :  imageCacheFolder + fileName,\n              localurl   :  imageCacheURL + fileName\n            };\n            \n        }\n    }\n}\nglobal.set('imageRef_Loc',imageRef_Loc);    \n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 990,
+        "y": 600,
+        "wires": [
+            [
+                "a7ea6d2a.f807d"
+            ]
+        ]
+    },
+    {
+        "id": "a7ea6d2a.f807d",
+        "type": "function",
+        "z": "1a726252.d178be",
+        "name": "Send Loc Image Requests",
+        "func": "var fs = global.get('fs');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nfor (var id in imageRef_Loc) {\n    if (!fs.existsSync(imageRef_Loc[id].filename)) {\n        \n        node.send({\n            url : imageRef_Loc[id].url,\n            filename : imageRef_Loc[id].filename\n        });\n    }\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1240,
+        "y": 600,
+        "wires": [
+            [
+                "e9df0f66.66f1e"
+            ]
         ]
     }
 ]
