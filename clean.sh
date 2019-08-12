@@ -4,7 +4,7 @@
 ####         M Steve Todd (From JMRI Image)           ####
 #### Usage: ./clean.sh                                ####
 #### Description: Clean up file system                ####
-#### Version: 0.1                                     ####
+#### Version: 0.20190812                              ####
 ##########################################################
 
 echo "Clearing up apt files"
