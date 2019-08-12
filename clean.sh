@@ -19,6 +19,7 @@ for i in $(sudo find /var/log -type d); do sudo rm $i/*.1 $i/*.gz 2>/dev/null; d
 echo "Clearing up other history files"
 sudo rm -rf /root/.bash_history 2>/dev/null
 rm -rdf /home/pi/Downloads/* /root/Downloads/* 2>/dev/null
+rm -rdf /usr/local/hiveid-ap/cache/* 2>/dev/null
 rm -rdf /home/pi/.local/share/Trash/info/* 2>/dev/null
 
 rm -rf  /home/pi/JMRI_UserFiles/roster/consist \
