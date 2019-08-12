@@ -486,7 +486,7 @@
         "order": 3,
         "disp": true,
         "width": "6",
-        "collapse": true
+        "collapse": false
     },
     {
         "id": "3220fafa.330906",
@@ -497,7 +497,7 @@
         "order": 1,
         "disp": true,
         "width": "12",
-        "collapse": false
+        "collapse": true
     },
     {
         "id": "52268d3e.c2cde4",
@@ -562,7 +562,7 @@
         "order": 4,
         "disp": true,
         "width": "6",
-        "collapse": false
+        "collapse": true
     },
     {
         "id": "e2f29212.fa7b8",
@@ -4089,7 +4089,7 @@
         "type": "function",
         "z": "c3e3e66a.322358",
         "name": "Make Summary",
-        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\" style=\\\"background-color:#f90;color:#fff;\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold;\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivegateway\": \"Gateways\",\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"tags_activity\" : \"Activity\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\" style=\\\"background-color:#f90;color:#fff;\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold;\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 420,
@@ -4123,7 +4123,7 @@
         "name": "Summary",
         "order": 1,
         "width": "6",
-        "height": "7",
+        "height": "9",
         "format": "",
         "storeOutMessages": false,
         "fwdInMessages": true,
