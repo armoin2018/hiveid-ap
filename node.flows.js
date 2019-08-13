@@ -2764,7 +2764,7 @@
         "type": "function",
         "z": "a40e76b8.4d8a48",
         "name": "Set Data",
-        "func": "var curTable = flow.get('curTable');\n\nif (curTable === 'tags_activity') {\n    var tempData = global.get('TrainTraxx.' + curTable);\n    /* Merge the Data */\n    for (var dID in tempData.data) {\n        msg.payload.data[dID] = tempData.data[dID];\n    }\n}\n\n\nmsg.payload.lastLoad = Date.now();\n\nvar tempMap = {};\nfor (var i in msg.payload.columns) {\n    tempMap[msg.payload.columns[i]] = i;\n}\nmsg.payload['columnLookup'] = tempMap;\nvar tempMap = {};\nif (msg.payload.meta !== undefined) {\n    for (var i in msg.payload.meta.columns) {\n        tempMap[msg.payload.meta.columns[i]] = i;\n    }\n    msg.payload.meta['columnLookup'] = tempMap;\n}\nvar tempMap = {};\nif (msg.payload.keys !== undefined) {\n    for (var i in msg.payload.keys.columns) {\n        tempMap[msg.payload.keys.columns[i]] = i;\n    }\n    msg.payload.keys['columnLookup'] = tempMap;\n}\n\nglobal.set('TrainTraxx.' + curTable,msg.payload);\nreturn msg;",
+        "func": "var curTable = flow.get('curTable');\n\nif (curTable === 'tags_activity') {\n    var tempData = global.get('TrainTraxx.' + curTable);\n    /* Merge the Data */\n    if (tempData.data !== undefined) {\n        for (var dID in tempData.data) {\n            msg.payload.data[dID] = tempData.data[dID];\n        }\n    }\n}\n\nmsg.payload.lastLoad = Date.now();\n\nvar tempMap = {};\nfor (var i in msg.payload.columns) {\n    tempMap[msg.payload.columns[i]] = i;\n}\nmsg.payload['columnLookup'] = tempMap;\nvar tempMap = {};\nif (msg.payload.meta !== undefined) {\n    for (var i in msg.payload.meta.columns) {\n        tempMap[msg.payload.meta.columns[i]] = i;\n    }\n    msg.payload.meta['columnLookup'] = tempMap;\n}\nvar tempMap = {};\nif (msg.payload.keys !== undefined) {\n    for (var i in msg.payload.keys.columns) {\n        tempMap[msg.payload.keys.columns[i]] = i;\n    }\n    msg.payload.keys['columnLookup'] = tempMap;\n}\n\nglobal.set('TrainTraxx.' + curTable,msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 880,
@@ -16057,6 +16057,29 @@
             [
                 "d7e7e4d1.7489a8"
             ]
+        ]
+    },
+    {
+        "id": "162cfc56.f88534",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "JRMI Car/Engine Process",
+        "func": "var RFIDRequest = msg.payload;\n\nvar hive = global.get('hive');\nvar JMRI_URL = global.get('JMRI_URL');\n\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nvar location = hive.getLocationNameByReporter(reporter.name);\n\nvar tag = hive.getTagName(RFIDRequest.UID);\nvar inventory = hive.jmri.getInventoryByTag(tag.name);\n\nmsg.verb = 'POST';\n\n\nmsg.payload = {\n    \"type\": \"idTag\",\n    \"data\": tag\n};\n\n\n\n\nmsg.headers = {'content-type':'application/json'};\nmsg.url = JMRI_URL + type;\nmsg.topic = type;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 680,
+        "wires": [
+            [
+                "2aac0d87.303432",
+                "a8fe1029.250ed"
+            ]
+        ],
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
         ]
     }
 ]
