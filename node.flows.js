@@ -14814,7 +14814,7 @@
         "proxy": "",
         "authType": "",
         "x": 830,
-        "y": 680,
+        "y": 700,
         "wires": [
             [
                 "d38f60fc.3dcee"
@@ -14833,7 +14833,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 1080,
-        "y": 680,
+        "y": 700,
         "wires": []
     },
     {
@@ -14849,7 +14849,7 @@
         "proxy": "",
         "authType": "",
         "x": 840,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "d38f60fc.3dcee"
@@ -15195,11 +15195,11 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Format Locations",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\nvar _ = global.get('_');\nvar FlowMap = flow.get('FlowMap');\nmsg.payload = { 'PUT' : {}, 'POST' : {}};\nvar metaKeys = {};\nvar keyColumns = TT.locations.keys.columns;\nfor (var keyID in TT.locations.keys.data) {\n    var curKey = TT.locations.keys.data[keyID];    \n    metaKeys[keyID] =  hive.array_combine(keyColumns,curKey);\n}\n\nvar locationColumns = TT.locations.columns;\nvar tempTrack = [];\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    curLocation.userName = curLocation['NAME'];\n    var parentID = curLocation['wp_tt_locations_PARENT_ID'];\n    var metaColumns = TT.locations.meta.columns;\n    if (TT.locations.meta.data[locationID] !== undefined ) {\n        for (var metaID in TT.locations.meta.data[locationID]) {\n            var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID][metaID]);\n            curLocation[metaKeys[curMeta['wp_tt_locationmetakeys_ID']]['meta_key']] = curMeta['meta_value'];\n        }\n    }\n    /* Translate Fields */\n    for (var i in FlowMap) {\n        var curMap = FlowMap[i];\n        if (curMap.TrainTraxx_Type === 'locations' && curLocation[curMap.TrainTraxx] !== undefined) {\n            curLocation[curMap.JMRI] = curLocation[curMap.TrainTraxx];\n        }\n    }\n    \n    /* Get Reporter */\n    curLocation.reporter = hive.getJMRIReporterNameByLocation(curLocation.userName);\n    /* Clean out unused entries */\n    var validFields = ['userName','name','comment','length','location','reporter','type', 'carType','reporterObj'];\n    var tempComment = [];\n    for (var a in curLocation) {\n        var flag = false;\n        for (var b in validFields) {\n            if (a === validFields[b]) {\n                flag = true;\n            }\n        }\n        if (flag === false) {\n            tempComment.push(a + ': ' + curLocation[a]);\n            delete curLocation[a];\n        }\n    }\n    if (curLocation['comment'] === undefined) {\n        curLocation['comment'] = \"\";\n    }\n    curLocation['comment'] += tempComment.join('\\n');\n\n    if (Number(parentID) > 0) {\n        /* Need to append to POST or PUT depending on if it exists or the parent exists\n            Location can be defined based on extracting the parent as well which will define\n            its assoc array key\n        */\n        \n        tempTrack = hive.getJMRISubLocation(curLocation.userName);\n        /* check to see if the sublocation already exists */\n        if (tempTrack.location !== undefined && Number(tempTrack.location) > 0) {\n            /* Add it to the track object of the POST object */\n            /* Need to converge the tempTrack data with updates from TrainTraxx */\n            for (var x in curLocation) {\n                tempTrack[x] = curLocation[x];\n            }\n            if (msg.payload['POST'][tempTrack.location] === undefined) {\n                msg.payload['POST'][tempTrack.location] = { 'track' : []};\n            }\n            msg.payload['POST'][tempTrack.location].track.push(tempTrack);\n            msg.payload['POST'][tempTrack.location].name = tempTrack.location;\n        } else {\n            /* Add it to the track object of the PUT object */\n            var parentLocation =hive.array_combine(locationColumns,TT.locations.data[parentID]);\n            var tempParent = hive.getJMRILocation(parentLocation.NAME);\n            if (tempParent.name !== undefined && tempParent.name !== '') {\n                if (msg.payload['POST'][tempParent.name] === undefined ) {\n                    msg.payload['POST'][tempParent.name] = {  \"track\" : [] };\n                }\n                curLocation.location = tempParent.name;\n                msg.payload['POST'][tempParent.name].track.push(curLocation);\n                msg.payload['POST'][tempParent.name].name = tempParent.name;\n            } else {\n                if (msg.payload['PUT'][parentID] === undefined) {\n                    msg.payload['PUT'][parentID] = { 'track' : [] };\n                }\n                msg.payload['PUT'][parentID].track.push(curLocation);\n            }\n        }\n    } else {\n        jmriLocation = hive.getJMRILocation(curLocation.userName);\n        delete curLocation.type;\n        if (jmriLocation.name !== undefined) {\n            tempTrack = []; \n            if (msg.payload['POST'][jmriLocation.name] === undefined) {\n                msg.payload['POST'][jmriLocation.name] = {  'track' : [] };\n            }\n            if (msg.payload['POST'][jmriLocation.name].track.length > 0) {\n                tempTrack = msg.payload['POST'][jmriLocation.name].track;\n            }\n            msg.payload['POST'][jmriLocation.name] = _.clone(curLocation);\n            msg.payload['POST'][jmriLocation.name].name = jmriLocation.name;\n            msg.payload['POST'][jmriLocation.name].track = tempTrack;\n        } else {\n            tempTrack = []; \n            if (msg.payload['PUT'][locationID] === undefined) {\n                msg.payload['PUT'][locationID] = {  'track' : [] };\n            }\n            if (msg.payload['PUT'][locationID].track.length > 0) {\n                tempTrack = msg.payload['PUT'][locationID].track;\n            }\n            msg.payload['PUT'][locationID] = _.clone(curLocation);\n            msg.payload['PUT'][locationID].track = tempTrack;\n        }\n    }\n}\n\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\nvar _ = global.get('_');\nvar FlowMap = flow.get('FlowMap');\nmsg.payload = { 'PUT' : {}, 'POST' : {}};\nvar metaKeys = {};\nvar keyColumns = TT.locations.keys.columns;\nfor (var keyID in TT.locations.keys.data) {\n    var curKey = TT.locations.keys.data[keyID];    \n    metaKeys[keyID] =  hive.array_combine(keyColumns,curKey);\n}\n\nvar locationColumns = TT.locations.columns;\nvar tempTrack = [];\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    curLocation.userName = curLocation['NAME'];\n    var parentID = curLocation['wp_tt_locations_PARENT_ID'];\n    var metaColumns = TT.locations.meta.columns;\n    if (TT.locations.meta.data[locationID] !== undefined ) {\n        for (var metaID in TT.locations.meta.data[locationID]) {\n            var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID][metaID]);\n            curLocation[metaKeys[curMeta['wp_tt_locationmetakeys_ID']]['meta_key']] = curMeta['meta_value'];\n        }\n    }\n    /* Translate Fields */\n    for (var i in FlowMap) {\n        var curMap = FlowMap[i];\n        if (curMap.TrainTraxx_Type === 'locations' && curLocation[curMap.TrainTraxx] !== undefined) {\n            curLocation[curMap.JMRI] = curLocation[curMap.TrainTraxx];\n        }\n    }\n    \n    /* Get Reporter */\n    var tempReporter = hive.getJMRIReporterNameByLocation(curLocation.userName);\n    if (tempReporter !== undefined && tempReporter !== \"\") {\n        curLocation.reporter = tempReporter;\n    }\n    /* Clean out unused entries */\n    var validFields = ['userName','name','comment','length','location','reporter','type', 'carType','reporterObj'];\n    var tempComment = [];\n    for (var a in curLocation) {\n        var flag = false;\n        for (var b in validFields) {\n            if (a === validFields[b]) {\n                flag = true;\n            }\n        }\n        if (flag === false) {\n            tempComment.push(a + ': ' + curLocation[a]);\n            delete curLocation[a];\n        }\n    }\n    if (curLocation['comment'] === undefined) {\n        curLocation['comment'] = \"\";\n    }\n    curLocation['comment'] += tempComment.join('\\n');\n\n    if (Number(parentID) > 0) {\n        /* Need to append to POST or PUT depending on if it exists or the parent exists\n            Location can be defined based on extracting the parent as well which will define\n            its assoc array key\n        */\n        \n        tempTrack = hive.getJMRISubLocation(curLocation.userName);\n        /* check to see if the sublocation already exists */\n        if (tempTrack.location !== undefined && Number(tempTrack.location) > 0) {\n            /* Add it to the track object of the POST object */\n            /* Need to converge the tempTrack data with updates from TrainTraxx */\n            for (var x in curLocation) {\n                tempTrack[x] = curLocation[x];\n            }\n            if (msg.payload['POST'][tempTrack.location] === undefined) {\n                msg.payload['POST'][tempTrack.location] = { 'track' : []};\n            }\n            msg.payload['POST'][tempTrack.location].track.push(tempTrack);\n            msg.payload['POST'][tempTrack.location].name = tempTrack.location;\n        } else {\n            /* Add it to the track object of the PUT object */\n            var parentLocation =hive.array_combine(locationColumns,TT.locations.data[parentID]);\n            var tempParent = hive.getJMRILocation(parentLocation.NAME);\n            if (tempParent.name !== undefined && tempParent.name !== '') {\n                if (msg.payload['POST'][tempParent.name] === undefined ) {\n                    msg.payload['POST'][tempParent.name] = {  \"track\" : [] };\n                }\n                curLocation.location = tempParent.name;\n                msg.payload['POST'][tempParent.name].track.push(curLocation);\n                msg.payload['POST'][tempParent.name].name = tempParent.name;\n            } else {\n                if (msg.payload['PUT'][parentID] === undefined) {\n                    msg.payload['PUT'][parentID] = { 'track' : [] };\n                }\n                msg.payload['PUT'][parentID].track.push(curLocation);\n            }\n        }\n    } else {\n        jmriLocation = hive.getJMRILocation(curLocation.userName);\n        delete curLocation.type;\n        if (jmriLocation.name !== undefined) {\n            tempTrack = []; \n            if (msg.payload['POST'][jmriLocation.name] === undefined) {\n                msg.payload['POST'][jmriLocation.name] = {  'track' : [] };\n            }\n            if (msg.payload['POST'][jmriLocation.name].track.length > 0) {\n                tempTrack = msg.payload['POST'][jmriLocation.name].track;\n            }\n            msg.payload['POST'][jmriLocation.name] = _.clone(curLocation);\n            msg.payload['POST'][jmriLocation.name].name = jmriLocation.name;\n            msg.payload['POST'][jmriLocation.name].track = tempTrack;\n        } else {\n            tempTrack = []; \n            if (msg.payload['PUT'][locationID] === undefined) {\n                msg.payload['PUT'][locationID] = {  'track' : [] };\n            }\n            if (msg.payload['PUT'][locationID].track.length > 0) {\n                tempTrack = msg.payload['PUT'][locationID].track;\n            }\n            msg.payload['PUT'][locationID] = _.clone(curLocation);\n            msg.payload['PUT'][locationID].track = tempTrack;\n        }\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 610,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "c5a45dee.0d697",
@@ -15215,8 +15215,8 @@
         "func": "var JMRI_URL = global.get('JMRI_URL');\nfor (var verb in msg.payload) {\n    for (var id in msg.payload[verb]) {\n        var temp = {\n            payload : {\n                \"type\" : \"location\",\n                \"data\" : msg.payload[verb][id]\n            },\n            verb : verb,\n            url : JMRI_URL + 'json/location',\n            headers : {'content-type':'application/json'}\n        };\n        node.send(temp);\n    }\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 860,
-        "y": 640,
+        "x": 880,
+        "y": 660,
         "wires": [
             [
                 "cf8fb8dd.4eeec8"
@@ -15246,7 +15246,7 @@
         "repair": true,
         "outputs": 2,
         "x": 590,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "ab94abd6.2d7c68"
@@ -16094,8 +16094,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 720,
-        "y": 600,
+        "x": 880,
+        "y": 620,
         "wires": []
     }
 ]
