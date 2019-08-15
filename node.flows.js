@@ -12656,16 +12656,6 @@
         "wires": []
     },
     {
-        "id": "c8efac4.157725",
-        "type": "comment",
-        "z": "7b5cf843.8f8fc8",
-        "name": "Updates",
-        "info": "Need to make sure the Probe_Ignore works",
-        "x": 200,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "33a5186c.ba9b08",
         "type": "debug",
         "z": "7b5cf843.8f8fc8",
@@ -12743,16 +12733,6 @@
                 "52cbe0db.c277c"
             ]
         ]
-    },
-    {
-        "id": "e4ecf803.e3e288",
-        "type": "comment",
-        "z": "3d602d50.39dab2",
-        "name": "TODO",
-        "info": "Add in RFID Matching\nRoad Mark Mapping \n\n\nLocation Update interface for engine and car\n",
-        "x": 110,
-        "y": 140,
-        "wires": []
     },
     {
         "id": "c4687444.fb6708",
@@ -12995,16 +12975,6 @@
                 "337e2284.c5ea3e"
             ]
         ]
-    },
-    {
-        "id": "7735206a.707b8",
-        "type": "comment",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "info": "msg.payload = {\n    \"type\" : type\n    ,\"data\" : {\n        \"name\" : curRecord['Road Name'] + curRecord['Road Number']\n        ,\"number\" : ((curRecord['Road Number'] === undefined) ? \"\" : curRecord['Road Number'])\n        ,\"road\" : ((curRecord['Road Name'] === undefined) ? \"\" : curRecord['Road Name'])\n        ,\"rfid\" : ((curRecord['JMRI_TAGNAME'] === undefined) ? \"\" : curRecord['JMRI_TAGNAME'])\n        ,\"carType\" : ((curRecord['Car Type'] === undefined) ? \"\" : curRecord['Car Type'])\n        ,\"length\" : ((curRecord['Length'] === undefined) ? \"\" : curRecord['Length'])\n        ,\"weight\" : ((curRecord['Weight']  === undefined) ? \"\" : curRecord['Weight'])\n        ,\"weightTons\" : ((curRecord['Weight Tons'] === undefined) ? \"\" : curRecord['Weight Tons'])\n        ,\"color\" : ((curRecord['Color'] === undefined) ? \"\" : curRecord['Color'])\n        ,\"owner\" : ((curRecord['owner'] === undefined) ? \"\" : curRecord['owner'])\n        ,\"built\" : ((curRecord['Year Built'] === undefined) ? \"\" : curRecord['Year Built'])\n        ,\"comment\" : ((curRecord[\"Comment\"] === undefined) ? \"\" : curRecord[\"Comment\"] )\n        /*\n        \"outOfService\" : ((curRecord[\"outOfService\"] === undefined) ? false : curRecord[\"outOfService\"] ),\n        \"location\" : {\n          \"userName\" : curRecord[\"location_userName\"]\n          ,\"name\" : ((curRecord[\"location_name\"] === undefined) ? \"\" : curRecord[\"location_name\"])\n          ,\"route\" : ((curRecord[\"location_route\"] === undefined) ? null : curRecord[\"location_route\"] )\n          ,\"track\" : {\n              \"userName\" : ((curRecord[\"track_userName\"] === undefined) ? \"\" : curRecord[\"track_userName\"])\n              ,\"name\" : ((curRecord[\"track_name\"] === undefined) ? \"\" : curRecord[\"track_name\"])\n          }\n        },\n        ,\"destination\" : ((curRecord[\"Destination\"] === undefined) ? null : curRecord[\"Destination\"])\n        ,\"load\" : ((curRecord[\"Load\"] === undefined) ? \"E\" : curRecord[\"Load\"])\n        */\n        ,\"hazardous\" : ((curRecord[\"Hazardous\"] === undefined) ? false : curRecord[\"Hazardous\"])\n        ,\"caboose\" : ((curRecord[\"Caboose\"] === undefined) ? false : curRecord[\"Caboose\"])\n        ,\"passenger\" : ((curRecord[\"Passenger\"] === undefined) ? false : curRecord[\"Passenger\"])\n        ,\"fred\" : ((curRecord[\"fred\"] === undefined) ? false : curRecord[\"fred\"])\n        /*\n        ,\"removeComment\": ((curRecord[\"removeComment\"] === undefined) ? \"\" : curRecord[\"removeComment\"])\n        ,\"addComment\" : ((curRecord[\"addComment\"] === undefined) ? \"\" : curRecord[\"addComment\"])\n        */\n        ,\"kernel\" : ((curRecord[\"kernel\"] === undefined) ? \"\" : curRecord[\"kernel\"])\n        ,\"utility\" : ((curRecord[\"Utility\"] === undefined) ? false : curRecord[\"Utility\"])\n        /*\n        ,\"finalDestination\": ((curRecord[\"finalDestination\"] === undefined) ? null : curRecord[\"finalDestination\"])\n        ,\"returnWhenEmpty\" : ((curRecord[\"returnWhenEmpty\"] === undefined) ? null : curRecord[\"returnWhenEmpty\"])\n        ,\"status\" : ((curRecord[\"Status\"] === undefined) ? \"\" : curRecord[\"Status\"])\n        */\n    }\n};",
-        "x": 120,
-        "y": 100,
-        "wires": []
     },
     {
         "id": "621572f.7860c8c",
@@ -15886,16 +15856,6 @@
         "targetType": "msg",
         "x": 1280,
         "y": 520,
-        "wires": []
-    },
-    {
-        "id": "4220295c.77cd48",
-        "type": "comment",
-        "z": "7bef0b7b.d5a104",
-        "name": "TODO",
-        "info": "Need to pull the tags_activity prior to rerunning the search\nMove Search components into the hive. global functions",
-        "x": 350,
-        "y": 600,
         "wires": []
     },
     {
