@@ -16034,7 +16034,7 @@
                 "t": "set",
                 "p": "rfid_queue",
                 "pt": "flow",
-                "to": "[\"reporters\",\"sensors\",\"idtag\",\"inventory\"]",
+                "to": "[\"reporters\",\"sensors\",\"idtag\",\"inventory\",\"resetJMRIState\"]",
                 "tot": "json"
             },
             {
@@ -16179,11 +16179,16 @@
                 "t": "eq",
                 "v": "inventory",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "resetJMRIState",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": true,
-        "outputs": 4,
+        "outputs": 5,
         "x": 450,
         "y": 580,
         "wires": [
@@ -16198,6 +16203,9 @@
             ],
             [
                 "162cfc56.f88534"
+            ],
+            [
+                "a605f456.8e5238"
             ]
         ]
     },
@@ -16679,8 +16687,8 @@
         "links": [
             "4cf16bd9.60c0c4"
         ],
-        "x": 1800,
-        "y": 600,
+        "x": 1675,
+        "y": 640,
         "wires": []
     },
     {
@@ -16780,7 +16788,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190815.0001",
+                "to": "20190815.0002",
                 "tot": "str"
             },
             {
@@ -16819,5 +16827,21 @@
         "x": 820,
         "y": 80,
         "wires": []
+    },
+    {
+        "id": "a605f456.8e5238",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Reset JMRI Activity State",
+        "func": "var RFIDRequest = msg.payload;\n\nvar hive = global.get('hive');\nvar Activity = global.get('Activity');\nif (!hive.empty(Activity) && Activity.length > 0) {\n    for (var aID in Activity) {\n        if (Activity[aID].TIME == RFIDRequest.TIME && Activity[aID].MAC == RFIDRequest.MAC && Activity[aID].UID == RFIDRequest.UID) {\n            delete Activity[aID].jmri;        \n        }\n    }\n}\nglobal.set('Activity',Activity);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 680,
+        "wires": [
+            [
+                "9326d651.dcf078"
+            ]
+        ]
     }
 ]
