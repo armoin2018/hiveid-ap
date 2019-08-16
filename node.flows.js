@@ -987,7 +987,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1066,7 +1066,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -2652,7 +2652,7 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 4,
+        "order": 5,
         "width": "6",
         "height": "2",
         "name": "",
@@ -4945,7 +4945,7 @@
         "name": "",
         "label": "Change Password",
         "group": "17f52c5b.cfb014",
-        "order": 6,
+        "order": 7,
         "width": "6",
         "height": "3",
         "options": [
@@ -6378,7 +6378,7 @@
         "z": "11b2f565.0266ab",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -14513,7 +14513,9 @@
         "x": 410,
         "y": 80,
         "wires": [
-            []
+            [
+                "5652d958.4bda68"
+            ]
         ]
     },
     {
@@ -16767,5 +16769,55 @@
                 "5af99042.1aa4c"
             ]
         ]
+    },
+    {
+        "id": "5652d958.4bda68",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Version",
+                "pt": "global",
+                "to": "20190815.0001",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Version",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 80,
+        "wires": [
+            [
+                "1c7f4e71.b72dd2"
+            ]
+        ]
+    },
+    {
+        "id": "1c7f4e71.b72dd2",
+        "type": "ui_text",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "HiveID Version",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 820,
+        "y": 80,
+        "wires": []
     }
 ]
