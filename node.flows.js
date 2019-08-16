@@ -3207,8 +3207,8 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 220,
-        "y": 1080,
+        "x": 160,
+        "y": 720,
         "wires": [
             [
                 "912ca386.46614"
@@ -3225,8 +3225,8 @@
             "391c0a36.ebdac6",
             "3ddcccc.12dc334"
         ],
-        "x": 215,
-        "y": 1040,
+        "x": 155,
+        "y": 680,
         "wires": [
             [
                 "b0a1d979.9f8538"
@@ -14476,10 +14476,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 410,
-        "y": 1120,
+        "x": 650,
+        "y": 760,
         "wires": [
-            []
+            [
+                "9326d651.dcf078"
+            ]
         ]
     },
     {
@@ -14494,8 +14496,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": ".5",
-        "x": 230,
-        "y": 1120,
+        "x": 170,
+        "y": 760,
         "wires": [
             [
                 "912ca386.46614"
@@ -15431,7 +15433,7 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "Format Activity Data",
-        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = hive.traintraxx.getInventoryIDByTag(activity[i]['UID']);\n    \n    var locID = hive.traintraxx.getHivenodeLocationByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = hive.traintraxx.getLocationNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = hive.array_combine(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    var JMRIState = '';\n    /* JMRI is going to need to be refreshed before this is going to work right \n       - After the tag is injected, refresh JRMI \n       - Need to make sure the resync is done before reloading the activity\n    */\n    if (JMRI_Config.JMRI_ENABLED === true) {\n        if (activity[i]['jmri'] === undefined) {\n            var jmri_inventory = hive.jmri.getInventoryByUID(activity[i]['UID']);\n            var tempLocation = '';\n            if (!hive.empty(jmri_inventory) && !hive.empty(jmri_inventory.location) && jmri_inventory.location.userName !== undefined) {\n                var tempComment='';\n                if (!hive.empty(jmri_inventory.comment)) {\n                    tempComment = hive.proper(jmri_inventory.comment) + ' ';\n                }\n                tempLocation += '(' +tempComment + ((jmri_inventory.load === 'E') ? 'Empty' : 'Loaded') + ') ' + jmri_inventory.location.userName;\n                if (!hive.empty(jmri_inventory.location.track) && !hive.empty(jmri_inventory.location.track.userName)) {\n                    tempLocation += '->' + jmri_inventory.location.track.userName;\n                }\n            }\n            JMRIState += '<strong>JMRI Location: </strong>' + tempLocation + '<br/>';   \n            activity[i]['jmri']=JMRIState;\n        } else {\n            JMRIState=activity[i]['jmri'];\n        }\n    }\n    /* Need to get the TrainTraxx Locations to show the parent as well */\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + '<br />' +\n                JMRIState + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
+        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = hive.traintraxx.getInventoryIDByTag(activity[i]['UID']);\n    \n    var locID = hive.traintraxx.getHivenodeLocationByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = hive.traintraxx.getLocationNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = hive.array_combine(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    var JMRIState = '';\n    /* JMRI is going to need to be refreshed before this is going to work right \n       - After the tag is injected, refresh JRMI \n       - Need to make sure the resync is done before reloading the activity\n    */\n    if (JMRI_Config.JMRI_ENABLED === true) {\n        if (hive.empty(activity[i].jmri)) {\n            var jmri_inventory = hive.jmri.getInventoryByUID(activity[i]['UID']);\n            var tempLocation = '';\n             \n            if (!hive.empty(jmri_inventory) && !hive.empty(jmri_inventory.location) && !hive.empty(jmri_inventory.location.userName)) {\n                var tempComment='';\n                if (!hive.empty(jmri_inventory.comment)) {\n                    tempComment = hive.proper(jmri_inventory.comment) + ' ';\n                }\n                tempLocation += '(' +tempComment + ((jmri_inventory.load === 'E') ? 'Empty' : 'Loaded') + ') ' + jmri_inventory.location.userName;\n                if (!hive.empty(jmri_inventory.location.track) && !hive.empty(jmri_inventory.location.track.userName)) {\n                    tempLocation += '->' + jmri_inventory.location.track.userName;\n                }\n            }\n            JMRIState += '<strong>JMRI Location: </strong>' + tempLocation + '<br/>';   \n            activity[i].jmri=JMRIState;\n        } else {\n            JMRIState=activity[i].jmri;\n        }\n    }\n    /* Need to get the TrainTraxx Locations to show the parent as well */\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + '<br />' +\n                JMRIState + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 720,
@@ -16034,7 +16036,7 @@
                 "t": "set",
                 "p": "rfid_queue",
                 "pt": "flow",
-                "to": "[\"reporters\",\"sensors\",\"idtag\",\"inventory\",\"resetJMRIState\"]",
+                "to": "[\"reporters\",\"sensors\",\"idtag\",\"inventory\",\"resetJMRIState\",\"refresh\"]",
                 "tot": "json"
             },
             {
@@ -16184,13 +16186,18 @@
                 "t": "eq",
                 "v": "resetJMRIState",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "refresh",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": true,
-        "outputs": 5,
+        "outputs": 6,
         "x": 450,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "deb0f6c8.09aad8"
@@ -16206,6 +16213,9 @@
             ],
             [
                 "a605f456.8e5238"
+            ],
+            [
+                "912ca386.46614"
             ]
         ]
     },
@@ -16261,7 +16271,9 @@
         "x": 1540,
         "y": 560,
         "wires": [
-            []
+            [
+                "800d24d6.ba7e68"
+            ]
         ]
     },
     {
@@ -16286,9 +16298,7 @@
         "x": 1570,
         "y": 600,
         "wires": [
-            [
-                "800d24d6.ba7e68"
-            ]
+            []
         ]
     },
     {
@@ -16687,8 +16697,8 @@
         "links": [
             "4cf16bd9.60c0c4"
         ],
-        "x": 1675,
-        "y": 640,
+        "x": 1735,
+        "y": 560,
         "wires": []
     },
     {
@@ -16833,7 +16843,7 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "Reset JMRI Activity State",
-        "func": "var RFIDRequest = msg.payload;\n\nvar hive = global.get('hive');\nvar Activity = global.get('Activity');\nif (!hive.empty(Activity) && Activity.length > 0) {\n    for (var aID in Activity) {\n        if (Activity[aID].TIME == RFIDRequest.TIME && Activity[aID].MAC == RFIDRequest.MAC && Activity[aID].UID == RFIDRequest.UID) {\n            delete Activity[aID].jmri;        \n        }\n    }\n}\nglobal.set('Activity',Activity);\nreturn msg;",
+        "func": "var RFIDRequest = msg.payload;\n\nvar hive = global.get('hive');\nvar Activity = global.get('Activity');\nif (!hive.empty(Activity) && Activity.length > 0) {\n    for (var aID in Activity) {\n        if (Activity[aID].TIME == RFIDRequest.TIME && Activity[aID].MAC == RFIDRequest.MAC && Activity[aID].UID == RFIDRequest.UID) {\n            Activity[aID].jmri ='';        \n        }\n    }\n}\nglobal.set('Activity',Activity);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 690,
