@@ -8,6 +8,7 @@
 ####          0.20190705 Changed to v4.17.1           ####
 ##########################################################
 killall PanelPro
+kill -9 `pidof java`
 mkdir /home/pi/.config/autostart 2>/dev/null
 cp /opt/hiveid-ap/PanelPro.desktop /home/pi/.config/autostart/.
 
