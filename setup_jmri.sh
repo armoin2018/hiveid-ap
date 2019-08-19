@@ -3,7 +3,8 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup_jmri.sh                           ####
 #### Description: Sets up basic JRMI                  ####
-#### Version: 0.20190812                              ####
+#### Version: 0.20190819                              ####
+####          0.20190819 Added kill command           ####
 ####          0.20190812 Changed to v4.17.3           ####
 ####          0.20190705 Changed to v4.17.1           ####
 ##########################################################
