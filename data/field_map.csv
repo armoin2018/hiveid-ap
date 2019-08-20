@@ -42,7 +42,7 @@ engine,road,inventory,Road Name
 engine,number,inventory,Road Number
 engine,number,inventory,Car #
 engine,rfid,,
-engine,carType,inventory,Car Type
+engine,car_Type,inventory,Car Type
 engine,,inventory,Track Scale
 engine,length,inventory,Car Length
 engine,length,inventory,Length
