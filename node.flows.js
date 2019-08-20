@@ -2845,11 +2845,11 @@
         "name": "",
         "active": true,
         "tosidebar": true,
-        "console": false,
+        "console": true,
         "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 810,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 840,
         "y": 380,
         "wires": []
     },
@@ -8807,8 +8807,8 @@
         "func": "var config = global.get('TrainTraxx_Config');\nmsg.payload['apikey'] = config.TrainTraxx_Key;\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 540,
-        "y": 320,
+        "x": 560,
+        "y": 360,
         "wires": [
             [
                 "109bc3b3.e3035c"
@@ -8827,8 +8827,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 570,
-        "y": 360,
+        "x": 610,
+        "y": 400,
         "wires": [
             [
                 "8dc0fe46.c010d",
@@ -16850,8 +16850,8 @@
             [
                 "e7682bc7.41dee8",
                 "9860fd21.83ed9",
-                "2fe76b58.5e83e4",
-                "1500441d.dabf1c"
+                "1500441d.dabf1c",
+                "24524c24.b32784"
             ],
             [
                 "b9f859cf.53b5f8"
@@ -17028,6 +17028,22 @@
         "wires": [
             [
                 "fbc8aba4.a7ccb8"
+            ]
+        ]
+    },
+    {
+        "id": "24524c24.b32784",
+        "type": "json",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "property": "payload.DATA",
+        "action": "str",
+        "pretty": true,
+        "x": 510,
+        "y": 320,
+        "wires": [
+            [
+                "2fe76b58.5e83e4"
             ]
         ]
     }
