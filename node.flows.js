@@ -2834,8 +2834,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 810,
-        "y": 340,
+        "x": 1070,
+        "y": 400,
         "wires": []
     },
     {
@@ -2849,8 +2849,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 840,
-        "y": 380,
+        "x": 1100,
+        "y": 440,
         "wires": []
     },
     {
@@ -8807,8 +8807,8 @@
         "func": "var config = global.get('TrainTraxx_Config');\nmsg.payload['apikey'] = config.TrainTraxx_Key;\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 560,
-        "y": 360,
+        "x": 820,
+        "y": 420,
         "wires": [
             [
                 "109bc3b3.e3035c"
@@ -8827,8 +8827,8 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 610,
-        "y": 400,
+        "x": 870,
+        "y": 460,
         "wires": [
             [
                 "8dc0fe46.c010d",
@@ -16851,7 +16851,7 @@
                 "e7682bc7.41dee8",
                 "9860fd21.83ed9",
                 "1500441d.dabf1c",
-                "24524c24.b32784"
+                "6aa1ae41.17382"
             ],
             [
                 "b9f859cf.53b5f8"
@@ -17039,12 +17039,52 @@
         "property": "payload.DATA",
         "action": "str",
         "pretty": true,
-        "x": 510,
-        "y": 320,
+        "x": 770,
+        "y": 380,
         "wires": [
             [
                 "2fe76b58.5e83e4"
             ]
         ]
+    },
+    {
+        "id": "6aa1ae41.17382",
+        "type": "switch",
+        "z": "5e61e22e.7a581c",
+        "name": "Offline Mode",
+        "property": "TrainTraxx_Config.USE_CACHE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 380,
+        "wires": [
+            [
+                "f8417fa7.a9bef"
+            ],
+            [
+                "24524c24.b32784"
+            ]
+        ]
+    },
+    {
+        "id": "f8417fa7.a9bef",
+        "type": "http response",
+        "z": "5e61e22e.7a581c",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 780,
+        "y": 340,
+        "wires": []
     }
 ]
