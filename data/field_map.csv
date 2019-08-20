@@ -10,7 +10,7 @@ car,weight,inventory,Weight
 car,weightTons,inventory,Weight Tons
 car,weightTons,inventory,Weight (T)
 ,,inventory,Reporting Mark
-car,car_Type,inventory,Car Type
+car,carType,inventory,Car Type
 car,color,inventory,Color
 car,,inventory,Image
 car,road,inventory,Road Name
@@ -42,7 +42,7 @@ engine,road,inventory,Road Name
 engine,number,inventory,Road Number
 engine,number,inventory,Car #
 engine,rfid,,
-engine,car_Type,inventory,Car Type
+engine,carType,inventory,Car Type
 engine,,inventory,Track Scale
 engine,length,inventory,Car Length
 engine,length,inventory,Length
@@ -64,7 +64,7 @@ location,name,locations,JMRI Name
 location,length,locations,Length
 location,comment,locations,Comments
 location,reporter,locations,Reporter
-location,car_Type,,
+location,carType,,
 location,track,,
 location,location,locations,PARENT
 location,type,locations,Location Type
