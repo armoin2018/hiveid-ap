@@ -64,7 +64,7 @@ location,name,locations,JMRI Name
 location,length,locations,Length
 location,comment,locations,Comments
 location,reporter,locations,Reporter
-location,carType,,
+location,car_Type,,
 location,track,,
 location,location,locations,PARENT
 location,type,locations,Location Type
