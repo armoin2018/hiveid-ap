@@ -10,7 +10,7 @@ car,weight,inventory,Weight
 car,weightTons,inventory,Weight Tons
 car,weightTons,inventory,Weight (T)
 ,,inventory,Reporting Mark
-car,carType,inventory,Car Type
+car,car_Type,inventory,Car Type
 car,color,inventory,Color
 car,,inventory,Image
 car,road,inventory,Road Name
