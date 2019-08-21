@@ -12,8 +12,8 @@ git reset --hard
 git pull --rebase
 sudo chown -R pi:pi /opt/hiveid-ap
 sudo chmod +x /opt/hiveid-ap/*.sh
-cp /opt/hiveid-ap/nodered/change_log.html /var/www/html/.
-cp /opt/hiveid-ap/nodered/index.php /var/www/html/.
-cp /opt/hiveid-ap/nodered/notavailable.html /var/www/html/.
-cp /opt/hiveid-ap/nodered/processing.php /var/www/html/.
+cp /opt/hiveid-ap/nodered/change_log.html /var/www/html/. 2>/dev/null
+cp /opt/hiveid-ap/nodered/index.php /var/www/html/. 2>/dev/null
+cp /opt/hiveid-ap/nodered/notavailable.html /var/www/html/. 2>/dev/null
+cp /opt/hiveid-ap/nodered/processing.php /var/www/html/. 2>/dev/null
 sudo chown -R pi:pi /var/www/html/*
