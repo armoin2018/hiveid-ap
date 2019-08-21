@@ -12698,31 +12698,12 @@
         "func": "var inData = msg.payload;\nvar JMRI_URL = global.get('JMRI_URL');\nvar JMRI = global.get('JMRI');\nvar sync = flow.get('sync');\nvar hive = flow.get('hive');\n\nfor (var i in inData) {\n    var curRecord = inData[i];\n    var type = 'car';\n    if (curRecord['Inventory Type'] !== undefined && curRecord['Inventory Type'] !== \"\") {\n        type = curRecord['Inventory Type'].toLowerCase();    \n    }\n    \n    var temp = {\n        payload : {\n            \"type\" : type,\n            \"data\" : {}\n        },\n        verb : 'PUT',\n        topic : type + 's',\n        url : JMRI_URL + 'json/' + type\n    };\n    \n    for (var fieldName in curRecord) {\n        var targetField = sync.tt2jmri('inventory',fieldName,type);\n        if (targetField !== undefined && targetField !== \"\" && curRecord[fieldName] !== \"\" && curRecord[fieldName] !== null) {\n            temp.payload['data'][targetField] = curRecord[fieldName];\n        }\n    }\n    //console.log(temp.payload);\n    if (temp.payload['data']['carType'] !== undefined) {\n        temp.payload['data']['carType'] = sync.tt2jmri_carType(temp.payload['data']['carType']);\n    }\n    \n    if (temp.payload['data']['color'] !== undefined) {\n        temp.payload['data']['color'] = sync.tt2jmri_color(temp.payload['data']['color']);\n    }\n    \n        \n    if (curRecord['Road Name'] === undefined) {\n        curRecord['Road Name'] = sync.tt2jmri_RoadName(temp.payload['data']['Road Name']);\n    }\n    \n    var name = curRecord['Road Name'] + curRecord['Road Number'];\n    temp.payload['data']['name'] = name;\n    \n    if (curRecord['JMRI_TAGNAME'] !== undefined) {\n        temp.payload['data']['rfid'] = curRecord['JMRI_TAGNAME'];\n    }\n    \n    \n    var exists = false;\n    \n    if (JMRI !== undefined && JMRI.cars !== undefined && JMRI.cars.data !== undefined && JMRI.cars.data.length > 0) {\n        for (var jmriID in JMRI.cars.data) {\n            if (name === JMRI.cars.data[jmriID].name) {\n                exists = true;\n            }\n        }\n    }\n    if (JMRI !== undefined && JMRI.engines !== undefined && JMRI.engines.data !== undefined && JMRI.engines.data.length > 0) {\n        for (var jmriID in JMRI.engines.data) {\n            if (name === JMRI.engines.data[jmriID].name) {\n                exists = true;\n            }\n        }\n    }\n    \n    if (exists === true) {\n        temp.verb = 'POST';\n    } \n    \n    node.send(temp);\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1050,
+        "x": 930,
         "y": 320,
         "wires": [
             [
                 "9c3a93e3.fade",
-                "52cbe0db.c277c"
-            ]
-        ]
-    },
-    {
-        "id": "c4687444.fb6708",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Add Tags",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar tagColumns = TT.tags.columns;\nmsg.payload = {};\nvar msg2 = {payload : [] };\n\nfor (var tagID in TT.tags.data) {\n    var curTag = hive.array_combine(tagColumns, TT.tags.data[tagID]);\n    curTag['ID'] = tagID;\n    curTag['JMRI_IDTAG'] = 'IDHIVE' + tagID;\n    msg2.payload.push(curTag);\n    if (curTag['wp_tt_inventory_ID'] !== undefined && curTag['wp_tt_inventory_ID'] !== \"\") {\n        msg.payload[curTag['wp_tt_inventory_ID']] = curTag['JMRI_IDTAG'];         \n    }\n}\nreturn [msg,msg2];",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 700,
-        "y": 120,
-        "wires": [
-            [
-                "3d9fe886.dbd038"
-            ],
-            [
-                "405bbea4.15dd8"
+                "c1596972.deb468"
             ]
         ]
     },
@@ -12738,56 +12719,9 @@
         "y": 500,
         "wires": [
             [
-                "c4837cb3.347e1"
+                "5b66b385.5c99bc"
             ]
         ]
-    },
-    {
-        "id": "e10f4679.205708",
-        "type": "file",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "filename": "/usr/local/hiveid-ap/cache/tags.json",
-        "appendNewline": true,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "none",
-        "x": 1030,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "405bbea4.15dd8",
-        "type": "json",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 830,
-        "y": 180,
-        "wires": [
-            [
-                "e10f4679.205708"
-            ]
-        ]
-    },
-    {
-        "id": "3d9fe886.dbd038",
-        "type": "debug",
-        "z": "3d602d50.39dab2",
-        "name": "Tag Debug",
-        "active": false,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 950,
-        "y": 80,
-        "wires": []
     },
     {
         "id": "97eed347.84621",
@@ -14710,7 +14644,7 @@
         "y": 240,
         "wires": [
             [
-                "3bd4107f.d2b5a"
+                "f0d3e728.b340e8"
             ]
         ]
     },
@@ -16993,7 +16927,7 @@
         "y": 620,
         "wires": [
             [
-                "cf8fb8dd.4eeec8"
+                "9139b588.d462c8"
             ]
         ]
     },
@@ -17009,7 +16943,7 @@
         "y": 660,
         "wires": [
             [
-                "cf8fb8dd.4eeec8"
+                "f2a69e81.30d69"
             ]
         ]
     },
@@ -17061,8 +16995,8 @@
         "func": "var JMRI = global.get('JMRI.' + msg.topic);\nvar flag = false;\n\nif (JMRI === undefined || JMRI.data === undefined) {\n    console.log('JMRI Data was missing for ' +msg.topic);\n    JMRI = { data : [], map : {}, nextID : 1 ,lastLoad : 0  };\n}\n\nif (msg.payload === undefined || msg.payload.data === undefined || msg.payload.data.name === undefined) {\n    console.log('Unable to merge ',msg.payload );\n    return false;\n}\n    \nfor (var dID in JMRI.data) { \n    var curData = JMRI.data[dID];\n    if (msg.payload.data.name === curData.name) {\n        flag=true;   \n        JMRI.data[dID] = msg.payload.data;\n    }\n}\nif (flag === false) {\n    JMRI.data.push(msg.payload.data);\n    JMRI.map[msg.payload.data.name] = JMRI.data.length - 1;\n    var match = msg.payload.data.name.match(/(\\d+)$/);\n    if (match[1] !== undefined && Number(match[1]) > 0) {\n        JMRI.nextID = Number(match[1]) + 1;\n    }\n}\nJMRI.lastLoad = Date.now();\nglobal.set('JMRI.' + msg.topic,JMRI);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1710,
-        "y": 600,
+        "x": 1910,
+        "y": 560,
         "wires": [
             []
         ]
@@ -17453,6 +17387,121 @@
         "wires": [
             [
                 "9596c547.812608"
+            ]
+        ]
+    },
+    {
+        "id": "5b66b385.5c99bc",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": ".2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 990,
+        "y": 500,
+        "wires": [
+            [
+                "c4837cb3.347e1"
+            ]
+        ]
+    },
+    {
+        "id": "c1596972.deb468",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": ".2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1110,
+        "y": 320,
+        "wires": [
+            [
+                "52cbe0db.c277c"
+            ]
+        ]
+    },
+    {
+        "id": "f0d3e728.b340e8",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": ".2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1110,
+        "y": 240,
+        "wires": [
+            [
+                "3bd4107f.d2b5a"
+            ]
+        ]
+    },
+    {
+        "id": "9139b588.d462c8",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": ".2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 870,
+        "y": 620,
+        "wires": [
+            [
+                "cf8fb8dd.4eeec8"
+            ]
+        ]
+    },
+    {
+        "id": "f2a69e81.30d69",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": ".2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 870,
+        "y": 660,
+        "wires": [
+            [
+                "cf8fb8dd.4eeec8"
             ]
         ]
     }
