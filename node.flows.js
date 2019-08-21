@@ -803,7 +803,7 @@
         "tab": "b69fbeec.5834b",
         "order": 1,
         "disp": true,
-        "width": "12",
+        "width": "20",
         "collapse": false
     },
     {
@@ -17342,7 +17342,7 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "Generate Train Links",
-        "func": "var JMRI = global.get('JMRI');\nvar trains = {};\nif (JMRI !== undefined && JMRI.trains !== undefined) {\n    trains = JMRI.trains;\n}\nvar JMRI_URL = global.get('JMRI_URL');\nvar IP = global.get('IP');\nvar list = [];\nif (trains !== {} && trains.data !== undefined && trains.data.length > 0) {\n    for (var tID in trains.data) {\n        var curTrain = trains.data[tID];\n        \n        var manifestFile = 'train_'+ curTrain.name + 'manifest.png';\n        var manifestLink = JMRI_URL +'operations/manifest/' + curTrain.name + '?format=html';\n        var manifestImage = '/var/www/html/qr/' + manifestFile;\n        node.send({\n            payload : ' -o ' + manifestImage + ' \"' + manifestLink + '\"',\n            topic: 'link'\n        });\n        \n        var conductorFile = 'train_'+ curTrain.name + 'conductor.png';\n        var conductorLink = JMRI_URL +'operations/trains/' + curTrain.name + '/conductor';\n        var conductorImage = '/var/www/html/qr/' + conductorFile;\n        node.send({\n            payload : ' -o ' + conductorImage + ' \"' + conductorLink + '\"',\n            topic: 'link'\n        });\n        \n        list.push({\n            title : '<strong>Train:</strong> ' + curTrain.userName + '<br/>' + \n                    '<strong>Description:</strong> ' + curTrain.description + '<br/>' + \n                    '<strong>Route:</strong> ' + curTrain.route + '<br/>' + \n                    '<strong>Departure Time:</strong> ' + curTrain.departureTime + '<br/>' + \n                    '<strong>Departs From:</strong> ' + curTrain.trainDepartsName + '<br/>' + \n                    '<strong>Terminates:</strong> ' + curTrain.trainTerminatesName + '<br/>' + \n                    '<strong>Lead Engine:</strong> ' + curTrain.leadEngine + '<br/>' + \n                    '<strong>Status:</strong> ' + curTrain.status + \n                    '<span><img width=\"200px\" src=\"http://' + IP.internalIPv4  + '/qr/' + manifestFile + '\"><br/><center>Manifest</center></span>' +\n                    '<span><img width=\"200px\" src=\"http://' + IP.internalIPv4  + '/qr/' + conductorFile + '\"><br/><center>Conductor</center></span>' +\n                    '<hr/>',\n            menu : [ {'Manifest ' : manifestLink}, {'Conductor' :conductorLink}]\n        });\n        \n    }\n    \n    node.send({\n        payload : list,\n        topic: 'list'\n    });\n} else {\n    node.send({\n        payload : [{\n           title : '<strong>No Trains are currently defined</strong>' \n        }],\n        topic : 'list'\n    })\n}\n\nreturn;\n",
+        "func": "var JMRI = global.get('JMRI');\nvar trains = {};\nif (JMRI !== undefined && JMRI.trains !== undefined) {\n    trains = JMRI.trains;\n}\nvar JMRI_URL = global.get('JMRI_URL');\nvar IP = global.get('IP');\nvar list = [];\nif (trains !== {} && trains.data !== undefined && trains.data.length > 0) {\n    for (var tID in trains.data) {\n        var curTrain = trains.data[tID];\n        \n        var manifestFile = 'train_'+ curTrain.name + 'manifest.png';\n        var manifestLink = JMRI_URL +'operations/manifest/' + curTrain.name + '?format=html';\n        var manifestImage = '/var/www/html/qr/' + manifestFile;\n        node.send({\n            payload : ' -o ' + manifestImage + ' \"' + manifestLink + '\"',\n            topic: 'link'\n        });\n        \n        var conductorFile = 'train_'+ curTrain.name + 'conductor.png';\n        var conductorLink = JMRI_URL +'operations/trains/' + curTrain.name + '/conductor';\n        var conductorImage = '/var/www/html/qr/' + conductorFile;\n        node.send({\n            payload : ' -o ' + conductorImage + ' \"' + conductorLink + '\"',\n            topic: 'link'\n        });\n        \n        list.push(\n            ' <tr><td><select onchange=\"if (this.value !== \\'Select View \\') {window.open(this.value,\\'_blank\\');}\">' + \n            '   <option>Select View</option><option value=\"' + manifestLink +'\">Manifest</option><option value=\"' + conductorLink +'\">Conductor</option></select></td>' +\n            '   <td>' + curTrain.userName + '</td>' + \n            '   <td>' + curTrain.description + '</td>' + \n            '   <td>' + curTrain.leadEngine + '</td>' + \n            '   <td>' + curTrain.trainDepartsName + '</td>' + \n            '   <td>' + curTrain.departureTime + '</td>' +\n            '   <td>' + curTrain.status + '</td>' + \n            '   <td>' +  '' + '</td>' + \n            '   <td>' + curTrain.trainTerminatesName + '</td>' + \n            '   <td>' + curTrain.route + '</td>' + \n            '   <td><img width=\"200px\" src=\"http://' + IP.internalIPv4  + '/qr/' + manifestFile + '\"></td>' +\n            '   <td><img width=\"200px\" src=\"http://' + IP.internalIPv4  + '/qr/' + conductorFile + '\"></td>' +\n            ' </tr>'\n        );\n        \n    }\n    \n    node.send({\n        template : \n            '<table>' +\n            ' <tr><th>View</th><th>Name</th><th>Description</th><th>Lead Engine</th><th>Departs</th><th>Time</th><th>Status</th><th>Current</th><th>Terminates</th><th>Route</th><th>Manifest Link</th><th>Conductor Link</td></tr>' +\n            list.join('') +\n            '</table>',\n        topic: 'list'\n    });\n} else {\n    node.send({\n        template : '<strong>No Trains are currently defined</strong>',\n        topic : 'list'\n    })\n}\n\nreturn;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 920,
@@ -17350,26 +17350,6 @@
         "wires": [
             [
                 "d5c68b3.53e5978"
-            ]
-        ]
-    },
-    {
-        "id": "1b0b9024.53e1a",
-        "type": "ui_list",
-        "z": "164213bd.e3dd4c",
-        "group": "2a4e66db.9da7fa",
-        "name": "Train List",
-        "order": 0,
-        "width": "12",
-        "height": "12",
-        "lineType": "one",
-        "actionType": "menu",
-        "allowHTML": true,
-        "x": 1240,
-        "y": 1280,
-        "wires": [
-            [
-                "d76116e5.29cbf8"
             ]
         ]
     },
@@ -17402,7 +17382,7 @@
                 "3006416c.5ff20e"
             ],
             [
-                "1b0b9024.53e1a"
+                "edaa7ba.706fd88"
             ]
         ]
     },
@@ -17426,20 +17406,6 @@
         ]
     },
     {
-        "id": "d76116e5.29cbf8",
-        "type": "function",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "func": "window.open(msg.payload,'_BLANK');\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1400,
-        "y": 1280,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "f493577d.f51498",
         "type": "inject",
         "z": "164213bd.e3dd4c",
@@ -17451,12 +17417,31 @@
         "crontab": "",
         "once": true,
         "onceDelay": "3",
-        "x": 730,
-        "y": 1320,
+        "x": 710,
+        "y": 1260,
         "wires": [
             [
                 "98537cc2.6b418"
             ]
+        ]
+    },
+    {
+        "id": "edaa7ba.706fd88",
+        "type": "ui_template",
+        "z": "164213bd.e3dd4c",
+        "group": "2a4e66db.9da7fa",
+        "name": "Trains",
+        "order": 0,
+        "width": "20",
+        "height": "12",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 1250,
+        "y": 1280,
+        "wires": [
+            []
         ]
     }
 ]
