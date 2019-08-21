@@ -12703,7 +12703,7 @@
         "wires": [
             [
                 "9c3a93e3.fade",
-                "c1596972.deb468"
+                "52cbe0db.c277c"
             ]
         ]
     },
@@ -12719,7 +12719,7 @@
         "y": 500,
         "wires": [
             [
-                "5b66b385.5c99bc"
+                "c4837cb3.347e1"
             ]
         ]
     },
@@ -14422,7 +14422,7 @@
                 "t": "set",
                 "p": "queue",
                 "pt": "flow",
-                "to": "[\"TrainTraxx\",\"JMRI\",\"tags\",\"inventory\",\"sensors\",\"locations\",\"tracks\",\"JMRI\"]",
+                "to": "[\"TrainTraxx\",\"JMRI\",\"tags\",\"JMRI\",\"inventory\",\"sensors\",\"JMRI\",\"locations\",\"JMRI\",\"tracks\",\"JMRI\"]",
                 "tot": "json"
             },
             {
@@ -14644,7 +14644,7 @@
         "y": 240,
         "wires": [
             [
-                "f0d3e728.b340e8"
+                "3bd4107f.d2b5a"
             ]
         ]
     },
@@ -16927,7 +16927,7 @@
         "y": 620,
         "wires": [
             [
-                "9139b588.d462c8"
+                "cf8fb8dd.4eeec8"
             ]
         ]
     },
@@ -16943,7 +16943,7 @@
         "y": 660,
         "wires": [
             [
-                "f2a69e81.30d69"
+                "cf8fb8dd.4eeec8"
             ]
         ]
     },
@@ -17126,9 +17126,7 @@
         "x": 1690,
         "y": 560,
         "wires": [
-            [
-                "28304277.30a6ce"
-            ]
+            []
         ]
     },
     {
@@ -17387,121 +17385,6 @@
         "wires": [
             [
                 "9596c547.812608"
-            ]
-        ]
-    },
-    {
-        "id": "5b66b385.5c99bc",
-        "type": "delay",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": ".2",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 990,
-        "y": 500,
-        "wires": [
-            [
-                "c4837cb3.347e1"
-            ]
-        ]
-    },
-    {
-        "id": "c1596972.deb468",
-        "type": "delay",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": ".2",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 1110,
-        "y": 320,
-        "wires": [
-            [
-                "52cbe0db.c277c"
-            ]
-        ]
-    },
-    {
-        "id": "f0d3e728.b340e8",
-        "type": "delay",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": ".2",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 1110,
-        "y": 240,
-        "wires": [
-            [
-                "3bd4107f.d2b5a"
-            ]
-        ]
-    },
-    {
-        "id": "9139b588.d462c8",
-        "type": "delay",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": ".2",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 870,
-        "y": 620,
-        "wires": [
-            [
-                "cf8fb8dd.4eeec8"
-            ]
-        ]
-    },
-    {
-        "id": "f2a69e81.30d69",
-        "type": "delay",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": ".2",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "x": 870,
-        "y": 660,
-        "wires": [
-            [
-                "cf8fb8dd.4eeec8"
             ]
         ]
     }
