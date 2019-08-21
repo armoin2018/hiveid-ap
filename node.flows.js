@@ -785,6 +785,16 @@
         "collapse": false
     },
     {
+        "id": "2d098932.9789f6",
+        "type": "ui_link",
+        "z": "",
+        "name": "Change Log",
+        "link": "/redir?app=change_log",
+        "icon": "change_history",
+        "target": "iframe",
+        "order": 17
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -1608,12 +1618,17 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "change_log",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "true",
         "repair": true,
-        "outputs": 5,
+        "outputs": 6,
         "x": 240,
         "y": 200,
         "wires": [
@@ -1628,6 +1643,9 @@
             ],
             [
                 "b4f7b12.29c705"
+            ],
+            [
+                "a2eef849.2ba0d8"
             ],
             [
                 "f8e90910.c1fb88"
@@ -1670,7 +1688,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 870,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "9596c547.812608"
@@ -1686,7 +1704,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 840,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "9596c547.812608"
@@ -10229,7 +10247,7 @@
         "repair": true,
         "outputs": 2,
         "x": 600,
-        "y": 200,
+        "y": 180,
         "wires": [
             [
                 "7f66e017.f90e1"
@@ -10287,7 +10305,7 @@
         "repair": false,
         "outputs": 2,
         "x": 620,
-        "y": 80,
+        "y": 100,
         "wires": [
             [
                 "f27066a1.a44ba8"
@@ -17420,6 +17438,22 @@
         "y": 1280,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "a2eef849.2ba0d8",
+        "type": "function",
+        "z": "f1ec9b2a.1f7298",
+        "name": "Set Change Log",
+        "func": "var IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nif (JMRI_Config !== undefined && JMRI_Config.JMRI_Web !== undefined) {\n    msg.statusCode = 302;\n    \n    msg.headers = {\n        \"Location\" : 'http://' + IP.internalIPv4 + '/change_log.html'\n    };\n} else {\n    msg.statusCode = 404;\n}\ndelete msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 200,
+        "wires": [
+            [
+                "9596c547.812608"
+            ]
         ]
     }
 ]
