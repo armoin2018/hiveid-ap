@@ -3,7 +3,8 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup.sh                                ####
 #### Description: Installs all packages               ####
-#### Version: 0.20190705                              ####
+#### Version: 0.20190821                              ####
+####          0.20190821  Added QREncode              ####
 ####          0.20190705  Removed apt-get --force-yes ####
 ##########################################################
 cd /opt/hiveid-ap
@@ -13,13 +14,13 @@ cd /opt/hiveid-ap
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get install --yes git curl firefox-esr iw at network-manager
 sudo apt-get install --yes lsof apache2 php libapache2-mod-php php-mcrypt expect geoip-bin shellinabox needrestart
-sudo apt-get install --yes jython arduino arduino-mk
+sudo apt-get install --yes jython arduino arduino-mk qrencode
 sudo apt-get install --yes libbluetooth-dev libudev-dev pi-bluetooth
 sudo apt-get install --yes bleachbit
 export DEBIAN_FRONTEND=dialog
 
 
-sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup /usr/local/hiveid-ap/ota /var/log/hiveid-ap /etc/hiveid-ap
+sudo mkdir /usr/local/hiveid-ap /usr/local/hiveid-ap/backup /usr/local/hiveid-ap/ota /var/log/hiveid-ap /etc/hiveid-ap /var/www/html/qr
 sudo chown -R pi:pi /usr/local/hiveid-ap /var/log/hiveid-ap 
 sudo chmod -R 666 /var/log/hiveid-ap
 sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)

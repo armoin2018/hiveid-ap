@@ -339,7 +339,7 @@
         "z": "",
         "name": "Application Settings",
         "icon": "fa-list",
-        "order": 11,
+        "order": 12,
         "disabled": false,
         "hidden": true
     },
@@ -373,7 +373,7 @@
         "link": "/",
         "icon": "all_inclusive",
         "target": "iframe",
-        "order": 14
+        "order": 15
     },
     {
         "id": "8e968283.a2d29",
@@ -383,7 +383,7 @@
         "link": "/redir?app=jmri",
         "icon": "train",
         "target": "iframe",
-        "order": 8
+        "order": 9
     },
     {
         "id": "6efda0bd.72343",
@@ -393,7 +393,7 @@
         "link": "/redir?app=openrsd",
         "icon": "fa-cogs",
         "target": "iframe",
-        "order": 10
+        "order": 11
     },
     {
         "id": "38e63d7a.b846e2",
@@ -403,7 +403,7 @@
         "link": "/redir?app=phpmyadmin",
         "icon": "fa-database",
         "target": "newtab",
-        "order": 9
+        "order": 10
     },
     {
         "id": "3808a9b7.8005b6",
@@ -413,7 +413,7 @@
         "link": "https://www.traintraxx.com/traintraxx-application",
         "icon": "fa-train",
         "target": "iframe",
-        "order": 6
+        "order": 7
     },
     {
         "id": "12a9f286.0bbd9d",
@@ -423,7 +423,7 @@
         "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
         "icon": "shopping_cart",
         "target": "newtab",
-        "order": 7
+        "order": 8
     },
     {
         "id": "82d159ac.42e4b8",
@@ -441,7 +441,7 @@
         "z": "",
         "name": "Network Mode",
         "icon": "settings_ethernet",
-        "order": 12,
+        "order": 13,
         "disabled": false,
         "hidden": true
     },
@@ -613,7 +613,7 @@
         "z": "",
         "name": "Node Manger",
         "icon": "fa-microchip",
-        "order": 4,
+        "order": 5,
         "disabled": false,
         "hidden": false
     },
@@ -645,7 +645,7 @@
         "z": "",
         "name": "Under Development",
         "icon": "dashboard",
-        "order": 15,
+        "order": 16,
         "disabled": true,
         "hidden": true
     },
@@ -688,7 +688,7 @@
         "z": "",
         "name": "Node History",
         "icon": "fa-history",
-        "order": 5,
+        "order": 6,
         "disabled": false,
         "hidden": true
     },
@@ -709,7 +709,7 @@
         "z": "",
         "name": "Service Manager",
         "icon": "fa-server",
-        "order": 13,
+        "order": 14,
         "disabled": false,
         "hidden": true
     },
@@ -763,7 +763,7 @@
         "link": "/redir?app=jmri_ops",
         "icon": "train",
         "target": "iframe",
-        "order": 3
+        "order": 4
     },
     {
         "id": "6e752ac1.4f63f4",
@@ -783,6 +783,27 @@
         "order": 2,
         "disp": true,
         "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b69fbeec.5834b",
+        "type": "ui_tab",
+        "z": "",
+        "name": "JMRI Operations Links",
+        "icon": "link",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "2a4e66db.9da7fa",
+        "type": "ui_group",
+        "z": "",
+        "name": "Trains",
+        "tab": "b69fbeec.5834b",
+        "order": 1,
+        "disp": true,
+        "width": "12",
         "collapse": false
     },
     {
@@ -5242,9 +5263,9 @@
         "z": "a06855ce.9f5488",
         "group": "73493f86.f11df",
         "name": "Network Interfaces",
-        "order": 2,
+        "order": 1,
         "width": "6",
-        "height": "4",
+        "height": "3",
         "lineType": "one",
         "actionType": "none",
         "allowHTML": true,
@@ -10685,7 +10706,7 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1970,
+        "x": 1990,
         "y": 1080,
         "wires": []
     },
@@ -10758,7 +10779,8 @@
         "y": 1040,
         "wires": [
             [
-                "ad579c1a.055678"
+                "ad579c1a.055678",
+                "de4995db.6ad218"
             ]
         ]
     },
@@ -11061,8 +11083,8 @@
         ],
         "payload": "",
         "topic": "",
-        "x": 2020,
-        "y": 840,
+        "x": 2340,
+        "y": 800,
         "wires": [
             [
                 "bd9072cd.a3d33"
@@ -11088,8 +11110,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2100,
-        "y": 880,
+        "x": 2420,
+        "y": 840,
         "wires": [
             []
         ]
@@ -11113,8 +11135,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1980,
-        "y": 800,
+        "x": 2300,
+        "y": 760,
         "wires": [
             [
                 "88a8cb0d.cc417"
@@ -11133,8 +11155,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 1930,
-        "y": 760,
+        "x": 2250,
+        "y": 720,
         "wires": [
             [
                 "f4e790c3.9bf6e8"
@@ -11432,7 +11454,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1770,
+        "x": 1790,
         "y": 1260,
         "wires": [
             [
@@ -14160,7 +14182,8 @@
             [
                 "1634e571.c471cb",
                 "2f44323a.d4024e",
-                "87e07238.a48f2"
+                "87e07238.a48f2",
+                "98537cc2.6b418"
             ]
         ]
     },
@@ -15329,9 +15352,9 @@
         "z": "a06855ce.9f5488",
         "name": "Change Network Mode",
         "group": "73493f86.f11df",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 2,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "label": "Change Network Mode",
         "tooltip": "",
@@ -17175,6 +17198,264 @@
         "wires": [
             [
                 "28304277.30a6ce"
+            ]
+        ]
+    },
+    {
+        "id": "44555692.009968",
+        "type": "inject",
+        "z": "9745920.d8a397",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "x": 1930,
+        "y": 940,
+        "wires": [
+            [
+                "de4995db.6ad218"
+            ]
+        ]
+    },
+    {
+        "id": "de4995db.6ad218",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set QR Info",
+        "func": "var gatewayInfo = global.get('gatewayInfo.hostapd');\nvar tempSec = gatewayInfo.wpa_key_mgmt.split(/\\-/);\nmsg.payload = '\"WIFI:S:' + gatewayInfo.ssid + ';T:' + tempSec[0] +';P:'+ gatewayInfo.wpa_passphrase + ';;\"'; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1970,
+        "y": 980,
+        "wires": [
+            [
+                "84b71b62.f45d08",
+                "ca44cb8b.516748"
+            ]
+        ]
+    },
+    {
+        "id": "84b71b62.f45d08",
+        "type": "exec",
+        "z": "9745920.d8a397",
+        "command": "qrencode -o /var/www/html/qr/wifi.png",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 2240,
+        "y": 980,
+        "wires": [
+            [],
+            [],
+            [
+                "54624b9a.52caf4"
+            ]
+        ]
+    },
+    {
+        "id": "54624b9a.52caf4",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2130,
+        "y": 1040,
+        "wires": [
+            [
+                "6176f5b2.17747c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6176f5b2.17747c",
+        "type": "function",
+        "z": "9745920.d8a397",
+        "name": "Set WiFi QR",
+        "func": "var IP = global.get('IP');\nvar gatewayInfo = global.get('gatewayInfo.hostapd');\nmsg.template = '<center><img width=\"80%\" src=\"http://' + IP.internalIPv4 + '/qr/wifi.png\">' + \n                '<hr/>Connect to ' + gatewayInfo.ssid + '</center>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 2330,
+        "y": 1040,
+        "wires": [
+            [
+                "42892d41.58e624"
+            ]
+        ]
+    },
+    {
+        "id": "42892d41.58e624",
+        "type": "ui_template",
+        "z": "9745920.d8a397",
+        "group": "73493f86.f11df",
+        "name": "QR Code",
+        "order": 3,
+        "width": "6",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "templateScope": "local",
+        "x": 2540,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ca44cb8b.516748",
+        "type": "debug",
+        "z": "9745920.d8a397",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 2150,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "98537cc2.6b418",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "Generate Train Links",
+        "func": "var trains = global.get('JMRI.trains');\nvar JMRI_URL = global.get('JMRI_URL');\nvar IP = global.get('IP');\nvar list = [];\nif (trains !== undefined && trains.data !== undefined && trains.data.length > 0) {\n    for (var tID in trains.data) {\n        var curTrain = trains.data[tID];\n        var manifestFile = 'train_'+ curTrain.name + 'manifest.png';\n        var conductorFile = 'train_'+ curTrain.name + 'conductor.png';\n        var manifestLink = JMRI_URL +'operations/manifest/' + curTrain.name + '?format=html';\n        var conductorLink = JMRI_URL +'operations/trains/' + curTrain.name + '/conductor';\n        var manifestImage = '/var/www/html/qr/' + manifestFile;\n        var conductorImage = '/var/www/html/qr/' + conductorFile;\n        node.send({\n            payload : ' -o ' + manifestImage + ' \"' + manifestLink + '\"',\n            topic: 'link'\n        });\n        \n        node.send({\n            payload : ' -o ' + conductorImage + ' \"' + conductorLink + '\"',\n            topic: 'link'\n        });\n        \n        list.push({\n            title : '<strong>Train:</strong> ' + curTrain.userName + '<br/>' + \n                    '<strong>Description:</strong> ' + curTrain.description + '<br/>' + \n                    '<strong>Route:</strong> ' + curTrain.route + '<br/>' + \n                    '<strong>Departure Time:</strong> ' + curTrain.departureTime + '<br/>' + \n                    '<strong>Departs From:</strong> ' + curTrain.trainDepartsName + '<br/>' + \n                    '<strong>Terminates:</strong> ' + curTrain.trainTerminatesName + '<br/>' + \n                    '<strong>Lead Engine:</strong> ' + curTrain.leadEngine + '<br/>' + \n                    '<strong>Status:</strong> ' + curTrain.status + \n                    '<span><img width=\"200px\" src=\"http://' + IP.internalIPv4  + '/qr/' + manifestFile + '\"><br/><center>Manifest</center></span>' +\n                    '<span><img width=\"200px\" src=\"http://' + IP.internalIPv4  + '/qr/' + conductorFile + '\"><br/><center>Conductor</center></span>' +\n                    '<hr/>',\n            menu : [ {'Manifest ' : manifestLink}, {'Conductor' :conductorLink}]\n        });\n        \n    }\n    \n    node.send({\n        payload : list,\n        topic: 'list'\n    });\n} else {\n    node.send({\n        payload : [{\n           title : '<strong>No Trains are currently defined</strong>' \n        }],\n        topic : 'list'\n    })\n}\n\nreturn;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 920,
+        "y": 1260,
+        "wires": [
+            [
+                "d5c68b3.53e5978"
+            ]
+        ]
+    },
+    {
+        "id": "1b0b9024.53e1a",
+        "type": "ui_list",
+        "z": "164213bd.e3dd4c",
+        "group": "2a4e66db.9da7fa",
+        "name": "Train List",
+        "order": 0,
+        "width": "12",
+        "height": "12",
+        "lineType": "one",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 1240,
+        "y": 1280,
+        "wires": [
+            [
+                "d76116e5.29cbf8"
+            ]
+        ]
+    },
+    {
+        "id": "d5c68b3.53e5978",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "link",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "list",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1110,
+        "y": 1260,
+        "wires": [
+            [
+                "3006416c.5ff20e"
+            ],
+            [
+                "1b0b9024.53e1a"
+            ]
+        ]
+    },
+    {
+        "id": "3006416c.5ff20e",
+        "type": "exec",
+        "z": "164213bd.e3dd4c",
+        "command": "qrencode",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1240,
+        "y": 1220,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d76116e5.29cbf8",
+        "type": "function",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "func": "window.open(msg.payload,'_BLANK');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1400,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f493577d.f51498",
+        "type": "inject",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "x": 730,
+        "y": 1320,
+        "wires": [
+            [
+                "98537cc2.6b418"
             ]
         ]
     }
