@@ -16,3 +16,4 @@ cp /opt/hiveid-ap/nodered/change_log.html /var/www/html/.
 cp /opt/hiveid-ap/nodered/index.php /var/www/html/.
 cp /opt/hiveid-ap/nodered/notavailable.html /var/www/html/.
 cp /opt/hiveid-ap/nodered/processing.php /var/www/html/.
+sudo chown -R pi:pi /var/www/html/*
