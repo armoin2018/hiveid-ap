@@ -12198,7 +12198,7 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "JRMI Reporters Process",
-        "func": "var RFIDRequest = msg.payload;\nvar curReporters = global.get('JMRI.reporters');\nvar hive = global.get('hive');\nvar JMRI_Config = global.get('JMRI_Config');\nvar IP = global.get('IP');\n\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nvar tag = hive.getTagName(RFIDRequest.UID);\nvar inventory = hive.getInventoryName(RFIDRequest.UID);\nreporter['value'] = inventory.inventory.NAME;\nreporter['report'] = tag.name; \nreporter['comment'] = global.get('timestamp');\nvar Inv = hive.jmri.getInventoryByUID(RFIDRequest.UID);\nif (Inv !== undefined && Inv.name !== undefined) {\n    reporter['comment'] += ' ' + Inv.name;\n}\nreporter['state'] = 2;\nmsg.verb = reporter.verb;\ndelete reporter.verb;\n\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": reporter\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_API.replace('{{IP}}',IP.internalIPv4) + 'reporter';\nmsg.topic = 'reporters';\nreturn msg;",
+        "func": "var RFIDRequest = msg.payload;\nvar hive = global.get('hive');\nvar JMRI_URL = global.get('JMRI_URL');\nvar reporter = hive.getReporterName(RFIDRequest.MAC);\nvar tag = hive.getTagName(RFIDRequest.UID);\nreporter['report'] = tag.name;\nreporter['comment'] = global.get('timestamp');\nvar Inv = hive.jmri.getInventoryByUID(RFIDRequest.UID);\nif (Inv !== undefined && Inv.name !== undefined) {\n    reporter['value'] =  Inv.name;\n    reporter['comment'] += ' ' + Inv.name;\n}\nreporter['state'] = 2;\nmsg.verb = reporter.verb;\ndelete reporter.verb;\n\nmsg.payload = {\n    \"type\": \"reporter\",\n    \"data\": reporter\n};\n\nmsg.headers = {'content-type':'application/json'};\nvar config = global.get('JMRI_Config');\nmsg.url = JMRI_URL + 'json/reporter';\nmsg.topic = 'reporters';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 690,
@@ -16579,7 +16579,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190821.0003",
+                "to": "20190822.0001",
                 "tot": "str"
             },
             {
@@ -16751,14 +16751,15 @@
         "color": "",
         "bgcolor": "",
         "icon": "train",
-        "payload": "",
+        "payload": "JMRI is upgrading, once completed it will request a reboot.",
         "payloadType": "str",
         "topic": "",
         "x": 140,
         "y": 700,
         "wires": [
             [
-                "6c1c07e9.b08868"
+                "6c1c07e9.b08868",
+                "6c97017c.caa18"
             ]
         ]
     },
@@ -17385,5 +17386,21 @@
                 "9596c547.812608"
             ]
         ]
+    },
+    {
+        "id": "6c97017c.caa18",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "JMRI Upgrade Notification",
+        "x": 420,
+        "y": 660,
+        "wires": []
     }
 ]
