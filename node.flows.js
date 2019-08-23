@@ -12734,7 +12734,7 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1740,
+        "x": 1920,
         "y": 220,
         "wires": []
     },
@@ -14454,10 +14454,10 @@
         "y": 240,
         "wires": [
             [
-                "80beb66.488e048"
+                "8ae082fc.570fc"
             ],
             [
-                "1b1d2a52.6a7416"
+                "5551a012.29ace"
             ]
         ]
     },
@@ -14473,7 +14473,7 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1250,
+        "x": 1430,
         "y": 220,
         "wires": [
             [
@@ -14493,7 +14493,7 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1260,
+        "x": 1440,
         "y": 260,
         "wires": [
             [
@@ -16293,7 +16293,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190823.0003",
+                "to": "20190823.0004",
                 "tot": "str"
             },
             {
@@ -16677,7 +16677,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 1,
-        "x": 1510,
+        "x": 1690,
         "y": 220,
         "wires": [
             [
@@ -16694,7 +16694,7 @@
         "func": "var JMRI = global.get('JMRI.' + msg.topic);\nvar flag = false;\n\nif (JMRI === undefined || JMRI.data === undefined) {\n    console.log('JMRI Data was missing for ' +msg.topic);\n    JMRI = { data : [], map : {}, nextID : 1 ,lastLoad : 0  };\n}\n\nif (msg.payload === undefined || msg.payload.data === undefined || msg.payload.data.name === undefined) {\n    console.log('Unable to merge ',msg.payload );\n    return false;\n}\n    \nfor (var dID in JMRI.data) { \n    var curData = JMRI.data[dID];\n    if (msg.payload.data.name === curData.name) {\n        flag=true;   \n        JMRI.data[dID] = msg.payload.data;\n    }\n}\nif (flag === false) {\n    JMRI.data.push(msg.payload.data);\n    JMRI.map[msg.payload.data.name] = JMRI.data.length - 1;\n    var match = msg.payload.data.name.match(/(\\d+)$/);\n    if (match[1] !== undefined && Number(match[1]) > 0) {\n        JMRI.nextID = Number(match[1]) + 1;\n    }\n}\nJMRI.lastLoad = Date.now();\nglobal.set('JMRI.' + msg.topic,JMRI);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1730,
+        "x": 1910,
         "y": 260,
         "wires": [
             []
@@ -16822,7 +16822,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 1,
-        "x": 1510,
+        "x": 1690,
         "y": 260,
         "wires": [
             []
@@ -17182,6 +17182,52 @@
             [
                 "d134657a.d3a028",
                 "9326d651.dcf078"
+            ]
+        ]
+    },
+    {
+        "id": "8ae082fc.570fc",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "3",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1230,
+        "y": 220,
+        "wires": [
+            [
+                "80beb66.488e048"
+            ]
+        ]
+    },
+    {
+        "id": "5551a012.29ace",
+        "type": "delay",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "3",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1230,
+        "y": 260,
+        "wires": [
+            [
+                "1b1d2a52.6a7416"
             ]
         ]
     }
