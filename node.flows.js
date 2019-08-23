@@ -12175,8 +12175,7 @@
         "y": 520,
         "wires": [
             [
-                "2aac0d87.303432",
-                "a8fe1029.250ed"
+                "2aac0d87.303432"
             ]
         ],
         "inputLabels": [
@@ -12221,8 +12220,7 @@
         "y": 560,
         "wires": [
             [
-                "2aac0d87.303432",
-                "a8fe1029.250ed"
+                "2aac0d87.303432"
             ]
         ],
         "inputLabels": [
@@ -13100,11 +13098,11 @@
         "name": "TrainTraxx Request",
         "active": false,
         "tosidebar": true,
-        "console": true,
+        "console": false,
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 760,
+        "x": 750,
         "y": 260,
         "wires": []
     },
@@ -14515,8 +14513,7 @@
         "y": 600,
         "wires": [
             [
-                "2aac0d87.303432",
-                "a8fe1029.250ed"
+                "2aac0d87.303432"
             ]
         ],
         "inputLabels": [
@@ -14542,8 +14539,7 @@
         "y": 540,
         "wires": [
             [
-                "d134657a.d3a028",
-                "9326d651.dcf078"
+                "7c13c850.93e948"
             ]
         ],
         "inputLabels": [
@@ -14609,8 +14605,7 @@
         "y": 580,
         "wires": [
             [
-                "d134657a.d3a028",
-                "9326d651.dcf078"
+                "7c13c850.93e948"
             ]
         ],
         "inputLabels": [
@@ -14631,23 +14626,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1300,
+        "x": 1520,
         "y": 540,
-        "wires": []
-    },
-    {
-        "id": "a8fe1029.250ed",
-        "type": "debug",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "x": 940,
-        "y": 640,
         "wires": []
     },
     {
@@ -15533,8 +15513,7 @@
         "y": 640,
         "wires": [
             [
-                "2aac0d87.303432",
-                "a8fe1029.250ed"
+                "2aac0d87.303432"
             ]
         ],
         "inputLabels": [
@@ -15755,8 +15734,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1320,
-        "y": 580,
+        "x": 1420,
+        "y": 680,
         "wires": [
             [
                 "14f4759a.22740a",
@@ -15786,8 +15765,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1540,
-        "y": 560,
+        "x": 1640,
+        "y": 660,
         "wires": [
             []
         ]
@@ -15811,8 +15790,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1570,
-        "y": 600,
+        "x": 1670,
+        "y": 700,
         "wires": [
             []
         ]
@@ -17171,6 +17150,38 @@
         "wires": [
             [
                 "d18c15f1.f2b5a8"
+            ]
+        ]
+    },
+    {
+        "id": "7c13c850.93e948",
+        "type": "switch",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1270,
+        "y": 560,
+        "wires": [
+            [
+                "9326d651.dcf078"
+            ],
+            [
+                "d134657a.d3a028",
+                "9326d651.dcf078"
             ]
         ]
     }
