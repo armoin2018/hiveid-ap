@@ -3373,7 +3373,8 @@
                 "29b4d282.40a57e",
                 "639c3c57.932cb4",
                 "e054e355.832a2",
-                "68c8ebf9.5924f4"
+                "68c8ebf9.5924f4",
+                "58aab300.01211c"
             ]
         ]
     },
@@ -12721,7 +12722,7 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Sync Sensors & Reporters",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar JMRI_URL = global.get('JMRI_URL');\nvar IP = global.get('IP');\n\nvar array_combine = hive.array_combine;\nvar getSensorName   = hive.getSensorName;\nvar getReporterName = hive.getReporterName;\n\nvar hiveColumns = TT.hivenode.columns;\n\nfor (var nodeID in TT.hivenode.data) {\n    var nodeData = array_combine(hiveColumns,TT.hivenode.data[nodeID]);\n    \n    var reporterObject = getReporterName(nodeData['MAC_ADDRESS']);\n    var sensorObject = getSensorName(nodeData['MAC_ADDRESS']);\n    var r_verb = reporterObject.verb;\n    var s_verb = sensorObject.verb;\n    delete reporterObject.verb;\n    delete sensorObject.verb;\n    reporterObject.report =null;\n    reporterObject.value =\"\";\n    reporterObject.lastReport =null;\n    node.send({\n        payload : { type: \"reporter\", data : reporterObject},\n        url : JMRI_URL + 'json/reporter',\n        verb : r_verb,\n        topic: \"reporters\"\n    });\n    node.send({\n        payload : { type : \"sensor\", data : sensorObject},\n        url : JMRI_URL + 'json/sensor',\n        verb : s_verb,\n        topic: \"sensors\"\n    });\n}\nflow.set('active', false);\nreturn;",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI_URL = global.get('JMRI_URL');\n\nif (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined && TT.hivenode.data.length >0) {\n    \n    for (var nodeID in TT.hivenode.data) {\n        var nodeData = hive.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeID]);\n        \n        var reporterObject = hive.getReporterName(nodeData['MAC_ADDRESS']);\n        var sensorObject = hive.getSensorName(nodeData['MAC_ADDRESS']);\n        var r_verb = reporterObject.verb;\n        var s_verb = sensorObject.verb;\n        delete reporterObject.verb;\n        delete sensorObject.verb;\n        reporterObject.report =null;\n        reporterObject.value =\"\";\n        reporterObject.lastReport =null;\n        node.send({\n            payload : { type: \"reporter\", data : reporterObject},\n            url : JMRI_URL + 'json/reporter',\n            verb : r_verb,\n            topic: \"reporters\"\n        });\n        node.send({\n            payload : { type : \"sensor\", data : sensorObject},\n            url : JMRI_URL + 'json/sensor',\n            verb : s_verb,\n            topic: \"sensors\"\n        });\n    }\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 660,
@@ -14644,7 +14645,7 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Setup JMRI Tags",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_URL = global.get('JMRI_URL');\nvar hive = global.get('hive');\nvar tagLookup = flow.get('tagLookup');\nif (tagLookup === undefined) {\n    tagLookup = { 'ID' : {}, 'NAME' : {}};\n}\nmsg.topic = 'idTag';\n\nfor (var id in TT.tags.data) {\n    var curTag = hive.array_combine(TT.tags.columns,TT.tags.data[id]);\n    var invName = \"Unknown\";\n    \n    if (curTag !== undefined && Number(curTag['wp_tt_inventory_ID']) > 0) {\n        var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n        invName=curInv.NAME;\n        tagLookup.ID[curTag['wp_tt_inventory_ID']] = 'IDHIVE' + id;\n        tagLookup.NAME[invName] = curTag['IDHIVE' + id];\n    }\n    var tempData = { \n      \"name\" : 'IDHIVE' + id,\n      \"userName\" : curTag.TAG_UID,\n      \"comment\" : invName\n    };\n    var verb = \"PUT\";\n    if (JMRI.idTag.map[curTag.TAG_UID] !== undefined){\n        verb= 'POST';\n    }\n    var tempMsg = {\n        payload : {\n            \"type\" : msg.topic,\n            \"data\" : tempData\n        },\n        verb : verb,\n        topic: msg.topic,\n        url : JMRI_URL + 'json/' + msg.topic\n        \n    };\n    node.send(tempMsg);\n}\nflow.set('tagLookup',tagLookup);\nflow.set('active',false);\nreturn;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_URL = global.get('JMRI_URL');\nvar hive = global.get('hive');\nvar tagLookup = flow.get('tagLookup');\nif (tagLookup === undefined) {\n    tagLookup = { 'ID' : {}, 'NAME' : {}};\n}\nmsg.topic = 'idTag';\n\nfor (var id in TT.tags.data) {\n    var curTag = hive.array_combine(TT.tags.columns,TT.tags.data[id]);\n    var invName = \"Unknown\";\n    \n    if (curTag['wp_tt_inventory_ID'] !== null && curTag['wp_tt_inventory_ID'] !== \"\" && Number(curTag['wp_tt_inventory_ID']) > 0) {\n        var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n        invName=curInv.NAME;\n        tagLookup.ID[curTag['wp_tt_inventory_ID']] = 'IDHIVE' + id;\n        tagLookup.NAME[invName] = 'IDHIVE' + id;\n    }\n    var tempData = { \n      \"name\" : 'IDHIVE' + id,\n      \"userName\" : curTag.TAG_UID,\n      \"comment\" : invName\n    };\n    var verb = \"PUT\";\n    if (JMRI.idTag.map[curTag.TAG_UID] !== undefined){\n        verb= 'POST';\n    }\n    var tempMsg = {\n        payload : {\n            \"type\" : msg.topic,\n            \"data\" : tempData\n        },\n        verb : verb,\n        topic: msg.topic,\n        url : JMRI_URL + 'json/' + msg.topic\n        \n    };\n    node.send(tempMsg);\n}\nflow.set('tagLookup',tagLookup);\nflow.set('active',false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 630,
@@ -17411,5 +17412,55 @@
         "x": 420,
         "y": 660,
         "wires": []
+    },
+    {
+        "id": "58aab300.01211c",
+        "type": "switch",
+        "z": "fd2ebb8a.240a38",
+        "name": "Is USE_CACHE Empty",
+        "property": "TrainTraxx_Config.USE_CACHE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 160,
+        "wires": [
+            [
+                "98594e32.01c36"
+            ]
+        ]
+    },
+    {
+        "id": "98594e32.01c36",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set True",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 160,
+        "wires": [
+            [
+                "d18c15f1.f2b5a8"
+            ]
+        ]
     }
 ]
