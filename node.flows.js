@@ -2484,7 +2484,7 @@
         "msgArray": false,
         "msgTemp": false,
         "x": 330,
-        "y": 780,
+        "y": 860,
         "wires": [
             [
                 "fed4cd3c.abeae"
@@ -2528,7 +2528,7 @@
         "useOldStyle": false,
         "outputs": 1,
         "x": 550,
-        "y": 780,
+        "y": 860,
         "wires": [
             []
         ]
@@ -2546,7 +2546,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 820,
+        "y": 900,
         "wires": [
             [
                 "c9aa36d9.5823f8",
@@ -2629,7 +2629,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "9ba3f6e7.d8b438"
@@ -2642,7 +2642,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 960,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -2653,7 +2653,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 860,
+        "y": 940,
         "wires": [
             [
                 "8a7998a8.747678"
@@ -2666,7 +2666,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 820,
+        "y": 900,
         "wires": [
             [
                 "2e18a81a.662928"
@@ -2686,7 +2686,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 710,
-        "y": 920,
+        "y": 1000,
         "wires": []
     },
     {
@@ -2702,7 +2702,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "302dd467.6f1a0c",
@@ -2733,7 +2733,7 @@
         "seg1": "",
         "seg2": "",
         "x": 720,
-        "y": 820,
+        "y": 900,
         "wires": []
     },
     {
@@ -2749,7 +2749,7 @@
         "format": "{{msg.payload.uptime}} seconds",
         "layout": "row-spread",
         "x": 500,
-        "y": 860,
+        "y": 940,
         "wires": []
     },
     {
@@ -2761,7 +2761,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "2a113082.e508b"
@@ -2777,7 +2777,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 510,
-        "y": 820,
+        "y": 900,
         "wires": [
             [],
             [
@@ -4292,46 +4292,6 @@
         ]
     },
     {
-        "id": "ee7a4b50.bf36e8",
-        "type": "comment",
-        "z": "3d602d50.39dab2",
-        "name": "Sample Car Object",
-        "info": "msg.payload =  {\n    \"type\": \"car\",\n    \"data\": {\n      \"id\": \"AA123\",\n      \"number\": \"123\",\n      \"road\": \"AA\",\n      \"type\": \"Baggage\",\n      \"length\": \"32\",\n      \"color\": \"Black\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"destination\": null,\n      \"load\": \"E\",\n      \"hazardous\": false,\n      \"removeComment\": \"\",\n      \"addComment\": \"\",\n      \"kernel\": \"\",\n      \"utility\": false,\n      \"finalDestination\": {\n        \"name\": \"Test Location\",\n        \"id\": \"1\",\n        \"route\": null,\n        \"track\": {\n          \"name\": \"Test Spur 1\",\n          \"id\": \"1s1\"\n        }\n      },\n      \"returnWhenEmpty\": null,\n      \"status\": \"\"\n    }\n  };\nreturn msg;",
-        "x": 1470,
-        "y": 820,
-        "wires": []
-    },
-    {
-        "id": "5f1626e1.e0ab68",
-        "type": "comment",
-        "z": "3d602d50.39dab2",
-        "name": "Sample Engine Object",
-        "info": "msg.payload =  {\n    \"type\": \"engine\",\n    \"data\": {\n      \"id\": \"ACL1234\",\n      \"number\": \"1234\",\n      \"road\": \"ACL\",\n      \"type\": \"Diesel\",\n      \"length\": \"54\",\n      \"color\": \"\",\n      \"owner\": \"\",\n      \"comment\": \"\",\n      \"location\": null,\n      \"destination\": null,\n      \"model\": \"E8\",\n      \"consist\": \"\"\n    }\n  };\n  \n \nreturn msg;",
-        "x": 1479,
-        "y": 937,
-        "wires": []
-    },
-    {
-        "id": "75824d8a.676ee4",
-        "type": "comment",
-        "z": "3d602d50.39dab2",
-        "name": "Sample Locations Object",
-        "info": "msg.payload =    {\n    \"type\": \"location\",\n    \"data\": {\n      \"name\": \"Test Location\",\n      \"id\": \"1\",\n      \"length\": 40,\n      \"comment\": \"\"\n    }\n  };\nreturn msg;",
-        "x": 1489,
-        "y": 898,
-        "wires": []
-    },
-    {
-        "id": "3289e031.08b23",
-        "type": "comment",
-        "z": "3d602d50.39dab2",
-        "name": "Sample Train Object",
-        "info": "msg.payload =  {\n    \"type\": \"train\",\n    \"data\": {\n      \"name\": \"Test Train 1\",\n      \"iconName\": \"Test Train 1\",\n      \"id\": \"1\",\n      \"departureTime\": \"03:00\",\n      \"description\": \"Test Train \",\n      \"comment\": \"\",\n      \"route\": \"Test Route\",\n      \"routeId\": \"1\",\n      \"locations\": [\n        {\n          \"id\": \"1r2\",\n          \"name\": \"Test Location\",\n          \"trainDirection\": \"East\",\n          \"comment\": \"\",\n          \"sequenceId\": 2,\n          \"expectedArrivalTime\": \"03:00\",\n          \"expectedDepartureTime\": \"03:00\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"length\": 40,\n            \"comment\": \"\"\n          }\n        }\n      ],\n      \"engines\": [],\n      \"cars\": [\n        {\n          \"id\": \"AA123\",\n          \"number\": \"123\",\n          \"road\": \"AA\",\n          \"type\": \"Baggage\",\n          \"length\": \"32\",\n          \"color\": \"Black\",\n          \"owner\": \"\",\n          \"comment\": \"\",\n          \"location\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"destination\": null,\n          \"load\": \"E\",\n          \"hazardous\": false,\n          \"removeComment\": \"\",\n          \"addComment\": \"\",\n          \"kernel\": \"\",\n          \"utility\": false,\n          \"finalDestination\": {\n            \"name\": \"Test Location\",\n            \"id\": \"1\",\n            \"route\": null,\n            \"track\": {\n              \"name\": \"Test Spur 1\",\n              \"id\": \"1s1\"\n            }\n          },\n          \"returnWhenEmpty\": null,\n          \"status\": \"\"\n        }\n      ],\n      \"trainDepartsName\": \"Test Location\",\n      \"trainTerminatesName\": \"Test Location\",\n      \"location\": \"\",\n      \"status\": \"\",\n      \"statusCode\": 65535,\n      \"length\": 0,\n      \"weight\": 0,\n      \"caboose\": \"\"\n    }\n  };\nreturn msg;",
-        "x": 1470,
-        "y": 859,
-        "wires": []
-    },
-    {
         "id": "f51f6fd0.01c5d",
         "type": "ui_button",
         "z": "3d602d50.39dab2",
@@ -4895,7 +4855,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 100,
-        "y": 1740,
+        "y": 1660,
         "wires": [
             [
                 "e1986986.8508b8"
@@ -4914,7 +4874,7 @@
         "oldrc": false,
         "name": "",
         "x": 470,
-        "y": 1740,
+        "y": 1660,
         "wires": [
             [],
             [],
@@ -5169,7 +5129,7 @@
         "repair": false,
         "outputs": 2,
         "x": 740,
-        "y": 1740,
+        "y": 1660,
         "wires": [
             [
                 "1d57def3.36f541"
@@ -5192,7 +5152,7 @@
         "topic": "",
         "name": "Success Notification",
         "x": 1200,
-        "y": 1720,
+        "y": 1660,
         "wires": []
     },
     {
@@ -5208,7 +5168,7 @@
         "topic": "",
         "name": "Failed Notification",
         "x": 1190,
-        "y": 1760,
+        "y": 1660,
         "wires": []
     },
     {
@@ -6064,7 +6024,7 @@
         "to": "",
         "reg": false,
         "x": 980,
-        "y": 1760,
+        "y": 1680,
         "wires": [
             [
                 "e992e762.65fa68"
@@ -6091,7 +6051,7 @@
         "to": "",
         "reg": false,
         "x": 980,
-        "y": 1720,
+        "y": 1640,
         "wires": [
             [
                 "b7ef9aeb.b31358"
@@ -7045,7 +7005,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 140,
-        "y": 1560,
+        "y": 1520,
         "wires": [
             [
                 "d80dbb05.2032d8"
@@ -7065,7 +7025,7 @@
         "proxy": "",
         "authType": "basic",
         "x": 390,
-        "y": 1560,
+        "y": 1520,
         "wires": [
             [
                 "b1b40989.5d3408"
@@ -7092,7 +7052,7 @@
         "to": "",
         "reg": false,
         "x": 640,
-        "y": 1560,
+        "y": 1520,
         "wires": [
             []
         ]
@@ -9739,8 +9699,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "x": 230,
-        "y": 440,
+        "x": 110,
+        "y": 380,
         "wires": [
             [
                 "1658cd8e.e99cb2",
@@ -9754,8 +9714,8 @@
         "type": "ui_ui_control",
         "z": "f1ec9b2a.1f7298",
         "name": "",
-        "x": 1520,
-        "y": 480,
+        "x": 1400,
+        "y": 420,
         "wires": [
             []
         ]
@@ -9786,8 +9746,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 420,
+        "x": 1070,
+        "y": 360,
         "wires": [
             [
                 "17537b54.bc1095",
@@ -9821,8 +9781,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1200,
-        "y": 500,
+        "x": 1080,
+        "y": 440,
         "wires": [
             [
                 "17537b54.bc1095",
@@ -9856,8 +9816,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1180,
-        "y": 580,
+        "x": 1060,
+        "y": 520,
         "wires": [
             [
                 "17537b54.bc1095",
@@ -9873,8 +9833,8 @@
         "func": "var IP = global.get('IP');\nmsg.url = \"http://\" + IP.internalIPv4 + '/openrsd';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 600,
-        "y": 440,
+        "x": 480,
+        "y": 380,
         "wires": [
             [
                 "38ccee17.2a19e2"
@@ -9891,8 +9851,8 @@
         "paytoqs": false,
         "url": "",
         "authType": "basic",
-        "x": 810,
-        "y": 440,
+        "x": 690,
+        "y": 380,
         "wires": [
             [
                 "48fba23e.2bfeac"
@@ -9907,8 +9867,8 @@
         "func": "var IP = global.get('IP');\nmsg.url = \"http://\" + IP.internalIPv4 + '/phpmyadmin';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 610,
-        "y": 480,
+        "x": 490,
+        "y": 420,
         "wires": [
             [
                 "832d51f1.fe01a"
@@ -9925,8 +9885,8 @@
         "paytoqs": false,
         "url": "",
         "authType": "basic",
-        "x": 810,
-        "y": 480,
+        "x": 690,
+        "y": 420,
         "wires": [
             [
                 "618acb56.9817f4"
@@ -9953,8 +9913,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 970,
-        "y": 480,
+        "x": 850,
+        "y": 420,
         "wires": [
             [
                 "9d1ae9f2.015d08"
@@ -9972,8 +9932,8 @@
         "func": "var IP = global.get('IP');\nvar JMRI_Config = global.get('JMRI_Config');\nmsg.url = JMRI_Config.JMRI_Web.replace('{{IP}}',IP.internalIPv4);\nglobal.set('JMRI_URL',msg.url);\nglobal.set('JMRI_OPS_URL',msg.url +'operations/trains');\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 580,
-        "y": 520,
+        "x": 460,
+        "y": 460,
         "wires": [
             [
                 "166cc3c9.4daa9c"
@@ -9992,8 +9952,8 @@
         "tls": "",
         "proxy": "",
         "authType": "basic",
-        "x": 810,
-        "y": 520,
+        "x": 690,
+        "y": 460,
         "wires": [
             [
                 "cbb60e9f.4986e"
@@ -10020,8 +9980,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 970,
-        "y": 520,
+        "x": 850,
+        "y": 460,
         "wires": [
             [
                 "abb88f0b.bd024"
@@ -10049,8 +10009,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 370,
-        "y": 580,
+        "x": 250,
+        "y": 520,
         "wires": [
             [
                 "b7691c32.91e9"
@@ -10070,8 +10030,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1510,
-        "y": 380,
+        "x": 1390,
+        "y": 320,
         "wires": []
     },
     {
@@ -10094,8 +10054,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 970,
-        "y": 440,
+        "x": 850,
+        "y": 380,
         "wires": [
             [
                 "b3162cb0.8a30e"
@@ -10131,8 +10091,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1200,
-        "y": 380,
+        "x": 1080,
+        "y": 320,
         "wires": [
             [
                 "17537b54.bc1095",
@@ -10166,8 +10126,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 460,
+        "x": 1090,
+        "y": 400,
         "wires": [
             [
                 "17537b54.bc1095",
@@ -10201,8 +10161,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1180,
-        "y": 540,
+        "x": 1060,
+        "y": 480,
         "wires": [
             [
                 "17537b54.bc1095",
@@ -10218,8 +10178,8 @@
         "links": [
             "1f35f075.13291"
         ],
-        "x": 155,
-        "y": 580,
+        "x": 95,
+        "y": 520,
         "wires": [
             [
                 "1658cd8e.e99cb2"
@@ -11476,7 +11436,7 @@
         "files": "/opt/hiveid-ap/nodered/scripts/gatewayInfo.php",
         "recursive": "",
         "x": 200,
-        "y": 1500,
+        "y": 1480,
         "wires": [
             [
                 "d80dbb05.2032d8"
@@ -12191,8 +12151,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 130,
-        "y": 980,
+        "x": 270,
+        "y": 640,
         "wires": [
             [
                 "5ce0926d.37562c",
@@ -12340,8 +12300,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 560,
-        "y": 1100,
+        "x": 700,
+        "y": 760,
         "wires": [
             [
                 "c05715cf.f986d8"
@@ -12360,8 +12320,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 930,
-        "y": 1100,
+        "x": 1070,
+        "y": 760,
         "wires": [
             [
                 "9a5cfaf0.6b0dd8"
@@ -12387,8 +12347,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
-        "y": 1100,
+        "x": 1230,
+        "y": 760,
         "wires": [
             []
         ]
@@ -12400,8 +12360,8 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/field_map.csv",
         "recursive": "",
-        "x": 540,
-        "y": 1060,
+        "x": 680,
+        "y": 720,
         "wires": [
             [
                 "5ce0926d.37562c"
@@ -12416,8 +12376,8 @@
         "func": "var FlowMap = flow.get('FlowMap');\nvar CarTypeMap = flow.get('CarTypeMap');\nvar RoadNameMap = flow.get('RoadNameMap');\nvar ColorMap = flow.get('ColorMap');\nvar inObject = {};\ninObject.jmri2tt = function(type,key,tt_type) {\n    var myResults = \"\";\n    for (var i in FlowMap) {\n        if (    FlowMap[i].JMRI_Type !== undefined && FlowMap[i].JMRI_Type.toLowerCase() === type.toLowerCase() &&\n                FlowMap[i].JMRI !== undefined && FlowMap[i].JMRI.toLowerCase() === key.toLowerCase() &&\n                FlowMap[i].TrainTraxx_Type !== undefined && FlowMap[i].TrainTraxx_Type.toLowerCase() === tt_type.toLowerCase()\n        ) {\n            myResults = FlowMap[i].TrainTraxx;\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri = function(type,key,jmri_type) {\n    var myResults = \"\";\n    for (var i in FlowMap) {\n        if (    FlowMap[i].TrainTraxx_Type !== undefined && FlowMap[i].TrainTraxx_Type.toLowerCase() === type.toLowerCase()  &&\n                FlowMap[i].TrainTraxx !== undefined && FlowMap[i].TrainTraxx.toLowerCase() === key.toLowerCase() &&\n                FlowMap[i].JMRI_Type !== undefined && FlowMap[i].JMRI_Type.toLowerCase() === jmri_type.toLowerCase()\n        ) {\n            myResults = FlowMap[i].JMRI;\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_color = function(name) {\n    var myResults = name;\n    for (var i in ColorMap) {\n        if (ColorMap[i].TrainTraxx.toLowerCase() === name.toLowerCase()) {\n            myResults = ColorMap[i].JMRI;\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_carType = function(name) {\n    var myResults = name;\n    for (var i in CarTypeMap) {\n        if (CarTypeMap[i].col1.toLowerCase() === name.toLowerCase().trim()) {\n            myResults = CarTypeMap[i].col2;\n        }\n    }\n    return myResults;\n};\n\ninObject.tt2jmri_RoadName = function(name) {\n    var myResults = name;\n    for (var i in RoadNameMap) {\n        if (RoadNameMap[i]['Road Name'] === name || RoadNameMap[i]['Road Short Name'] === name ) {\n            myResults = RoadNameMap[i]['Road Short Name'];\n        }\n    }\n    return myResults;\n};\n\nflow.set('sync', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 140,
-        "y": 1020,
+        "x": 280,
+        "y": 680,
         "wires": [
             []
         ]
@@ -12427,7 +12387,7 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Sync Inventory",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar tagLookup = flow.get('tagLookup');\n\nvar invColumns = TT.inventory.columns;\nvar metaColumns = TT.inventory.meta.columns;\nvar metaKeyColumns = TT.inventory.keys.columns;\ncurRecord = {};\nvar KeyRecords = {};\n\nvar columnList = ['NAME'];\nfor (var KeyID in TT.inventory.keys.data) {\n    var curKey = TT.inventory.keys.data[KeyID];\n    KeyRecords[KeyID] = hive.array_combine(metaKeyColumns,curKey);\n    KeyRecords[KeyID]['ID'] = KeyID;\n    columnList.push(KeyRecords[KeyID]['meta_key']);\n}\n\nvar InvRecords = {};\nvar curMetaRecord = {};\nmsg.payload = [];\n\nfor (var InvID in TT.inventory.data) {\n    var curInv = TT.inventory.data[InvID];\n    \n    var InvRecord = hive.array_combine(invColumns,curInv);\n    var tempRecord = {\"JMRI_TAGNAME\" : \"\"};\n    if (tagLookup['ID'][InvID] !== undefined) {\n        tempRecord['JMRI_TAGNAME'] = tagLookup['ID'][InvID];\n    }\n    \n    for (var i in columnList) {\n        var columnName = columnList[i];\n        tempRecord[columnName] = '';\n    }\n    tempRecord['NAME'] = InvRecord.NAME;\n    for (var MetaID in TT.inventory.meta.data[InvID]) {\n        var curMeta = TT.inventory.meta.data[InvID][MetaID];\n        curMetaRecord[MetaID] = hive.array_combine(metaColumns,curMeta);\n        curMetaRecord[MetaID]['key'] = KeyRecords[curMetaRecord[MetaID]['wp_tt_inventorymetakeys_ID']];\n        tempRecord[curMetaRecord[MetaID]['key']['meta_key']] = curMetaRecord[MetaID]['meta_value'];\n    }\n    msg.payload.push(tempRecord);\n}\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI = global.get('JMRI');\nvar tagLookup = flow.get('tagLookup');\n\ncurRecord = {};\nvar KeyRecords = {};\n\nvar columnList = ['NAME'];\nfor (var KeyID in TT.inventory.keys.data) {\n    KeyRecords[KeyID] = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[KeyID]);\n    KeyRecords[KeyID]['ID'] = KeyID;\n    columnList.push(KeyRecords[KeyID]['meta_key']);\n}\n\nvar InvRecords = {};\nvar curMetaRecord = {};\nmsg.payload = [];\n\nfor (var InvID in TT.inventory.data) {\n    var curInv = TT.inventory.data[InvID];\n    \n    var InvRecord = hive.array_combine(TT.inventory.columns,curInv);\n    var tempRecord = {\"JMRI_TAGNAME\" : \"\"};\n    if (tagLookup['ID'][InvID] !== undefined) {\n        tempRecord['JMRI_TAGNAME'] = tagLookup['ID'][InvID];\n    }\n    \n    for (var i in columnList) {\n        var columnName = columnList[i];\n        tempRecord[columnName] = '';\n    }\n    tempRecord['NAME'] = InvRecord.NAME;\n    for (var MetaID in TT.inventory.meta.data[InvID]) {\n        curMetaRecord[MetaID] = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[InvID][MetaID]);\n        curMetaRecord[MetaID]['key'] = KeyRecords[curMetaRecord[MetaID]['wp_tt_inventorymetakeys_ID']];\n        tempRecord[curMetaRecord[MetaID]['key']['meta_key']] = curMetaRecord[MetaID]['meta_value'];\n    }\n    msg.payload.push(tempRecord);\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 620,
@@ -12678,8 +12638,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 740,
-        "y": 360,
+        "x": 1200,
+        "y": 460,
         "wires": [
             []
         ]
@@ -12692,8 +12652,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 610,
-        "y": 320,
+        "x": 1070,
+        "y": 420,
         "wires": [
             [
                 "2ec96926.6bdab6"
@@ -12726,7 +12686,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 660,
-        "y": 400,
+        "y": 320,
         "wires": [
             [
                 "3bd4107f.d2b5a"
@@ -12805,8 +12765,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 610,
-        "y": 1020,
+        "x": 750,
+        "y": 680,
         "wires": [
             [
                 "2c706ed6.288632"
@@ -12825,8 +12785,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 930,
-        "y": 1020,
+        "x": 1070,
+        "y": 680,
         "wires": [
             [
                 "fe3937c2.70aef8"
@@ -12852,8 +12812,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
-        "y": 1020,
+        "x": 1250,
+        "y": 680,
         "wires": [
             []
         ]
@@ -12865,8 +12825,8 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.cartypes.csv",
         "recursive": "",
-        "x": 590,
-        "y": 980,
+        "x": 730,
+        "y": 640,
         "wires": [
             [
                 "337e2284.c5ea3e"
@@ -12899,8 +12859,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 620,
-        "y": 940,
+        "x": 760,
+        "y": 600,
         "wires": [
             [
                 "56c30c3b.453964"
@@ -12919,8 +12879,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 930,
-        "y": 940,
+        "x": 1070,
+        "y": 600,
         "wires": [
             [
                 "cc6a1299.94f3d"
@@ -12946,8 +12906,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
-        "y": 940,
+        "x": 1250,
+        "y": 600,
         "wires": [
             []
         ]
@@ -12959,8 +12919,8 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.roadnames.csv",
         "recursive": "",
-        "x": 600,
-        "y": 900,
+        "x": 740,
+        "y": 560,
         "wires": [
             [
                 "d619f02a.37bcb"
@@ -14413,7 +14373,7 @@
         "once": true,
         "onceDelay": "1",
         "x": 130,
-        "y": 480,
+        "y": 240,
         "wires": [
             [
                 "353f0842.9ef0c8"
@@ -14434,7 +14394,7 @@
         "fwdInMessages": false,
         "templateScope": "local",
         "x": 200,
-        "y": 580,
+        "y": 340,
         "wires": [
             []
         ]
@@ -14769,8 +14729,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
-        "x": 600,
-        "y": 860,
+        "x": 740,
+        "y": 520,
         "wires": [
             [
                 "8de4ae07.976cd"
@@ -14789,8 +14749,8 @@
         "ret": "\\n",
         "temp": "",
         "skip": "0",
-        "x": 930,
-        "y": 860,
+        "x": 1070,
+        "y": 520,
         "wires": [
             [
                 "347260e5.7d676"
@@ -14816,8 +14776,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
-        "y": 860,
+        "x": 1240,
+        "y": 520,
         "wires": [
             []
         ]
@@ -14829,8 +14789,8 @@
         "name": "",
         "files": "/opt/hiveid-ap/data/traintraxx_to_jmri.colors.csv",
         "recursive": "",
-        "x": 580,
-        "y": 820,
+        "x": 720,
+        "y": 480,
         "wires": [
             [
                 "cbce0132.b2547"
@@ -14923,7 +14883,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 160,
-        "y": 520,
+        "y": 280,
         "wires": [
             [
                 "16944a31.10d486"
@@ -15298,7 +15258,7 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "Build Inventory Name List",
-        "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\n\nmsg.options=[];\nif (JMRI_Config.JMRI_ENABLED === true) {\n    \n    for (var cID in JMRI.cars.data) {\n        msg.options.push(String(JMRI.cars.data[cID].name));\n    }\n    for (var eID in JMRI.engines.data) {\n        msg.options.push(String(JMRI.engines.data[eID].name));\n    }\n}\n\n\nif (JMRI_Config.JMRI_ENABLED === false || msg.options.length === 0) { \n    var metaKeys = {};\n    var rnameKey = null;\n    var rnumKey  = null;\n    for (var kID in TT.inventory.keys.data) {\n        var curKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n        metaKeys[kID] = curKey;\n        if (curKey['meta_key'] === 'Road Name') {\n            rnameKey = kID;\n        }\n        if (curKey['meta_key'] === 'Road Number') {\n            rnumKey = kID;\n        }\n    }\n    for (var iID in TT.inventory.data) {\n        var RNAME = '';\n        var RNUM = '';\n        var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n        for (var mID in TT.inventory.meta.data[iID]) {\n            var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[mID]);\n            if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnameKey)) {\n                RNAME = curMeta['meta_value'];\n            }\n            if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnumKey)) {\n                RNUM = curMeta['meta_value'];\n            }\n        }\n        if (RNAME !== '' && RNUM !== '' ) {\n            msg.options.push(RNAME + String(RNUM));\n        } else {\n            msg.options.push(curInv.NAME);\n        }\n    }\n}\n\nmsg.options.sort();\nreturn msg;",
+        "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\n\nmsg.options=[];\nif (JMRI_Config !== undefined && JMRI_Config.JMRI_ENABLED !== undefined && JMRI_Config.JMRI_ENABLED === true) {\n    \n    if (JMRI !== undefined && JMRI.cars !== undefined && JMRI.cars.data !== undefined && JMRI.cars.data.length > 0) {\n        for (var cID in JMRI.cars.data) {\n            msg.options.push(String(JMRI.cars.data[cID].name));\n        }\n    }\n    if (JMRI !== undefined && JMRI.engines !== undefined && JMRI.engines.data !== undefined && JMRI.engines.data.length > 0) {\n        for (var eID in JMRI.engines.data) {\n            msg.options.push(String(JMRI.engines.data[eID].name));\n        }\n    }\n    \n    if (JMRI_Config.JMRI_ENABLED === false || msg.options.length === 0) { \n        var metaKeys = {};\n        var rnameKey = null;\n        var rnumKey  = null;\n        if (TT !== undefined && TT.inventory !== undefined && TT.inventory.data !== undefined && TT.inventory.data.length >0) {\n            for (var kID in TT.inventory.keys.data) {\n                var curKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n                metaKeys[kID] = curKey;\n                if (curKey['meta_key'] === 'Road Name') {\n                    rnameKey = kID;\n                }\n                if (curKey['meta_key'] === 'Road Number') {\n                    rnumKey = kID;\n                }\n            }\n            for (var iID in TT.inventory.data) {\n                var RNAME = '';\n                var RNUM = '';\n                var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n                for (var mID in TT.inventory.meta.data[iID]) {\n                    var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[mID]);\n                    if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnameKey)) {\n                        RNAME = curMeta['meta_value'];\n                    }\n                    if (curMeta['wp_tt_inventorymetakeys_ID'] === Number(rnumKey)) {\n                        RNUM = curMeta['meta_value'];\n                    }\n                }\n                if (RNAME !== '' && RNUM !== '' ) {\n                    msg.options.push(RNAME + String(RNUM));\n                } else {\n                    msg.options.push(curInv.NAME);\n                }\n            }\n        }\n    }\n}\nif (msg.options.length >0) {\n    msg.options.sort();\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 430,
@@ -15876,7 +15836,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 90,
-        "y": 1620,
+        "y": 1580,
         "wires": [
             [
                 "3570e4ea.63c73c"
@@ -15951,7 +15911,7 @@
         "to": "",
         "reg": false,
         "x": 390,
-        "y": 1620,
+        "y": 1580,
         "wires": [
             [
                 "e1986986.8508b8",
@@ -15971,7 +15931,7 @@
             "7d4b34cc.654fec"
         ],
         "x": 555,
-        "y": 1600,
+        "y": 1560,
         "wires": []
     },
     {
@@ -15983,7 +15943,7 @@
             "829d7cac.b3072"
         ],
         "x": 595,
-        "y": 1620,
+        "y": 1580,
         "wires": []
     },
     {
@@ -16182,7 +16142,7 @@
             "78979090.cc80c"
         ],
         "x": 555,
-        "y": 1640,
+        "y": 1600,
         "wires": []
     },
     {
@@ -16242,7 +16202,7 @@
             "d64a561f.a26af8"
         ],
         "x": 595,
-        "y": 1660,
+        "y": 1620,
         "wires": []
     },
     {
@@ -16286,7 +16246,7 @@
         "once": true,
         "onceDelay": "2",
         "x": 110,
-        "y": 1700,
+        "y": 1620,
         "wires": [
             [
                 "e1986986.8508b8"
@@ -16354,7 +16314,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190823.0002",
+                "to": "20190823.0003",
                 "tot": "str"
             },
             {
@@ -16698,7 +16658,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 650,
-        "y": 440,
+        "y": 360,
         "wires": [
             [
                 "3bd4107f.d2b5a"
@@ -16714,7 +16674,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 650,
-        "y": 480,
+        "y": 400,
         "wires": [
             [
                 "3bd4107f.d2b5a"
