@@ -4097,7 +4097,7 @@
         "tostatus": false,
         "complete": "true",
         "x": 650,
-        "y": 160,
+        "y": 200,
         "wires": []
     },
     {
@@ -4114,7 +4114,7 @@
         "fwdInMessages": true,
         "templateScope": "local",
         "x": 660,
-        "y": 220,
+        "y": 160,
         "wires": [
             []
         ]
@@ -6762,7 +6762,7 @@
         "type": "debug",
         "z": "11b2f565.0266ab",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -14404,11 +14404,11 @@
         "name": "Temp Debug",
         "active": false,
         "tosidebar": true,
-        "console": true,
+        "console": false,
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 620,
+        "x": 610,
         "y": 340,
         "wires": []
     },
@@ -14417,7 +14417,7 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Setup JMRI Tags",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_URL = global.get('JMRI_URL');\nvar hive = global.get('hive');\nvar tagLookup = flow.get('tagLookup');\nif (tagLookup === undefined) {\n    tagLookup = { 'ID' : {}, 'NAME' : {}};\n}\nif (TT !== undefined && TT.tags.data !== undefined && TT.tags.data.length > 0) {\n    for (var id in TT.tags.data) {\n        var curTag = hive.array_combine(TT.tags.columns,TT.tags.data[id]);\n        var invName = \"Unknown\";\n        \n        if (curTag['wp_tt_inventory_ID'] !== null && curTag['wp_tt_inventory_ID'] !== \"\" && Number(curTag['wp_tt_inventory_ID']) > 0) {\n            var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n            invName=curInv.NAME;\n            tagLookup.ID[curTag['wp_tt_inventory_ID']] = 'IDHIVE' + id;\n            tagLookup.NAME[invName] = 'IDHIVE' + id;\n        }\n        var tempData = { \n          \"name\" : 'IDHIVE' + id,\n          \"userName\" : curTag.TAG_UID,\n          \"comment\" : invName\n        };\n        var verb = \"PUT\";\n        if (JMRI.idTag.map[curTag.TAG_UID] !== undefined){\n            verb= 'POST';\n        }\n        var tempMsg = {\n            payload : {\n                \"type\" : 'idTag',\n                \"data\" : tempData\n            },\n            verb : verb,\n            topic: 'idTag',\n            url : JMRI_URL + 'json/idTag'\n            \n        };\n        node.send(tempMsg);\n    }\n}\nflow.set('tagLookup',tagLookup);\nflow.set('active',false);\nreturn;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_URL = global.get('JMRI_URL');\nvar hive = global.get('hive');\nvar tagLookup = flow.get('tagLookup');\nif (tagLookup === undefined) {\n    tagLookup = { 'ID' : {}, 'NAME' : {}};\n}\nif (TT !== undefined && TT.tags.data !== undefined && TT.tags.data.length > 0) {\n    for (var id in TT.tags.data) {\n        var curTag = hive.array_combine(TT.tags.columns,TT.tags.data[id]);\n        var invName = \"Unknown\";\n        \n        if (curTag['wp_tt_inventory_ID'] !== null && curTag['wp_tt_inventory_ID'] !== \"\" && Number(curTag['wp_tt_inventory_ID']) > 0) {\n            var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[curTag['wp_tt_inventory_ID']]);\n            invName=curInv.NAME;\n            tagLookup.ID[curTag['wp_tt_inventory_ID']] = 'IDHIVE' + id;\n            tagLookup.NAME[invName] = 'IDHIVE' + id;\n        }\n        var tempData = { \n          \"name\" : 'IDHIVE' + id,\n          \"userName\" : curTag.TAG_UID,\n          \"comment\" : invName\n        };\n        var verb = \"PUT\";\n        if (JMRI !== undefined && JMRI.idTag !== undefined && JMRI.idTag.map !== undefined && JMRI.idTag.map.length > 0 && JMRI.idTag.map[curTag.TAG_UID] !== undefined){\n            verb= 'POST';\n        }\n        var tempMsg = {\n            payload : {\n                \"type\" : 'idTag',\n                \"data\" : tempData\n            },\n            verb : verb,\n            topic: 'idTag',\n            url : JMRI_URL + 'json/idTag'\n            \n        };\n        node.send(tempMsg);\n    }\n}\nflow.set('tagLookup',tagLookup);\nflow.set('active',false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 630,
@@ -14626,8 +14626,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1520,
-        "y": 540,
+        "x": 1480,
+        "y": 580,
         "wires": []
     },
     {
@@ -15367,11 +15367,11 @@
         "name": "",
         "active": false,
         "tosidebar": true,
-        "console": true,
+        "console": false,
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1280,
+        "x": 1270,
         "y": 520,
         "wires": []
     },
