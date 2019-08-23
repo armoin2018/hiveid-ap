@@ -12431,7 +12431,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 620,
-        "y": 320,
+        "y": 280,
         "wires": [
             [
                 "9678a17d.f9233",
@@ -12679,7 +12679,7 @@
         "overwriteFile": "true",
         "encoding": "none",
         "x": 740,
-        "y": 400,
+        "y": 360,
         "wires": [
             []
         ]
@@ -12693,7 +12693,7 @@
         "action": "",
         "pretty": true,
         "x": 610,
-        "y": 360,
+        "y": 320,
         "wires": [
             [
                 "2ec96926.6bdab6"
@@ -12708,12 +12708,12 @@
         "func": "var inData = msg.payload;\nvar JMRI_URL = global.get('JMRI_URL');\nvar JMRI = global.get('JMRI');\nvar sync = flow.get('sync');\nvar hive = flow.get('hive');\n\nfor (var i in inData) {\n    var curRecord = inData[i];\n    var type = 'car';\n    if (curRecord['Inventory Type'] !== undefined && curRecord['Inventory Type'] !== \"\") {\n        type = curRecord['Inventory Type'].toLowerCase();    \n    }\n    \n    var temp = {\n        payload : {\n            \"type\" : type,\n            \"data\" : {}\n        },\n        verb : 'PUT',\n        topic : type + 's',\n        url : JMRI_URL + 'json/' + type\n    };\n    \n    for (var fieldName in curRecord) {\n        var targetField = sync.tt2jmri('inventory',fieldName,type);\n        if (targetField !== undefined && targetField !== \"\" && curRecord[fieldName] !== \"\" && curRecord[fieldName] !== null) {\n            temp.payload['data'][targetField] = curRecord[fieldName];\n        }\n    }\n    //console.log(temp.payload);\n    if (temp.payload['data']['carType'] !== undefined) {\n        temp.payload['data']['carType'] = sync.tt2jmri_carType(temp.payload['data']['carType']);\n    }\n    \n    if (temp.payload['data']['color'] !== undefined) {\n        temp.payload['data']['color'] = sync.tt2jmri_color(temp.payload['data']['color']);\n    }\n    \n        \n    if (curRecord['Road Name'] === undefined) {\n        curRecord['Road Name'] = sync.tt2jmri_RoadName(temp.payload['data']['Road Name']);\n    }\n    \n    var name = curRecord['Road Name'] + curRecord['Road Number'];\n    temp.payload['data']['name'] = name;\n    \n    if (curRecord['JMRI_TAGNAME'] !== undefined) {\n        temp.payload['data']['rfid'] = curRecord['JMRI_TAGNAME'];\n    }\n    \n    \n    var exists = false;\n    \n    if (JMRI !== undefined && JMRI.cars !== undefined && JMRI.cars.data !== undefined && JMRI.cars.data.length > 0) {\n        for (var jmriID in JMRI.cars.data) {\n            if (name === JMRI.cars.data[jmriID].name) {\n                exists = true;\n            }\n        }\n    }\n    if (JMRI !== undefined && JMRI.engines !== undefined && JMRI.engines.data !== undefined && JMRI.engines.data.length > 0) {\n        for (var jmriID in JMRI.engines.data) {\n            if (name === JMRI.engines.data[jmriID].name) {\n                exists = true;\n            }\n        }\n    }\n    \n    if (exists === true) {\n        temp.verb = 'POST';\n    } \n    \n    node.send(temp);\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 930,
-        "y": 320,
+        "x": 830,
+        "y": 280,
         "wires": [
             [
                 "9c3a93e3.fade",
-                "52cbe0db.c277c"
+                "3bd4107f.d2b5a"
             ]
         ]
     },
@@ -12726,10 +12726,10 @@
         "outputs": 1,
         "noerr": 0,
         "x": 660,
-        "y": 500,
+        "y": 400,
         "wires": [
             [
-                "c4837cb3.347e1"
+                "3bd4107f.d2b5a"
             ]
         ]
     },
@@ -12743,8 +12743,8 @@
         "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 1180,
-        "y": 400,
+        "x": 1200,
+        "y": 340,
         "wires": [
             []
         ]
@@ -12757,31 +12757,11 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 1050,
-        "y": 360,
-        "wires": [
-            [
-                "97eed347.84621"
-            ]
-        ]
-    },
-    {
-        "id": "5e89fd1e.bd8354",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "PUT Record",
-        "method": "PUT",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 1410,
+        "x": 1070,
         "y": 300,
         "wires": [
             [
-                "da8a2ab7.df8648"
+                "97eed347.84621"
             ]
         ]
     },
@@ -12796,8 +12776,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1920,
-        "y": 520,
+        "x": 1740,
+        "y": 220,
         "wires": []
     },
     {
@@ -12903,8 +12883,8 @@
         "createDir": true,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 1200,
-        "y": 440,
+        "x": 1220,
+        "y": 380,
         "wires": [
             []
         ]
@@ -12984,79 +12964,6 @@
         "wires": [
             [
                 "d619f02a.37bcb"
-            ]
-        ]
-    },
-    {
-        "id": "cb1c3e2b.f563f",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "POST Record",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 1420,
-        "y": 340,
-        "wires": [
-            [
-                "da8a2ab7.df8648"
-            ]
-        ]
-    },
-    {
-        "id": "52cbe0db.c277c",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": true,
-        "outputs": 2,
-        "x": 1250,
-        "y": 320,
-        "wires": [
-            [
-                "5e89fd1e.bd8354"
-            ],
-            [
-                "cb1c3e2b.f563f"
-            ]
-        ]
-    },
-    {
-        "id": "5cbff943.93c3d8",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "PUT Record",
-        "method": "PUT",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 1410,
-        "y": 480,
-        "wires": [
-            [
-                "da8a2ab7.df8648"
             ]
         ]
     },
@@ -14368,59 +14275,6 @@
         ]
     },
     {
-        "id": "c4837cb3.347e1",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": true,
-        "outputs": 2,
-        "x": 1250,
-        "y": 500,
-        "wires": [
-            [
-                "5cbff943.93c3d8"
-            ],
-            [
-                "6a59731.add798c"
-            ]
-        ]
-    },
-    {
-        "id": "6a59731.add798c",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "POST Record",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 1420,
-        "y": 520,
-        "wires": [
-            [
-                "da8a2ab7.df8648"
-            ]
-        ]
-    },
-    {
         "id": "509dfa72.51cfc4",
         "type": "change",
         "z": "3d602d50.39dab2",
@@ -14530,7 +14384,7 @@
         "links": [
             "b1607e3f.fb142"
         ],
-        "x": 495,
+        "x": 555,
         "y": 160,
         "wires": []
     },
@@ -14542,7 +14396,7 @@
         "links": [
             "a309b660.225d08"
         ],
-        "x": 495,
+        "x": 555,
         "y": 200,
         "wires": []
     },
@@ -14601,46 +14455,6 @@
         "wires": []
     },
     {
-        "id": "ab94abd6.2d7c68",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "PUT Record",
-        "method": "PUT",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 1410,
-        "y": 600,
-        "wires": [
-            [
-                "da8a2ab7.df8648"
-            ]
-        ]
-    },
-    {
-        "id": "62352b07.56d274",
-        "type": "http request",
-        "z": "3d602d50.39dab2",
-        "name": "POST Record",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": false,
-        "url": "",
-        "tls": "",
-        "proxy": "",
-        "authType": "",
-        "x": 1420,
-        "y": 640,
-        "wires": [
-            [
-                "da8a2ab7.df8648"
-            ]
-        ]
-    },
-    {
         "id": "3ca5628c.c8f32e",
         "type": "function",
         "z": "3d602d50.39dab2",
@@ -14678,7 +14492,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1250,
+        "x": 1070,
         "y": 240,
         "wires": [
             [
@@ -14701,7 +14515,7 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1410,
+        "x": 1250,
         "y": 220,
         "wires": [
             [
@@ -14721,7 +14535,7 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1420,
+        "x": 1260,
         "y": 260,
         "wires": [
             [
@@ -14942,55 +14756,6 @@
         "wires": [
             [
                 "ad4add7.ad9572"
-            ]
-        ]
-    },
-    {
-        "id": "b88f5f93.adc52",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Format Locations",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar hive = global.get('hive');\nvar _ = global.get('_');\nvar FlowMap = flow.get('FlowMap');\nmsg.payload = { 'PUT' : {}, 'POST' : {}};\nvar metaKeys = {};\nvar keyColumns = TT.locations.keys.columns;\nfor (var keyID in TT.locations.keys.data) {\n    var curKey = TT.locations.keys.data[keyID];    \n    metaKeys[keyID] =  hive.array_combine(keyColumns,curKey);\n}\n\nvar locationColumns = TT.locations.columns;\nvar tempTrack = [];\nfor (var locationID in TT.locations.data) {\n    var curLocation = hive.array_combine(locationColumns,TT.locations.data[locationID]);\n    curLocation.userName = curLocation['NAME'];\n    var parentID = curLocation['wp_tt_locations_PARENT_ID'];\n    var metaColumns = TT.locations.meta.columns;\n    if (TT.locations.meta.data[locationID] !== undefined ) {\n        for (var metaID in TT.locations.meta.data[locationID]) {\n            var curMeta =  hive.array_combine(metaColumns,TT.locations.meta.data[locationID][metaID]);\n            curLocation[metaKeys[curMeta['wp_tt_locationmetakeys_ID']]['meta_key']] = curMeta['meta_value'];\n        }\n    }\n    /* Translate Fields */\n    for (var i in FlowMap) {\n        var curMap = FlowMap[i];\n        if (curMap.TrainTraxx_Type === 'locations' && curLocation[curMap.TrainTraxx] !== undefined) {\n            curLocation[curMap.JMRI] = curLocation[curMap.TrainTraxx];\n        }\n    }\n    /* Get Reporter */\n    var tempReporter = hive.jmri.getReporterNameByLocation(curLocation.userName);\n    if (tempReporter !== undefined && tempReporter !== \"\") {\n        curLocation.reporter = tempReporter;\n    }\n    /* Clean out unused entries */\n    var validFields = ['userName','name','comment','length','location','reporter','type', 'carType','reporterObj'];\n    var tempComment = [];\n    for (var a in curLocation) {\n        var flag = false;\n        for (var b in validFields) {\n            if (a === validFields[b]) {\n                flag = true;\n            }\n        }\n        if (flag === false) {\n            tempComment.push(a + ': ' + curLocation[a]);\n            delete curLocation[a];\n        }\n    }\n    if (curLocation['comment'] === undefined) {\n        curLocation['comment'] = \"\";\n    }\n    curLocation['comment'] += tempComment.join('\\n');\n\n    if (Number(parentID) > 0) {\n        /* Need to append to POST or PUT depending on if it exists or the parent exists\n            Location can be defined based on extracting the parent as well which will define\n            its assoc array key\n        */\n        \n        tempTrack = hive.jmri.getSubLocation(curLocation.userName);\n        /* check to see if the sublocation already exists */\n        if (tempTrack.location !== undefined && Number(tempTrack.location) > 0) {\n            /* Add it to the track object of the POST object */\n            /* Need to converge the tempTrack data with updates from TrainTraxx */\n            for (var x in curLocation) {\n                tempTrack[x] = curLocation[x];\n            }\n            if (msg.payload['POST'][tempTrack.location] === undefined) {\n                msg.payload['POST'][tempTrack.location] = { 'track' : []};\n            }\n            msg.payload['POST'][tempTrack.location].track.push(tempTrack);\n            msg.payload['POST'][tempTrack.location].name = tempTrack.location;\n        } else {\n            /* Add it to the track object of the PUT object */\n            var parentLocation =hive.array_combine(locationColumns,TT.locations.data[parentID]);\n            var tempParent = hive.jmri.getLocation(parentLocation.NAME);\n            if (tempParent.name !== undefined && tempParent.name !== '') {\n                if (msg.payload['POST'][tempParent.name] === undefined ) {\n                    msg.payload['POST'][tempParent.name] = {  \"track\" : [] };\n                }\n                curLocation.location = tempParent.name;\n                msg.payload['POST'][tempParent.name].track.push(curLocation);\n                msg.payload['POST'][tempParent.name].name = tempParent.name;\n            } else {\n                if (msg.payload['PUT'][parentID] === undefined) {\n                    msg.payload['PUT'][parentID] = { 'track' : [] };\n                }\n                msg.payload['PUT'][parentID].track.push(curLocation);\n            }\n        }\n    } else {\n        jmriLocation = hive.jmri.getLocation(curLocation.userName);\n        delete curLocation.type;\n        if (jmriLocation.name !== undefined) {\n            tempTrack = []; \n            if (msg.payload['POST'][jmriLocation.name] === undefined) {\n                msg.payload['POST'][jmriLocation.name] = {  'track' : [] };\n            }\n            if (msg.payload['POST'][jmriLocation.name].track.length > 0) {\n                tempTrack = msg.payload['POST'][jmriLocation.name].track;\n            }\n            msg.payload['POST'][jmriLocation.name] = _.clone(curLocation);\n            msg.payload['POST'][jmriLocation.name].name = jmriLocation.name;\n            msg.payload['POST'][jmriLocation.name].track = tempTrack;\n        } else {\n            tempTrack = []; \n            if (msg.payload['PUT'][locationID] === undefined) {\n                msg.payload['PUT'][locationID] = {  'track' : [] };\n            }\n            if (msg.payload['PUT'][locationID].track.length > 0) {\n                tempTrack = msg.payload['PUT'][locationID].track;\n            }\n            msg.payload['PUT'][locationID] = _.clone(curLocation);\n            msg.payload['PUT'][locationID].track = tempTrack;\n        }\n    }\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 630,
-        "y": 560,
-        "wires": [
-            [
-                "c5a45dee.0d697"
-            ]
-        ]
-    },
-    {
-        "id": "cf8fb8dd.4eeec8",
-        "type": "switch",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "verb",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "PUT",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "POST",
-                "vt": "str"
-            }
-        ],
-        "checkall": "false",
-        "repair": true,
-        "outputs": 2,
-        "x": 1250,
-        "y": 620,
-        "wires": [
-            [
-                "ab94abd6.2d7c68"
-            ],
-            [
-                "62352b07.56d274"
             ]
         ]
     },
@@ -16589,7 +16354,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190823.0001",
+                "to": "20190823.0002",
                 "tot": "str"
             },
             {
@@ -16933,10 +16698,10 @@
         "outputs": 1,
         "noerr": 0,
         "x": 650,
-        "y": 620,
+        "y": 440,
         "wires": [
             [
-                "cf8fb8dd.4eeec8"
+                "3bd4107f.d2b5a"
             ]
         ]
     },
@@ -16949,25 +16714,11 @@
         "outputs": 1,
         "noerr": 0,
         "x": 650,
-        "y": 660,
+        "y": 480,
         "wires": [
             [
-                "cf8fb8dd.4eeec8"
+                "3bd4107f.d2b5a"
             ]
-        ]
-    },
-    {
-        "id": "c5a45dee.0d697",
-        "type": "function",
-        "z": "3d602d50.39dab2",
-        "name": "Break up Location Messages",
-        "func": "var JMRI_URL = global.get('JMRI_URL');\nfor (var verb in msg.payload) {\n    for (var id in msg.payload[verb]) {\n        var temp = {\n            payload : {\n                \"type\" : msg.topic,\n                \"data\" : msg.payload[verb][id]\n            },\n            verb : verb,\n            url : JMRI_URL + 'json/' + msg.topic,\n            headers : {'content-type':'application/json'}\n        };\n        node.send(temp);\n    }\n}\nflow.set('active', false);\nreturn;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 860,
-        "y": 560,
-        "wires": [
-            []
         ]
     },
     {
@@ -16987,8 +16738,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 1,
-        "x": 1690,
-        "y": 520,
+        "x": 1510,
+        "y": 220,
         "wires": [
             [
                 "d939d611.5a0548",
@@ -17004,8 +16755,8 @@
         "func": "var JMRI = global.get('JMRI.' + msg.topic);\nvar flag = false;\n\nif (JMRI === undefined || JMRI.data === undefined) {\n    console.log('JMRI Data was missing for ' +msg.topic);\n    JMRI = { data : [], map : {}, nextID : 1 ,lastLoad : 0  };\n}\n\nif (msg.payload === undefined || msg.payload.data === undefined || msg.payload.data.name === undefined) {\n    console.log('Unable to merge ',msg.payload );\n    return false;\n}\n    \nfor (var dID in JMRI.data) { \n    var curData = JMRI.data[dID];\n    if (msg.payload.data.name === curData.name) {\n        flag=true;   \n        JMRI.data[dID] = msg.payload.data;\n    }\n}\nif (flag === false) {\n    JMRI.data.push(msg.payload.data);\n    JMRI.map[msg.payload.data.name] = JMRI.data.length - 1;\n    var match = msg.payload.data.name.match(/(\\d+)$/);\n    if (match[1] !== undefined && Number(match[1]) > 0) {\n        JMRI.nextID = Number(match[1]) + 1;\n    }\n}\nJMRI.lastLoad = Date.now();\nglobal.set('JMRI.' + msg.topic,JMRI);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1910,
-        "y": 560,
+        "x": 1730,
+        "y": 260,
         "wires": [
             []
         ]
@@ -17132,8 +16883,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 1,
-        "x": 1690,
-        "y": 560,
+        "x": 1510,
+        "y": 260,
         "wires": [
             []
         ]
