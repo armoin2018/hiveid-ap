@@ -12392,9 +12392,7 @@
         "y": 280,
         "wires": [
             [
-                "9678a17d.f9233",
-                "20f89dba.b8f4e2",
-                "621572f.7860c8c"
+                "9678a17d.f9233"
             ]
         ]
     },
@@ -12627,38 +12625,6 @@
         "wires": []
     },
     {
-        "id": "2ec96926.6bdab6",
-        "type": "file",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "filename": "/usr/local/hiveid-ap/cache/traintraxx.json",
-        "appendNewline": true,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "none",
-        "x": 1200,
-        "y": 460,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "20f89dba.b8f4e2",
-        "type": "json",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 1070,
-        "y": 420,
-        "wires": [
-            [
-                "2ec96926.6bdab6"
-            ]
-        ]
-    },
-    {
         "id": "9678a17d.f9233",
         "type": "function",
         "z": "3d602d50.39dab2",
@@ -12670,7 +12636,6 @@
         "y": 280,
         "wires": [
             [
-                "9c3a93e3.fade",
                 "3bd4107f.d2b5a"
             ]
         ]
@@ -12680,46 +12645,15 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Sync Sensors & Reporters",
-        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI_URL = global.get('JMRI_URL');\n\nif (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined && TT.hivenode.data.length >0) {\n    \n    for (var nodeID in TT.hivenode.data) {\n        var nodeData = hive.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeID]);\n        \n        var reporterObject = hive.getReporterName(nodeData['MAC_ADDRESS']);\n        var sensorObject = hive.getSensorName(nodeData['MAC_ADDRESS']);\n        var r_verb = reporterObject.verb;\n        var s_verb = sensorObject.verb;\n        delete reporterObject.verb;\n        delete sensorObject.verb;\n        reporterObject.report =null;\n        reporterObject.value =\"\";\n        reporterObject.lastReport =null;\n        node.send({\n            payload : { type: \"reporter\", data : reporterObject},\n            url : JMRI_URL + 'json/reporter',\n            verb : r_verb,\n            topic: \"reporters\"\n        });\n        node.send({\n            payload : { type : \"sensor\", data : sensorObject},\n            url : JMRI_URL + 'json/sensor',\n            verb : s_verb,\n            topic: \"sensors\"\n        });\n    }\n}\nflow.set('active', false);\nreturn;",
+        "func": "var TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar JMRI_URL = global.get('JMRI_URL');\n\nif (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined && TT.hivenode.data.length >0) {\n    \n    for (var nodeID in TT.hivenode.data) {\n        var nodeData = hive.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeID]);\n        \n        var reporterObject = hive.getReporterName(nodeData['MAC_ADDRESS']);\n        var r_verb = reporterObject.verb;\n        delete reporterObject.verb;\n        node.send({\n            payload : { type: \"reporter\", data : reporterObject},\n            url : JMRI_URL + 'json/reporter',\n            verb : r_verb,\n            topic: \"reporters\"\n        });\n        \n        var sensorObject = hive.getSensorName(nodeData['MAC_ADDRESS']);\n        var s_verb = sensorObject.verb;\n        delete sensorObject.verb;\n        \n        node.send({\n            payload : { type : \"sensor\", data : sensorObject},\n            url : JMRI_URL + 'json/sensor',\n            verb : s_verb,\n            topic: \"sensors\"\n        });\n    }\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 660,
         "y": 320,
         "wires": [
             [
-                "3bd4107f.d2b5a"
-            ]
-        ]
-    },
-    {
-        "id": "97eed347.84621",
-        "type": "file",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "filename": "/usr/local/hiveid-ap/cache/formatted.json",
-        "appendNewline": true,
-        "createDir": true,
-        "overwriteFile": "false",
-        "encoding": "none",
-        "x": 1200,
-        "y": 340,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "9c3a93e3.fade",
-        "type": "json",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 1070,
-        "y": 300,
-        "wires": [
-            [
-                "97eed347.84621"
+                "3bd4107f.d2b5a",
+                "2d91fa0e.59f576"
             ]
         ]
     },
@@ -12734,8 +12668,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1920,
-        "y": 220,
+        "x": 1940,
+        "y": 160,
         "wires": []
     },
     {
@@ -12829,22 +12763,6 @@
             [
                 "337e2284.c5ea3e"
             ]
-        ]
-    },
-    {
-        "id": "621572f.7860c8c",
-        "type": "file",
-        "z": "3d602d50.39dab2",
-        "name": "",
-        "filename": "/usr/local/hiveid-ap/cache/formatted.json",
-        "appendNewline": true,
-        "createDir": true,
-        "overwriteFile": "delete",
-        "encoding": "none",
-        "x": 1220,
-        "y": 380,
-        "wires": [
-            []
         ]
     },
     {
@@ -14424,7 +14342,8 @@
         "y": 240,
         "wires": [
             [
-                "3bd4107f.d2b5a"
+                "3bd4107f.d2b5a",
+                "2d91fa0e.59f576"
             ]
         ]
     },
@@ -16293,7 +16212,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190823.0004",
+                "to": "20190823.0005",
                 "tot": "str"
             },
             {
@@ -16672,17 +16591,22 @@
                 "t": "eq",
                 "v": "200",
                 "vt": "str"
+            },
+            {
+                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": true,
-        "outputs": 1,
+        "outputs": 2,
         "x": 1690,
         "y": 220,
         "wires": [
             [
-                "d939d611.5a0548",
                 "7e6bf024.4ff5a"
+            ],
+            [
+                "d939d611.5a0548"
             ]
         ]
     },
@@ -17230,5 +17154,50 @@
                 "1b1d2a52.6a7416"
             ]
         ]
+    },
+    {
+        "id": "2d91fa0e.59f576",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 910,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c1271aeb.e43838",
+        "type": "catch",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 920,
+        "y": 80,
+        "wires": [
+            [
+                "ee6181c6.4d728"
+            ]
+        ]
+    },
+    {
+        "id": "ee6181c6.4d728",
+        "type": "debug",
+        "z": "3d602d50.39dab2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1150,
+        "y": 80,
+        "wires": []
     }
 ]
