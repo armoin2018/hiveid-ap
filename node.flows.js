@@ -16212,7 +16212,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190828.0001",
+                "to": "20190829.0001",
                 "tot": "str"
             },
             {
@@ -16777,15 +16777,14 @@
         "type": "function",
         "z": "9745920.d8a397",
         "name": "Set QR Info",
-        "func": "var gatewayInfo = global.get('gatewayInfo.hostapd');\nvar tempSec = gatewayInfo.wpa_key_mgmt.split(/\\-/);\nmsg.payload = '\"WIFI:S:' + gatewayInfo.ssid + ';T:' + tempSec[0] +';P:'+ gatewayInfo.wpa_passphrase + ';;\"'; \nreturn msg;",
+        "func": "var gatewayInfo = global.get('gatewayInfo.hostapd');\nmsg.payload = \"\";\nif (gatewayInfo !== undefined && gatewayInfo.wpa_key_mgmt !== undefined) {\n    var tempSec = gatewayInfo.wpa_key_mgmt.split(/\\-/);\n    msg.payload = '\"WIFI:S:' + gatewayInfo.ssid + ';T:' + tempSec[0] +';P:'+ gatewayInfo.wpa_passphrase + ';;\"'; \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1970,
         "y": 980,
         "wires": [
             [
-                "84b71b62.f45d08",
-                "ca44cb8b.516748"
+                "bea6969b.ca8e38"
             ]
         ]
     },
@@ -16800,7 +16799,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 2240,
+        "x": 2420,
         "y": 980,
         "wires": [
             [],
@@ -16884,7 +16883,7 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 2150,
+        "x": 2330,
         "y": 940,
         "wires": []
     },
@@ -17205,5 +17204,29 @@
         "x": 230,
         "y": 140,
         "wires": []
+    },
+    {
+        "id": "bea6969b.ca8e38",
+        "type": "switch",
+        "z": "9745920.d8a397",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 2150,
+        "y": 980,
+        "wires": [
+            [
+                "84b71b62.f45d08",
+                "ca44cb8b.516748"
+            ]
+        ]
     }
 ]
