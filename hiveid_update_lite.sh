@@ -3,7 +3,8 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./hiveid_update_lite.sh                   ####
 #### Description: Updates HiveID's scripts w/o Node   ####
-#### Version:   20190821.001                          ####
+#### Version:   20190829.001                          ####
+####            20190829.001 Added qrencode           ####
 ####            20190821.001 Added File Syncs as well ####
 ##########################################################
 
@@ -16,4 +17,6 @@ cp /opt/hiveid-ap/nodered/change_log.html /var/www/html/. 2>/dev/null
 cp /opt/hiveid-ap/nodered/index.php /var/www/html/. 2>/dev/null
 cp /opt/hiveid-ap/nodered/notavailable.html /var/www/html/. 2>/dev/null
 cp /opt/hiveid-ap/nodered/processing.php /var/www/html/. 2>/dev/null
+
+sudo apt-get install -y qrencode
 sudo chown -R pi:pi /var/www/html/*
