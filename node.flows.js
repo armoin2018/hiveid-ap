@@ -2306,7 +2306,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Get Network Interfaces",
-        "func": "var os = global.get('os');\nvar nics = {};\nnics = os.getNetworkInterfaces();\nglobal.set('networkInterfaces',nics);\n\n//var nics = global.get('networkInterfaces');\nmsg.payload =[];\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    if (ni !== 'lo') {\n        for (var i =0; i< nics[ni].length;i++) {\n            if (nics[ni][i].family === \"IPv4\" && nics[ni][i].netmask === \"255.255.255.0\") {\n                tempIP[ni]=nics[ni][i].address;\n                msg.payload.push({\n                    title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][i].address \n                });\n            }\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = '127.0.0.1';\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
+        "func": "var os = global.get('os');\nvar nics = {};\nnics = os.networkInterfaces();\nglobal.set('networkInterfaces',nics);\n\n//var nics = global.get('networkInterfaces');\nmsg.payload =[];\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    if (ni !== 'lo') {\n        for (var i =0; i< nics[ni].length;i++) {\n            if (nics[ni][i].family === \"IPv4\" && nics[ni][i].netmask === \"255.255.255.0\") {\n                tempIP[ni]=nics[ni][i].address;\n                msg.payload.push({\n                    title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][i].address \n                });\n            }\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = '127.0.0.1';\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
@@ -16212,7 +16212,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190829.0001",
+                "to": "20190829.0002",
                 "tot": "str"
             },
             {
