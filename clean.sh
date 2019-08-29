@@ -20,7 +20,7 @@ echo "Clearing up other history files"
 sudo rm -rf /root/.bash_history 2>/dev/null
 rm -rdf /home/pi/Downloads/* /root/Downloads/* \
         /home/pi/.local/share/Trash/info/* \
-        /home/pi/.local/share/Trash/info/* \
+        /home/pi/.node-red/context/ \
         /usr/local/hiveid-ap/backup/* \
         /usr/local/hiveid-ap/backups/* \
         /usr/local/hiveid-ap/staging/* \
@@ -32,6 +32,7 @@ rm -rf  /home/pi/JMRI_UserFiles/roster/consist \
         /home/pi/.jmri/log/messages.log \
         /home/pi/.bash_history 2>/dev/null
 
+cp /opt/hiveid-ap/*.json /etc/hiveid-ap/.
 find /home/pi/.jmri -name "*.bak" -type f -delete
 for i in $(find /home/pi/.jmri -name "jmri-*" -type d); do rm -r $i 2>/dev/null; done
 
