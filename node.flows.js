@@ -13183,7 +13183,7 @@
         "name": "",
         "filename": "/usr/local/hiveid-ap/cache/global.TrainTraxx.json",
         "appendNewline": true,
-        "createDir": false,
+        "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
         "x": 1100,
@@ -13915,7 +13915,7 @@
         "name": "",
         "filename": "/usr/local/hiveid-ap/cache/global.JMRI.json",
         "appendNewline": true,
-        "createDir": false,
+        "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
         "x": 1010,
@@ -17053,12 +17053,12 @@
         "id": "98594e32.01c36",
         "type": "change",
         "z": "fd2ebb8a.240a38",
-        "name": "Set True",
+        "name": "Set USE_CACHE To False",
         "rules": [
             {
                 "t": "set",
-                "p": "payload",
-                "pt": "msg",
+                "p": "TrainTraxx_Config.USE_CACHE",
+                "pt": "global",
                 "to": "false",
                 "tot": "bool"
             }
@@ -17068,11 +17068,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1220,
+        "x": 1270,
         "y": 160,
         "wires": [
             [
-                "d18c15f1.f2b5a8"
+                "ed5837b0.97eb08"
             ]
         ]
     },
@@ -17159,7 +17159,7 @@
         "type": "debug",
         "z": "3d602d50.39dab2",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": true,
         "tostatus": false,
