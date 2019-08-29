@@ -4,7 +4,9 @@
 ####         M Steve Todd (From JMRI Image)           ####
 #### Usage: ./clean.sh                                ####
 #### Description: Clean up file system                ####
-#### Version: 0.20190812                              ####
+#### Version: 0.20190829                              ####
+####          0.20190829 Added Removal of images & qr ####
+####          0.20190812                              ####
 ##########################################################
 
 echo "Clearing up apt files"
@@ -25,6 +27,8 @@ rm -rdf /home/pi/Downloads/* /root/Downloads/* \
         /usr/local/hiveid-ap/backups/* \
         /usr/local/hiveid-ap/staging/* \
         /usr/local/hiveid-ap/staging_backup/* \
+        /var/www/html/imageCache/* \
+        /var/www/html/qr/* \
         /usr/local/hiveid-ap/cache/* 2>/dev/null
 
 rm -rf  /home/pi/JMRI_UserFiles/roster/consist \
