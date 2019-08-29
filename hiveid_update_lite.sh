@@ -18,5 +18,5 @@ cp /opt/hiveid-ap/nodered/index.php /var/www/html/. 2>/dev/null
 cp /opt/hiveid-ap/nodered/notavailable.html /var/www/html/. 2>/dev/null
 cp /opt/hiveid-ap/nodered/processing.php /var/www/html/. 2>/dev/null
 
-sudo apt-get install -y qrencode
+sudo apt-get install -y qrencode 2>/dev/null
 sudo chown -R pi:pi /var/www/html/*
