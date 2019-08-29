@@ -80,4 +80,6 @@ fi
 /opt/hiveid-ap/setup_links.sh
 /opt/hiveid-ap/setup_node.sh
 
+sudo tune2fs -c 1 /dev/mmcblk0p2
+
 echo "Please Reboot"
