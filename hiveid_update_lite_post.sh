@@ -13,4 +13,4 @@ sudo apt-get install -y qrencode 2>/dev/null
 mkdir /var/www/html/qr /usr/local/hiveid-ap/cache &>/dev/null
 sudo chown -R pi:pi /var/www/html/qr /usr/local/hiveid-ap/cache
 /opt/hiveid-ap/setup_links.sh
-sudo /opt/hiveid-ap/free_memory.sh
+/opt/hiveid-ap/free_memory.sh
