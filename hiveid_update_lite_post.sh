@@ -10,7 +10,7 @@
 
 sudo setcap cap_net_raw,cap_net_admin+eip $(eval readlink -f `which node`)
 sudo apt-get install -y qrencode 2>/dev/null
-mkdir /var/www/html/qr /usr/local/hiveid-ap/cache 2>/dev/null
+mkdir /var/www/html/qr /usr/local/hiveid-ap/cache &>/dev/null
 sudo chown -R pi:pi /var/www/html/qr /usr/local/hiveid-ap/cache
 /opt/hiveid-ap/setup_links.sh
 /opt/hiveid-ap/free_memory.sh
