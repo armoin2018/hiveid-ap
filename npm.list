@@ -1,7 +1,7 @@
+gyp
 node-gyp
 zmq
 usb
-bluetooth-hci-socket
 bcrypt
 node-red-admin
 noble
@@ -14,3 +14,4 @@ aws4
 assert-plus
 caseless
 asynckit
+bluetooth-hci-socket
