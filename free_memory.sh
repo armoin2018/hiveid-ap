@@ -6,5 +6,5 @@
 #### Version: 0.1                                     ####
 ##########################################################
 sudo sync 
-sudo echo 3 > /proc/sys/vm/drop_caches
+sudo echo 3 > /proc/sys/vm/drop_caches 2>/dev/null
 sudo free -m
