@@ -2876,7 +2876,7 @@
         "complete": "payload",
         "targetType": "msg",
         "x": 1100,
-        "y": 440,
+        "y": 460,
         "wires": []
     },
     {
@@ -2931,9 +2931,7 @@
         "type": "link in",
         "z": "5e61e22e.7a581c",
         "name": "Configuration Change oLink",
-        "links": [
-            "b6ed7646.ea36a8"
-        ],
+        "links": [],
         "x": 231.111083984375,
         "y": 101.111083984375,
         "wires": [
@@ -3096,8 +3094,8 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 250,
-        "y": 460,
+        "x": 310,
+        "y": 480,
         "wires": [
             [
                 "251b3c83.10ad94"
@@ -3126,10 +3124,11 @@
         "name": "TrainTraxx Data iLink",
         "links": [
             "eb7a7fef.95ee4",
-            "e37006db.0ea648"
+            "e37006db.0ea648",
+            "b6ed7646.ea36a8"
         ],
-        "x": 215,
-        "y": 420,
+        "x": 235,
+        "y": 440,
         "wires": [
             [
                 "248da61.73dc05a"
@@ -3192,8 +3191,8 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 160,
-        "y": 720,
+        "x": 200,
+        "y": 780,
         "wires": [
             [
                 "cb778529.c41cc8"
@@ -3207,10 +3206,11 @@
         "name": "JMRI Data iLink",
         "links": [
             "391c0a36.ebdac6",
-            "ef86f5e4.672e98"
+            "ef86f5e4.672e98",
+            "d9967b03.2bc018"
         ],
-        "x": 155,
-        "y": 680,
+        "x": 195,
+        "y": 720,
         "wires": [
             [
                 "b0a1d979.9f8538"
@@ -3374,7 +3374,8 @@
                 "639c3c57.932cb4",
                 "e054e355.832a2",
                 "68c8ebf9.5924f4",
-                "58aab300.01211c"
+                "58aab300.01211c",
+                "c1054d1e.8d906"
             ]
         ]
     },
@@ -3433,9 +3434,7 @@
         "x": 1500,
         "y": 420,
         "wires": [
-            [
-                "b6ed7646.ea36a8"
-            ]
+            []
         ]
     },
     {
@@ -3637,12 +3636,12 @@
         "id": "b6ed7646.ea36a8",
         "type": "link out",
         "z": "fd2ebb8a.240a38",
-        "name": "Configuration Change iLink",
+        "name": "TrainTraxx Configuration Change Data iLink",
         "links": [
-            "f6d7de28.90ff4"
+            "b1607e3f.fb142"
         ],
-        "x": 1395,
-        "y": 460,
+        "x": 1415,
+        "y": 120,
         "wires": []
     },
     {
@@ -3783,7 +3782,9 @@
             [
                 "16ca6d5b.3ce5e3",
                 "463da7b7.9c90a8",
-                "f2f09380.a63d5"
+                "f2f09380.a63d5",
+                "1f35f075.13291",
+                "995235ce.0f93e8"
             ]
         ]
     },
@@ -4041,8 +4042,7 @@
         "y": 318,
         "wires": [
             [
-                "7481bb81.5ab614",
-                "1f35f075.13291"
+                "7481bb81.5ab614"
             ]
         ],
         "outputLabels": [
@@ -4138,8 +4138,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 510,
-        "y": 100,
+        "x": 750,
+        "y": 60,
         "wires": [
             []
         ]
@@ -4465,7 +4465,7 @@
         "z": "9745920.d8a397",
         "name": "",
         "x": 860,
-        "y": 400,
+        "y": 460,
         "wires": [
             []
         ]
@@ -7525,7 +7525,7 @@
         "func": "flow.set('currentFirmware',msg.payload.trim());\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
+        "x": 510,
         "y": 340,
         "wires": [
             [
@@ -8848,7 +8848,7 @@
         "type": "debug",
         "z": "5e61e22e.7a581c",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10194,8 +10194,8 @@
         "links": [
             "c03ebe92.1f1ad"
         ],
-        "x": 955,
-        "y": 360,
+        "x": 975,
+        "y": 160,
         "wires": []
     },
     {
@@ -11677,8 +11677,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1280,
-        "y": 360,
+        "x": 1310,
+        "y": 400,
         "wires": []
     },
     {
@@ -13071,8 +13071,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
-        "y": 500,
+        "x": 510,
+        "y": 520,
         "wires": [
             [
                 "99908d40.fdccd"
@@ -13096,7 +13096,7 @@
         "wires": [
             [
                 "3b2bff91.5df5c",
-                "8815dd85.1aad7"
+                "47a06ffc.43f61"
             ]
         ]
     },
@@ -13226,15 +13226,21 @@
         "propertyType": "flow",
         "rules": [
             {
+                "t": "true"
+            },
+            {
                 "t": "false"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 260,
         "y": 320,
         "wires": [
+            [
+                "8815dd85.1aad7"
+            ],
             [
                 "6f9cb799.5e91b8"
             ]
@@ -13370,8 +13376,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": ".5",
-        "x": 270,
-        "y": 500,
+        "x": 330,
+        "y": 520,
         "wires": [
             [
                 "251b3c83.10ad94"
@@ -13385,8 +13391,8 @@
         "name": "",
         "files": "/usr/local/hiveid-ap/cache/global.TrainTraxx.json",
         "recursive": "",
-        "x": 340,
-        "y": 540,
+        "x": 400,
+        "y": 560,
         "wires": [
             [
                 "99908d40.fdccd"
@@ -13403,8 +13409,8 @@
         "chunk": false,
         "sendError": false,
         "encoding": "none",
-        "x": 410,
-        "y": 580,
+        "x": 470,
+        "y": 600,
         "wires": [
             [
                 "1908bb15.312be5"
@@ -13419,8 +13425,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 310,
-        "y": 620,
+        "x": 370,
+        "y": 640,
         "wires": [
             [
                 "982469e0.a9d008"
@@ -13453,8 +13459,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 500,
-        "y": 620,
+        "x": 560,
+        "y": 640,
         "wires": [
             [
                 "a02f6d2c.9c107"
@@ -13476,8 +13482,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 630,
-        "y": 540,
+        "x": 690,
+        "y": 560,
         "wires": [
             [
                 "b85917e0.96a9d8"
@@ -13829,7 +13835,8 @@
         "wires": [
             [
                 "3c4a9a1c.addf66",
-                "f15a725e.ee9ed"
+                "f15a725e.ee9ed",
+                "9a0f81c9.da719"
             ]
         ]
     },
@@ -13852,7 +13859,7 @@
         "repair": false,
         "outputs": 2,
         "x": 220,
-        "y": 1040,
+        "y": 1060,
         "wires": [
             [
                 "4ca45c93.8fc0f4"
@@ -13958,15 +13965,21 @@
         "propertyType": "flow",
         "rules": [
             {
+                "t": "true"
+            },
+            {
                 "t": "false"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 180,
         "y": 1000,
         "wires": [
+            [
+                "f15a725e.ee9ed"
+            ],
             [
                 "910e7072.24197"
             ]
@@ -14115,26 +14128,6 @@
         ]
     },
     {
-        "id": "853d6b3d.540508",
-        "type": "inject",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": ".5",
-        "x": 170,
-        "y": 760,
-        "wires": [
-            [
-                "cb778529.c41cc8"
-            ]
-        ]
-    },
-    {
         "id": "26beefe6.cfd83",
         "type": "function",
         "z": "a06855ce.9f5488",
@@ -14195,7 +14188,7 @@
         "storeOutMessages": true,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 570,
+        "x": 770,
         "y": 200,
         "wires": [
             []
@@ -14205,12 +14198,12 @@
         "id": "8815dd85.1aad7",
         "type": "function",
         "z": "1a726252.d178be",
-        "name": "",
-        "func": "var running = global.get('sync_TrainTraxx_Running');\nif (running !== undefined && running === true) {\n    msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\n} else {\n    msg.template = '';\n}\nreturn msg;",
+        "name": "Set Processing",
+        "func": "msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 370,
-        "y": 200,
+        "x": 500,
+        "y": 300,
         "wires": [
             [
                 "6da11f5.6279ae"
@@ -14240,12 +14233,12 @@
         "id": "f15a725e.ee9ed",
         "type": "function",
         "z": "164213bd.e3dd4c",
-        "name": "",
-        "func": "var running = global.get('sync_JMRI_Running');\nif (running !== undefined && running === true) {\n    msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\n} else {\n    msg.template = '';\n}\nreturn msg;",
+        "name": "Set Processing",
+        "func": "msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 390,
-        "y": 880,
+        "x": 420,
+        "y": 980,
         "wires": [
             [
                 "8f8c1443.c1b888"
@@ -15263,8 +15256,8 @@
         "links": [
             "994a6f66.58304"
         ],
-        "x": 855,
-        "y": 620,
+        "x": 915,
+        "y": 640,
         "wires": []
     },
     {
@@ -15885,6 +15878,11 @@
                 "t": "delete",
                 "p": "stored",
                 "pt": "flow"
+            },
+            {
+                "t": "delete",
+                "p": "sync_TrainTraxx_Running",
+                "pt": "global"
             }
         ],
         "action": "",
@@ -16956,26 +16954,6 @@
         ]
     },
     {
-        "id": "f493577d.f51498",
-        "type": "inject",
-        "z": "164213bd.e3dd4c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "3",
-        "x": 710,
-        "y": 1260,
-        "wires": [
-            [
-                "98537cc2.6b418"
-            ]
-        ]
-    },
-    {
         "id": "edaa7ba.706fd88",
         "type": "ui_template",
         "z": "164213bd.e3dd4c",
@@ -17226,6 +17204,141 @@
             [
                 "84b71b62.f45d08",
                 "ca44cb8b.516748"
+            ]
+        ]
+    },
+    {
+        "id": "47a06ffc.43f61",
+        "type": "change",
+        "z": "1a726252.d178be",
+        "name": "Clear Refresh",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "6da11f5.6279ae"
+            ]
+        ]
+    },
+    {
+        "id": "c1054d1e.8d906",
+        "type": "switch",
+        "z": "fd2ebb8a.240a38",
+        "name": "If USE_CACHE is false",
+        "property": "TrainTraxx_Config.USE_CACHE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 120,
+        "wires": [
+            [
+                "8f4b57b4.4e5a18"
+            ]
+        ]
+    },
+    {
+        "id": "8f4b57b4.4e5a18",
+        "type": "switch",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Key is set",
+        "property": "TrainTraxx_Config.TrainTraxx_Key",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1260,
+        "y": 120,
+        "wires": [
+            [
+                "b6ed7646.ea36a8"
+            ]
+        ]
+    },
+    {
+        "id": "995235ce.0f93e8",
+        "type": "switch",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI_ENABLED",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1040,
+        "y": 120,
+        "wires": [
+            [
+                "d9967b03.2bc018"
+            ]
+        ]
+    },
+    {
+        "id": "d9967b03.2bc018",
+        "type": "link out",
+        "z": "ed0209cc.523aa8",
+        "name": "JMRI Config to Data iLink",
+        "links": [
+            "a309b660.225d08"
+        ],
+        "x": 1175,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9a0f81c9.da719",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "Clear Template",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 880,
+        "wires": [
+            [
+                "8f8c1443.c1b888"
             ]
         ]
     }

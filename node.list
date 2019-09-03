@@ -11,7 +11,7 @@ node-red-contrib-gzip
 node-red-contrib-ibm-watson-iot
 node-red-contrib-moment
 node-red-contrib-mqtt-broker
-node-red-contrib-mqtt-dynamictopic
+//node-red-contrib-mqtt-dynamictopic
 node-red-contrib-mqtt-json
 node-red-contrib-mqttjsonrpc
 node-red-contrib-play-audio
@@ -34,7 +34,7 @@ node-red-node-rbe
 node-red-node-serialport
 node-red-node-smooth
 node-red-node-twitter
-node-red-contrib-ignoble
+//node-red-contrib-ignoble
 node-red-contrib-generic-ble
 node-red-contrib-function-npm
 node-red-contrib-npm

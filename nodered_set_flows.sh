@@ -29,5 +29,8 @@ fi
 
 sudo chown -R pi:pi /home/pi/.node-red
 
+npm cache clean --force
+npm cache verify
+
 sudo service nodered start
 exit 0
