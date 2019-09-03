@@ -22,7 +22,7 @@ echo "Clearing up other history files"
 sudo rm -rf /root/.bash_history 2>/dev/null
 rm -rdf /home/pi/Downloads/* /root/Downloads/* \
         /home/pi/.local/share/Trash/info/* \
-        /home/pi/.node-red/context/ \
+        #/home/pi/.node-red/context/ \
         /usr/local/hiveid-ap/backup/* \
         /usr/local/hiveid-ap/backups/* \
         /usr/local/hiveid-ap/staging/* \
