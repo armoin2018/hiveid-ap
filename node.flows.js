@@ -925,8 +925,8 @@
         "payload": "Do you want to Reboot?",
         "payloadType": "str",
         "topic": "",
-        "x": 700,
-        "y": 320,
+        "x": 740,
+        "y": 260,
         "wires": [
             [
                 "5a9407e8.fa2398"
@@ -944,8 +944,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1370,
-        "y": 320,
+        "x": 1410,
+        "y": 260,
         "wires": [
             [],
             [],
@@ -1158,8 +1158,8 @@
         "cancel": "Cancel",
         "topic": "Reboot",
         "name": "Reboot",
-        "x": 980,
-        "y": 320,
+        "x": 1020,
+        "y": 260,
         "wires": [
             [
                 "d5da6758.1961a8"
@@ -2426,8 +2426,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1150,
-        "y": 320,
+        "x": 1190,
+        "y": 260,
         "wires": [
             [
                 "7cb7f74b.562db8"
@@ -3033,7 +3033,7 @@
         "once": true,
         "onceDelay": "5",
         "x": 210,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
                 "ad4add7.ad9572",
@@ -3070,8 +3070,8 @@
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 990,
-        "y": 400,
+        "x": 1010,
+        "y": 380,
         "wires": [
             []
         ]
@@ -4074,7 +4074,7 @@
         "type": "function",
         "z": "c3e3e66a.322358",
         "name": "Make Summary",
-        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivegateway\": \"Gateways\",\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"tags_activity\" : \"Activity\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\" style=\\\"background-color:#f90;color:#fff;\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold;\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>' + \n    '<br/><strong>NOTES:</strong>'+\n    '<small><ul><li>JMRI summary will only show the parent location counts</li>' +\n    '<li>TrainTraxx inventory will report under JMRI cars and engines</li>' +\n    '<li>TrainTraxx locations withe readers will report under reporters and sensors both.</li>' +\n    '<li>JMRI has an extra sensor</li></ul></small>';\nreturn msg;",
+        "func": "var JMRI_Config = global.get('JMRI_Config');\n\nvar temp = [];\n\nvar Stores = {\n    \"TrainTraxx\": {\n        \"label\": \"TrainTraxx\",\n        \"enabled\": true,\n        \"elements\": {\n            \"hivegateway\": \"Gateways\",\n            \"hivenode\": \"Readers\",\n            \"tags\": \"Tags\",\n            \"tags_activity\" : \"Activity\",\n            \"inventory\": \"Inventory\",\n            \"locations\": \"Locations\"\n        }\n    },\n    \"JMRI\": {\n        \"label\": \"JMRI\",\n        \"enabled\": JMRI_Config.JMRI_ENABLED,\n        \"elements\": {\n            \"sensors\": \"Sensors\",\n            \"reporters\": \"Reporters\",\n            \"cars\": \"Cars\",\n            \"engines\": \"Engines\",\n            \"locations\": \"Locations\",\n            \"idTag\" : \"Tags\"\n        }\n    }\n};\n\nfor (var store in Stores) {\n    \n    var TStore = global.get(store); \n    temp.push(\"<td colspan=\\\"2\\\" style=\\\"background-color:#f90;color:#fff;\\\"><h3>\" + Stores[store].label + \"</h3></td>\");\n    \n    if (TStore !== undefined && Stores[store].enabled === true) {\n        for (var element in Stores[store].elements) {\n            if (TStore[element] !== undefined && TStore[element].data !== undefined) {\n                var tempLength = 0;\n                if (Array.isArray(TStore[element].data)) {\n                    tempLength = TStore[element].data.length;\n                } else if (typeof TStore[element].data === 'object') {\n                    tempLength = Object.keys(TStore[element].data).length;\n                }\n                temp.push('<td style=\"font-weight:bold;\">' + Stores[store].elements[element] + '</td><td>'+ tempLength + '</td>');\n            } else {\n                temp.push('<td colspan=\"2\">No ' + Stores[store].elements[element] + ' Loaded</td>');        \n            }\n        } \n    } else {\n        temp.push('<td colspan=\"2\">Not Loaded</td>');\n    }\n}\n\nmsg.template = '<table width=\"100%\"><tr>' + temp.join('</tr><tr>') + '</tr></table>' + \n    '<br/><strong>NOTES:</strong>'+\n    '<small><ul><li>JMRI summary will only show the parent location counts</li>' +\n    '<li>TrainTraxx inventory will report under JMRI cars and engines</li>' +\n    '<li>TrainTraxx locations with readers will report under reporters and sensors both.</li>' +\n    '<li>JMRI has an extra sensor</li></ul></small>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 420,
@@ -5369,8 +5369,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 830,
-        "y": 260,
+        "x": 870,
+        "y": 200,
         "wires": [
             [
                 "5a9407e8.fa2398"
@@ -5424,8 +5424,8 @@
         "cancel": "",
         "topic": "",
         "name": "Not rebooting message",
-        "x": 1230,
-        "y": 260,
+        "x": 1270,
+        "y": 200,
         "wires": []
     },
     {
@@ -6293,8 +6293,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1000,
-        "y": 260,
+        "x": 1040,
+        "y": 200,
         "wires": [
             [
                 "bd2d57f0.2622f8"
@@ -12152,7 +12152,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 620,
+        "y": 540,
         "wires": [
             [
                 "5ce0926d.37562c",
@@ -12375,7 +12375,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 140,
-        "y": 660,
+        "y": 580,
         "wires": [
             []
         ]
@@ -16210,7 +16210,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190829.0002",
+                "to": "20190904.0001",
                 "tot": "str"
             },
             {
