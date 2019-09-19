@@ -17423,7 +17423,7 @@
         "z": "164213bd.e3dd4c",
         "position": "top right",
         "displayTime": "3",
-        "highlight": "red",
+        "highlight": "",
         "outputs": 0,
         "ok": "OK",
         "cancel": "",
@@ -17444,13 +17444,6 @@
                 "p": "payload",
                 "pt": "msg",
                 "to": "Unable to update JMRI with Tag Read",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "Failure",
                 "tot": "str"
             },
             {
