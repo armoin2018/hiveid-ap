@@ -14551,7 +14551,7 @@
         "complete": "payload",
         "targetType": "msg",
         "x": 1480,
-        "y": 580,
+        "y": 560,
         "wires": []
     },
     {
@@ -16223,7 +16223,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190919.0001",
+                "to": "20190919.0002",
                 "tot": "str"
             },
             {
@@ -17095,7 +17095,8 @@
             ],
             [
                 "d134657a.d3a028",
-                "9326d651.dcf078"
+                "9326d651.dcf078",
+                "e5f31f54.fb78e"
             ]
         ]
     },
@@ -17415,5 +17416,62 @@
         "x": 950,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "6ec8d260.15dccc",
+        "type": "ui_toast",
+        "z": "164213bd.e3dd4c",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "red",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1510,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e5f31f54.fb78e",
+        "type": "change",
+        "z": "164213bd.e3dd4c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Unable to update JMRI with Tag Read",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Failure",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1480,
+        "y": 460,
+        "wires": [
+            [
+                "6ec8d260.15dccc"
+            ]
+        ]
     }
 ]
