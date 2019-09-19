@@ -44,3 +44,4 @@ node-red-contrib-device-stats
 node-red-contrib-linux-memory 
 node-red-contrib-os
 node-red-contrib-wifiscan
+node-red-node-discovery

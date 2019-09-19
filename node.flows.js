@@ -193,6 +193,16 @@
                         "port": 1
                     }
                 ]
+            },
+            {
+                "x": 480,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "91353714.a754e8",
+                        "port": 0
+                    }
+                ]
             }
         ],
         "inputLabels": [
@@ -3210,7 +3220,7 @@
             "d9967b03.2bc018"
         ],
         "x": 195,
-        "y": 700,
+        "y": 680,
         "wires": [
             [
                 "b0a1d979.9f8538"
@@ -7775,7 +7785,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = flow.get('Probes');\nvar hive = global.get('hive');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nfor (var i in inProbes) {\n    if (inProbes[i].MAC === undefined) {\n        continue;\n    }\n    var icon = 'wifi';\n    var error ='';\n    if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n        icon = \"error\";\n        error = \"Unable to reach node \" + inProbes[i].IP;\n    }\n    if (inHealth[inProbes[i].MAC] >= 400) {\n        icon = \"error\";\n        error = \"Page Not Found\";\n        if (inHealth[inProbes[i].MAC] >= 500) {    \n            error = \"Application Error\";\n        }\n    }\n    var successRate = 'N/A';\n    var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n    if (total > 0) {\n        var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n        if (icon === \"wifi\" ) {\n            icon = 'done';\n            if (tempRate < 75) {\n                icon = 'warning';\n                error = 'Some failures detected';\n                if (tempRate < 50) {\n                    icon = 'error';\n                    error = 'Excessive errors detected';\n                }\n            }\n        }\n        successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n    }\n    var locationName = '';\n    var t_loc = hive.getLocationDetails(inProbes[i].MAC);\n    if (t_loc !== undefined && t_loc.location !== undefined && t_loc.location.NAME !== undefined) {\n        locationName = t_loc.location.NAME;\n    }\n    msg.payload.push({\n       title :  '<div>' +\n                    '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                    '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                    '<strong>TrainTraxx Location:</strong>' + locationName + '<br/>' +\n                    '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                    '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                    '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                    '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                    ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                    '<hr/>' +\n                '</div>',\n       menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n       icon_name : icon,\n       data : inProbes[i],\n       url : 'http://' + inProbes[i].IP + ':8080/'\n       \n    });\n}\nreturn msg;",
+        "func": "var inProbes = flow.get('Probes');\nvar hive = global.get('hive');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nif (inProbes !== undefined && inProbes.length > 0) {\n    for (var i in inProbes) {\n        if (inProbes[i].MAC === undefined) {\n            continue;\n        }\n        var icon = 'wifi';\n        var error ='';\n        if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n            icon = \"error\";\n            error = \"Unable to reach node \" + inProbes[i].IP;\n        }\n        if (inHealth[inProbes[i].MAC] >= 400) {\n            icon = \"error\";\n            error = \"Page Not Found\";\n            if (inHealth[inProbes[i].MAC] >= 500) {    \n                error = \"Application Error\";\n            }\n        }\n        var successRate = 'N/A';\n        var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n        if (total > 0) {\n            var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n            if (icon === \"wifi\" ) {\n                icon = 'done';\n                if (tempRate < 75) {\n                    icon = 'warning';\n                    error = 'Some failures detected';\n                    if (tempRate < 50) {\n                        icon = 'error';\n                        error = 'Excessive errors detected';\n                    }\n                }\n            }\n            successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n        }\n        var locationName = '';\n        var t_loc = hive.getLocationDetails(inProbes[i].MAC);\n        if (t_loc !== undefined && t_loc.location !== undefined && t_loc.location.NAME !== undefined) {\n            locationName = t_loc.location.NAME;\n        }\n        msg.payload.push({\n           title :  '<div>' +\n                        '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                        '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                        '<strong>TrainTraxx Location:</strong>' + locationName + '<br/>' +\n                        '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                        '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                        '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                        '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                        ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                        '<hr/>' +\n                    '</div>',\n           menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n           icon_name : icon,\n           data : inProbes[i],\n           url : 'http://' + inProbes[i].IP + ':8080/'\n           \n        });\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -8790,7 +8800,7 @@
         "type": "function",
         "z": "5e61e22e.7a581c",
         "name": "Tracker Process",
-        "func": "var config = global.get('TrainTraxx_Config');\nmsg.payload['apikey'] = config.TrainTraxx_Key;\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "func": "var config = global.get('TrainTraxx_Config');\nvar IP = global.get('IP');\nmsg.payload['apikey'] = config.TrainTraxx_Key;\nmsg.payload.DATA['GATEWAY_IP'] = IP.internalIPv4;\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 820,
@@ -13006,6 +13016,9 @@
             [
                 "5b349664.1dbb58",
                 "881bf492.b6f288"
+            ],
+            [
+                "9a96d660.551768"
             ]
         ]
     },
@@ -13798,7 +13811,6 @@
         "wires": [
             [
                 "b5fe78d9.7a6e58",
-                "f8b2bdc2.f0e25",
                 "d3aedf1f.c858c"
             ]
         ]
@@ -13815,7 +13827,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 660,
-        "y": 940,
+        "y": 980,
         "wires": []
     },
     {
@@ -13861,7 +13873,8 @@
         "y": 1060,
         "wires": [
             [
-                "4ca45c93.8fc0f4"
+                "4ca45c93.8fc0f4",
+                "f8b2bdc2.f0e25"
             ],
             [
                 "767ca1ff.14e85"
@@ -13949,7 +13962,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
+        "x": 430,
         "y": 980,
         "wires": [
             []
@@ -14236,8 +14249,8 @@
         "func": "msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 420,
-        "y": 980,
+        "x": 480,
+        "y": 920,
         "wires": [
             [
                 "8f8c1443.c1b888"
@@ -15355,7 +15368,8 @@
         "wires": [
             [
                 "30269361.9d143c"
-            ]
+            ],
+            []
         ]
     },
     {
@@ -15492,8 +15506,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 150,
-        "y": 460,
+        "x": 130,
+        "y": 480,
         "wires": [
             [
                 "1c2af215.ee5c3e"
@@ -15515,8 +15529,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 190,
-        "y": 500,
+        "x": 170,
+        "y": 520,
         "wires": [
             [
                 "c516a97c.430558"
@@ -15538,8 +15552,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 210,
-        "y": 540,
+        "x": 190,
+        "y": 560,
         "wires": [
             [
                 "635db4f6.97515c"
@@ -15551,11 +15565,11 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "Extract Queue",
-        "func": "var rfid_queue = flow.get('rfid_queue');\nmsg.topic = rfid_queue.shift();\nflow.set('rfid_queue',rfid_queue);\nmsg.payload = flow.get('message');\nreturn msg;",
+        "func": "var rfid_queue = flow.get('rfid_queue');\nmsg.topic = rfid_queue.shift();\nflow.set('rfid_queue',rfid_queue);\nmsg.payload = flow.get('message');\n\nif (msg.payload.UID !== undefined && mag.payload.UID !== \"\" && \n    msg.payload.MAC !== undefined && msg.payload.MAC !== \"\") {\n    node.send(msg);\n}",
         "outputs": 1,
         "noerr": 0,
-        "x": 240,
-        "y": 580,
+        "x": 220,
+        "y": 600,
         "wires": [
             [
                 "cbab1184.86b04"
@@ -16209,7 +16223,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190905.0001",
+                "to": "20190913.0001",
                 "tot": "str"
             },
             {
@@ -17386,5 +17400,20 @@
                 "9a0f81c9.da719"
             ]
         ]
+    },
+    {
+        "id": "9a96d660.551768",
+        "type": "debug",
+        "z": "1a726252.d178be",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 950,
+        "y": 260,
+        "wires": []
     }
 ]
