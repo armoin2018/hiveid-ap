@@ -15565,7 +15565,7 @@
         "type": "function",
         "z": "164213bd.e3dd4c",
         "name": "Extract Queue",
-        "func": "var rfid_queue = flow.get('rfid_queue');\nmsg.topic = rfid_queue.shift();\nflow.set('rfid_queue',rfid_queue);\nmsg.payload = flow.get('message');\n\nif (msg.payload.UID !== undefined && mag.payload.UID !== \"\" && \n    msg.payload.MAC !== undefined && msg.payload.MAC !== \"\") {\n    node.send(msg);\n}",
+        "func": "var rfid_queue = flow.get('rfid_queue');\nmsg.topic = rfid_queue.shift();\nflow.set('rfid_queue',rfid_queue);\nmsg.payload = flow.get('message');\n\nif (msg.payload.UID !== undefined && msg.payload.UID !== \"\" && \n    msg.payload.MAC !== undefined && msg.payload.MAC !== \"\") {\n    node.send(msg);\n}",
         "outputs": 1,
         "noerr": 0,
         "x": 220,
