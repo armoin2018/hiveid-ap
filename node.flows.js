@@ -8800,7 +8800,7 @@
         "type": "function",
         "z": "5e61e22e.7a581c",
         "name": "Tracker Process",
-        "func": "var config = global.get('TrainTraxx_Config');\nvar IP = global.get('IP');\nmsg.payload['apikey'] = config.TrainTraxx_Key;\nmsg.payload.DATA['GATEWAY_IP'] = IP.internalIPv4;\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
+        "func": "var config = global.get('TrainTraxx_Config');\nvar IP = global.get('IP');\nmsg.payload.DATA['GATEWAY_IP'] = IP.internalIPv4;\nmsg.url = config.TrainTraxx_Web + '/tracker.php';\nmsg.headers = {'content-type':'application/x-www-form-urlencoded'};\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 820,
