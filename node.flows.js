@@ -5094,11 +5094,10 @@
         "proxy": "",
         "authType": "",
         "x": 550,
-        "y": 360,
+        "y": 420,
         "wires": [
             [
-                "505e45d0.cb662c",
-                "33a5186c.ba9b08"
+                "505e45d0.cb662c"
             ]
         ]
     },
@@ -5107,11 +5106,11 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Set URL",
-        "func": "msg.url = 'http://' + msg.IP + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
+        "func": "var curIP =  msg.IP;\nvar curMAC = msg.MAC;\nmsg = {\n    IP : curIP,\n    MAC : curMAC\n};\nmsg.url = 'http://' + curIP + ':8080/info';\nmsg.headers ={'content-type':'text/javascript' };\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "3176c5dc.e897ba"
@@ -7755,7 +7754,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1140,
-        "y": 360,
+        "y": 420,
         "wires": [
             []
         ]
@@ -7785,7 +7784,7 @@
         "type": "function",
         "z": "7b5cf843.8f8fc8",
         "name": "Setup Rendering",
-        "func": "var inProbes = flow.get('Probes');\nvar hive = global.get('hive');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nif (inProbes !== undefined && inProbes.length > 0) {\n    for (var i in inProbes) {\n        if (inProbes[i].MAC === undefined) {\n            continue;\n        }\n        var icon = 'wifi';\n        var error ='';\n        if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n            icon = \"error\";\n            error = \"Unable to reach node \" + inProbes[i].IP;\n        }\n        if (inHealth[inProbes[i].MAC] >= 400) {\n            icon = \"error\";\n            error = \"Page Not Found\";\n            if (inHealth[inProbes[i].MAC] >= 500) {    \n                error = \"Application Error\";\n            }\n        }\n        var successRate = 'N/A';\n        var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n        if (total > 0) {\n            var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n            if (icon === \"wifi\" ) {\n                icon = 'done';\n                if (tempRate < 75) {\n                    icon = 'warning';\n                    error = 'Some failures detected';\n                    if (tempRate < 50) {\n                        icon = 'error';\n                        error = 'Excessive errors detected';\n                    }\n                }\n            }\n            successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n        }\n        var locationName = '';\n        var t_loc = hive.getLocationDetails(inProbes[i].MAC);\n        if (t_loc !== undefined && t_loc.location !== undefined && t_loc.location.NAME !== undefined) {\n            locationName = t_loc.location.NAME;\n        }\n        msg.payload.push({\n           title :  '<div>' +\n                        '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                        '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                        '<strong>TrainTraxx Location:</strong>' + locationName + '<br/>' +\n                        '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                        '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                        '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                        '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                        ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                        '<hr/>' +\n                    '</div>',\n           menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n           icon_name : icon,\n           data : inProbes[i],\n           url : 'http://' + inProbes[i].IP + ':8080/'\n           \n        });\n    }\n}\nreturn msg;",
+        "func": "var inProbes = flow.get('Probes');\nvar hive = global.get('hive');\nmsg.payload = [];\nvar inHealth = flow.get('Probe_Health');\nif (inProbes !== undefined && Object.keys(inProbes).length > 0) {\n    for (var i in inProbes) {\n        if (inProbes[i].MAC === undefined) {\n            continue;\n        }\n        var icon = 'wifi';\n        var error ='';\n        if (inHealth[inProbes[i].MAC] === \"EHOSTUNREACH\") {\n            icon = \"error\";\n            error = \"Unable to reach node \" + inProbes[i].IP;\n        }\n        if (inHealth[inProbes[i].MAC] >= 400) {\n            icon = \"error\";\n            error = \"Page Not Found\";\n            if (inHealth[inProbes[i].MAC] >= 500) {    \n                error = \"Application Error\";\n            }\n        }\n        var successRate = 'N/A';\n        var total = inProbes[i].SUCCESS + inProbes[i].FAILURE;\n        if (total > 0) {\n            var tempRate = parseFloat((inProbes[i].SUCCESS*100)/total).toFixed(1);\n            if (icon === \"wifi\" ) {\n                icon = 'done';\n                if (tempRate < 75) {\n                    icon = 'warning';\n                    error = 'Some failures detected';\n                    if (tempRate < 50) {\n                        icon = 'error';\n                        error = 'Excessive errors detected';\n                    }\n                }\n            }\n            successRate = inProbes[i].SUCCESS + '/' + total + ' = ' + String(tempRate) +'%';\n        }\n        var locationName = '';\n        var t_loc = hive.getLocationDetails(inProbes[i].MAC);\n        if (t_loc !== undefined && t_loc.location !== undefined && t_loc.location.NAME !== undefined) {\n            locationName = t_loc.location.NAME;\n        }\n        msg.payload.push({\n           title :  '<div>' +\n                        '<strong>IP:</strong>' + inProbes[i].IP + '<br/>'+ \n                        '<strong>MAC:</strong> ' + inProbes[i].MAC + '<br/>'+ \n                        '<strong>TrainTraxx Location:</strong>' + locationName + '<br/>' +\n                        '<strong>Version: </strong> ' + inProbes[i].VERSION + '<br />' +\n                        '<strong>Endpoint:</strong> ' + inProbes[i].URL + '<br/>' +\n                        '<strong>Signal:</strong> ' + inProbes[i].RSSI + '<br/>' +\n                        '<strong>Success Rate:</strong> ' + successRate + '<br/>' +\n                        ((error !== \"\" ) ? '<strong>Notice:</strong> ' + error : '') +\n                        '<hr/>' +\n                    '</div>',\n           menu : [\"Restart\",\"Reset\",\"Clear Configuration\",\"Update Firmware\",\"Show History\"],\n           icon_name : icon,\n           data : inProbes[i],\n           url : 'http://' + inProbes[i].IP + ':8080/'\n           \n        });\n    }\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -7805,7 +7804,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1170,
-        "y": 320,
+        "y": 380,
         "wires": [
             []
         ]
@@ -12452,7 +12451,7 @@
         "repair": true,
         "outputs": 7,
         "x": 780,
-        "y": 360,
+        "y": 420,
         "wires": [
             [
                 "dd94a3fd.ae674",
@@ -12568,7 +12567,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1150,
-        "y": 400,
+        "y": 460,
         "wires": [
             []
         ]
@@ -12601,22 +12600,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 1180,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "33a5186c.ba9b08",
-        "type": "debug",
-        "z": "7b5cf843.8f8fc8",
-        "name": "Post Web Request",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 770,
-        "y": 440,
+        "y": 500,
         "wires": []
     },
     {
