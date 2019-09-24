@@ -495,7 +495,7 @@
         "tab": "1aab9ee9.8893d1",
         "order": 1,
         "disp": true,
-        "width": "12",
+        "width": "14",
         "collapse": true
     },
     {
@@ -3074,8 +3074,8 @@
         "group": "3220fafa.330906",
         "name": "TrainTraxx Activity",
         "order": 1,
-        "width": "12",
-        "height": "14",
+        "width": "14",
+        "height": "15",
         "format": "",
         "storeOutMessages": false,
         "fwdInMessages": true,
@@ -14592,7 +14592,7 @@
         "name": "",
         "group": "3220fafa.330906",
         "order": 3,
-        "width": "6",
+        "width": "7",
         "height": "1",
         "passthru": false,
         "label": "Refresh Activity",
@@ -15123,7 +15123,7 @@
         "tooltip": "",
         "place": "Select Inventory Name",
         "group": "d3d8accc.c9188",
-        "order": 1,
+        "order": 2,
         "width": "6",
         "height": "1",
         "passthru": false,
@@ -15235,7 +15235,7 @@
         "z": "7bef0b7b.d5a104",
         "group": "d3d8accc.c9188",
         "name": "Search Results",
-        "order": 2,
+        "order": 3,
         "width": "6",
         "height": "14",
         "format": "<div ng-bind-html=\"msg.payload\"></div>",
@@ -16157,7 +16157,7 @@
         "name": "Clear Activity",
         "group": "3220fafa.330906",
         "order": 2,
-        "width": "6",
+        "width": "7",
         "height": "1",
         "passthru": false,
         "label": "Clear Activity",
@@ -17483,5 +17483,29 @@
         "x": 1270,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "57e61d6.5d4c464",
+        "type": "ui_text_input",
+        "z": "7bef0b7b.d5a104",
+        "name": "Inventory Name Input",
+        "label": "Inventory Name",
+        "tooltip": "",
+        "group": "d3d8accc.c9188",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "5824b887.3ea998",
+                "97a995d3.1794c8"
+            ]
+        ]
     }
 ]
