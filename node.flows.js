@@ -8754,7 +8754,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1480,
+        "x": 1520,
         "y": 1120,
         "wires": [
             [
@@ -8901,7 +8901,7 @@
         "name": "Flush Node Cache",
         "group": "873f13f8.22f2b",
         "order": 2,
-        "width": "12",
+        "width": "6",
         "height": "1",
         "passthru": false,
         "label": "Flush Cache",
@@ -8912,8 +8912,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 660,
-        "y": 1120,
+        "x": 650,
+        "y": 880,
         "wires": [
             [
                 "d804a10b.2f2a3"
@@ -8960,8 +8960,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 890,
-        "y": 1120,
+        "x": 880,
+        "y": 880,
         "wires": [
             []
         ]
@@ -17504,6 +17504,183 @@
             [
                 "5824b887.3ea998",
                 "97a995d3.1794c8"
+            ]
+        ]
+    },
+    {
+        "id": "fc2e1f06.0f8808",
+        "type": "change",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LEASE_FILE",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 1200,
+        "wires": [
+            [
+                "6cf81c1.4948364"
+            ]
+        ]
+    },
+    {
+        "id": "6cf81c1.4948364",
+        "type": "exec",
+        "z": "7b5cf843.8f8fc8",
+        "command": "sudo /opt/hiveid-ap/dnsmasq_get_leases.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 790,
+        "y": 1260,
+        "wires": [
+            [
+                "85dc2ac8.cb7eb"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "85dc2ac8.cb7eb",
+        "type": "csv",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 1050,
+        "y": 1260,
+        "wires": [
+            [
+                "9dd5c2cf.9dd2"
+            ]
+        ]
+    },
+    {
+        "id": "9dd5c2cf.9dd2",
+        "type": "function",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Set URL",
+        "func": "var new_url = flow.get('NEW_URL');\nmsg.url = 'http://' + msg.payload.col3 + ':8080/restart';\nmsg.topic = msg.payload.col2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1100,
+        "y": 1300,
+        "wires": [
+            [
+                "711756f6.51c86"
+            ]
+        ]
+    },
+    {
+        "id": "711756f6.51c86",
+        "type": "http request",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1150,
+        "y": 1340,
+        "wires": [
+            [
+                "83d65862.a7a6e8"
+            ]
+        ]
+    },
+    {
+        "id": "83d65862.a7a6e8",
+        "type": "switch",
+        "z": "7b5cf843.8f8fc8",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "400",
+                "vt": "str"
+            },
+            {
+                "t": "gte",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 1310,
+        "y": 1340,
+        "wires": [
+            [
+                "4226552a.2c89fc"
+            ],
+            [
+                "1fc4e5f6.cb0fda"
+            ],
+            [
+                "9ab886c2.8e45f8"
+            ],
+            [
+                "1fc4e5f6.cb0fda"
+            ]
+        ]
+    },
+    {
+        "id": "256760f8.a886e",
+        "type": "ui_button",
+        "z": "7b5cf843.8f8fc8",
+        "name": "Restart All Nodes",
+        "group": "873f13f8.22f2b",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "label": "Restart All Nodes",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "fa-reload",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 630,
+        "y": 1160,
+        "wires": [
+            [
+                "fc2e1f06.0f8808"
             ]
         ]
     }
