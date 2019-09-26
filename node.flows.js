@@ -7757,13 +7757,6 @@
                 "pt": "msg",
                 "to": "green",
                 "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "lite_running",
-                "pt": "flow",
-                "to": "true",
-                "tot": "bool"
             }
         ],
         "action": "",
