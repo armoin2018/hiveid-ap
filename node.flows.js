@@ -814,6 +814,33 @@
         "height": 1
     },
     {
+        "id": "4b0278eb.86214",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "17f52c5b.cfb014",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b70330c6.020ec",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "17f52c5b.cfb014",
+        "order": 8,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "c439ace5.0b1cb",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "17f52c5b.cfb014",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -1015,9 +1042,9 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 7,
-        "width": 0,
-        "height": 0,
+        "order": 10,
+        "width": "5",
+        "height": "1",
         "passthru": false,
         "label": "OS Upgrades",
         "tooltip": "",
@@ -1094,9 +1121,9 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 4,
-        "width": 0,
-        "height": 0,
+        "order": 5,
+        "width": "5",
+        "height": "1",
         "passthru": false,
         "label": "Update HiveID Code (SLOW)",
         "tooltip": "",
@@ -1783,11 +1810,10 @@
         "payloadType": "str",
         "topic": "",
         "x": 230,
-        "y": 60,
+        "y": 40,
         "wires": [
             [
-                "dc21a5dc.d18fb8",
-                "b6adf091.54a19"
+                "652e7920.f4f0e"
             ]
         ]
     },
@@ -1870,7 +1896,8 @@
         "y": 260,
         "wires": [
             [
-                "208ccfbb.60cfd"
+                "208ccfbb.60cfd",
+                "7b2ff96a.7e981"
             ]
         ]
     },
@@ -1884,7 +1911,7 @@
         "createDir": false,
         "overwriteFile": "false",
         "x": 570,
-        "y": 400,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1898,7 +1925,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 590,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
                 "fca32d87.e092a"
@@ -1923,7 +1950,7 @@
         "outputType": "msg",
         "outTz": "America/Chicago",
         "x": 540,
-        "y": 320,
+        "y": 300,
         "wires": [
             [
                 "a03255ae.66a948"
@@ -2688,7 +2715,7 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 6,
+        "order": 9,
         "width": "6",
         "height": "2",
         "name": "",
@@ -4900,7 +4927,7 @@
         "name": "",
         "label": "Change Password",
         "group": "17f52c5b.cfb014",
-        "order": 8,
+        "order": 12,
         "width": "6",
         "height": "3",
         "options": [
@@ -6333,10 +6360,10 @@
         "name": "",
         "group": "17f52c5b.cfb014",
         "order": 3,
-        "width": 0,
-        "height": 0,
+        "width": "5",
+        "height": "1",
         "passthru": false,
-        "label": "HiveID Lite Update with Standard Flows",
+        "label": "HiveID Lite Update with Flows",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -6344,12 +6371,11 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 260,
+        "x": 210,
         "y": 440,
         "wires": [
             [
-                "cb5b3377.6d8cd",
-                "b6adf091.54a19"
+                "ac649e65.7a997"
             ]
         ]
     },
@@ -6665,7 +6691,8 @@
         "y": 700,
         "wires": [
             [
-                "d5c9c93d.040dc8"
+                "d5c9c93d.040dc8",
+                "2642f88e.2ca0a8"
             ],
             [
                 "bf3e9a41.53c138"
@@ -7730,6 +7757,13 @@
                 "pt": "msg",
                 "to": "green",
                 "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "lite_running",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
             }
         ],
         "action": "",
@@ -14858,7 +14892,7 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "Format Activity Data",
-        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nvar types = ['location','destination','finalDestination'];\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = hive.traintraxx.getInventoryIDByTag(activity[i]['UID']);\n    \n    var locID = hive.traintraxx.getHivenodeLocationByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = hive.traintraxx.getLocationNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = hive.array_combine(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    var JMRIState = '';\n    /* JMRI is going to need to be refreshed before this is going to work right \n       - After the tag is injected, refresh JMRI \n       - Need to make sure the resync is done before reloading the activity\n    */\n    if (JMRI_Config.JMRI_ENABLED === true) {\n        if (i === 0 || activity[i].jmri === undefined || activity[i].jmri === \"\" || activity[i].jmri === '<strong>JMRI Location: </strong><br/>') {\n            var jmri_inventory = hive.jmri.getInventoryByUID(activity[i]['UID']);\n            var locationTracker = {};\n            for (var typeID in types) {\n                var type = types[typeID];\n                var tempLocation = '';\n                var tempLoc = '';\n                var curColor = '';\n                locationTracker[type] = '';\n                if (jmri_inventory !== undefined && jmri_inventory[type] !== undefined && jmri_inventory[type] !== null) {\n                    if (jmri_inventory[type].userName === undefined && jmri_inventory[type].name !== undefined) {\n                        tempLoc = hive.jmri.getLocationByJMRIName(jmri_inventory[type].name);\n                        if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                            jmri_inventory[type].userName = tempLoc.userName;\n                        }\n                    }\n\n                    if (jmri_inventory[type].userName === undefined) {\n                        jmri_inventory[type].userName= \"\";\n                    }\n                    if (type === 'location') {\n                        var tempComment='';\n                        if (jmri_inventory.comment !== undefined && jmri_inventory.comment !== '') {\n                            tempComment = hive.proper(jmri_inventory.comment) + ' ';\n                        }\n                        tempLocation += '(' +tempComment + ((jmri_inventory.load === 'E') ? 'Empty' : 'Loaded') + ') ';\n                    }\n                    if ( jmri_inventory[type].userName !== '') {\n                        tempLocation += jmri_inventory[type].userName;\n                        locationTracker[type] = jmri_inventory[type].userName;\n                    }\n                    if (jmri_inventory[type].track !== undefined && jmri_inventory[type].track !== null) {\n                        if (jmri_inventory[type].track.userName === undefined && jmri_inventory[type].track.name !== undefined ) {\n                            tempLoc = hive.jmri.getSubLocationByJMRIName(jmri_inventory[type].track.name);\n                            if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                                jmri_inventory[type].track.userName = tempLoc.userName;\n                            }\n                        }\n                        if (jmri_inventory[type].track.userName !== undefined && jmri_inventory[type].track.userName !== \"\") {\n                            tempLocation += '->' + jmri_inventory[type].track.userName;\n                            locationTracker[type] += '->' + jmri_inventory[type].track.userName;\n                        }\n                    }\n                }\n                if (tempLocation !== '') {\n                    JMRIState += '<strong class=\"li-color-' + i + '\">JMRI ' + hive.proper(type) + ': </strong>' + tempLocation + '<br/>';   \n                }\n            }\n            console.log(locationTracker);\n            if (locationTracker['location'] !== '' && locationTracker['destination'] !== '' && locationTracker['location'] === locationTracker['destination']) {\n                JMRIState += '<style> .li-color-' + i + ': #0f0;</style>';         \n            }\n            activity[i].jmri=JMRIState;\n        } else {\n            JMRIState=activity[i].jmri;\n        }\n    }\n    /* Need to get the TrainTraxx Locations to show the parent as well */\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + '<br />' +\n                JMRIState + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
+        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nvar types = ['location','destination','finalDestination'];\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = hive.traintraxx.getInventoryIDByTag(activity[i]['UID']);\n    \n    var locID = hive.traintraxx.getHivenodeLocationByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = hive.traintraxx.getLocationNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = hive.array_combine(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    var JMRIState = '';\n    /* JMRI is going to need to be refreshed before this is going to work right \n       - After the tag is injected, refresh JMRI \n       - Need to make sure the resync is done before reloading the activity\n    */\n    if (JMRI_Config.JMRI_ENABLED === true) {\n        if (i === 0 || activity[i].jmri === undefined || activity[i].jmri === \"\" || activity[i].jmri === '<strong>JMRI Location: </strong><br/>') {\n            var jmri_inventory = hive.jmri.getInventoryByUID(activity[i]['UID']);\n            var locationTracker = {};\n            for (var typeID in types) {\n                var type = types[typeID];\n                var tempLocation = '';\n                var tempLoc = '';\n                var curColor = '';\n                locationTracker[type] = '';\n                if (jmri_inventory !== undefined && jmri_inventory[type] !== undefined && jmri_inventory[type] !== null) {\n                    if (jmri_inventory[type].userName === undefined && jmri_inventory[type].name !== undefined) {\n                        tempLoc = hive.jmri.getLocationByJMRIName(jmri_inventory[type].name);\n                        if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                            jmri_inventory[type].userName = tempLoc.userName;\n                        }\n                    }\n\n                    if (jmri_inventory[type].userName === undefined) {\n                        jmri_inventory[type].userName= \"\";\n                    }\n                    if (type === 'location') {\n                        var tempComment='';\n                        if (jmri_inventory.comment !== undefined && jmri_inventory.comment !== '') {\n                            tempComment = hive.proper(jmri_inventory.comment) + ' ';\n                        }\n                        tempLocation += '(' +tempComment + ((jmri_inventory.load === 'E') ? 'Empty' : 'Loaded') + ') ';\n                    }\n                    if ( jmri_inventory[type].userName !== '') {\n                        tempLocation += jmri_inventory[type].userName;\n                        locationTracker[type] = jmri_inventory[type].userName;\n                    }\n                    if (jmri_inventory[type].track !== undefined && jmri_inventory[type].track !== null) {\n                        if (jmri_inventory[type].track.userName === undefined && jmri_inventory[type].track.name !== undefined ) {\n                            tempLoc = hive.jmri.getSubLocationByJMRIName(jmri_inventory[type].track.name);\n                            if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                                jmri_inventory[type].track.userName = tempLoc.userName;\n                            }\n                        }\n                        if (jmri_inventory[type].track.userName !== undefined && jmri_inventory[type].track.userName !== \"\") {\n                            tempLocation += '->' + jmri_inventory[type].track.userName;\n                            locationTracker[type] += '->' + jmri_inventory[type].track.userName;\n                        }\n                    }\n                }\n                if (tempLocation !== '') {\n                    JMRIState += '<strong class=\"li-color-' + i + '\">JMRI ' + hive.proper(type) + ': </strong>' + tempLocation + '<br/>';   \n                }\n            }\n            console.log(locationTracker);\n            if (locationTracker['location'] !== '' && locationTracker['destination'] !== '' && locationTracker['location'] === locationTracker['destination']) {\n                JMRIState += '<style> .li-color-' + i + ' { color : #0f0;}</style>';         \n            }\n            activity[i].jmri=JMRIState;\n        } else {\n            JMRIState=activity[i].jmri.replace(/li-color-\\d+/g,'li-color-' + i);\n        }\n    }\n    /* Need to get the TrainTraxx Locations to show the parent as well */\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + '<br />' +\n                JMRIState + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 720,
@@ -16210,7 +16244,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190924.0002",
+                "to": "20190926.0001",
                 "tot": "str"
             },
             {
@@ -16240,8 +16274,8 @@
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
         "order": 2,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "1",
         "name": "",
         "label": "HiveID Version",
         "format": "{{msg.payload}}",
@@ -16373,9 +16407,9 @@
         "z": "a06855ce.9f5488",
         "name": "Setup/Update JMRI",
         "group": "17f52c5b.cfb014",
-        "order": 5,
-        "width": 0,
-        "height": 0,
+        "order": 7,
+        "width": "5",
+        "height": "1",
         "passthru": false,
         "label": "Setup/Update JMRI",
         "tooltip": "",
@@ -17682,6 +17716,339 @@
             [
                 "fc2e1f06.0f8808"
             ]
+        ]
+    },
+    {
+        "id": "2642f88e.2ca0a8",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lite_running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 660,
+        "wires": [
+            [
+                "7a528331.5cb0ac"
+            ]
+        ]
+    },
+    {
+        "id": "7b2ff96a.7e981",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "store_running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 260,
+        "wires": [
+            [
+                "905d4268.8126"
+            ]
+        ]
+    },
+    {
+        "id": "ac649e65.7a997",
+        "type": "switch",
+        "z": "11b2f565.0266ab",
+        "name": "Is Running",
+        "property": "lite_running",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 520,
+        "y": 440,
+        "wires": [
+            [
+                "9fe5b605.55ca4"
+            ],
+            [
+                "b6adf091.54a19",
+                "cb5b3377.6d8cd",
+                "25386384.87620c",
+                "be33311c.a2908"
+            ]
+        ]
+    },
+    {
+        "id": "652e7920.f4f0e",
+        "type": "switch",
+        "z": "11b2f565.0266ab",
+        "name": "Is Running",
+        "property": "store_running",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 40,
+        "wires": [
+            [
+                "9fe5b605.55ca4"
+            ],
+            [
+                "b6adf091.54a19",
+                "dc21a5dc.d18fb8",
+                "13a4899f.f71016",
+                "d521c635.651c2"
+            ]
+        ]
+    },
+    {
+        "id": "9fe5b605.55ca4",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Already Running Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Update already running",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Update Request",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 260,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "d521c635.651c2",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Store Processing",
+        "func": "msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1090,
+        "y": 120,
+        "wires": [
+            [
+                "2022e342.3c6b14"
+            ]
+        ]
+    },
+    {
+        "id": "25386384.87620c",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Lite Running",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lite_running",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13a4899f.f71016",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Store Running",
+        "rules": [
+            {
+                "t": "set",
+                "p": "store_running",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "905d4268.8126",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Clear",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 160,
+        "wires": [
+            [
+                "2022e342.3c6b14"
+            ]
+        ]
+    },
+    {
+        "id": "2022e342.3c6b14",
+        "type": "ui_template",
+        "z": "11b2f565.0266ab",
+        "group": "511f0851.ca4e98",
+        "name": "Store Processing",
+        "order": 1,
+        "width": "1",
+        "height": "1",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 1330,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be33311c.a2908",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Lite Processing",
+        "func": "msg.template = '<img src=\"/images/processing.png\" height=\"48px\">';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1360,
+        "y": 360,
+        "wires": [
+            [
+                "2bf06b74.374e94"
+            ]
+        ]
+    },
+    {
+        "id": "7a528331.5cb0ac",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Clear",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1330,
+        "y": 400,
+        "wires": [
+            [
+                "2bf06b74.374e94"
+            ]
+        ]
+    },
+    {
+        "id": "2bf06b74.374e94",
+        "type": "ui_template",
+        "z": "11b2f565.0266ab",
+        "group": "17f52c5b.cfb014",
+        "name": "Lite Processing",
+        "order": 4,
+        "width": "1",
+        "height": "1",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 1600,
+        "y": 380,
+        "wires": [
+            []
         ]
     }
 ]
