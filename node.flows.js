@@ -126,6 +126,13 @@
         "info": ""
     },
     {
+        "id": "7e6978a8.bbc058",
+        "type": "tab",
+        "label": "JMRI Audit",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "8b10dcf.dc4c82",
         "type": "subflow",
         "name": "Get JMRI Info",
@@ -349,7 +356,7 @@
         "z": "",
         "name": "Application Settings",
         "icon": "fa-list",
-        "order": 12,
+        "order": 13,
         "disabled": false,
         "hidden": true
     },
@@ -372,7 +379,7 @@
         "link": "/",
         "icon": "all_inclusive",
         "target": "iframe",
-        "order": 15
+        "order": 16
     },
     {
         "id": "8e968283.a2d29",
@@ -382,7 +389,7 @@
         "link": "/redir?app=jmri",
         "icon": "train",
         "target": "iframe",
-        "order": 9
+        "order": 10
     },
     {
         "id": "6efda0bd.72343",
@@ -392,7 +399,7 @@
         "link": "/redir?app=openrsd",
         "icon": "fa-cogs",
         "target": "iframe",
-        "order": 11
+        "order": 12
     },
     {
         "id": "38e63d7a.b846e2",
@@ -402,7 +409,7 @@
         "link": "/redir?app=phpmyadmin",
         "icon": "fa-database",
         "target": "newtab",
-        "order": 10
+        "order": 11
     },
     {
         "id": "3808a9b7.8005b6",
@@ -412,7 +419,7 @@
         "link": "https://www.traintraxx.com/traintraxx-application",
         "icon": "fa-train",
         "target": "iframe",
-        "order": 7
+        "order": 8
     },
     {
         "id": "12a9f286.0bbd9d",
@@ -422,7 +429,7 @@
         "link": "https://www.traintraxx.com/product-category/traintraxx-products/",
         "icon": "shopping_cart",
         "target": "newtab",
-        "order": 8
+        "order": 9
     },
     {
         "id": "82d159ac.42e4b8",
@@ -440,7 +447,7 @@
         "z": "",
         "name": "Network Mode",
         "icon": "settings_ethernet",
-        "order": 13,
+        "order": 14,
         "disabled": false,
         "hidden": true
     },
@@ -612,7 +619,7 @@
         "z": "",
         "name": "Node Manger",
         "icon": "fa-microchip",
-        "order": 5,
+        "order": 6,
         "disabled": false,
         "hidden": false
     },
@@ -644,7 +651,7 @@
         "z": "",
         "name": "Under Development",
         "icon": "dashboard",
-        "order": 16,
+        "order": 17,
         "disabled": true,
         "hidden": true
     },
@@ -676,7 +683,7 @@
         "z": "",
         "name": "Node History",
         "icon": "fa-history",
-        "order": 6,
+        "order": 7,
         "disabled": false,
         "hidden": true
     },
@@ -697,7 +704,7 @@
         "z": "",
         "name": "Service Manager",
         "icon": "fa-server",
-        "order": 14,
+        "order": 15,
         "disabled": false,
         "hidden": true
     },
@@ -751,7 +758,7 @@
         "link": "/redir?app=jmri_ops",
         "icon": "train",
         "target": "iframe",
-        "order": 4
+        "order": 5
     },
     {
         "id": "6e752ac1.4f63f4",
@@ -779,7 +786,7 @@
         "z": "",
         "name": "JMRI Operations Links",
         "icon": "link",
-        "order": 3,
+        "order": 4,
         "disabled": false,
         "hidden": false
     },
@@ -802,7 +809,7 @@
         "link": "/redir?app=change_log",
         "icon": "change_history",
         "target": "iframe",
-        "order": 17
+        "order": 18
     },
     {
         "id": "654fb383.d4029c",
@@ -839,6 +846,38 @@
         "order": 11,
         "width": 1,
         "height": 1
+    },
+    {
+        "id": "2e59cdbe.2f3a72",
+        "type": "ui_tab",
+        "z": "",
+        "name": "JMRI Train Auditor",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b241ba50.8a64a",
+        "type": "ui_group",
+        "z": "",
+        "name": "Trains",
+        "tab": "2e59cdbe.2f3a72",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "17c7cc36.736714",
+        "type": "ui_group",
+        "z": "",
+        "name": "Cars",
+        "tab": "2e59cdbe.2f3a72",
+        "order": 3,
+        "disp": true,
+        "width": "14",
+        "collapse": false
     },
     {
         "id": "5a317a8b.60a8b4",
@@ -18040,6 +18079,247 @@
         "templateScope": "local",
         "x": 1600,
         "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a718b596.5cb9c8",
+        "type": "inject",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "60",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "6e6b3a22.482694"
+            ]
+        ]
+    },
+    {
+        "id": "6e6b3a22.482694",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "is JMRI_ENABLED",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "6fc4e750.dc1d3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1abcb494.09e6fb",
+        "type": "ui_list",
+        "z": "7e6978a8.bbc058",
+        "group": "b241ba50.8a64a",
+        "name": "Trains",
+        "order": 0,
+        "width": "6",
+        "height": "14",
+        "lineType": "two",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "65a88892.34e51",
+                "6798731.fb03c0c"
+            ]
+        ]
+    },
+    {
+        "id": "6fc4e750.dc1d3",
+        "type": "function",
+        "z": "7e6978a8.bbc058",
+        "name": "Create Train List",
+        "func": "var jmri = global.get('JMRI');\nvar listItem = [];\nif (jmri.trains !== undefined && jmri.trains.length > 0) {\n    for (var trainID in jmri.trains) {\n        var curTrain = jmri.trains[trainID];\n        \n        listItem.push({\n            curTrain : curTrain,\n            menu : {},\n            title : '<strong>' + curTrain.userName + '</strong><br />' +\n                '<strong>Description: </strong>' + curTrain.description + '<br />' +\n                '<strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                '<strong>Route: </strong>' + curTrain.route + '<br />' +\n                '<strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                '<strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                '<strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                '<strong>Location: </strong>' + curTrain.location + '<br />' +\n                '<strong>Status: </strong>' + curTrain.status + '<br />' + '<hr />'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send(listItem);    \n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "1abcb494.09e6fb"
+            ]
+        ]
+    },
+    {
+        "id": "65a88892.34e51",
+        "type": "debug",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 350,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "295d0b98.074214",
+        "type": "ui_list",
+        "z": "7e6978a8.bbc058",
+        "group": "17c7cc36.736714",
+        "name": "Engines",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "lineType": "one",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "26502bd1.df83b4"
+            ]
+        ]
+    },
+    {
+        "id": "c7d176fe.8cce58",
+        "type": "ui_list",
+        "z": "7e6978a8.bbc058",
+        "group": "17c7cc36.736714",
+        "name": "Cars",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "lineType": "one",
+        "actionType": "menu",
+        "allowHTML": true,
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "4d229772.25e0e"
+            ]
+        ]
+    },
+    {
+        "id": "3cc0257d.4dc9c2",
+        "type": "function",
+        "z": "7e6978a8.bbc058",
+        "name": "Format Engines",
+        "func": "var jmri = global.get('JMRI');\nvar selectedTrain = msg.payload.curTrain;\nvar engineList = [];\nif (jmri !== undefined && jmri.trains !== undefined) {\n    for (var trainID in jmri.trains) {\n        var curTrain = jmri.trains[trainID];\n        if (selectedTrain.name === curTrain.name) {\n            if (curTrain.engines !== undefined && curTrain.engines.length >0 ) {\n                for (var engineID in curTrain.engines) {\n                    var curEngine = curTrain.engines[engineID];\n                    var formatLocation = curEngine.location.userName;\n                    if (curEngine.location.track !== undefined && curEngine.location.track.userName !== undefined) {\n                        formatLocation += '->' + curEngine.location.track.userName;\n                    }\n                    var formatDestination = curEngine.destination.userName;\n                    if (curEngine.destination.track !== undefined && curEngine.destination.track.userName !== undefined) {\n                        formatDestination += '->' + curEngine.destination.track.userName;\n                    }\n                    engineList.push({\n                        curEngine: curEngine,\n                        title:  '<strong>Engine Name: </strong>' + curEngine.name + '<br />' +\n                                '<strong>Location: </strong>' + formatLocation + '<br />' +\n                                '<strong>Destination: </strong>' + formatDestination + '<br />',\n                        menu : []\n                    });     \n                }\n            }\n        }\n    }\n}\nif (engineList !== undefined && engineList.length > 0) {\n    node.send(engineList);\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 360,
+        "wires": [
+            [
+                "295d0b98.074214"
+            ]
+        ]
+    },
+    {
+        "id": "b5f61484.372",
+        "type": "function",
+        "z": "7e6978a8.bbc058",
+        "name": "Format Cars",
+        "func": "var jmri = global.get('JMRI');\nvar selectedTrain = msg.payload.curTrain;\nvar carList = [];\nif (jmri !== undefined && jmri.trains !== undefined) {\n    for (var trainID in jmri.trains) {\n        var curTrain = jmri.trains[trainID];\n        if (selectedTrain.name === curTrain.name) {\n            if (curTrain.cars !== undefined && curTrain.cars.length >0 ) {\n                for (var carID in curTrain.cars) {\n                    var curCar = curTrain.cars[carID];\n                    var formatLocation = curCar.location.userName;\n                    if (curCar.location.track !== undefined && curCar.location.track.userName !== undefined) {\n                        formatLocation += '->' + curCar.location.track.userName;\n                    }\n                    var formatDestination = curCar.destination.userName;\n                    if (curCar.destination.track !== undefined && curCar.destination.track.userName !== undefined) {\n                        formatDestination += '->' + curCar.destination.track.userName;\n                    }\n                    carList.push({\n                        curCar: curCar,\n                        title:  '<strong>Car Name: </strong>' + curCar.name + '<br />' +\n                                '<strong>Location: </strong>' + formatLocation + '<br />' +\n                                '<strong>Destination: </strong>' + formatDestination + '<br />',\n                        menu : []\n                    });     \n                }\n            }\n        }\n    }\n}\nif (carList !== undefined && carList.length > 0) {\n    node.send(carList);\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "c7d176fe.8cce58"
+            ]
+        ]
+    },
+    {
+        "id": "6798731.fb03c0c",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "property": "payload.curTrain",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "3cc0257d.4dc9c2",
+                "b5f61484.372"
+            ]
+        ]
+    },
+    {
+        "id": "26502bd1.df83b4",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4d229772.25e0e",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 400,
         "wires": [
             []
         ]
