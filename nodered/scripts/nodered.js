@@ -7,7 +7,7 @@ function download(filename, text, type = 'json') {
             typeString = 'text/plain';
             break;
     }
-    element.setAttribute('href', 'data:' +typeString+';charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('href', 'data:' + typeString + ';charset=utf-8,\'' + encodeURIComponent(text) +'\'');
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);
