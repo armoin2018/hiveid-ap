@@ -652,8 +652,8 @@
         "name": "Under Development",
         "icon": "dashboard",
         "order": 17,
-        "disabled": true,
-        "hidden": true
+        "disabled": false,
+        "hidden": false
     },
     {
         "id": "511f0851.ca4e98",
@@ -18156,7 +18156,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Create Train List",
-        "func": "var jmri = global.get('JMRI');\nvar listItem = [];\nif (jmri.trains !== undefined && jmri.trains.data.length > 0) {\n    for (var trainID in jmri.trains.data) {\n        var curTrain = jmri.trains.data[trainID];\n        \n        listItem.push({\n            curTrain : curTrain,\n            menu : {},\n            title : '<strong>' + curTrain.userName + '</strong><br />' +\n                '<strong>Description: </strong>' + curTrain.description + '<br />' +\n                '<strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                '<strong>Route: </strong>' + curTrain.route + '<br />' +\n                '<strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                '<strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                '<strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                '<strong>Location: </strong>' + curTrain.location + '<br />' +\n                '<strong>Status: </strong>' + curTrain.status + '<br />' + '<hr />'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send(listItem);    \n}\nreturn;",
+        "func": "var jmri = global.get('JMRI');\nvar listItem = [];\nif (jmri.trains !== undefined && jmri.trains.data !== undefined && jmri.trains.data.length > 0) {\n    for (var trainID in jmri.trains.data) {\n        var curTrain = jmri.trains.data[trainID];\n        \n        listItem.push({\n            curTrain : curTrain,\n            menu : {},\n            title : '<strong>' + curTrain.userName + '</strong><br />' +\n                '<strong>Description: </strong>' + curTrain.description + '<br />' +\n                '<strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                '<strong>Route: </strong>' + curTrain.route + '<br />' +\n                '<strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                '<strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                '<strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                '<strong>Location: </strong>' + curTrain.location + '<br />' +\n                '<strong>Status: </strong>' + curTrain.status + '<br />' + '<hr />'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send(listItem);    \n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 200,
@@ -18322,6 +18322,110 @@
         "y": 400,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "8054e013.d36e5",
+        "type": "ui_button",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "group": "511f0851.ca4e98",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Export JMRI",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 400,
+        "y": 480,
+        "wires": [
+            [
+                "5ec6db25.245f1c"
+            ]
+        ]
+    },
+    {
+        "id": "143e4829.27e3c8",
+        "type": "json",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "2e15bdf0.3140a2"
+            ]
+        ]
+    },
+    {
+        "id": "5ec6db25.245f1c",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 520,
+        "wires": [
+            [
+                "143e4829.27e3c8"
+            ]
+        ]
+    },
+    {
+        "id": "b7f746ba.bb6b4",
+        "type": "ui_template",
+        "z": "ed0209cc.523aa8",
+        "group": "511f0851.ca4e98",
+        "name": "",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 780,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e15bdf0.3140a2",
+        "type": "function",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "func": "msg.template = '<script language=\"javascript\">download(\\'temp.js\\',\\'' + msg.payload + '\\');</script>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 560,
+        "wires": [
+            [
+                "b7f746ba.bb6b4"
+            ]
         ]
     }
 ]
