@@ -1,4 +1,5 @@
-function download(filename, text, type='json') {
+function download(filename, text, type = 'json') {
+    console.log({ 'filename': filename, 'text': text, 'type': type });
     var element = document.createElement('a');
     var typeString = 'application/json';
     switch (type.toUpperCase()) {

@@ -18417,7 +18417,7 @@
         "type": "function",
         "z": "ed0209cc.523aa8",
         "name": "",
-        "func": "msg.template = '<script language=\"javascript\">download(\\'temp.js\\',\\'' + msg.payload + '\\');</script>';\nreturn msg;",
+        "func": "var IP = global.get('IP');\nmsg.template = '<script type=\"text/javascript\" src=\"http://' + IP.internalIPv4 + '/scripts/nodered.js\"></script>' +\n                '<script language=\"javascript\">download(\\'temp.js\\',\\'' + msg.payload + '\\');</script>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 610,
@@ -18426,6 +18426,70 @@
             [
                 "b7f746ba.bb6b4"
             ]
+        ]
+    },
+    {
+        "id": "346b7eba.dcfc8a",
+        "type": "ui_text_input",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "label": "Import JMRI",
+        "tooltip": "",
+        "group": "511f0851.ca4e98",
+        "order": 4,
+        "width": "6",
+        "height": "5",
+        "passthru": true,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 390,
+        "y": 620,
+        "wires": [
+            [
+                "e0f4df75.50e018"
+            ]
+        ]
+    },
+    {
+        "id": "e0f4df75.50e018",
+        "type": "json",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 660,
+        "wires": [
+            [
+                "bb67a477.d641f"
+            ]
+        ]
+    },
+    {
+        "id": "bb67a477.d641f",
+        "type": "change",
+        "z": "ed0209cc.523aa8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "JMRI",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 660,
+        "wires": [
+            []
         ]
     }
 ]
