@@ -865,7 +865,7 @@
         "tab": "2e59cdbe.2f3a72",
         "order": 1,
         "disp": true,
-        "width": "6",
+        "width": "9",
         "collapse": false
     },
     {
@@ -6790,7 +6790,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 530,
+        "x": 370,
         "y": 760,
         "wires": [
             [],
@@ -14665,7 +14665,7 @@
         "tooltip": "",
         "color": "",
         "bgcolor": "",
-        "icon": "",
+        "icon": "refresh",
         "payload": "",
         "payloadType": "str",
         "topic": "",
@@ -16276,7 +16276,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20190929.0002",
+                "to": "20191002.0002",
                 "tot": "str"
             },
             {
@@ -18095,8 +18095,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "60",
-        "x": 150,
-        "y": 160,
+        "x": 130,
+        "y": 80,
         "wires": [
             [
                 "6e6b3a22.482694"
@@ -18127,7 +18127,9 @@
             [
                 "6fc4e750.dc1d3"
             ],
-            []
+            [
+                "fa977e2d.84bd48"
+            ]
         ]
     },
     {
@@ -18137,7 +18139,7 @@
         "group": "b241ba50.8a64a",
         "name": "Trains",
         "order": 0,
-        "width": "6",
+        "width": "9",
         "height": "14",
         "lineType": "two",
         "actionType": "menu",
@@ -18156,7 +18158,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Create Train List",
-        "func": "var jmri = global.get('JMRI');\nvar listItem = [];\nif (jmri.trains !== undefined && jmri.trains.data !== undefined && jmri.trains.data.length > 0) {\n    for (var trainID in jmri.trains.data) {\n        var curTrain = jmri.trains.data[trainID];\n        \n        listItem.push({\n            curTrain : curTrain,\n            menu : {},\n            title : '<strong>' + curTrain.userName + '</strong><br />' +\n                '<strong>Description: </strong>' + curTrain.description + '<br />' +\n                '<strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                '<strong>Route: </strong>' + curTrain.route + '<br />' +\n                '<strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                '<strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                '<strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                '<strong>Location: </strong>' + curTrain.location + '<br />' +\n                '<strong>Status: </strong>' + curTrain.status + '<br />' + '<hr />'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send(listItem);    \n}\nreturn;",
+        "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nconsole.log(trains);\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        \n        listItem.push({\n            curTrain : curTrain,\n            menu : ['List Cars','Build','Move','Terminate'],\n            title : '<div style=\"font-size:7pt;\">' +\n                ' <strong>' + curTrain.userName + '</strong><br />' +\n                ' <small>' + curTrain.description + '</small><br /><br />' +\n                ' <strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                ' <strong>Route: </strong>' + curTrain.route + '<br />' +\n                ' <strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                ' <strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                ' <strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                ' <strong>Location: </strong>' + curTrain.location + '<br />' +\n                ' <strong>Status: </strong>' + curTrain.status + '<br /><hr />' +\n                '</div>'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send({payload : listItem});    \n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 200,
@@ -18227,7 +18229,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Format Engines",
-        "func": "var engineList = [];\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;\n    if (curTrain.engines !== undefined && curTrain.engines.length >0 ) {\n        for (var engineID in curTrain.engines) {\n            var curEngine = curTrain.engines[engineID];\n            var formatLocation = curEngine.location.userName;\n            if (curEngine.location.track !== undefined && curEngine.location.track.userName !== undefined) {\n                formatLocation += '->' + curEngine.location.track.userName;\n            }\n            var formatDestination = curEngine.destination.userName;\n            if (curEngine.destination.track !== undefined && curEngine.destination.track.userName !== undefined) {\n                formatDestination += '->' + curEngine.destination.track.userName;\n            }\n            engineList.push({\n                curEngine: curEngine,\n                title:  '<strong>Engine Name: </strong>' + curEngine.name + '<br />' +\n                        '<strong>Location: </strong>' + formatLocation + '<br />' +\n                        '<strong>Destination: </strong>' + formatDestination + '<br />',\n                menu : []\n            });     \n        }\n    }\n}\nif (engineList !== undefined && engineList.length > 0) {\n    node.send(engineList);\n}\nreturn;",
+        "func": "var engineList = [];\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;\n    if (curTrain.engines !== undefined && curTrain.engines.length >0 ) {\n        for (var engineID in curTrain.engines) {\n            var curEngine = curTrain.engines[engineID];\n            var formatLocation = curEngine.location.userName;\n            if (curEngine.location.track !== undefined && curEngine.location.track.userName !== undefined) {\n                formatLocation += '->' + curEngine.location.track.userName;\n            }\n            var formatDestination = curEngine.destination.userName;\n            if (curEngine.destination.track !== undefined && curEngine.destination.track.userName !== undefined) {\n                formatDestination += '->' + curEngine.destination.track.userName;\n            }\n            engineList.push({\n                curEngine: curEngine,\n                title:  '<strong>Engine Name: </strong>' + curEngine.name + '<br />' +\n                        '<strong>Location: </strong>' + formatLocation + '<br />' +\n                        '<strong>Destination: </strong>' + formatDestination + '<br />',\n                menu : []\n            });     \n        }\n    }\n}\nif (engineList !== undefined && engineList.length > 0) {\n    node.send({payload: engineList});\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 360,
@@ -18243,7 +18245,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Format Cars",
-        "func": "var carList = [];\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;\n    if (curTrain.cars !== undefined && curTrain.cars.length >0 ) {\n        for (var carID in curTrain.cars) {\n            var curCar = curTrain.cars[carID];\n            var formatLocation = curCar.location.userName;\n            if (curCar.location.track !== undefined && curCar.location.track.userName !== undefined) {\n                formatLocation += '->' + curCar.location.track.userName;\n            }\n            var formatDestination = curCar.destination.userName;\n            if (curCar.destination.track !== undefined && curCar.destination.track.userName !== undefined) {\n                formatDestination += '->' + curCar.destination.track.userName;\n            }\n            carList.push({\n                curCar: curCar,\n                title:  '<strong>Car Name: </strong>' + curCar.name + '<br />' +\n                        '<strong>Location: </strong>' + formatLocation + '<br />' +\n                        '<strong>Destination: </strong>' + formatDestination + '<br />',\n                menu : []\n            });     \n        }\n    }\n}\nif (carList !== undefined && carList.length > 0) {\n    node.send(carList);\n}\nreturn;",
+        "func": "var carList = [];\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;\n    if (curTrain.cars !== undefined && curTrain.cars.length >0 ) {\n        for (var carID in curTrain.cars) {\n            var curCar = curTrain.cars[carID];\n            var formatLocation = curCar.location.userName;\n            if (curCar.location.track !== undefined && curCar.location.track.userName !== undefined) {\n                formatLocation += '->' + curCar.location.track.userName;\n            }\n            var formatDestination = curCar.destination.userName;\n            if (curCar.destination.track !== undefined && curCar.destination.track.userName !== undefined) {\n                formatDestination += '->' + curCar.destination.track.userName;\n            }\n            carList.push({\n                curCar: curCar,\n                title:  '<strong>Car Name: </strong>' + curCar.name + '<br />' +\n                        '<strong>Location: </strong>' + formatLocation + '<br />' +\n                        '<strong>Destination: </strong>' + formatDestination + '<br />',\n                menu : []\n            });     \n        }\n    }\n}\nif (carList !== undefined && carList.length > 0) {\n    node.send({payload: carList});\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 350,
@@ -18554,5 +18556,88 @@
                 "154caf68.ec7a39"
             ]
         ]
+    },
+    {
+        "id": "db522252.8f4758",
+        "type": "ui_button",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "group": "b241ba50.8a64a",
+        "order": 1,
+        "width": "9",
+        "height": "1",
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "6e6b3a22.482694"
+            ]
+        ]
+    },
+    {
+        "id": "fa977e2d.84bd48",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Feature Not Available",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "JMRI Auditor",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "d593a0db.05e84"
+            ]
+        ]
+    },
+    {
+        "id": "d593a0db.05e84",
+        "type": "ui_toast",
+        "z": "7e6978a8.bbc058",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 710,
+        "y": 200,
+        "wires": []
     }
 ]
