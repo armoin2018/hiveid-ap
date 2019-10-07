@@ -14205,10 +14205,10 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Setup Global Functions",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = { 'jmri' : {}, 'traintraxx': {}};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.empty = function(inObject) {\n    if (inObject === undefined || inObject === null || inObject === {} || inObject === \"\") {\n        return true;\n    }\n    return false;\n}\n\ninObject.proper = function(inString) {\n  return inString.replace(/(^|\\s)\\S/g, function(s) { return s.toUpperCase(); });\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : String(mac).toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    if (JMRI !== undefined && JMRI[deviceType] !== undefined && JMRI[deviceType].data !== undefined && JMRI[deviceType].data.length > 0) {\n        for (var id in JMRI[deviceType].data) {\n            var curDevice = JMRI[deviceType].data[id];\n            if (myResults.userName === curDevice.userName) {\n                myResults.name = curDevice.name;\n                myResults.state = curDevice.state;\n                myResults.verb = 'POST';\n            }\n        }\n    }\n    if (myResults.name === '') {\n        if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n            for (var nodeId in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeId]);\n                if (String(curNode['MAC_ADDRESS']).toUpperCase() === myResults.userName) { \n                    myResults.name = prefix + String(nodeId);\n                }\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var activeHivenode = {};\n    if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var hivenodeID in TT.hivenode.data) {\n            var curHivenode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[hivenodeID]);\n            if (String(curHivenode.MAC_ADDRESS).toUpperCase() == String(mac).toUpperCase()) {\n                activeHivenode = curHivenode;\n            }\n        }\n        var activeLocation = {};\n        if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n            activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n            activeLocation['ID'] = activeHivenode['wp_tt_locations_ID'];\n        }\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var activeTag = {};\n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined ) {\n        for (var tagID in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns, TT.tags.data[tagID]);\n            if (String(curTag.TAG_UID).toUpperCase() == String(uid).toUpperCase()) {\n                activeTag = curTag;\n            }\n        }\n        \n        var activeInventory = {};\n        if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n            activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n        }\n    }\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    if (JMRI !== undefined && JMRI.idTag !==undefined) {\n        if (JMRI.idTag.data !== undefined && JMRI.idTag.data.length > 0) {\n            for (var id in JMRI.idTag.data) {\n                var curTag = JMRI.idTag.data[id];\n                if (curTag.userName === uid) {\n                    myResults.name = curTag.name;   \n                }\n            }\n        }\n    \n        if (myResults.name === undefined) {\n            myResults.verb = 'PUT';\n            myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.userName === userName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.name === jmriName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.userName === userName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.name === jmriName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getReporterNameByLocation = function(userName) {\n    var myResults = \"\";\n    var lookupID = null;\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in TT.locations.data) {\n            var curLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[lID]);\n            if (curLocation.NAME === userName) {\n                lookupID = Number(lID);\n            }\n        }\n        if (Number(lookupID) >0) {\n            for (var nodeID in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[nodeID]);\n                if (Number(curNode['wp_tt_locations_ID']) === lookupID) {\n                    var tempResults= inObject.getReporterName(curNode['MAC_ADDRESS']);\n                    myResults = tempResults['name'];\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getTagByUID= function(uid) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.idTag !== undefined && JMRI.idTag.map !== undefined) {\n        for (var jmID in JMRI.idTag.map) {\n            if (jmID === uid) {\n                myResults = JMRI.idTag.data[JMRI.idTag.map[jmID]];\n            }\n        }\n    }\n    return myResults;   \n};\n\n\ninObject.jmri.getInventoryByTag = function(tagName) {\n    var myResults = {};\n    if (JMRI !== undefined) {\n        if (JMRI.cars !== undefined && JMRI.cars.data.length > 0 ) {\n            for (var cID in JMRI.cars.data ) {\n                var curCar = JMRI.cars.data[cID];\n                if (curCar.rfid !== undefined && curCar.rfid === tagName) {\n                    myResults = curCar;\n                    myResults['type'] = 'car';\n                }\n                \n            }\n        }\n        if (myResults.name === undefined && JMRI.engines !== undefined && JMRI.engines.data.length > 0 ) {\n            for (var eID in JMRI.engines.data ) {\n                var curEngine = JMRI.engines.data[eID];\n                if (curEngine.rfid === tagName) {\n                    myResults = curEngine;\n                    myResults['type'] = 'engine';\n                }\n            }    \n        }\n    }\n    return myResults;   \n};\n\ninObject.jmri.getInventoryByUID = function(uid) {\n    var tempTag =  inObject.jmri.getTagByUID(uid);\n    var myResults = {};\n    if (tempTag !== undefined && tempTag !== {} && tempTag.name !== '') {\n        myResults = inObject.jmri.getInventoryByTag(tempTag.name);\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByReporter = function(reporter) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLoc = JMRI.locations.data[lID];\n            if (curLoc.reporter !== undefined && curLoc.reporter === reporter) {\n                myResults = { \"name\" : curLoc.name};    \n            } \n            if (curLoc.track !== undefined && curLoc.track.length > 0) {\n                for (var tID in curLoc.track) {\n                    var curTrack = curLoc.track[tID];\n                    if (curTrack.reporter !== undefined && curTrack.reporter === reporter) {\n                        myResults = { \n                            \"name\" : curLoc.name, \n                            \"track\" : { \n                                \"name\" : curTrack.name \n                            }\n                        };    \n                    }\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\n\n\ninObject.traintraxx.getInventoryIDByTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        for (var t in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns,TT.tags.data[t]);\n            if (curTag['TAG_UID'] === uid) {\n                return curTag['wp_tt_inventory_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\ninObject.traintraxx.getHivenodeLocationByMac = function(mac) {\n    if (mac !== undefined && TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[t]);\n            if (curNode['MAC_ADDRESS'] !== undefined && String(curNode['MAC_ADDRESS']).toUpperCase() === String(mac).toUpperCase()) {\n                return curNode['wp_tt_locations_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\n/* This function is for legacy support without track level Reporter assignment */\ninObject.jmri.getLocationByTrainTraxxMAC = function(mac) {\n    var myResults = { 'userName' : '', 'name' : '', 'track' : {} };\n    var TT_LocID = inObject.traintraxx.getHivenodeLocationByMac(mac);\n    var TT_Loc_Parent ={};\n    if (!inObject.empty(TT_LocID)) {\n        var curLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[TT_LocID]);\n        if (!inObject.empty(curLoc) && Number(curLoc['wp_tt_locations_PARENT_ID']) > 0) {\n            TT_Loc_Parent = inObject.array_combine(TT.locations.columns,TT.locations.data[curLoc['wp_tt_locations_PARENT_ID']]);\n        }\n    }\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        if (!inObject.empty(TT_Loc_Parent)) { /* Lookup Parent Location first */\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc_Parent.NAME === jLoc.userName) {\n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                    if (!inObject.empty(jLoc.track) && jLoc.track.length > 0) {\n                        for (var jID2 in jLoc.track) {\n                            var jTrack = jLoc.track[jID2];\n                            if (jTrack.userName === curLoc.NAME) {\n                                myResults.track['userName'] =jTrack.userName;\n                                myResults.track['name'] =jTrack.name;\n                            }\n                        }\n                    }\n                } \n            }\n        } else {\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc.NAME === jLoc.userName) {    \n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                }\n            }\n        }\n    }\n    return myResults;\n}\n\ninObject.traintraxx.getLocationNameByID = function(lid) {\n    var myResults = '';\n    if (lid !== undefined && lid > 0 && TT !== undefined && TT.locations !== undefined && TT.locations.data !== undefined && TT.locations.data[lid] !== undefined) {\n        var tempLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            if (Number(tempLoc['wp_tt_locations_PARENT_ID']) > 0) {\n                var tempParent = inObject.array_combine(TT.locations.columns,TT.locations.data[tempLoc['wp_tt_locations_PARENT_ID']]);\n                myResults = tempParent['NAME'] + '->';\n            }\n            myResults += tempLoc['NAME'];\n        } else {\n            myResults = 'Unknown';\n        }\n    } else {\n        myResults =  'Not assigned';\n    }\n    return myResults;\n};\n\ninObject.download = function(filename, text, type = 'json') {\n    var element = document.createElement('a');\n    var typeString = 'application/json';\n    switch (type.toUpperCase()) {\n        case 'text' :\n            typeString = 'text/plain';\n            break;\n    }\n    element.setAttribute('href', 'data:' + typeString + ';charset=utf-8,' + encodeURIComponent(text) );\n    element.setAttribute('download', filename);\n    element.style.display = 'none';\n    document.body.appendChild(element);\n    element.click();\n    document.body.removeChild(element);\n}\n\nglobal.set('hive', inObject);\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = { 'jmri' : {}, 'traintraxx': {}};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.empty = function(inObject) {\n    if (inObject === undefined || inObject === null || inObject === {} || inObject === \"\") {\n        return true;\n    }\n    return false;\n}\n\ninObject.proper = function(inString) {\n  return inString.replace(/(^|\\s)\\S/g, function(s) { return s.toUpperCase(); });\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : String(mac).toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    if (JMRI !== undefined && JMRI[deviceType] !== undefined && JMRI[deviceType].data !== undefined && JMRI[deviceType].data.length > 0) {\n        for (var id in JMRI[deviceType].data) {\n            var curDevice = JMRI[deviceType].data[id];\n            if (myResults.userName === curDevice.userName) {\n                myResults.name = curDevice.name;\n                myResults.state = curDevice.state;\n                myResults.verb = 'POST';\n            }\n        }\n    }\n    if (myResults.name === '') {\n        if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n            for (var nodeId in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeId]);\n                if (String(curNode['MAC_ADDRESS']).toUpperCase() === myResults.userName) { \n                    myResults.name = prefix + String(nodeId);\n                }\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var activeHivenode = {};\n    if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var hivenodeID in TT.hivenode.data) {\n            var curHivenode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[hivenodeID]);\n            if (String(curHivenode.MAC_ADDRESS).toUpperCase() == String(mac).toUpperCase()) {\n                activeHivenode = curHivenode;\n            }\n        }\n        var activeLocation = {};\n        if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n            activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n            activeLocation['ID'] = activeHivenode['wp_tt_locations_ID'];\n        }\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var activeTag = {};\n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined ) {\n        for (var tagID in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns, TT.tags.data[tagID]);\n            if (String(curTag.TAG_UID).toUpperCase() == String(uid).toUpperCase()) {\n                activeTag = curTag;\n            }\n        }\n        \n        var activeInventory = {};\n        if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n            activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n        }\n    }\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    if (JMRI !== undefined && JMRI.idTag !==undefined) {\n        if (JMRI.idTag.data !== undefined && JMRI.idTag.data.length > 0) {\n            for (var id in JMRI.idTag.data) {\n                var curTag = JMRI.idTag.data[id];\n                if (curTag.userName === uid) {\n                    myResults.name = curTag.name;   \n                }\n            }\n        }\n    \n        if (myResults.name === undefined) {\n            myResults.verb = 'PUT';\n            myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.userName === userName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.name === jmriName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.userName === userName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.name === jmriName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getReporterNameByLocation = function(userName) {\n    var myResults = \"\";\n    var lookupID = null;\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in TT.locations.data) {\n            var curLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[lID]);\n            if (curLocation.NAME === userName) {\n                lookupID = Number(lID);\n            }\n        }\n        if (Number(lookupID) >0) {\n            for (var nodeID in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[nodeID]);\n                if (Number(curNode['wp_tt_locations_ID']) === lookupID) {\n                    var tempResults= inObject.getReporterName(curNode['MAC_ADDRESS']);\n                    myResults = tempResults['name'];\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getTagByUID= function(uid) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.idTag !== undefined && JMRI.idTag.map !== undefined) {\n        for (var jmID in JMRI.idTag.map) {\n            if (jmID === uid) {\n                myResults = JMRI.idTag.data[JMRI.idTag.map[jmID]];\n            }\n        }\n    }\n    return myResults;   \n};\n\n\ninObject.jmri.getInventoryByTag = function(tagName) {\n    var myResults = {};\n    if (JMRI !== undefined) {\n        if (JMRI.cars !== undefined && JMRI.cars.data.length > 0 ) {\n            for (var cID in JMRI.cars.data ) {\n                var curCar = JMRI.cars.data[cID];\n                if (curCar.rfid !== undefined && curCar.rfid === tagName) {\n                    myResults = curCar;\n                    myResults['type'] = 'car';\n                }\n                \n            }\n        }\n        if (myResults.name === undefined && JMRI.engines !== undefined && JMRI.engines.data.length > 0 ) {\n            for (var eID in JMRI.engines.data ) {\n                var curEngine = JMRI.engines.data[eID];\n                if (curEngine.rfid === tagName) {\n                    myResults = curEngine;\n                    myResults['type'] = 'engine';\n                }\n            }    \n        }\n    }\n    return myResults;   \n};\n\ninObject.jmri.getInventoryByUID = function(uid) {\n    var tempTag =  inObject.jmri.getTagByUID(uid);\n    var myResults = {};\n    if (tempTag !== undefined && tempTag !== {} && tempTag.name !== '') {\n        myResults = inObject.jmri.getInventoryByTag(tempTag.name);\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByReporter = function(reporter) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLoc = JMRI.locations.data[lID];\n            if (curLoc.reporter !== undefined && curLoc.reporter === reporter) {\n                myResults = { \"name\" : curLoc.name};    \n            } \n            if (curLoc.track !== undefined && curLoc.track.length > 0) {\n                for (var tID in curLoc.track) {\n                    var curTrack = curLoc.track[tID];\n                    if (curTrack.reporter !== undefined && curTrack.reporter === reporter) {\n                        myResults = { \n                            \"name\" : curLoc.name, \n                            \"track\" : { \n                                \"name\" : curTrack.name \n                            }\n                        };    \n                    }\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\n\n\ninObject.traintraxx.getInventoryIDByTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        for (var t in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns,TT.tags.data[t]);\n            if (curTag['TAG_UID'] === uid) {\n                return curTag['wp_tt_inventory_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\ninObject.traintraxx.getHivenodeLocationByMac = function(mac) {\n    if (mac !== undefined && TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[t]);\n            if (curNode['MAC_ADDRESS'] !== undefined && String(curNode['MAC_ADDRESS']).toUpperCase() === String(mac).toUpperCase()) {\n                return curNode['wp_tt_locations_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\n/* This function is for legacy support without track level Reporter assignment */\ninObject.jmri.getLocationByTrainTraxxMAC = function(mac) {\n    var myResults = { 'userName' : '', 'name' : '', 'track' : {} };\n    var TT_LocID = inObject.traintraxx.getHivenodeLocationByMac(mac);\n    var TT_Loc_Parent ={};\n    if (!inObject.empty(TT_LocID)) {\n        var curLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[TT_LocID]);\n        if (!inObject.empty(curLoc) && Number(curLoc['wp_tt_locations_PARENT_ID']) > 0) {\n            TT_Loc_Parent = inObject.array_combine(TT.locations.columns,TT.locations.data[curLoc['wp_tt_locations_PARENT_ID']]);\n        }\n    }\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        if (!inObject.empty(TT_Loc_Parent)) { /* Lookup Parent Location first */\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc_Parent.NAME === jLoc.userName) {\n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                    if (!inObject.empty(jLoc.track) && jLoc.track.length > 0) {\n                        for (var jID2 in jLoc.track) {\n                            var jTrack = jLoc.track[jID2];\n                            if (jTrack.userName === curLoc.NAME) {\n                                myResults.track['userName'] =jTrack.userName;\n                                myResults.track['name'] =jTrack.name;\n                            }\n                        }\n                    }\n                } \n            }\n        } else {\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc.NAME === jLoc.userName) {    \n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                }\n            }\n        }\n    }\n    return myResults;\n}\n\ninObject.jmri.getRoute = function(routeName) {\n    if (JMRI !== undefined && JMRI.trains !== undefined && JMRI.trains.data !== undefined && JMRI.trains.data.length >0) {\n        for (var trainID in JMRI.trains.data) {\n            var curTrain = JMRI.trains.data[trainID];\n            if (curTrain.locations !== undefined && curTrain.locations.length > 0) {\n                for (var locationID in curTrain.locations) {\n                    var curLocation = curTrain.locations[locationID];\n                    if (curLocation.name === routeName) {\n                        return curLocation;\n                    }\n                }\n            }\n        }\n    }\n    return {\n        name : routeName, userName: \"Not Defined\", trainDirection: \"Unknown\"\n    };\n}\n\ninObject.traintraxx.getLocationNameByID = function(lid) {\n    var myResults = '';\n    if (lid !== undefined && lid > 0 && TT !== undefined && TT.locations !== undefined && TT.locations.data !== undefined && TT.locations.data[lid] !== undefined) {\n        var tempLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            if (Number(tempLoc['wp_tt_locations_PARENT_ID']) > 0) {\n                var tempParent = inObject.array_combine(TT.locations.columns,TT.locations.data[tempLoc['wp_tt_locations_PARENT_ID']]);\n                myResults = tempParent['NAME'] + '->';\n            }\n            myResults += tempLoc['NAME'];\n        } else {\n            myResults = 'Unknown';\n        }\n    } else {\n        myResults =  'Not assigned';\n    }\n    return myResults;\n};\n\ninObject.download = function(filename, text, type = 'json') {\n    var element = document.createElement('a');\n    var typeString = 'application/json';\n    switch (type.toUpperCase()) {\n        case 'text' :\n            typeString = 'text/plain';\n            break;\n    }\n    element.setAttribute('href', 'data:' + typeString + ';charset=utf-8,' + encodeURIComponent(text) );\n    element.setAttribute('download', filename);\n    element.style.display = 'none';\n    document.body.appendChild(element);\n    element.click();\n    document.body.removeChild(element);\n}\n\nglobal.set('hive', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 410,
+        "x": 390,
         "y": 80,
         "wires": [
             [
@@ -16287,7 +16287,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191002.0002",
+                "to": "20191007.0001",
                 "tot": "str"
             },
             {
@@ -18107,7 +18107,7 @@
         "once": true,
         "onceDelay": "60",
         "x": 130,
-        "y": 80,
+        "y": 200,
         "wires": [
             [
                 "6e6b3a22.482694"
@@ -18132,7 +18132,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 190,
+        "x": 330,
         "y": 200,
         "wires": [
             [
@@ -18155,8 +18155,8 @@
         "lineType": "two",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 190,
-        "y": 280,
+        "x": 350,
+        "y": 300,
         "wires": [
             [
                 "65a88892.34e51",
@@ -18172,8 +18172,8 @@
         "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nconsole.log(trains);\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        \n        listItem.push({\n            curTrain : curTrain,\n            menu : ['List Cars','Build','Move','Terminate'],\n            title : '<div style=\"font-size:7pt;\">' +\n                ' <strong>' + curTrain.userName + '</strong><br />' +\n                ' <small>' + curTrain.description + '</small><br /><br />' +\n                ' <strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                ' <strong>Route: </strong>' + curTrain.route + '<br />' +\n                ' <strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                ' <strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                ' <strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                ' <strong>Location: </strong>' + curTrain.location + '<br />' +\n                ' <strong>Status: </strong>' + curTrain.status + '<br /><hr />' +\n                '</div>'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send({payload : listItem});    \n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 200,
-        "y": 240,
+        "x": 340,
+        "y": 260,
         "wires": [
             [
                 "1abcb494.09e6fb"
@@ -18191,8 +18191,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 350,
-        "y": 280,
+        "x": 530,
+        "y": 300,
         "wires": []
     },
     {
@@ -18207,8 +18207,8 @@
         "lineType": "one",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 560,
-        "y": 360,
+        "x": 940,
+        "y": 440,
         "wires": [
             [
                 "26502bd1.df83b4"
@@ -18227,8 +18227,8 @@
         "lineType": "one",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 550,
-        "y": 400,
+        "x": 930,
+        "y": 480,
         "wires": [
             [
                 "4d229772.25e0e"
@@ -18239,31 +18239,15 @@
         "id": "3cc0257d.4dc9c2",
         "type": "function",
         "z": "7e6978a8.bbc058",
-        "name": "Format Engines",
-        "func": "var engineList = [];\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;\n    if (curTrain.engines !== undefined && curTrain.engines.length >0 ) {\n        for (var engineID in curTrain.engines) {\n            var curEngine = curTrain.engines[engineID];\n            var formatLocation = curEngine.location.userName;\n            if (curEngine.location.track !== undefined && curEngine.location.track.userName !== undefined) {\n                formatLocation += '->' + curEngine.location.track.userName;\n            }\n            var formatDestination = curEngine.destination.userName;\n            if (curEngine.destination.track !== undefined && curEngine.destination.track.userName !== undefined) {\n                formatDestination += '->' + curEngine.destination.track.userName;\n            }\n            var icon = (formatLocation === formatDestination) \n                ? 'check'\n                : 'close';\n            engineList.push({\n                curEngine: curEngine,\n                icon_name : icon,\n                title:  '<strong>Engine Name: </strong>' + curEngine.name + '<br />' +\n                        '<strong>Location: </strong>' + formatLocation + '<br />' +\n                        '<strong>Destination: </strong>' + formatDestination + '<br /><hr />',\n                menu : ['Force to Destination','Force to Final Destination']\n            });     \n        }\n    }\n}\nif (engineList !== undefined && engineList.length > 0) {\n    node.send({payload: engineList});\n}\nreturn;",
+        "name": "Formatter",
+        "func": "var hive = global.get('hive');\nvar IP = global.get('IP.internalIPv4');\nvar engineList = [];\n\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;console.log(curTrain);\n    if (curTrain[msg.type] !== undefined && curTrain[msg.type].length >0 ) {\n        for (var invID in curTrain[msg.type]) {\n            var curInv = curTrain[msg.type][invID];\n            var formatLocation = '';\n            var formatRoute = '';\n            var formatDestination = '';\n            var formatfinalDestination = '';\n            var testLocation = '';\n            var testDestination = '';\n            var menu = [];\n            var icon = 'report_problem';\n            \n            if (curInv.location !== undefined && curInv.location !== null && curInv.location.userName !== undefined) {\n                testLocation=  curInv.location.userName;    \n                if (curInv.location.track !== undefined && curInv.location.track.userName !== undefined) {\n                    testLocation += '->' + curInv.location.track.userName;\n                }\n                var loadState='';\n                if (msg.type === 'cars') {\n                    var load = 'Loaded';\n                    if (curInv.load === 'E') {\n                        load = 'Empty';\n                        menu.push('Change to Loaded');\n                    } else {\n                        menu.push('Change to Empty');\n                    }\n                    loadState += ' (' + load + ')';\n                }\n                formatLocation = '<strong>Location: </strong>' + testLocation + loadState + '<br />';\n                \n                if (curInv.location.route !== undefined) {\n                    var curRoute = hive.jmri.getRoute(curInv.location.route); \n                    if (curRoute !== undefined && curRoute.userName !== undefined) {\n                        formatRoute = '<strong>Current Route: </strong>' + curRoute.userName + ' heading ' + curRoute.trainDirection + '<br/>'; \n                    }\n                }\n            }\n            \n            if (curInv.destination !== undefined && curInv.destination !== null && curInv.destination.userName !== undefined ) {\n                testDestination = curInv.destination.userName;\n                icon = 'close';\n                if (curInv.destination.track !== undefined && curInv.destination.track.userName !== undefined) {\n                    testDestination += '->' + curInv.destination.track.userName;\n                }\n                formatDestination = '<strong>Destination: </strong>' + testDestination + '<br />';\n                if (testLocation === testDestination) {\n                    icon = 'check';\n                } else {\n                    menu.push('Force to Destination');\n                }\n            }\n            if (curInv.finalDestination !== undefined && curInv.finalDestination !== null &&  curInv.finalDestination.userName !== undefined ) {\n                formatfinalDestination = '<strong>Final Destination: </strong>' + curInv.finalDestination.userName;\n                icon = 'http://' + IP + '/images/icons/close_red_24px.png';\n                var color = 'red';\n                if (curInv.finalDestination.track !== undefined && curInv.finalDestination.track.userName !== undefined) {\n                    formatfinalDestination += '->' + curInv.finalDestination.track.userName;\n                }\n                formatfinalDestination += '<br/>';\n                if (formatLocation === formatfinalDestination) {\n                    icon = 'http://' + IP + '/images/icons/check_green_24px.png';\n                    color= 'green';\n                } else {\n                    menu.push('Force to Final Destination');\n                }\n            }            \n\n            engineList.push({\n                curInv: curInv,\n                icon : icon,\n                title:  '<span><strong>Name: </strong>' + curInv.name + '<br />' +\n                        formatLocation + \n                        formatRoute +\n                        '<span style=\"color: ' + color + '\">' + formatDestination + '</span>' +\n                        formatfinalDestination +\n                        '</span>'+\n                        '<hr />',\n                menu : menu\n            });     \n        }\n    }\n}\nif (engineList !== undefined && engineList.length > 0) {\n    node.send({type : msg.type, payload: engineList});\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 360,
-        "y": 360,
+        "x": 760,
+        "y": 340,
         "wires": [
             [
-                "295d0b98.074214"
-            ]
-        ]
-    },
-    {
-        "id": "b5f61484.372",
-        "type": "function",
-        "z": "7e6978a8.bbc058",
-        "name": "Format Cars",
-        "func": "var carList = [];\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;\n    if (curTrain.cars !== undefined && curTrain.cars.length >0 ) {\n        for (var carID in curTrain.cars) {\n            var curCar = curTrain.cars[carID];\n            var formatLocation = curCar.location.userName;\n            if (curCar.location.track !== undefined && curCar.location.track.userName !== undefined) {\n                formatLocation += '->' + curCar.location.track.userName;\n            }\n            var formatDestination = curCar.destination.userName;\n            if (curCar.destination.track !== undefined && curCar.destination.track.userName !== undefined) {\n                formatDestination += '->' + curCar.destination.track.userName;\n            }\n            var icon = (formatLocation === formatDestination) \n                ? 'check'\n                : 'close';\n            carList.push({\n                curCar: curCar,\n                icon_name : icon,\n                title:  '<strong>Car Name: </strong>' + curCar.name + '<br />' +\n                        '<strong>Location: </strong>' + formatLocation + '<br />' +\n                        '<strong>Destination: </strong>' + formatDestination + '<br /><hr/>',\n                menu :  ['Force to Destination','Force to Final Destination']\n            });     \n        }\n    }\n}\nif (carList !== undefined && carList.length > 0) {\n    node.send({payload: carList});\n}\nreturn;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 350,
-        "y": 400,
-        "wires": [
-            [
-                "c7d176fe.8cce58"
+                "87d7cc4b.2afb38"
             ]
         ]
     },
@@ -18282,12 +18266,12 @@
         "checkall": "true",
         "repair": true,
         "outputs": 1,
-        "x": 160,
-        "y": 380,
+        "x": 390,
+        "y": 360,
         "wires": [
             [
-                "3cc0257d.4dc9c2",
-                "b5f61484.372"
+                "fba06c3d.e6f7f8",
+                "ea533bbd.f22c38"
             ]
         ]
     },
@@ -18308,8 +18292,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 730,
-        "y": 360,
+        "x": 1110,
+        "y": 440,
         "wires": [
             []
         ]
@@ -18331,8 +18315,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 730,
-        "y": 400,
+        "x": 1110,
+        "y": 480,
         "wires": [
             []
         ]
@@ -18586,8 +18570,8 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 260,
-        "y": 140,
+        "x": 140,
+        "y": 160,
         "wires": [
             [
                 "6e6b3a22.482694"
@@ -18627,7 +18611,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 500,
+        "x": 660,
         "y": 200,
         "wires": [
             [
@@ -18647,8 +18631,144 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 710,
+        "x": 870,
         "y": 200,
         "wires": []
+    },
+    {
+        "id": "fba06c3d.e6f7f8",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "Set to engines",
+        "rules": [
+            {
+                "t": "set",
+                "p": "type",
+                "pt": "msg",
+                "to": "engines",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 340,
+        "wires": [
+            [
+                "3cc0257d.4dc9c2"
+            ]
+        ]
+    },
+    {
+        "id": "ea533bbd.f22c38",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "Set to cars",
+        "rules": [
+            {
+                "t": "set",
+                "p": "type",
+                "pt": "msg",
+                "to": "cars",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "3cc0257d.4dc9c2"
+            ]
+        ]
+    },
+    {
+        "id": "87d7cc4b.2afb38",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "property": "type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "engines",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cars",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 770,
+        "y": 400,
+        "wires": [
+            [
+                "295d0b98.074214"
+            ],
+            [
+                "c7d176fe.8cce58"
+            ]
+        ]
+    },
+    {
+        "id": "622b4dfd.bf1374",
+        "type": "inject",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "96be489b.95b9b"
+            ]
+        ]
+    },
+    {
+        "id": "96be489b.95b9b",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "1abcb494.09e6fb",
+                "295d0b98.074214",
+                "c7d176fe.8cce58"
+            ]
+        ]
     }
 ]
