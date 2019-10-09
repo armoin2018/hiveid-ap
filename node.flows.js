@@ -3294,7 +3294,8 @@
         "links": [
             "391c0a36.ebdac6",
             "ef86f5e4.672e98",
-            "d9967b03.2bc018"
+            "d9967b03.2bc018",
+            "ebf43dda.291b7"
         ],
         "x": 195,
         "y": 680,
@@ -16287,7 +16288,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191007.0002",
+                "to": "20191009.0001",
                 "tot": "str"
             },
             {
@@ -18107,7 +18108,7 @@
         "once": true,
         "onceDelay": "60",
         "x": 130,
-        "y": 200,
+        "y": 140,
         "wires": [
             [
                 "6e6b3a22.482694"
@@ -18136,7 +18137,8 @@
         "y": 200,
         "wires": [
             [
-                "6fc4e750.dc1d3"
+                "6fc4e750.dc1d3",
+                "ebf43dda.291b7"
             ],
             [
                 "fa977e2d.84bd48"
@@ -18509,10 +18511,11 @@
         "payloadType": "str",
         "topic": "",
         "x": 140,
-        "y": 160,
+        "y": 100,
         "wires": [
             [
-                "6e6b3a22.482694"
+                "6e6b3a22.482694",
+                "96be489b.95b9b"
             ]
         ]
     },
@@ -18550,7 +18553,7 @@
         "to": "",
         "reg": false,
         "x": 560,
-        "y": 200,
+        "y": 140,
         "wires": [
             [
                 "d593a0db.05e84"
@@ -18570,7 +18573,7 @@
         "topic": "",
         "name": "",
         "x": 770,
-        "y": 200,
+        "y": 140,
         "wires": []
     },
     {
@@ -18672,8 +18675,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 190,
-        "y": 400,
+        "x": 170,
+        "y": 480,
         "wires": [
             [
                 "96be489b.95b9b"
@@ -18714,7 +18717,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Build Inventory Update Request",
-        "func": "var data = {\n   name : msg.payload.curInv.name \n};\nswitch (msg.payload.selected) {\n    case 'Change to Empty':\n        data['load'] = 'E';\n        break;\n    case 'Change to Loaded': \n        data['load'] = 'L';\n        break;\n    case 'Force to Destination':\n        data['location'] = msg.payload.curInv.destination;\n        break;\n    case 'Force to Final Destination': \n        data['location'] = msg.payload.curInv.finalDestination;\n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + 'json/' + msg.payload.type,\n    topic : msg.payload.type,\n    verb : \"POST\",\n    payload : {\n        type: msg.payload.type,\n        data: data\n    }\n});\nreturn;",
+        "func": "var data = {\n   name : msg.payload.curInv.name \n};\nmsg.payload.type = msg.payload.type.replace(/s$/,'');\nswitch (msg.payload.selected) {\n    case 'Change to Empty':\n        data['load'] = 'E';\n        break;\n    case 'Change to Loaded': \n        data['load'] = 'L';\n        break;\n    case 'Force to Destination':\n        data['location'] = msg.payload.curInv.destination;\n        break;\n    case 'Force to Final Destination': \n        data['location'] = msg.payload.curInv.finalDestination;\n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + 'json/' + msg.payload.type,\n    topic : msg.payload.type,\n    verb : \"POST\",\n    payload : {\n        type: msg.payload.type,\n        data: data\n    }\n});\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 1190,
@@ -18770,7 +18773,8 @@
         "wires": [
             [
                 "de8b57b7.5c0578",
-                "44adbe29.440fc8"
+                "ebf43dda.291b7",
+                "1bc25a65.eaeac6"
             ],
             [
                 "7f73a57e.12761c"
@@ -18928,14 +18932,49 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1550,
-        "y": 200,
+        "x": 1770,
+        "y": 180,
         "wires": [
             [
                 "6fc4e750.dc1d3"
             ],
             [
                 "6798731.fb03c0c"
+            ]
+        ]
+    },
+    {
+        "id": "ebf43dda.291b7",
+        "type": "link out",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "links": [
+            "a309b660.225d08"
+        ],
+        "x": 1535,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1bc25a65.eaeac6",
+        "type": "delay",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1580,
+        "y": 180,
+        "wires": [
+            [
+                "44adbe29.440fc8"
             ]
         ]
     }
