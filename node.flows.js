@@ -16288,7 +16288,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191009.0001",
+                "to": "20191009.0002",
                 "tot": "str"
             },
             {
@@ -18161,7 +18161,8 @@
         "y": 300,
         "wires": [
             [
-                "e5f7907c.6ed85"
+                "e5f7907c.6ed85",
+                "9ea3ca8e.561d48"
             ]
         ]
     },
@@ -18197,7 +18198,8 @@
         "y": 440,
         "wires": [
             [
-                "1670ed6f.95d3db"
+                "1670ed6f.95d3db",
+                "a401aeb4.6aebe"
             ]
         ]
     },
@@ -18217,7 +18219,8 @@
         "y": 480,
         "wires": [
             [
-                "1670ed6f.95d3db"
+                "1670ed6f.95d3db",
+                "a401aeb4.6aebe"
             ]
         ]
     },
@@ -18720,7 +18723,7 @@
         "func": "var data = {\n   name : msg.payload.curInv.name \n};\nmsg.payload.type = msg.payload.type.replace(/s$/,'');\nswitch (msg.payload.selected) {\n    case 'Change to Empty':\n        data['load'] = 'E';\n        break;\n    case 'Change to Loaded': \n        data['load'] = 'L';\n        break;\n    case 'Force to Destination':\n        data['location'] = msg.payload.curInv.destination;\n        break;\n    case 'Force to Final Destination': \n        data['location'] = msg.payload.curInv.finalDestination;\n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + 'json/' + msg.payload.type,\n    topic : msg.payload.type,\n    verb : \"POST\",\n    payload : {\n        type: msg.payload.type,\n        data: data\n    }\n});\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1190,
+        "x": 1210,
         "y": 440,
         "wires": [
             [
@@ -18885,7 +18888,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 530,
+        "x": 570,
         "y": 280,
         "wires": [
             [
@@ -18939,7 +18942,7 @@
                 "6fc4e750.dc1d3"
             ],
             [
-                "6798731.fb03c0c"
+                "1a69414c.307197"
             ]
         ]
     },
@@ -18974,7 +18977,85 @@
         "y": 180,
         "wires": [
             [
-                "44adbe29.440fc8"
+                "44adbe29.440fc8",
+                "96be489b.95b9b"
+            ]
+        ]
+    },
+    {
+        "id": "9ea3ca8e.561d48",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "curTrain",
+                "pt": "flow",
+                "to": "payload.curTrain",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a401aeb4.6aebe",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "curInv",
+                "pt": "flow",
+                "to": "payload.curInv",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1a69414c.307197",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.curTrain",
+                "pt": "msg",
+                "to": "curTrain",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1990,
+        "y": 180,
+        "wires": [
+            [
+                "6798731.fb03c0c"
             ]
         ]
     }
