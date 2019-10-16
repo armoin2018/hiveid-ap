@@ -14209,7 +14209,7 @@
         "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = { 'jmri' : {}, 'traintraxx': {}};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.empty = function(inObject) {\n    if (inObject === undefined || inObject === null || inObject === {} || inObject === \"\") {\n        return true;\n    }\n    return false;\n}\n\ninObject.proper = function(inString) {\n  return inString.replace(/(^|\\s)\\S/g, function(s) { return s.toUpperCase(); });\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : String(mac).toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    if (JMRI !== undefined && JMRI[deviceType] !== undefined && JMRI[deviceType].data !== undefined && JMRI[deviceType].data.length > 0) {\n        for (var id in JMRI[deviceType].data) {\n            var curDevice = JMRI[deviceType].data[id];\n            if (myResults.userName === curDevice.userName) {\n                myResults.name = curDevice.name;\n                myResults.state = curDevice.state;\n                myResults.verb = 'POST';\n            }\n        }\n    }\n    if (myResults.name === '') {\n        if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n            for (var nodeId in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeId]);\n                if (String(curNode['MAC_ADDRESS']).toUpperCase() === myResults.userName) { \n                    myResults.name = prefix + String(nodeId);\n                }\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var activeHivenode = {};\n    if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var hivenodeID in TT.hivenode.data) {\n            var curHivenode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[hivenodeID]);\n            if (String(curHivenode.MAC_ADDRESS).toUpperCase() == String(mac).toUpperCase()) {\n                activeHivenode = curHivenode;\n            }\n        }\n        var activeLocation = {};\n        if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n            activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n            activeLocation['ID'] = activeHivenode['wp_tt_locations_ID'];\n        }\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var activeTag = {};\n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined ) {\n        for (var tagID in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns, TT.tags.data[tagID]);\n            if (String(curTag.TAG_UID).toUpperCase() == String(uid).toUpperCase()) {\n                activeTag = curTag;\n            }\n        }\n        \n        var activeInventory = {};\n        if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n            activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n        }\n    }\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    if (JMRI !== undefined && JMRI.idTag !==undefined) {\n        if (JMRI.idTag.data !== undefined && JMRI.idTag.data.length > 0) {\n            for (var id in JMRI.idTag.data) {\n                var curTag = JMRI.idTag.data[id];\n                if (curTag.userName === uid) {\n                    myResults.name = curTag.name;   \n                }\n            }\n        }\n    \n        if (myResults.name === undefined) {\n            myResults.verb = 'PUT';\n            myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.userName === userName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.name === jmriName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.userName === userName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.name === jmriName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getReporterNameByLocation = function(userName) {\n    var myResults = \"\";\n    var lookupID = null;\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in TT.locations.data) {\n            var curLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[lID]);\n            if (curLocation.NAME === userName) {\n                lookupID = Number(lID);\n            }\n        }\n        if (Number(lookupID) >0) {\n            for (var nodeID in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[nodeID]);\n                if (Number(curNode['wp_tt_locations_ID']) === lookupID) {\n                    var tempResults= inObject.getReporterName(curNode['MAC_ADDRESS']);\n                    myResults = tempResults['name'];\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getTagByUID= function(uid) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.idTag !== undefined && JMRI.idTag.map !== undefined) {\n        for (var jmID in JMRI.idTag.map) {\n            if (jmID === uid) {\n                myResults = JMRI.idTag.data[JMRI.idTag.map[jmID]];\n            }\n        }\n    }\n    return myResults;   \n};\n\n\ninObject.jmri.getInventoryByTag = function(tagName) {\n    var myResults = {};\n    if (JMRI !== undefined) {\n        if (JMRI.cars !== undefined && JMRI.cars.data.length > 0 ) {\n            for (var cID in JMRI.cars.data ) {\n                var curCar = JMRI.cars.data[cID];\n                if (curCar.rfid !== undefined && curCar.rfid === tagName) {\n                    myResults = curCar;\n                    myResults['type'] = 'car';\n                }\n                \n            }\n        }\n        if (myResults.name === undefined && JMRI.engines !== undefined && JMRI.engines.data.length > 0 ) {\n            for (var eID in JMRI.engines.data ) {\n                var curEngine = JMRI.engines.data[eID];\n                if (curEngine.rfid === tagName) {\n                    myResults = curEngine;\n                    myResults['type'] = 'engine';\n                }\n            }    \n        }\n    }\n    return myResults;   \n};\n\ninObject.jmri.getInventoryByUID = function(uid) {\n    var tempTag =  inObject.jmri.getTagByUID(uid);\n    var myResults = {};\n    if (tempTag !== undefined && tempTag !== {} && tempTag.name !== '') {\n        myResults = inObject.jmri.getInventoryByTag(tempTag.name);\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByReporter = function(reporter) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLoc = JMRI.locations.data[lID];\n            if (curLoc.reporter !== undefined && curLoc.reporter === reporter) {\n                myResults = { \"name\" : curLoc.name};    \n            } \n            if (curLoc.track !== undefined && curLoc.track.length > 0) {\n                for (var tID in curLoc.track) {\n                    var curTrack = curLoc.track[tID];\n                    if (curTrack.reporter !== undefined && curTrack.reporter === reporter) {\n                        myResults = { \n                            \"name\" : curLoc.name, \n                            \"track\" : { \n                                \"name\" : curTrack.name \n                            }\n                        };    \n                    }\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\n\n\ninObject.traintraxx.getInventoryIDByTag = function(uid) {\n    if (uid !== undefined && uid !== \"\") {\n        for (var t in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns,TT.tags.data[t]);\n            if (curTag['TAG_UID'] === uid) {\n                return curTag['wp_tt_inventory_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\ninObject.traintraxx.getHivenodeLocationByMac = function(mac) {\n    if (mac !== undefined && TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[t]);\n            if (curNode['MAC_ADDRESS'] !== undefined && String(curNode['MAC_ADDRESS']).toUpperCase() === String(mac).toUpperCase()) {\n                return curNode['wp_tt_locations_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\n/* This function is for legacy support without track level Reporter assignment */\ninObject.jmri.getLocationByTrainTraxxMAC = function(mac) {\n    var myResults = { 'userName' : '', 'name' : '', 'track' : {} };\n    var TT_LocID = inObject.traintraxx.getHivenodeLocationByMac(mac);\n    var TT_Loc_Parent ={};\n    if (!inObject.empty(TT_LocID)) {\n        var curLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[TT_LocID]);\n        if (!inObject.empty(curLoc) && Number(curLoc['wp_tt_locations_PARENT_ID']) > 0) {\n            TT_Loc_Parent = inObject.array_combine(TT.locations.columns,TT.locations.data[curLoc['wp_tt_locations_PARENT_ID']]);\n        }\n    }\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        if (!inObject.empty(TT_Loc_Parent)) { /* Lookup Parent Location first */\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc_Parent.NAME === jLoc.userName) {\n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                    if (!inObject.empty(jLoc.track) && jLoc.track.length > 0) {\n                        for (var jID2 in jLoc.track) {\n                            var jTrack = jLoc.track[jID2];\n                            if (jTrack.userName === curLoc.NAME) {\n                                myResults.track['userName'] =jTrack.userName;\n                                myResults.track['name'] =jTrack.name;\n                            }\n                        }\n                    }\n                } \n            }\n        } else {\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc.NAME === jLoc.userName) {    \n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                }\n            }\n        }\n    }\n    return myResults;\n}\n\ninObject.jmri.getRoute = function(routeName) {\n    var myResults = {\n        name : routeName, userName: \"Not Defined\", trainDirection: \"Unknown\"\n    };\n    if (JMRI !== undefined && JMRI.trains !== undefined && JMRI.trains.data !== undefined && JMRI.trains.data.length >0) {\n        for (var trainID in JMRI.trains.data) {\n            var curTrain = JMRI.trains.data[trainID];\n            if (curTrain.locations !== undefined && curTrain.locations.length > 0) {\n                for (var locationID in curTrain.locations) {\n                    var curLocation = curTrain.locations[locationID];\n                    if (curLocation.name === routeName) {\n                        myResults = curLocation;\n                    }\n                }\n            }\n        }\n    }\n    return myResults;\n}\n\ninObject.traintraxx.getLocationNameByID = function(lid) {\n    var myResults = '';\n    if (lid !== undefined && lid > 0 && TT !== undefined && TT.locations !== undefined && TT.locations.data !== undefined && TT.locations.data[lid] !== undefined) {\n        var tempLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            if (Number(tempLoc['wp_tt_locations_PARENT_ID']) > 0) {\n                var tempParent = inObject.array_combine(TT.locations.columns,TT.locations.data[tempLoc['wp_tt_locations_PARENT_ID']]);\n                myResults = tempParent['NAME'] + '->';\n            }\n            myResults += tempLoc['NAME'];\n        } else {\n            myResults = 'Unknown';\n        }\n    } else {\n        myResults =  'Not assigned';\n    }\n    return myResults;\n};\n\ninObject.download = function(filename, text, type = 'json') {\n    var element = document.createElement('a');\n    var typeString = 'application/json';\n    switch (type.toUpperCase()) {\n        case 'text' :\n            typeString = 'text/plain';\n            break;\n    }\n    element.setAttribute('href', 'data:' + typeString + ';charset=utf-8,' + encodeURIComponent(text) );\n    element.setAttribute('download', filename);\n    element.style.display = 'none';\n    document.body.appendChild(element);\n    element.click();\n    document.body.removeChild(element);\n}\n\nglobal.set('hive', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 390,
+        "x": 410,
         "y": 80,
         "wires": [
             [
@@ -14936,7 +14936,7 @@
         "type": "function",
         "z": "7bef0b7b.d5a104",
         "name": "Format Activity Data",
-        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nvar types = ['location','destination','finalDestination'];\nfor (var i in activity) {\n    tempRow = { \n        \"Location\" : \"\", \n        \"Name\" : \"\", \n        \"Time\" : \"\", \n        \"Image\" : \"/images/traintraxx_logo.png\",\n        \"LocImage\" : \"/images/traintraxx_logo.png\",\n        \"Road Name\" :\"\",\n        \"Road Number\" : \"\",\n        \"Color\" : \"#ffffff\"\n    };\n    var invID = hive.traintraxx.getInventoryIDByTag(activity[i]['UID']);\n    \n    var locID = hive.traintraxx.getHivenodeLocationByMac(activity[i]['MAC'].toUpperCase());\n    if (locID !== undefined && locID > 0) {\n        tempRow.Location = hive.traintraxx.getLocationNameByID(locID);\n        if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n            tempRow.LocImage = imageRef_Loc[locID].localurl;\n        }\n    }\n    if (invID !== undefined && invID > 0) {\n        var invInfo = hive.array_combine(TT.inventory.columns,TT.inventory.data[invID]);\n        if (invInfo !== undefined && invInfo.NAME !== undefined) {\n            tempRow.Name = invInfo.NAME;\n        }\n        if (TT.inventory.meta.data[invID] !== undefined ) {\n            var tempData = [];\n            for (var curId in TT.inventory.meta.data[invID]) {\n                if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                    var tempInv =  hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                    var tempMetaKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                    tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                }\n            }\n        }\n        if (imageRef_Inv[invID] !== undefined) {\n            tempRow.Image = imageRef_Inv[invID].localurl;\n        }\n    }\n    var JMRIState = '';\n    /* JMRI is going to need to be refreshed before this is going to work right \n       - After the tag is injected, refresh JMRI \n       - Need to make sure the resync is done before reloading the activity\n    */\n    if (JMRI_Config.JMRI_ENABLED === true) {\n        if (i === 0 || activity[i].jmri === undefined || activity[i].jmri === \"\" || activity[i].jmri === '<strong>JMRI Location: </strong><br/>') {\n            var jmri_inventory = hive.jmri.getInventoryByUID(activity[i]['UID']);\n            var locationTracker = {};\n            for (var typeID in types) {\n                var type = types[typeID];\n                var tempLocation = '';\n                var tempLoc = '';\n                var curColor = '';\n                locationTracker[type] = '';\n                if (jmri_inventory !== undefined && jmri_inventory[type] !== undefined && jmri_inventory[type] !== null) {\n                    if (jmri_inventory[type].userName === undefined && jmri_inventory[type].name !== undefined) {\n                        tempLoc = hive.jmri.getLocationByJMRIName(jmri_inventory[type].name);\n                        if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                            jmri_inventory[type].userName = tempLoc.userName;\n                        }\n                    }\n\n                    if (jmri_inventory[type].userName === undefined) {\n                        jmri_inventory[type].userName= \"\";\n                    }\n                    if (type === 'location') {\n                        var tempComment='';\n                        if (jmri_inventory.comment !== undefined && jmri_inventory.comment !== '') {\n                            tempComment = hive.proper(jmri_inventory.comment) + ' ';\n                        }\n                        tempLocation += '(' +tempComment + ((jmri_inventory.load === 'E') ? 'Empty' : 'Loaded') + ') ';\n                    }\n                    if ( jmri_inventory[type].userName !== '') {\n                        tempLocation += jmri_inventory[type].userName;\n                        locationTracker[type] = jmri_inventory[type].userName;\n                    }\n                    if (jmri_inventory[type].track !== undefined && jmri_inventory[type].track !== null) {\n                        if (jmri_inventory[type].track.userName === undefined && jmri_inventory[type].track.name !== undefined ) {\n                            tempLoc = hive.jmri.getSubLocationByJMRIName(jmri_inventory[type].track.name);\n                            if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                                jmri_inventory[type].track.userName = tempLoc.userName;\n                            }\n                        }\n                        if (jmri_inventory[type].track.userName !== undefined && jmri_inventory[type].track.userName !== \"\") {\n                            tempLocation += '->' + jmri_inventory[type].track.userName;\n                            locationTracker[type] += '->' + jmri_inventory[type].track.userName;\n                        }\n                    }\n                }\n                if (tempLocation !== '') {\n                    JMRIState += '<strong class=\"li-color-' + i + '\">JMRI ' + hive.proper(type) + ': </strong>' + tempLocation + '<br/>';   \n                }\n            }\n            console.log(locationTracker);\n            if (locationTracker['location'] !== '' && locationTracker['destination'] !== '' && locationTracker['location'] === locationTracker['destination']) {\n                JMRIState += '<style> .li-color-' + i + ' { color : #008000;}</style>';         \n            }\n            activity[i].jmri=JMRIState;\n        } else {\n            JMRIState=activity[i].jmri.replace(/li-color-\\d+/g,'li-color-' + i);\n        }\n    }\n    /* Need to get the TrainTraxx Locations to show the parent as well */\n    msg.template += '<tr>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.Image + '\"></td>' +\n        '<td width=\"40px\">' + \n            '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n        '</td>' +\n        '<td>' +\n            '<div>' +\n                '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                '<strong>Location: </strong>' + tempRow.Location + '<br />' +\n                JMRIState + \n            '</div>' +\n        '</td>' +\n        '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n    '</tr>';\n}\nmsg.template += '</table></div>';\nreturn msg;",
+        "func": "var activity = global.get('Activity');\nvar TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar imageRef_Loc = global.get('imageRef_Loc');\n\nmsg.template =  '<style> ' +\n                '   table, th, td { ' +\n                '      text-align:left;  ' +\n                '      border-bottom: 1px solid #ccc; ' +\n                '      border-spacing: 0px; ' +\n                '   } ' +\n                '   th, td { ' +\n                '       padding: 5px; ' +\n                '       font-size: 10pt; ' +\n                '       background-color:none; ' +\n                '   }' +\n                '   .colorBlock { ' +\n                '       height:30px;' +\n                '       width: 30px;' +\n                '   }' +\n                '</style>' +\n    '<div style=\"height:720px;\"><table width=\"100%\">';\nvar tempRow = {};\nvar types = ['location','destination','finalDestination'];\nif (activity !== undefined && activity.length > 0) {\n    for (var i in activity) {\n        var curActivity = activity[i];\n        tempRow = { \n            \"Location\" : \"\", \n            \"Name\" : \"\", \n            \"Time\" : \"\", \n            \"Image\" : \"/images/traintraxx_logo.png\",\n            \"LocImage\" : \"/images/traintraxx_logo.png\",\n            \"Road Name\" :\"\",\n            \"Road Number\" : \"\",\n            \"Color\" : \"#ffffff\"\n        };\n        var invID = hive.traintraxx.getInventoryIDByTag(curActivity['UID']);\n        var locID = hive.traintraxx.getHivenodeLocationByMac(curActivity['MAC'].toUpperCase());\n        if (locID !== undefined && locID > 0) {\n            tempRow.Location = hive.traintraxx.getLocationNameByID(locID);\n            if (imageRef_Loc !== undefined && imageRef_Loc[locID] !== undefined) {\n                tempRow.LocImage = imageRef_Loc[locID].localurl;\n            }\n        }\n        if (invID !== undefined && invID > 0) {\n            var invInfo = hive.array_combine(TT.inventory.columns,TT.inventory.data[invID]);\n            if (invInfo !== undefined && invInfo.NAME !== undefined) {\n                tempRow.Name = invInfo.NAME;\n            }\n            if (TT.inventory.meta.data[invID] !== undefined ) {\n                var tempData = [];\n                for (var curId in TT.inventory.meta.data[invID]) {\n                    if (TT.inventory.meta.data[invID][curId] !== undefined) {\n                        var tempInv =  hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[invID][curId]);\n                        var tempMetaKey = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[tempInv['wp_tt_inventorymetakeys_ID']]);\n                        tempRow[tempMetaKey['meta_key']] = tempInv['meta_value'];\n                    }\n                }\n            }\n            if (imageRef_Inv[invID] !== undefined) {\n                tempRow.Image = imageRef_Inv[invID].localurl;\n            }\n        }\n        var JMRIState = '';\n        /* JMRI is going to need to be refreshed before this is going to work right \n           - After the tag is injected, refresh JMRI \n           - Need to make sure the resync is done before reloading the activity\n        */\n        if (JMRI_Config.JMRI_ENABLED === true) {\n            if (i === 0 || curActivity.jmri === undefined || curActivity.jmri === \"\" || curActivity.jmri === '<strong>JMRI Location: </strong><br/>') {\n                var jmri_inventory = hive.jmri.getInventoryByUID(curActivity['UID']);\n                var locationTracker = {};\n                for (var typeID in types) {\n                    var type = types[typeID];\n                    var tempLocation = '';\n                    var tempLoc = '';\n                    var curColor = '';\n                    locationTracker[type] = '';\n                    if (jmri_inventory !== undefined && jmri_inventory[type] !== undefined && jmri_inventory[type] !== null) {\n                        if (jmri_inventory[type].userName === undefined && jmri_inventory[type].name !== undefined) {\n                            tempLoc = hive.jmri.getLocationByJMRIName(jmri_inventory[type].name);\n                            if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                                jmri_inventory[type].userName = tempLoc.userName;\n                            }\n                        }\n    \n                        if (jmri_inventory[type].userName === undefined) {\n                            jmri_inventory[type].userName= \"\";\n                        }\n                        if (type === 'location') {\n                            var tempComment='';\n                            if (jmri_inventory.comment !== undefined && jmri_inventory.comment !== '') {\n                                tempComment = hive.proper(jmri_inventory.comment) + ' ';\n                            }\n                            tempLocation += '(' +tempComment + ((jmri_inventory.load === 'E') ? 'Empty' : 'Loaded') + ') ';\n                        }\n                        if ( jmri_inventory[type].userName !== '') {\n                            tempLocation += jmri_inventory[type].userName;\n                            locationTracker[type] = jmri_inventory[type].userName;\n                        }\n                        if (jmri_inventory[type].track !== undefined && jmri_inventory[type].track !== null) {\n                            if (jmri_inventory[type].track.userName === undefined && jmri_inventory[type].track.name !== undefined ) {\n                                tempLoc = hive.jmri.getSubLocationByJMRIName(jmri_inventory[type].track.name);\n                                if (tempLoc !== undefined && tempLoc.userName !== undefined ) {\n                                    jmri_inventory[type].track.userName = tempLoc.userName;\n                                }\n                            }\n                            if (jmri_inventory[type].track.userName !== undefined && jmri_inventory[type].track.userName !== \"\") {\n                                tempLocation += '->' + jmri_inventory[type].track.userName;\n                                locationTracker[type] += '->' + jmri_inventory[type].track.userName;\n                            }\n                        }\n                    }\n                    if (tempLocation !== '') {\n                        JMRIState += '<strong class=\"li-color-' + i + '\">JMRI ' + hive.proper(type) + ': </strong>' + tempLocation + '<br/>';   \n                    }\n                }\n                console.log(locationTracker);\n                if (locationTracker['location'] !== '' && locationTracker['destination'] !== '' && locationTracker['location'] === locationTracker['destination']) {\n                    JMRIState += '<style> .li-color-' + i + ' { color : #008000;}</style>';         \n                }\n                activity[i].jmri=JMRIState;\n            } else {\n                JMRIState=activity[i].jmri.replace(/li-color-\\d+/g,'li-color-' + i);\n            }\n        }\n        /* Need to get the TrainTraxx Locations to show the parent as well */\n        msg.template += '<tr>' +\n            '<td width=\"210px;\"><img width=\"200px\" src=\"' + tempRow.Image + '\"></td>' +\n            '<td width=\"40px\">' + \n                '<div class=\"colorBlock\" style=\"background-color: ' + tempRow.Color + ';\">&nbsp;</div>' +\n            '</td>' +\n            '<td>' +\n                '<div>' +\n                    '<strong>Name: </strong>' + tempRow.Name +  '<br/>' +\n                    '<strong>Road Name/Number: </strong>' + tempRow['Road Name']  + tempRow['Road Number'] +  '<br/>' +\n                    '<strong>Time: </strong>' + activity[i].TIME + '<br/>' + \n                    '<strong>Location: </strong>' + tempRow.Location + '<br />' +\n                    JMRIState + \n                '</div>' +\n            '</td>' +\n            '<td width=\"110px;\"><img width=\"100px\" src=\"' + tempRow.LocImage + '\"></td>' + \n        '</tr>';\n    }\n}\nmsg.template += '</table></div>';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 720,
@@ -16288,7 +16288,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191009.0002",
+                "to": "20191016.0001",
                 "tot": "str"
             },
             {
@@ -18107,8 +18107,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "60",
-        "x": 130,
-        "y": 140,
+        "x": 110,
+        "y": 60,
         "wires": [
             [
                 "6e6b3a22.482694"
@@ -18119,29 +18119,29 @@
         "id": "6e6b3a22.482694",
         "type": "switch",
         "z": "7e6978a8.bbc058",
-        "name": "is JMRI_ENABLED",
+        "name": "is not JMRI_ENABLED",
         "property": "JMRI_Config.JMRI_ENABLED",
         "propertyType": "global",
         "rules": [
             {
-                "t": "true"
+                "t": "false"
             },
             {
-                "t": "false"
+                "t": "true"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 330,
-        "y": 200,
+        "x": 360,
+        "y": 100,
         "wires": [
             [
-                "6fc4e750.dc1d3",
-                "ebf43dda.291b7"
+                "fa977e2d.84bd48"
             ],
             [
-                "fa977e2d.84bd48"
+                "ebf43dda.291b7",
+                "1bc25a65.eaeac6"
             ]
         ]
     },
@@ -18157,8 +18157,8 @@
         "lineType": "two",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 350,
-        "y": 300,
+        "x": 310,
+        "y": 280,
         "wires": [
             [
                 "e5f7907c.6ed85"
@@ -18170,11 +18170,11 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Create Train List",
-        "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nconsole.log(trains);\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        var Stops = '';\n        if (curTrain.locations !== undefined && curTrain.locations.length > 0 ) {\n            Stops += '<br /><strong>Stops:</strong><br /><table width=\"100%\" style=\"font-size:8pt;\"><tr><th>Name</th><th>Direction</th><th>Arrives</th><th>Departs</th><th>Location</th></tr>';\n            for (var locID in curTrain.locations) {\n                var curStop = curTrain.locations[locID];\n                var curLocation = '';\n                if (curStop.location !== undefined && curStop.location.userName !== undefined) {\n                    curLocation  =curStop.location.userName;\n                    if (curStop.location.track !== undefined && curStop.location.track.userName !== undefined) {\n                        curLocation += '->' + curStop.location.track.userName;\n                    }\n                }\n                Stops +=   '<tr><td>' + curStop.userName + '</td>'+\n                            '<td>' + curStop.trainDirection + '</td>' +\n                            '<td>' + curStop.expectedArrivalTime + '</td>' +                   \n                            '<td>' + curStop.expectedDepartureTime  + '</td>' +\n                            '<td>' + curLocation + '</td></tr>';\n            }   \n            Stops += '</table>';\n        }\n        listItem.push({\n            curTrain : curTrain,\n            menu : ['List Cars'], //,'Build','Move','Terminate'],\n            title : \n                '<div className=\"trainList\">' +\n                ' <strong>' + curTrain.userName + '</strong><br />' +\n                ' <small>' + curTrain.description + '</small><br /><br />' +\n                ' <strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                ' <strong>Route: </strong>' + curTrain.route + '<br />' +\n                ' <strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                ' <strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                ' <strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                ' <strong>Location: </strong>' + curTrain.location + '<br />' +\n                ' <strong>Status: </strong>' + curTrain.status + '<br />' +\n                Stops + \n                '<hr /></div>'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send({payload : listItem});    \n}\nreturn;",
+        "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nconsole.log(trains);\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        var Stops = '';\n        if (curTrain.locations !== undefined && curTrain.locations.length > 0 ) {\n            Stops += '<br /><strong>Stops:</strong><br /><table width=\"100%\" style=\"font-size:8pt;\"><tr><th>Name</th><th>Direction</th><th>Arrives</th><th>Departs</th><th>Location</th></tr>';\n            for (var locID in curTrain.locations) {\n                var curStop = curTrain.locations[locID];\n                var curLocation = '';\n                if (curStop.location !== undefined && curStop.location.userName !== undefined) {\n                    curLocation  =curStop.location.userName;\n                    if (curStop.location.track !== undefined && curStop.location.track.userName !== undefined) {\n                        curLocation += '->' + curStop.location.track.userName;\n                    }\n                }\n                Stops +=   '<tr><td>' + curStop.userName + '</td>'+\n                            '<td>' + curStop.trainDirection + '</td>' +\n                            '<td>' + curStop.expectedArrivalTime + '</td>' +                   \n                            '<td>' + curStop.expectedDepartureTime  + '</td>' +\n                            '<td>' + curLocation + '</td></tr>';\n            }   \n            Stops += '</table>';\n        }\n        listItem.push({\n            curTrain : curTrain,\n            menu : ['List Cars','Clear Car Status'], //,'Build','Move','Terminate'],\n            title : \n                '<div className=\"trainList\">' +\n                ' <strong>' + curTrain.userName + '</strong><br />' +\n                ' <small>' + curTrain.description + '</small><br /><br />' +\n                ' <strong>Lead Engine: </strong>' + curTrain.leadEngine + '<br />' +\n                ' <strong>Route: </strong>' + curTrain.route + '<br />' +\n                ' <strong>Departs: </strong>' + curTrain.trainDepartsName + '<br />' +\n                ' <strong>Departure Time: </strong>' + curTrain.departureTime + '<br />' +\n                ' <strong>Terminates: </strong>' + curTrain.trainTerminatesName + '<br />' +\n                ' <strong>Location: </strong>' + curTrain.location + '<br />' +\n                ' <strong>Status: </strong>' + curTrain.status + '<br />' +\n                Stops + \n                '<hr /></div>'\n        });\n        \n     /*\n        Name, Departs, Route,\n        Status, Current, Terminates, , Description,\n     */\n    }\n}\nif (listItem !== undefined && listItem.length > 0) {\n    node.send({payload : listItem});    \n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 340,
-        "y": 260,
+        "y": 160,
         "wires": [
             [
                 "1abcb494.09e6fb"
@@ -18193,7 +18193,7 @@
         "lineType": "one",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 940,
+        "x": 980,
         "y": 440,
         "wires": [
             [
@@ -18213,7 +18213,7 @@
         "lineType": "one",
         "actionType": "menu",
         "allowHTML": true,
-        "x": 930,
+        "x": 970,
         "y": 480,
         "wires": [
             [
@@ -18229,7 +18229,7 @@
         "func": "var hive = global.get('hive');\nvar IP = global.get('IP.internalIPv4');\nvar engineList = [];\n\nif (msg.payload.curTrain !== undefined) {\n    var curTrain = msg.payload.curTrain;console.log(curTrain);\n    if (curTrain[msg.type] !== undefined && curTrain[msg.type].length >0 ) {\n        for (var invID in curTrain[msg.type]) {\n            var curInv = curTrain[msg.type][invID];\n            var formatLocation = '';\n            var formatRoute = '';\n            var formatDestination = '';\n            var formatfinalDestination = '';\n            var testLocation = '';\n            var testDestination = '';\n            var menu = [];\n            var color = '';\n            var icon_name = '';\n            var icon = 'report_problem';\n            if (curInv.location !== undefined && curInv.location !== null && curInv.location.userName !== undefined) {\n                testLocation=  curInv.location.userName;    \n                if (curInv.location.track !== undefined && curInv.location.track.userName !== undefined) {\n                    testLocation += '->' + curInv.location.track.userName;\n                }\n                var loadState='';\n                if (msg.type === 'cars') {\n                    var load = 'Loaded';\n                    if (curInv.load === 'E') {\n                        load = 'Empty';\n                        menu.push('Change to Loaded');\n                    } else {\n                        menu.push('Change to Empty');\n                    }\n                    loadState += ' (' + load + ')';\n                }\n                formatLocation = '<strong>Location: </strong>' + testLocation + loadState + '<br />';\n                \n                if (msg.type ==='cars' && curInv.location.route !== undefined) {\n                    var curRoute = hive.jmri.getRoute(curInv.location.route); \n                    console.log(curRoute);\n                    if (curRoute !== undefined && curRoute.userName !== undefined) {\n                        formatRoute = '<strong>Current Route: </strong>' + curRoute.userName + ' heading ' + curRoute.trainDirection + '<br/>'; \n                    }\n                }\n            }\n            if (curInv.destination !== undefined && curInv.destination !== null && curInv.destination.userName !== undefined ) {\n                testDestination = curInv.destination.userName;\n                icon = 'http://' + IP + '/images/icons/close_red_24px.png';\n                icon_name = 'close';\n                color = '#F00;';\n                if (curInv.destination.track !== undefined && curInv.destination.track.userName !== undefined) {\n                    testDestination += '->' + curInv.destination.track.userName;\n                }\n                formatDestination = '<strong>Destination: </strong>' + testDestination + '<br />';\n                if (testLocation === testDestination) {\n                    icon = 'http://' + IP + '/images/icons/check_green_24px.png';\n                    icon_name='check';\n                    color= '#0F0';\n                } else {\n                    menu.push('Force to Destination');\n                }\n            }\n            if (curInv.finalDestination !== undefined && curInv.finalDestination !== null &&  curInv.finalDestination.userName !== undefined ) {\n                formatfinalDestination = '<strong>Final Destination: </strong>' + curInv.finalDestination.userName;\n                icon = 'http://' + IP + '/images/icons/close_red_24px.png';\n                icon_name = 'close';\n                color = 'red';\n                if (curInv.finalDestination.track !== undefined && curInv.finalDestination.track.userName !== undefined) {\n                    formatfinalDestination += '->' + curInv.finalDestination.track.userName;\n                }\n                formatfinalDestination += '<br/>';\n                if (formatLocation === formatfinalDestination) {\n                    icon = 'http://' + IP + '/images/icons/check_green_24px.png';\n                    icon_name='check';\n                    color= 'green';\n                } else {\n                    menu.push('Force to Final Destination');\n                }\n            }            \n\n            engineList.push({\n                curTrain : curTrain,\n                curInv: curInv,\n                type: msg.type,\n                icon : icon,\n                icon_name : icon_name,\n                title:  '<span><strong>Name: </strong>' + curInv.name + '<br />' +\n                        formatLocation + \n                        formatRoute +\n                        '<span style=\"color: ' + color + '\">' + formatDestination + '</span>' +\n                        formatfinalDestination +\n                        '</span>'+\n                        '<hr />',\n                menu : menu\n            });     \n        }\n    }\n}\nif (engineList !== undefined && engineList.length > 0) {\n    node.send({type : msg.type, payload: engineList});\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 740,
+        "x": 760,
         "y": 340,
         "wires": [
             [
@@ -18241,7 +18241,7 @@
         "id": "6798731.fb03c0c",
         "type": "switch",
         "z": "7e6978a8.bbc058",
-        "name": "",
+        "name": "curTrain not Empty",
         "property": "payload.curTrain",
         "propertyType": "msg",
         "rules": [
@@ -18252,12 +18252,13 @@
         "checkall": "true",
         "repair": true,
         "outputs": 1,
-        "x": 390,
+        "x": 350,
         "y": 360,
         "wires": [
             [
                 "fba06c3d.e6f7f8",
-                "ea533bbd.f22c38"
+                "ea533bbd.f22c38",
+                "a628a70a.a3278"
             ]
         ]
     },
@@ -18510,12 +18511,13 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 140,
+        "x": 120,
         "y": 100,
         "wires": [
             [
                 "6e6b3a22.482694",
-                "96be489b.95b9b"
+                "96be489b.95b9b",
+                "663c4883.6a1ca"
             ]
         ]
     },
@@ -18552,8 +18554,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 560,
-        "y": 140,
+        "x": 600,
+        "y": 60,
         "wires": [
             [
                 "d593a0db.05e84"
@@ -18572,8 +18574,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 770,
-        "y": 140,
+        "x": 810,
+        "y": 60,
         "wires": []
     },
     {
@@ -18652,8 +18654,8 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 770,
-        "y": 400,
+        "x": 790,
+        "y": 380,
         "wires": [
             [
                 "295d0b98.074214"
@@ -18675,7 +18677,7 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 170,
+        "x": 150,
         "y": 480,
         "wires": [
             [
@@ -18702,7 +18704,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
+        "x": 120,
         "y": 440,
         "wires": [
             [
@@ -18717,10 +18719,10 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Build Inventory Update Request",
-        "func": "var data = {\n   name : msg.payload.curInv.name \n};\nmsg.payload.type = msg.payload.type.replace(/s$/,'');\nswitch (msg.payload.selected) {\n    case 'Change to Empty':\n        data['load'] = 'E';\n        break;\n    case 'Change to Loaded': \n        data['load'] = 'L';\n        break;\n    case 'Force to Destination':\n        data['location'] = msg.payload.curInv.destination;\n        break;\n    case 'Force to Final Destination': \n        data['location'] = msg.payload.curInv.finalDestination;\n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + 'json/' + msg.payload.type,\n    topic : msg.payload.type,\n    verb : \"POST\",\n    payload : {\n        type: msg.payload.type,\n        data: data\n    }\n});\nreturn;",
+        "func": "var data = {\n   name : msg.payload.curInv.name \n};\nmsg.payload.type = msg.payload.type.replace(/s$/,'');\nswitch (msg.payload.selected) {\n    case 'Change to Empty':\n        data['load'] = 'E';\n        break;\n    case 'Change to Loaded': \n        data['load'] = 'L';\n        break;\n    case 'Force to Destination':\n        data['location'] = msg.payload.curInv.destination;\n        break;\n    case 'Force to Final Destination': \n        data['location'] = msg.payload.curInv.finalDestination;\n        break;\n    case 'Clear Comment':\n        data['comment'] = '';\n        break;\n    case 'Terminate Comment': \n        data['comment'] = 'terminated';\n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + 'json/' + msg.payload.type,\n    topic : msg.payload.type,\n    verb : \"POST\",\n    payload : {\n        type: msg.payload.type,\n        data: data\n    }\n});\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1210,
+        "x": 1370,
         "y": 440,
         "wires": [
             [
@@ -18740,7 +18742,7 @@
         "tls": "",
         "proxy": "",
         "authType": "",
-        "x": 1270,
+        "x": 1110,
         "y": 280,
         "wires": [
             [
@@ -18768,7 +18770,7 @@
         "checkall": "true",
         "repair": true,
         "outputs": 2,
-        "x": 1410,
+        "x": 1250,
         "y": 280,
         "wires": [
             [
@@ -18793,7 +18795,7 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1830,
+        "x": 1670,
         "y": 280,
         "wires": []
     },
@@ -18807,7 +18809,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Unable to update JMRI with Tag Read",
+                "to": "Unable to update JMRI",
                 "tot": "str"
             },
             {
@@ -18823,7 +18825,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1580,
+        "x": 1420,
         "y": 300,
         "wires": [
             [
@@ -18857,7 +18859,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1580,
+        "x": 1420,
         "y": 260,
         "wires": [
             [
@@ -18879,18 +18881,24 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "Clear Car Status",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "true",
         "repair": true,
-        "outputs": 2,
-        "x": 570,
+        "outputs": 3,
+        "x": 530,
         "y": 280,
         "wires": [
             [
                 "6798731.fb03c0c"
             ],
+            [],
             [
                 "b16f8e4d.82a198"
             ]
@@ -18904,7 +18912,7 @@
         "func": "var data = {\n    name : msg.payload.curTrain.name\n};\nswitch (msg.payload.selected) {\n    case 'Build':\n        \n        break;\n    case 'Move': \n        \n        break;\n    case 'Terminate':\n        \n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + '/trains',\n    topic : 'trains',\n    verb : \"POST\",\n    payload : {\n        type: 'trains',\n        data: data\n    }\n});\nreturn;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 820,
+        "x": 830,
         "y": 280,
         "wires": [
             [
@@ -18920,8 +18928,8 @@
         "links": [
             "a309b660.225d08"
         ],
-        "x": 1535,
-        "y": 140,
+        "x": 1355,
+        "y": 220,
         "wires": []
     },
     {
@@ -18939,12 +18947,263 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1580,
-        "y": 180,
+        "x": 1180,
+        "y": 100,
         "wires": [
             [
                 "96be489b.95b9b",
-                "6fc4e750.dc1d3"
+                "4fc18ce3.79a6c4",
+                "6fc4e750.dc1d3",
+                "29a4865c.1bea2a"
+            ]
+        ]
+    },
+    {
+        "id": "a628a70a.a3278",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "curTrain",
+                "pt": "flow",
+                "to": "payload.curTrain.name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "571b6e59.540558",
+        "type": "function",
+        "z": "7e6978a8.bbc058",
+        "name": "Set curTrain data for refresh",
+        "func": "var trains = global.get('JMRI.trains.data');\nvar selectedTrain = flow.get('curTrain');\nvar listItem = [];\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        if (curTrain.name === selectedTrain) {\n            node.send({\n                payload : {\n                    curTrain : curTrain\n                }\n            });\n        }\n    }\n}\n\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 680,
+        "y": 200,
+        "wires": [
+            [
+                "6798731.fb03c0c"
+            ]
+        ]
+    },
+    {
+        "id": "4fc18ce3.79a6c4",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "If curTrain set",
+        "property": "curTrain",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "571b6e59.540558"
+            ]
+        ]
+    },
+    {
+        "id": "663c4883.6a1ca",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "clear curTrain",
+        "rules": [
+            {
+                "t": "set",
+                "p": "curTrain",
+                "pt": "flow",
+                "to": "payload.curTrain.name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29a4865c.1bea2a",
+        "type": "function",
+        "z": "7e6978a8.bbc058",
+        "name": "Check Train State Changes",
+        "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nvar curStatus = flow.get('curStatus');\nvar newStatus = {};\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        newStatus[trainID] = curTrain.status;\n        if (curStatus !== undefined && curStatus[trainID] !== undefined && curTrain.status !== curStatus[trainID]) {\n            /* Check if it is terminated and if it is update cars or engines */\n            node.send({\n                payload : curTrain\n            });\n        }\n    }\n}\nflow.set('curStatus',newStatus);\nnode.send({\n    payload : {\n        statusCode : -1\n    }\n});\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1620,
+        "y": 100,
+        "wires": [
+            [
+                "83f40580.0ccce"
+            ]
+        ]
+    },
+    {
+        "id": "83f40580.0ccce",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "Route Messages",
+        "property": "payload.statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "128",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "build",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "move",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "-1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 4,
+        "x": 1630,
+        "y": 160,
+        "wires": [
+            [
+                "9db74008.34fc3"
+            ],
+            [],
+            [],
+            [
+                "ebf43dda.291b7"
+            ]
+        ]
+    },
+    {
+        "id": "9db74008.34fc3",
+        "type": "function",
+        "z": "7e6978a8.bbc058",
+        "name": "Set Terminated",
+        "func": "var curTrain = msg.payload;\nvar setStatus = msg.payload.status;\nvar types = ['car','engine'];\nif (curTrain !== undefined) { \n    for (var typeID in types) {\n        var s_type = types[typeID];\n        var o_type = s_type + 's';\n        if (curTrain[o_type] !== undefined && curTrain[o_type].length > 0) {\n            for (var invID in curTrain[o_type]) {\n                var curInv = curTrain[o_type][invID];\n                var data = {\n                    name : curInv.name,\n                    comment : setStatus\n                };\n                node.send( {\n                    headers : {'content-type':'application/json'},\n                    url : global.get('JMRI_URL') + '/' + o_type,\n                    topic : s_type,\n                    verb : \"POST\",\n                    payload : {\n                        type: s_type,\n                        data: data\n                    }\n                });\n            }\n        }\n    }\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1920,
+        "y": 140,
+        "wires": [
+            [
+                "97227002.6a6e4"
+            ]
+        ]
+    },
+    {
+        "id": "97227002.6a6e4",
+        "type": "http request",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1950,
+        "y": 180,
+        "wires": [
+            [
+                "4477009f.1c91a8"
+            ]
+        ]
+    },
+    {
+        "id": "4477009f.1c91a8",
+        "type": "switch",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 2,
+        "x": 1950,
+        "y": 220,
+        "wires": [
+            [],
+            [
+                "b25fe76a.2487b8"
+            ]
+        ]
+    },
+    {
+        "id": "b25fe76a.2487b8",
+        "type": "change",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Unable to update JMRI",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2140,
+        "y": 220,
+        "wires": [
+            [
+                "1641f8ff.f45a1f"
             ]
         ]
     }
