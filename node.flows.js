@@ -19055,7 +19055,7 @@
         "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nvar curStatus = flow.get('curStatus');\nvar newStatus = {};\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        newStatus[trainID] = curTrain.status;\n        if (curStatus !== undefined && curStatus[trainID] !== undefined && curTrain.status !== curStatus[trainID]) {\n            /* Check if it is terminated and if it is update cars or engines */\n            node.send({\n                payload : curTrain\n            });\n        }\n    }\n}\nflow.set('curStatus',newStatus);\nnode.send({\n    payload : {\n        statusCode : -1\n    }\n});\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1620,
+        "x": 1600,
         "y": 100,
         "wires": [
             [
@@ -19140,7 +19140,8 @@
         "y": 180,
         "wires": [
             [
-                "4477009f.1c91a8"
+                "4477009f.1c91a8",
+                "66dad8b0.11a828"
             ]
         ]
     },
@@ -19235,8 +19236,24 @@
                 "ebf43dda.291b7"
             ],
             [
-                "97227002.6a6e4"
+                "97227002.6a6e4",
+                "66dad8b0.11a828"
             ]
         ]
+    },
+    {
+        "id": "66dad8b0.11a828",
+        "type": "debug",
+        "z": "7e6978a8.bbc058",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 2230,
+        "y": 180,
+        "wires": []
     }
 ]
