@@ -865,7 +865,7 @@
         "tab": "2e59cdbe.2f3a72",
         "order": 1,
         "disp": true,
-        "width": "9",
+        "width": "12",
         "collapse": false
     },
     {
@@ -6419,8 +6419,8 @@
         "color": "",
         "bgcolor": "",
         "icon": "cloud_download",
-        "payload": "",
-        "payloadType": "str",
+        "payload": "true",
+        "payloadType": "bool",
         "topic": "",
         "x": 210,
         "y": 440,
@@ -16288,7 +16288,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191016.0004",
+                "to": "20191016.0005",
                 "tot": "str"
             },
             {
@@ -18152,7 +18152,7 @@
         "group": "b241ba50.8a64a",
         "name": "Trains",
         "order": 0,
-        "width": "9",
+        "width": "12",
         "height": "14",
         "lineType": "two",
         "actionType": "menu",
@@ -18500,7 +18500,7 @@
         "name": "",
         "group": "b241ba50.8a64a",
         "order": 1,
-        "width": "9",
+        "width": "12",
         "height": "1",
         "passthru": false,
         "label": "Refresh",
