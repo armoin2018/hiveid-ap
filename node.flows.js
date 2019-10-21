@@ -16288,7 +16288,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191021.0001",
+                "to": "20191021.0002",
                 "tot": "str"
             },
             {
@@ -19115,7 +19115,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Set Terminated",
-        "func": "var storedTrain = flow.get('storedTrain');\nvar activeTrain = msg.payload.name;\nif (storedTrain !== undefined && storedTrain[activeTrain] !== undefined) {\n    var curTrain = storedTrain[activeTrain];\n    var setStatus = msg.payload.status;\n    var types = ['car','engine'];\n    if (curTrain !== undefined) { \n        for (var typeID in types) {\n            var s_type = types[typeID];\n            var o_type = s_type + 's';\n            if (curTrain[o_type] !== undefined && curTrain[o_type].length > 0) {\n                for (var invID in curTrain[o_type]) {\n                    var curInv = curTrain[o_type][invID];\n                    var data = {\n                        name : curInv.name,\n                        comment : setStatus\n                    };\n                    node.send( {\n                        headers : {'content-type':'application/json'},\n                        url : global.get('JMRI_URL') + '/' + o_type,\n                        topic : s_type,\n                        verb : \"POST\",\n                        payload : {\n                            type: s_type,\n                            data: data\n                        }\n                    });\n                }\n            }\n        }\n    }\n}\nnode.send({payload: -1});\nreturn;",
+        "func": "var storedTrain = flow.get('storedTrain');\nvar activeTrain = msg.payload.name;\nif (storedTrain !== undefined && storedTrain[activeTrain] !== undefined) {\n    var curTrain = storedTrain[activeTrain];\n    var setStatus = msg.payload.status;\n    if (msg.payload.statusCode === 20) {\n        setStatus = '';\n    }\n    var types = ['car','engine'];\n    if (curTrain !== undefined) { \n        for (var typeID in types) {\n            var s_type = types[typeID];\n            var o_type = s_type + 's';\n            if (curTrain[o_type] !== undefined && curTrain[o_type].length > 0) {\n                for (var invID in curTrain[o_type]) {\n                    var curInv = curTrain[o_type][invID];\n                    var data = {\n                        name : curInv.name,\n                        comment : setStatus\n                    };\n                    node.send( {\n                        headers : {'content-type':'application/json'},\n                        url : global.get('JMRI_URL') + '/' + s_type,\n                        topic : s_type,\n                        verb : \"POST\",\n                        payload : {\n                            type: s_type,\n                            data: data\n                        }\n                    });\n                }\n            }\n        }\n    }\n}\nnode.send({payload: -1});\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 1920,
@@ -19269,7 +19269,9 @@
         "x": 1920,
         "y": 80,
         "wires": [
-            []
+            [
+                "9db74008.34fc3"
+            ]
         ]
     }
 ]
