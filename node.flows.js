@@ -16288,7 +16288,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191021.0003",
+                "to": "20191022.0001",
                 "tot": "str"
             },
             {
@@ -19265,7 +19265,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Store the Train",
-        "func": "var storedTrain = flow.get('storedTrain');\nif (stroredTrain === undefined) {\n    storedTrain = {};   \n}\nstoredTrain[msg.payload.name] = msg.payload;\nflow.set('storedTrain',storedTrain);\nreturn msg;",
+        "func": "var storedTrain = flow.get('storedTrain');\nif (storedTrain === undefined) {\n    storedTrain = {};   \n}\nstoredTrain[msg.payload.name] = msg.payload;\nflow.set('storedTrain',storedTrain);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1920,
