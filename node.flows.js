@@ -1195,14 +1195,14 @@
         "id": "60e3884f.3df908",
         "type": "exec",
         "z": "a06855ce.9f5488",
-        "command": "echo \"/opt/hiveid-ap/hiveid_update.sh\" | at -M now",
-        "addpay": false,
+        "command": "",
+        "addpay": true,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 1110,
+        "x": 1170,
         "y": 500,
         "wires": [
             [],
@@ -3463,7 +3463,9 @@
                 "e054e355.832a2",
                 "68c8ebf9.5924f4",
                 "58aab300.01211c",
-                "c1054d1e.8d906"
+                "c1054d1e.8d906",
+                "baeca58d.963ab8",
+                "f1fbdfc5.ab581"
             ]
         ]
     },
@@ -5428,8 +5430,8 @@
         "y": 500,
         "wires": [
             [
-                "60e3884f.3df908",
-                "bea700c3.ebb21"
+                "bea700c3.ebb21",
+                "54d58dee.031254"
             ],
             [
                 "a08dd7de.918c88"
@@ -6435,13 +6437,13 @@
         "type": "exec",
         "z": "11b2f565.0266ab",
         "command": "/opt/hiveid-ap/hiveid_update_lite.sh",
-        "addpay": false,
+        "addpay": true,
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 310,
+        "x": 370,
         "y": 500,
         "wires": [
             [],
@@ -6802,7 +6804,7 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 370,
+        "x": 350,
         "y": 760,
         "wires": [
             [],
@@ -15184,7 +15186,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1130,
+        "x": 1070,
         "y": 460,
         "wires": [
             [
@@ -16288,7 +16290,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191022.0001",
+                "to": "20191023.0002",
                 "tot": "str"
             },
             {
@@ -17842,9 +17844,9 @@
             ],
             [
                 "b6adf091.54a19",
-                "cb5b3377.6d8cd",
                 "25386384.87620c",
-                "be33311c.a2908"
+                "be33311c.a2908",
+                "155c2e8b.580881"
             ]
         ]
     },
@@ -19291,5 +19293,183 @@
         "x": 2300,
         "y": 60,
         "wires": []
+    },
+    {
+        "id": "baeca58d.963ab8",
+        "type": "switch",
+        "z": "fd2ebb8a.240a38",
+        "name": "Is BRANCH Empty",
+        "property": "TrainTraxx_Config.BRANCH",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 200,
+        "wires": [
+            [
+                "57861a33.8a5654"
+            ]
+        ]
+    },
+    {
+        "id": "57861a33.8a5654",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set BRANCH To master",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.BRANCH",
+                "pt": "global",
+                "to": "master",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 200,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "c18e81f8.f1aae",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "Set TrainTraxx_Config.BRANCH",
+        "rules": [
+            {
+                "t": "set",
+                "p": "TrainTraxx_Config.BRANCH",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 560,
+        "wires": [
+            [
+                "ed5837b0.97eb08"
+            ]
+        ]
+    },
+    {
+        "id": "d2bbfe69.5ccec",
+        "type": "ui_switch",
+        "z": "fd2ebb8a.240a38",
+        "name": "Use Production Toggle",
+        "label": "Use Production",
+        "tooltip": "",
+        "group": "c39736a3.dcaf08",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "style": "",
+        "onvalue": "master",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "dev",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 760,
+        "y": 560,
+        "wires": [
+            [
+                "c18e81f8.f1aae"
+            ]
+        ]
+    },
+    {
+        "id": "f1fbdfc5.ab581",
+        "type": "change",
+        "z": "fd2ebb8a.240a38",
+        "name": "TrainTraxx_Config.BRANCH",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.BRANCH",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 560,
+        "wires": [
+            [
+                "d2bbfe69.5ccec"
+            ]
+        ]
+    },
+    {
+        "id": "155c2e8b.580881",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "TrainTraxx_Config.BRANCH",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "cb5b3377.6d8cd"
+            ]
+        ]
+    },
+    {
+        "id": "54d58dee.031254",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set Command",
+        "func": "msg.payload = 'echo \"/opt/hiveid-ap/hiveid_update.sh ' + global.get('TrainTraxx_Config.BRANCH') + '\" | at -M now';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1000,
+        "y": 500,
+        "wires": [
+            [
+                "60e3884f.3df908"
+            ]
+        ]
     }
 ]
