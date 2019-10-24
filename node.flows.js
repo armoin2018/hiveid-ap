@@ -16291,7 +16291,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191023.0003",
+                "to": "20191024.0001",
                 "tot": "str"
             },
             {
@@ -19061,7 +19061,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Check Train State Changes",
-        "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nvar curStatus = flow.get('curStatus');\nvar newStatus = {};\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        newStatus[trainID] = curTrain.status;\n        if (curStatus !== undefined && curStatus[trainID] !== undefined && curTrain.status !== curStatus[trainID]) {\n            /* Check if it is terminated and if it is update cars or engines */\n            node.send({\n                payload : curTrain\n            });\n        }\n    }\n}\nflow.set('curStatus',newStatus);\nnode.send({\n    payload : {\n        statusCode : -1\n    }\n});\nreturn;",
+        "func": "var trains = global.get('JMRI.trains.data');\nvar listItem = [];\nvar curStatus = flow.get('curStatus');\nvar newStatus = {};\nif (trains !== undefined && trains.length > 0) {\n    for (var trainID in trains) {\n        var curTrain = trains[trainID];\n        newStatus[curTrain.name] = curTrain.status;\n        if (curStatus !== undefined && curStatus[curTrain.name] !== undefined && curTrain.status !== curStatus[curTrain.name]) {\n            /* Check if it is terminated and if it is update cars or engines */\n            node.send({\n                payload : curTrain\n            });\n        }\n    }\n}\nflow.set('curStatus',newStatus);\nnode.send({\n    payload : {\n        statusCode : -1\n    }\n});\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 1600,
@@ -19277,8 +19277,8 @@
         "func": "var storedTrain = flow.get('storedTrain');\nif (storedTrain === undefined) {\n    storedTrain = {};   \n}\nstoredTrain[msg.payload.name] = msg.payload;\nflow.set('storedTrain',storedTrain);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1920,
-        "y": 80,
+        "x": 1940,
+        "y": 100,
         "wires": [
             [
                 "9db74008.34fc3",
@@ -19297,8 +19297,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 2300,
-        "y": 60,
+        "x": 2240,
+        "y": 40,
         "wires": []
     },
     {
@@ -19534,7 +19534,9 @@
         "x": 160,
         "y": 320,
         "wires": [
-            []
+            [
+                "7a528331.5cb0ac"
+            ]
         ]
     }
 ]
