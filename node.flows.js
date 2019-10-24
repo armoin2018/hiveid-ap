@@ -6851,7 +6851,7 @@
         "type": "debug",
         "z": "11b2f565.0266ab",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -16290,7 +16290,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191023.0002",
+                "to": "20191023.0003",
                 "tot": "str"
             },
             {
@@ -19470,6 +19470,58 @@
             [
                 "60e3884f.3df908"
             ]
+        ]
+    },
+    {
+        "id": "eefc72ad.91a3c",
+        "type": "inject",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "13f228b7.573737"
+            ]
+        ]
+    },
+    {
+        "id": "13f228b7.573737",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "store_running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "lite_running",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 320,
+        "wires": [
+            []
         ]
     }
 ]
