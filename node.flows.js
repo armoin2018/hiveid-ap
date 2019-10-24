@@ -2647,7 +2647,7 @@
         "type": "function",
         "z": "8b10dcf.dc4c82",
         "name": "Set Map",
-        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nif (currentRecords !== undefined && currentRecords.length > 0) {\n    for (var cID in currentRecords) {\n        var curRecord =  currentRecords[cID];\n        if (msg.topic !== 'trains') {\n            curRecord = currentRecords[cID].data;\n        } \n        if (curRecord.userName === null) {\n            msg.payload.available.push(cID);\n        } else {\n            msg.payload.map[curRecord.userName] = cID;\n        }\n        msg.payload.data[cID] = curRecord;\n        if (curRecord.name !== undefined) {\n            msg.payload.nextID =Number(curRecord.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n    \n}\n\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+msg.topic,msg.payload);\nreturn msg;",
+        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nif (currentRecords !== undefined && currentRecords.length > 0) {\n    for (var cID in currentRecords) {\n        var curRecord =  currentRecords[cID];\n        if (msg.topic !== 'trains') {\n            curRecord = currentRecords[cID].data;\n        } \n        if (curRecord.userName === undefined || curRecord.userName === \"\" || curRecord.userName === null) {\n            msg.payload.available.push(cID);\n        } else {\n            msg.payload.map[curRecord.userName] = cID;\n        }\n        msg.payload.data[cID] = curRecord;\n        if (curRecord.name !== undefined) {\n            msg.payload.nextID =Number(curRecord.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n    \n}\n\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+msg.topic,msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 605,
@@ -16291,7 +16291,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191024.0001-dev",
+                "to": "20191024.0002-dev",
                 "tot": "str"
             },
             {
@@ -19265,7 +19265,7 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 2320,
+        "x": 2380,
         "y": 180,
         "wires": []
     },
@@ -19297,7 +19297,7 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 2240,
+        "x": 2360,
         "y": 40,
         "wires": []
     },
