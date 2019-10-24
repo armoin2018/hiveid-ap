@@ -17095,14 +17095,20 @@
         "rules": [
             {
                 "t": "empty"
+            },
+            {
+                "t": "null"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 1020,
         "y": 160,
         "wires": [
+            [
+                "98594e32.01c36"
+            ],
             [
                 "98594e32.01c36"
             ]
@@ -19305,14 +19311,20 @@
         "rules": [
             {
                 "t": "empty"
+            },
+            {
+                "t": "null"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 1010,
         "y": 200,
         "wires": [
+            [
+                "57861a33.8a5654"
+            ],
             [
                 "57861a33.8a5654"
             ]
