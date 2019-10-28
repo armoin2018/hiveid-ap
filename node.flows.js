@@ -14270,7 +14270,7 @@
                 "t": "set",
                 "p": "queue",
                 "pt": "flow",
-                "to": "[\"TrainTraxx\",\"JMRI\",\"tags\",\"JMRI\",\"inventory\",\"sensors\",\"JMRI\",\"locations\",\"JMRI\",\"tracks\",\"JMRI\",\"clean_tags\",\"JMRI\"]",
+                "to": "[\"TrainTraxx\",\"JMRI\",\"clean_tags\",\"JMRI\",\"tags\",\"JMRI\",\"inventory\",\"sensors\",\"JMRI\",\"locations\",\"JMRI\",\"tracks\",\"JMRI\"]",
                 "tot": "json"
             },
             {
@@ -15348,7 +15348,7 @@
         "func": "var JMRI = global.get('JMRI');\nvar JMRI_Config = global.get('JMRI_Config');\nvar TrainTraxx_Config = global.get('TrainTraxx_Config');\nvar TT = global.get('TrainTraxx');\nvar hive = global.get('hive');\nvar imageRef_Inv = global.get('imageRef_Inv');\nvar Activity = global.get('Activity');\n\nvar inName = msg.payload;\nvar jmri_Info = '';\nvar tt_Info = '';\n\nmsg.template =  '<style>' +\n                '   .info_header {color:#fff; background-color: #f90;} ' +\n                '   .info_title { font-weight: bold;} ' +\n                '   .colorBlock_sm { height:20px; width: 20px;} ' +\n                '</style>' +\n                '<div style=\"height:720px;\"><table width=\"100%\">';\nif (JMRI_Config.JMRI_ENABLED === true) {\n    var types = ['cars','engines'];\n    msg.template += '<tr><th class=\"info_header\" colspan=\"2\">JMRI Info</th></tr>';\n    for (var typeID in types) {\n        var curType = types[typeID];\n        for (var jID in JMRI[curType].data) {\n            var curCar = JMRI[curType].data[jID];\n            var out = {'location' : 'Not Set', 'destination' : 'Not Set', 'finalDestination' : 'Not Set', 'returnWhenEmpty' : 'Not Set'};\n            for (var outKey in out) {\n                if (curCar[outKey] !== undefined && curCar[outKey] !== null) {\n                    if (curCar[outKey].userName !== undefined) {\n                        out[outKey] = curCar[outKey].userName;\n                        if (curCar[outKey].track !== undefined && curCar[outKey].track.userName !== undefined) {\n                            out[outKey] += '->' + curCar[outKey].track.userName;    \n                        }\n                    }\n                }\n            }\n            \n            \n            if (curCar.name === inName) {\n                msg.template += '<tr><td class=\"info_title\">Name:</td><td>' +curCar.name + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Car Type:</td><td>' + ((curCar.carType === undefined || curCar.carType === \"\") ? 'Unknown' : curCar.carType) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Color:</td><td><div class=\"colorBlock_sm\" style=\"background-color:' + ((curCar.color === undefined) ? '#fff' : curCar.color) + ';\">&nbsp;</div></td></tr>' +\n                            '<tr><td class=\"info_title\">Length:</td><td>' + ((curCar.length === undefined || curCar.length === \"\") ? 'Unknown' : curCar.length) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight:</td><td>' + ((curCar.weight === undefined || curCar.weight === \"\") ? 'Unknown' : curCar.weight) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Weight Tons:</td><td>' + ((curCar.weightTons === undefined || curCar.weightTons === \"\") ? 'Unknown' : curCar.weightTons) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Load:</td><td>' + ((curCar.load === undefined || curCar.load === \"\") ? 'Unknown' : curCar.load) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">RFID:</td><td>' + ((curCar.rfid === undefined || curCar.rfid ===\"\") ? 'Not Set' : curCar.rfid ) + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Out of Service:</td><td>' + ((curCar.outOfService === false) ? 'No' : 'Yes') + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Last Location:</td><td>' + out['location'] + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Destination:</td><td>' +  out['destination'] + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Final Destination:</td><td>' +  out['finalDestination'] + '</td></tr>' +\n                            '<tr><td class=\"info_title\">Return When Empty:</td><td>' +  out['returnWhenEmpty'] + '</td></tr>';\n            }\n        }\n    }\n}\n\nvar metaKeys = {};\nfor (var kID in TT.inventory.keys.data) {\n    metaKeys[kID] = hive.array_combine(TT.inventory.keys.columns,TT.inventory.keys.data[kID]);\n}\n\nmsg.template += '<tr><th class=\"info_header\" colspan=\"2\">TrainTraxx Info</th></tr>';\nfor (var iID in TT.inventory.data) {\n    var curInv = hive.array_combine(TT.inventory.columns,TT.inventory.data[iID]);\n    var tempOut = {'Road Name' :'','Road Number' :''};\n    for (var mID in TT.inventory.meta.data[iID]) {\n        var curMeta = hive.array_combine(TT.inventory.meta.columns,TT.inventory.meta.data[iID][mID]);\n        var metaKeyID =curMeta['wp_tt_inventorymetakeys_ID'];\n        var tempVal ='';\n        switch (metaKeys[metaKeyID]['OUTPUT_FORMAT']) {\n            case 'image' :\n            case 'train-image' :    \n                break;\n            case 'color':\n                tempVal = '<div class=\"colorBlock_sm\" style=\"background-color:' + curMeta['meta_value'] + ';\">&nbsp;</div>';\n                break;\n            case 'tickCross':\n                tempVal = (curMeta['meta_value'] === true) ? 'Yes' : 'No';\n                break;\n            default: \n                tempVal = curMeta['meta_value'];\n        }\n        if (tempVal !== '') {\n            tempOut[metaKeys[metaKeyID]['meta_key']] = tempVal;\n        }\n    }\n    if (inName === tempOut['Road Name'] + String(tempOut['Road Number']) || inName === curInv.NAME) {\n        msg.template += '<tr><td class=\"info_title\">Name:</td><td>' + curInv.NAME + '</td></tr>'; \n        if (imageRef_Inv[iID] !== undefined) {\n            msg.template += '<tr><td class=\"info_title\">Image:</td><td><img src=\"' + imageRef_Inv[iID].localurl + '\" width=\"100px\"></td></tr>'; \n        }\n        for (var meta_key in tempOut) {\n            msg.template += '<tr><td class=\"info_title\">' + meta_key + ':</td><td>' + tempOut[meta_key] + '</td></tr>';\n        }\n        var activeTag = { ID : null, UID : null, lastActivity : null, lastNode : null };\n        for (var tID in TT.tags.data) {\n            var curTag = hive.array_combine(TT.tags.columns,TT.tags.data[tID]);\n            if (Number(iID) === Number(curTag['wp_tt_inventory_ID'])) {\n                activeTag.ID = tID; \n                activeTag.UID = curTag['TAG_UID'];\n            }\n        }\n        \n        /* Move these to functions */\n        if (Number(activeTag.ID) > 0) {\n            if (TrainTraxx_Config.USE_CACHE === false) {\n                /* Go through the tags_activity */\n                for (var aID in TT.tags_activity.data) {\n                    var curActivity = hive.array_combine(TT.tags_activity.columns,TT.tags_activity.data[aID]);\n                    if (Number(curActivity.wp_tt_tags_ID) === Number(activeTag.ID)) {\n                        if (activeTag.lastActivity === null || Date.parse(activeTag.lastActivity) < Date.parse(curActivity.A_TIME)) {\n                            activeTag.lastActivity = curActivity.A_TIME;\n                            var actNode = hive.array_combine(TT.hivenode.columns,TT.hivenode.data[String(curActivity.wp_tt_hivenode_ID)]);\n                            activeTag.lastNode = actNode.MAC_ADDRESS;\n                        }\n                    }\n                }\n            } else {\n              for (var actID in Activity) {\n                  if (Activity[actID].UID === activeTag.UID) {\n                      if (activeTag.lastActivity === null || Date.parse(activeTag.lastActivity) < Date.parse(Activity[actID].TIME)) {\n                            activeTag.lastActivity = Activity[actID].TIME;\n                            activeTag.lastNode = Activity[actID].MAC;\n                      }\n                  }\n              }  \n            }\n\n            if (activeTag.lastNode !== null) {\n                var tempLoc = hive.getLocationDetails(activeTag.lastNode);\n                var parentName = '';\n                var parentID = tempLoc.location.wp_tt_locations_PARENT_ID;\n                if (Number(parentID) > 0) {\n                    var parentInfo = hive.array_combine(TT.locations.columns,TT.locations.data[parentID]);\n                    parentName = parentInfo.NAME + '->';\n                }\n                var nameOut = 'Not Set';\n                if (tempLoc.location.NAME !== undefined) {\n                    nameOut = parentName +tempLoc.location.NAME;\n                }\n                msg.template += '<tr><td class=\"info_title\">Last Detected Location: </td><td>' + nameOut + '</td></tr>' +\n                                '<tr><td class=\"info_title\">Last Detected Time: </td><td>' + activeTag.lastActivity + '</td></tr>';\n            }\n        }\n    } \n    \n    /* \n    Find the last reported location \n        This is going to require more information to be pulled from TrainTraxx\n    */\n}\nmsg.template += '</table></div>';\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1030,
+        "x": 950,
         "y": 520,
         "wires": [
             [
@@ -15370,7 +15370,7 @@
         "storeOutMessages": false,
         "fwdInMessages": false,
         "templateScope": "local",
-        "x": 1280,
+        "x": 1200,
         "y": 640,
         "wires": [
             []
@@ -15411,7 +15411,7 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 1270,
+        "x": 1190,
         "y": 520,
         "wires": []
     },
@@ -15507,7 +15507,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1020,
+        "x": 940,
         "y": 480,
         "wires": [
             [
@@ -16195,7 +16195,7 @@
         "to": "",
         "reg": false,
         "x": 700,
-        "y": 140,
+        "y": 240,
         "wires": [
             [
                 "fc758d5.841bd7"
@@ -16210,8 +16210,8 @@
         "links": [
             "2e0d514c.6cd8ce"
         ],
-        "x": 315,
-        "y": 140,
+        "x": 255,
+        "y": 240,
         "wires": [
             [
                 "5af99042.1aa4c"
@@ -16297,7 +16297,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 190,
-        "y": 80,
+        "y": 180,
         "wires": [
             [
                 "7ab4dcfd.fab8d4"
@@ -16322,7 +16322,7 @@
         "to": "",
         "reg": false,
         "x": 430,
-        "y": 80,
+        "y": 180,
         "wires": [
             [
                 "5af99042.1aa4c"
@@ -16339,7 +16339,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191028.0001-dev",
+                "to": "20191028.0002-dev",
                 "tot": "str"
             },
             {
@@ -19592,13 +19592,15 @@
         "type": "function",
         "z": "3d602d50.39dab2",
         "name": "Clean Tags",
-        "func": "\n\nflow.set('active', false);\nreturn;",
+        "func": "var TrainTraxx = global.get('TrainTraxx.tags');\nvar JMRI = global.get('JMRI.idTag');\nvar JMRI_URL = global.get('JMRI_URL');\nvar hive = global.get('hive');\n\nvar autoTags = {};\nif (JMRI !== undefined && JMRI.data !== undefined && JMRI.data.length >0) {\n    for (var jID in JMRI.data) {\n        var curJTag = JMRI.data[jID];\n        if (curJTag.name.match(/IDHIVEA/)) {\n            autoTags[curJTag.userName] = curJTag;\n        }\n    }\n}\nif (Object.keys(autoTags).length > 0) {\n    if (TrainTraxx !== undefined && TrainTraxx.data !== undefined) {\n        for (var tID in TrainTraxx.data) {\n            var curTag = hive.array_combine(TrainTraxx.columns,TrainTraxx.data[tID]);\n            if (autoTags[curTag['TAG_UID']] !== undefined) {\n                var tempMsg = {\n                    payload : {\n                        \"type\" : 'idTag',\n                        \"data\" : {\n                            name : autoTags[curTag['TAG_UID']].name\n                        }\n                    },\n                    verb : 'DELETE',\n                    topic: 'idTag',\n                    url : JMRI_URL + 'json/idTag'\n                    \n                };\n                node.send(tempMsg);\n            }      \n        }\n    }\n}\nflow.set('active', false);\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 530,
         "y": 460,
         "wires": [
-            []
+            [
+                "5478727a.ee556c"
+            ]
         ]
     },
     {
@@ -21129,6 +21131,26 @@
         "wires": [
             [
                 "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "5478727a.ee556c",
+        "type": "http request",
+        "z": "3d602d50.39dab2",
+        "name": "DELETE Record",
+        "method": "DELETE",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1160,
+        "y": 460,
+        "wires": [
+            [
+                "da8a2ab7.df8648"
             ]
         ]
     }
