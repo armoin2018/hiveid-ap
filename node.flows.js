@@ -133,6 +133,20 @@
         "info": ""
     },
     {
+        "id": "9a17c9d0.baa598",
+        "type": "tab",
+        "label": "Debug",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9591b959.49caf8",
+        "type": "tab",
+        "label": "File Viewer",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "8b10dcf.dc4c82",
         "type": "subflow",
         "name": "Get JMRI Info",
@@ -891,6 +905,27 @@
         "collapse": false
     },
     {
+        "id": "e89de939.fa1068",
+        "type": "ui_tab",
+        "z": "",
+        "name": "File Viewer",
+        "icon": "dashboard",
+        "order": 19,
+        "disabled": false,
+        "hidden": true
+    },
+    {
+        "id": "f2029119.d7364",
+        "type": "ui_group",
+        "z": "",
+        "name": "File",
+        "tab": "e89de939.fa1068",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": false
+    },
+    {
         "id": "5a317a8b.60a8b4",
         "type": "ui_text_input",
         "z": "a06855ce.9f5488",
@@ -1229,7 +1264,8 @@
         "wires": [
             [
                 "e8ed6bdd.7a0138",
-                "26beefe6.cfd83"
+                "26beefe6.cfd83",
+                "5652d958.4bda68"
             ]
         ]
     },
@@ -1281,9 +1317,9 @@
         "label": "HiveID API Endpoint",
         "tooltip": "",
         "group": "2d93584c.72e648",
-        "order": 3,
-        "width": 0,
-        "height": 0,
+        "order": 2,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "mode": "text",
         "delay": "0",
@@ -1376,7 +1412,7 @@
         "z": "d65a42c6.df12f",
         "name": "",
         "property": "payload",
-        "action": "",
+        "action": "obj",
         "pretty": false,
         "x": 430,
         "y": 240,
@@ -1411,7 +1447,12 @@
             [
                 "616d5896.3683f8",
                 "62d04a23.b80bd4",
-                "2250c2df.a8728e"
+                "2250c2df.a8728e",
+                "d4ba1e69.11d02",
+                "2c435689.7186ba",
+                "ad21ffe7.a26d9",
+                "3df743c8.491dac",
+                "ec8777d.b7c8b88"
             ]
         ]
     },
@@ -1434,7 +1475,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1220,
+        "x": 1720,
         "y": 360,
         "wires": [
             [
@@ -1448,9 +1489,9 @@
         "z": "d65a42c6.df12f",
         "name": "",
         "property": "payload",
-        "action": "",
+        "action": "str",
         "pretty": true,
-        "x": 1230,
+        "x": 1730,
         "y": 400,
         "wires": [
             [
@@ -1464,10 +1505,11 @@
         "z": "d65a42c6.df12f",
         "name": "",
         "filename": "/etc/hiveid-ap/conf.hiveid.json",
-        "appendNewline": true,
+        "appendNewline": false,
         "createDir": true,
         "overwriteFile": "true",
-        "x": 1330,
+        "encoding": "utf8",
+        "x": 1830,
         "y": 440,
         "wires": [
             []
@@ -1516,9 +1558,9 @@
         "label": "HiveID Web Address",
         "tooltip": "",
         "group": "2d93584c.72e648",
-        "order": 2,
-        "width": 0,
-        "height": 0,
+        "order": 1,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "mode": "text",
         "delay": "0",
@@ -1596,9 +1638,9 @@
         "label": "HiveID API Key",
         "tooltip": "",
         "group": "2d93584c.72e648",
-        "order": 4,
-        "width": 0,
-        "height": 0,
+        "order": 3,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "mode": "text",
         "delay": "0",
@@ -14209,15 +14251,13 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Setup Global Functions",
-        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar inObject = { 'jmri' : {}, 'traintraxx': {}};\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.empty = function(inObject) {\n    if (inObject === undefined || inObject === null || inObject === {} || inObject === \"\") {\n        return true;\n    }\n    return false;\n}\n\ninObject.proper = function(inString) {\n  return inString.replace(/(^|\\s)\\S/g, function(s) { return s.toUpperCase(); });\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    var myResults = {\n        name : \"\",\n        userName : String(mac).toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    if (JMRI !== undefined && JMRI[deviceType] !== undefined && JMRI[deviceType].data !== undefined && JMRI[deviceType].data.length > 0) {\n        for (var id in JMRI[deviceType].data) {\n            var curDevice = JMRI[deviceType].data[id];\n            if (myResults.userName === curDevice.userName) {\n                myResults.name = curDevice.name;\n                myResults.state = curDevice.state;\n                myResults.verb = 'POST';\n            }\n        }\n    }\n    if (myResults.name === '') {\n        if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n            for (var nodeId in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeId]);\n                if (String(curNode['MAC_ADDRESS']).toUpperCase() === myResults.userName) { \n                    myResults.name = prefix + String(nodeId);\n                }\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    return inObject.getDeviceName('sensors','ISHIVE',mac);\n};\n\ninObject.getReporterName = function(mac) {\n    return inObject.getDeviceName('reporters','IRHIVE',mac);\n};\n\ninObject.getLocationDetails = function(mac) {\n    var activeHivenode = {};\n    if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var hivenodeID in TT.hivenode.data) {\n            var curHivenode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[hivenodeID]);\n            if (String(curHivenode.MAC_ADDRESS).toUpperCase() == String(mac).toUpperCase()) {\n                activeHivenode = curHivenode;\n            }\n        }\n        var activeLocation = {};\n        if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n            activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n            activeLocation['ID'] = activeHivenode['wp_tt_locations_ID'];\n        }\n    }\n    /* Need to find the active location from JMRI */\n    return {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n};\n\ninObject.getInventoryName = function(uid) {\n    var activeTag = {};\n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined ) {\n        for (var tagID in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns, TT.tags.data[tagID]);\n            if (String(curTag.TAG_UID).toUpperCase() == String(uid).toUpperCase()) {\n                activeTag = curTag;\n            }\n        }\n        \n        var activeInventory = {};\n        if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n            activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n        }\n    }\n    /* Need to find the active inventory from JMRI */\n    return {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n};\n\ninObject.getTagName = function(uid) {\n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    if (JMRI !== undefined && JMRI.idTag !==undefined) {\n        if (JMRI.idTag.data !== undefined && JMRI.idTag.data.length > 0) {\n            for (var id in JMRI.idTag.data) {\n                var curTag = JMRI.idTag.data[id];\n                if (curTag.userName === uid) {\n                    myResults.name = curTag.name;   \n                }\n            }\n        }\n    \n        if (myResults.name === undefined) {\n            myResults.verb = 'PUT';\n            myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.userName === userName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.name === jmriName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocation = function(userName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.userName === userName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getSubLocationByJMRIName = function(jmriName) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.name === jmriName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getReporterNameByLocation = function(userName) {\n    var myResults = \"\";\n    var lookupID = null;\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in TT.locations.data) {\n            var curLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[lID]);\n            if (curLocation.NAME === userName) {\n                lookupID = Number(lID);\n            }\n        }\n        if (Number(lookupID) >0) {\n            for (var nodeID in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[nodeID]);\n                if (Number(curNode['wp_tt_locations_ID']) === lookupID) {\n                    var tempResults= inObject.getReporterName(curNode['MAC_ADDRESS']);\n                    myResults = tempResults['name'];\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\ninObject.jmri.getTagByUID= function(uid) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.idTag !== undefined && JMRI.idTag.map !== undefined) {\n        for (var jmID in JMRI.idTag.map) {\n            if (jmID === uid && JMRI.idTag.map[jmID] !== undefined && JMRI.idTag.data[JMRI.idTag.map[jmID]] !== undefined) {\n                myResults = JMRI.idTag.data[JMRI.idTag.map[jmID]];\n            }\n        }\n    }\n    return myResults;   \n};\n\n\ninObject.jmri.getInventoryByTag = function(tagName) {\n    var myResults = {};\n    if (JMRI !== undefined) {\n        if (JMRI.cars !== undefined && JMRI.cars.data !== undefined && JMRI.cars.data.length > 0 ) {\n            for (var cID in JMRI.cars.data ) {\n                var curCar = JMRI.cars.data[cID];\n                if (curCar.rfid !== undefined && curCar.rfid === tagName) {\n                    myResults = curCar;\n                    myResults['type'] = 'car';\n                }\n                \n            }\n        }\n        if (myResults.name === undefined && JMRI.engines !== undefined && JMRI.engines.data !== undefined && JMRI.engines.data.length > 0 ) {\n            for (var eID in JMRI.engines.data ) {\n                var curEngine = JMRI.engines.data[eID];\n                if (curEngine.rfid === tagName) {\n                    myResults = curEngine;\n                    myResults['type'] = 'engine';\n                }\n            }    \n        }\n    }\n    return myResults;   \n};\n\ninObject.jmri.getInventoryByUID = function(uid) {\n    var tempTag =  inObject.jmri.getTagByUID(uid);\n    var myResults = {};\n    if (tempTag !== undefined && tempTag !== {} && tempTag.name !== '') {\n        myResults = inObject.jmri.getInventoryByTag(tempTag.name);\n    }\n    return myResults;\n};\n\ninObject.jmri.getLocationByReporter = function(reporter) {\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLoc = JMRI.locations.data[lID];\n            if (curLoc.reporter !== undefined && curLoc.reporter === reporter) {\n                myResults = { \"name\" : curLoc.name};    \n            } \n            if (curLoc.track !== undefined && curLoc.track.length > 0) {\n                for (var tID in curLoc.track) {\n                    var curTrack = curLoc.track[tID];\n                    if (curTrack.reporter !== undefined && curTrack.reporter === reporter) {\n                        myResults = { \n                            \"name\" : curLoc.name, \n                            \"track\" : { \n                                \"name\" : curTrack.name \n                            }\n                        };    \n                    }\n                }\n            }\n        }\n    }\n    return myResults;\n};\n\n\n\ninObject.traintraxx.getInventoryIDByTag = function(uid) {\n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined && uid !== undefined && uid !== \"\") {\n        for (var t in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns,TT.tags.data[t]);\n            if (curTag['TAG_UID'] === uid) {\n                return curTag['wp_tt_inventory_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\ninObject.traintraxx.getHivenodeLocationByMac = function(mac) {\n    if (mac !== undefined && TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[t]);\n            if (curNode['MAC_ADDRESS'] !== undefined && String(curNode['MAC_ADDRESS']).toUpperCase() === String(mac).toUpperCase()) {\n                return curNode['wp_tt_locations_ID'];\n            }\n        }  \n    } \n    return null;\n};\n\n/* This function is for legacy support without track level Reporter assignment */\ninObject.jmri.getLocationByTrainTraxxMAC = function(mac) {\n    var myResults = { 'userName' : '', 'name' : '', 'track' : {} };\n    var TT_LocID = inObject.traintraxx.getHivenodeLocationByMac(mac);\n    var TT_Loc_Parent ={};\n    if (!inObject.empty(TT_LocID)) {\n        var curLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[TT_LocID]);\n        if (!inObject.empty(curLoc) && Number(curLoc['wp_tt_locations_PARENT_ID']) > 0) {\n            TT_Loc_Parent = inObject.array_combine(TT.locations.columns,TT.locations.data[curLoc['wp_tt_locations_PARENT_ID']]);\n        }\n    }\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        if (!inObject.empty(TT_Loc_Parent)) { /* Lookup Parent Location first */\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc_Parent.NAME === jLoc.userName) {\n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                    if (!inObject.empty(jLoc.track) && jLoc.track.length > 0) {\n                        for (var jID2 in jLoc.track) {\n                            var jTrack = jLoc.track[jID2];\n                            if (jTrack.userName === curLoc.NAME) {\n                                myResults.track['userName'] =jTrack.userName;\n                                myResults.track['name'] =jTrack.name;\n                            }\n                        }\n                    }\n                } \n            }\n        } else {\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc.NAME === jLoc.userName) {    \n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                }\n            }\n        }\n    }\n    return myResults;\n}\n\ninObject.jmri.getRoute = function(routeName) {\n    var myResults = {\n        name : routeName, userName: \"Not Defined\", trainDirection: \"Unknown\"\n    };\n    if (JMRI !== undefined && JMRI.trains !== undefined && JMRI.trains.data !== undefined && JMRI.trains.data.length >0) {\n        for (var trainID in JMRI.trains.data) {\n            var curTrain = JMRI.trains.data[trainID];\n            if (curTrain.locations !== undefined && curTrain.locations.length > 0) {\n                for (var locationID in curTrain.locations) {\n                    var curLocation = curTrain.locations[locationID];\n                    if (curLocation.name === routeName) {\n                        myResults = curLocation;\n                    }\n                }\n            }\n        }\n    }\n    return myResults;\n}\n\ninObject.traintraxx.getLocationNameByID = function(lid) {\n    var myResults = '';\n    if (lid !== undefined && lid > 0 && TT !== undefined && TT.locations !== undefined && TT.locations.data !== undefined && TT.locations.data[lid] !== undefined) {\n        var tempLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            if (Number(tempLoc['wp_tt_locations_PARENT_ID']) > 0) {\n                var tempParent = inObject.array_combine(TT.locations.columns,TT.locations.data[tempLoc['wp_tt_locations_PARENT_ID']]);\n                myResults = tempParent['NAME'] + '->';\n            }\n            myResults += tempLoc['NAME'];\n        } else {\n            myResults = 'Unknown';\n        }\n    } else {\n        myResults =  'Not assigned';\n    }\n    return myResults;\n};\n\ninObject.download = function(filename, text, type = 'json') {\n    var element = document.createElement('a');\n    var typeString = 'application/json';\n    switch (type.toUpperCase()) {\n        case 'text' :\n            typeString = 'text/plain';\n            break;\n    }\n    element.setAttribute('href', 'data:' + typeString + ';charset=utf-8,' + encodeURIComponent(text) );\n    element.setAttribute('download', filename);\n    element.style.display = 'none';\n    document.body.appendChild(element);\n    element.click();\n    document.body.removeChild(element);\n}\n\nglobal.set('hive', inObject);\nreturn msg;",
+        "func": "var TT = global.get('TrainTraxx');\nvar JMRI = global.get('JMRI');\nvar debug = global.get('debug');\nvar inObject = { \n    'jmri' : {}, \n    'traintraxx': {}\n};\n\ninObject.array_combine = function(inKeys,inValues) {\n    var myResults = {};\n    for (var ki=0;ki<inKeys.length;ki++) {\n        myResults[inKeys[ki]] = inValues[ki];\n    }\n    return myResults;\n};\n\ninObject.sleep = function(inSeconds) {\n    var now = new Date().getTime();\n    var endTime = now + inSeconds * 1000;\n    while ( new Date().getTime() < endTime) {}\n\n};\n\ninObject.array_fill = function(keys,defaultValue = null) {\n    var myResults = {};\n    for (var i in keys) {\n        myResults[keys[i]] = defaultValue;\n    }\n    return myResults;\n};\n\ninObject.empty = function(inObject) {\n    if (inObject === undefined || inObject === null || inObject === {} || inObject === \"\") {\n        return true;\n    }\n    return false;\n}\n\ninObject.proper = function(inString) {\n  return inString.replace(/(^|\\s)\\S/g, function(s) { return s.toUpperCase(); });\n};\n\ninObject.getDeviceName = function(deviceType, prefix, mac) {\n    debug({called : 'hive.getDeviceName', deviceType : deviceType, prefix : prefix, mac: mac});\n    var myResults = {\n        name : \"\",\n        userName : String(mac).toUpperCase(),\n        state : 4,\n        properties: [],\n        comment : null,\n        inverted : false,\n        verb : \"PUT\"\n    };\n    if (JMRI !== undefined && JMRI[deviceType] !== undefined && JMRI[deviceType].data !== undefined && JMRI[deviceType].data.length > 0) {\n        for (var id in JMRI[deviceType].data) {\n            var curDevice = JMRI[deviceType].data[id];\n            if (myResults.userName === curDevice.userName) {\n                myResults.name = curDevice.name;\n                myResults.state = curDevice.state;\n                myResults.verb = 'POST';\n            }\n        }\n    }\n    if (myResults.name === '') {\n        if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n            for (var nodeId in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[nodeId]);\n                if (String(curNode['MAC_ADDRESS']).toUpperCase() === myResults.userName) { \n                    myResults.name = prefix + String(nodeId);\n                }\n            }\n        }\n    }\n    if (myResults.name === '') {\n        myResults.name = prefix + 'A' + JMRI[deviceType].nextID;\n    }\n    debug({called : 'hive.getDeviceName', returned : myResults});\n    return myResults;\n};\n\ninObject.getSensorName = function(mac) {\n    debug({called : 'hive.getSensorName',mac : mac});\n    var myResults = {};\n    \n    myResults = inObject.getDeviceName('sensors','ISHIVE',mac);\n    debug({called : 'hive.getSensorName',results : myResults});\n    return myResults;\n};\n\ninObject.getReporterName = function(mac) {\n    debug({called : 'hive.getReporterName',mac : mac});\n    var myResults = {};\n    \n    myResults = inObject.getDeviceName('reporters','IRHIVE',mac);\n    debug({called : 'hive.getReporterName',results : myResults});\n    return myResults;\n};\n\ninObject.getLocationDetails = function(mac) {\n    debug({called : 'hive.getLocationDetails',mac : mac});\n    var activeHivenode = {};\n    if (TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var hivenodeID in TT.hivenode.data) {\n            var curHivenode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[hivenodeID]);\n            if (String(curHivenode.MAC_ADDRESS).toUpperCase() == String(mac).toUpperCase()) {\n                activeHivenode = curHivenode;\n            }\n        }\n        var activeLocation = {};\n        if (Number(activeHivenode['wp_tt_locations_ID']) > 0) {\n            activeLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[activeHivenode['wp_tt_locations_ID']]);\n            activeLocation['ID'] = activeHivenode['wp_tt_locations_ID'];\n        }\n    }\n    /* Need to find the active location from JMRI */\n    \n    var myResults =  {\n        hivenode : activeHivenode,\n        location : activeLocation,\n    };\n    debug({called : 'hive.getLocationDetails',results : myResults});\n    return myResults;\n};\n\ninObject.getInventoryName = function(uid) {\n    debug({called : 'hive.getInventoryName',uid : uid});\n    \n    var activeTag = {};\n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined ) {\n        for (var tagID in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns, TT.tags.data[tagID]);\n            if (String(curTag.TAG_UID).toUpperCase() == String(uid).toUpperCase()) {\n                activeTag = curTag;\n            }\n        }\n        \n        var activeInventory = {};\n        if (Number(activeTag['wp_tt_inventory_ID']) > 0) {\n            activeInventory = inObject.array_combine(TT.inventory.columns,TT.inventory.data[activeTag['wp_tt_inventory_ID']]);\n        }\n    }\n    /* Need to find the active inventory from JMRI */\n    var myResults = {\n        tag : activeTag,\n        inventory : activeInventory,\n    };    \n    debug({called : 'hive.getInventoryName',results : myResults});\n    return myResults;\n};\n\ninObject.getTagName = function(uid) {\n    debug({called : 'hive.getTagName',uid : uid});\n    \n    var myResults = {\n        verb : \"POST\",\n        userName : uid\n    };\n    if (JMRI !== undefined && JMRI.idTag !==undefined) {\n        if (JMRI.idTag.data !== undefined && JMRI.idTag.data.length > 0) {\n            for (var id in JMRI.idTag.data) {\n                var curTag = JMRI.idTag.data[id];\n                if (curTag.userName === uid) {\n                    myResults.name = curTag.name;   \n                }\n            }\n        }\n    \n        if (myResults.name === undefined) {\n            myResults.verb = 'PUT';\n            myResults.name = 'IDHIVEA' + JMRI.idTag.nextID;\n        }\n    }\n    debug({called : 'hive.getTagName',results : myResults});\n    \n    return myResults;\n};\n\ninObject.jmri.getLocation = function(userName) {\n    debug({called : 'hive.jmri.getLocation',userName : userName});\n    \n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.userName === userName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getLocation',results : myResults});\n    return myResults;\n};\n\ninObject.jmri.getLocationByJMRIName = function(jmriName) {\n    debug({called : 'hive.jmri.getLocationByJMRIName',jmriName : jmriName});\n    \n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            if (curLocation.name === jmriName) {\n                myResults = curLocation;\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getLocationByJMRIName',results : myResults});\n    return myResults;\n};\n\ninObject.jmri.getSubLocation = function(userName) {\n    debug({called : 'hive.jmri.getSubLocation',userName : userName});\n    \n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.userName === userName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getSubLocation',results : myResults});\n    \n    return myResults;\n};\n\ninObject.jmri.getSubLocationByJMRIName = function(jmriName) {\n    debug({called : 'hive.jmri.getSubLocationByJMRIName',jmriName : jmriName});\n    \n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLocation = JMRI.locations.data[lID];\n            for (var tID in curLocation.track) {\n                var curTrack = curLocation.track[tID];\n                if (curTrack.name === jmriName) {\n                    myResults = curTrack;\n                }\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getSubLocationByJMRIName',results : myResults});\n    \n    return myResults;\n};\n\ninObject.jmri.getReporterNameByLocation = function(userName) {\n    \n    debug({called : 'hive.jmri.getReporterNameByLocation',userName : userName});\n    var myResults = \"\";\n    var lookupID = null;\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in TT.locations.data) {\n            var curLocation = inObject.array_combine(TT.locations.columns,TT.locations.data[lID]);\n            if (curLocation.NAME === userName) {\n                lookupID = Number(lID);\n            }\n        }\n        if (Number(lookupID) >0) {\n            for (var nodeID in TT.hivenode.data) {\n                var curNode = inObject.array_combine(TT.hivenode.columns, TT.hivenode.data[nodeID]);\n                if (Number(curNode['wp_tt_locations_ID']) === lookupID) {\n                    var tempResults= inObject.getReporterName(curNode['MAC_ADDRESS']);\n                    myResults = tempResults['name'];\n                }\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getReporterNameByLocation',results : myResults});\n    return myResults;\n};\n\ninObject.jmri.getTagByUID= function(uid) {\n    debug({called : 'hive.jmri.getTagByUID',uid : uid});\n    \n    console.log('jmri.getTagByUID',uid);\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.idTag !== undefined && JMRI.idTag.map !== undefined) {\n        for (var jmID in JMRI.idTag.map) {\n            if (jmID === uid && JMRI.idTag.map[jmID] !== undefined && JMRI.idTag.data[JMRI.idTag.map[jmID]] !== undefined) {\n                myResults = JMRI.idTag.data[JMRI.idTag.map[jmID]];\n                 console.log('jmri.getTagByUID - myResults',myResults);\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getTagByUID',results : myResults});\n    \n    return myResults;   \n};\n\n\ninObject.jmri.getInventoryByTag = function(tagName) {\n    debug({called : 'hive.jmri.getInventoryByTag',tagName : tagName});\n    var myResults = {};\n    if (JMRI !== undefined) {\n        if (JMRI.cars !== undefined && JMRI.cars.data !== undefined && JMRI.cars.data.length > 0 ) {\n            for (var cID in JMRI.cars.data ) {\n                var curCar = JMRI.cars.data[cID];\n                if (curCar.rfid !== undefined && curCar.rfid === tagName) {\n                    myResults = curCar;\n                    myResults['type'] = 'car';\n                }\n                \n            }\n        }\n        if (myResults.name === undefined && JMRI.engines !== undefined && JMRI.engines.data !== undefined && JMRI.engines.data.length > 0 ) {\n            for (var eID in JMRI.engines.data ) {\n                var curEngine = JMRI.engines.data[eID];\n                if (curEngine.rfid === tagName) {\n                    myResults = curEngine;\n                    myResults['type'] = 'engine';\n                }\n            }    \n        }\n    }\n    debug({called : 'hive.jmri.getInventoryByTag',results : myResults});\n    return myResults;   \n};\n\ninObject.jmri.getInventoryByUID = function(uid) {\n    debug({called : 'hive.jmri.getInventoryByUID',uid : uid});\n    \n    console.log('jmri.getInventoryByUID',uid);\n    var tempTag =  inObject.jmri.getTagByUID(uid);\n    console.log('jmri.getInventoryByUID - tempTag',tempTag);\n    var myResults = {};\n    if (tempTag !== undefined && tempTag !== {} && tempTag.name !== '') {\n        myResults = inObject.jmri.getInventoryByTag(tempTag.name);\n        console.log('jmri.getInventoryByUID - myResults',myResults);\n    \n    }\n    debug({called : 'hive.jmri.getInventoryByUID',results : myResults});\n    \n    return myResults;\n};\n\ninObject.jmri.getLocationByReporter = function(reporter) {\n    debug({called : 'hive.jmri.getLocationByReporter',reporter : reporter});\n    var myResults = {};\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        for (var lID in JMRI.locations.data) {\n            var curLoc = JMRI.locations.data[lID];\n            if (curLoc.reporter !== undefined && curLoc.reporter === reporter) {\n                myResults = { \"name\" : curLoc.name};    \n            } \n            if (curLoc.track !== undefined && curLoc.track.length > 0) {\n                for (var tID in curLoc.track) {\n                    var curTrack = curLoc.track[tID];\n                    if (curTrack.reporter !== undefined && curTrack.reporter === reporter) {\n                        myResults = { \n                            \"name\" : curLoc.name, \n                            \"track\" : { \n                                \"name\" : curTrack.name \n                            }\n                        };    \n                    }\n                }\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getLocationByReporter',results : myResults});\n    return myResults;\n};\n\n\n\ninObject.traintraxx.getInventoryIDByTag = function(uid) {\n    debug({called : 'hive.traintraxx.getInventoryIDByTag',uid : uid});\n    \n    if (TT !== undefined && TT.tags !== undefined && TT.tags.data !== undefined && uid !== undefined && uid !== \"\") {\n        for (var t in TT.tags.data) {\n            var curTag = inObject.array_combine(TT.tags.columns,TT.tags.data[t]);\n            if (curTag['TAG_UID'] === uid) {\n                debug({called : 'hive.traintraxx.getInventoryIDByTag',results : curTag['wp_tt_inventory_ID']});\n                return curTag['wp_tt_inventory_ID'];\n            }\n        }  \n    } \n    debug({called : 'hive.traintraxx.getInventoryIDByTag',results : null});\n    return null;\n};\n\ninObject.traintraxx.getHivenodeLocationByMac = function(mac) {\n    debug({called : 'hive.traintraxx.getHivenodeLocationByMac',mac : mac});\n    if (mac !== undefined && TT !== undefined && TT.hivenode !== undefined && TT.hivenode.data !== undefined) {\n        for (var t in TT.hivenode.data) {\n            var curNode = inObject.array_combine(TT.hivenode.columns,TT.hivenode.data[t]);\n            if (curNode['MAC_ADDRESS'] !== undefined && String(curNode['MAC_ADDRESS']).toUpperCase() === String(mac).toUpperCase()) {\n                debug({called : 'hive.traintraxx.getHivenodeLocationByMac',results : curNode['wp_tt_locations_ID']});\n                return curNode['wp_tt_locations_ID'];\n            }\n        }  \n    } \n    debug({called : 'hive.traintraxx.getHivenodeLocationByMac',results : null});\n    return null;\n};\n\n/* This function is for legacy support without track level Reporter assignment */\ninObject.jmri.getLocationByTrainTraxxMAC = function(mac) {\n    debug({called : 'hive.jmri.getLocationByTrainTraxxMAC',mac : mac});\n    var myResults = { 'userName' : '', 'name' : '', 'track' : {} };\n    var TT_LocID = inObject.traintraxx.getHivenodeLocationByMac(mac);\n    var TT_Loc_Parent ={};\n    if (!inObject.empty(TT_LocID)) {\n        var curLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[TT_LocID]);\n        if (!inObject.empty(curLoc) && Number(curLoc['wp_tt_locations_PARENT_ID']) > 0) {\n            TT_Loc_Parent = inObject.array_combine(TT.locations.columns,TT.locations.data[curLoc['wp_tt_locations_PARENT_ID']]);\n        }\n    }\n    if (JMRI !== undefined && JMRI.locations !== undefined && JMRI.locations.data.length > 0 ) {\n        if (!inObject.empty(TT_Loc_Parent)) { /* Lookup Parent Location first */\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc_Parent.NAME === jLoc.userName) {\n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                    if (!inObject.empty(jLoc.track) && jLoc.track.length > 0) {\n                        for (var jID2 in jLoc.track) {\n                            var jTrack = jLoc.track[jID2];\n                            if (jTrack.userName === curLoc.NAME) {\n                                myResults.track['userName'] =jTrack.userName;\n                                myResults.track['name'] =jTrack.name;\n                            }\n                        }\n                    }\n                } \n            }\n        } else {\n            for (var jID in JMRI.locations.data) {\n                var jLoc = JMRI.locations.data[jID];\n                if (TT_Loc.NAME === jLoc.userName) {    \n                    myResults.userName = jLoc.userName;\n                    myResults.name = jLoc.name;\n                }\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getLocationByTrainTraxxMAC',results : myResults});\n    \n    return myResults;\n}\n\ninObject.jmri.getRoute = function(routeName) {\n    debug({called : 'hive.jmri.getRoute',routeName : routeName});\n    var myResults = {\n        name : routeName, userName: \"Not Defined\", trainDirection: \"Unknown\"\n    };\n    if (JMRI !== undefined && JMRI.trains !== undefined && JMRI.trains.data !== undefined && JMRI.trains.data.length >0) {\n        for (var trainID in JMRI.trains.data) {\n            var curTrain = JMRI.trains.data[trainID];\n            if (curTrain.locations !== undefined && curTrain.locations.length > 0) {\n                for (var locationID in curTrain.locations) {\n                    var curLocation = curTrain.locations[locationID];\n                    if (curLocation.name === routeName) {\n                        myResults = curLocation;\n                    }\n                }\n            }\n        }\n    }\n    debug({called : 'hive.jmri.getRoute',results : myResults});\n    return myResults;\n}\n\ninObject.traintraxx.getLocationNameByID = function(lid) {\n    debug({called : 'hive.traintraxx.getLocationNameByID',lid : lid});\n    var myResults = '';\n    if (lid !== undefined && lid > 0 && TT !== undefined && TT.locations !== undefined && TT.locations.data !== undefined && TT.locations.data[lid] !== undefined) {\n        var tempLoc = inObject.array_combine(TT.locations.columns,TT.locations.data[lid]);\n        if (tempLoc !== undefined) {\n            if (Number(tempLoc['wp_tt_locations_PARENT_ID']) > 0) {\n                var tempParent = inObject.array_combine(TT.locations.columns,TT.locations.data[tempLoc['wp_tt_locations_PARENT_ID']]);\n                myResults = tempParent['NAME'] + '->';\n            }\n            myResults += tempLoc['NAME'];\n        } else {\n            myResults = 'Unknown';\n        }\n    } else {\n        myResults =  'Not assigned';\n    }\n    debug({called : 'hive.traintraxx.getLocationNameByID',results : myResults});\n    \n    return myResults;\n};\n\ninObject.download = function(filename, text, type = 'json') {\n    debug({called : 'hive.download',filename : filename,text: text, type : type});\n    var element = document.createElement('a');\n    var typeString = 'application/json';\n    switch (type.toUpperCase()) {\n        case 'TEXT' :\n            typeString = 'text/plain';\n            break;\n    }\n    element.setAttribute('href', 'data:' + typeString + ';charset=utf-8,' + encodeURIComponent(text) );\n    element.setAttribute('download', filename);\n    element.style.display = 'none';\n    document.body.appendChild(element);\n    element.click();\n    document.body.removeChild(element);\n}\n\nglobal.set('hive', inObject);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 410,
-        "y": 80,
+        "y": 60,
         "wires": [
-            [
-                "5652d958.4bda68"
-            ]
+            []
         ]
     },
     {
@@ -14230,7 +14270,7 @@
                 "t": "set",
                 "p": "queue",
                 "pt": "flow",
-                "to": "[\"TrainTraxx\",\"JMRI\",\"tags\",\"JMRI\",\"inventory\",\"sensors\",\"JMRI\",\"locations\",\"JMRI\",\"tracks\",\"JMRI\"]",
+                "to": "[\"TrainTraxx\",\"JMRI\",\"tags\",\"JMRI\",\"inventory\",\"sensors\",\"JMRI\",\"locations\",\"JMRI\",\"tracks\",\"JMRI\",\"clean_tags\",\"JMRI\"]",
                 "tot": "json"
             },
             {
@@ -14641,7 +14681,7 @@
         "outputType": "global",
         "outTz": "America/Chicago",
         "x": 400,
-        "y": 40,
+        "y": 20,
         "wires": [
             []
         ]
@@ -14815,11 +14855,16 @@
                 "t": "eq",
                 "v": "tracks",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "clean_tags",
+                "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 8,
+        "outputs": 9,
         "x": 330,
         "y": 280,
         "wires": [
@@ -14844,6 +14889,9 @@
             ],
             [
                 "39007a50.147b16"
+            ],
+            [
+                "bc8a6f13.88642"
             ]
         ]
     },
@@ -16291,7 +16339,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191025.0001-dev",
+                "to": "20191028.0001-dev",
                 "tot": "str"
             },
             {
@@ -16307,8 +16355,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 630,
-        "y": 80,
+        "x": 370,
+        "y": 100,
         "wires": [
             [
                 "1c7f4e71.b72dd2"
@@ -16327,8 +16375,8 @@
         "label": "HiveID Version",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 820,
-        "y": 80,
+        "x": 620,
+        "y": 100,
         "wires": []
     },
     {
@@ -19536,6 +19584,1551 @@
         "wires": [
             [
                 "7a528331.5cb0ac"
+            ]
+        ]
+    },
+    {
+        "id": "bc8a6f13.88642",
+        "type": "function",
+        "z": "3d602d50.39dab2",
+        "name": "Clean Tags",
+        "func": "\n\nflow.set('active', false);\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "817e12b.dfd69f",
+        "type": "function",
+        "z": "9a17c9d0.baa598",
+        "name": "Set Debug Function",
+        "func": "var HIVEID_Config = global.get('HIVEID_Config');\n\nvar debug = function(inObject) {\n    var date= new Date();\n    var __stack = function() {\n        var orig = Error.prepareStackTrace;\n        Error.prepareStackTrace = function(_, stack) {\n            return stack;\n        };\n        var err = new Error;\n        Error.captureStackTrace(err, arguments.callee);\n        var stack = err.stack;\n        Error.prepareStackTrace = orig;\n        return stack;\n    };\n    \n    var __line = function() {\n        return __stack()[1].getLineNumber();\n    };\n    \n    var __function = function() {\n        return __stack()[1].getFunctionName();\n    };\n    \n    var __showStack = function(inStack) {\n        var myResults = [];\n        if (inStack !== undefined) {\n            for (var i in inStack) {\n                myResults.push( {\n                    Type : inStack[i].getTypeName(),\n                    Method: inStack[i].getMethodName(),\n                    File: inStack[i].getFileName() ,\n                    Origin: inStack[i].getEvalOrigin(),\n                    Function : inStack[i].getFunctionName(), \n                    Location:  inStack[i].getLineNumber() + ':' + inStack[i].getColumnNumber()\n                });\n            }\n        }  \n        return myResults;\n    };\n    var sendData = {\n        'time' : date.toJSON(),\n        'data' : inObject\n    };\n    if (HIVEID_Config !== undefined && HIVEID_Config.DEBUG_TRACE !== undefined && HIVEID_Config.DEBUG_TRACE=== true) {\n        sendData['trace'] = __showStack(__stack());\n    }\n    node.send({\n        payload : sendData\n    });\n};\ndebug({\n  'Version' : global.get('Version')\n});\nglobal.set('debug',debug);\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 40,
+        "wires": [
+            [
+                "ba22e794.eff698"
+            ]
+        ]
+    },
+    {
+        "id": "ba22e794.eff698",
+        "type": "switch",
+        "z": "9a17c9d0.baa598",
+        "name": "Debug Enabled",
+        "property": "HIVEID_Config.DEBUG_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 480,
+        "y": 80,
+        "wires": [
+            [
+                "f0a37074.de7f3",
+                "23de0b61.54cdc4",
+                "4f0b64ce.842aac"
+            ]
+        ]
+    },
+    {
+        "id": "eaaecc58.c03be",
+        "type": "inject",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.3",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "817e12b.dfd69f",
+                "674ffe04.25126"
+            ]
+        ]
+    },
+    {
+        "id": "f0a37074.de7f3",
+        "type": "switch",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "property": "HIVEID_Config.DEBUG_NODE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 690,
+        "y": 40,
+        "wires": [
+            [
+                "7268220f.34ca1c"
+            ]
+        ]
+    },
+    {
+        "id": "7268220f.34ca1c",
+        "type": "debug",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "23de0b61.54cdc4",
+        "type": "switch",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "property": "HIVEID_Config.DEBUG_CONSOLE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 690,
+        "y": 80,
+        "wires": [
+            [
+                "3a08fb96.c65264"
+            ]
+        ]
+    },
+    {
+        "id": "3a08fb96.c65264",
+        "type": "debug",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "active": true,
+        "tosidebar": false,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 880,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "af3cb242.f151c",
+        "type": "file",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 1210,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f0b64ce.842aac",
+        "type": "switch",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "property": "HIVEID_Config.DEBUG_FILE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 690,
+        "y": 120,
+        "wires": [
+            [
+                "b38fbe69.91f93"
+            ]
+        ]
+    },
+    {
+        "id": "b38fbe69.91f93",
+        "type": "json",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 850,
+        "y": 120,
+        "wires": [
+            [
+                "c208ee93.c1be5"
+            ]
+        ]
+    },
+    {
+        "id": "80f0561b.0f0d18",
+        "type": "link in",
+        "z": "9a17c9d0.baa598",
+        "name": "Debug In",
+        "links": [],
+        "x": 295,
+        "y": 140,
+        "wires": [
+            [
+                "7d63e776.dba3d8"
+            ]
+        ]
+    },
+    {
+        "id": "d4ba1e69.11d02",
+        "type": "switch",
+        "z": "d65a42c6.df12f",
+        "name": "If DEBUG_ENABLED is Not Empty",
+        "property": "HIVEID_Config.DEBUG_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 820,
+        "y": 540,
+        "wires": [
+            [
+                "70aa538c.22b06c"
+            ],
+            [
+                "45b829df.bcfbc8"
+            ]
+        ]
+    },
+    {
+        "id": "45b829df.bcfbc8",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.DEBUG_ENABLED to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_ENABLED",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 580,
+        "wires": [
+            [
+                "70aa538c.22b06c"
+            ]
+        ]
+    },
+    {
+        "id": "2c435689.7186ba",
+        "type": "switch",
+        "z": "d65a42c6.df12f",
+        "name": "If DEBUG_NODE is Not Empty",
+        "property": "HIVEID_Config.DEBUG_NODE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 620,
+        "wires": [
+            [
+                "ff012a5f.1c2498"
+            ],
+            [
+                "72c541fb.33bdf"
+            ]
+        ]
+    },
+    {
+        "id": "72c541fb.33bdf",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.DEBUG_NODE to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_NODE",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 660,
+        "wires": [
+            [
+                "ff012a5f.1c2498"
+            ]
+        ]
+    },
+    {
+        "id": "ad21ffe7.a26d9",
+        "type": "switch",
+        "z": "d65a42c6.df12f",
+        "name": "If DEBUG_CONSOLE is Not Empty",
+        "property": "HIVEID_Config.DEBUG_CONSOLE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 820,
+        "y": 700,
+        "wires": [
+            [
+                "4a628e3b.a2dde"
+            ],
+            [
+                "7315595a.6ffbd8"
+            ]
+        ]
+    },
+    {
+        "id": "7315595a.6ffbd8",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.DEBUG_CONSOLE to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_CONSOLE",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 740,
+        "wires": [
+            [
+                "4a628e3b.a2dde"
+            ]
+        ]
+    },
+    {
+        "id": "3df743c8.491dac",
+        "type": "switch",
+        "z": "d65a42c6.df12f",
+        "name": "If DEBUG_FILE is Not Empty",
+        "property": "HIVEID_Config.DEBUG_FILE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 800,
+        "y": 780,
+        "wires": [
+            [
+                "818490d7.21b73"
+            ],
+            [
+                "f32d2f7b.aaf8"
+            ]
+        ]
+    },
+    {
+        "id": "f32d2f7b.aaf8",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.DEBUG_FILE to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_FILE",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 820,
+        "wires": [
+            [
+                "818490d7.21b73"
+            ]
+        ]
+    },
+    {
+        "id": "b24ea650.7cfca8",
+        "type": "ui_switch",
+        "z": "d65a42c6.df12f",
+        "name": "Enable Debug",
+        "label": "Enable Debug",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1180,
+        "y": 580,
+        "wires": [
+            [
+                "4e20132b.684f5c"
+            ]
+        ]
+    },
+    {
+        "id": "a33f2611.1e2988",
+        "type": "ui_switch",
+        "z": "d65a42c6.df12f",
+        "name": "Debug to Node",
+        "label": "Debug to Node",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1180,
+        "y": 660,
+        "wires": [
+            [
+                "1cdf843c.a281dc"
+            ]
+        ]
+    },
+    {
+        "id": "ff74c9dc.0b0d48",
+        "type": "ui_switch",
+        "z": "d65a42c6.df12f",
+        "name": "Debug to Console",
+        "label": "Debug to Console",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1190,
+        "y": 740,
+        "wires": [
+            [
+                "c7a4cd12.7181b"
+            ]
+        ]
+    },
+    {
+        "id": "5ea21806.751188",
+        "type": "ui_switch",
+        "z": "d65a42c6.df12f",
+        "name": "Debug to File",
+        "label": "Debug to File",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 7,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1180,
+        "y": 820,
+        "wires": [
+            [
+                "c6a4f92e.880d68"
+            ]
+        ]
+    },
+    {
+        "id": "818490d7.21b73",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_FILE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.DEBUG_FILE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 780,
+        "wires": [
+            [
+                "5ea21806.751188"
+            ]
+        ]
+    },
+    {
+        "id": "4a628e3b.a2dde",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_CONSOLE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.DEBUG_CONSOLE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1240,
+        "y": 700,
+        "wires": [
+            [
+                "ff74c9dc.0b0d48"
+            ]
+        ]
+    },
+    {
+        "id": "ff012a5f.1c2498",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_NODE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.DEBUG_NODE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 620,
+        "wires": [
+            [
+                "a33f2611.1e2988"
+            ]
+        ]
+    },
+    {
+        "id": "70aa538c.22b06c",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.DEBUG_ENABLED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.DEBUG_ENABLED",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 540,
+        "wires": [
+            [
+                "b24ea650.7cfca8"
+            ]
+        ]
+    },
+    {
+        "id": "c6a4f92e.880d68",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_FILE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_FILE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1480,
+        "y": 820,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "c7a4cd12.7181b",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_CONSOLE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_CONSOLE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1460,
+        "y": 740,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "1cdf843c.a281dc",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_NODE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_NODE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 660,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "4e20132b.684f5c",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_ENABLED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_ENABLED",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1430,
+        "y": 580,
+        "wires": [
+            [
+                "e82f7a29.794508"
+            ]
+        ]
+    },
+    {
+        "id": "f5b274c.57fe388",
+        "type": "inject",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "b7e548d5.b70988"
+            ]
+        ]
+    },
+    {
+        "id": "b7e548d5.b70988",
+        "type": "function",
+        "z": "9a17c9d0.baa598",
+        "name": "Start Log Message",
+        "func": "var debug = global.get('debug');\n\ndebug({'NOTICE':'Logging started'});\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22bb963d.c7460a",
+        "type": "ui_button",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "group": "2d93584c.72e648",
+        "order": 9,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "Remove Log",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "delete",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "1b77fd5b.aa39b3"
+            ]
+        ]
+    },
+    {
+        "id": "77198d1c.176b04",
+        "type": "file",
+        "z": "9a17c9d0.baa598",
+        "name": "Remove Debug Log",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "4a47b840.80cbe8"
+            ]
+        ]
+    },
+    {
+        "id": "4a47b840.80cbe8",
+        "type": "change",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "/var/log/hiveid-ap/debug.log",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "File Removed",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "orange",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "8534b171.50012"
+            ]
+        ]
+    },
+    {
+        "id": "8534b171.50012",
+        "type": "ui_toast",
+        "z": "9a17c9d0.baa598",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 650,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7d63e776.dba3d8",
+        "type": "function",
+        "z": "9a17c9d0.baa598",
+        "name": "Call Debug Function",
+        "func": "var debug = global.get('debug');\ndebug(msg.payload);\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6cab9cb.969d38",
+        "type": "ui_button",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "group": "2d93584c.72e648",
+        "order": 8,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "View Log",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 380,
+        "y": 400,
+        "wires": [
+            [
+                "81f84a82.22d1b8"
+            ]
+        ]
+    },
+    {
+        "id": "e7e2f766.25b158",
+        "type": "link out",
+        "z": "9a17c9d0.baa598",
+        "name": "Debug to File Viewer oLink",
+        "links": [
+            "a11a19f1.55c228"
+        ],
+        "x": 655,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "e9aa8f7b.7f26c",
+        "type": "ui_template",
+        "z": "9591b959.49caf8",
+        "group": "f2029119.d7364",
+        "name": "File Viewer",
+        "order": 4,
+        "width": "16",
+        "height": "14",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 630,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79bdde0b.93ee3",
+        "type": "change",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "template",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 160,
+        "wires": [
+            [
+                "e9aa8f7b.7f26c"
+            ]
+        ]
+    },
+    {
+        "id": "20dc8562.765b7a",
+        "type": "inject",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "79bdde0b.93ee3"
+            ]
+        ]
+    },
+    {
+        "id": "a11a19f1.55c228",
+        "type": "link in",
+        "z": "9591b959.49caf8",
+        "name": "File Viewer iLink",
+        "links": [
+            "e7e2f766.25b158"
+        ],
+        "x": 255,
+        "y": 220,
+        "wires": [
+            [
+                "b8c7dae1.0af138",
+                "dc15ac07.0d733"
+            ]
+        ]
+    },
+    {
+        "id": "69bc7bd1.8b9294",
+        "type": "ui_ui_control",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "events": "change",
+        "x": 620,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8c7dae1.0af138",
+        "type": "change",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"tab\":\"File Viewer\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "69bc7bd1.8b9294"
+            ]
+        ]
+    },
+    {
+        "id": "53742104.cc5d2",
+        "type": "function",
+        "z": "9591b959.49caf8",
+        "name": "Create Log File View",
+        "func": "msg.template = '<pre>' + msg.payload.replace(/\\}\\n\\{/g,'}<hr />{') + '</pre>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "e9aa8f7b.7f26c",
+                "ce9a6c4e.09396"
+            ]
+        ]
+    },
+    {
+        "id": "a1a28c79.66e6c",
+        "type": "file in",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "53742104.cc5d2"
+            ]
+        ]
+    },
+    {
+        "id": "dc15ac07.0d733",
+        "type": "change",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "flow",
+                "to": "filename",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "2489a75.f2e6358"
+            ]
+        ]
+    },
+    {
+        "id": "2489a75.f2e6358",
+        "type": "change",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "a1a28c79.66e6c"
+            ]
+        ]
+    },
+    {
+        "id": "7f3e26dc.f70538",
+        "type": "ui_button",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "group": "f2029119.d7364",
+        "order": 1,
+        "width": "8",
+        "height": "1",
+        "passthru": false,
+        "label": "Refresh File",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 210,
+        "y": 260,
+        "wires": [
+            [
+                "2489a75.f2e6358"
+            ]
+        ]
+    },
+    {
+        "id": "9dc2f1f.78b5f1",
+        "type": "ui_button",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "group": "f2029119.d7364",
+        "order": 1,
+        "width": "8",
+        "height": "1",
+        "passthru": false,
+        "label": "Remove File",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "delete",
+        "payload": "filename",
+        "payloadType": "flow",
+        "topic": "",
+        "x": 210,
+        "y": 520,
+        "wires": [
+            [
+                "dd4a4d56.1b9da"
+            ]
+        ]
+    },
+    {
+        "id": "dd4a4d56.1b9da",
+        "type": "change",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 520,
+        "wires": [
+            [
+                "ef305ba1.c1a378"
+            ]
+        ]
+    },
+    {
+        "id": "ef305ba1.c1a378",
+        "type": "file",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "79bdde0b.93ee3"
+            ]
+        ]
+    },
+    {
+        "id": "674ffe04.25126",
+        "type": "change",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "flow",
+                "to": "/usr/local/hiveid-ap/log/debug.log",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "1b77fd5b.aa39b3"
+            ]
+        ]
+    },
+    {
+        "id": "1b77fd5b.aa39b3",
+        "type": "change",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "77198d1c.176b04"
+            ]
+        ]
+    },
+    {
+        "id": "81f84a82.22d1b8",
+        "type": "change",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "e7e2f766.25b158"
+            ]
+        ]
+    },
+    {
+        "id": "c208ee93.c1be5",
+        "type": "change",
+        "z": "9a17c9d0.baa598",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "filename",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 120,
+        "wires": [
+            [
+                "af3cb242.f151c"
+            ]
+        ]
+    },
+    {
+        "id": "ce9a6c4e.09396",
+        "type": "debug",
+        "z": "9591b959.49caf8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ec8777d.b7c8b88",
+        "type": "switch",
+        "z": "d65a42c6.df12f",
+        "name": "If DEBUG_TRACE is Not Empty",
+        "property": "HIVEID_Config.DEBUG_TRACE",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 860,
+        "wires": [
+            [
+                "d956ef4c.5c748"
+            ],
+            [
+                "e3d86191.6b762"
+            ]
+        ]
+    },
+    {
+        "id": "e3d86191.6b762",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "HIVEID_Config.DEBUG_TRACE to false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_TRACE",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 900,
+        "wires": [
+            [
+                "d956ef4c.5c748"
+            ]
+        ]
+    },
+    {
+        "id": "9c9454e3.6bd518",
+        "type": "ui_switch",
+        "z": "d65a42c6.df12f",
+        "name": "Include Trace",
+        "label": "Include Trace",
+        "tooltip": "",
+        "group": "2d93584c.72e648",
+        "order": 7,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1180,
+        "y": 900,
+        "wires": [
+            [
+                "890d8b9a.151838"
+            ]
+        ]
+    },
+    {
+        "id": "d956ef4c.5c748",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_TRACE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "HIVEID_Config.DEBUG_TRACE",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 860,
+        "wires": [
+            [
+                "9c9454e3.6bd518"
+            ]
+        ]
+    },
+    {
+        "id": "890d8b9a.151838",
+        "type": "change",
+        "z": "d65a42c6.df12f",
+        "name": "Set HIVEID_Config.DEBUG_TRACE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "HIVEID_Config.DEBUG_TRACE",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1480,
+        "y": 900,
+        "wires": [
+            [
+                "e82f7a29.794508"
             ]
         ]
     }
