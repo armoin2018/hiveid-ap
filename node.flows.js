@@ -16339,7 +16339,7 @@
                 "t": "set",
                 "p": "Version",
                 "pt": "global",
-                "to": "20191029.0001-dev",
+                "to": "20191029.0002-dev",
                 "tot": "str"
             },
             {
@@ -18966,7 +18966,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Build JMRI Request for Trains",
-        "func": "var data = {\n    name : msg.payload.curTrain.name\n};\nswitch (msg.payload.selected) {\n    case 'Build':\n        \n        break;\n    case 'Move': \n        \n        break;\n    case 'Terminate':\n        \n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + '/trains',\n    topic : 'trains',\n    verb : \"POST\",\n    payload : {\n        type: 'trains',\n        data: data\n    }\n});\nreturn;\n",
+        "func": "var data = {\n    name : msg.payload.curTrain.name\n};\nswitch (msg.payload.selected) {\n    case 'Build':\n        \n        break;\n    case 'Move': \n        \n        break;\n    case 'Terminate':\n        \n        break;\n}\n\nnode.send( {\n    headers : {'content-type':'application/json'},\n    url : global.get('JMRI_URL') + 'json/trains',\n    topic : 'trains',\n    verb : \"POST\",\n    payload : {\n        type: 'trains',\n        data: data\n    }\n});\nreturn;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 830,
@@ -19173,7 +19173,7 @@
         "type": "function",
         "z": "7e6978a8.bbc058",
         "name": "Set Terminated",
-        "func": "var storedTrain = flow.get('storedTrain');\nvar activeTrain = msg.payload.name;\nif (storedTrain !== undefined && storedTrain[activeTrain] !== undefined) {\n    var curTrain = storedTrain[activeTrain];\n    var setStatus = msg.payload.status;\n    if (Number(msg.payload.statusCode) === 20) {\n        setStatus = '';\n    }\n    var types = ['car','engine'];\n    if (curTrain !== undefined) { \n        for (var typeID in types) {\n            var s_type = types[typeID];\n            var o_type = s_type + 's';\n            if (curTrain[o_type] !== undefined && curTrain[o_type].length > 0) {\n                for (var invID in curTrain[o_type]) {\n                    var curInv = curTrain[o_type][invID];\n                    var data = {\n                        name : curInv.name,\n                        comment : setStatus\n                    };\n                    node.send( {\n                        headers : {'content-type':'application/json'},\n                        url : global.get('JMRI_URL') + '/' + s_type,\n                        topic : s_type,\n                        verb : \"POST\",\n                        payload : {\n                            type: s_type,\n                            data: data\n                        }\n                    });\n                }\n            }\n        }\n    }\n}\nnode.send({payload: -1});\nreturn;",
+        "func": "var storedTrain = flow.get('storedTrain');\nvar activeTrain = msg.payload.name;\nif (storedTrain !== undefined && storedTrain[activeTrain] !== undefined) {\n    var curTrain = storedTrain[activeTrain];\n    var setStatus = msg.payload.status;\n    if (Number(msg.payload.statusCode) === 20) {\n        setStatus = '';\n    }\n    var types = ['car','engine'];\n    if (curTrain !== undefined) { \n        for (var typeID in types) {\n            var s_type = types[typeID];\n            var o_type = s_type + 's';\n            if (curTrain[o_type] !== undefined && curTrain[o_type].length > 0) {\n                for (var invID in curTrain[o_type]) {\n                    var curInv = curTrain[o_type][invID];\n                    var data = {\n                        name : curInv.name,\n                        comment : setStatus\n                    };\n                    node.send( {\n                        headers : {'content-type':'application/json'},\n                        url : global.get('JMRI_URL') + 'json/' + s_type,\n                        topic : s_type,\n                        verb : \"POST\",\n                        payload : {\n                            type: s_type,\n                            data: data\n                        }\n                    });\n                }\n            }\n        }\n    }\n}\nnode.send({payload: -1});\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 1920,
