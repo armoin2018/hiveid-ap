@@ -1,5 +1,10 @@
 {
     "HiveID_API": "https://www.hive-id.com/wp-json/hiveid/v2/custom/",
     "HiveID_Web": "https://www.hive-id.com",
-    "HiveID_Key": ""
+    "HiveID_Key": "",
+    "DEBUG_ENABLED" : false,
+    "DEBUG_NODE" : false,
+    "DEBUG_CONSOLE" : false,
+    "DEBUG_FILE" : false,
+    "DEBUG_TRACE" : false
 }
