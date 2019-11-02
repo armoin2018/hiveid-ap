@@ -3,7 +3,8 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./setup_jmri.sh                           ####
 #### Description: Sets up basic JRMI                  ####
-#### Version: 0.20190910                              ####
+#### Version: 0.20191102                              ####
+####          0.20191102 Changed to v4.17.5           ####
 ####          0.20190910 Changed to v4.17.3           ####
 ####          0.20190819 Added kill command           ####
 ####          0.20190812 Changed to v4.17.3           ####
@@ -22,7 +23,8 @@ sudo tar -zcvf jmri_$now.tar.gz jmri
 sudo mv jmri_$now.tar.gz /opt/jmri_backups/.
 cd /opt/jmri
 sudo rm -rdf *
-sudo wget https://github.com/JMRI/JMRI/releases/download/v4.17.3/JMRI.4.17.3+R12d2ded.tgz
+sudo wget https://github.com/JMRI/JMRI/releases/download/v4.17.5/JMRI.4.17.5+Rdf73700.tgz
+#sudo wget https://github.com/JMRI/JMRI/releases/download/v4.17.3/JMRI.4.17.3+R12d2ded.tgz
 #sudo wget https://github.com/JMRI/JMRI/releases/download/v4.17.4/JMRI.4.17.4+Rbf0d1af.tgz
 sudo tar -xvf *.tgz
 sudo mv JMRI/* .
