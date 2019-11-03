@@ -1,5 +1,5 @@
 {
-    "gateway-version" : {
+    "hiveid" : {
         "dev" : {
             "20191102.0001-dev" : {
                 "url" : "https://github.com/armoin2018/hiveid-ap",
@@ -19,7 +19,7 @@
             }
         }
     },
-    "jmri-version" : {
+    "jmri" : {
         "4.17.5" : {
             "url" : "https://github.com/JMRI/JMRI/releases/download/v4.17.5/JMRI.4.17.5+Rdf73700.tgz",
             "tested" : false,

@@ -881,7 +881,7 @@
         "type": "ui_spacer",
         "name": "spacer",
         "group": "17f52c5b.cfb014",
-        "order": 6,
+        "order": 7,
         "width": 1,
         "height": 1
     },
@@ -890,7 +890,7 @@
         "type": "ui_spacer",
         "name": "spacer",
         "group": "17f52c5b.cfb014",
-        "order": 8,
+        "order": 9,
         "width": 1,
         "height": 1
     },
@@ -899,7 +899,7 @@
         "type": "ui_spacer",
         "name": "spacer",
         "group": "17f52c5b.cfb014",
-        "order": 11,
+        "order": 12,
         "width": 1,
         "height": 1
     },
@@ -1169,7 +1169,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 10,
+        "order": 11,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -1248,7 +1248,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 5,
+        "order": 6,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -1306,8 +1306,7 @@
         "wires": [
             [
                 "e8ed6bdd.7a0138",
-                "26beefe6.cfd83",
-                "5652d958.4bda68"
+                "26beefe6.cfd83"
             ]
         ]
     },
@@ -2418,7 +2417,7 @@
         "func": "var os = global.get('os');\nvar nics = {};\nnics = os.networkInterfaces();\nglobal.set('networkInterfaces',nics);\n\n//var nics = global.get('networkInterfaces');\nmsg.payload =[];\nvar internalIPv4  = '';\nvar tempIP= {};\nfor (var ni in nics ) {\n    if (ni !== 'lo') {\n        for (var i =0; i< nics[ni].length;i++) {\n            if (nics[ni][i].family === \"IPv4\" && nics[ni][i].netmask === \"255.255.255.0\") {\n                tempIP[ni]=nics[ni][i].address;\n                msg.payload.push({\n                    title: '<strong>' + ni + '</strong>&nbsp;'+ nics[ni][i].address \n                });\n            }\n        }\n    }\n}\n\nif (tempIP['wlan1'] !== undefined) {\n    internalIPv4 = tempIP['wlan1'];\n} else if (tempIP['eth0'] !== undefined) {\n    internalIPv4 = tempIP['eth0'];\n} else if  (tempIP['wlan0'] !== undefined) {\n    internalIPv4 = tempIP['wlan0'];\n} else {\n    internalIPv4 = '127.0.0.1';\n}\n\nglobal.set('IP',{'internalIPv4' :  internalIPv4});\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 410,
+        "x": 390,
         "y": 200,
         "wires": [
             [
@@ -2593,7 +2592,7 @@
         "msgArray": false,
         "msgTemp": false,
         "x": 330,
-        "y": 860,
+        "y": 1200,
         "wires": [
             [
                 "fed4cd3c.abeae"
@@ -2637,7 +2636,7 @@
         "useOldStyle": false,
         "outputs": 1,
         "x": 550,
-        "y": 860,
+        "y": 1200,
         "wires": [
             []
         ]
@@ -2655,7 +2654,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 900,
+        "y": 1240,
         "wires": [
             [
                 "c9aa36d9.5823f8",
@@ -2738,7 +2737,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 1000,
+        "y": 1340,
         "wires": [
             [
                 "9ba3f6e7.d8b438"
@@ -2751,7 +2750,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 310,
-        "y": 1040,
+        "y": 1380,
         "wires": [
             []
         ]
@@ -2762,7 +2761,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 940,
+        "y": 1280,
         "wires": [
             [
                 "8a7998a8.747678"
@@ -2775,7 +2774,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "x": 320,
-        "y": 900,
+        "y": 1240,
         "wires": [
             [
                 "2e18a81a.662928"
@@ -2787,7 +2786,7 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 9,
+        "order": 10,
         "width": "6",
         "height": "2",
         "name": "",
@@ -2795,7 +2794,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 710,
-        "y": 1000,
+        "y": 1340,
         "wires": []
     },
     {
@@ -2811,7 +2810,7 @@
         "once": true,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 1000,
+        "y": 1340,
         "wires": [
             [
                 "302dd467.6f1a0c",
@@ -2842,7 +2841,7 @@
         "seg1": "",
         "seg2": "",
         "x": 720,
-        "y": 900,
+        "y": 1240,
         "wires": []
     },
     {
@@ -2858,7 +2857,7 @@
         "format": "{{msg.payload.uptime}} seconds",
         "layout": "row-spread",
         "x": 500,
-        "y": 940,
+        "y": 1280,
         "wires": []
     },
     {
@@ -2870,7 +2869,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 520,
-        "y": 1000,
+        "y": 1340,
         "wires": [
             [
                 "2a113082.e508b"
@@ -2886,7 +2885,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 510,
-        "y": 900,
+        "y": 1240,
         "wires": [
             [],
             [
@@ -4579,7 +4578,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 180,
-        "y": 1120,
+        "y": 1460,
         "wires": [
             [
                 "a5662777.20df48",
@@ -4599,7 +4598,7 @@
         "oldrc": false,
         "name": "",
         "x": 530,
-        "y": 1120,
+        "y": 1460,
         "wires": [
             [],
             [],
@@ -4629,7 +4628,7 @@
         "repair": false,
         "outputs": 2,
         "x": 850,
-        "y": 1120,
+        "y": 1460,
         "wires": [
             [
                 "6d76fe5b.cb776"
@@ -4708,7 +4707,7 @@
             "acd4a1d3.1b2d1"
         ],
         "x": 295,
-        "y": 1160,
+        "y": 1500,
         "wires": [
             [
                 "a5662777.20df48",
@@ -4895,7 +4894,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 100,
-        "y": 1660,
+        "y": 2000,
         "wires": [
             [
                 "e1986986.8508b8"
@@ -4914,7 +4913,7 @@
         "oldrc": false,
         "name": "",
         "x": 470,
-        "y": 1660,
+        "y": 2000,
         "wires": [
             [],
             [],
@@ -4930,7 +4929,7 @@
         "name": "",
         "label": "Change Password",
         "group": "17f52c5b.cfb014",
-        "order": 12,
+        "order": 13,
         "width": "6",
         "height": "3",
         "options": [
@@ -4956,7 +4955,7 @@
         "cancel": "Cancel",
         "topic": "",
         "x": 130,
-        "y": 1280,
+        "y": 1620,
         "wires": [
             [
                 "ff08124.c1692f"
@@ -4972,7 +4971,7 @@
         "outputs": 2,
         "noerr": 0,
         "x": 350,
-        "y": 1280,
+        "y": 1620,
         "wires": [
             [
                 "34c84103.7b175e",
@@ -4995,7 +4994,7 @@
         "oldrc": false,
         "name": "",
         "x": 1050,
-        "y": 1260,
+        "y": 1600,
         "wires": [
             [],
             [],
@@ -5169,7 +5168,7 @@
         "repair": false,
         "outputs": 2,
         "x": 740,
-        "y": 1660,
+        "y": 2000,
         "wires": [
             [
                 "1d57def3.36f541"
@@ -5192,7 +5191,7 @@
         "topic": "",
         "name": "Success Notification",
         "x": 1200,
-        "y": 1660,
+        "y": 1980,
         "wires": []
     },
     {
@@ -5208,7 +5207,7 @@
         "topic": "",
         "name": "Failed Notification",
         "x": 1190,
-        "y": 1660,
+        "y": 2020,
         "wires": []
     },
     {
@@ -5260,7 +5259,7 @@
         "topic": "",
         "name": "Mismatch Notice",
         "x": 770,
-        "y": 1300,
+        "y": 1640,
         "wires": []
     },
     {
@@ -5433,7 +5432,7 @@
         "topic": "",
         "name": "Restarting Gateway Services",
         "x": 500,
-        "y": 1080,
+        "y": 1420,
         "wires": []
     },
     {
@@ -5449,7 +5448,7 @@
         "topic": "",
         "name": "Restart Notice",
         "x": 760,
-        "y": 1220,
+        "y": 1560,
         "wires": []
     },
     {
@@ -5487,7 +5486,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 160,
-        "y": 1420,
+        "y": 1760,
         "wires": [
             [
                 "1d5c0d1d.86fb23"
@@ -5507,7 +5506,7 @@
         "topic": "",
         "name": "Restart Node-Red",
         "x": 630,
-        "y": 1420,
+        "y": 1760,
         "wires": [
             [
                 "1ecb5d68.ee8303"
@@ -5537,7 +5536,7 @@
         "repair": false,
         "outputs": 2,
         "x": 890,
-        "y": 1420,
+        "y": 1760,
         "wires": [
             [
                 "260fc6de.f3479a",
@@ -5560,7 +5559,7 @@
         "oldrc": false,
         "name": "",
         "x": 1160,
-        "y": 1420,
+        "y": 1760,
         "wires": [
             [],
             [],
@@ -5588,7 +5587,7 @@
         "repair": false,
         "outputs": 2,
         "x": 950,
-        "y": 1340,
+        "y": 1680,
         "wires": [
             [
                 "1d5c0d1d.86fb23"
@@ -5611,7 +5610,7 @@
         "topic": "",
         "name": "Password Change Failure",
         "x": 1370,
-        "y": 1340,
+        "y": 1680,
         "wires": []
     },
     {
@@ -5627,7 +5626,7 @@
         "topic": "",
         "name": "Not Restarting Node-Red",
         "x": 1370,
-        "y": 1460,
+        "y": 1800,
         "wires": []
     },
     {
@@ -5643,7 +5642,7 @@
         "topic": "",
         "name": "Gateway Restarted",
         "x": 1210,
-        "y": 1100,
+        "y": 1440,
         "wires": []
     },
     {
@@ -5659,7 +5658,7 @@
         "topic": "",
         "name": "Gateway was unable to restart",
         "x": 1250,
-        "y": 1140,
+        "y": 1480,
         "wires": []
     },
     {
@@ -5675,7 +5674,7 @@
         "topic": "",
         "name": "Restarting Node-Red",
         "x": 1360,
-        "y": 1380,
+        "y": 1720,
         "wires": []
     },
     {
@@ -5848,7 +5847,7 @@
         "to": "",
         "reg": false,
         "x": 400,
-        "y": 1420,
+        "y": 1760,
         "wires": [
             [
                 "74ca8036.a5bdb"
@@ -5875,7 +5874,7 @@
         "to": "",
         "reg": false,
         "x": 580,
-        "y": 1220,
+        "y": 1560,
         "wires": [
             [
                 "4a4d9e53.4b233"
@@ -5902,7 +5901,7 @@
         "to": "",
         "reg": false,
         "x": 580,
-        "y": 1300,
+        "y": 1640,
         "wires": [
             [
                 "7a652293.01ccbc"
@@ -5929,7 +5928,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1340,
+        "y": 1680,
         "wires": [
             [
                 "1d72c2d2.dd9c8d"
@@ -5956,7 +5955,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1380,
+        "y": 1720,
         "wires": [
             [
                 "a03e3ca8.3c9c3"
@@ -5983,7 +5982,7 @@
         "to": "",
         "reg": false,
         "x": 1120,
-        "y": 1460,
+        "y": 1800,
         "wires": [
             [
                 "fe750cdf.f1c19"
@@ -6010,7 +6009,7 @@
         "to": "",
         "reg": false,
         "x": 1020,
-        "y": 1140,
+        "y": 1480,
         "wires": [
             [
                 "97476705.d5f628"
@@ -6037,7 +6036,7 @@
         "to": "",
         "reg": false,
         "x": 1020,
-        "y": 1100,
+        "y": 1440,
         "wires": [
             [
                 "b644d7aa.00e728"
@@ -6064,7 +6063,7 @@
         "to": "",
         "reg": false,
         "x": 980,
-        "y": 1680,
+        "y": 2020,
         "wires": [
             [
                 "e992e762.65fa68"
@@ -6091,7 +6090,7 @@
         "to": "",
         "reg": false,
         "x": 980,
-        "y": 1640,
+        "y": 1980,
         "wires": [
             [
                 "b7ef9aeb.b31358"
@@ -6358,32 +6357,6 @@
         "wires": []
     },
     {
-        "id": "2f029628.f1b68a",
-        "type": "ui_button",
-        "z": "11b2f565.0266ab",
-        "name": "HiveID Lite Update with Flows",
-        "group": "17f52c5b.cfb014",
-        "order": 3,
-        "width": "5",
-        "height": "1",
-        "passthru": false,
-        "label": "HiveID Lite Update with Flows",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "cloud_download",
-        "payload": "true",
-        "payloadType": "bool",
-        "topic": "",
-        "x": 210,
-        "y": 440,
-        "wires": [
-            [
-                "ac649e65.7a997"
-            ]
-        ]
-    },
-    {
         "id": "cb5b3377.6d8cd",
         "type": "exec",
         "z": "11b2f565.0266ab",
@@ -6394,8 +6367,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 370,
-        "y": 500,
+        "x": 430,
+        "y": 540,
         "wires": [
             [],
             [],
@@ -6425,8 +6398,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 270,
-        "y": 560,
+        "x": 590,
+        "y": 600,
         "wires": [
             [
                 "b71926b7.4d6c68",
@@ -6449,8 +6422,8 @@
         "cancel": "",
         "topic": "",
         "name": "",
-        "x": 1370,
-        "y": 540,
+        "x": 1610,
+        "y": 480,
         "wires": []
     },
     {
@@ -6486,8 +6459,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 920,
-        "y": 540,
+        "x": 1240,
+        "y": 580,
         "wires": [
             [
                 "93535d75.79ef"
@@ -6527,8 +6500,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
-        "y": 740,
+        "x": 1410,
+        "y": 780,
         "wires": [
             [
                 "93535d75.79ef"
@@ -6568,8 +6541,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 900,
-        "y": 580,
+        "x": 1220,
+        "y": 620,
         "wires": [
             [
                 "93535d75.79ef"
@@ -6609,8 +6582,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1080,
-        "y": 780,
+        "x": 1400,
+        "y": 820,
         "wires": [
             [
                 "93535d75.79ef"
@@ -6643,8 +6616,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 310,
-        "y": 620,
+        "x": 630,
+        "y": 660,
         "wires": [
             [
                 "fafc95d8.818068"
@@ -6663,8 +6636,8 @@
         "cancel": "Cancel",
         "topic": "",
         "name": "Install Flows",
-        "x": 370,
-        "y": 660,
+        "x": 690,
+        "y": 700,
         "wires": [
             [
                 "19f7d2e8.e7113d"
@@ -6691,8 +6664,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 390,
-        "y": 700,
+        "x": 710,
+        "y": 740,
         "wires": [
             [
                 "d5c9c93d.040dc8",
@@ -6737,8 +6710,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1060,
-        "y": 700,
+        "x": 1380,
+        "y": 740,
         "wires": [
             [
                 "93535d75.79ef"
@@ -6756,8 +6729,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 350,
-        "y": 760,
+        "x": 670,
+        "y": 800,
         "wires": [
             [],
             [],
@@ -6787,8 +6760,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 890,
-        "y": 760,
+        "x": 1210,
+        "y": 800,
         "wires": [
             [
                 "38fc9479.9fd71c"
@@ -7031,7 +7004,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 140,
-        "y": 1520,
+        "y": 1860,
         "wires": [
             [
                 "d80dbb05.2032d8"
@@ -7051,7 +7024,7 @@
         "proxy": "",
         "authType": "basic",
         "x": 390,
-        "y": 1520,
+        "y": 1860,
         "wires": [
             [
                 "b1b40989.5d3408"
@@ -7078,7 +7051,7 @@
         "to": "",
         "reg": false,
         "x": 640,
-        "y": 1520,
+        "y": 1860,
         "wires": [
             []
         ]
@@ -7710,8 +7683,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 890,
-        "y": 440,
+        "x": 1050,
+        "y": 420,
         "wires": [
             [
                 "93535d75.79ef"
@@ -11241,7 +11214,7 @@
         "files": "/opt/hiveid-ap/nodered/scripts/gatewayInfo.php",
         "recursive": "",
         "x": 200,
-        "y": 1480,
+        "y": 1820,
         "wires": [
             [
                 "d80dbb05.2032d8"
@@ -11320,7 +11293,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 580,
-        "y": 1260,
+        "y": 1600,
         "wires": [
             [
                 "367077e4.def7a8"
@@ -13800,7 +13773,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 650,
-        "y": 60,
+        "y": 100,
         "wires": [
             []
         ]
@@ -14217,7 +14190,8 @@
         "y": 40,
         "wires": [
             [
-                "f83d3ea6.5e836"
+                "f83d3ea6.5e836",
+                "7ebfbf64.2e225"
             ]
         ]
     },
@@ -15356,7 +15330,7 @@
         "payloadType": "str",
         "topic": "",
         "x": 90,
-        "y": 1580,
+        "y": 1920,
         "wires": [
             [
                 "3570e4ea.63c73c"
@@ -15431,7 +15405,7 @@
         "to": "",
         "reg": false,
         "x": 390,
-        "y": 1580,
+        "y": 1920,
         "wires": [
             [
                 "e1986986.8508b8",
@@ -15451,7 +15425,7 @@
             "7d4b34cc.654fec"
         ],
         "x": 555,
-        "y": 1560,
+        "y": 1900,
         "wires": []
     },
     {
@@ -15463,7 +15437,7 @@
             "829d7cac.b3072"
         ],
         "x": 595,
-        "y": 1580,
+        "y": 1920,
         "wires": []
     },
     {
@@ -15667,7 +15641,7 @@
             "78979090.cc80c"
         ],
         "x": 555,
-        "y": 1600,
+        "y": 1940,
         "wires": []
     },
     {
@@ -15727,7 +15701,7 @@
             "d64a561f.a26af8"
         ],
         "x": 595,
-        "y": 1620,
+        "y": 1960,
         "wires": []
     },
     {
@@ -15771,7 +15745,7 @@
         "once": true,
         "onceDelay": "2",
         "x": 110,
-        "y": 1620,
+        "y": 1960,
         "wires": [
             [
                 "e1986986.8508b8"
@@ -15830,45 +15804,11 @@
         ]
     },
     {
-        "id": "5652d958.4bda68",
-        "type": "change",
-        "z": "a06855ce.9f5488",
-        "name": "Set Version",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Version",
-                "pt": "global",
-                "to": "20191102.0001-dev",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Version",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 370,
-        "y": 100,
-        "wires": [
-            [
-                "1c7f4e71.b72dd2"
-            ]
-        ]
-    },
-    {
         "id": "1c7f4e71.b72dd2",
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 2,
+        "order": 3,
         "width": "6",
         "height": "1",
         "name": "",
@@ -15876,7 +15816,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 620,
-        "y": 100,
+        "y": 920,
         "wires": []
     },
     {
@@ -15997,38 +15937,11 @@
         ]
     },
     {
-        "id": "caa3617a.baa06",
-        "type": "ui_button",
-        "z": "a06855ce.9f5488",
-        "name": "Setup/Update JMRI",
-        "group": "17f52c5b.cfb014",
-        "order": 7,
-        "width": "5",
-        "height": "1",
-        "passthru": false,
-        "label": "Setup/Update JMRI",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "train",
-        "payload": "JMRI is upgrading, once completed it will request a reboot.",
-        "payloadType": "str",
-        "topic": "",
-        "x": 140,
-        "y": 700,
-        "wires": [
-            [
-                "6c1c07e9.b08868",
-                "6c97017c.caa18"
-            ]
-        ]
-    },
-    {
         "id": "6c1c07e9.b08868",
         "type": "exec",
         "z": "a06855ce.9f5488",
         "command": "/opt/hiveid-ap/setup_jmri.sh",
-        "addpay": false,
+        "addpay": true,
         "append": "",
         "useSpawn": "false",
         "timer": "",
@@ -16609,10 +16522,12 @@
         "z": "a06855ce.9f5488",
         "position": "top right",
         "displayTime": "5",
-        "highlight": "",
+        "highlight": "green",
+        "sendall": true,
         "outputs": 0,
         "ok": "OK",
         "cancel": "",
+        "raw": false,
         "topic": "",
         "name": "JMRI Upgrade Notification",
         "x": 420,
@@ -17250,8 +17165,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1080,
-        "y": 660,
+        "x": 1400,
+        "y": 700,
         "wires": [
             [
                 "7a528331.5cb0ac"
@@ -17300,8 +17215,8 @@
                 "t": "false"
             }
         ],
-        "checkall": "true",
-        "repair": false,
+        "checkall": "false",
+        "repair": true,
         "outputs": 2,
         "x": 520,
         "y": 440,
@@ -17313,7 +17228,7 @@
                 "b6adf091.54a19",
                 "25386384.87620c",
                 "be33311c.a2908",
-                "155c2e8b.580881"
+                "d3b3799f.ecd0e8"
             ]
         ]
     },
@@ -17425,8 +17340,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 870,
-        "y": 480,
+        "x": 1030,
+        "y": 460,
         "wires": [
             []
         ]
@@ -17551,7 +17466,7 @@
         "z": "11b2f565.0266ab",
         "group": "17f52c5b.cfb014",
         "name": "Lite Processing",
-        "order": 4,
+        "order": 5,
         "width": "1",
         "height": "1",
         "format": "<div ng-bind-html=\"msg.payload\"></div>",
@@ -18853,38 +18768,11 @@
         ]
     },
     {
-        "id": "155c2e8b.580881",
-        "type": "change",
-        "z": "11b2f565.0266ab",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "TrainTraxx_Config.BRANCH",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 120,
-        "y": 500,
-        "wires": [
-            [
-                "cb5b3377.6d8cd"
-            ]
-        ]
-    },
-    {
         "id": "54d58dee.031254",
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Set Command",
-        "func": "msg.payload = 'echo \"/opt/hiveid-ap/hiveid_update.sh ' + global.get('TrainTraxx_Config.BRANCH') + '\" | at -M now';\nreturn msg;",
+        "func": "msg.payload = 'echo \"/opt/hiveid-ap/hiveid_update.sh ' + global.get('REPO') + ' ' + global.get('TrainTraxx_Config.BRANCH') + '\" | at -M now';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1000,
@@ -20510,7 +20398,7 @@
             "75f778d8.26e3e8"
         ],
         "x": 315,
-        "y": 60,
+        "y": 80,
         "wires": [
             [
                 "26beefe6.cfd83"
@@ -20812,8 +20700,8 @@
         "type": "subflow:3acc419c.b0ca8e",
         "z": "11b2f565.0266ab",
         "name": "",
-        "x": 670,
-        "y": 620,
+        "x": 990,
+        "y": 660,
         "wires": []
     },
     {
@@ -20878,5 +20766,757 @@
         "x": 1030,
         "y": 200,
         "wires": []
+    },
+    {
+        "id": "984331b1.05ef8",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 110,
+        "y": 760,
+        "wires": [
+            [
+                "6ef69cdb.1b3314",
+                "56e1666f.5d92b8"
+            ]
+        ]
+    },
+    {
+        "id": "4046c48d.ef144c",
+        "type": "ui_switch",
+        "z": "a06855ce.9f5488",
+        "name": "Select Production Version",
+        "label": "Production Version",
+        "tooltip": "",
+        "group": "17f52c5b.cfb014",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "master",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "dev",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 990,
+        "y": 800,
+        "wires": [
+            [
+                "259978ef.dee108"
+            ]
+        ]
+    },
+    {
+        "id": "f7740b9d.85dc28",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set msg to VersionBranch",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "VersionBranch",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 760,
+        "wires": [
+            [
+                "4046c48d.ef144c"
+            ]
+        ]
+    },
+    {
+        "id": "6ef69cdb.1b3314",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "VersionBranch is Empty",
+        "property": "VersionBranch",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "dev",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 760,
+        "wires": [
+            [
+                "f7740b9d.85dc28"
+            ],
+            [
+                "1fceba5f.3d3946"
+            ]
+        ]
+    },
+    {
+        "id": "1fceba5f.3d3946",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set VersionBranch to master",
+        "rules": [
+            {
+                "t": "set",
+                "p": "VersionBranch",
+                "pt": "global",
+                "to": "master",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 800,
+        "wires": [
+            [
+                "f7740b9d.85dc28"
+            ]
+        ]
+    },
+    {
+        "id": "259978ef.dee108",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set VersionBranch to msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "VersionBranch",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 840,
+        "wires": [
+            [
+                "943f0a70.091ee8"
+            ]
+        ]
+    },
+    {
+        "id": "90e3d51b.771d08",
+        "type": "http request",
+        "z": "a06855ce.9f5488",
+        "name": "Get Versions",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 1270,
+        "y": 800,
+        "wires": [
+            [
+                "f0c9a5f.1c0d958"
+            ]
+        ]
+    },
+    {
+        "id": "943f0a70.091ee8",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set URL for Version List",
+        "func": "var VersionBranch =global.get('VersionBranch');\nmsg.url = global.get('REPO_RAW') + global.get('VersionBranch') + '/version.json';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1290,
+        "y": 760,
+        "wires": [
+            [
+                "90e3d51b.771d08"
+            ]
+        ]
+    },
+    {
+        "id": "f0c9a5f.1c0d958",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "set Versions to Payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Versions",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1330,
+        "y": 840,
+        "wires": [
+            [
+                "8556022b.3f9c3",
+                "f56c9962.5d8cf8",
+                "a6fcdc29.bfb0f"
+            ]
+        ]
+    },
+    {
+        "id": "615049df.487468",
+        "type": "watch",
+        "z": "a06855ce.9f5488",
+        "name": "Watch hiveid.version.txt ",
+        "files": "/opt/hiveid-ap/hiveid.version.txt",
+        "recursive": "",
+        "x": 140,
+        "y": 880,
+        "wires": [
+            [
+                "56e1666f.5d92b8"
+            ]
+        ]
+    },
+    {
+        "id": "56e1666f.5d92b8",
+        "type": "file in",
+        "z": "a06855ce.9f5488",
+        "name": "Get hiveid.version",
+        "filename": "/opt/hiveid-ap/hiveid.version.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 390,
+        "y": 880,
+        "wires": [
+            [
+                "5fff6be7.9e98e4",
+                "1c7f4e71.b72dd2"
+            ]
+        ]
+    },
+    {
+        "id": "5fff6be7.9e98e4",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Version",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 880,
+        "wires": [
+            [
+                "6d2fc07c.a0dd1"
+            ]
+        ]
+    },
+    {
+        "id": "648aba5a.bc6e34",
+        "type": "ui_dropdown",
+        "z": "a06855ce.9f5488",
+        "name": "HiveID Version",
+        "label": "HiveID Version",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "17f52c5b.cfb014",
+        "order": 13,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 1600,
+        "y": 920,
+        "wires": [
+            [
+                "420b19e5.26f0c8"
+            ]
+        ]
+    },
+    {
+        "id": "8556022b.3f9c3",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Setup HiveID Version List",
+        "func": "msg.payload=global.get('Version');\nmsg.options = Object.keys(global.get('Versions.hiveid.' + global.get('VersionBranch')));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1610,
+        "y": 880,
+        "wires": [
+            [
+                "648aba5a.bc6e34"
+            ]
+        ]
+    },
+    {
+        "id": "6d2fc07c.a0dd1",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "Versions are set",
+        "property": "Versions",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 930,
+        "y": 880,
+        "wires": [
+            [
+                "8556022b.3f9c3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "420b19e5.26f0c8",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "raw": false,
+        "topic": "",
+        "name": "Change Version",
+        "x": 1620,
+        "y": 960,
+        "wires": [
+            [
+                "54031c6d.a96db4",
+                "28e24f72.cf6d1"
+            ]
+        ]
+    },
+    {
+        "id": "54031c6d.a96db4",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1830,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "d292229a.77e8",
+        "type": "ui_dropdown",
+        "z": "a06855ce.9f5488",
+        "name": "JMRI Version",
+        "label": "JMRI Version",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "17f52c5b.cfb014",
+        "order": 13,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 2050,
+        "y": 760,
+        "wires": [
+            [
+                "a917c27c.53998"
+            ]
+        ]
+    },
+    {
+        "id": "467bf226.5e5ebc",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Setup JMRI Version List",
+        "func": "msg.payload=global.get('JMRI_Version');\nmsg.options = Object.keys(global.get('Versions.jmri'));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1830,
+        "y": 760,
+        "wires": [
+            [
+                "d292229a.77e8"
+            ]
+        ]
+    },
+    {
+        "id": "a917c27c.53998",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "raw": false,
+        "topic": "",
+        "name": "Change JMRI Version",
+        "x": 2100,
+        "y": 800,
+        "wires": [
+            [
+                "9179bafc.9a80b8",
+                "d6cfc33d.994a1"
+            ]
+        ]
+    },
+    {
+        "id": "9179bafc.9a80b8",
+        "type": "debug",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 2290,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "f56c9962.5d8cf8",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "JMRI is Enabled",
+        "property": "JMRI_Config.JMRI_ENABLED",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 1580,
+        "y": 780,
+        "wires": [
+            [
+                "467bf226.5e5ebc"
+            ],
+            [
+                "e8a316e1.74aca8"
+            ]
+        ]
+    },
+    {
+        "id": "e8a316e1.74aca8",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set Not Enabled",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "['Not Enabled']",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1860,
+        "y": 800,
+        "wires": [
+            [
+                "d292229a.77e8"
+            ]
+        ]
+    },
+    {
+        "id": "a6fcdc29.bfb0f",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "New Versions Notice",
+        "func": "\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1600,
+        "y": 720,
+        "wires": [
+            [
+                "7ac94e14.39a5f"
+            ]
+        ]
+    },
+    {
+        "id": "7ac94e14.39a5f",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "10",
+        "highlight": "Green",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "New Version Available",
+        "name": "New Version Notice",
+        "x": 2040,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "87a7e73a.0e5678",
+        "type": "link in",
+        "z": "a06855ce.9f5488",
+        "name": "JMRI Update iLink",
+        "links": [
+            "d6cfc33d.994a1"
+        ],
+        "x": 55,
+        "y": 660,
+        "wires": [
+            [
+                "6c97017c.caa18",
+                "6c1c07e9.b08868"
+            ]
+        ]
+    },
+    {
+        "id": "d6cfc33d.994a1",
+        "type": "link out",
+        "z": "a06855ce.9f5488",
+        "name": "JMRI Update oLink",
+        "links": [
+            "87a7e73a.0e5678"
+        ],
+        "x": 2255,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "7ebfbf64.2e225",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set Globals",
+        "rules": [
+            {
+                "t": "set",
+                "p": "REPO",
+                "pt": "global",
+                "to": "https://github.com/armoin2018/hiveid-ap",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "REPO_RAW",
+                "pt": "global",
+                "to": "https://raw.githubusercontent.com/armoin2018/hiveid-ap/",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54cfd856.57b5e8",
+        "type": "link in",
+        "z": "11b2f565.0266ab",
+        "name": "HiveID Flow Update Lite iLink",
+        "links": [
+            "28e24f72.cf6d1"
+        ],
+        "x": 355,
+        "y": 440,
+        "wires": [
+            [
+                "ac649e65.7a997"
+            ]
+        ]
+    },
+    {
+        "id": "28e24f72.cf6d1",
+        "type": "link out",
+        "z": "a06855ce.9f5488",
+        "name": "HiveID Flow Update Lite oLink",
+        "links": [
+            "54cfd856.57b5e8"
+        ],
+        "x": 1795,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "d3b3799f.ecd0e8",
+        "type": "function",
+        "z": "11b2f565.0266ab",
+        "name": "Create Arguments",
+        "func": "var Versions = global.get('versions.hiveid');\nif (Versions !== undefined && Object.keys(Versions).length > 0 && Versions[msg.payload] !== undefined) {\n    var ActiveVersion = Versions[msg.payload];\n    node.send({\n        payload : ActiveVersion.url + ' ' + ActiveVersion.branch\n    })\n    \n} else {\n    node.send({payload : -1});\n}\n\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "bed36eb8.794ee"
+            ]
+        ]
+    },
+    {
+        "id": "bed36eb8.794ee",
+        "type": "switch",
+        "z": "11b2f565.0266ab",
+        "name": "If Invalid",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "-1",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "b1397788.17bd38"
+            ],
+            [
+                "cb5b3377.6d8cd"
+            ]
+        ]
+    },
+    {
+        "id": "b1397788.17bd38",
+        "type": "change",
+        "z": "11b2f565.0266ab",
+        "name": "Invalid Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Invalid Version Selected",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "HiveID Update",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 500,
+        "wires": [
+            [
+                "93535d75.79ef"
+            ]
+        ]
     }
 ]
