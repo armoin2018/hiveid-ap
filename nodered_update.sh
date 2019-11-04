@@ -3,7 +3,9 @@
 #### Author: Blaine McDonnell (blaine@armoin.com)     ####
 #### Usage: ./nodered_update.sh                       ####
 #### Description: Updates Node Red                    ####
-#### Version: 0.20190614                              ####
+#### Version: 0.20191104                              ####
+####          0.20191104 Added more chown folders     ####
+####          0.20190614 Initial Version              ####
 ##########################################################
 
 echo "Installing Global NPM Modules"
@@ -31,5 +33,5 @@ php /opt/hiveid-ap/nodered_set_nodes.php
 echo "Restoring configuration and restarting Node Red"
 sudo service nodered stop
 cp ~/.node-red/settings.js.temp ~/.node-red/settings.js
-sudo chown -R pi:pi ~/.node-red
+sudo chown -R pi:pi home/pi/.npm /home/pi/.node-red /home/pi/.node-gyp
 sudo service nodered start
