@@ -21920,7 +21920,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "set payload to install_hiveid",
-        "func": "var curVer = flow.get('install_hiveid');\nvar versions = global.get('Versions.hiveid');\nvar branch = global.get('VersionBranch');\nif (versions !== undefined && versions[branch] !== undefined && verisons[branch][curVer] !== undefined && versions[branch][curVer] !== undefined) {\n    node.send({ payload : curVer });    \n}\nreturn;",
+        "func": "var curVer = flow.get('install_hiveid');\nvar versions = global.get('Versions.hiveid');\nvar branch = global.get('VersionBranch');\nif (versions !== undefined && versions[branch] !== undefined && versions[branch][curVer] !== undefined) {\n    node.send({ payload : curVer });    \n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 2020,
