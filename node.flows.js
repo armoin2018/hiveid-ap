@@ -21965,5 +21965,25 @@
                 "6ef69cdb.1b3314"
             ]
         ]
+    },
+    {
+        "id": "d039db2f.f7d368",
+        "type": "inject",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "x": 150,
+        "y": 940,
+        "wires": [
+            [
+                "1985609.f6a269f"
+            ]
+        ]
     }
 ]
