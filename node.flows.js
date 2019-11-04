@@ -21276,7 +21276,7 @@
         "type": "function",
         "z": "11b2f565.0266ab",
         "name": "Create Arguments",
-        "func": "var Versions = global.get('versions.hiveid');\nif (Versions !== undefined && Object.keys(Versions).length > 0 && Versions[msg.payload] !== undefined) {\n    var ActiveVersion = Versions[msg.payload];\n    node.send({\n        payload : ActiveVersion.url + ' ' + ActiveVersion.branch\n    })\n    \n} else {\n    node.send({payload : -1});\n}\n\nreturn;",
+        "func": "var Versions = global.get('Versions.hiveid.' + global.get('VersionBranch'));\nif (Versions !== undefined && Object.keys(Versions).length > 0 && Versions[msg.payload] !== undefined) {\n    var ActiveVersion = Versions[msg.payload];\n    node.send({\n        payload : ActiveVersion.url + ' ' + ActiveVersion.branch\n    })\n    \n} else {\n    node.send({payload : -1});\n}\n\nreturn;",
         "outputs": 1,
         "noerr": 0,
         "x": 130,
