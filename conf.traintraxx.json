@@ -3,6 +3,5 @@
     "TrainTraxx_Web": "https://www.traintraxx.com",
     "TrainTraxx_Key": "",
     "USE_CACHE" : false,
-    "ACTIVITY_SIZE" : 10,
-    "BRANCH" : "master"
+    "ACTIVITY_SIZE" : 10
 }

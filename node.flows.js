@@ -821,7 +821,7 @@
         "type": "ui_spacer",
         "name": "spacer",
         "group": "98512fe8.4ad4",
-        "order": 3,
+        "order": 4,
         "width": "6",
         "height": 1
     },
@@ -877,29 +877,11 @@
         "height": 1
     },
     {
-        "id": "4b0278eb.86214",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "17f52c5b.cfb014",
-        "order": 7,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "b70330c6.020ec",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "17f52c5b.cfb014",
-        "order": 9,
-        "width": 1,
-        "height": 1
-    },
-    {
         "id": "c439ace5.0b1cb",
         "type": "ui_spacer",
         "name": "spacer",
         "group": "17f52c5b.cfb014",
-        "order": 12,
+        "order": 10,
         "width": 1,
         "height": 1
     },
@@ -962,10 +944,39 @@
         "z": "",
         "name": "File",
         "tab": "e89de939.fa1068",
-        "order": 1,
+        "order": 2,
         "disp": true,
         "width": "16",
         "collapse": false
+    },
+    {
+        "id": "3d8d1e29.3d8be2",
+        "type": "ui_group",
+        "z": "",
+        "name": "Configure",
+        "tab": "e89de939.fa1068",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "de33c044.ff8ca",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "7491149.92351ec",
+        "order": 2,
+        "width": "6",
+        "height": "2"
+    },
+    {
+        "id": "7dc056e1.fca768",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "92534c08.7fb13",
+        "order": 5,
+        "width": "6",
+        "height": 1
     },
     {
         "id": "5a317a8b.60a8b4",
@@ -1077,7 +1088,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1122,7 +1133,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 7,
+        "order": 8,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -1169,7 +1180,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "17f52c5b.cfb014",
-        "order": 11,
+        "order": 9,
         "width": "5",
         "height": "1",
         "passthru": false,
@@ -1235,7 +1246,7 @@
         "y": 420,
         "wires": [
             [
-                "5a9407e8.fa2398"
+                "d8aa0881.5c8f28"
             ],
             [
                 "88bdde27.e13aa"
@@ -1247,9 +1258,9 @@
         "type": "ui_button",
         "z": "a06855ce.9f5488",
         "name": "",
-        "group": "17f52c5b.cfb014",
-        "order": 6,
-        "width": "5",
+        "group": "98512fe8.4ad4",
+        "order": 3,
+        "width": "6",
         "height": "1",
         "passthru": false,
         "label": "Update HiveID Code (SLOW)",
@@ -2668,7 +2679,7 @@
         "type": "function",
         "z": "8b10dcf.dc4c82",
         "name": "Set Map",
-        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nif (currentRecords !== undefined && currentRecords.length > 0) {\n    for (var cID in currentRecords) {\n        var curRecord =  currentRecords[cID];\n        if (msg.topic !== 'trains') {\n            curRecord = currentRecords[cID].data;\n        } \n        if (curRecord.userName === undefined || curRecord.userName === \"\" || curRecord.userName === null) {\n            msg.payload.available.push(cID);\n        } else {\n            msg.payload.map[curRecord.userName] = cID;\n        }\n        msg.payload.data[cID] = curRecord;\n        if (curRecord.name !== undefined) {\n            msg.payload.nextID =Number(curRecord.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n    \n}\n\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+msg.topic,msg.payload);\nreturn msg;",
+        "func": "var currentRecords = msg.payload;\nmsg.payload = {\n    'available' : [],\n    'map' : {},\n    'data' : [],\n    'nextID' : 1 \n};\n\nif (currentRecords !== undefined && currentRecords.length > 0) {\n    for (var cID in currentRecords) {\n        var curRecord =  currentRecords[cID];\n        if (msg.topic !== 'trains') {\n            curRecord = currentRecords[cID].data;\n        } \n        if (curRecord.userName === undefined || curRecord.userName === \"\" || curRecord.userName === null || msg.payload.map[curRecord.userName] == undefined) {\n            msg.payload.available.push(cID);\n        } else {\n            msg.payload.map[curRecord.userName] = cID;\n        }\n        msg.payload.data[cID] = curRecord;\n        if (curRecord.name !== undefined) {\n            msg.payload.nextID =Number(curRecord.name.replace(/^[^\\d]+/,'')) + 1;\n        } else {\n            delete msg.payload.nextID;\n        }\n    }\n    \n}\n\nmsg.payload.lastLoad = Date.now();\nglobal.set('JMRI.'+msg.topic,msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 605,
@@ -2786,14 +2797,14 @@
         "type": "ui_text",
         "z": "a06855ce.9f5488",
         "group": "17f52c5b.cfb014",
-        "order": 10,
+        "order": 8,
         "width": "6",
         "height": "2",
         "name": "",
-        "label": "OS Version",
+        "label": "OS",
         "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 710,
+        "layout": "row-left",
+        "x": 690,
         "y": 1340,
         "wires": []
     },
@@ -3440,9 +3451,7 @@
                 "e054e355.832a2",
                 "68c8ebf9.5924f4",
                 "58aab300.01211c",
-                "c1054d1e.8d906",
-                "baeca58d.963ab8",
-                "f1fbdfc5.ab581"
+                "c1054d1e.8d906"
             ]
         ]
     },
@@ -3708,7 +3717,7 @@
             "b1607e3f.fb142"
         ],
         "x": 1415,
-        "y": 120,
+        "y": 140,
         "wires": []
     },
     {
@@ -4422,9 +4431,9 @@
         "z": "9745920.d8a397",
         "name": "",
         "group": "7491149.92351ec",
-        "order": 5,
-        "width": 0,
-        "height": 0,
+        "order": 4,
+        "width": "6",
+        "height": "1",
         "passthru": true,
         "label": "Commit Changes",
         "tooltip": "",
@@ -4565,7 +4574,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -4929,7 +4938,7 @@
         "name": "",
         "label": "Change Password",
         "group": "17f52c5b.cfb014",
-        "order": 13,
+        "order": 11,
         "width": "6",
         "height": "3",
         "options": [
@@ -5412,7 +5421,7 @@
         "y": 200,
         "wires": [
             [
-                "5a9407e8.fa2398"
+                "d8aa0881.5c8f28"
             ],
             [
                 "1850bfe0.d1164"
@@ -5473,7 +5482,7 @@
         "z": "a06855ce.9f5488",
         "name": "",
         "group": "98512fe8.4ad4",
-        "order": 6,
+        "order": 7,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -11309,8 +11318,8 @@
         "tooltip": "",
         "group": "92534c08.7fb13",
         "order": 3,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "mode": "password",
         "delay": "0",
@@ -11333,8 +11342,8 @@
         "tooltip": "",
         "group": "92534c08.7fb13",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "mode": "text",
         "delay": "0",
@@ -11358,8 +11367,8 @@
         "place": "Select option",
         "group": "92534c08.7fb13",
         "order": 2,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "options": [
             {
@@ -11452,9 +11461,9 @@
         "label": "IP Network",
         "tooltip": "",
         "group": "92534c08.7fb13",
-        "order": 3,
-        "width": 0,
-        "height": 0,
+        "order": 4,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "mode": "text",
         "delay": "0",
@@ -11474,9 +11483,9 @@
         "z": "9745920.d8a397",
         "name": "Reset",
         "group": "7491149.92351ec",
-        "order": 2,
-        "width": 0,
-        "height": 0,
+        "order": 3,
+        "width": "6",
+        "height": "1",
         "passthru": false,
         "label": "Reset",
         "tooltip": "",
@@ -13244,7 +13253,7 @@
         "label": "Offline Mode",
         "tooltip": "",
         "group": "c39736a3.dcaf08",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -14687,7 +14696,7 @@
         "label": "Activity to Display Locally",
         "tooltip": "",
         "group": "c39736a3.dcaf08",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -15804,22 +15813,6 @@
         ]
     },
     {
-        "id": "1c7f4e71.b72dd2",
-        "type": "ui_text",
-        "z": "a06855ce.9f5488",
-        "group": "17f52c5b.cfb014",
-        "order": 3,
-        "width": "6",
-        "height": "1",
-        "name": "",
-        "label": "HiveID Version",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 620,
-        "y": 920,
-        "wires": []
-    },
-    {
         "id": "a605f456.8e5238",
         "type": "function",
         "z": "164213bd.e3dd4c",
@@ -15981,7 +15974,7 @@
         "y": 700,
         "wires": [
             [
-                "5a9407e8.fa2398"
+                "d8aa0881.5c8f28"
             ],
             [
                 "751c7ff8.4e3c4"
@@ -16553,7 +16546,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1020,
-        "y": 160,
+        "y": 180,
         "wires": [
             [
                 "98594e32.01c36"
@@ -16583,7 +16576,7 @@
         "to": "",
         "reg": false,
         "x": 1270,
-        "y": 160,
+        "y": 180,
         "wires": [
             [
                 "ed5837b0.97eb08"
@@ -16757,7 +16750,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1020,
-        "y": 120,
+        "y": 140,
         "wires": [
             [
                 "8f4b57b4.4e5a18"
@@ -16780,7 +16773,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1260,
-        "y": 120,
+        "y": 140,
         "wires": [
             [
                 "b6ed7646.ea36a8"
@@ -17466,7 +17459,7 @@
         "z": "11b2f565.0266ab",
         "group": "17f52c5b.cfb014",
         "name": "Lite Processing",
-        "order": 5,
+        "order": 3,
         "width": "1",
         "height": "1",
         "format": "<div ng-bind-html=\"msg.payload\"></div>",
@@ -18627,147 +18620,6 @@
         ]
     },
     {
-        "id": "baeca58d.963ab8",
-        "type": "switch",
-        "z": "fd2ebb8a.240a38",
-        "name": "Is BRANCH Empty",
-        "property": "TrainTraxx_Config.BRANCH",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "empty"
-            },
-            {
-                "t": "null"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1010,
-        "y": 200,
-        "wires": [
-            [
-                "57861a33.8a5654"
-            ],
-            [
-                "57861a33.8a5654"
-            ]
-        ]
-    },
-    {
-        "id": "57861a33.8a5654",
-        "type": "change",
-        "z": "fd2ebb8a.240a38",
-        "name": "Set BRANCH To master",
-        "rules": [
-            {
-                "t": "set",
-                "p": "TrainTraxx_Config.BRANCH",
-                "pt": "global",
-                "to": "master",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1270,
-        "y": 200,
-        "wires": [
-            [
-                "ed5837b0.97eb08"
-            ]
-        ]
-    },
-    {
-        "id": "c18e81f8.f1aae",
-        "type": "change",
-        "z": "fd2ebb8a.240a38",
-        "name": "Set TrainTraxx_Config.BRANCH",
-        "rules": [
-            {
-                "t": "set",
-                "p": "TrainTraxx_Config.BRANCH",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1050,
-        "y": 560,
-        "wires": [
-            [
-                "ed5837b0.97eb08"
-            ]
-        ]
-    },
-    {
-        "id": "d2bbfe69.5ccec",
-        "type": "ui_switch",
-        "z": "fd2ebb8a.240a38",
-        "name": "Use Production Toggle",
-        "label": "Use Production",
-        "tooltip": "",
-        "group": "c39736a3.dcaf08",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "decouple": "true",
-        "topic": "",
-        "style": "",
-        "onvalue": "master",
-        "onvalueType": "str",
-        "onicon": "",
-        "oncolor": "",
-        "offvalue": "dev",
-        "offvalueType": "str",
-        "officon": "",
-        "offcolor": "",
-        "x": 760,
-        "y": 560,
-        "wires": [
-            [
-                "c18e81f8.f1aae"
-            ]
-        ]
-    },
-    {
-        "id": "f1fbdfc5.ab581",
-        "type": "change",
-        "z": "fd2ebb8a.240a38",
-        "name": "TrainTraxx_Config.BRANCH",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "TrainTraxx_Config.BRANCH",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 480,
-        "y": 560,
-        "wires": [
-            [
-                "d2bbfe69.5ccec"
-            ]
-        ]
-    },
-    {
         "id": "54d58dee.031254",
         "type": "function",
         "z": "a06855ce.9f5488",
@@ -19291,8 +19143,8 @@
         "name": "Enable Debug",
         "label": "Enable Debug",
         "tooltip": "",
-        "group": "2d93584c.72e648",
-        "order": 4,
+        "group": "3d8d1e29.3d8be2",
+        "order": 1,
         "width": "6",
         "height": "1",
         "passthru": false,
@@ -19322,8 +19174,8 @@
         "name": "Debug to Node",
         "label": "Debug to Node",
         "tooltip": "",
-        "group": "2d93584c.72e648",
-        "order": 5,
+        "group": "3d8d1e29.3d8be2",
+        "order": 3,
         "width": "6",
         "height": "1",
         "passthru": false,
@@ -19353,8 +19205,8 @@
         "name": "Debug to Console",
         "label": "Debug to Console",
         "tooltip": "",
-        "group": "2d93584c.72e648",
-        "order": 6,
+        "group": "3d8d1e29.3d8be2",
+        "order": 2,
         "width": "6",
         "height": "1",
         "passthru": false,
@@ -19384,8 +19236,8 @@
         "name": "Debug to File",
         "label": "Debug to File",
         "tooltip": "",
-        "group": "2d93584c.72e648",
-        "order": 7,
+        "group": "3d8d1e29.3d8be2",
+        "order": 4,
         "width": "6",
         "height": "1",
         "passthru": false,
@@ -19664,7 +19516,7 @@
         "z": "9a17c9d0.baa598",
         "name": "",
         "group": "2d93584c.72e648",
-        "order": 9,
+        "order": 6,
         "width": "3",
         "height": "1",
         "passthru": false,
@@ -19781,11 +19633,11 @@
         "z": "9a17c9d0.baa598",
         "name": "",
         "group": "2d93584c.72e648",
-        "order": 8,
+        "order": 5,
         "width": "3",
         "height": "1",
         "passthru": false,
-        "label": "View Log",
+        "label": "View Debug Log",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -20291,8 +20143,8 @@
         "name": "Include Trace",
         "label": "Include Trace",
         "tooltip": "",
-        "group": "2d93584c.72e648",
-        "order": 7,
+        "group": "3d8d1e29.3d8be2",
+        "order": 5,
         "width": "6",
         "height": "1",
         "passthru": false,
@@ -20784,7 +20636,8 @@
         "wires": [
             [
                 "6ef69cdb.1b3314",
-                "56e1666f.5d92b8"
+                "56e1666f.5d92b8",
+                "1985609.f6a269f"
             ]
         ]
     },
@@ -20793,10 +20646,10 @@
         "type": "ui_switch",
         "z": "a06855ce.9f5488",
         "name": "Select Production Version",
-        "label": "Production Version",
+        "label": "Use Production",
         "tooltip": "",
-        "group": "17f52c5b.cfb014",
-        "order": 2,
+        "group": "2d93584c.72e648",
+        "order": 4,
         "width": "6",
         "height": "1",
         "passthru": true,
@@ -21025,8 +20878,7 @@
         "y": 880,
         "wires": [
             [
-                "5fff6be7.9e98e4",
-                "1c7f4e71.b72dd2"
+                "5fff6be7.9e98e4"
             ]
         ]
     },
@@ -21062,14 +20914,14 @@
         "type": "ui_dropdown",
         "z": "a06855ce.9f5488",
         "name": "HiveID Version",
-        "label": "HiveID Version",
+        "label": "",
         "tooltip": "",
         "place": "Select option",
         "group": "17f52c5b.cfb014",
-        "order": 13,
+        "order": 4,
         "width": "6",
         "height": "1",
-        "passthru": true,
+        "passthru": false,
         "options": [
             {
                 "label": "",
@@ -21083,7 +20935,8 @@
         "y": 920,
         "wires": [
             [
-                "420b19e5.26f0c8"
+                "420b19e5.26f0c8",
+                "e9575c96.471af"
             ]
         ]
     },
@@ -21092,14 +20945,15 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Setup HiveID Version List",
-        "func": "msg.payload=global.get('Version');\nmsg.options = Object.keys(global.get('Versions.hiveid.' + global.get('VersionBranch')));\nreturn msg;",
+        "func": "var curVersion=global.get('Version');\nmsg.options = [];\nmsg.payload = '';\nvar versions = Object.keys(global.get('Versions.hiveid.' + global.get('VersionBranch')));\nfor (var i in versions) {\n    if (curVersion === versions[i]) {\n        msg.options.push(versions[i] + ' (current)');\n        msg.payload = versions[i] + ' (current)';\n    } else {\n        msg.options.push(versions[i]);\n    }\n}\nif (msg.payload === '') {\n    msg.payload = curVersion + ' (current)';\n    msg.options.unshift(msg.payload);\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1610,
         "y": 880,
         "wires": [
             [
-                "648aba5a.bc6e34"
+                "648aba5a.bc6e34",
+                "c37be023.a5ad1"
             ]
         ]
     },
@@ -21121,7 +20975,7 @@
         "checkall": "false",
         "repair": true,
         "outputs": 2,
-        "x": 930,
+        "x": 940,
         "y": 880,
         "wires": [
             [
@@ -21145,42 +20999,26 @@
         "topic": "",
         "name": "Change Version",
         "x": 1620,
-        "y": 960,
+        "y": 980,
         "wires": [
             [
-                "54031c6d.a96db4",
-                "28e24f72.cf6d1"
+                "50204566.2760cc"
             ]
         ]
-    },
-    {
-        "id": "54031c6d.a96db4",
-        "type": "debug",
-        "z": "a06855ce.9f5488",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "x": 1830,
-        "y": 920,
-        "wires": []
     },
     {
         "id": "d292229a.77e8",
         "type": "ui_dropdown",
         "z": "a06855ce.9f5488",
         "name": "JMRI Version",
-        "label": "JMRI Version",
+        "label": "",
         "tooltip": "",
         "place": "Select option",
         "group": "17f52c5b.cfb014",
-        "order": 13,
+        "order": 7,
         "width": "6",
         "height": "1",
-        "passthru": true,
+        "passthru": false,
         "options": [
             {
                 "label": "",
@@ -21194,7 +21032,8 @@
         "y": 760,
         "wires": [
             [
-                "a917c27c.53998"
+                "a917c27c.53998",
+                "209be347.84a92c"
             ]
         ]
     },
@@ -21203,7 +21042,7 @@
         "type": "function",
         "z": "a06855ce.9f5488",
         "name": "Setup JMRI Version List",
-        "func": "msg.payload=global.get('JMRI_Version');\nmsg.options = Object.keys(global.get('Versions.jmri'));\nreturn msg;",
+        "func": "msg.payload='';\nvar svc = global.get('JMRI_SERVICES');\nif (svc !== undefined && svc.length > 0) {\n    for (var i in svc) {\n        var curSvc = svc[i].data;\n        if (curSvc.port !== undefined && curSvc.port === 12080) {\n            global.set('JMRI_VERSION',curSvc.jmri);\n        }\n    }\n}\nmsg.options = []; \nvar versions = Object.keys(global.get('Versions.jmri'));\nvar curVer = global.get('JMRI_VERSION');\nfor (var i in versions) {\n    if (versions[i] === curVer) {\n        msg.options.push(curVer + ' (current)');\n        msg.payload = curVer + ' (current)';\n            \n    } else {\n        msg.options.push(versions[i]);\n    }\n    \n}\nif (msg.payload === '') {\n    msg.payload = curVer + ' (current)';\n    msg.options.unshift(msg.payload);\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1830,
@@ -21226,14 +21065,13 @@
         "ok": "OK",
         "cancel": "Cancel",
         "raw": false,
-        "topic": "",
+        "topic": "Install JMRI",
         "name": "Change JMRI Version",
         "x": 2100,
-        "y": 800,
+        "y": 720,
         "wires": [
             [
-                "9179bafc.9a80b8",
-                "d6cfc33d.994a1"
+                "b4714ff9.fa9"
             ]
         ]
     },
@@ -21248,8 +21086,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 2290,
-        "y": 760,
+        "x": 2730,
+        "y": 720,
         "wires": []
     },
     {
@@ -21274,7 +21112,8 @@
         "y": 780,
         "wires": [
             [
-                "467bf226.5e5ebc"
+                "467bf226.5e5ebc",
+                "4259c9f6.8afb88"
             ],
             [
                 "e8a316e1.74aca8"
@@ -21289,10 +21128,10 @@
         "rules": [
             {
                 "t": "set",
-                "p": "options",
+                "p": "payload",
                 "pt": "msg",
-                "to": "['Not Enabled']",
-                "tot": "json"
+                "to": "JMRI is not Enabled",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -21300,11 +21139,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1860,
-        "y": 800,
+        "x": 1800,
+        "y": 840,
         "wires": [
             [
-                "d292229a.77e8"
+                "fc6b725a.32d1b"
             ]
         ]
     },
@@ -21317,7 +21156,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 1600,
-        "y": 720,
+        "y": 680,
         "wires": [
             [
                 "7ac94e14.39a5f"
@@ -21338,8 +21177,8 @@
         "raw": false,
         "topic": "New Version Available",
         "name": "New Version Notice",
-        "x": 2040,
-        "y": 720,
+        "x": 1810,
+        "y": 680,
         "wires": []
     },
     {
@@ -21367,8 +21206,8 @@
         "links": [
             "87a7e73a.0e5678"
         ],
-        "x": 2255,
-        "y": 800,
+        "x": 2755,
+        "y": 820,
         "wires": []
     },
     {
@@ -21427,8 +21266,8 @@
         "links": [
             "54cfd856.57b5e8"
         ],
-        "x": 1795,
-        "y": 960,
+        "x": 2215,
+        "y": 980,
         "wires": []
     },
     {
@@ -21516,6 +21355,578 @@
         "wires": [
             [
                 "93535d75.79ef"
+            ]
+        ]
+    },
+    {
+        "id": "fc6b725a.32d1b",
+        "type": "ui_template",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "name": "JMRI Version Label",
+        "order": 5,
+        "width": "5",
+        "height": "1",
+        "format": "<div style=\"padding-top:28px;font-size:smaller;\" ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 2070,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6eb32d35.233ad4",
+        "type": "ui_template",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "name": "HiveID Version Label",
+        "order": 2,
+        "width": "5",
+        "height": "1",
+        "format": "<div style=\"padding-top:28px;font-size:smaller;\" ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 2300,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8aa0881.5c8f28",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Reboot Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Do you want to Reboot?",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 320,
+        "wires": [
+            [
+                "5a9407e8.fa2398"
+            ]
+        ]
+    },
+    {
+        "id": "209be347.84a92c",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "set install_jmri",
+        "rules": [
+            {
+                "t": "set",
+                "p": "install_jmri",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2320,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3647423a.5f193e",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set payload to install_jmri",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "install_jmri",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2490,
+        "y": 720,
+        "wires": [
+            [
+                "9179bafc.9a80b8",
+                "ca86dfe4.976b9"
+            ]
+        ]
+    },
+    {
+        "id": "e9575c96.471af",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "set install_hiveid",
+        "rules": [
+            {
+                "t": "set",
+                "p": "install_hiveid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1860,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50204566.2760cc",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "Is OK",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 1810,
+        "y": 980,
+        "wires": [
+            [
+                "fb6f0d43.85f67"
+            ],
+            [
+                "8556022b.3f9c3"
+            ]
+        ]
+    },
+    {
+        "id": "b4714ff9.fa9",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "Is OK",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "OK",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 2290,
+        "y": 720,
+        "wires": [
+            [
+                "3647423a.5f193e"
+            ],
+            [
+                "467bf226.5e5ebc"
+            ]
+        ]
+    },
+    {
+        "id": "ca86dfe4.976b9",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set JRMI Version url",
+        "func": "var versions = global.get('Versions.jmri');\nvar selected = flow.get('install_jmri');\nif (versions !== undefined && selected !== undefined && versions[selected] !== undefined) {\n    node.send({\n        payload : versions[selected].url\n    });\n} else {\n    node.send({\n        payload : -1\n    });\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 2600,
+        "y": 760,
+        "wires": [
+            [
+                "1a339c10.13ace4"
+            ]
+        ]
+    },
+    {
+        "id": "1a339c10.13ace4",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "Check for Error",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "-1",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 2600,
+        "y": 800,
+        "wires": [
+            [
+                "b9d5010a.51fab"
+            ],
+            [
+                "d6cfc33d.994a1"
+            ]
+        ]
+    },
+    {
+        "id": "b9d5010a.51fab",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Invalid JMRI Version Message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Invalid Version Selected",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "JMRI Install",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2910,
+        "y": 780,
+        "wires": [
+            [
+                "1e4942af.94a9bd"
+            ]
+        ]
+    },
+    {
+        "id": "1e4942af.94a9bd",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 2910,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "c37be023.a5ad1",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "set HiveID Version Label",
+        "func": "msg.payload = 'HiveID Version';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 2010,
+        "y": 880,
+        "wires": [
+            [
+                "6eb32d35.233ad4"
+            ]
+        ]
+    },
+    {
+        "id": "4259c9f6.8afb88",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Set JMRI Version Label",
+        "func": "msg.payload = 'JMRI Version';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1830,
+        "y": 800,
+        "wires": [
+            [
+                "fc6b725a.32d1b"
+            ]
+        ]
+    },
+    {
+        "id": "1985609.f6a269f",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "Get JMRI Version",
+        "func": "var URL = global.get('JMRI_URL');\nif (URL !== undefined) {\n    node.send( {\n        url : URL + 'json/networkServices'\n    });\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 940,
+        "wires": [
+            [
+                "96c1da80.9761b8"
+            ]
+        ]
+    },
+    {
+        "id": "96c1da80.9761b8",
+        "type": "http request",
+        "z": "a06855ce.9f5488",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 610,
+        "y": 940,
+        "wires": [
+            [
+                "765811ed.36fba",
+                "c5c837f9.f312f8"
+            ]
+        ]
+    },
+    {
+        "id": "a7b0c099.1311d",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "set JMRI_SERVICES",
+        "rules": [
+            {
+                "t": "set",
+                "p": "JMRI_SERVICES",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1280,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "765811ed.36fba",
+        "type": "switch",
+        "z": "a06855ce.9f5488",
+        "name": "good request",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 930,
+        "y": 940,
+        "wires": [
+            [
+                "a7b0c099.1311d"
+            ],
+            [
+                "f83a2f4d.086f8"
+            ]
+        ]
+    },
+    {
+        "id": "f83a2f4d.086f8",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "JMRI Issue Notification",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "JMRI Web Service Issue",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "highlight",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "WARNING",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1290,
+        "y": 960,
+        "wires": [
+            [
+                "32c6679.1bd3198"
+            ]
+        ]
+    },
+    {
+        "id": "32c6679.1bd3198",
+        "type": "ui_toast",
+        "z": "a06855ce.9f5488",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 1290,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "a847353e.f10f28",
+        "type": "ui_led",
+        "z": "a06855ce.9f5488",
+        "group": "17f52c5b.cfb014",
+        "order": 6,
+        "width": "1",
+        "height": "1",
+        "label": "",
+        "labelPlacement": "right",
+        "labelAlignment": "right",
+        "colorForValue": [
+            {
+                "color": "green",
+                "value": "200",
+                "valueType": "num"
+            },
+            {
+                "color": "red",
+                "value": "500",
+                "valueType": "num"
+            },
+            {
+                "color": "orange",
+                "value": "404",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "name": "JMRI Status",
+        "x": 1250,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "c5c837f9.f312f8",
+        "type": "change",
+        "z": "a06855ce.9f5488",
+        "name": "Set payload to statusCode",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "statusCode",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 1040,
+        "wires": [
+            [
+                "a847353e.f10f28"
+            ]
+        ]
+    },
+    {
+        "id": "fb6f0d43.85f67",
+        "type": "function",
+        "z": "a06855ce.9f5488",
+        "name": "set payload to install_hiveid",
+        "func": "var curVer = flow.get('install_hiveid');\nvar versions = global.get('Versions.hiveid');\nvar branch = global.get('VersionBranch');\nif (versions !== undefined && versions[branch] !== undefined && verisons[branch][curVer] !== undefined && versions[branch][curVer] !== undefined) {\n    node.send({ payload : curVer });    \n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 2020,
+        "y": 980,
+        "wires": [
+            [
+                "28e24f72.cf6d1"
             ]
         ]
     }
