@@ -45,3 +45,4 @@ node-red-contrib-linux-memory
 node-red-contrib-os
 node-red-contrib-wifiscan
 node-red-node-discovery
+node-red-contrib-kafka-node-latest
