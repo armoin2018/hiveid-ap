@@ -46,3 +46,7 @@ node-red-node-discovery
 node-red-contrib-kafka-node-latest
 node-red-contrib-file-upload 
 node-red-contrib-http-multipart
+node-red-node-ui-table
+node-red-contrib-ui-value-trail
+node-red-contrib-ui-statechart
+node-red-contrib-ui-level
