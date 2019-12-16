@@ -20,6 +20,12 @@
         }
     },
     "jmri" : {
+        "4.17.7" : {
+            "url" : "https://github.com/JMRI/JMRI/releases/download/v4.17.7/JMRI.4.17.7+R5bc91de.tgz",
+            "tested" : false,
+            "Comments" : "",
+            "default" : false
+        },
         "4.17.5" : {
             "url" : "https://github.com/JMRI/JMRI/releases/download/v4.17.5/JMRI.4.17.5+Rdf73700.tgz",
             "tested" : false,

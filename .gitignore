@@ -3,3 +3,5 @@ nodered/images/.DS_Store
 nodered/images/icons/.DS_Store
 .DS_Store
 nodered/.DS_Store
+.vscode
+hiveid-ap.code-workspace
