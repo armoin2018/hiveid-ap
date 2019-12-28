@@ -1,7 +1,7 @@
 {
     "hiveid" : {
         "dev" : {
-            "20191201.0002-dev" : {
+            "20191228.0001-dev" : {
                 "url" : "https://github.com/armoin2018/hiveid-ap",
                 "branch" : "dev",
                 "tested" : false,
@@ -20,6 +20,18 @@
         }
     },
     "jmri" : {
+        "4.18" : {
+            "url" : "https://github.com/JMRI/JMRI/releases/download/v4.18/JMRI.4.18+R37ad3d0.tgz",
+            "tested" : false,
+            "Comments" : "",
+            "default" : false
+        },
+        "4.17.8" : {
+            "url" : "https://github.com/JMRI/JMRI/releases/download/v4.17.8/JMRI.4.17.8+R7c13c6b.tgz",
+            "tested" : false,
+            "Comments" : "",
+            "default" : true
+        },
         "4.17.7" : {
             "url" : "https://github.com/JMRI/JMRI/releases/download/v4.17.7/JMRI.4.17.7+R5bc91de.tgz",
             "tested" : false,
