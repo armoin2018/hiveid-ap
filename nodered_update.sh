@@ -33,5 +33,5 @@ php /opt/hiveid-ap/nodered_set_nodes.php
 echo "Restoring configuration and restarting Node Red"
 sudo service nodered stop
 cp ~/.node-red/settings.js.temp ~/.node-red/settings.js
-sudo chown -R pi:pi home/pi/.npm /home/pi/.node-red /home/pi/.node-gyp
+sudo chown -R pi:pi home/pi/.npm /home/pi/.node-red /home/pi/.node-gyp /usr/local/bin/node-red
 sudo service nodered start
