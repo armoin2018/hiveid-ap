@@ -1,7 +1,7 @@
 {
     "hiveid" : {
         "dev" : {
-            "20191228.0001-dev" : {
+            "20200215.0001-dev" : {
                 "url" : "https://github.com/armoin2018/hiveid-ap",
                 "branch" : "dev",
                 "tested" : false,
