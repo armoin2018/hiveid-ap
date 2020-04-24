@@ -1,7 +1,7 @@
 {
     "hiveid" : {
         "dev" : {
-            "20200215.0001-dev" : {
+            "20200420.0001-dev" : {
                 "url" : "https://github.com/armoin2018/hiveid-ap",
                 "branch" : "dev",
                 "tested" : false,
@@ -10,16 +10,28 @@
             }
         },
         "master" : {
-            "20191201.0001" : {
+            "20200420.0001" : {
                 "url" : "https://github.com/armoin2018/hiveid-ap",
                 "branch" : "master",
                 "tested" : true,
                 "default" : true,
-                "Comments" : "JMRI Sync does not support Car/Engine Types"
+                "Comments" : "Minor Fixes"
             }
         }
     },
     "jmri" : {
+        "4.19.5" : {
+            "url" : "https://github.com/JMRI/JMRI/releases/download/v4.19.5/JMRI.4.19.5+R6ede87265.tgz",
+            "tested" : false,
+            "Comments" : "",
+            "default" : false
+        },
+        "4.19.4" : {
+            "url" : "https://github.com/JMRI/JMRI/releases/download/v4.19.4/JMRI.4.19.4+R4abda5deb.tgz",
+            "tested" : false,
+            "Comments" : "",
+            "default" : false
+        },
         "4.19.3" : {
             "url" : "https://github.com/JMRI/JMRI/releases/download/v4.19.3/JMRI.4.19.3+R7364caf9c.tgz",
             "tested" : false,
